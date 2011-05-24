@@ -214,7 +214,7 @@ The energy of the mixture of two states is~\cite{Pitaevskii2003}:
 		- \frac{\hbar^2 \Psi_2^* \nabla^2 \Psi_2}{2m}
 	\right. \\
 	& \left.
-		+ V_1 n_1 + ( V_2 + V_{hf} ) n_2
+		+ V_1 n_1 + ( V_2 + \hbar \omega_{hf} ) n_2
 		+ \frac{g_{11}}{2} n_1^2 + \frac{g_{22}}{2} n_2^2 + g_{12} n_1 n_2
 	\right) d\xvec.
 \end{split}
@@ -224,7 +224,8 @@ Interaction coefficients $g_{11}$, $g_{12}$ and $g_{22}$ depend on corresponding
 \[
 	g_{ij} = \frac{4 \pi \hbar^2 a_{ij}}{m}.
 \]
-The quantity $V_{hf}$ is the hyperfine splitting for $5^2S_{1/2}$ and equals $V_{hf} / h \approx 6.8 \textrm{GHz}$~\cite{Steck2009}.
+The quantity $\omega_{hf}$ is the hyperfine splitting for $5^2S_{1/2}$ and equals
+$\omega_{hf} \approx 2 \pi \times 6.8 \textrm{GHz}$~\cite{Steck2009}.
 
 One can obtain coupled GPEs from~\eqnref{mean-field:two-comp-energy} using the variational principle $i \hbar \partial \Psi_i / \partial t = \delta E / \delta \Psi_i^*$:
 \begin{align}
@@ -235,7 +236,7 @@ One can obtain coupled GPEs from~\eqnref{mean-field:two-comp-energy} using the v
 		+ g_{11} \lvert \Psi_1 \rvert^2 + g_{12} \lvert \Psi_2 \rvert^2
 	\right) \Psi_1 \\
 	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + V_{hf}
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_{hf}
 		+ g_{22} \lvert \Psi_2 \rvert^2 + g_{12} \lvert \Psi_1 \rvert^2
 	\right) \Psi_2
 \end{split}
@@ -276,7 +277,7 @@ and loss terms~\cite{Mertes2007}:
 		+ \textrm{c.c.}
 	\right) \Psi_2, \\
 	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + V_{hf}
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_{hf}
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
 		- i \hbar \Gamma_2
@@ -302,11 +303,11 @@ Coupling coefficient $\tilde{\Omega}$ is a complex number $\Omega e^{i \alpha}$,
 where $\Omega$ is the Rabi frequency (its exact value depends on the nature of coupling process),
 and $\alpha$ is the phase of the coupling field.
 
-The fact that $V_{hf} \gg V_2$ can cause problems when performing calculations with low precision.
+The fact that $\hbar \omega_{hf} \gg V_2$ can cause problems when performing calculations with low precision.
 Therefore it is convenient to use equations~\eqnref{mean-field:two-comp-evolution-cgpes}
 in a slightly different coordinate system:
 $\Psi_2 \rightarrow \Psi_2 e^{-i \omega_{hf} t}$.
-This transformation eliminates $V_{hf}$ from the equations and does not change single-time observable values;
+This transformation eliminates $\omega_{hf}$ from the equations and does not change single-time observable values;
 but one must remember that it does change relative phase of the components,
 which may be significant in some cases.
 Transformed equations look like:
