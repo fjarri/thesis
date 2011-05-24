@@ -1,0 +1,9 @@
+chapters/*.aux
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+*.synctex.gz
+*.tmproj
+

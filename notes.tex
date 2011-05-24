@@ -1,0 +1,33 @@
+\documentclass[10pt,notitlepage]{report}
+\usepackage{indentfirst}
+\usepackage[pdftex]{graphicx}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{bm}
+
+\newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
+\newcommand{\xvec}{\boldsymbol{x}}
+\newcommand{\Psivec}{\boldsymbol{\Psi}}
+
+\newcommand{\eqnref}[1]{(\ref{eqn:#1})}
+\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
+\newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
+
+\title{Two-component BEC dynamics simulations}
+\author{Bogdan Opanchuk}
+
+\begin{document}
+\maketitle
+
+\include{chapters/mean_field}
+
+\appendix
+\include{chapters/natural_units}
+\include{chapters/split_step}
+
+\bibliographystyle{plain}
+\bibliography{notes}
+
+\end{document}
