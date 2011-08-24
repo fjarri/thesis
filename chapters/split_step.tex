@@ -39,14 +39,14 @@ Here $\hat{D}(i k)$ is obtained by replacing differential operator by $i k$,
 where $k$ is a spatial frequency in Fourier domain.
 The equation is approximate, because splitting operators in this way ignores the fact that they do not commute.
 
-In order to improve the accuracy of the method, equation~\eqnref{split-step:split-eqn} can be rewritten as
+In order to improve the accuracy of the method, equation~\eqnref{split-step:split-eqn} can be rewritten as~\cite{Sinkin2003}
 \[
 	\Psi(\xvec, t + dt) \simeq
 	\exp \left( \frac{dt}{2} \hat{D} \right)
 	\exp \left( \int\limits^{t + dt}_t \hat{N} (t^\prime) dt^\prime \right)
 	\exp \left( \frac{dt}{2} \hat{D} \right) \Psi(\xvec, t).
 \]
-This method is called the symmetrized split-step Fourier method, and it has the global error of $O(dt^2)$.
+This method is called the symmetrized split-step Fourier method, and it has the global error of $\mbox{O}(dt^2)$.
 Integral can be evaluated either by approximating it with $dt \hat{N}(t)$ or by using slightly more accurate method,
 like trapezoidal rule
 \[
