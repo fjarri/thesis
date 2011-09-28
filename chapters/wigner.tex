@@ -46,7 +46,7 @@ In the subspace of two coupled components $\tilde{\Omega}_{jk}$ can be defined a
 where $\omega$ and $\alpha$ are frequency and phase of the oscillator,
 and $\Omega$ is Rabi frequency (cf. equation \eqnref{mean-field:rotation-matrix}).
 
-If we impose an energy cutoff $\epsilon_{\mathrm{cut}}$ and only take into account low-energy modes,
+If we impose an energy cutoff $\ecut$ and only take into account low-energy modes,
 the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by contact potential $U_{jk} \delta^{(D)}(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
 \begin{equation}
 \label{eqn:wigner:hamiltonian_effective}
@@ -63,24 +63,35 @@ where $a_{jk}$ is the scattering length.
 Note that in general case the coefficient must be renormalised depending on the grid~\cite{Sinatra2002},
 but the change is small if $dx \gg a_{jk}$.
 
+
 % =============================================================================
 \section{Restricted basis field}
 % =============================================================================
 
 Field operator can be decomposed using a single-particle basis \todo{explanation needed?}:
 \[
-	\Psiop_i(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{i,\nvec},
+	\Psiop_j(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec},
 \]
 where $\phi_{\nvec}$ is some orthonormal basis,
 and $\nvec$ is a state vector with $D$ elements.
-The simplest variant is the plane-wave basis:
+The mode operators obey bosonic commutation relations:
+\[
+	[ \hat{a}_{j,\nvec}, \hat{a}_{k,\mvec} ]
+	= [ \hat{a}_{j,\nvec}^\dagger, \hat{a}_{k,\mvec}^\dagger ] = 0,
+\]
+\[
+	[ \hat{a}_{j,\nvec}, \hat{a}_{k,\mvec}^\dagger ]
+	= \delta_{jk} \delta_{\mvec,\nvec}.
+\]
+
+The simplest variant of basis is the plane-wave one:
 \[
 	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
 \]
 whose elements are eigenfunctions of kinetic term:
 \[
 	\left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
-	= E_n \phi_{\nvec}
+	= E_{\nvec} \phi_{\nvec}
 	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
 \]
 Field functions can be decomposed into this basis using common FFTs.
@@ -97,75 +108,45 @@ More sophisticated basis can be constructed out of harmonic oscillator modes:
 This one requires special transform employing Gauss-Hermite quadrature
 (see \appref{harmonic-transform} for technical details).
 
-The mode operators obey bosonic commutation relations:
+As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
+We divide mode subspaces into low- and high-energy subsets $L$ and $H$,
+depending on whether $E_n$ is more or less than some cutoff energy $\ecut$.
+We introduce projection operators
 \[
-	[ \hat{a}_{i,\nvec}, \hat{a}_{j,\mvec} ]
-	= [ \hat{a}_{i,\nvec}^\dagger, \hat{a}_{j,\mvec}^\dagger ] = 0,
+	P \equiv \sum\limits_{\nvec \in L} \lvert \nvec \rangle \langle \nvec \rvert,
 \]
 \[
-	[ \hat{a}_{i,\nvec}, \hat{a}_{j,\mvec}^\dagger ]
-	= \delta_{ij} \delta_{\mvec,\nvec}.
+	Q \equiv \sum\limits_{\nvec \in H} \lvert \nvec \rangle \langle \nvec \rvert.
 \]
-
-Interaction part of hamiltonian~\eqnref{wigner:hamiltonian} then can be rewritten as:
-\begin{equation*}
-	\hat{H}_{\mathrm{int}} / \hbar
-	= \frac{1}{2} \sum\limits_{\kvec \lvec \mvec \nvec}
-		\langle \kvec \lvec \lvert U_{ij} \rvert \mvec \nvec \rangle
-		\hat{a}_{i,\kvec}^\dagger \hat{a}_{j,\lvec}^\dagger \hat{a}_{i,\mvec} \hat{a}_{j,\nvec}.
-\end{equation*}
-
-Now we divide mode subspaces $ik,\,i=1,2$ into low- and high-energy subsets
-($L$ and $H$)~\cite{Morgan2000},
-depending on whether $\hbar \omega_{k}$ is more or less than some cutoff energy $\epsilon_{\textrm{cut}}$.
-If values of $\epsilon_{\textrm{cut}}$ are sufficiently small,
-$\hat{H}_{\mathrm{int}}$ can be simplified as:
-\begin{equation*}
-	\hat{H}_{\mathrm{int}}
-	= \frac{U_{ij}}{2} \sum\limits_{\kvec \lvec \mvec \nvec}
-		\langle \kvec \lvec \vert \mvec \nvec \rangle
-		\hat{a}_{i,\kvec}^\dagger \hat{a}_{j,\lvec}^\dagger \hat{a}_{i,\mvec} \hat{a}_{j,\nvec},
-\end{equation*}
-where $U_{ij} = 4 \pi \hbar a_{ij} / m$, and
-$a_{ij}$ is the $s$-wave scattering length in three dimensions \todo{generalize it for $D$ dimentsions}.
-Here we implicitly assume a momentum cutoff $k_{c} \ll 1 / a_{ij}$,
-otherwise the couplings must be renormalized~\cite{Sinatra2002}.
-
-We introduce projection operators:
-\[
-	P \equiv \sum\limits_{k \in L} \lvert k \rangle \langle k \rvert,
-\]
-\[
-	Q \equiv \sum\limits_{k \in H} \lvert k \rangle \langle k \rvert.
-\]
-In coordinate form:
+Or, in coordinate form:
 \[
 	P [f(x)]
-	= \sum\limits_{\kvec \in L} \phi_{\kvec} (\xvec) \int\limits_V
-		d\xvec^\prime\, \phi_{\kvec}^*(\xvec^\prime) f(\xvec^\prime)
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int\limits_V
+		d\xvec^\prime\, \phi_{\nvec}^*(\xvec^\prime) f(\xvec^\prime)
 \]
-Being applied to the field operator $\Psiop_i$, this operator returns the restricted field operator:
+Being applied to the field operator $\Psiop_j$, this operator returns the restricted field operator:
 \[
-	P [\Psiop_i]
-	= \sum\limits_{\kvec \in L} \phi_{\kvec} (\xvec) \hat{a}_{i,\kvec}
-	= \Psiop_{iP} (\xvec)
+	P [\Psiop_j]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
+	= \Psiop_{jP} (\xvec)
 \]
 
 Because of the restricted nature of the operator, common commutation relations no longer apply.
 The following ones should be used instead:
 \[
-	\left[ \Psiop_{iP}(\xvec), \Psiop_{jP}(\xvec^\prime) \right]
-	= \left[ \Psiop_{iP}^\dagger(\xvec), \Psiop_{jP}^\dagger(\xvec^\prime) \right] = 0,
+	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}(\xvec^\prime) \right]
+	= \left[ \Psiop_{jP}^\dagger(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right] = 0,
 \]
 \[
-	\left[ \Psiop_{iP}(\xvec), \Psiop_{iP}^\dagger(\xvec^\prime) \right]
-	= \delta_{ij} \delta_{P}(\xvec, \xvec^\prime),
+	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right]
+	= \delta_{jk} \delta_{P}(\xvec, \xvec^\prime),
 \]
-where the restricted delta function $\delta_P$ is defined as:
-\[
+where the restricted delta function $\delta_P$ is defined as
+\begin{equation}
+\label{eqn:wigner:restricted-delta}
 	\delta_{P}(\xvec, \xvec^\prime)
-	= \sum\limits_{\kvec \in L} \phi_{\kvec}^* (\xvec) \phi_{\kvec} (\xvec^\prime).
-\]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec) \phi_{\nvec} (\xvec^\prime).
+\end{equation}
 
 \begin{comment}
 \section{Master equation}
