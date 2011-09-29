@@ -97,6 +97,16 @@ whose elements are eigenfunctions of kinetic term:
 Field functions can be decomposed into this basis using common FFTs.
 More sophisticated basis can be constructed out of harmonic oscillator modes:
 \[
+	\phi_{\nvec}(\xvec) = \frac{1}{\sqrt[4]{\pi}}
+		\prod\limits_{d=1}^{D}
+			\frac{1}{\sqrt{2^{n_d} n_d! l_d}}
+			H_{n_d} \left( \frac{x_d}{l_d} \right)
+			\exp \left( -\frac{x_d^2}{2 l_d^2} \right),
+\]
+where $H_k(x)$ is the ``physicists'\,'' Hermite polynomial of order $k$,
+and the oscillator length $l_d = \sqrt{\hbar / m \omega_d}$.
+These are the eigenfunctions of harmonic oscillator Hamiltonian:
+\[
 	\left( -\frac{\hbar^2}{2m} \nabla^2 + V(\xvec) \right) \phi_{\nvec}
 	= E_{\nvec} \phi_{\nvec}
 	= \left(
@@ -105,7 +115,7 @@ More sophisticated basis can be constructed out of harmonic oscillator modes:
 		\right)
 	\right) \phi_{\nvec}.
 \]
-This one requires special transform employing Gauss-Hermite quadrature
+One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
 (see \appref{harmonic-transform} for technical details).
 
 As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
