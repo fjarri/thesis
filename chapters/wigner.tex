@@ -141,6 +141,21 @@ Being applied to the field operator $\Psiop_j$, this operator returns the restri
 	= \Psiop_{jP} (\xvec)
 \]
 
+\begin{figure}
+\begin{center}
+\subfloat[Uniform grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_uniform_1000.eps}}
+\subfloat[Harmonic grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_harmonic_1000.eps}} \\
+\subfloat[Uniform grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_uniform_all.eps}}
+\subfloat[Harmonic grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_harmonic_all.eps}}
+\end{center}
+\caption{Shape of restricted delta function $\delta_P(z - z^\prime)$ with and without explicit cutoff.}
+\label{fig:wigner:restricted-delta}
+\end{figure}
+
 Because of the restricted nature of the operator, common commutation relations no longer apply.
 The following ones should be used instead:
 \[
@@ -149,14 +164,17 @@ The following ones should be used instead:
 \]
 \[
 	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right]
-	= \delta_{jk} \delta_{P}(\xvec, \xvec^\prime),
+	= \delta_{jk} \delta_{P}(\xvec - \xvec^\prime),
 \]
 where the restricted delta function $\delta_P$ is defined as
 \begin{equation}
 \label{eqn:wigner:restricted-delta}
-	\delta_{P}(\xvec, \xvec^\prime)
+	\delta_{P}(\xvec - \xvec^\prime)
 	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec) \phi_{\nvec} (\xvec^\prime).
 \end{equation}
+Shape of restricted delta function for two different grids and two different cutoff is shown in \figref{wigner:restricted-delta}.
+The higher cutoff is, the closer its shape gets to the ``ideal'' delta-function,
+with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
 
 \begin{comment}
 \section{Master equation}
