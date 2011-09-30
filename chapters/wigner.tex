@@ -81,7 +81,7 @@ The mode operators obey bosonic commutation relations:
 \]
 \[
 	[ \hat{a}_{j,\nvec}, \hat{a}_{k,\mvec}^\dagger ]
-	= \delta_{jk} \delta_{\mvec,\nvec}.
+	= \delta_{jk} \delta_{\mvec\nvec}.
 \]
 
 The simplest variant of basis is the plane-wave one:
@@ -179,12 +179,12 @@ with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
 
 Restricted delta function can be used to rewrite equation for projection operator $P$:
 \[
-	P [f(\xvec)] = \int d\xvec^\prime \delta_P^*(\xvec - \xvec^\prime) f(\xvec^\prime).
+	P [f(\xvec)] = \int d\xvec^\prime \delta_P(\xvec^\prime - \xvec) f(\xvec^\prime).
 \]
 The Hermitian conjugate of $P$ is thus defined as
 \[
 	(P [f(\xvec)])^\dagger
-	= \int d\xvec^\prime \delta_P(\xvec - \xvec^\prime) f^\dagger(\xvec^\prime)
+	= \int d\xvec^\prime \delta_P^*(\xvec^\prime - \xvec) f^\dagger(\xvec^\prime)
 	= P^\dagger [f^\dagger(\xvec)].
 \]
 
