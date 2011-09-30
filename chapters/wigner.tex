@@ -130,8 +130,8 @@ We introduce projection operators
 \]
 Or, in coordinate form:
 \[
-	P [f(x)]
-	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int\limits_V
+	P [f(\xvec)]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int
 		d\xvec^\prime\, \phi_{\nvec}^*(\xvec^\prime) f(\xvec^\prime)
 \]
 Being applied to the field operator $\Psiop_j$, this operator returns the restricted field operator:
@@ -152,7 +152,7 @@ Being applied to the field operator $\Psiop_j$, this operator returns the restri
 \subfloat[Harmonic grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
 	figures_generated/wigner/delta_harmonic_all.eps}}
 \end{center}
-\caption{Shape of restricted delta function $\delta_P(z - z^\prime)$ with and without explicit cutoff.}
+\caption{Absolute value of restricted delta function $\lvert \delta_P(z - z^\prime) \rvert$ with and without explicit cutoff.}
 \label{fig:wigner:restricted-delta}
 \end{figure}
 
@@ -164,39 +164,32 @@ The following ones should be used instead:
 \]
 \[
 	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right]
-	= \delta_{jk} \delta_{P}(\xvec - \xvec^\prime),
+	= \delta_{jk} \delta_P(\xvec - \xvec^\prime),
 \]
 where the restricted delta function $\delta_P$ is defined as
 \begin{equation}
 \label{eqn:wigner:restricted-delta}
-	\delta_{P}(\xvec - \xvec^\prime)
+	\delta_P(\xvec - \xvec^\prime)
 	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec) \phi_{\nvec} (\xvec^\prime).
 \end{equation}
-Shape of restricted delta function for two different grids and two different cutoff is shown in \figref{wigner:restricted-delta}.
-The higher cutoff is, the closer its shape gets to the ``ideal'' delta-function,
+Note that conjugation operator swaps variables in $\delta_P$: $\delta_P^*(\xvec - \xvec^\prime) = \delta_P(\xvec^\prime - \xvec)$.
+Shape of the module of restricted delta function for two different grids and two different cutoff is shown in \figref{wigner:restricted-delta}.
+The higher cutoff is, the closer its shape gets to the ``ideal'' delta function,
 with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
 
+Restricted delta function can be used to rewrite equation for projection operator $P$:
+\[
+	P [f(\xvec)] = \int d\xvec^\prime \delta_P^*(\xvec - \xvec^\prime) f(\xvec^\prime).
+\]
+The Hermitian conjugate of $P$ is thus defined as
+\[
+	(P [f(\xvec)])^\dagger
+	= \int d\xvec^\prime \delta_P(\xvec - \xvec^\prime) f^\dagger(\xvec^\prime)
+	= P^\dagger [f^\dagger(\xvec)].
+\]
+
+
 \begin{comment}
-\section{Master equation}
-
-The master equation for restricted field can be written as following \textcolor{red}{[citation needed]}:
-\[
-i \hbar \frac{d\rho}{d t} = [\hat{H}_{\textrm{eff}}, \rho] + i \hbar \sum\limits_n \frac{\kappa_n}{2} \int\limits_V d\xvec
-\left( 2  \hat{O}_n \rho \hat{O}_n^\dagger - \hat{O}_n^\dagger \hat{O}_n \rho - \rho \hat{O}_n^\dagger \hat{O}_n \right),
-\]
-where $\hat{O}_j$ are operators, describing bath couplings with corresponding strengths $\kappa_j$.
-In our case, we have three main sources of losses: three-body interactions between $\vert1\rangle$ particles,
-two-body $\vert1\rangle$-$\vert2\rangle$ and two-body $\vert2\rangle$-$\vert2\rangle$ interactions.
-Therefore, bath coupling operators are:
-\[
-\hat{O}_1 = \Psiop_1^3,\, \hat{O}_2 = \Psiop_{1P} \Psiop_{2P} + \Psiop_{2P} \Psiop_{1P},\, \hat{O}_3 = \Psiop_{2P}^2
-\]
-
-We choose loss constants $\kappa_n$ so that loss terms in final stochastic equations
-are the same as in coupled GPEs~(\ref{two-component_evolution:cgpes}):
-\[
-\kappa_1 = \gamma_{111} / 3,\, \kappa_2 = \gamma_{12} / 2,\, \kappa_3 = \gamma_{22} / 2
-\]
 
 \subsection{Wigner representation}
 
