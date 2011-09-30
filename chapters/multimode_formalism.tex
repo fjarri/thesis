@@ -1,0 +1,76 @@
+\chapter{Multimode field operators formalism}
+\label{cha:appendix:multimode-formalism}
+
+
+% =============================================================================
+\section{Single-mode operators}
+% =============================================================================
+
+We start from the set of single-mode operators $\hat{a}_j$, which obey bosonic commutation relations:
+\[
+	[ \hat{a}_j, \hat{a}_k ] = [ \hat{a}_j^\dagger, \hat{a}_k^\dagger ] = 0,
+\]
+\[
+	[ \hat{a}_j, \hat{a}_k^\dagger ] = \delta_{jk}.
+\]
+
+In order to work with the moments of multimode operators we will need the equations for commutators of arbitrary single-mode operator products $[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_k}^\dagger ]$ and $[ \hat{a}_n^\dagger, \hat{a}_{m_1} \ldots \hat{a}_{m_k} ]$.
+Let us find the expression for the first commutator by induction.
+Providing that we know the expression for $[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger ]$,
+commutator of order $k$ can be expanded as:
+\[
+	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_k}^\dagger ]
+	= (1 - \delta_{n m_k})
+		[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger ] \hat{a}_{m_k}
+	+ \delta_{n m_k} (
+		\hat{a}_n \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger \hat{a}_n^\dagger
+		- \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger \hat{a}_n^\dagger \hat{a}_n
+	)
+	= (*).
+\]
+Here we have split the initial commutator into two possible outcomes, depending on whether $n = m_k$.
+First term, corresponding to $n \ne m_k$, contains the known commutator of lower order.
+In the second term we have substituted $\hat{a}_n$ for $\hat{a}_{m_k}$,
+since the delta function outside the parentheses ensures that $n = m_k$.
+Swapping $\hat{a}_n^\dagger$ and $\hat{a}_n$ in the last term and, again, recognising the known commutator:
+\begin{equation*}
+\begin{split}
+	(*)
+	& = (1 - \delta_{n m_k})
+		[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger ] \hat{a}_{m_k}
+	+ \delta_{n m_k} (
+		[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger ] \hat{a}_n^\dagger
+		+ \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger
+	) \\
+	& = [ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger ] \hat{a}_{m_k}
+	+ \delta_{n m_k} \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_{k-1}}^\dagger.
+\end{split}
+\end{equation*}
+Now, starting from the first-order relation $[ \hat{a}_n, \hat{a}_{m_1}^\dagger ] = \delta_{n m_1}$, we can obtain the relation for any order:
+\begin{equation*}
+\begin{split}
+	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \hat{a}_{m_2}^\dagger ]
+	& = \delta_{n m_1} \hat{a}_{m_2} + \delta_{n m_2} \hat{a}_{m_1}, \\
+	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \hat{a}_{m_2}^\dagger \hat{a}_{m_3}^\dagger ]
+	& = \delta_{n m_1} \hat{a}_{m_2} \hat{a}_{m_3}
+	+ \delta_{n m_2} \hat{a}_{m_1} \hat{a}_{m_3}
+	+ \delta_{n m_3} \hat{a}_{m_1} \hat{a}_{m_2}, \\
+	& \ldots
+\end{split}
+\end{equation*}
+or, in generalised form:
+\begin{equation}
+	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_k}^\dagger ]
+	= \sum\limits_{i=1}^k \delta_{n m_i}
+		\prod\limits_{j=1,j \ne i}^k \hat{a}_{m_j}^\dagger.
+\end{equation}
+Note that if $n = m_1 = \ldots = m_k$, this boils down to the well-known relation from~\cite{Louisell1990}:
+\[
+	[ \hat{a}, (\hat{a}^\dagger)^k ] = k (\hat{a}^\dagger)^{k-1}.
+\]
+The general form for the second commutator can be found using the exact same procedure:
+\begin{equation}
+	[ \hat{a}_n^\dagger, \hat{a}_{m_1} \ldots \hat{a}_{m_k} ]
+	= - \sum\limits_{i=1}^k \delta_{n m_i}
+		\prod\limits_{j=1,j \ne i}^k \hat{a}_{m_j}.
+\end{equation}
