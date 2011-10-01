@@ -61,6 +61,7 @@ Now, starting from the first-order relation $[ \hat{a}_n, \hat{a}_{m_1}^\dagger 
 \end{equation*}
 or, in generalised form:
 \begin{equation}
+\label{eqn:multimode-formalism:single-mode-high-order-commutators}
 	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_k}^\dagger ]
 	= \sum\limits_{i=1}^k \delta_{n m_i}
 		\prod\limits_{j=1,j \ne i}^k \hat{a}_{m_j}^\dagger.
@@ -131,9 +132,9 @@ The following ones should be used instead:
 \begin{equation}
 \label{eqn:multimode-formalism:restricted-commutators}
 \begin{split}
-	\left[ \Psiop_{j}(\xvec), \Psiop_{k}(\xvec^\prime) \right]
-	& = \left[ \Psiop_{j}^\dagger(\xvec), \Psiop_{k}^\dagger(\xvec^\prime) \right] = 0, \\
-	\left[ \Psiop_{j}(\xvec), \Psiop_{k}^\dagger(\xvec^\prime) \right]
+	\left[ \Psiop_j(\xvec), \Psiop_k(\xvec^\prime) \right]
+	& = \left[ \Psiop_j^\dagger(\xvec), \Psiop_k^\dagger(\xvec^\prime) \right] = 0, \\
+	\left[ \Psiop_j(\xvec), \Psiop_k^\dagger(\xvec^\prime) \right]
 	& = \delta_{jk} \delta_P(\xvec - \xvec^\prime),
 \end{split}
 \end{equation}
@@ -154,4 +155,43 @@ The Hermitian conjugate of $P$ is thus defined as
 	(P [f(\xvec)])^\dagger
 	= \int d\xvec^\prime \delta_P^*(\xvec^\prime - \xvec) f^\dagger(\xvec^\prime)
 	= P^\dagger [f^\dagger(\xvec)].
+\]
+
+
+% =============================================================================
+\section{High order commutators}
+% =============================================================================
+
+Let us find the expression for high-order commutators of restricted field operators, analogous to equation~\eqnref{multimode-formalism:single-mode-high-order-commutators} for single-mode operators.
+It can be done using the similar recursive procedure.
+Given that we know the expression for $\left[ \Psiop, ( \Psiop^{\prime\dagger} )^{l-1} \right]$,
+the commutator of higher order can be expanded as
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
+	& = \Psiop ( \Psiop^{\prime\dagger} )^l - ( \Psiop^{\prime\dagger} )^l \Psiop \\
+	& = (
+		\delta_P (\xvec - \xvec^\prime) + \Psiop^{\prime\dagger} \Psiop
+	) ( \Psiop^{\prime\dagger} )^{l-1}
+	- ( \Psiop^{\prime\dagger} )^l \Psiop \\
+	& = \delta_P (\xvec - \xvec^\prime) ( \Psiop^{\prime\dagger} )^{l-1}
+	+ \Psiop^{\prime\dagger} (
+		\Psiop ( \Psiop^{\prime\dagger} )^{l-1}
+		- ( \Psiop^{\prime\dagger} )^{l-1} \Psiop
+	) \\
+	& = \delta_P (\xvec - \xvec^\prime) ( \Psiop^{\prime\dagger} )^{l-1}
+	+ \Psiop^{\prime\dagger} [
+		\Psiop, ( \Psiop^{\prime\dagger} )^{l-1}
+	].
+\end{split}
+\end{equation*}
+Now we can get the commutator of any order starting from the known relation~\eqnref{multimode-formalism:restricted-commutators}:
+\[
+	\left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
+	= l \delta_P (\xvec - \xvec^\prime) ( \Psiop^{\prime\dagger} )^{l-1}.
+\]
+Accompanying conjugated relation:
+\[
+	\left[ \Psiop^\dagger, ( \Psiop^\prime )^l \right]
+	= - l \delta_P^* (\xvec - \xvec^\prime) ( \Psiop^\prime )^{l-1}.
 \]
