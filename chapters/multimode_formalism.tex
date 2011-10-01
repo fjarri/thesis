@@ -7,12 +7,13 @@
 % =============================================================================
 
 We start from the set of single-mode operators $\hat{a}_j$, which obey bosonic commutation relations:
-\[
-	[ \hat{a}_j, \hat{a}_k ] = [ \hat{a}_j^\dagger, \hat{a}_k^\dagger ] = 0,
-\]
-\[
-	[ \hat{a}_j, \hat{a}_k^\dagger ] = \delta_{jk}.
-\]
+\begin{equation}
+\label{eqn:multimode-formalism:single-mode-commutators}
+\begin{split}
+	[ \hat{a}_j, \hat{a}_k ] & = [ \hat{a}_j^\dagger, \hat{a}_k^\dagger ] = 0, \\
+	[ \hat{a}_j, \hat{a}_k^\dagger ] & = \delta_{jk}.
+\end{split}
+\end{equation}
 
 In order to work with the moments of multimode operators we will need the equations for commutators of arbitrary single-mode operator products $[ \hat{a}_n, \hat{a}_{m_1}^\dagger \ldots \hat{a}_{m_k}^\dagger ]$ and $[ \hat{a}_n^\dagger, \hat{a}_{m_1} \ldots \hat{a}_{m_k} ]$.
 Let us find the expression for the first commutator by induction.
@@ -50,11 +51,11 @@ Now, starting from the first-order relation $[ \hat{a}_n, \hat{a}_{m_1}^\dagger 
 \begin{equation*}
 \begin{split}
 	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \hat{a}_{m_2}^\dagger ]
-	& = \delta_{n m_1} \hat{a}_{m_2} + \delta_{n m_2} \hat{a}_{m_1}, \\
+	& = \delta_{n m_1} \hat{a}_{m_2}^\dagger + \delta_{n m_2} \hat{a}_{m_1}^\dagger, \\
 	[ \hat{a}_n, \hat{a}_{m_1}^\dagger \hat{a}_{m_2}^\dagger \hat{a}_{m_3}^\dagger ]
-	& = \delta_{n m_1} \hat{a}_{m_2} \hat{a}_{m_3}
-	+ \delta_{n m_2} \hat{a}_{m_1} \hat{a}_{m_3}
-	+ \delta_{n m_3} \hat{a}_{m_1} \hat{a}_{m_2}, \\
+	& = \delta_{n m_1} \hat{a}_{m_2}^\dagger \hat{a}_{m_3}^\dagger
+	+ \delta_{n m_2} \hat{a}_{m_1}^\dagger \hat{a}_{m_3}^\dagger
+	+ \delta_{n m_3} \hat{a}_{m_1}^\dagger \hat{a}_{m_2}^\dagger, \\
 	& \ldots
 \end{split}
 \end{equation*}
@@ -74,3 +75,83 @@ The general form for the second commutator can be found using the exact same pro
 	= - \sum\limits_{i=1}^k \delta_{n m_i}
 		\prod\limits_{j=1,j \ne i}^k \hat{a}_{m_j}.
 \end{equation}
+
+
+% =============================================================================
+\section{Restricted basis field}
+% =============================================================================
+
+Multimode fields are described by operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
+where $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
+and $\Psiop_j(\xvec)$ destroys one;
+the commutators are
+\begin{equation}
+\label{eqn:multimode-formalism:multimode-commutators}
+	[ \Psiop_j(\xvec), \Psiop_k^{\dagger}(\xvec^\prime) ]
+	= \delta_{jk} \delta(\xvec-\xvec^\prime).
+\end{equation}
+Field operators can be decomposed using a single-particle basis \todo{explanation needed?}:
+\[
+	\Psiop_j(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec},
+\]
+where $\phi_{\nvec}$ is some orthonormal basis,
+$\nvec$ is a state vector with $D$ elements.
+Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations \eqnref{multimode-formalism:single-mode-commutators},
+the pair $j,\nvec$ serving as a mode identifier.
+Orthonormality condition for basis functions is
+\[
+	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) d\xvec = \delta_{\nvec\mvec},
+\]
+where the exact nature of integration area $A$ depends on the basis set.
+Hereinafter we assume that the integration is always performed over $A$.
+
+Now suppose we want to consider only modes from some subset $L$.
+Corresponding projection operator can be written as
+\[
+	P \equiv \sum\limits_{\nvec \in L} \lvert \nvec \rangle \langle \nvec \rvert,
+\]
+Or, in coordinate form:
+\[
+	P [f(\xvec)]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int
+		d\xvec^\prime\, \phi_{\nvec}^*(\xvec^\prime) f(\xvec^\prime).
+\]
+Being applied to the field operator $\Psiop_j$, this operator returns the restricted field operator
+\[
+	P [\Psiop_j]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
+	= \Psiop_{jP} (\xvec),
+\]
+containing only modes from subset $L$.
+If $L$ is the whole mode space, then obviously $P \equiv \mathds{1}$.
+In order to simplify equations, we will consider all field operators in this chapter to be restricted and omit the index $P$.
+
+Because of the restricted nature of the operator, commutation relations~\eqnref{multimode-formalism:multimode-commutators} no longer apply.
+The following ones should be used instead:
+\begin{equation}
+\label{eqn:multimode-formalism:restricted-commutators}
+\begin{split}
+	\left[ \Psiop_{j}(\xvec), \Psiop_{k}(\xvec^\prime) \right]
+	& = \left[ \Psiop_{j}^\dagger(\xvec), \Psiop_{k}^\dagger(\xvec^\prime) \right] = 0, \\
+	\left[ \Psiop_{j}(\xvec), \Psiop_{k}^\dagger(\xvec^\prime) \right]
+	& = \delta_{jk} \delta_P(\xvec - \xvec^\prime),
+\end{split}
+\end{equation}
+where the restricted delta function $\delta_P$ is defined as
+\begin{equation}
+\label{eqn:multimode-formalism:restricted-delta}
+	\delta_P(\xvec - \xvec^\prime)
+	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec) \phi_{\nvec} (\xvec^\prime).
+\end{equation}
+Note that conjugation operator swaps variables in $\delta_P$: $\delta_P^*(\xvec - \xvec^\prime) = \delta_P(\xvec^\prime - \xvec)$.
+
+Restricted delta function can be used to rewrite equation for projection operator $P$:
+\[
+	P [f(\xvec)] = \int d\xvec^\prime \delta_P(\xvec^\prime - \xvec) f(\xvec^\prime).
+\]
+The Hermitian conjugate of $P$ is thus defined as
+\[
+	(P [f(\xvec)])^\dagger
+	= \int d\xvec^\prime \delta_P^*(\xvec^\prime - \xvec) f^\dagger(\xvec^\prime)
+	= P^\dagger [f^\dagger(\xvec)].
+\]

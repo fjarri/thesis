@@ -10,8 +10,7 @@ In order to take into account quantum effects, we must start from the master equ
 The basic Hamiltonian is easily expressed using quantum fields $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
 where $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
 and $\Psiop_j(\xvec)$ destroys one;
-the commutators are $[\Psiop_j(\xvec),\Psiop_k^{\dagger}(\xvec^\prime)] =
-\delta^{(D)}(\xvec-\xvec^\prime)\delta_{jk}$.
+the commutators are defined by~\eqnref{multimode-formalism:multimode-commutators}.
 Second-quantized Hamiltonian for the system looks like:
 \begin{equation}
 \label{eqn:wigner:hamiltonian}
@@ -44,7 +43,7 @@ In the subspace of two coupled components $\tilde{\Omega}_{jk}$ can be defined a
 	\end{pmatrix},
 \]
 where $\omega$ and $\alpha$ are frequency and phase of the oscillator,
-and $\Omega$ is Rabi frequency (cf. equation \eqnref{mean-field:rotation-matrix}).
+and $\Omega$ is Rabi frequency (cf. equation~\eqnref{mean-field:rotation-matrix}).
 
 If we impose an energy cutoff $\ecut$ and only take into account low-energy modes,
 the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by contact potential $U_{jk} \delta^{(D)}(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
@@ -65,26 +64,14 @@ but the change is small if $dx \gg a_{jk}$.
 
 
 % =============================================================================
-\section{Restricted basis field}
+\section{Energy cutoff}
 % =============================================================================
 
-Field operator can be decomposed using a single-particle basis \todo{explanation needed?}:
-\[
-	\Psiop_j(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec},
-\]
-where $\phi_{\nvec}$ is some orthonormal basis,
-and $\nvec$ is a state vector with $D$ elements.
-The mode operators obey bosonic commutation relations:
-\[
-	[ \hat{a}_{j,\nvec}, \hat{a}_{k,\mvec} ]
-	= [ \hat{a}_{j,\nvec}^\dagger, \hat{a}_{k,\mvec}^\dagger ] = 0,
-\]
-\[
-	[ \hat{a}_{j,\nvec}, \hat{a}_{k,\mvec}^\dagger ]
-	= \delta_{jk} \delta_{\mvec\nvec}.
-\]
+As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
+We will use the formalism for multimode operators described in \appref{multimode-formalism}.
 
-The simplest variant of basis is the plane-wave one:
+Two basis sets are used in this work.
+First is the basis of plane waves:
 \[
 	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
 \]
@@ -95,6 +82,8 @@ whose elements are eigenfunctions of kinetic term:
 	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
 \]
 Field functions can be decomposed into this basis using common FFTs.
+Integration area for this set is the box with volume $V$.
+
 More sophisticated basis can be constructed out of harmonic oscillator modes:
 \[
 	\phi_{\nvec}(\xvec) = \frac{1}{\sqrt[4]{\pi}}
@@ -115,31 +104,14 @@ These are the eigenfunctions of harmonic oscillator Hamiltonian:
 		\right)
 	\right) \phi_{\nvec}.
 \]
+This basis set has the whole $D$-dimensional space as the integration area.
 One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
 (see \appref{harmonic-transform} for technical details).
 
-As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
 We divide mode subspaces into low- and high-energy subsets $L$ and $H$,
-depending on whether $E_n$ is more or less than some cutoff energy $\ecut$.
-We introduce projection operators
-\[
-	P \equiv \sum\limits_{\nvec \in L} \lvert \nvec \rangle \langle \nvec \rvert,
-\]
-\[
-	Q \equiv \sum\limits_{\nvec \in H} \lvert \nvec \rangle \langle \nvec \rvert.
-\]
-Or, in coordinate form:
-\[
-	P [f(\xvec)]
-	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int
-		d\xvec^\prime\, \phi_{\nvec}^*(\xvec^\prime) f(\xvec^\prime)
-\]
-Being applied to the field operator $\Psiop_j$, this operator returns the restricted field operator:
-\[
-	P [\Psiop_j]
-	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
-	= \Psiop_{jP} (\xvec)
-\]
+depending on whether $E_n$ is more or less than some cutoff energy $\ecut$,
+and limit field operators to the subset $L$.
+Restricted operators obey commutation relations~\eqnref{multimode-formalism:restricted-commutators}.
 
 \begin{figure}
 \begin{center}
@@ -156,41 +128,50 @@ Being applied to the field operator $\Psiop_j$, this operator returns the restri
 \label{fig:wigner:restricted-delta}
 \end{figure}
 
-Because of the restricted nature of the operator, common commutation relations no longer apply.
-The following ones should be used instead:
-\[
-	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}(\xvec^\prime) \right]
-	= \left[ \Psiop_{jP}^\dagger(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right] = 0,
-\]
-\[
-	\left[ \Psiop_{jP}(\xvec), \Psiop_{kP}^\dagger(\xvec^\prime) \right]
-	= \delta_{jk} \delta_P(\xvec - \xvec^\prime),
-\]
-where the restricted delta function $\delta_P$ is defined as
-\begin{equation}
-\label{eqn:wigner:restricted-delta}
-	\delta_P(\xvec - \xvec^\prime)
-	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec) \phi_{\nvec} (\xvec^\prime).
-\end{equation}
-Note that conjugation operator swaps variables in $\delta_P$: $\delta_P^*(\xvec - \xvec^\prime) = \delta_P(\xvec^\prime - \xvec)$.
-Shape of the module of restricted delta function for two different grids and two different cutoff is shown in \figref{wigner:restricted-delta}.
+Shape of the module of restricted delta function~\eqnref{multimode-formalism:restricted-delta} for two different basis sets and two different cutoffs is shown in~\figref{wigner:restricted-delta}.
 The higher cutoff is, the closer its shape gets to the ``ideal'' delta function,
 with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
 
-Restricted delta function can be used to rewrite equation for projection operator $P$:
-\[
-	P [f(\xvec)] = \int d\xvec^\prime \delta_P(\xvec^\prime - \xvec) f(\xvec^\prime).
-\]
-The Hermitian conjugate of $P$ is thus defined as
-\[
-	(P [f(\xvec)])^\dagger
-	= \int d\xvec^\prime \delta_P^*(\xvec^\prime - \xvec) f^\dagger(\xvec^\prime)
-	= P^\dagger [f^\dagger(\xvec)].
-\]
 
+% =============================================================================
+\section{Master equation}
+% =============================================================================
+
+Hereinafter field operators and wave functions will be assumed to be defined in restricted basis, unless explicitly stated otherwise.
+The Markovian master equation for the system with the inclusion of losses can be written as~\cite{Jack2002}
+\begin{equation}
+	\frac{d\hat{\rho}}{dt} =
+		- \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
+		+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec
+			\mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
+\end{equation}
+where $\lvec = (l_1, l_2, \ldots, l_n)$ is a vector indicating the spins that are coupled,
+$n$ being the number of interacting particles,
+and we have introduced local Liouville loss terms,
+\begin{equation}
+	\mathcal{L}_{\lvec} \left[ \hat{\rho} \right] =
+		2\hat{O}_{\lvec} \hat{\rho} \hat{O}_{\lvec}^\dagger
+		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{\rho}
+		- \hat{\rho} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}.
+\end{equation}
+The reservoir coupling operators $\hat{O}_{\lvec}$ are the distinct $n$-fold products of local field annihilation operators,
+$\hat{O}_{\lvec} = \hat{O}_{\lvec} (\Psiopvec) =
+	\Psiop_{l_{1}} (\xvec)
+	\Psiop_{l_{2}} (\xvec) \ldots
+	\Psiop_{l_{n}} (\xvec),$
+describing local $n$-body collision losses.
+
+The master equation allows us to derive an important property.
+\begin{equation*}
+\begin{split}
+	\frac{d}{dt} \langle \Psiop_j \rangle
+	= \frac{d}{dt} Tr \left[ \hat{\rho} \Psiop_j \right]
+	= Tr \left[ \frac{d\hat{\rho}}{dt} \Psiop_j \right]
+\end{split}
+\end{equation*}
+\todo{Calculate the part from unitary evolution}
 
 \begin{comment}
-
 \subsection{Wigner representation}
 
 We use a multimode Wigner function representation~\cite{Gardiner2004} of the density operator,
