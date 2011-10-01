@@ -142,7 +142,7 @@ The Markovian master equation for the system with the inclusion of losses can be
 \begin{equation}
 	\frac{d\hat{\rho}}{dt} =
 		- \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
-		+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec
+		+ \sum\limits_{\lvec} \kappa_{\lvec} \int d\xvec
 			\mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
 \end{equation}
 where $\lvec = (l_1, l_2, \ldots, l_n)$ is a vector indicating the spins that are coupled,
@@ -161,15 +161,58 @@ $\hat{O}_{\lvec} = \hat{O}_{\lvec} (\Psiopvec) =
 	\Psiop_{l_{n}} (\xvec),$
 describing local $n$-body collision losses.
 
-The master equation allows us to derive an important property.
+The master equation allows us to derive an important property:
 \begin{equation*}
 \begin{split}
 	\frac{d}{dt} \langle \Psiop_j \rangle
-	= \frac{d}{dt} Tr \left[ \hat{\rho} \Psiop_j \right]
-	= Tr \left[ \frac{d\hat{\rho}}{dt} \Psiop_j \right]
+	= \frac{d}{dt} \Tr \left[ \hat{\rho} \Psiop_j \right]
+	= \Tr \left[ \frac{d\hat{\rho}}{dt} \Psiop_j \right]
+	= \Tr \left[ -\frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right] \Psiop_j \right]
+	+ \sum\limits_{\lvec} \kappa_{\lvec} \int d\xvec^\prime
+		\Tr \left[
+			\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
+			\Psiop_j^\prime
+		\right],
 \end{split}
 \end{equation*}
-\todo{Calculate the part from unitary evolution}
+where $\mathcal{L}_{\lvec}^\prime \equiv \mathcal{L} [ O_{\lvec}^\prime ] \equiv \mathcal{L} [ O_{\lvec} ( \Psiopvec(\xvec^\prime) ) ]$ and $\Psiop_j^\prime \equiv \Psiop_j (\xvec^\prime)$.
+\todo{Calculate the part from unitary evolution.}
+The second term, coming from the losses, can be calculated as
+\begin{equation*}
+\begin{split}
+	\int d\xvec^\prime
+		\Tr \left[
+			\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
+			\Psiop_j
+		\right]
+	& = \int d\xvec^\prime
+		\Tr \left[
+			2 \hat{O}_{\lvec}^\prime \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j
+			- \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \hat{\rho} \Psiop_j
+			- \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \Psiop_j
+		\right] \\
+	& = \int d\xvec^\prime
+		\Tr \left[
+			2 \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j \hat{O}_{\lvec}^\prime
+			- \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \hat{\rho} \Psiop_j
+			- \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \Psiop_j
+		\right] \\
+	& = \int d\xvec^\prime
+		\Tr \left[
+			\hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \Psiop_j
+			+ \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j \hat{O}_{\lvec}^\prime
+			- \hat{\rho} \Psiop_j \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
+			- \hat{\rho} \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \Psiop_j
+		\right] \\
+	& = \int d\xvec^\prime
+		\Tr \left[
+			\hat{\rho} \left[
+				\hat{O}_{\lvec}^{\prime\dagger}, \Psiop_j
+			\right] \hat{O}_{\lvec}^\prime
+		\right].
+\end{split}
+\end{equation*}
+
 
 \begin{comment}
 \subsection{Wigner representation}
