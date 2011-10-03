@@ -195,3 +195,28 @@ Accompanying conjugated relation:
 	\left[ \Psiop^\dagger, ( \Psiop^\prime )^l \right]
 	= - l \delta_P^* (\xvec - \xvec^\prime) ( \Psiop^\prime )^{l-1}.
 \]
+
+A further generalisation of these relations is
+\begin{equation}
+\label{eqn:multimode-formalism:functional-commutators}
+\begin{split}
+	\left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = \delta_P (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^{\prime\dagger}} \\
+	\left[ \Psiop^\dagger, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = -\delta_P^* (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^\prime},
+\end{split}
+\end{equation}
+where $f(x, y)$ is a function that can be expanded in the power series of $x$ and $y$.
+Let us prove the first relation; the procedure for the second one is the same.
+Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in power series of normally ordered operators (otherwise we can just use commutation relations).
+Thus
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r (\Psiop^\prime)^s ] \\
+	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r ] (\Psiop^\prime)^s \\
+	& = \sum\limits_{r,s} f_{rs} r \delta_P(\xvec - \xvec^\prime)
+		(\Psiop^{\prime\dagger})^{r-1} (\Psiop^\prime)^s \\
+	& = \delta_P (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}
+\end{split}
+\end{equation*}
