@@ -8,16 +8,17 @@
 
 In order to take into account quantum effects, we must start from the master equation.
 The basic Hamiltonian is easily expressed using quantum fields $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
-where $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
+where $\xvec$ is $D$-dimensional coordinate vector,
+$\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
 and $\Psiop_j(\xvec)$ destroys one;
 the commutators are defined by~\eqnref{multimode-formalism:multimode-commutators}.
 Second-quantized Hamiltonian for the system looks like:
 \begin{equation}
 \label{eqn:wigner:hamiltonian}
 \begin{split}
-	\hat{H} / \hbar = \int d^{D}\xvec \left\{
+	\hat{H} / \hbar = \int d\xvec \left\{
 		\Psiop_j^{\dagger} K_{jk} \Psiop_k
-		+ \frac{1}{2} \int d^D\xvec^\prime
+		+ \frac{1}{2} \int d\xvec^\prime
 			\Psiop_j^\dagger (\xvec) \Psiop_k^\dagger (\xvec^\prime)
 			U_{jk}(\xvec - \xvec^\prime)
 			\Psiop_j (\xvec^\prime) \Psiop_k (\xvec)
@@ -46,11 +47,11 @@ where $\omega$ and $\alpha$ are frequency and phase of the oscillator,
 and $\Omega$ is Rabi frequency (cf. equation~\eqnref{mean-field:rotation-matrix}).
 
 If we impose an energy cutoff $\ecut$ and only take into account low-energy modes,
-the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by contact potential $U_{jk} \delta^{(D)}(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
+the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by contact potential $U_{jk} \delta(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
 \begin{equation}
 \label{eqn:wigner:hamiltonian_effective}
 \begin{split}
-	\hat{H} / \hbar = \int d^{D}\xvec \left\{
+	\hat{H} / \hbar = \int d\xvec \left\{
 		\Psiop_j^{\dagger} K_{jk} \Psiop_k
 		+ \frac{U_{jk}}{2} \Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k
 	\right\}.
@@ -104,7 +105,7 @@ These are the eigenfunctions of harmonic oscillator Hamiltonian:
 		\right)
 	\right) \phi_{\nvec}.
 \]
-This basis set has the whole $D$-dimensional space as the integration area.
+This basis set has the whole space as the integration area.
 One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
 (see \appref{harmonic-transform} for technical details).
 
