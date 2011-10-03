@@ -209,10 +209,24 @@ The second term, coming from the losses, can be calculated as
 			\hat{\rho} \left[
 				\hat{O}_{\lvec}^{\prime\dagger}, \Psiop_j
 			\right] \hat{O}_{\lvec}^\prime
-		\right].
+		\right] \\
+	& = -\int d\xvec^\prime \delta_P(\xvec - \xvec^\prime)
+		\Tr \left[
+			\hat{\rho} \frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^{\prime\dagger}}
+			\hat{O}_{\lvec}^\prime
+		\right] \\
+	& = - P \left[ \langle
+		\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
+	\rangle \right].
 \end{split}
 \end{equation*}
-
+Thus the full relation is
+\[
+	\frac{d}{dt} \langle \Psiop_j \rangle
+	= -\sum\limits_{\lvec} \kappa_{\lvec} P \left[ \langle
+		\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
+	\rangle \right].
+\]
 
 \begin{comment}
 \subsection{Wigner representation}
