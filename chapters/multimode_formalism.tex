@@ -159,7 +159,7 @@ The Hermitian conjugate of $P$ is thus defined as
 
 
 % =============================================================================
-\section{High order commutators}
+\section{High order multimode commutators}
 % =============================================================================
 
 Let us find the expression for high-order commutators of restricted field operators, analogous to equation~\eqnref{multimode-formalism:single-mode-high-order-commutators} for single-mode operators.
@@ -220,3 +220,73 @@ Thus
 	& = \delta_P (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}
 \end{split}
 \end{equation*}
+
+
+% =============================================================================
+\section{Functional correspondences}
+% =============================================================================
+
+Phase-space treatment of multimode problems can be simplified by working with multimode field operators instead of single-mode operators~\cite{Steel1998,Norrie2006a}.
+Since distributions are initially defined in terms of single-mode operators, some preparations are necessary.
+
+\begin{lemma}
+If $\alpha$ and $\lambda$ are complex variables and $\int d^2\alpha$ stands for the integral over the complex plane, then
+\[
+	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda)
+\]
+\end{lemma}
+\begin{proof}
+Let us denote $\alpha = x + iy$ and $\lambda = u + iv$, where $x,\,y,\,u,\,v$ are real; then
+\begin{equation*}
+\begin{split}
+	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	& = \int d^2\alpha \exp(2 \Imag(\lambda^* \alpha))
+	= \int dx dy \exp(-2vx) \exp(2uy) \\
+	& = \int \exp(2\pi (-v / \pi) x) dx \int \exp(2\pi (u / \pi) y) dy
+	= \delta(-v / \pi) \delta(u / \pi) \\
+	& = \pi^2 \delta(u) \delta(v)
+	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda)
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
+
+Formally, a function of complex variable has to be holomorphic in order to be complex differentiable.
+In many cases it is enough to have less strict ``physicists'\,'' complex differentiation rule.
+If complex variable $z = x + iy$ and function $f(z) = u(x, y) + iv(x, y)$ then
+\[
+	\left( \frac{df(z)}{dz} \right)_{phys}
+	= \frac{1}{2} \left(
+		\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
+	\right)
+\]
+
+\begin{lemma}
+\label{lmm:multimode-formalism:phys-diff}
+If $f(z)$ is holomorphic, then ``physicists'\,'' differentiation is equivalent to the formal one.
+\end{lemma}
+\begin{proof}
+If $f(z)$ is holomorphic, Cauchy-Riemann equations $\partial u / \partial x = \partial v / \partial y$ and $\partial u / \partial y = -\partial v / \partial x$ are satisfied.
+Thus
+\begin{equation*}
+\begin{split}
+	\left( \frac{df(z)}{dz} \right)_{phys}
+	= \frac{1}{2} \left(
+		\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
+	\right)
+	= \frac{1}{2} \left(
+		\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}
+	\right)
+	+ \frac{i}{2} \left(
+		\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
+	\right)
+	= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
+\end{split}
+\end{equation*}
+The last expression being one of the forms of derivative for holomorphic functions.
+\end{proof}
+
+Hereinafter we will use ``physicists'\,'' differentiation unless explicitly stated otherwise,
+because some important functions we will encounter are not holomorphic.
+

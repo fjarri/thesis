@@ -3,12 +3,16 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{subfig}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{color}
 \usepackage{bm}
 \usepackage{verbatim}
 \usepackage{dsfont}
 
 \usepackage{fullpage}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 \newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
@@ -35,6 +39,8 @@
 \newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
 \newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
 \newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
 
 \title{Two-component BEC dynamics simulations}
 \author{Bogdan Opanchuk}
