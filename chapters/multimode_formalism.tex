@@ -217,7 +217,7 @@ Thus
 	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r ] (\Psiop^\prime)^s \\
 	& = \sum\limits_{r,s} f_{rs} r \delta_P(\xvec - \xvec^\prime)
 		(\Psiop^{\prime\dagger})^{r-1} (\Psiop^\prime)^s \\
-	& = \delta_P (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}
+	& = \delta_P (\xvec - \xvec^\prime) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}.
 \end{split}
 \end{equation*}
 
@@ -233,7 +233,7 @@ Since distributions are initially defined in terms of single-mode operators, som
 If $\alpha$ and $\lambda$ are complex variables and $\int d^2\alpha$ stands for the integral over the complex plane, then
 \[
 	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
-	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda)
+	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
 \]
 \end{lemma}
 \begin{proof}
@@ -246,7 +246,7 @@ Let us denote $\alpha = x + iy$ and $\lambda = u + iv$, where $x,\,y,\,u,\,v$ ar
 	& = \int \exp(2\pi (-v / \pi) x) dx \int \exp(2\pi (u / \pi) y) dy
 	= \delta(-v / \pi) \delta(u / \pi) \\
 	& = \pi^2 \delta(u) \delta(v)
-	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda)
+	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
 	\qedhere
 \end{split}
 \end{equation*}
@@ -259,11 +259,10 @@ If complex variable $z = x + iy$ and function $f(z) = u(x, y) + iv(x, y)$ then
 	\left( \frac{df(z)}{dz} \right)_{phys}
 	= \frac{1}{2} \left(
 		\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
-	\right)
+	\right).
 \]
 
 \begin{lemma}
-\label{lmm:multimode-formalism:phys-diff}
 If $f(z)$ is holomorphic, then ``physicists'\,'' differentiation is equivalent to the formal one.
 \end{lemma}
 \begin{proof}
@@ -281,7 +280,7 @@ Thus
 	+ \frac{i}{2} \left(
 		\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}
 	\right)
-	= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}
+	= \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x}.
 \end{split}
 \end{equation*}
 The last expression being one of the forms of derivative for holomorphic functions.
