@@ -286,6 +286,57 @@ Thus
 The last expression being one of the forms of derivative for holomorphic functions.
 \end{proof}
 
+\begin{lemma}
+(obvious) For any ``good'' (even non-holomorphic) $f(z)$, ``physicists'\,'' differentiation obeys sum, product, quotient, and chain differentiation rules.
+\end{lemma}
+
 Hereinafter we will use ``physicists'\,'' differentiation unless explicitly stated otherwise,
 because some important functions we will encounter are not holomorphic.
+This differentiation has all intuitively assumed properties, along with some not quite obvious ones.
 
+\begin{lemma}
+For any nonnegative integers $a$ and $b$.
+\[
+	\frac{d}{dz} (z^a (z^*)^b) = a z^{a-1} (z^*)^b,
+	\quad
+	\frac{d}{dz^*} (z^a (z^*)^b) = b z^a (z^*)^{b-1},
+\]
+\end{lemma}
+\begin{proof}
+Let us assume that the statement of the lemma is valid for some $a$ and $b$, then using chain rule
+\[
+	\frac{d}{dz} (z^{a+1} (z^*)^b)
+	= \frac{d}{dz} (z z^a (z^*)^b)
+	= z^a (z^*)^b + z \frac{d}{dz} (z^a (z^*)^b)
+	= z^a (z^*)^b + a z z^{a-1} (z^*)^b
+	= (a + 1) z^a (z^*)^b.
+\]
+The part for $d/dz^*$ can is proved in the same way.
+One can easily prove (by transition to real values) that $d(z z^*)/dz = z^*$ and $d(z z^*)/dz^* = z$.
+By induction, the statement is true for any natural $a$ and $b$,
+and it is obviously true if $a = 0$ or $b = 0$, which proves the lemma.
+\todo{This can be proved for any real $a$ and $b$, if necessary.}
+\end{proof}
+
+This is straightforwardly followed by
+\begin{lemma}
+If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $df(z)/dz$ can be treated as partial differentiation of the function of two independent variables $z$ and $z^*$.
+In other words:
+\[
+	\frac{d}{dz} f(z) \equiv \frac{\partial}{\partial z} f(z, z^*),
+	\quad
+	\frac{d}{dz^*} f(z) \equiv \frac{\partial}{\partial z^*} f(z, z^*).
+\]
+\end{lemma}
+
+Single-mode characteristic function for Wigner representation is defined as
+\[
+	\chi_W (\lambda, \lambda^*)
+	= \Trace{ \hat{\rho} \exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a}) },
+\]
+and the Wigner function itself is
+\[
+	W (\alpha, \alpha^*)
+	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\chi_W (\lambda, \lambda^*).
+\]
