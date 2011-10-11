@@ -223,7 +223,7 @@ Thus
 
 
 % =============================================================================
-\section{Functional correspondences}
+\section{Single-mode Wigner representation}
 % =============================================================================
 
 Phase-space treatment of multimode problems can be simplified by working with multimode field operators instead of single-mode operators~\cite{Steel1998,Norrie2006a}.
@@ -379,11 +379,12 @@ Single-mode characteristic function for Wigner representation is defined as
 	= \Trace{ \hat{\rho} \exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a}) },
 \]
 and the Wigner function itself is
-\[
+\begin{equation}
+\label{eqn:multimode-formalism:single-mode-wigner}
 	W (\alpha, \alpha^*)
 	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\chi_W (\lambda, \lambda^*).
-\]
+\end{equation}
 
 \begin{lemma}
 \label{lmm:multimode-formalism:moments-from-chi}
