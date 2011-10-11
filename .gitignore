@@ -6,4 +6,7 @@ chapters/*.aux
 *.pdf
 *.synctex.gz
 *.tmproj
+*.out
+*.toc
+temp/*
 
