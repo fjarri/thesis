@@ -229,29 +229,6 @@ Thus
 Phase-space treatment of multimode problems can be simplified by working with multimode field operators instead of single-mode operators~\cite{Steel1998,Norrie2006a}.
 Since distributions are initially defined in terms of single-mode operators, some preparations are necessary.
 
-\begin{lemma}
-If $\alpha$ and $\lambda$ are complex variables and $\int d^2\alpha$ stands for the integral over the complex plane, then
-\[
-	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
-	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
-\]
-\end{lemma}
-\begin{proof}
-Let us denote $\alpha = x + iy$ and $\lambda = u + iv$, where $x,\,y,\,u,\,v$ are real; then
-\begin{equation*}
-\begin{split}
-	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
-	& = \int d^2\alpha \exp(2 \Imag(\lambda^* \alpha))
-	= \int dx dy \exp(-2vx) \exp(2uy) \\
-	& = \int \exp(2\pi (-v / \pi) x) dx \int \exp(2\pi (u / \pi) y) dy
-	= \delta(-v / \pi) \delta(u / \pi) \\
-	& = \pi^2 \delta(u) \delta(v)
-	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
-	\qedhere
-\end{split}
-\end{equation*}
-\end{proof}
-
 Formally, a function of complex variable has to be holomorphic in order to be complex differentiable.
 In many cases it is enough to have less strict ``physicists'\,'' complex differentiation rule.
 If complex variable $z = x + iy$ and function $f(z) = u(x, y) + iv(x, y)$ then
@@ -329,6 +306,73 @@ In other words:
 \]
 \end{lemma}
 
+Now we can prove the lemma which will help us deal with some integrals.
+\begin{lemma}
+\label{lmm:multimode-formalism:fourier-of-moments}
+If $\alpha$ and $\lambda$ are complex variables and $\int d^2\alpha$ stands for the integral over the complex plane, then for any non-negative integers $r$ and $s$:
+\[
+	\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	= \pi^2
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\delta(\Real \lambda) \delta(\Imag \lambda)
+\]
+\end{lemma}
+\begin{proof}
+First, changing the variables in the integrals and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
+\[
+	\int\limits_{-\infty}^{\infty} dx\, x^n \exp(2 i x v) = \pi (-i / 2)^n \delta^{(n)}(v),
+\]
+\[
+	\int\limits_{-\infty}^{\infty} dx\, x^n \exp(-2 i x v) = \pi (i / 2)^n \delta^{(n)}(v).
+\]
+Note that we have explicitly written integration limits here;
+they are swapped when we change the variable in the first integral.
+
+Denoting $\alpha = x + iy$ and $\lambda = u + iv$, we can expand the initial expression as
+\begin{equation*}
+\begin{split}
+	\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	& = \int dx dy \exp(2ixv - 2iyu)
+		\sum\limits_{l=0}^r \binom{r}{l} x^l (iy)^{r-l}
+		\sum\limits_{m=0}^s \binom{s}{m} x^m (-iy)^{s-m} \\
+	& = \sum\limits_{l=0}^r \sum\limits_{m=0}^s \binom{r}{l} \binom{s}{m}
+		i^{r-l} (-i)^{s-m}
+		\int dx\, x^{l+m} \exp(2ixv)
+		\int dy\, y^{r-l+s-m} \exp(-2iyu) \\
+	& = \pi^2 \sum\limits_{l=0}^r \sum\limits_{m=0}^s \binom{r}{l} \binom{s}{m}
+		i^{r-l} (-i)^{s-m}
+		(-i/2)^{l+m} \delta^{(l+m)}(v)
+		(i/2)^{r-l+s-m} \delta^{(r-l+s-m)}(u) \\
+	& = \pi^2
+		\sum\limits_{l=0}^r \binom{r}{l}
+			\frac{1}{2^r}
+			(-i \partial / \partial v)^l
+			(-\partial / \partial u)^{r-l}
+		\sum\limits_{m=0}^s \binom{s}{m}
+			\frac{1}{2^s}
+			(-i \partial / \partial v)^m
+			(\partial / \partial u)^{s-m}
+		\delta(v) \delta(u) \\
+	& = \pi^2
+		\left( \frac{1}{2} (-i \partial / \partial v - \partial / \partial u) \right)^r
+		\left( \frac{1}{2} (-i \partial / \partial v + \partial / \partial u) \right)^s
+		\delta(v) \delta(u) \\
+	& = \pi^2
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\delta(\Real \lambda) \delta(\Imag \lambda).
+		\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
+
+A notable special case of \lmmref{multimode-formalism:fourier-of-moments} is
+\[
+	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
+\]
+
 Single-mode characteristic function for Wigner representation is defined as
 \[
 	\chi_W (\lambda, \lambda^*)
@@ -340,3 +384,151 @@ and the Wigner function itself is
 	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\chi_W (\lambda, \lambda^*).
 \]
+
+\begin{lemma}
+\label{lmm:multimode-formalism:moments-from-chi}
+\[
+	\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+	= \left.
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\chi_W (\lambda, \lambda^*)
+	\right|_{\lambda=0}.
+\]
+\end{lemma}
+\begin{proof}
+The exponent in the $\chi_W$ can be expanded as
+\[
+	\exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a})
+	= \sum\limits_{r,s}
+		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
+		\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }.
+\]
+Therefore the application of $(\partial / \partial \lambda)^s$ and $(-\partial / \partial \lambda^*)^r$ to this exponent will eliminate all lower order moments,
+and setting $\lambda = 0$ afterwards will eliminate all higher order moments,
+leaving only $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
+\[
+	\left.
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\chi_W (\lambda, \lambda^*)
+	\right|_{\lambda=0}
+	= \Trace{
+		\hat{\rho} r! s! \frac{\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }}{r! s!}
+	}
+	= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle.
+	\qedhere
+\]
+\end{proof}
+
+In order to connect Wigner function and operator moments, we will need the following lemma:
+\begin{lemma}
+\label{lmm:multimode-formalism:zero-integrals}
+For any non-negative $r$, $s$:
+\begin{equation*}
+\begin{split}
+	\int d^2\alpha \int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \chi_W (\lambda, \lambda^*)
+		\right)
+	& = 0 \\
+	\int d^2\alpha \int d^2\lambda
+		\frac{\partial}{\partial \lambda^*} \left(
+			\alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \chi_W (\lambda, \lambda^*)
+		\right)
+	& = 0.
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+We will prove the first equation; the second one is proved in the same way.
+First, note that complex-valued integral of derivative is evaluated as
+\begin{equation*}
+\begin{split}
+	\int d^2\lambda \frac{\partial}{\partial \lambda} f(\lambda, \lambda^*)
+	& = \frac{1}{2} \int\limits_{-\infty}^{\infty} dx \int\limits_{-\infty}^{\infty} dy
+		\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)
+		f(x, y) \\
+	& = \frac{1}{2} \int\limits_{-\infty}^{\infty} dy \int\limits_{-\infty}^{\infty} dx
+			\frac{\partial}{\partial x} f(x, y)
+		- \frac{i}{2} \int\limits_{-\infty}^{\infty} dx \int\limits_{-\infty}^{\infty} dy
+			\frac{\partial}{\partial y} f(x, y) \\
+	& =	\frac{1}{2} \int\limits_{-\infty}^{\infty} dy \left(
+			\left. f(x, y) \right|_{x=-\infty}^{\infty}
+		\right)
+		- \frac{i}{2} \int\limits_{-\infty}^{\infty} dx \left(
+			\left. f(x, y) \right|_{y=-\infty}^{\infty}
+		\right),
+\end{split}
+\end{equation*}
+where we expanded $\lambda = x + iy$.
+Evaluating integral over $\alpha$ using \lmmref{multimode-formalism:fourier-of-moments}:
+\begin{equation*}
+\begin{split}
+	\int d^2\alpha \int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \chi_W (\lambda, \lambda^*)
+		\right)
+	& = \pi^2 \int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\chi_W (\lambda, \lambda^*)
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+			\left( \frac{\partial}{\partial \lambda} \right)^s
+			\delta(\Real \lambda) \delta(\Imag \lambda)
+		\right) \\
+	& = \frac{\pi^2}{2} \int\limits_{-\infty}^{\infty} dy \left(
+		\left.
+			\chi_W (x, y)
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+			\left( \frac{\partial}{\partial \lambda} \right)^s
+			\delta(x) \delta(y)
+		\right|_{x=-\infty}^{\infty}
+	\right) \\
+	& - \frac{i\pi^2}{2} \int\limits_{-\infty}^{\infty} dx \left(
+		\left.
+			\chi_W (x, y)
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+			\left( \frac{\partial}{\partial \lambda} \right)^s
+			\delta(x) \delta(y)
+		\right|_{y=-\infty}^{\infty}
+	\right) \\
+	& = 0
+\end{split}
+\end{equation*}
+since $\chi_W$ is bounded~\cite{Gardiner2004},
+and any finite derivative of delta-function is zero on the infinity.
+\end{proof}
+
+Now we can get the final relation.
+\begin{theorem}
+\[
+	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
+	= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+\]
+\end{theorem}
+\begin{proof}
+Integrating the expression to the left by parts and eliminating terms which fit \lmmref{multimode-formalism:zero-integrals}, we find that
+\begin{equation*}
+\begin{split}
+	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
+	& = \int d^2\alpha \int d^2\lambda
+		\exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\chi_W (\lambda, \lambda^*) \\
+	& = \int d^2\lambda\,
+		\delta (\Real \lambda) \delta (\Imag \lambda)
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\chi_W (\lambda, \lambda^*) \\
+	& = \left.
+		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+		\chi_W (\lambda, \lambda^*)
+	\right|_{\lambda=0},
+\end{split}
+\end{equation*}
+where we used \lmmref{multimode-formalism:fourier-of-moments} to evaluate integral over $\alpha$.
+Now, recognising the final expression as a part of \lmmref{multimode-formalism:moments-from-chi},
+we immideately get the statement of the theorem.
+\end{proof}
