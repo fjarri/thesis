@@ -405,7 +405,19 @@ The exponent in the $\chi_W$ can be expanded as
 		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
 		\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }.
 \]
-Therefore the application of $(\partial / \partial \lambda)^s$ and $(-\partial / \partial \lambda^*)^r$ to this exponent will eliminate all lower order moments,
+Thus
+\[
+	\chi_W(\lambda, \lambda^*)
+	= \sum\limits_{r,s}
+		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
+		\Trace{
+			\hat{\rho} \symprod{ \hat{a}^r (\hat{a}^\dagger)^s }
+		}
+	= \sum\limits_{r,s}
+		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
+		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+\]
+Apparently, the application of $(\partial / \partial \lambda)^s$ and $(-\partial / \partial \lambda^*)^r$ will eliminate all lower order moments,
 and setting $\lambda = 0$ afterwards will eliminate all higher order moments,
 leaving only $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 \[
@@ -414,9 +426,8 @@ leaving only $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
 		\chi_W (\lambda, \lambda^*)
 	\right|_{\lambda=0}
-	= \Trace{
-		\hat{\rho} r! s! \frac{\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }}{r! s!}
-	}
+	= r! s! \frac{1}{r! s!}
+		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 	= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle.
 	\qedhere
 \]
@@ -502,6 +513,7 @@ and any finite derivative of delta-function is zero on the infinity.
 
 Now we can get the final relation.
 \begin{theorem}
+\label{thm:multimode-formalism:single-mode-wigner-moments}
 \[
 	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
 	= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
