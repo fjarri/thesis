@@ -524,7 +524,7 @@ Integrating the expression to the left by parts and eliminating terms which fit 
 \begin{equation*}
 \begin{split}
 	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
-	& = \int d^2\alpha \int d^2\lambda
+	& = \frac{1}{\pi^2} \int d^2\alpha \int d^2\lambda
 		\exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\left( \frac{\partial}{\partial \lambda} \right)^s
 		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
@@ -562,7 +562,7 @@ Then the definitions of multimode characteristic function and Wigner function ar
 \begin{equation}
 \label{eqn:multimode-formalism:multimode-wigner}
 	W (\bm{\alpha}, \bm{\alpha}^*)
-	= \frac{1}{\pi^2} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
+	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
 		\left(
 			\exp \sum\limits_n (-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
 		\right)
