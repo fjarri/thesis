@@ -545,3 +545,98 @@ where we used \lmmref{multimode-formalism:fourier-of-moments} to evaluate integr
 Now, recognising the final expression as a part of \lmmref{multimode-formalism:moments-from-chi},
 we immideately get the statement of the theorem.
 \end{proof}
+
+% =============================================================================
+\section{Multimode Wigner representation}
+% =============================================================================
+
+Single-mode definition~\eqnref{multimode-formalism:single-mode-wigner} of Wigner representation can be extended to the case of many modes.
+Let $\bm{\lambda}$ and $\bm{\alpha}$ be vectors of $\lambda_n$ and $\alpha_n$ values respectively,
+with $n = 1 \ldots N$.
+Then the definitions of multimode characteristic function and Wigner function are
+\[
+	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
+	= \Trace{ \hat{\rho} \exp \sum\limits_n
+		(\lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n) },
+\]
+\begin{equation}
+\label{eqn:multimode-formalism:multimode-wigner}
+	W (\bm{\alpha}, \bm{\alpha}^*)
+	= \frac{1}{\pi^2} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
+		\left(
+			\exp \sum\limits_n (-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
+		\right)
+		\chi_W (\bm{\lambda}, \bm{\lambda}^*).
+\end{equation}
+
+\begin{lemma}[Multimode extension of~\lmmref{multimode-formalism:moments-from-chi}]
+\label{lmm:multimode-formalism:multimode-moments-from-chi}
+\[
+	\langle \symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle
+	= \left.
+		\left(
+			\prod\limits_n
+			\left( \frac{\partial}{\partial \lambda_n} \right)^{s_n}
+			\left( -\frac{\partial}{\partial \lambda_n^*} \right)^{r_n}
+		\right)
+		\chi_W (\bm{\lambda}, \bm{\lambda}^*)
+	\right|_{\bm{\lambda}=0}.
+\]
+\end{lemma}
+\begin{proof}
+Mode operators with different indices commute, so
+\begin{equation*}
+\begin{split}
+	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
+	& = \Trace{
+		\hat{\rho}
+		\prod\limits_n
+			\exp( \lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)
+	} \\
+	& = \Trace{
+		\hat{\rho}
+		\prod\limits_n \sum\limits_{r_n, s_n}
+			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+	} \\
+	& = \Trace{
+		\hat{\rho}
+		\sum\limits_{r_1, s_1, \ldots, r_N, s_N} \prod\limits_n
+			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+	} \\
+	& = \Trace{
+		\sum\limits_{r_1, s_1, \ldots, r_N, s_N}
+			\left(
+				\prod\limits_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+			\right)
+			\hat{\rho}
+			\symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+	} \\
+	& = \sum\limits_{r_1, s_1, \ldots, r_N, s_N}
+		\left(
+			\prod\limits_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+		\right)
+		\langle
+			\symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+		\rangle,
+\end{split}
+\end{equation*}
+which is straightforwardly followed by the statement of the lemma.
+\end{proof}
+
+Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for single-mode case.
+\begin{theorem}[Multimode extension of~\thmref{multimode-formalism:single-mode-wigner-moments}]
+\[
+	\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
+		\left(
+			\prod\limits_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
+		\right) W(\bm{\alpha}, \bm{\alpha}^*)
+	= \langle \symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
+\]
+\end{theorem}
+\begin{proof}
+The proof is carried out similarly to~\thmref{multimode-formalism:single-mode-wigner-moments}:
+integrals over $\alpha_n$ are eliminated one by one using integration by parts and~\lmmref{multimode-formalism:zero-integrals},
+until we get the right part of~\lmmref{multimode-formalism:multimode-moments-from-chi}.
+\end{proof}
