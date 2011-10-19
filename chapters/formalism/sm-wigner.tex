@@ -19,25 +19,34 @@ one can find that
 	= (\hat{a} - \frac{1}{2} \lambda) \hat{D}(\lambda, \lambda^*).
 \end{split}
 \end{equation}
-Single-mode characteristic function for Wigner representation is defined as
-\[
-	\chi_W (\lambda, \lambda^*)
-	= \Trace{ \hat{\rho} \hat{D}(\lambda, \lambda^*) },
-\]
-and the Wigner function itself is
-\begin{equation}
-\label{eqn:formalism:sm-wigner:w-definition}
-	W (\alpha, \alpha^*)
-	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\chi_W (\lambda, \lambda^*).
-\end{equation}
-For future purposes it is convenient to also define Wigner transformation \todo{probably, Weyl transformation goes here too}
+
+In terms of displacement operator Wigner transformation $\mathcal{W}$ is defined as
 \[
 	\mathcal{W}[\hat{A}]
 	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
 \]
-Thus Wigner function is a result of Wigner transformation of a density matrix: $W(\alpha, \alpha^*) = \mathcal{W}[\hat{\rho}]$.
+It transforms an operator $\hat{A}$ on a Hilbert space to a function $\mathcal{W}[\hat{A}](\alpha, \alpha^*)$ on phase space.
+The backward transformation (called the Weyl transformation) gives back matrix elements of the operator:
+\[
+	\langle \alpha \lvert \mathcal{W}^{-1}[f(\alpha, \alpha^*)] \rvert \alpha \rangle
+	= \todo{find the expression},
+\]
+which is enough, because any operator is determined by its expectation in all coherent states~\cite{Gardiner2004}.
+
+Thus Wigner function can be defined as a result of Wigner transformation of the density matrix: $W(\alpha, \alpha^*) = \mathcal{W}[\hat{\rho}]$.
+In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}
+\begin{equation}
+\label{eqn:formalism:sm-wigner:w-definition}
+	W (\alpha, \alpha^*)
+	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\chi_W (\lambda, \lambda^*),
+\end{equation}
+where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
+\[
+	\chi_W (\lambda, \lambda^*)
+	= \Trace{ \hat{\rho} \hat{D}(\lambda, \lambda^*) }.
+\]
 
 \begin{lemma}
 \label{lmm:formalism:sm-wigner:moments-from-chi}
