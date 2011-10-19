@@ -402,6 +402,13 @@ and the Wigner function itself is
 	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\chi_W (\lambda, \lambda^*).
 \end{equation}
+For future purposes it is convenient to also define Wigner transformation \todo{probably, Weyl transformation goes here too}
+\[
+	\mathcal{W}[\hat{A}]
+	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
+\]
+Thus Wigner function is a result of Wigner transformation of a density matrix: $W(\alpha, \alpha^*) = \mathcal{W}[\hat{\rho}]$.
 
 \begin{lemma}
 \label{lmm:multimode-formalism:moments-from-chi}
