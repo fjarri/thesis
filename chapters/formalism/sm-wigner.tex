@@ -35,6 +35,8 @@ The backward transformation (called the Weyl transformation) gives back matrix e
 which is enough, because any operator is determined by its expectation in all coherent states~\cite{Gardiner2004}.
 
 Thus Wigner function can be defined as a result of Wigner transformation of the density matrix: $W(\alpha, \alpha^*) = \mathcal{W}[\hat{\rho}]$.
+The Wigner function always exists for any density matrix, which makes the correspondence $W \leftrightarrow \hat{\rho}$ a bijection.
+
 In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}
 \begin{equation}
 \label{eqn:formalism:sm-wigner:w-definition}
@@ -134,25 +136,19 @@ we immideately get the statement of the theorem.
 
 \begin{theorem}[Operator correspondences]
 \label{thm:formalism:sm-wigner:correspondences}
-Considering~\eqnref{formalism:sm-wigner:w-definition} and corresponding backward transform \todo{needs explicit definition?} to be a bijection from Hilbert space to $\mathbb{R}^2$ \todo{proof needed? or just write the theorem in terms of Wigner transformation?}
-(in other words, a one-to-one correspondence $\hat{\rho} \leftrightarrow W$),
-the following correspondences take place:
+If $\mathcal{W} [ \hat{\rho} ] = W(\alpha, \alpha^*)$, then
 \begin{equation*}
 \begin{split}
-	\hat{a} \hat{\rho}
-		& \leftrightarrow
-		\left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W(\alpha, \alpha^*),
+	\mathcal{W} [ \hat{a} \hat{\rho} ]
+		& = \left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W,
 	\quad
-	\hat{a}^\dagger \hat{\rho}
-		\leftrightarrow
-		\left( \alpha^* - \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W(\alpha, \alpha^*), \\
-	\hat{\rho} \hat{a}
-		& \leftrightarrow
-		\left( \alpha - \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W(\alpha, \alpha^*),
+	\mathcal{W} [ \hat{a}^\dagger \hat{\rho} ]
+		= \left( \alpha^* - \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W, \\
+	\mathcal{W} [ \hat{\rho} \hat{a} ]
+		& = \left( \alpha - \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W,
 	\quad
-	\hat{\rho} \hat{a}^\dagger
-		\leftrightarrow
-		\left( \alpha^* + \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W(\alpha, \alpha^*).
+	\mathcal{W} [ \hat{\rho} \hat{a}^\dagger ]
+		= \left( \alpha^* + \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W.
 \end{split}
 \end{equation*}
 \end{theorem}
