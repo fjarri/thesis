@@ -373,10 +373,27 @@ A notable special case of \lmmref{multimode-formalism:fourier-of-moments} is
 	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
 \]
 
+We will need the displacement operator which was first introduced by Weyl~\cite{Weyl1950}:
+\[
+	\hat{D}(\lambda, \lambda^*) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}).
+\]
+Using Baker-Hausdorff theorem to split non-commuting operators in the exponent,
+one can find that
+\begin{equation}
+\label{eqn:multimode-formalism:displacement-derivatives}
+\begin{split}
+	\frac{\partial}{\partial \lambda} \hat{D}(\lambda, \lambda^*)
+	& = \hat{D}(\lambda, \lambda^*) (\hat{a}^\dagger + \frac{1}{2} \lambda^*)
+	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda, \lambda^*), \\
+	-\frac{\partial}{\partial \lambda^*} \hat{D}(\lambda, \lambda^*)
+	& = \hat{D}(\lambda, \lambda^*) (\hat{a} + \frac{1}{2} \lambda)
+	= (\hat{a} - \frac{1}{2} \lambda) \hat{D}(\lambda, \lambda^*).
+\end{split}
+\end{equation}
 Single-mode characteristic function for Wigner representation is defined as
 \[
 	\chi_W (\lambda, \lambda^*)
-	= \Trace{ \hat{\rho} \exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a}) },
+	= \Trace{ \hat{\rho} \hat{D}(\lambda, \lambda^*) },
 \]
 and the Wigner function itself is
 \begin{equation}
