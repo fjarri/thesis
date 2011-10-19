@@ -570,6 +570,75 @@ Now, recognising the final expression as a part of \lmmref{multimode-formalism:m
 we immideately get the statement of the theorem.
 \end{proof}
 
+\begin{theorem}[Operator correspondences]
+\label{thm:multimode-formalism:single-mode-wigner-correspondences}
+Considering~\eqnref{multimode-formalism:single-mode-wigner} and corresponding backward transform \todo{needs explicit definition?} to be a bijection from Hilbert space to $\mathbb{R}^2$ \todo{proof needed? or just write the theorem in terms of Wigner transformation?}
+(in other words, a one-to-one correspondence $\hat{\rho} \leftrightarrow W$),
+the following correspondences take place:
+\begin{equation*}
+\begin{split}
+	\hat{a} \hat{\rho}
+		& \leftrightarrow
+		\left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W(\alpha, \alpha^*),
+	\quad
+	\hat{a}^\dagger \hat{\rho}
+		\leftrightarrow
+		\left( \alpha^* - \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W(\alpha, \alpha^*), \\
+	\hat{\rho} \hat{a}
+		& \leftrightarrow
+		\left( \alpha - \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) W(\alpha, \alpha^*),
+	\quad
+	\hat{\rho} \hat{a}^\dagger
+		\leftrightarrow
+		\left( \alpha^* + \frac{1}{2} \frac{\partial}{\partial \alpha} \right) W(\alpha, \alpha^*).
+\end{split}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+We will prove the first correspondence.
+First, let us transform the trace using~\eqnref{multimode-formalism:displacement-derivatives}:
+\begin{equation*}
+\begin{split}
+	\Trace{ \hat{a} \hat{\rho} \hat{D} }
+	= \Trace{ \hat{\rho} \hat{D} \hat{a}}
+	= \Trace{ \hat{\rho} \left(
+		-\frac{\partial}{\partial \lambda^*}
+		-\frac{1}{2} \lambda
+	\right) \hat{D}}
+	= \left(
+		-\frac{\partial}{\partial \lambda^*}
+		-\frac{1}{2} \lambda
+	\right) \Trace{ \hat{\rho} \hat{D}}
+	= \left(
+		-\frac{\partial}{\partial \lambda^*}
+		-\frac{1}{2} \lambda
+	\right) \chi_W
+\end{split}
+\end{equation*}
+Now we need to somehow move this additional multiplier outside the integral in the expression for Wigner function:
+\begin{equation*}
+\begin{split}
+	\mathcal{W} [ \hat{a} \hat{\rho} ]
+	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\Trace{ \hat{a} \hat{\rho} \hat{D}(\lambda, \lambda^*) } \\
+	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\left(
+			-\frac{\partial}{\partial \lambda^*}
+			-\frac{1}{2} \lambda
+		\right) \chi_W(\lambda, \lambda^*) \\
+	& = \frac{1}{2} \frac{\partial}{\partial \alpha^*} \mathcal{W} [\hat{\rho}]
+	- \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\frac{\partial}{\partial \lambda^*} \chi_W(\lambda, \lambda^*) \\
+	& = \frac{1}{2} \frac{\partial}{\partial \alpha^*} \mathcal{W} [\hat{\rho}]
+	+ \frac{1}{\pi^2} \int d^2 \lambda \left(
+		\frac{\partial}{\partial \lambda^*} \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	\right) \chi_W(\lambda, \lambda^*) \\
+	& = \left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) \mathcal{W} [\hat{\rho}].
+\end{split}
+\end{equation*}
+Notice that we used~\lmmref{multimode-formalism:zero-integrals-2} to move the partial derivative over $\lambda^*$.
+\end{proof}
+
 % =============================================================================
 \section{Multimode Wigner representation}
 % =============================================================================
