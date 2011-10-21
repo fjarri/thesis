@@ -222,3 +222,57 @@ Evaluating integral over $\alpha$ using \lmmref{formalism:c-numbers:fourier-of-m
 since $f$ is bounded,
 and any finite derivative of delta-function is zero on the infinity.
 \end{proof}
+
+\begin{lemma}
+\label{lmm:formalism:c-numbers:zero-integrals-2}
+For any non-negative integers $r$, $s$ and complex numbers $\lambda = x + iy$, $\alpha = u + iv$
+\begin{equation*}
+\begin{split}
+	\int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\exp(ixy) x^r (iy)^s
+		\right)
+	& = 0 \\
+	\int d^2\lambda
+		\frac{\partial}{\partial \lambda^*}
+		\left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\exp(ixy) x^r (iy)^s
+		\right)
+	& = 0.
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+We will prove the first equation.
+Expanding complex numbers:
+\begin{equation*}
+\begin{split}
+	\int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\exp(ixy) x^r (iy)^s
+		\right)
+	& = \frac{1}{2} \int dy \left. \left(
+			\exp(2ixv - 2iyu) \exp(ixy) x^r (iy)^s
+		\right) \right|_{x = -\infty}^\infty \\
+	& - \frac{i}{2} \int dy \left. \left(
+			\exp(2ixv - 2iyu) \exp(ixy) x^r (iy)^s
+		\right) \right|_{y = -\infty}^\infty \\
+	& = \left(
+			\frac{1}{2} \exp(2ixv) x^r i^s \int dy \exp(iy(x-2u)) y^s
+		\right)_{x = -\infty}^\infty \\
+	& - \left(
+		\frac{i}{2} \exp(-2ixy) (iy)^s \int dx \exp(ix(y+2v)) x^r
+	\right)_{y = -\infty}^\infty \\
+	& = \left(
+			\frac{1}{2} \exp(2ixv) x^r i^s 2 \pi i^s \delta^{(s)}(x-2u)
+		\right)_{x = -\infty}^\infty \\
+	& - \left(
+			\frac{i}{2} \exp(-2ixy) (iy)^s 2 \pi i^r \delta^{(r)}(y+2v)
+		\right)_{y = -\infty}^\infty \\
+	& = 0
+\end{split}
+\end{equation*}
+\end{proof}
