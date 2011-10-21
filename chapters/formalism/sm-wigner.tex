@@ -51,6 +51,78 @@ where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
 \]
 
 \begin{lemma}
+\label{lmm:formalism:sm-wigner:zero-integrals}
+\begin{equation*}
+\begin{split}
+	\int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\left( \frac{\partial}{\partial \lambda} \right)^m
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^n
+			\hat{D}(\lambda, \lambda^*)
+		\right)
+	& = 0 \\
+	\int d^2\lambda
+		\frac{\partial}{\partial \lambda^*}
+		\left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\left( \frac{\partial}{\partial \lambda} \right)^m
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^n
+			\hat{D}(\lambda, \lambda^*)
+		\right)
+	& = 0.
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+We will prove the first equation.
+Expanding $\lambda = x + iy$ and applying Baker-Hausdorff theorem:
+\begin{equation*}
+\begin{split}
+	\hat{D}(\lambda, \lambda^*)
+	= \exp(x(\hat{a}^\dagger - \hat{a}) + iy(\hat{a}^\dagger + \hat{a}))
+	= \exp(ixy) \exp(x(\hat{a}^\dagger - \hat{a})) \exp(iy(\hat{a}^\dagger + \hat{a}))
+\end{split}
+\end{equation*}
+Thus
+\begin{equation*}
+\begin{split}
+	& \int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\left( \frac{\partial}{\partial \lambda} \right)^m
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^n
+			\hat{D}(\lambda, \lambda^*)
+		\right) \\
+	& = \int d^2\lambda
+		\frac{\partial}{\partial \lambda} \left(
+			\exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\exp(ixy)
+			\frac{1}{4^{m+n}}
+			\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^m
+			\left( -\frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^n
+			\sum\limits_{r=0}^{\infty} \frac{x^r (\hat{a}^\dagger - \hat{a})^r}{r!}
+			\sum\limits_{s=0}^{\infty} \frac{(iy)^s (\hat{a}^\dagger + \hat{a})^s}{s!}
+		\right) \\
+	& = \frac{1}{4^{m+n}} \sum\limits_{r=0}^{\infty} \sum\limits_{s=0}^{\infty} \left(
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda} \left(
+				\exp(-\lambda \alpha^* + \lambda^* \alpha)
+				\exp(ixy)
+				\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^m
+				\left( -\frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^n
+				x^r (iy)^s
+			\right)
+		\right)
+		\frac{(\hat{a}^\dagger - \hat{a})^r}{r!}
+		\frac{(\hat{a}^\dagger + \hat{a})^s}{s!} \\
+	& = 0,
+\end{split}
+\end{equation*}
+where we used \lmmref{formalism:c-numbers:zero-integrals-2} to evaluate integral over $\lambda$.
+\end{proof}
+
+\begin{lemma}
 \label{lmm:formalism:sm-wigner:moments-from-chi}
 \[
 	\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
