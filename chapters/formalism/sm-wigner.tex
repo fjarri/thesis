@@ -35,7 +35,8 @@ The backward transformation (called the Weyl transformation) gives back matrix e
 which is enough, because any operator is determined by its expectation in all coherent states~\cite{Gardiner2004}.
 
 Thus Wigner function can be defined as a result of Wigner transformation of the density matrix: $W(\alpha, \alpha^*) = \mathcal{W}[\hat{\rho}]$.
-The Wigner function always exists for any density matrix, which makes the correspondence $W \leftrightarrow \hat{\rho}$ a bijection.
+The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
+The correspondence $W \leftrightarrow \hat{\rho}$ a bijection \todo{prove it?}.
 
 In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}
 \begin{equation}
@@ -119,7 +120,7 @@ Thus
 	& = 0,
 \end{split}
 \end{equation*}
-where we used \lmmref{formalism:c-numbers:zero-integrals-2} to evaluate integral over $\lambda$.
+where we used \lmmref{formalism:c-numbers:zero-integrals} to evaluate the integral over $\lambda$.
 \end{proof}
 
 \begin{lemma}
@@ -243,16 +244,16 @@ We will prove the first correspondence.
 First, let us transform the trace using~\eqnref{formalism:sm-wigner:displacement-derivatives}:
 \begin{equation*}
 \begin{split}
-	\Trace{ \hat{a} \hat{\rho} \hat{D} }
-	= \Trace{ \hat{\rho} \hat{D} \hat{a}}
-	= \Trace{ \hat{\rho} \left(
+	\Trace{ \hat{a} \hat{A} \hat{D} }
+	= \Trace{ \hat{A} \hat{D} \hat{a}}
+	= \Trace{ \hat{A} \left(
 		-\frac{\partial}{\partial \lambda^*}
 		-\frac{1}{2} \lambda
 	\right) \hat{D}}
 	= \left(
 		-\frac{\partial}{\partial \lambda^*}
 		-\frac{1}{2} \lambda
-	\right) \Trace{ \hat{\rho} \hat{D}}
+	\right) \Trace{ \hat{A} \hat{D}}
 \end{split}
 \end{equation*}
 Now we need to somehow move this additional multiplier outside the integral in the expression for Wigner function:
