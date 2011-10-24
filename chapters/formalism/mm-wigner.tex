@@ -3,21 +3,37 @@
 % =============================================================================
 
 
-Single-mode definition~\eqnref{formalism:sm-wigner:w-definition} of Wigner representation can be extended to the case of many modes.
+Single-mode definition~\eqnref{formalism:sm-wigner:w-transformation} of Wigner transformation can be extended to the case of many modes.
 Let $\bm{\lambda}$ and $\bm{\alpha}$ be vectors of $\lambda_n$ and $\alpha_n$ values respectively,
 with $n = 1 \ldots N$.
-Then the definitions of multimode characteristic function and Wigner function are
+\begin{equation}
+\label{eqn:formalism:mm-wigner:w-transformation}
+	\mathcal{W}[\hat{A}]
+	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
+		\left(
+			\prod\limits_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
+		\right)
+		\Trace{
+			\hat{A}
+			\prod\limits_n \hat{D}_n (\lambda_n, \lambda_n^*)
+		},
+\end{equation}
+where $\hat{D}_n = \exp(\lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)$.
+Corresponding definitions of multimode characteristic function and Wigner function are
 \[
 	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
-	= \Trace{ \hat{\rho} \exp \sum\limits_n
-		(\lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n) },
+	= \Trace{
+		\hat{\rho}
+		\prod\limits_n \hat{D}_n (\lambda_n, \lambda_n^*)
+	},
 \]
 \begin{equation}
 \label{eqn:formalism:mm-wigner:w-definition}
 	W (\bm{\alpha}, \bm{\alpha}^*)
+	\equiv \mathcal{W}[\hat{\rho}]
 	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
 		\left(
-			\exp \sum\limits_n (-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
+			\prod\limits_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
 		\right)
 		\chi_W (\bm{\lambda}, \bm{\lambda}^*).
 \end{equation}
@@ -79,7 +95,8 @@ which is straightforwardly followed by the statement of the lemma.
 \end{proof}
 
 Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for single-mode case.
-\begin{theorem}[Multimode extension of~\thmref{formalism:sm-wigner:moments}]
+
+\begin{theorem}[Multimode extension of \thmref{formalism:sm-wigner:moments}]
 \[
 	\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
 		\left(
@@ -90,6 +107,31 @@ Moments of multimode Wigner function correspond to the averages of symmetrically
 \end{theorem}
 \begin{proof}
 The proof is carried out similarly to~\thmref{formalism:sm-wigner:moments}:
-integrals over $\alpha_n$ are eliminated one by one using integration by parts and~\lmmref{formalism:c-numbers:zero-integrals},
+integrals over $\alpha_n$ are eliminated one by one using integration by parts and~\lmmref{formalism:sm-wigner:zero-integrals},
 until we get the right part of~\lmmref{formalism:mm-wigner:moments-from-chi}.
+\end{proof}
+
+\begin{theorem}[Multimode extension of \thmref{formalism:sm-wigner:correspondences}]
+\label{thm:formalism:mm-wigner:correspondences}
+\begin{equation*}
+\begin{split}
+	\mathcal{W} [ \hat{a}_k \hat{A} ]
+		& = \left( \alpha_k + \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+			\mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \hat{a}_k^\dagger \hat{A} ]
+		= \left( \alpha_k^* - \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+			\mathcal{W}[\hat{A}], \\
+	\mathcal{W} [ \hat{A} \hat{a}_k ]
+		& = \left( \alpha_k - \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+			\mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \hat{A} \hat{a}_k^\dagger ]
+		= \left( \alpha_k^* + \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+			\mathcal{W}[\hat{A}].
+\end{split}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Again, the procedure is the same as in \thmref{formalism:sm-wigner:correspondences}.
 \end{proof}
