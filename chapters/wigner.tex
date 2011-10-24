@@ -11,7 +11,7 @@ The basic Hamiltonian is easily expressed using quantum fields $\Psiop_j^{\dagge
 where $\xvec$ is $D$-dimensional coordinate vector,
 $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
 and $\Psiop_j(\xvec)$ destroys one;
-the commutators are defined by~\eqnref{multimode-formalism:multimode-commutators}.
+the commutators are defined by~\eqnref{formalism:func-aux:commutators}.
 Second-quantized Hamiltonian for the system looks like:
 \begin{equation}
 \label{eqn:wigner:hamiltonian}
@@ -69,7 +69,7 @@ but the change is small if $dx \gg a_{jk}$.
 % =============================================================================
 
 As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
-We will use the formalism for multimode operators described in \appref{multimode-formalism}.
+We will use the formalism for multimode operators described in \charef{formalism}.
 
 Two basis sets are used in this work.
 First is the basis of plane waves:
@@ -112,7 +112,7 @@ One of the ways to decompose wave function into this basis is the Gauss-Hermite 
 We divide mode subspaces into low- and high-energy subsets $L$ and $H$,
 depending on whether $E_n$ is more or less than some cutoff energy $\ecut$,
 and limit field operators to the subset $L$.
-Restricted operators obey commutation relations~\eqnref{multimode-formalism:restricted-commutators}.
+Restricted operators obey commutation relations~\eqnref{formalism:func-aux:restricted-commutators}.
 
 \begin{figure}
 \begin{center}
@@ -202,7 +202,7 @@ and $\Psiop_j^\prime \equiv \Psiop_j (\xvec^\prime)$.
 
 Let us transform each term separately.
 We will make extensive use of the fact that trace is invariant under cyclic permutations to re-order the operators in terms.
-In addition, the transformations are based on commutation relations~\eqnref{multimode-formalism:functional-commutators}.
+In addition, the transformations are based on commutation relations proved in \lmmref{formalism:func-aux:functional-commutators}.
 
 Noticing that $[ K_{lm}^\prime, Psiop_j ] \equiv 0$, the first term can be transformed as:
 \begin{equation*}
