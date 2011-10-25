@@ -156,4 +156,80 @@ Thus
 \end{proof}
 
 Detailed description of functional calculus is given in~\cite{Dalton2011} \todo{anywhere else?}.
-Here we only provide some important results which are going to be used late on in this chapter.
+Here we only provide some important results which are going to be used later on in this chapter.
+
+Let $F[\Psi(\xvec)]$ be some functional.
+If $\Psi(\xvec)$ can be decomposed into a sum of known modes, the result of this functional is a function of $\xvec$, parameterised by corresponding mode coefficients: $F[\Psi(\xvec)] \equiv F[\Psi(\xvec)](\bm{\alpha})$.
+Functional derivative is defined as
+\begin{equation}
+\label{eqn:formalism:func-aux:func-diff}
+	\frac{\delta F[\Psi(\xvec)]}{\delta \Psi(\xvec^\prime)}
+	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec^\prime)
+		\frac{\partial F[\Psi(\xvec)](\bm{\alpha})}{\partial \alpha_{\nvec}}.
+\end{equation}
+This definition behaves in many ways similar to common derivative.
+
+\begin{lemma}
+Functional differentiation~\eqnref{formalism:func-aux:func-diff} obeys sum, product, quotient, and chain differentiation rules.
+\end{lemma}
+\begin{proof}
+\todo{Sum, product and quotient are more or less obvious; but should we prove chain differentiation?}
+\end{proof}
+
+\begin{lemma}
+If $f(z)$ can be expanded into power series,
+and functional $F[\Psi] \equiv f(\Psi)$, then
+\[
+	\frac{\delta F[\Psi(\xvec)]}{\delta \Psi(\xvec^\prime)}
+	= \delta_P(\xvec^\prime - \xvec)
+		\left. \frac{\partial f(z)}{\partial z} \right|_{z = \Psi(\xvec)}
+\]
+\end{lemma}
+\begin{proof}
+We will consider $f(z) = z^k$ case first, which will straightforwardly lead to the statement of the lemma.
+For $k = 1$, obviously,
+\[
+	\frac{\delta \Psi(\xvec)}{\delta \Psi(\xvec^\prime)}
+	= \delta_P(\xvec^\prime - \xvec)
+\]
+Then for other values of $k$:
+\begin{equation*}
+\begin{split}
+	\frac{\delta F[\Psi(\xvec)]}{\delta \Psi(\xvec^\prime)}
+	& = \frac{\delta \Psi^k(\xvec)}{\delta \Psi(\xvec^\prime)}
+	= \sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+		\frac{\partial \Psi^k}{\partial \alpha_{\nvec}} \\
+	& = \sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+		\frac{\partial \Psi^k}{\partial \Psi}
+		\frac{\partial \Psi}{\partial \alpha_{\nvec}}
+	= k \Psi^{k-1}
+		\sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+		\frac{\partial \Psi}{\partial \alpha_{\nvec}} \\
+	& = k \delta_P(\xvec^\prime - \xvec) \Psi^{k-1}(\xvec)
+	= \delta_P(\xvec^\prime - \xvec)
+		\left. \frac{\partial z^k}{\partial z} \right|_{z = \Psi(\xvec)}.
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
+
+\begin{lemma}
+If $f(z)$ can be expanded into series of $z^n (z^*)^m$,
+and functional $F[\Psi, \Psi^*] \equiv f(\Psi, \Psi^*)$,
+then $\delta F / \delta \Psi^\prime$ and $\delta F / \delta \Psi^{\prime*}$ can be treated as partial differentiation of the functional of two independent variables $\Psi$ and $\Psi^*$.
+In other words:
+\[
+	\frac{\delta F}{\delta \Psi^\prime}
+	= \delta_P(\xvec^\prime - \xvec) \left.
+		\frac{\partial f(z, z^*)}{\partial z}
+	\right|_{z=\Psi(x)},
+	\quad
+	\frac{\delta F}{\delta \Psi^{\prime*}}
+	= \delta_P^*(\xvec^\prime - \xvec) \left.
+		\frac{\partial f(z, z^*)}{\partial z^*}
+	\right|_{z=\Psi^*(x)}
+\]
+\end{lemma}
+\begin{proof}
+Proof is similar to \lmmref{formalism:c-numbers:independent-vars}.
+\end{proof}
