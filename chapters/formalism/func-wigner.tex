@@ -2,4 +2,64 @@
 \section{Functional Wigner representation}
 % =============================================================================
 
-Under construction.
+First, we will define functional analogue of the displacement operator~\eqnref{formalism:sm-wigner:dispacement-op}:
+\[
+	\hat{D}[\Lambda, \Lambda^*] = \exp \int d\xvec \left(
+		\Lambda(\xvec) \Psiop^\dagger(\xvec) - \Lambda^*(\xvec) \Psiop(\xvec)
+	\right),
+\]
+where $\Lambda(\xvec) = \sum\limits_{\nvec \in L} \phi_n(\xvec) \lambda_n$ is some function from restricted mode space $L$.
+It can be shown that the displacement operator has properties similar to~\eqnref{formalism:sm-wigner:displacement-derivatives}.
+
+\begin{lemma}
+\begin{equation*}
+\begin{split}
+	\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
+	& = \hat{D}[\Lambda, \Lambda^*] (\Psiop^{\prime\dagger} + \frac{1}{2} \Lambda^{\prime*})
+	= (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime*}) \hat{D}[\Lambda, \Lambda^*], \\
+	-\frac{\delta}{\delta \Lambda^{\prime*}} \hat{D}[\Lambda, \Lambda^*]
+	& = \hat{D}(\Lambda, \Lambda^*) (\Psiop^\prime + \frac{1}{2} \Lambda^\prime)
+	= (\Psiop^\prime - \frac{1}{2} \Lambda^\prime) \hat{D}[\Lambda, \Lambda^*].
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+We will prove the second part of the first equation.
+Using Baker-Hausdorff theorem:
+\begin{equation*}
+\begin{split}
+	\hat{D}[\Lambda, \Lambda^*]
+	& = \exp \int d\xvec \Psiop(\xvec)^\dagger \Lambda(\xvec)
+		\exp \left( -\int d\xvec \Psiop(\xvec) \Lambda^*(\xvec) \right)
+		\exp \frac{1}{2} \left[
+			\int d\xvec^\prime \Psiop(\xvec^\prime)^\dagger \Lambda(\xvec^\prime),
+			\int d\xvec \Psiop(\xvec) \Lambda^*(\xvec)
+		\right] \\
+	& = \exp \int d\xvec \Psiop^\dagger \Lambda
+		\exp \left( -\int d\xvec \Psiop \Lambda^* \right)
+		\exp \left(
+			-\frac{1}{2} \int \int d\xvec d\xvec^\prime
+			\Lambda^\prime \Lambda^* \delta_P(\xvec^\prime - \xvec)
+		\right) \\
+	& = \exp \int d\xvec \Psiop^\dagger \Lambda
+		\exp \left( -\int d\xvec \Psiop \Lambda^* \right)
+		\exp \left(
+			-\frac{1}{2} \int d\xvec \Lambda \Lambda^*
+		\right).
+\end{split}
+\end{equation*}
+Note that, since $\Lambda$ belongs to restricted mode space, it projects to itself.
+Thus
+\begin{equation*}
+\begin{split}
+	\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
+	= \left(
+		\int dx \Psiop^\dagger(\xvec) \delta_P(\xvec^\prime - \xvec)
+		- \frac{1}{2} \int dx \Lambda^*(\xvec) \delta_P(\xvec^\prime - \xvec)
+	\right) \hat{D}[\Lambda, \Lambda^*]
+	= (\Psiop^\dagger(\xvec^\prime) - \frac{1}{2} \Lambda^*(\xvec^\prime)) \hat{D}[\Lambda, \Lambda^*]
+\end{split}
+\end{equation*}
+
+
+\end{proof}
