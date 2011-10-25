@@ -125,7 +125,7 @@ Restricted operators obey commutation relations~\eqnref{formalism:func-aux:restr
 \subfloat[Harmonic grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
 	figures_generated/wigner/delta_harmonic_all.eps}}
 \end{center}
-\caption{Absolute value of restricted delta function $\lvert \delta_P(z - z^\prime) \rvert$ with and without explicit cutoff.}
+\caption{Absolute value of restricted delta function $\lvert \delta_P(z^\prime - z) \rvert$ with and without explicit cutoff.}
 \label{fig:wigner:restricted-delta}
 \end{figure}
 
@@ -229,9 +229,9 @@ Noticing that $[ K_{lm}^\prime, Psiop_j ] \equiv 0$, the first term can be trans
 		\right] K_{lm}^\prime \Psiop_m^\prime
 	} \\
 	& = \Trace{
-		\hat{\rho} \delta_{jl} \delta_P(\xvec - \xvec^\prime) K_{lm}^\prime \Psiop_m^\prime
+		\hat{\rho} \delta_{jl} \delta_P(\xvec^\prime - \xvec) K_{lm}^\prime \Psiop_m^\prime
 	}
-	= \delta_P(\xvec - \xvec^\prime) \langle K_{jm}^\prime \Psiop_m^\prime \rangle
+	= \delta_P(\xvec^\prime - \xvec) \langle K_{jm}^\prime \Psiop_m^\prime \rangle
 \end{split}
 \end{equation*}
 
@@ -265,15 +265,15 @@ Second (nonlinear) term:
 		\right] \Psiop_l^\prime \Psiop_m^\prime
 	} \\
 	& = U_{lm} \Trace{
-		\hat{\rho} \delta_P(\xvec - \xvec^\prime) \left(
+		\hat{\rho} \delta_P(\xvec^\prime - \xvec) \left(
 			\delta_{jl} \Psiop_m^{\prime\dagger}
 			+ \delta_{jm} \Psiop_l^{\prime\dagger}
 		\right) \Psiop_l^\prime \Psiop_m^\prime
 	} \\
-	& = 2 U_{jm} \delta_P(\xvec - \xvec^\prime) \Trace{
+	& = 2 U_{jm} \delta_P(\xvec^\prime - \xvec) \Trace{
 		\hat{\rho} \Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
 	} \\
-	& = 2 U_{jm} \delta_P(\xvec - \xvec^\prime) \langle
+	& = 2 U_{jm} \delta_P(\xvec^\prime - \xvec) \langle
 		\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
 	\rangle
 \end{split}
@@ -307,11 +307,11 @@ The third term, coming from the losses, can be calculated as
 			\hat{O}_{\lvec}^{\prime\dagger}, \Psiop_j
 		\right] \hat{O}_{\lvec}^\prime
 	} \\
-	& = -\delta_P(\xvec - \xvec^\prime)	\Trace{
+	& = -\delta_P(\xvec^\prime - \xvec)	\Trace{
 		\hat{\rho} \frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 		\hat{O}_{\lvec}^\prime
 	} \\
-	& = -\delta_P(\xvec - \xvec^\prime) \langle
+	& = -\delta_P(\xvec^\prime - \xvec) \langle
 		\frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 		\hat{O}_{\lvec}^\prime
 	\rangle.
@@ -322,7 +322,7 @@ Thus the full relation is
 \begin{equation*}
 \begin{split}
 	\frac{d}{dt} \langle \Psiop_j \rangle
-	& = \int d\xvec^\prime \delta_P(\xvec - \xvec^\prime) \left(
+	& = \int d\xvec^\prime \delta_P(\xvec^\prime - \xvec) \left(
 		- \frac{i}{\hbar} \langle K_{jm}^\prime \Psiop_m^\prime \rangle
 		- \frac{i U_{jm}}{\hbar} \langle
 			\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
