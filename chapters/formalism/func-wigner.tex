@@ -29,20 +29,20 @@ Using Baker-Hausdorff theorem:
 \begin{equation*}
 \begin{split}
 	\hat{D}[\Lambda, \Lambda^*]
-	& = \exp \int d\xvec \Psiop(\xvec)^\dagger \Lambda(\xvec)
-		\exp \left( -\int d\xvec \Psiop(\xvec) \Lambda^*(\xvec) \right)
+	& = \exp \int d\xvec \Lambda(\xvec) \Psiop(\xvec)^\dagger
+		\exp \left( -\int d\xvec \Lambda^*(\xvec) \Psiop(\xvec) \right)
 		\exp \frac{1}{2} \left[
-			\int d\xvec^\prime \Psiop(\xvec^\prime)^\dagger \Lambda(\xvec^\prime),
-			\int d\xvec \Psiop(\xvec) \Lambda^*(\xvec)
+			\int d\xvec^\prime \Lambda(\xvec^\prime) \Psiop(\xvec^\prime)^\dagger,
+			\int d\xvec \Lambda^*(\xvec) \Psiop(\xvec)
 		\right] \\
-	& = \exp \int d\xvec \Psiop^\dagger \Lambda
-		\exp \left( -\int d\xvec \Psiop \Lambda^* \right)
+	& = \exp \int d\xvec \Lambda \Psiop^\dagger
+		\exp \left( -\int d\xvec \Lambda^* \Psiop \right)
 		\exp \left(
 			-\frac{1}{2} \int \int d\xvec d\xvec^\prime
 			\Lambda^\prime \Lambda^* \delta_P(\xvec^\prime - \xvec)
 		\right) \\
-	& = \exp \int d\xvec \Psiop^\dagger \Lambda
-		\exp \left( -\int d\xvec \Psiop \Lambda^* \right)
+	& = \exp \int d\xvec \Lambda \Psiop^\dagger
+		\exp \left( -\int d\xvec \Lambda^* \Psiop \right)
 		\exp \left(
 			-\frac{1}{2} \int d\xvec \Lambda \Lambda^*
 		\right).
@@ -58,8 +58,7 @@ Thus
 		- \frac{1}{2} \int dx \Lambda^*(\xvec) \delta_P(\xvec^\prime - \xvec)
 	\right) \hat{D}[\Lambda, \Lambda^*]
 	= (\Psiop^\dagger(\xvec^\prime) - \frac{1}{2} \Lambda^*(\xvec^\prime)) \hat{D}[\Lambda, \Lambda^*]
+	\qedhere
 \end{split}
 \end{equation*}
-
-
 \end{proof}
