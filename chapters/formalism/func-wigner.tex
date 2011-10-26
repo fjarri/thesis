@@ -62,3 +62,67 @@ Thus
 \end{split}
 \end{equation*}
 \end{proof}
+
+\begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:moments-from-chi}]
+\label{lmm:formalism:func-wigner:moments-from-chi}
+\[
+	\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
+	= \left.
+		\left( \frac{\delta}{\delta \Lambda^\prime} \right)^s
+		\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^r
+		\chi_W (\Lambda, \Lambda^*)
+	\right|_{\Lambda \equiv 0}.
+\]
+\end{lemma}
+\begin{proof}
+The proof follows the same general scheme as in single-mode case.
+The exponent in the $\chi_W$ can be expanded as
+\[
+	\exp (\Lambda \Psiop^\dagger - \Lambda^* \Psiop)
+	= \sum\limits_{r,s}
+		\frac{
+			\symprod{
+				\left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
+				\left( -\int d\xvec \Lambda^* \Psiop \right)^s
+			}
+		}
+		{r!s!}.
+\]
+We can swap functional derivative with both integration and multiplication by independent function, so:
+\[
+	\frac{\delta}{\delta \Lambda^\prime} \left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
+	= r \int d\xvec \frac{\delta \Lambda}{\delta \Lambda^\prime} \Psiop^\dagger
+		\left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1}
+	= r \int d\xvec \delta_P(\xvec^\prime - \xvec) \Psiop^\dagger
+		\left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1}
+	= r \Psiop^{\prime\dagger} \left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1},
+\]
+and multiple application of the differential gives us
+\[
+	\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
+	\left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
+	= r! ( \Psiop^{\prime\dagger} )^r.
+\]
+Similarly for the other differential:
+\[
+	\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
+	\left( -\int d\xvec \Lambda \Psiop^\dagger \right)^s
+	= s! ( \Psiop^{\prime\dagger} )^s.
+\]
+
+Thus, same as in single-mode case,
+differentiation will eliminate all lower order terms in the expansion,
+and all higher order terms will be eliminated by setting $\Lambda \equiv 0$,
+leaving only one operator product with required order:
+\[
+	\left.
+		\left( \frac{\delta}{\delta \Lambda^\prime} \right)^s
+		\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^r
+		\chi_W (\Lambda, \Lambda^*)
+	\right|_{\Lambda \equiv 0}
+	= r! s! \frac{1}{r! s!}
+		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
+	= \langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle.
+	\qedhere
+\]
+\end{proof}
