@@ -1,0 +1,41 @@
+\chapter{Notation}
+\label{cha:appendix:notation}
+
+This chapters contains general principles of notation used in this work.
+
+\paragraph{Function types.}
+In some places types of functions, functionals and operators are written explicitly for the sake of clarification.
+They are expressed using Haskell style for function types.
+Basic types are complex scalar $\mathbb{C}$ and Hilbert space element $\mathbb{H}$.
+Thus, for example, common complex-valued function has type $f(z) :: \mathbb{C} \rightarrow \mathbb{C}$,
+wavefunction in $D$-dimensional space has type $\Psi(\xvec) :: \mathbb{C}^D \rightarrow \mathbb{C}$,
+and field annihilation operator has type $\Psiop(\xvec) :: \mathbb{C}^D \rightarrow \mathbb{H}$.
+As an example of slightly more complex dependency,
+an integration functional has type $\int d\xvec f(\xvec) :: (\mathbb{C}^D \rightarrow \mathbb{C}) \rightarrow \mathbb{C}$,
+because it maps function to complex number.
+
+\paragraph{Operators.}
+There is an ambiguity associated with the word ``operator'':
+in the context of this work it could mean either element of Hilbert space, or a mapping from function to function.
+Strictly speaking, these are the same, but in many cases it is more convenient to extract quantum-mechanical operators in a separate group, without going into details about what they actually do.
+Therefore we are using the term ``operator'' for quantum-mechanical operators,
+and term ``transformation'' for anything else we define.
+Note that function that takes an operator as one of the parameters is a transformation too.
+
+\paragraph{Notation for operators and transformations.}
+In order to distinguish operators and transformations, they are written in different form.
+Transformations use letters from calligraphic set, for instance $\mathcal{W}$ or $\mathcal{F}$.
+Anything which has $\mathbb{H}$ as a final parameter is marked by hat symbol.
+This applies for transformations which are known to produce operator result in known context;
+for example, projection $\mathcal{P}$ can take either function or operator function,
+and in the latter case it is marked with the hat: $\mathcal{P}[\Psi]$, but $\hat{\mathcal{P}}[\Psiop]$.
+
+\paragraph{Operands.}
+In general, functions can have multiple operands with basic types, vector types or function types.
+Operands with types $\mathbb{C}$ and $\mathbb{C}^D$ are written in parentheses,
+while all other operands are written in square brackets.
+For example, in case of projection $\mathcal{P}[\Psi] \equiv \mathcal{P}[\Psi](\xvec)$.
+Operands can be partially applied.
+Single-mode Wigner transformation has type $\mathcal{W}[\hat{A}](\alpha) :: \mathbb{H} \rightarrow \mathbb{C} \rightarrow \mathbb{C}$.
+Therefore Wigner function, which is a Wigner transformation applied to density matrix, can be considered a partially applied $\mathcal{W}$,
+which, as it is obvious from its type, is a complex-valued function: $W(\alpha) \equiv \mathcal{W}[\hat{\rho}](\alpha)$.
