@@ -100,10 +100,10 @@ Thus
 	& = \int d^2\lambda
 		\frac{\partial}{\partial \lambda} \left(
 			\exp(-\lambda \alpha^* + \lambda^* \alpha)
-			\exp(ixy)
 			\frac{1}{4^{m+n}}
 			\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^m
 			\left( -\frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^n
+			\exp(ixy)
 			\sum\limits_{r=0}^{\infty} \frac{x^r (\hat{a}^\dagger - \hat{a})^r}{r!}
 			\sum\limits_{s=0}^{\infty} \frac{(iy)^s (\hat{a}^\dagger + \hat{a})^s}{s!}
 		\right) \\
@@ -111,10 +111,20 @@ Thus
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				\exp(ixy)
 				\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^m
 				\left( -\frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^n
+				\exp(ixy)
 				x^r (iy)^s
+			\right)
+		\right)
+		\frac{(\hat{a}^\dagger - \hat{a})^r}{r!}
+		\frac{(\hat{a}^\dagger + \hat{a})^s}{s!} \\
+	& = \sum\limits_{r=0}^{\infty} \sum\limits_{s=0}^{\infty} \left(
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda} \left(
+				\exp(-\lambda \alpha^* + \lambda^* \alpha)
+				\exp(ixy)
+				f(x, y)
 			\right)
 		\right)
 		\frac{(\hat{a}^\dagger - \hat{a})^r}{r!}
@@ -122,7 +132,8 @@ Thus
 	& = 0,
 \end{split}
 \end{equation*}
-where we used \lmmref{formalism:c-numbers:zero-integrals} to evaluate the integral over $\lambda$.
+where $f(x, y)$ is some finite-order polynomial of $x$ and $y$,
+and we used \lmmref{formalism:c-numbers:zero-integrals} to evaluate the integral over $\lambda$.
 \end{proof}
 
 \begin{lemma}
