@@ -6,12 +6,12 @@ This chapters contains general principles of notation used in this work.
 \paragraph{Function types.}
 In some places types of functions, functionals and operators are written explicitly for the sake of clarification.
 They are expressed using Haskell style for function types.
-Basic types are complex scalar $\mathbb{C}$ and Hilbert space element $\mathbb{H}$.
+Basic types are complex scalar $\mathbb{C}$ and Hilbert space element $\mathbb{H}$ (variable that can be either one of them will be said to belong to basic type $\BasicType$).
 Thus, for example, common complex-valued function has type $f(z) :: \mathbb{C} \rightarrow \mathbb{C}$,
-wavefunction in $D$-dimensional space has type $\Psi(\xvec) :: \mathbb{C}^D \rightarrow \mathbb{C}$,
-and field annihilation operator has type $\Psiop(\xvec) :: \mathbb{C}^D \rightarrow \mathbb{H}$.
+wavefunction in $D$-dimensional space has type $\Psi(\xvec) :: \mathbb{R}^D \rightarrow \mathbb{C}$,
+and field annihilation operator has type $\Psiop(\xvec) :: \mathbb{R}^D \rightarrow \mathbb{H}$.
 As an example of slightly more complex dependency,
-an integration functional has type $\int d\xvec f(\xvec) :: (\mathbb{C}^D \rightarrow \mathbb{C}) \rightarrow \mathbb{C}$,
+an integration functional has type $\int d\xvec f(\xvec) :: (\mathbb{R}^D \rightarrow \mathbb{C}) \rightarrow \mathbb{C}$,
 because it maps function to complex number.
 
 \paragraph{Operators.}
@@ -21,6 +21,7 @@ Strictly speaking, these are the same, but in many cases it is more convenient t
 Therefore we are using the term ``operator'' for quantum-mechanical operators,
 and term ``transformation'' for anything else we define.
 Note that function that takes an operator as one of the parameters is a transformation too.
+A special case of transformation is a functional, which gives scalar as a result.
 
 \paragraph{Notation for operators and transformations.}
 In order to distinguish operators and transformations, they are written in different form.
@@ -32,8 +33,9 @@ and in the latter case it is marked with the hat: $\mathcal{P}[\Psi]$, but $\hat
 
 \paragraph{Operands.}
 In general, functions can have multiple operands with basic types, vector types or function types.
-Operands with types $\mathbb{C}$ and $\mathbb{C}^D$ are written in parentheses,
+Operands with types $\mathbb{C}$ (or $\mathbb{C}^n$ for complex vectors) and $\mathbb{R}^D$ are written in parentheses,
 while all other operands are written in square brackets.
+The reason for this is that the functions of such arguments are ``normal'' and obey known integration and differentiation rules.
 For example, in case of projection $\mathcal{P}[\Psi] \equiv \mathcal{P}[\Psi](\xvec)$.
 Operands can be partially applied.
 Single-mode Wigner transformation has type $\mathcal{W}[\hat{A}](\alpha) :: \mathbb{H} \rightarrow \mathbb{C} \rightarrow \mathbb{C}$.
