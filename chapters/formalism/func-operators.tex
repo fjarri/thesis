@@ -1,0 +1,116 @@
+% =============================================================================
+\section{Field operators and restricted basis}
+% =============================================================================
+
+Multimode fields are described by operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
+where $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
+and $\Psiop_j(\xvec)$ destroys one;
+the commutators are
+\begin{equation}
+\label{eqn:formalism:func-aux:commutators}
+	[ \Psiop_j(\xvec), \Psiop_k^{\dagger}(\xvec^\prime) ]
+	= \delta_{jk} \delta(\xvec^\prime-\xvec).
+\end{equation}
+Field operators can be decomposed using a single-particle basis \todo{explanation needed?}:
+\[
+	\Psiop_j(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec}.
+\]
+Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{formalism:mm-aux:commutators},
+the pair $j,\nvec$ serving as a mode identifier.
+
+Now suppose we want to consider only modes from some subset $L$.
+Projection transformation~\eqnref{formalism:func-calculus:projector} can be extended to work on operators.
+The expression remains the same, and the type becomes
+\[
+	\hat{\mathcal{P}} ::
+	(\mathbb{R}^D \rightarrow \mathbb{H}) \rightarrow (\mathbb{R}^D \rightarrow \mathbb{H}_L),
+\]
+where $\mathbb{H}_L$ is the restricted subset of modes.
+Being applied to the annihilation operator $\Psiop_j$, this projection returns the restricted annihilation operator
+\[
+	\hat{\mathcal{P}} [\Psiop_j]
+	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
+	= \Psiop_{jP} (\xvec),
+\]
+containing only modes from subset $L$.
+Same as with functions, we will consider all field operators to be restricted and omit the index $P$.
+
+Because of the restricted nature of the operator, commutation relations~\eqnref{formalism:func-aux:commutators} no longer apply.
+The following ones should be used instead:
+\begin{equation}
+\label{eqn:formalism:func-aux:restricted-commutators}
+\begin{split}
+	\left[ \Psiop_j(\xvec), \Psiop_k(\xvec^\prime) \right]
+	& = \left[ \Psiop_j^\dagger(\xvec), \Psiop_k^\dagger(\xvec^\prime) \right] = 0, \\
+	\left[ \Psiop_j(\xvec), \Psiop_k^\dagger(\xvec^\prime) \right]
+	& = \delta_{jk} \delta_P(\xvec^\prime - \xvec).
+\end{split}
+\end{equation}
+
+Let us now find the expression for high-order commutators of restricted field operators, analogous to \lmmref{formalism:mm-aux:high-order-commutators} for single-mode operators.
+It can be done using the similar recursive procedure.
+
+\begin{lemma}
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
+	& = l \delta_P (\xvec^\prime - \xvec) ( \Psiop^{\prime\dagger} )^{l-1}, \\
+	\left[ \Psiop^\dagger, ( \Psiop^\prime )^l \right]
+	& = - l \delta_P^* (\xvec^\prime - \xvec) ( \Psiop^\prime )^{l-1}.
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+Given that we know the expression for $\left[ \Psiop, ( \Psiop^{\prime\dagger} )^{l-1} \right]$,
+the commutator of higher order can be expanded as
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
+	& = \Psiop ( \Psiop^{\prime\dagger} )^l - ( \Psiop^{\prime\dagger} )^l \Psiop \\
+	& = (
+		\delta_P (\xvec^\prime - \xvec) + \Psiop^{\prime\dagger} \Psiop
+	) ( \Psiop^{\prime\dagger} )^{l-1}
+	- ( \Psiop^{\prime\dagger} )^l \Psiop \\
+	& = \delta_P (\xvec^\prime - \xvec) ( \Psiop^{\prime\dagger} )^{l-1}
+	+ \Psiop^{\prime\dagger} (
+		\Psiop ( \Psiop^{\prime\dagger} )^{l-1}
+		- ( \Psiop^{\prime\dagger} )^{l-1} \Psiop
+	) \\
+	& = \delta_P (\xvec^\prime - \xvec) ( \Psiop^{\prime\dagger} )^{l-1}
+	+ \Psiop^{\prime\dagger} [
+		\Psiop, ( \Psiop^{\prime\dagger} )^{l-1}
+	].
+\end{split}
+\end{equation*}
+Now we can get the commutator of any order starting from the known relation~\eqnref{formalism:func-aux:restricted-commutators}.
+\end{proof}
+
+A further generalisation of these relations is
+\begin{lemma}
+\label{lmm:formalism:func-aux:functional-commutators}
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = \delta_P (\xvec^\prime - \xvec) \frac{\partial f}{\partial \Psiop^{\prime\dagger}} \\
+	\left[ \Psiop^\dagger, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = -\delta_P^* (\xvec^\prime - \xvec) \frac{\partial f}{\partial \Psiop^\prime},
+\end{split}
+\end{equation*}
+where $f(x, y)$ is a function that can be expanded in the power series of $x$ and $y$.
+\end{lemma}
+\begin{proof}
+Let us prove the first relation; the procedure for the second one is the same.
+Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in power series of normally ordered operators (otherwise we can just use commutation relations).
+Thus
+\begin{equation*}
+\begin{split}
+	\left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
+	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r (\Psiop^\prime)^s ] \\
+	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r ] (\Psiop^\prime)^s \\
+	& = \sum\limits_{r,s} f_{rs} r \delta_P(\xvec^\prime - \xvec)
+		(\Psiop^{\prime\dagger})^{r-1} (\Psiop^\prime)^s \\
+	& = \delta_P (\xvec^\prime - \xvec) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}.
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
