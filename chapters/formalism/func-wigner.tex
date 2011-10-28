@@ -4,44 +4,18 @@
 
 First, we will define functional analogue of the displacement operator~\eqnref{formalism:sm-wigner:dispacement-op}:
 \[
+	\hat{D} ::
+	(\mathbb{R}^D \rightarrow \mathbb{C})_L
+	\rightarrow
+	\mathbb{H}_L
+\]
+\[
 	\hat{D}[\Lambda, \Lambda^*] = \exp \int d\xvec \left(
 		\Lambda(\xvec) \Psiop^\dagger(\xvec) - \Lambda^*(\xvec) \Psiop(\xvec)
 	\right),
 \]
 where $\Lambda(\xvec) = \sum\limits_{\nvec \in L} \phi_n(\xvec) \lambda_n$ is some function from restricted mode space $L$.
 It can be shown that the displacement operator has properties similar to~\eqnref{formalism:sm-wigner:displacement-derivatives}.
-
-Functional Wigner transformation $\mathcal{W}$ is defined as
-\begin{equation}
-\label{eqn:formalism:func-wigner:w-transformation}
-	\mathcal{W}[\hat{A}]
-	= \frac{1}{\pi^2} \int \delta^2 \Lambda \left(
-		\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
-	\right)
-	\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
-\end{equation}
-It transforms an operator $\hat{A}$ on a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
-The backward transformation (called the Weyl transformation) gives back matrix elements of the operator:
-\[
-	\langle \Psi \lvert \mathcal{W}^{-1}[f[\Psi, \Psi^*]] \rvert \Psi \rangle
-	= \todo{find\,the\,expression}.
-\]
-
-Equivalent definition:
-\begin{equation}
-\label{eqn:formalism:func-wigner:w-function}
-	W [\Psi, \Psi^*]
-	\equiv \mathcal{W}[\hat{\rho}]
-	= \frac{1}{\pi^2} \int \delta^2 \Lambda \left(
-		\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
-	\right)
-	\chi_W [\Lambda, \Lambda^*],
-\end{equation}
-where $\chi_W (\Lambda, \Lambda^*)$ is the characteristic functional
-\[
-	\chi_W [\Lambda, \Lambda^*]
-	= \Trace{ \hat{\rho} \hat{D}[\Lambda, \Lambda^*] }.
-\]
 
 \begin{lemma}
 \begin{equation*}
@@ -94,6 +68,53 @@ Thus
 \end{split}
 \end{equation*}
 \end{proof}
+
+Functional Wigner transformation $\mathcal{W}$ is defined as
+\todo{Is the return value real or complex?}
+\[
+	\mathcal{W} ::
+	(\mathbb{R}^D \rightarrow \mathbb{H}_L)
+	\rightarrow
+	(\mathbb{R}^D \rightarrow \mathbb{C})_L
+	\rightarrow
+	\mathbb{C}
+\]
+\begin{equation}
+\label{eqn:formalism:func-wigner:w-transformation}
+	\mathcal{W}[\hat{A}]
+	= \frac{1}{\pi^2} \int \delta^2 \Lambda \left(
+		\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
+	\right)
+	\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
+\end{equation}
+It transforms an operator $\hat{A}$ on a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
+The backward transformation (called the Weyl transformation) gives back matrix elements of the operator:
+\[
+	\langle \Psi \lvert \mathcal{W}^{-1}[f[\Psi, \Psi^*]] \rvert \Psi \rangle
+	= \todo{find\,the\,expression}.
+\]
+
+Thus Wigner functional is
+\[
+	W :: (\mathbb{R}^D \rightarrow \mathbb{C})_L \rightarrow \mathbb{C}
+\]
+\begin{equation}
+\label{eqn:formalism:func-wigner:w-functional}
+	W [\Psi, \Psi^*]
+	\equiv \mathcal{W}[\hat{\rho}]
+	= \frac{1}{\pi^2} \int \delta^2 \Lambda \left(
+		\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
+	\right)
+	\chi_W [\Lambda, \Lambda^*],
+\end{equation}
+where $\chi_W (\Lambda, \Lambda^*)$ is the characteristic functional
+\[
+	\chi_W :: (\mathbb{R}^D \rightarrow \mathbb{C})_L \rightarrow \mathbb{R}
+\]
+\[
+	\chi_W [\Lambda, \Lambda^*]
+	= \Trace{ \hat{\rho} \hat{D}[\Lambda, \Lambda^*] }.
+\]
 
 \begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:moments-from-chi}]
 \label{lmm:formalism:func-wigner:moments-from-chi}
