@@ -107,22 +107,22 @@ Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial exp
 \begin{split}
 	\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
 	& = \int du dv \exp(2ivx - 2iuy)
-		\sum\limits_{l=0}^r \binom{r}{l} u^l (iv)^{r-l}
-		\sum\limits_{m=0}^s \binom{s}{m} u^m (-iv)^{s-m} \\
-	& = \sum\limits_{l=0}^r \sum\limits_{m=0}^s \binom{r}{l} \binom{s}{m}
+		\sum_{l=0}^r \binom{r}{l} u^l (iv)^{r-l}
+		\sum_{m=0}^s \binom{s}{m} u^m (-iv)^{s-m} \\
+	& = \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
 		i^{r-l} (-i)^{s-m}
 		\int du\, u^{l+m} \exp(2ivx)
 		\int dv\, v^{r-l+s-m} \exp(-2iuy) \\
-	& = \pi^2 \sum\limits_{l=0}^r \sum\limits_{m=0}^s \binom{r}{l} \binom{s}{m}
+	& = \pi^2 \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
 		i^{r-l} (-i)^{s-m}
 		(-i/2)^{l+m} \delta^{(l+m)}(y)
 		(i/2)^{r-l+s-m} \delta^{(r-l+s-m)}(x) \\
 	& = \pi^2
-		\sum\limits_{l=0}^r \binom{r}{l}
+		\sum_{l=0}^r \binom{r}{l}
 			\frac{1}{2^r}
 			(-i \partial / \partial y)^l
 			(-\partial / \partial x)^{r-l}
-		\sum\limits_{m=0}^s \binom{s}{m}
+		\sum_{m=0}^s \binom{s}{m}
 			\frac{1}{2^s}
 			(-i \partial / \partial y)^m
 			(\partial / \partial x)^{s-m}

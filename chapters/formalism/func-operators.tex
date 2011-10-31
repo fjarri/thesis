@@ -13,7 +13,7 @@ the commutators are
 \end{equation}
 Field operators can be decomposed using a single-particle basis \todo{explanation needed?}:
 \[
-	\Psiop_j(\xvec) = \sum\limits_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec}.
+	\Psiop_j(\xvec) = \sum_{\nvec} \phi_{\nvec}(\xvec) \hat{a}_{j,\nvec}.
 \]
 Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{formalism:mm-aux:commutators},
 the pair $j,\nvec$ serving as a mode identifier.
@@ -29,7 +29,7 @@ where $\mathbb{H}_L$ is the restricted subset of modes.
 Being applied to the annihilation operator $\Psiop_j$, this projection returns the restricted annihilation operator
 \[
 	\hat{\mathcal{P}} [\Psiop_j]
-	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
+	= \sum_{\nvec \in L} \phi_{\nvec} (\xvec) \hat{a}_{j,\nvec}
 	= \Psiop_{jP} (\xvec),
 \]
 containing only modes from subset $L$.
@@ -105,9 +105,9 @@ Thus
 \begin{equation*}
 \begin{split}
 	\left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
-	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r (\Psiop^\prime)^s ] \\
-	& = \sum\limits_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r ] (\Psiop^\prime)^s \\
-	& = \sum\limits_{r,s} f_{rs} r \delta_P(\xvec^\prime - \xvec)
+	& = \sum_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r (\Psiop^\prime)^s ] \\
+	& = \sum_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r ] (\Psiop^\prime)^s \\
+	& = \sum_{r,s} f_{rs} r \delta_P(\xvec^\prime - \xvec)
 		(\Psiop^{\prime\dagger})^{r-1} (\Psiop^\prime)^s \\
 	& = \delta_P (\xvec^\prime - \xvec) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}.
 	\qedhere

@@ -18,7 +18,7 @@ Orthonormality and completeness conditions for basis functions are, respectively
 	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) d\xvec = \delta_{\nvec\mvec},
 \]
 \[
-	\sum\limits_{\nvec} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime) = \delta(\xvec^\prime - \xvec),
+	\sum_{\nvec} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime) = \delta(\xvec^\prime - \xvec),
 \]
 where the exact nature of integration area $A$ depends on the nature of the basis set
 (for example, $A$ is the whole space for harmonic oscillator modes, and a box for plane waves).
@@ -29,7 +29,7 @@ Given basis, we can define composition transformation
 	\mathcal{C} :: \mathbb{C}^{|L|} \rightarrow (\mathbb{R}^D \rightarrow \mathbb{C})_L
 \]
 \[
-	\mathcal{C}(\bm{\alpha}) = \sum\limits_{\nvec \in L} \phi_{\nvec} \alpha_{\nvec},
+	\mathcal{C}(\bm{\alpha}) = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{\nvec},
 \]
 where $L$ is some subset of the basis,
 and $|L|$ is its cardinality.
@@ -49,7 +49,7 @@ Any function can be projected to subset $L$ using the projection transformation
 \begin{equation}
 \label{eqn:formalism:func-calculus:projector}
 	\mathcal{P}[f](\xvec)
-	= \sum\limits_{\nvec \in L} \phi_{\nvec} (\xvec) \int
+	= \sum_{\nvec \in L} \phi_{\nvec} (\xvec) \int
 		d\xvec^\prime\, \phi_{\nvec}^*(\xvec^\prime) f(\xvec^\prime),
 \end{equation}
 If $L$ is the whole basis, then, apparently, $\mathcal{P} \equiv \mathds{1}$.
@@ -63,7 +63,7 @@ the restricted delta function is written as $\delta_P$ and defined as
 \begin{equation}
 \label{eqn:formalism:func-calculus:restricted-delta}
 	\delta_P(\xvec^\prime - \xvec)
-	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec^\prime) \phi_{\nvec} (\xvec).
+	= \sum_{\nvec \in L} \phi_{\nvec}^* (\xvec^\prime) \phi_{\nvec} (\xvec).
 \end{equation}
 Apparently, restricted delta belongs to required type $(\mathbb{R}^D \rightarrow \mathbb{C})_L$.
 Note that $\delta_P$ is a Hermitian function: $\delta_P^*(\xvec^\prime - \xvec) = \delta_P(\xvec - \xvec^\prime)$.
@@ -109,7 +109,7 @@ Functional derivative is defined as
 \begin{equation}
 \label{eqn:formalism:func-aux:func-diff}
 	\frac{\delta \mathcal{F}[f]}{\delta f(\xvec^\prime)}
-	= \sum\limits_{\nvec \in L} \phi_{\nvec}^* (\xvec^\prime)
+	= \sum_{\nvec \in L} \phi_{\nvec}^* (\xvec^\prime)
 		\frac{\partial \mathcal{F}(\bm{\alpha}_f)}{\partial \alpha_{f,\nvec}}.
 \end{equation}
 Note that the transformation being returned differs from the one which was taken:
@@ -145,13 +145,13 @@ Then for other values of $k$:
 \begin{split}
 	\frac{\delta \mathcal{F}[f]}{\delta f(\xvec^\prime)} (\xvec)
 	& = \frac{\delta f^k}{\delta f(\xvec^\prime)} (\xvec)
-	= \sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+	= \sum_{\nvec \in L} \phi_{\nvec}^{\prime*}
 		\frac{\partial f^k}{\partial \alpha_{\nvec}} \\
-	& = \sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+	& = \sum_{\nvec \in L} \phi_{\nvec}^{\prime*}
 		\frac{\partial f^k}{\partial f}
 		\frac{\partial f}{\partial \alpha_{\nvec}}
 	= k f^{k-1}
-		\sum\limits_{\nvec \in L} \phi_{\nvec}^{\prime*}
+		\sum_{\nvec \in L} \phi_{\nvec}^{\prime*}
 		\frac{\partial f}{\partial \alpha_{\nvec}} \\
 	& = k \delta_P(\xvec^\prime - \xvec) f^{k-1}(\xvec)
 	= \delta_P(\xvec^\prime - \xvec)

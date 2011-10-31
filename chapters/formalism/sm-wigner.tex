@@ -104,10 +104,10 @@ Thus
 			\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^m
 			\left( -\frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)^n
 			\exp(ixy)
-			\sum\limits_{r=0}^{\infty} \frac{x^r (\hat{a}^\dagger - \hat{a})^r}{r!}
-			\sum\limits_{s=0}^{\infty} \frac{(iy)^s (\hat{a}^\dagger + \hat{a})^s}{s!}
+			\sum_{r=0}^{\infty} \frac{x^r (\hat{a}^\dagger - \hat{a})^r}{r!}
+			\sum_{s=0}^{\infty} \frac{(iy)^s (\hat{a}^\dagger + \hat{a})^s}{s!}
 		\right) \\
-	& = \frac{1}{4^{m+n}} \sum\limits_{r=0}^{\infty} \sum\limits_{s=0}^{\infty} \left(
+	& = \frac{1}{4^{m+n}} \sum_{r=0}^{\infty} \sum_{s=0}^{\infty} \left(
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -119,7 +119,7 @@ Thus
 		\right)
 		\frac{(\hat{a}^\dagger - \hat{a})^r}{r!}
 		\frac{(\hat{a}^\dagger + \hat{a})^s}{s!} \\
-	& = \sum\limits_{r=0}^{\infty} \sum\limits_{s=0}^{\infty} \left(
+	& = \sum_{r=0}^{\infty} \sum_{s=0}^{\infty} \left(
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -151,19 +151,19 @@ and we used \lmmref{formalism:c-numbers:zero-integrals} to evaluate the integral
 The exponent in the $\chi_W$ can be expanded as
 \[
 	\exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a})
-	= \sum\limits_{r,s}
+	= \sum_{r,s}
 		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
 		\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }.
 \]
 Thus
 \[
 	\chi_W(\lambda, \lambda^*)
-	= \sum\limits_{r,s}
+	= \sum_{r,s}
 		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
 		\Trace{
 			\hat{\rho} \symprod{ \hat{a}^r (\hat{a}^\dagger)^s }
 		}
-	= \sum\limits_{r,s}
+	= \sum_{r,s}
 		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 \]

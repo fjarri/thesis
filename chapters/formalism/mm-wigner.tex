@@ -11,11 +11,11 @@ with $n = 1 \ldots N$.
 	\mathcal{W}[\hat{A}]
 	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
 		\left(
-			\prod\limits_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
+			\prod_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
 		\right)
 		\Trace{
 			\hat{A}
-			\prod\limits_n \hat{D}_n (\lambda_n, \lambda_n^*)
+			\prod_n \hat{D}_n (\lambda_n, \lambda_n^*)
 		},
 \end{equation}
 where $\hat{D}_n = \exp(\lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)$.
@@ -24,7 +24,7 @@ Corresponding definitions of multimode characteristic function and Wigner functi
 	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
 	= \Trace{
 		\hat{\rho}
-		\prod\limits_n \hat{D}_n (\lambda_n, \lambda_n^*)
+		\prod_n \hat{D}_n (\lambda_n, \lambda_n^*)
 	},
 \]
 \begin{equation}
@@ -33,7 +33,7 @@ Corresponding definitions of multimode characteristic function and Wigner functi
 	\equiv \mathcal{W}[\hat{\rho}]
 	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
 		\left(
-			\prod\limits_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
+			\prod_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
 		\right)
 		\chi_W (\bm{\lambda}, \bm{\lambda}^*).
 \end{equation}
@@ -41,10 +41,10 @@ Corresponding definitions of multimode characteristic function and Wigner functi
 \begin{lemma}[Multimode extension of~\lmmref{formalism:sm-wigner:moments-from-chi}]
 \label{lmm:formalism:mm-wigner:moments-from-chi}
 \[
-	\langle \symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle
+	\langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle
 	= \left.
 		\left(
-			\prod\limits_n
+			\prod_n
 			\left( \frac{\partial}{\partial \lambda_n} \right)^{s_n}
 			\left( -\frac{\partial}{\partial \lambda_n^*} \right)^{r_n}
 		\right)
@@ -59,35 +59,35 @@ Mode operators with different indices commute, so
 	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
 	& = \Trace{
 		\hat{\rho}
-		\prod\limits_n
+		\prod_n
 			\exp( \lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)
 	} \\
 	& = \Trace{
 		\hat{\rho}
-		\prod\limits_n \sum\limits_{r_n, s_n}
+		\prod_n \sum_{r_n, s_n}
 			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
 			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
 	} \\
 	& = \Trace{
 		\hat{\rho}
-		\sum\limits_{r_1, s_1, \ldots, r_N, s_N} \prod\limits_n
+		\sum_{r_1, s_1, \ldots, r_N, s_N} \prod_n
 			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
 			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
 	} \\
 	& = \Trace{
-		\sum\limits_{r_1, s_1, \ldots, r_N, s_N}
+		\sum_{r_1, s_1, \ldots, r_N, s_N}
 			\left(
-				\prod\limits_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+				\prod_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
 			\right)
 			\hat{\rho}
-			\symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+			\symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
 	} \\
-	& = \sum\limits_{r_1, s_1, \ldots, r_N, s_N}
+	& = \sum_{r_1, s_1, \ldots, r_N, s_N}
 		\left(
-			\prod\limits_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+			\prod_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
 		\right)
 		\langle
-			\symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+			\symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
 		\rangle,
 \end{split}
 \end{equation*}
@@ -100,9 +100,9 @@ Moments of multimode Wigner function correspond to the averages of symmetrically
 \[
 	\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
 		\left(
-			\prod\limits_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
+			\prod_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
 		\right) W(\bm{\alpha}, \bm{\alpha}^*)
-	= \langle \symprod{ \prod\limits_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
+	= \langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
 \]
 \end{theorem}
 \begin{proof}
