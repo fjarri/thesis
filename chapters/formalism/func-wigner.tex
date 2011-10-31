@@ -351,3 +351,54 @@ leaving only one operator product with required order:
 	\qedhere
 \]
 \end{proof}
+
+\begin{theorem}[Functional extension of \thmref{formalism:sm-wigner:moments}]
+\label{thm:formalism:func-wigner:moments}
+\[
+	\int \delta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi, \Psi^*]
+	= \langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
+\]
+\end{theorem}
+\begin{proof}
+By definition of Wigner functional:
+\begin{equation*}
+\begin{split}
+	\int \delta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi, \Psi^*]
+	= \frac{1}{\pi^{2N}} \Trace{ \hat{\rho}
+		\int \delta^2\Psi\, \Psi^r (\Psi^*)^s
+		\int \delta^2\Lambda \exp(-\Lambda \Psi^* + \Lambda^* \Psi)
+		\hat{D}[\Lambda, \Lambda^*]
+	}
+\end{split}
+\end{equation*}
+Integrating by parts and eliminating terms which fit \lmmref{formalism:func-wigner:zero-integrals}:
+\[
+	= \frac{1}{\pi^{2N}} \Trace{ \hat{\rho}
+		\int \delta^2\Psi \int \delta^2\Lambda
+		\exp(-\Lambda \Psi^* + \Lambda^* \Psi)
+		\left( \frac{\delta}{\delta \Lambda} \right)^s
+		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\hat{D}[\Lambda, \Lambda^*]
+	}
+\]
+Evaluating integral over $\Psi$ using \lmmref{formalism:func-calculus:fourier-of-moments}:
+\begin{equation*}
+\begin{split}
+	& = \int \delta^2\Lambda\,
+		\Delta[\Lambda]
+		\left( \frac{\delta}{\delta \Lambda} \right)^s
+		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\Trace{
+			\hat{\rho}
+			\hat{D}[\Lambda, \Lambda^*]
+		} \\
+	& = \left.
+		\left( \frac{\delta}{\delta \Lambda} \right)^s
+		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\chi_W [\Lambda, \Lambda^*]
+	\right|_{\Lambda \equiv 0}.
+\end{split}
+\end{equation*}
+Now, recognising the final expression as a part of \lmmref{formalism:func-wigner:moments-from-chi},
+we immideately get the statement of the theorem.
+\end{proof}
