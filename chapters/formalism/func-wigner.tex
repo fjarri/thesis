@@ -129,6 +129,164 @@ where $\chi_W (\Lambda, \Lambda^*)$ is the characteristic functional
 	= \Trace{ \hat{\rho} \hat{D}[\Lambda, \Lambda^*] }.
 \]
 
+\begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:zero-integrals}]
+\label{lmm:formalism:func-wigner:zero-integrals}
+If $\Lambda = \sum\limits_{\nvec \in L} \phi_{\nvec} \lambda_n$ and $\Psi = \sum\limits_{\nvec \in L} \phi_{\nvec} \alpha_n$:
+\begin{equation*}
+\begin{split}
+	\int \delta^2\Lambda
+		\frac{\delta}{\delta \Lambda^\prime} \left(
+			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+			\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
+			\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
+			\hat{D}[\Lambda, \Lambda^*]
+		\right)
+	& = 0 \\
+	\int \delta^2\Lambda
+		\frac{\delta}{\delta \Lambda^{\prime*}}
+		\left(
+			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+			\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
+			\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
+			\hat{D}[\Lambda, \Lambda^*]
+		\right)
+	& = 0.
+\end{split}
+\end{equation*}
+\end{lemma}
+\begin{proof}
+We will prove the first equation.
+Functional displacement operator can be represented as a function of mode vector:
+\begin{equation*}
+\begin{split}
+	\hat{D}[\Lambda, \Lambda^*]
+	= \exp \int dx \sum\limits_{\nvec,\mvec} \left(
+		\phi_{\nvec} \phi_{\mvec}^* \lambda_{\nvec} \hat{a}_{\mvec}^\dagger
+		- \phi_{\nvec}^* \phi_{\mvec} \lambda_{\nvec}^* \hat{a}_{\mvec}
+	\right)
+	= \exp \sum\limits_{\nvec,\mvec} \left(
+		\delta_{\nvec,\mvec} \lambda_{\nvec} \hat{a}_{\nvec}^\dagger
+		- \delta_{\nvec,\mvec} \lambda_{\nvec}^* \hat{a}_{\nvec}
+	\right)
+	= \exp \sum\limits_{\nvec} \left(
+		\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec}
+	\right).
+\end{split}
+\end{equation*}
+Expanding $\lambda_{\nvec} = x_{\nvec} + iy_{\nvec}$ and applying Baker-Hausdorff theorem:
+\begin{equation*}
+\begin{split}
+	\hat{D}[\Lambda, \Lambda^*]
+	& = \prod\limits_{\nvec \in L}
+		\exp(x_{\nvec}(\hat{a}_{\nvec}^\dagger - \hat{a}_{\nvec})
+		+ iy_{\nvec}(\hat{a}_{\nvec}^\dagger + \hat{a}_{\nvec})) \\
+	& = \prod\limits_{\nvec \in L}
+		\exp(ix_{\nvec}y_{\nvec})
+		\exp(x_{\nvec}(\hat{a}_{\nvec}^\dagger - \hat{a}_{\nvec}))
+		\exp(iy_{\nvec}(\hat{a}_{\nvec}^\dagger + \hat{a}_{\nvec}))
+\end{split}
+\end{equation*}
+Similarly,
+\[
+	\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
+	= \prod\limits_{\nvec \in L} \exp
+		(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
+\]
+For brevity, we will use index in multimode functions and operators to specify the subset of $L$ they use.
+With this notation, for fixed $\nvec$:
+\[
+	\hat{D}[\Lambda, \Lambda^*]
+	= \prod\limits_{\mvec \in L} \exp \left(
+		\lambda_{\mvec} \hat{a}_{\mvec}^\dagger - \lambda_{\mvec}^* \hat{a}_{\mvec}
+	\right)
+	= \exp \left(
+		\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec}
+	\right)
+	\prod\limits_{\mvec \in L, \mvec \ne \nvec} \exp \left(
+		\lambda_{\mvec} \hat{a}_{\mvec}^\dagger - \lambda_{\mvec}^* \hat{a}_{\mvec}
+	\right)
+	= \hat{D}_{\lnot \nvec} \hat{D}_{\nvec},
+\]
+and, similarly,
+\begin{equation*}
+\begin{split}
+	\Lambda & = \Lambda_{\lnot \nvec} + \Lambda_{\nvec} \\
+	D[\Lambda, \Lambda^*, \Psi, \Psi^*]	& = D_{\lnot \nvec} D_{\nvec}, \\
+	\frac{\partial}{\partial \Lambda^\prime}
+	& = \left( \frac{\delta}{\delta \Lambda^\prime} \right)_{\lnot \nvec}
+	+ \left( \frac{\delta}{\delta \Lambda^\prime} \right)_{\nvec}
+	= \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime}
+	+ \frac{\partial}{\partial \Lambda_{\nvec}^\prime}.
+\end{split}
+\end{equation*}
+
+Thus
+\begin{equation*}
+\begin{split}
+	& \int \delta^2\Lambda
+		\frac{\delta}{\delta \Lambda^\prime} \left(
+			\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
+			\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
+			\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
+			\hat{D}[\Lambda, \Lambda^*]
+		\right) \\
+	& = \int \ldots \int d^2\lambda_1 \ldots d^2\lambda_N
+		\sum\limits_{\nvec \in L}
+		\phi_{\nvec}^\prime
+		\frac{\partial}{\partial \lambda_{\nvec}} \left(
+			D_{\lnot \nvec} D_{\nvec}
+		\right.	\\
+		& \left.
+			\left(
+				\frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime}
+				+ \frac{\partial}{\partial \Lambda_{\nvec}^\prime}.
+			\right)^r
+			\left(
+				-\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}}
+				-\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}}.
+			\right)^s
+			\hat{D}_{\lnot \nvec} \hat{D}_{\nvec}
+		\right) \\
+	& = \sum\limits_{\nvec \in L} \int \ldots \int d^2\lambda_1 \ldots d^2\lambda_N
+		\phi_{\nvec}^\prime D_{\lnot \nvec}
+		\frac{\partial}{\partial \lambda_{\nvec}} \left(
+			D_{\nvec}
+		\right.	\\
+	& \left.
+		\sum\limits_{u=1}^r \sum\limits_{v=1}^s \binom{r}{u} \binom{s}{v}
+			\left(
+				\left( \frac{\partial}{\partial \Lambda_{\nvec}^\prime} \right)^u
+				\left( -\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}} \right)^v
+				\hat{D}_{\nvec}
+			\right)
+			\left(
+				\left( \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime} \right)^{r-u}
+				\left( -\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}} \right)^{s-v}
+				\hat{D}_{\lnot \nvec}
+			\right)
+		\right) \\
+	& = \sum\limits_{u=1}^r \sum\limits_{v=1}^s \binom{r}{u} \binom{s}{v}
+		\sum\limits_{\nvec \in L}
+		\int \ldots \int d^2\lambda_1 \ldots (\ne \nvec) \ldots d^2\lambda_N
+		\phi_{\nvec}^\prime D_{\lnot \nvec}
+		\left(
+			\left( \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime} \right)^{r-u}
+			\left( -\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}} \right)^{s-v}
+			\hat{D}_{\lnot \nvec}
+		\right) \\
+	&	\int d^2\lambda_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}} \left(
+			D_{\nvec}
+			\left( \frac{\partial}{\partial \Lambda_{\nvec}^\prime} \right)^u
+			\left( -\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}} \right)^v
+			\hat{D}_{\nvec}
+		\right).
+\end{split}
+\end{equation*}
+And the integral over $\lambda_{\nvec}$ is exactly the expression from \lmmref{formalism:c-numbers:zero-integrals},
+which is equal to zero,
+thus proving the lemma.
+\end{proof}
+
 \begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:moments-from-chi}]
 \label{lmm:formalism:func-wigner:moments-from-chi}
 \[
