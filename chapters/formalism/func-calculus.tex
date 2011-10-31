@@ -194,3 +194,77 @@ Functional integration is defined as
 \]
 If the basis contains infinite number of modes, the integral is treated as a limit $N \rightarrow \infty$ \todo{\cite{Dalton2011} has detailed explanation, do we need it here?}.
 
+We will need delta functional:
+\[
+	\Delta[\Lambda]
+	\equiv \prod_{\nvec \in L} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}).
+\]
+It has the same property as common delta function:
+\[
+	\int \delta^2 \Lambda \mathcal{F}[\Lambda] \Delta[\Lambda]
+	= \int \ldots \int d^2\lambda_1 \ldots d^2\lambda_N \mathcal{F}(\bm{\lambda})
+		\prod_{\nvec \in L} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec})
+	= \left. \mathcal{F}(\bm{\lambda}) \right|_{\forall \nvec\, \lambda_{\nvec} = 0}
+	= \left. \mathcal{F}[\Lambda] \right|_{\Lambda \equiv 0}
+\]
+
+\begin{lemma}[Functional extension of \lmmref{formalism:c-numbers:fourier-of-moments}]
+\label{lmm:formalism:func-calculus:fourier-of-moments}
+If $\Psi$ and $\Lambda$ are complex-valued functions of coordinate $\xvec$,
+then for any non-negative integers $r$ and $s$:
+\[
+	\int \delta^2\Psi\, \Psi^r (\Psi^*)^s \exp
+		\int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+	= \pi^{2N}
+		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\left( \frac{\delta}{\delta \Lambda} \right)^s
+		\Delta[\Lambda]
+\]
+\end{lemma}
+\begin{proof}
+\begin{equation*}
+\begin{split}
+	& \int \delta^2\Psi\, \Psi^r (\Psi^*)^s \exp
+		\int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \\
+	& = \int \ldots \int d^2\alpha_1 \ldots d^2\alpha_N
+		\left( \sum_{\nvec \in L} \phi_{\nvec} \alpha_{\nvec} \right)^r
+		\left( \sum_{\nvec \in L} \phi^*_{\nvec} \alpha_{\nvec}^* \right)^s
+		\prod_{\nvec \in L} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}) \\
+	& = \int \ldots \int d^2\alpha_1 \ldots d^2\alpha_N
+		\sum_{u_1 + \ldots + u_N = r} \binom{r}{u_1, \ldots, u_N}
+			\prod_{\nvec \in L} \phi_{\nvec}^{u_{\nvec}} \alpha_{\nvec}^{u_{\nvec}} \\
+	&	\sum_{v_1 + \ldots + v_N = s} \binom{s}{v_1, \ldots, v_N}
+			\prod_{\nvec \in L} (\phi_{\nvec}^*)^{v_{\nvec}} (\alpha_{\nvec}^*)^{v_{\nvec}}
+		\prod_{\nvec \in L} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}) \\
+	& = \sum_{u_1 + \ldots + u_N = r}
+		\sum_{v_1 + \ldots + v_N = s}
+		\binom{r}{u_1, \ldots, u_N}
+		\binom{s}{v_1, \ldots, v_N}
+		\prod_{\nvec \in L}
+			\phi_{\nvec}^{u_{\nvec}} (\phi_{\nvec}^*){v_{\nvec}}
+			\int d^2\alpha_{\nvec}
+				\alpha_{\nvec}^{u_{\nvec}}
+				(\alpha_{\nvec}^*)^{v_{\nvec}}
+				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}) \\
+	& = \sum_{u_1 + \ldots + u_N = r}
+		\sum_{v_1 + \ldots + v_N = s}
+		\binom{r}{u_1, \ldots, u_N}
+		\binom{s}{v_1, \ldots, v_N}
+		\pi^{2N}
+		\prod_{\nvec \in L}
+			\phi_{\nvec}^{u_{\nvec}} (\phi_{\nvec}^*)^{v_{\nvec}}
+			\left( -\frac{\partial}{\partial \lambda_{\nvec}^*} \right)^{u_{\nvec}}
+			\left( \frac{\partial}{\partial \lambda_{\nvec}} \right)^{v_{\nvec}}
+			\delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
+	& = \pi^{2N}
+		(-\sum_{\nvec \in L} \phi_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}^*})^r
+		(\sum_{\nvec \in L} \phi_{\nvec}^* \frac{\partial}{\partial \lambda_{\nvec}})^s
+		\prod_{\nvec \in L} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
+	& = \pi^{2N}
+		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\left( \frac{\delta}{\delta \Lambda} \right)^s
+		\Delta[\Lambda]
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
