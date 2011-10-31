@@ -232,7 +232,7 @@ Thus
 		\right) \\
 	& = \int \ldots \int d^2\lambda_1 \ldots d^2\lambda_N
 		\sum\limits_{\nvec \in L}
-		\phi_{\nvec}^\prime
+		\phi_{\nvec}^{*\prime}
 		\frac{\partial}{\partial \lambda_{\nvec}} \left(
 			D_{\lnot \nvec} D_{\nvec}
 		\right.	\\
@@ -248,7 +248,7 @@ Thus
 			\hat{D}_{\lnot \nvec} \hat{D}_{\nvec}
 		\right) \\
 	& = \sum\limits_{\nvec \in L} \int \ldots \int d^2\lambda_1 \ldots d^2\lambda_N
-		\phi_{\nvec}^\prime D_{\lnot \nvec}
+		\phi_{\nvec}^{*\prime} D_{\lnot \nvec}
 		\frac{\partial}{\partial \lambda_{\nvec}} \left(
 			D_{\nvec}
 		\right.	\\
@@ -268,7 +268,7 @@ Thus
 	& = \sum\limits_{u=1}^r \sum\limits_{v=1}^s \binom{r}{u} \binom{s}{v}
 		\sum\limits_{\nvec \in L}
 		\int \ldots \int d^2\lambda_1 \ldots (\ne \nvec) \ldots d^2\lambda_N
-		\phi_{\nvec}^\prime D_{\lnot \nvec}
+		\phi_{\nvec}^{*\prime} D_{\lnot \nvec}
 		\left(
 			\left( \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime} \right)^{r-u}
 			\left( -\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}} \right)^{s-v}
@@ -282,6 +282,7 @@ Thus
 		\right).
 \end{split}
 \end{equation*}
+\todo{Is there any mathematical symbol equivalent to $\sum$ or $\prod$, but applied to integration over a set of variables?}
 And the integral over $\lambda_{\nvec}$ is exactly the expression from \lmmref{formalism:c-numbers:zero-integrals},
 which is equal to zero,
 thus proving the lemma.
