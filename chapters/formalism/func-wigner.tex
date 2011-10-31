@@ -455,3 +455,34 @@ Moving additional multiplier outside the integral:
 \end{equation*}
 Notice that we used~\lmmref{formalism:func-wigner:zero-integrals} to move the partial derivative over $\Lambda^*$.
 \end{proof}
+
+\thmref{formalism:func-wigner:moments} and \thmref{formalism:func-wigner:correspondences} can be further extended to the case of several components.
+They can be proved in exactly the same way, so we only provide the statements.
+
+\begin{theorem}[Multi-component extension of \thmref{formalism:func-wigner:moments}]
+\label{thm:formalism:func-wigner:mc-moments}
+If $C$ is the number of components, then
+\[
+	\int \delta^2\Psi_1 \ldots \int \delta^2\Psi_C\,
+		\prod_{c=1}^C \Psi_c^{r_c} (\Psi_c^*)^{s_c} W[\Psivec, \Psivec^*]
+	= \langle \symprod{ \prod_{c=1}^C \Psiop_c^{r_c} (\Psiop_c^\dagger)^{s_c} } \rangle.
+\]
+\end{theorem}
+
+\begin{theorem}[Multi-component extension of \thmref{formalism:func-wigner:correspondences}]
+\label{thm:formalism:func-wigner:mc-correspondences}
+\begin{equation*}
+\begin{split}
+	\mathcal{W} [ \Psiop_c \hat{A} ]
+		& = \left( \Psi_c + \frac{1}{2} \frac{\delta}{\delta \Psi_c^*} \right) \mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \Psiop_c^\dagger \hat{A} ]
+		= \left( \Psi_c^* - \frac{1}{2} \frac{\delta}{\delta \Psi_c} \right) \mathcal{W}[\hat{A}], \\
+	\mathcal{W} [ \hat{A} \Psiop_c ]
+		& = \left( \Psi_c - \frac{1}{2} \frac{\delta}{\delta \Psi_c^*} \right) \mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \hat{A} \Psiop_c^\dagger ]
+		= \left( \Psi_c^* + \frac{1}{2} \frac{\delta}{\partial \Psi_c} \right) \mathcal{W}[\hat{A}].
+\end{split}
+\end{equation*}
+\end{theorem}
