@@ -33,6 +33,7 @@ It is convenient to also define displacement functional as
 It can be shown that the displacement operator has properties similar to~\eqnref{formalism:sm-wigner:displacement-derivatives}.
 
 \begin{lemma}
+\label{lmm:formalism:func-wigner:displacement-derivatives}
 \begin{equation*}
 \begin{split}
 	\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
@@ -388,4 +389,69 @@ Evaluating integral over $\Psi$ using \lmmref{formalism:func-calculus:fourier-of
 \end{equation*}
 Now, recognising the final expression as a part of \lmmref{formalism:func-wigner:moments-from-chi},
 we immideately get the statement of the theorem.
+\end{proof}
+
+\begin{theorem}[Functional extension of \thmref{formalism:sm-wigner:correspondences}]
+\label{thm:formalism:func-wigner:correspondences}
+\begin{equation*}
+\begin{split}
+	\mathcal{W} [ \Psiop \hat{A} ]
+		& = \left( \Psi + \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \Psiop^\dagger \hat{A} ]
+		= \left( \Psi^* - \frac{1}{2} \frac{\delta}{\delta \Psi} \right) \mathcal{W}[\hat{A}], \\
+	\mathcal{W} [ \hat{A} \Psiop ]
+		& = \left( \Psi - \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W}[\hat{A}],
+	\quad
+	\mathcal{W} [ \hat{A} \Psiop^\dagger ]
+		= \left( \Psi^* + \frac{1}{2} \frac{\delta}{\partial \Psi} \right) \mathcal{W}[\hat{A}].
+\end{split}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+We will prove the first correspondence.
+First, let us transform the trace using \lmmref{formalism:func-wigner:displacement-derivatives}:
+\begin{equation*}
+\begin{split}
+	\Trace{ \Psiop \hat{A} \hat{D} }
+	= \Trace{ \hat{A} \hat{D} \Psiop}
+	= \Trace{ \hat{A} \left(
+		-\frac{\delta}{\delta \Lambda^*}
+		-\frac{1}{2} \Lambda
+	\right) \hat{D}}
+	= \left(
+		-\frac{\delta}{\delta \Lambda^*}
+		-\frac{1}{2} \Lambda
+	\right) \Trace{ \hat{A} \hat{D}}
+\end{split}
+\end{equation*}
+Moving additional multiplier outside the integral:
+\begin{equation*}
+\begin{split}
+	\mathcal{W} [ \hat{\Psi} \hat{A} ]
+	& = \frac{1}{\pi^{2N}} \int \delta^2 \Lambda
+		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\Trace{ \Psiop \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
+	& = \frac{1}{\pi^{2N}} \int \delta^2 \Lambda
+		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\left(
+			-\frac{\delta}{\delta \Lambda^*}
+			-\frac{1}{2} \Lambda
+		\right)
+		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
+	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
+	- \frac{1}{\pi^{2N}} \int \delta^2 \Lambda
+		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\frac{\delta}{\delta \Lambda^*}
+		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
+	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
+	+ \frac{1}{\pi^{2N}} \int \delta^2 \Lambda \left(
+		\frac{\delta}{\delta \Lambda^*}
+		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+	\right)
+	\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
+	& = \left( \Psi + \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W} [\hat{A}].
+\end{split}
+\end{equation*}
+Notice that we used~\lmmref{formalism:func-wigner:zero-integrals} to move the partial derivative over $\Lambda^*$.
 \end{proof}
