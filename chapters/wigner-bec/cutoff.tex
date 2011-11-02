@@ -1,0 +1,49 @@
+% =============================================================================
+\section{Energy cutoff}
+% =============================================================================
+
+As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
+We will use the formalism for multimode operators described in \charef{formalism}.
+
+Two basis sets are used in this work.
+First is the basis of plane waves:
+\[
+	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
+\]
+whose elements are eigenfunctions of kinetic term:
+\[
+	\left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
+	= E_{\nvec} \phi_{\nvec}
+	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
+\]
+Field functions can be decomposed into this basis using common FFTs.
+Integration area for this set is the box with volume $V$.
+
+More sophisticated basis can be constructed out of harmonic oscillator modes,
+which have the whole space as an integration area.
+One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
+(see \appref{harmonic-transform} for technical details).
+
+We divide mode subspaces into low- and high-energy subsets $L$ and $H$,
+depending on whether $E_n$ is more or less than some cutoff energy $\ecut$,
+and limit field operators to the subset $L$.
+Restricted operators obey commutation relations~\eqnref{formalism:func-aux:restricted-commutators}.
+
+\begin{figure}
+\begin{center}
+\subfloat[Uniform grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_uniform_1000.eps}}
+\subfloat[Harmonic grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_harmonic_1000.eps}} \\
+\subfloat[Uniform grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_uniform_all.eps}}
+\subfloat[Harmonic grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
+	figures_generated/wigner/delta_harmonic_all.eps}}
+\end{center}
+\caption{Absolute value of restricted delta function $\lvert \delta_P(z^\prime - z) \rvert$ with and without explicit cutoff.}
+\label{fig:wigner-bec:cutoff:restricted-delta}
+\end{figure}
+
+Shape of the module of restricted delta function~\eqnref{formalism:func-calculus:restricted-delta} for two different basis sets and two different cutoffs is shown in~\figref{wigner-bec:cutoff:restricted-delta}.
+The higher cutoff is, the closer its shape gets to the ``ideal'' delta function,
+with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
