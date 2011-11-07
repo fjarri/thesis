@@ -11,3 +11,10 @@
 - Add description and results of noise tests (and implement them in the code)
 - Find a way to calculate energy/chemical potential for Wigner representation
 - Add a chapter on noise propagation algorithms
+- Formalise 'N' as '|L|' (along with infinite |L|) in Wigner function definition and lemmas
+
+Questions:
+- Do we actually need the generalisation for |L| = \infty? This creates infinities when
+  transforming master equation to FPE (in form of \delta(x, x)) and possibly makes
+  proofs in Formalism chapter not entirely mathematically correct.
+  Moreover, the validity criterion for truncation is n(x) >> \delta(x, x).
