@@ -16,8 +16,13 @@ whose elements are eigenfunctions of kinetic term:
 	= E_{\nvec} \phi_{\nvec}
 	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
 \]
+Integration area for this set is the box with volume $V = \prod_{j=1}^D L_j$.
+Spatial wave vectors are
+\[
+	\kvec_{\nvec} = \sum_{j=1}^D \frac{\pi n_j}{L_j} \vec{x}_j,
+\]
+where $L_j$ are dimensions of the box, and $\vec{x}_j$ are spatial unit vectors.
 Field functions can be decomposed into this basis using common FFTs.
-Integration area for this set is the box with volume $V$.
 
 More sophisticated basis can be constructed out of harmonic oscillator modes,
 which have the whole space as an integration area.
