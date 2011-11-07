@@ -5,9 +5,10 @@
 Hereinafter field operators and wave functions will be assumed to be defined in restricted basis, unless explicitly stated otherwise.
 The Markovian master equation for the system with the inclusion of losses can be written as~\cite{Jack2002}
 \begin{equation}
+\label{eqn:wigner-bec:master-eqn:master-eqn}
 	\frac{d\hat{\rho}}{dt} =
 		- \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
-		+ \sum\limits_{\lvec} \kappa_{\lvec} \int d\xvec
+		+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec
 			\mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
 \end{equation}
 where $\lvec = (l_1, l_2, \ldots, l_n)$ is a vector indicating the spins that are coupled,
@@ -33,7 +34,7 @@ The master equation allows us to derive an important property:
 	& = \frac{d}{dt} \Trace{ \hat{\rho} \Psiop_j }
 	= \Trace{ \frac{d\hat{\rho}}{dt} \Psiop_j } \\
 	& = \Trace{ -\frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right] \Psiop_j }
-	+ \sum\limits_{\lvec} \kappa_{\lvec} \int d\xvec^\prime
+	+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec^\prime
 		\Trace{
 			\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 			\Psiop_j
@@ -52,7 +53,7 @@ The master equation allows us to derive an important property:
 				\hat{\rho}
 			\right] \Psiop_j
 		}
-		+ \sum\limits_{\lvec} \kappa_{\lvec}
+		+ \sum_{\lvec} \kappa_{\lvec}
 			\Trace{
 				\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 				\Psiop_j
@@ -191,7 +192,7 @@ Thus the full relation is
 		- \frac{i U_{jm}}{\hbar} \langle
 			\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
 		\rangle
-		- \sum\limits_{\lvec} \kappa_{\lvec} \langle
+		- \sum_{\lvec} \kappa_{\lvec} \langle
 			\frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 			\hat{O}_{\lvec}^\prime
 		\rangle
@@ -202,7 +203,7 @@ Thus the full relation is
 				K_{jm} \Psiop_m
 				+ U_{jm} \Psiop_m^\dagger \Psiop_m \Psiop_j
 			\right)
-			- \sum\limits_{\lvec} \kappa_{\lvec}
+			- \sum_{\lvec} \kappa_{\lvec}
 				\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
 		\rangle
 	\right]
