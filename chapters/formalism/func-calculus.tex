@@ -270,3 +270,66 @@ then for any non-negative integers $r$ and $s$:
 \end{split}
 \end{equation*}
 \end{proof}
+
+In order to perform transformations of master equations in the future,
+we will need a lemma, which justifies certain operation with Laplacian
+(which is a part of kinetic term in Hamiltonian).
+
+\begin{lemma}
+\label{lmm:formalism:func-calculus:move-laplacian}
+If $\forall n \in L, \xvec \in \partial A$ $\phi_n(\xvec) = 0$, then
+\[
+	\int\limits_A d\xvec \left(
+		\nabla^2 \frac{\delta}{\delta \Psi}
+	\right) \Psi \mathcal{F}[\Psi, \Psi^*]
+	= \int\limits_A d\xvec \frac{\delta}{\delta \Psi}
+	( \nabla^2 \Psi ) \mathcal{F}[\Psi, \Psi^*]
+\]
+\end{lemma}
+\begin{proof}
+Integration limits play an important role in this proof,
+so we will write them explicitly.
+\begin{equation*}
+\begin{split}
+	\int\limits_A d\xvec \left(
+		\nabla^2 \frac{\delta}{\delta \Psi}
+	\right) \Psi
+	= \sum_{\nvec, \mvec} \left(
+			\int\limits_A d\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+		\right)
+		\frac{\partial}{\partial \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\bm{\alpha})
+	= (*)
+\end{split}
+\end{equation*}
+Using Green's first identity and the fact that eigenfunctions are equal to zero at the boundary of $A$:
+\begin{equation*}
+\begin{split}
+	\int\limits_A d\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+	& = \oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \bm{v}) dS
+	- \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = 0 - \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = \oint\limits_{\partial A} \phi_{\nvec}^* (\nabla \phi_{\mvec} \cdot \bm{v}) dS
+	- \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = \int\limits_A d\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
+\end{split}
+\end{equation*}
+where $\bm{v}$ is the outward pointing unit normal of surface element $dS$.
+Thus
+\[
+	(*)
+	= \sum_{\nvec, \mvec} \left(
+			\int\limits_A d\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
+		\right)
+		\frac{\partial}{\partial \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\bm{\alpha})
+	= \int\limits_A d\xvec \frac{\delta}{\delta \Psi}
+		( \nabla^2 \Psi ) \mathcal{F}[\Psi, \Psi^*].
+	\qedhere
+\]
+\end{proof}
+
+Note that this lemma imposes additional requirement for basis functions,
+but in practical applications it is always satisfied.
+For example, in plane wave basis eigenfunctions are equal to zero at the border of the bounding box,
+and in harmonic oscillator basis they are equal to zero on the infinity
+(which can be considered the boundary of their integration area).
+Hereinafter we will assume that this condition is true for any basis we work with.
