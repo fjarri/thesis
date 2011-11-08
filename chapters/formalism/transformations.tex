@@ -6,7 +6,70 @@ This section contains some theorems concerning transformations of specific opera
 which will be useful when transforming the master equation.
 
 \begin{theorem}
-\label{thm:formalism:func-wigner:wigner-of-laplacian}
+\label{thm:formalism:transformations:w-commutator1}
+\[
+	\mathcal{W} \left[ [\int d\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
+	= \int d\xvec \left(
+		- \frac{\delta}{\delta \Psi_j} \Psi_k
+		+ \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
+	\right) \mathcal{W}[\hat{A}].
+\]
+\end{theorem}
+\begin{proof}
+\begin{equation*}
+\begin{split}
+	\mathcal{W} \left[ [\int d\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
+	& = \int d\xvec \left(
+		\left(
+			\Psi_j^* - \frac{1}{2} \frac{\delta}{\delta \Psi_j}
+		\right)
+		\left(
+			\Psi_k + \frac{1}{2} \frac{\delta}{\delta \Psi_k^*}
+		\right)
+		- \left(
+			\Psi_k - \frac{1}{2} \frac{\delta}{\delta \Psi_k^*}
+		\right)
+		\left(
+			\Psi_j^* + \frac{1}{2} \frac{\delta}{\delta \Psi_j}
+		\right)
+	\right)
+	\mathcal{W}[\hat{A}] \\
+	& = \frac{1}{2} \int d\xvec \left(
+		- \frac{\delta}{\delta \Psi_j} \Psi_k
+		+ \Psi_j^* \frac{\delta}{\delta \Psi_k^*}
+		+ \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
+		- \Psi_k \frac{\delta}{\delta \Psi_j}
+	\right)
+	\mathcal{W}[\hat{A}] \\
+	& = (*).
+\end{split}
+\end{equation*}
+Changing the order of derivatives and functions using the relation
+\[
+	\Psi_k \frac{\delta}{\delta \Psi_j} \mathcal{F}
+	= \left(
+		\frac{\delta}{\delta \Psi_j} \Psi_k
+		- \delta_{jk} \delta_P(\xvec, \xvec)
+	\right) \mathcal{F},
+\]
+we get
+\[
+	(*) = \int d\xvec \left(
+		- \frac{\delta}{\delta \Psi_j} \Psi_k
+		+ \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
+	\right)
+	\mathcal{W}[\hat{A}].
+	\qedhere
+\]
+\end{proof}
+
+Commutators with Laplacian inside require somewhat special treatment,
+because it acts on basis functions and, in general, cannot be dragged around like a constant.
+For our purposes we only need one specific case,
+and, fortunately, in this case it does act like a constant.
+
+\begin{theorem}
+\label{thm:formalism:transformations:w-laplacian-commutator1}
 \[
 	\mathcal{W} \left[
 		\int d\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
