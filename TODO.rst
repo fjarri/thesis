@@ -18,3 +18,7 @@ Questions:
   transforming master equation to FPE (in form of \delta(x, x)) and possibly makes
   proofs in Formalism chapter not entirely mathematically correct.
   Moreover, the validity criterion for truncation is n(x) >> \delta(x, x).
+- Which way to write delta is better - delta(x - x') or delta(x, x')?
+  On the one hand, first way corresponds to the fact that this is one-dimensional delta
+  On the other hand, the function itself depends on x and x' separately, not on their difference.
+  And delta(x, x) written in a first way looks misleading (delta(0)? but it can depend on x)
