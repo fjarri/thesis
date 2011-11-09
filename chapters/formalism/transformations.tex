@@ -188,3 +188,61 @@ Now using \lmmref{formalism:func-calculus:move-laplacian} we can get the final r
 \end{split}
 \end{equation*}
 \end{proof}
+
+\begin{theorem}
+\begin{equation*}
+\begin{split}
+	\mathcal{W} \left[
+		[
+			\int d\xvec d\xvec^\prime
+			\Psiop_j^\dagger \Psiop_k^{\prime\dagger} \Psiop_j^\prime \Psiop_k,
+			\hat{A}
+		]
+	\right]
+	& = \int d\xvec d\xvec^\prime \left(
+		\frac{\delta}{\delta \Psi_j} \left(
+			- \Psi_j^\prime \Psi_k \Psi_k^{\prime*}
+			+ \frac{1}{2} \delta_{jk} \delta_P(\xvec^\prime, \xvec^\prime) \Psi_k
+			+ \frac{1}{2} \delta_P(\xvec, \xvec^\prime) \Psi_j^\prime
+		\right) \right . \\
+	&	\left. + \frac{\delta}{\delta \Psi_j^{\prime*}} \left(
+			\Psi_j^* \Psi_k \Psi_k^{\prime*}
+			- \frac{1}{2} \delta_{jk} \delta_P(\xvec, \xvec) \Psi_k^{\prime*}
+			- \frac{1}{2} \delta_P(\xvec, \xvec^\prime) \Psi_j^*
+		\right) \right. \\
+	&	\left. + \frac{\delta}{\delta \Psi_k^\prime} \left(
+			- \Psi_j^\prime \Psi_j^* \Psi_k
+			+ \frac{1}{2} \delta_{jk} \delta_P(\xvec, \xvec) \Psi_j^\prime
+			+ \frac{1}{2} \delta_P(\xvec^\prime, \xvec) \Psi_k
+		\right) \right .\\
+	&	\left. + \frac{\delta}{\delta \Psi_k^*} \left(
+			\Psi_j^\prime \Psi_j^* \Psi_k^{\prime*}
+			- \frac{1}{2} \delta_{jk} \delta_P(\xvec^\prime, \xvec^\prime) \Psi_j^*
+			- \frac{1}{2} \delta_P(\xvec^\prime, \xvec) \Psi_k^{\prime*}
+		\right) \right. \\
+	&	\left.
+			+ \frac{\delta}{\delta \Psi_j}
+			\frac{\delta}{\delta \Psi_j^{\prime*}}
+			\frac{\delta}{\delta \Psi_k^\prime}
+			\frac{1}{4} \Psi_k
+			- \frac{\delta}{\delta \Psi_j}
+			\frac{\delta}{\delta \Psi_j^{\prime*}}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{1}{4} \Psi_k^{\prime*}
+		\right. \\
+	&	\left.
+			+ \frac{\delta}{\delta \Psi_k^\prime}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{\delta}{\delta \Psi_j}
+			\frac{1}{4} \Psi_j^\prime
+			- \frac{\delta}{\delta \Psi_k^\prime}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{\delta}{\delta \Psi_j^{\prime*}}
+			\frac{1}{4} \Psi_j^*
+	\right) \mathcal{W}[\hat{A}].
+\end{split}
+\end{equation*}
+\end{theorem}
+\begin{proof}
+Proof is the same as in case of \thmref{formalism:transformations:w-commutator1}.
+\end{proof}
