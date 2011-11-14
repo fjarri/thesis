@@ -246,3 +246,249 @@ Now using \lmmref{formalism:func-calculus:move-laplacian} we can get the final r
 \begin{proof}
 Proof is the same as in case of \thmref{formalism:transformations:w-commutator1}.
 \end{proof}
+
+\begin{lemma}
+\[
+	\Psi(\xvec)^a \left( \frac{\delta}{\delta \Psi(\xvec)} \right)^b \mathcal{F}[\Psi, \Psi^*]
+	= \sum_{j=0}^{\min(a, b)}
+		\binom{b}{j} \frac{(-1)^j a!}{(a - j)!}
+		\delta(\xvec, \xvec)^j
+		\left( \frac{\delta}{\delta \Psi(\xvec)} \right)^{b - j}
+		\Psi(\xvec)^{a - j}
+		\mathcal{F}[\Psi, \Psi^*]
+\]
+\end{lemma}
+\begin{proof}
+Proof by induction.
+Let us assume that the statement is true for $b - 1$, and prove it for $b$
+(also assuming non-trivial case of $a > 0$).
+Moving a single differential to the left:
+\[
+	\Psi^a \left( \frac{\delta}{\delta \Psi} \right)^b \mathcal{F}
+	= \left(
+			\frac{\delta}{\delta \Psi} \Psi^a
+			- a \Psi^{a - 1} \delta_P(\xvec, \xvec)
+		\right)
+		\left( \frac{\delta}{\delta \Psi} \right)^{b-1}
+		\mathcal{F}
+\]
+Using known relation for $b-1$:
+\begin{equation*}
+\begin{split}
+	& = \frac{\delta}{\delta \Psi} \sum_{j = 0}^{\min(a, b-1)}
+			\binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-j}
+			\mathcal{F} \\
+	& - a \delta_P(\xvec, \xvec) \sum_{j = 0}^{\min(a-1, b-1)}
+			\binom{b-1}{j} \frac{(-1)^j (a-1)!}{(a-1-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
+			\mathcal{F}
+\end{split}
+\end{equation*}
+Merging coefficients before sums into the internal expressions:
+\begin{equation*}
+\begin{split}
+	& = \sum_{j = 0}^{\min(a, b-1)}
+			\binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+			\mathcal{F} \\
+	& + \sum_{j = 0}^{\min(a-1, b-1)}
+			\binom{b-1}{j} \frac{(-1)^{j+1} a!}{(a-1-j)!} \delta_P(\xvec, \xvec)^{j+1}
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
+			\mathcal{F}
+\end{split}
+\end{equation*}
+Shifting counter in the second sum:
+\begin{equation*}
+\begin{split}
+	& = \sum_{j = 0}^{\min(a, b-1)}
+			\binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+			\mathcal{F} \\
+	& + \sum_{j = 1}^{\min(a, b)}
+			\binom{b-1}{j-1} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+			\mathcal{F}
+\end{split}
+\end{equation*}
+Now we can join sums, noticing that $\binom{b-1}{j} + \binom{b-1}{j-1} = \binom{b}{j}$.
+There will be at most two leftover terms: first, term for $j=0$ from the first sum,
+and, possibly, the term with $j=\min(a,b)$ from the second sum.
+The former term appears only if $\min(a,b) > \min(a, b-1)$,
+or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-1) = b-1$).
+\begin{equation*}
+\begin{split}
+	& = \binom{b-1}{0} \frac{(-1)^0 a!}{(a-0)!} \delta_P(\xvec, \xvec)^0
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-0} \Psi^{a-0}
+			\mathcal{F} \\
+	& + \sum_{j = 1}^{\min(a, b-1)}
+			\binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+			\mathcal{F} \\
+	& + H[a - b]
+			\binom{b-1}{b-1} \frac{(-1)^j a!}{(a-b)!} \delta_P(\xvec, \xvec)^b
+			\left( \frac{\delta}{\delta \Psi} \right)^{b-b} \Psi^{a-b}
+			\mathcal{F},
+\end{split}
+\end{equation*}
+Where $H[n]$ is the discrete Heaviside step function.
+Now, since $\binom{b-1}{0} = \binom{b}{0}$ and $\binom{b-1}{b-1} = \binom{b}{b}$,
+we can attach two leftover terms to the sum too, obtaining the statement of the lemma:
+\[
+	= \sum_{j = 0}^{\min(a, b)}
+		\binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_P(\xvec, \xvec)^j
+		\left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+		\mathcal{F}
+	\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[Sum rearrangement]
+For integer $l$, $u$:
+\[
+	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q_{jk}
+	= \sum_{v=0}^l x^v \sum_{k=0}^{l-\max(u,v)} Q_{(v+k)k}.
+\]
+\end{lemma}
+\begin{proof}
+\todo{Add picture of summation area for axes $j, k$?}
+Obviously, the order $v = j - k$ of factor $x$ can vary from $0$ (say, when $j=0$ and $k=0$) to $l$ (when $j=l$ and $k=0$).
+Therefore:
+\[
+	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q_{jk}
+	= \sum_{v=0}^l x^v \sum_{k \in K(l, u, v)} Q_{(v+k)k},
+\]
+where the set $K$ is defined as
+\begin{equation*}
+\begin{split}
+	K(l, u, v)
+	& = \{k |
+		0 \le j \le l
+		\wedge 0 \le k \le \min(l - u, j)
+		\wedge j - k = v
+	\} \\
+	& = \{k |
+		-v \le k \le l - v
+		\wedge 0 \le k \le \min(l - u, v + k)
+	\} \\
+	& = \{k |
+		k \le l - v
+		\wedge 0 \le k \le \min(l - u, v + k)
+	\}.
+\end{split}
+\end{equation*}
+
+It is convenient to consider two cases separately $v \le u$ and $v > u$.
+For the former case
+\[
+	K_{v \le u}
+	= \{k |
+		k \le l - v
+		\wedge 0 \le k \le \min(l - u, k + v)
+		\wedge v \le u
+	\}.
+\]
+Since $v \le u$, $k \le l - v \le l - u \le \min(l - u, k + v)$ is always true,
+the first inequation is redundant:
+\[
+	= \{k |
+		0 \le k \le \min(l - u, v + k)
+		\wedge v \le u
+	\}.
+\]
+Splitting into two sets to get rid of minimum function:
+\begin{equation*}
+\begin{split}
+	& = \{k |
+		v \le u \wedge k \ge 0
+		\wedge
+		(
+			(k \le l - u \wedge l - u < v + k)
+			\vee
+			(k \le v + k \wedge l - u \ge v + k)
+		)
+	\} \\
+	& = \{k |
+		v \le u \wedge k \ge 0
+		\wedge
+		(
+			(k \le l - u \wedge k > l - u - v)
+			\vee
+			(k \le l - u - v)
+		)
+	\} \\
+	& = \{k |
+		v \le u \wedge k \ge 0
+		\wedge
+		(k \le l - u)
+	\} \\
+	& = \{k | v \le u \wedge 0 \le k \le l - u \}.
+\end{split}
+\end{equation*}
+
+For the latter case:
+\begin{equation*}
+\begin{split}
+	K_{v > u}
+	& = \{k |
+		k \le l - v
+		\wedge 0 \le k \le \min(l - u, k + v)
+		\wedge v > u
+	\} \\
+	& = \{k |
+		v > u \wedge k \ge 0
+		\wedge
+		(
+			(k \le l - v \wedge k \le l - u \wedge l - u \le k + v)
+			\vee
+			(k \le l - v \wedge k \le k + v \wedge l - u > k + v)
+		)
+	\} \\
+	& = \{k |
+		v > u \wedge k \ge 0
+		\wedge
+		(
+			(k \le l - v \wedge k \ge l - u - v)
+			\vee
+			(k \le l - v \wedge k < l - u - v)
+		)
+	\} \\
+	& = \{k | v > u \wedge 0 \le k \le l - v \}.
+\end{split}
+\end{equation*}
+Thus
+\begin{equation*}
+\begin{split}
+	K
+	& = K_{v \le u} \cup K_{v > u} \\
+	& = \{k | v \le u \wedge 0 \le k \le l - u \} \cup \{k | v > u \wedge 0 \le k \le l - v \} \\
+	& = \{k | 0 \le k \le l - \max(u, v) \},
+\end{split}
+\end{equation*}
+which gives us the statement of the lemma.
+\end{proof}
+
+\begin{theorem}
+\[
+	\mathcal{W} \left[
+		\int d\xvec \mathcal{L}_{\lvec} [\hat{A}]
+	\right] = \todo{?} \mathcal{W}[\hat{A}],
+\]
+where
+\[
+	\mathcal{L}_{\lvec} [\hat{A}]
+	= 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
+		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
+		- \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
+\]
+and
+\[
+	\hat{O}_{\lvec}
+	\equiv \hat{O}_{\lvec} (\Psiopvec)
+	= \Psiop_{l_{1}} (\xvec) \Psiop_{l_{2}} (\xvec) \ldots \Psiop_{l_{n}} (\xvec).
+\]
+\end{theorem}
+\begin{proof}
+\todo{Need general formula.
+I know how it looks for truncated part, but is there something for all terms?}
+\end{proof}
