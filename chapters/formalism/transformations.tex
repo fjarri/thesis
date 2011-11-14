@@ -248,6 +248,7 @@ Proof is the same as in case of \thmref{formalism:transformations:w-commutator1}
 \end{proof}
 
 \begin{lemma}
+\label{lmm:formalism:transformations:swap-differential}
 \[
 	\Psi(\xvec)^a \left( \frac{\delta}{\delta \Psi(\xvec)} \right)^b \mathcal{F}[\Psi, \Psi^*]
 	= \sum_{j=0}^{\min(a, b)}
@@ -344,10 +345,11 @@ we can attach two leftover terms to the sum too, obtaining the statement of the 
 \end{proof}
 
 \begin{lemma}[Sum rearrangement]
+\label{lmm:formalism:transformations:sum-rearrangement}
 For integer $l$, $u$:
 \[
-	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q_{jk}
-	= \sum_{v=0}^l x^v \sum_{k=0}^{l-\max(u,v)} Q_{(v+k)k}.
+	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q(j, k)
+	= \sum_{v=0}^l x^v \sum_{k=0}^{l-\max(u,v)} Q(v + k, k).
 \]
 \end{lemma}
 \begin{proof}
@@ -355,8 +357,8 @@ For integer $l$, $u$:
 Obviously, the order $v = j - k$ of factor $x$ can vary from $0$ (say, when $j=0$ and $k=0$) to $l$ (when $j=l$ and $k=0$).
 Therefore:
 \[
-	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q_{jk}
-	= \sum_{v=0}^l x^v \sum_{k \in K(l, u, v)} Q_{(v+k)k},
+	\sum_{j=0}^l \sum_{k=0}^{\min(l-u,j)} x^{j-k} Q(j, k)
+	= \sum_{v=0}^l x^v \sum_{k \in K(l, u, v)} Q(v + k, k),
 \]
 where the set $K$ is defined as
 \begin{equation*}
@@ -471,12 +473,12 @@ which gives us the statement of the lemma.
 \begin{theorem}
 \[
 	\mathcal{W} \left[
-		\int d\xvec \mathcal{L}_{\lvec} [\hat{A}]
+		\int d\xvec \hat{\mathcal{L}}_{\lvec} [\hat{A}]
 	\right] = \todo{?} \mathcal{W}[\hat{A}],
 \]
-where
+where loss operator $\hat{\mathcal{L}}_{\lvec}$ is
 \[
-	\mathcal{L}_{\lvec} [\hat{A}]
+	\hat{\mathcal{L}}_{\lvec} [\hat{A}]
 	= 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
 		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
 		- \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
@@ -485,10 +487,166 @@ and
 \[
 	\hat{O}_{\lvec}
 	\equiv \hat{O}_{\lvec} (\Psiopvec)
-	= \Psiop_{l_{1}} (\xvec) \Psiop_{l_{2}} (\xvec) \ldots \Psiop_{l_{n}} (\xvec).
+	= \prod_{c=1}^C \Psiop_c^{l_c} (\xvec).
 \]
 \end{theorem}
 \begin{proof}
-\todo{Need general formula.
-I know how it looks for truncated part, but is there something for all terms?}
+Let us perform the transformation for each term of loss operator.
+\begin{equation*}
+\begin{split}
+	W^{(1)}
+	& = \mathcal{W}[\hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger] \\
+	& = \prod_{c=1}^C \left(
+			\Psi_c + \frac{1}{2} \frac{\delta}{\delta \Psi_c^*}
+		\right)^{l_c}
+		\left(
+			\Psi_c^* + \frac{1}{2} \frac{\delta}{\delta \Psi_c}
+		\right)^{l_c}
+		\mathcal{W}[\hat{A}] \\
+	& = \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+				\binom{l_c}{j} \left( \frac{1}{2} \right)^j
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\Psi_c^{l_c - j}
+			\sum_{k=0}^{l_c}
+				\binom{l_c}{k} \left( \frac{1}{2} \right)^k
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+				(\Psi_c^*)^{l_c - k}
+		\right)
+		\mathcal{W}[\hat{A}] \\
+	& = \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\Psi_c^{l_c - j}
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+				(\Psi_c^*)^{l_c - k}
+		\right)
+		\mathcal{W}[\hat{A}].
+\end{split}
+\end{equation*}
+Using \lmmref{formalism:transformations:swap-differential} to swap $\Psi_c$ and $\delta / \delta \Psi_c$:
+\begin{equation*}
+\begin{split}
+	= & \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+		\right. \\
+		& \left.
+				\sum_{m=0}^{\min(l_c - j, k)}
+					\binom{k}{m}
+					\frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}
+					\delta_P(\xvec, \xvec)^m
+					\left( \frac{\delta}{\delta \Psi_c} \right)^{k - m}
+					\Psi_c^{l_c - j - m}
+				(\Psi_c^*)^{l_c - k}
+		\right)
+		\mathcal{W}[\hat{A}] \\
+	= & \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+			\sum_{k=0}^{l_c}
+			\sum_{m=0}^{\min(l_c - j, k)}
+				\left( \frac{\delta}{\delta \Psi_c} \right)^{k - m}
+				\tilde{Q}_c^{(1)}(j, k, m)
+		\right)
+		\mathcal{W}[\hat{A}],
+\end{split}
+\end{equation*}
+where
+\[
+	\tilde{Q}_c^{(1)}(j, k, m)
+	= \binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
+		\binom{k}{m}
+		\frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}
+		\delta_P(\xvec, \xvec)^m
+		\Psi_c^{l_c - j - m}
+	(\Psi_c^*)^{l_c - k}.
+\]
+Using \lmmref{formalism:transformations:sum-rearrangement}:
+\begin{equation*}
+\begin{split}
+	= & \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+			\sum_{m=0}^{l_c - \max(j, k)}
+				\tilde{Q}_c^{(1)}(j, k + m, m)
+		\right)
+		\mathcal{W}[\hat{A}] \\
+	= & \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+				\sum_{m=0}^{l_c - \max(j, k)}
+				Q_c^{(1)}(j, k, m)
+				\delta_P(\xvec, \xvec)^m
+				\Psi_c^{l_c - j - m}
+				(\Psi_c^*)^{l_c - k - m}
+		\right)
+		\mathcal{W}[\hat{A}],
+\end{split}
+\end{equation*}
+where
+\[
+	Q_c^{(1)}(j, k)
+	= \left( \frac{1}{2} \right)^{j + k + m}
+		\binom{l_c}{j} \binom{l_c}{k + m} \binom{k + m}{m}
+		\frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}.
+\]
+
+Similarly,
+\[
+	W^{(2)}
+	= \mathcal{W}[\hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}] \\
+	= \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+				\sum_{m=0}^{l_c - \max(j, k)}
+				Q_c^{(2)}(j, k, m)
+				\delta_P(\xvec, \xvec)^m
+				\Psi_c^{l_c - j - m}
+				(\Psi_c^*)^{l_c - k - m}
+		\right)
+		\mathcal{W}[\hat{A}],
+\]
+where
+\[
+	Q_c^{(2)}(j, k, m)
+	= (-1)^k \left( \frac{1}{2} \right)^{j + k + m}
+		\binom{l_c}{k} \binom{l_c}{j + m} \binom{j + m}{m}
+		\frac{(-1)^m (l_c - k)!}{(l_c - k - m)!},
+\]
+and
+\[
+	W^{(3)}
+	= \mathcal{W}[\hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}] \\
+	= \prod_{c=1}^C \left(
+			\sum_{j=0}^{l_c}
+			\sum_{k=0}^{l_c}
+				\left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+				\left( \frac{\delta}{\delta \Psi_c} \right)^k
+				\sum_{m=0}^{l_c - \max(j, k)}
+				Q_c^{(3)}(j, k, m)
+				\delta_P(\xvec, \xvec)^m
+				\Psi_c^{l_c - j - m}
+				(\Psi_c^*)^{l_c - k - m}
+		\right)
+		\mathcal{W}[\hat{A}],
+\]
+where
+\[
+	Q_c^{(3)}(j, k, m)
+	= (-1)^j \left( \frac{1}{2} \right)^{j + k + m}
+		\binom{l_c}{j} \binom{l_c}{k + m} \binom{k + m}{m}
+		\frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}.
+\]
+
 \end{proof}
