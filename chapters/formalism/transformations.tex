@@ -190,16 +190,17 @@ Now using \lmmref{formalism:func-calculus:move-laplacian} we can get the final r
 \end{proof}
 
 \begin{theorem}
+\label{thm:formalism:transformations:w-commutator2}
 \begin{equation*}
 \begin{split}
 	\mathcal{W} \left[
 		[
-			\int d\xvec d\xvec^\prime
+			\int d\xvec \int d\xvec^\prime
 			\Psiop_j^\dagger \Psiop_k^{\prime\dagger} \Psiop_j^\prime \Psiop_k,
 			\hat{A}
 		]
 	\right]
-	& = \int d\xvec d\xvec^\prime \left(
+	& = \int d\xvec \int d\xvec^\prime \left(
 		\frac{\delta}{\delta \Psi_j} \left(
 			- \Psi_j^\prime \Psi_k \Psi_k^{\prime*}
 			+ \frac{1}{2} \delta_{jk} \delta_P(\xvec^\prime, \xvec^\prime) \Psi_k
@@ -471,23 +472,45 @@ which gives us the statement of the lemma.
 \end{proof}
 
 \begin{theorem}
-\[
-	\mathcal{W} \left[
-		\int d\xvec \hat{\mathcal{L}}_{\lvec} [\hat{A}]
-	\right] = \todo{?} \mathcal{W}[\hat{A}],
-\]
-where loss operator $\hat{\mathcal{L}}_{\lvec}$ is
+\label{thm:formalism:transformations:w-losses}
+If loss operator $\hat{\mathcal{L}}_{\lvec}$ is defined as
 \[
 	\hat{\mathcal{L}}_{\lvec} [\hat{A}]
 	= 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
 		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
 		- \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
 \]
-and
+where
 \[
 	\hat{O}_{\lvec}
 	\equiv \hat{O}_{\lvec} (\Psiopvec)
-	= \prod_{c=1}^C \Psiop_c^{l_c} (\xvec).
+	= \prod_{c=1}^C \Psiop_c^{l_c} (\xvec),
+\]
+then its Wigner transformation is
+\[
+	\mathcal{W} \left[ \int d\xvec \hat{\mathcal{L}}_{\lvec} [\hat{A}] \right]
+	= \int d\xvec
+		\sum_{j_1=0}^{l_1} \sum_{k_1=0}^{l_1} \ldots
+		\sum_{j_C=0}^{l_C} \sum_{k_C=0}^{l_C}
+			\left(
+				\prod_{c=1}^C
+					\left( \frac{\delta}{\delta \Psi_c^*} \right)^{j_c}
+					\left( \frac{\delta}{\delta \Psi_c} \right)^{k_c}
+			\right)
+			L_{\jvec, \kvec}
+		\mathcal{W}[\hat{A}],
+\]
+where
+\[
+	L_{\jvec, \kvec}
+	= \left( 2 - (-1)^{\sum_c j_c} - (-1)^{\sum_c k_c} \right)
+		\prod_{c=1}^C \left(
+			\sum_{m_c=0}^{l_c - \max(j_c, k_c)}
+			Q_c(j_c, k_c, m_c)
+			\delta_P(\xvec, \xvec)^{m_c}
+			\Psi_c^{l_c - j_c - m_c}
+			(\Psi_c^*)^{l_c - k_c - m_c}
+		\right).
 \]
 \end{theorem}
 \begin{proof}
@@ -649,4 +672,44 @@ where
 		\frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}.
 \]
 
+Expanding binomial coefficients, one can see that
+\[
+	Q_c^{(1)} = Q_c,\, Q_c^{(2)} = (-1)^k Q_c,\, Q_c^{(3)} = (-1)^j Q_c,
+\]
+where
+\[
+	Q_c(j, k, m)
+	= (-1)^m \left( \frac{1}{2} \right)^{j + k + m}
+		\frac{(l_c!)^2}{m! j! k! (l_c - k - m)! (l_c - j - m)!}.
+\]
+
+Now we can write down the full expression for the Wigner transformation of $\hat{\mathcal{L}}$.
+\todo{Here's a good place for ``multiple application'' operator.}
+\begin{equation*}
+\begin{split}
+	\mathcal{W}[\hat{\mathcal{L}_{\lvec}}[\hat{A}]]
+	& = 2 W^{(1)} - W^{(2)} - W^{(3)} \\
+	& = \sum_{j_1=0}^{l_1} \sum_{k_1=0}^{l_1} \ldots
+		\sum_{j_C=0}^{l_C} \sum_{k_C=0}^{l_C}
+			\left(
+				\prod_{c=1}^C
+					\left( \frac{\delta}{\delta \Psi_c^*} \right)^{j_c}
+					\left( \frac{\delta}{\delta \Psi_c} \right)^{k_c}
+			\right)
+			L_{\jvec, \kvec}
+		\mathcal{W}[\hat{A}],
+\end{split}
+\end{equation*}
+where
+\[
+	L_{\jvec, \kvec}
+	= \left( 2 - (-1)^{\sum_c j_c} - (-1)^{\sum_c k_c} \right)
+		\prod_{c=1}^C \left(
+			\sum_{m_c=0}^{l_c - \max(j_c, k_c)}
+			Q_c(j_c, k_c, m_c)
+			\delta_P(\xvec, \xvec)^{m_c}
+			\Psi_c^{l_c - j_c - m_c}
+			(\Psi_c^*)^{l_c - k_c - m_c}
+		\right).
+\]
 \end{proof}
