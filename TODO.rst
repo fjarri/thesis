@@ -12,6 +12,7 @@
 - Find a way to calculate energy/chemical potential for Wigner representation
 - Add a chapter on noise propagation algorithms
 - Formalise 'N' as '|L|' (along with infinite |L|) in Wigner function definition and lemmas
+- Check first approximation beyond truncated Wigner - Polkovnikov 2003
 
 Questions:
 - Do we actually need the generalisation for |L| = \infty? This creates infinities when
