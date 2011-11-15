@@ -1,0 +1,76 @@
+% =============================================================================
+\section{Wigner truncation}
+% =============================================================================
+
+In order to solve operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} numerically,
+we will transform it to ordinary differential equation using Wigner transformation~\eqnref{formalism:func-wigner:w-transformation}.
+
+Namely, the term with $K_j$ is transformed using \thmref{formalism:transformations:w-commutator1} and \thmref{formalism:transformations:w-laplacian-commutator1}
+(since $K_j$ is basically a sum of Laplacian operator and functions of $\xvec$):
+\[
+	\mathcal{W} \left[ [ \int d\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
+	= \int d\xvec \left(
+			- \frac{\delta}{\delta \Psi_j} K_{jk} \Psi_k
+			+ \frac{\delta}{\delta \Psi_k^*} K_{jk} \Psi_j^*
+		\right)
+		W,
+\]
+where Wigner function $W = \mathcal{W}[\hat{\rho}]$.
+Nonlinear term is transformed with \thmref{formalism:transformations:w-commutator2}
+(minding the locality of interaction and integrating over $\xvec$):
+\begin{equation*}
+\begin{split}
+	\mathcal{W} \left[
+		[
+			\int d\xvec \frac{U_{jk}}{2}
+				\Psiop_j^\dagger K_{jk} \Psiop_k^\dagger \Psiop_j \Psiop_k,
+			\hat{\rho}
+		]
+	\right]
+	& = \int d\xvec \frac{U_{jk}}{2} \left(
+		\frac{\delta}{\delta \Psi_j} \left(
+			- \Psi_j \Psi_k \Psi_k^*
+			+ \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
+		\right) \right. \\
+	&	\left. + \frac{\delta}{\delta \Psi_j^*} \left(
+			\Psi_j^* \Psi_k \Psi_k^*
+			- \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
+		\right) \right. \\
+	&	\left. + \frac{\delta}{\delta \Psi_k} \left(
+			- \Psi_j \Psi_j^* \Psi_k
+			+ \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j + \Psi_k )
+		\right) \right. \\
+	&	\left. + \frac{\delta}{\delta \Psi_k^*} \left(
+			\Psi_j \Psi_j^* \Psi_k^*
+			- \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j^* + \Psi_k^* )
+		\right) \right. \\
+	&	\left.
+			+ \frac{\delta}{\delta \Psi_j}
+			\frac{\delta}{\delta \Psi_j^*}
+			\frac{\delta}{\delta \Psi_k}
+			\frac{1}{4} \Psi_k
+			- \frac{\delta}{\delta \Psi_j}
+			\frac{\delta}{\delta \Psi_j^*}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{1}{4} \Psi_k^*
+		\right. \\
+	&	\left.
+			+ \frac{\delta}{\delta \Psi_k}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{\delta}{\delta \Psi_j}
+			\frac{1}{4} \Psi_j
+			- \frac{\delta}{\delta \Psi_k}
+			\frac{\delta}{\delta \Psi_k^*}
+			\frac{\delta}{\delta \Psi_j^*}
+			\frac{1}{4} \Psi_j^*
+		\right) W.
+\end{split}
+\end{equation*}
+Loss operator is transformed with \thmref{formalism:transformations:w-losses}.
+\todo{Not writing the resulting expression here, because with the absence of truncation it is too long,
+and is practically the same as in theorem statement.}
+
+We can only solve the resulting differential equation if it does not have functional derivatives of order more than 2 \todo{citation needed}.
+One can see that
+
+
