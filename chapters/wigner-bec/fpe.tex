@@ -1,0 +1,54 @@
+% =============================================================================
+\section{Fokker-Planck equation}
+% =============================================================================
+
+The general approach to numerical solution of the Fokker-Planck equation~\eqnref{wigner-bec:truncation:fpe} is to transform it to the equivalent set of stochastic differential equations (SDEs) for $\Psi_j$.
+Since the transformation is defined for real-valued variables only \todo{citation needed},
+we have to modify the equation.
+
+First, noticing that $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ are real-valued
+(which is important for the further transformations),
+we can rewrite equation~\eqnref{wigner-bec:truncation:fpe} as
+\[
+	\frac{dW}{dt}
+	= \int d\xvec \left(
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} A_j
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} A_j^*
+		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k} D_{jk}
+	\right) W,
+\]
+where
+\[
+	A_j = -\frac{i}{\hbar} \left(
+			\sum_{k=1}^C K_{jk} \Psi_k
+			+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
+		\right)
+		- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec},
+\]
+and
+\[
+	D_{jk} = \sum_{\lvec} \kappa_{\lvec}
+		\frac{\partial O_{\lvec}}{\partial \Psi_j}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}.
+\]
+Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
+\[
+	\frac{dW}{dt}
+	= \left(
+		- \sum_{j=1}^C \sum_{\nvec \in L}
+			\frac{\partial}{\partial \alpha_{j,\nvec}}
+			\int d\xvec \phi_{\nvec}^* A_j
+		- \sum_{j=1}^C \sum_{\nvec \in L}
+			\frac{\partial}{\partial \alpha_{j,\nvec}^*}
+			\int d\xvec \phi_{\nvec} A_j^*
+		+ \sum_{j=1}^C \sum_{k=1}^C
+			\sum_{\mvec,\nvec \in L}
+			\frac{\partial}{\partial \alpha_{j,\mvec}^*}
+			\frac{\partial}{\partial \alpha_{k,\nvec}}
+			\int d\xvec
+			\phi_{\mvec} \phi_{\nvec}^* D_{jk}
+	\right) W.
+\]
+
+Theorem 1. FPE with ordinary differentials -> SDEs
+Theorem 2. FPE with functional differentials -> SDEs
