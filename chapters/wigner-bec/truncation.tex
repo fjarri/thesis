@@ -124,4 +124,93 @@ the result of Wigner transformation of the nonlinear term can be written as
 \]
 \end{lemma}
 
+\begin{theorem}
+Assuming the conditions for Wigner truncation are satisfied,
+i.e. we can drop differentials higher than the second order and consider $\delta_P(\xvec, \xvec) \ll | \Psi_j |^2$,
+the result of Wigner transformation of the loss term can be written as
+\begin{equation*}
+\begin{split}
+	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
+	= \sum_{n=1}^C
+			\frac{\delta}{\delta \Psi_n^*} \frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
+	+ \sum_{n=1}^C
+		\frac{\delta}{\delta \Psi_n} \frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
+	+ \sum_{n=1}^C \sum_{p=1}^C
+		\frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}.
+\end{split}
+\end{equation*}
+where $O_{\lvec} \equiv O_{\lvec}(\Psivec) = \prod_{c=1}^C \Psi_c^{l_c}$.
+\end{theorem}
+\begin{proof}
+The proof is basically a simplification of the result of \thmref{formalism:transformations:w-losses} under certain conditions.
+First, we are neglecting all occurrences of $\delta_P$, which means setting $m_c = 0$ for every $c$.
+Second, we are dropping all terms with high order differentials,
+which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
+The only combinations of $j_c$ and $k_c$ for which $Z(\jvec, \kvec)$ is not zero are thus
+$\{ j_c = \delta_{cn}, k_c = 0, n \in [1, C] \}$,
+$\{ j_c = 0, k_c = \delta_{cn}, n \in [1, C] \}$ and
+$\{ j_c = \delta_{cn}, k_c = \delta_{cp}, n \in [1, C], p \in [1, C] \}$.
+These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$,
+$\frac{\delta}{\delta \Psi_n}$ and
+$\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
+\begin{equation*}
+\begin{split}
+	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
+	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+		2 H[l_n - 1] Q_n(1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
+		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
+		2 H[l_n - 1] Q_n(0, 1, 0) \Psi_n^{l_n} (\Psi_n^*)^{l_n - 1}
+		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		4 H[l_n - 1] Q_n(1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
+		H[l_p - 1] Q_p(0, 1, 0) \Psi_p^{l_p} (\Psi_p^*)^{l_p - 1} \\
+	&	\prod_{c=1, c \ne n, c \ne p}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
+		4 H[l_n - 1] Q_n(1, 1, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n - 1}
+		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c},
+\end{split}
+\end{equation*}
+where $H[n]$ is the discrete Heavyside function.
+
+One can easily find that $Q_n(1, 0, 0) = Q_n(0, 1, 0) = l_n / 2$, $Q_n(0, 0, 0) = 1$ and $Q_n(1, 1, 0) =
+l_n^2 / 4$.
+Therefore:
+\begin{equation*}
+\begin{split}
+	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
+		O_{\lvec}^* \\
+	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
+		\left( H[l_n - 1] l_n (\Psi_n^*)^{l_n - 1} \prod_{c=1, c \ne n}^C (\Psi_c^*)^{l_c} \right)
+		O_{\lvec} \\
+	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
+		\left( H[l_p - 1] l_p (\Psi_p^*)^{l_p - 1} \prod_{c=1, c \ne p}^C (\Psi_c^*)^{l_c} \right) \\
+	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
+		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
+		\left( H[l_n - 1] l_n (\Psi_n^*)^{l_n - 1} \prod_{c=1, c \ne n}^C (\Psi_c^*)^{l_c} \right) \\
+	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
+	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
+	+ \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n}
+	+ \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n} \\
+	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
+	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
+	+ \sum_{n=1}^C \sum_{p=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
 
