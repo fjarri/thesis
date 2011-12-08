@@ -103,6 +103,25 @@ Loss operator is transformed with \thmref{formalism:transformations:w-losses}.
 and is practically the same as in theorem statement.}
 
 We can only solve the resulting differential equation if it does not have functional derivatives of order more than 2 \todo{citation needed}.
-One can see that
+\todo{Need to formally derive truncation condition.
+For now I am assuming that we can drop third- and higher-order derivatives and consider $\delta_P(\xvec, \xvec) \ll | \Psi_j |^2$ for any $j$.}
+
+\begin{lemma}
+Assuming the conditions for Wigner truncation are satisfied,
+the result of Wigner transformation of the nonlinear term can be written as
+\[
+	\mathcal{W} \left[
+		[
+			\frac{U_{jk}}{2}
+				\Psiop_j^\dagger K_{jk} \Psiop_k^\dagger \Psiop_j \Psiop_k,
+			\hat{\rho}
+		]
+	\right]
+	= U_{jk} \left(
+		\frac{\delta}{\delta \Psi_j^*} \Psi_j^* \Psi_k \Psi_k^*
+		- \frac{\delta}{\delta \Psi_j} \Psi_j \Psi_k \Psi_k^*
+	\right) W.
+\]
+\end{lemma}
 
 
