@@ -214,3 +214,30 @@ Therefore:
 \end{equation*}
 \end{proof}
 
+Resulting Wigner-transformed master equation is
+\begin{equation*}
+\begin{split}
+	\frac{dW}{dt}
+	& = \int d\xvec \left(
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \left(
+			-\frac{i}{\hbar} \left(
+				\sum_{k=1}^C K_{jk} \Psi_k
+				+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
+			\right)
+			- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec}
+		\right)
+	\right. \\
+	& \left. + \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \left(
+		-\frac{i}{\hbar} \left(
+			\sum_{k=1}^C K_{jk} \Psi_k^*
+			+ \sum_{k=1}^C U_{jk} \Psi_j^* \Psi_k \Psi_k^*
+		\right)
+		+ \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}}{\partial \Psi_j} O_{\lvec}^*
+	\right) \right. \\
+	& \left. + \sum_{n=1}^C \sum_{p=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
+	\right) W
+\end{split}
+\end{equation*}
+
