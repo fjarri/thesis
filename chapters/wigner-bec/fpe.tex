@@ -50,5 +50,40 @@ Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and repl
 	\right) W.
 \]
 
+\begin{lemma}[FPE--SDEs correspondence in convenient form.]
+If $\bm{z}^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables,
+Fokker-Planck equation
+\[
+	\frac{dW}{dt}
+	= -\bm{\partial}_{\bm{z}}^T \bm{a} W
+	+ \frac{1}{2} \Trace{ \bm{\partial}_{\bm{z}} \bm{\partial}_{\bm{z}}^T B B^T }  W
+\]
+is equivalent to a set of stochastic differential equations in It\^{o} form
+\[
+	d\bm{z} = \bm{a} dt + B d\bm{Z}
+\]
+and to a set of stochastic differential equations in Stratonovich form
+\[
+	d\bm{z} = (\bm{a} - \bm{c})dt + B d\bm{Z},
+\]
+where the noise-induced (or spurious) drift vector $\bm{c}$ has elements
+\[
+	c_i
+	= \sum_{k,j} B_{kj} \frac{\partial}{\partial z_k} B_{ij}
+	= \Trace{B^T \bm{\partial}_z \bm{e}_i^T B},
+\]
+$\bm{e}_i$ being the unit vector with elements $(\bm{e}_i)_j = \delta_{ij}$.
+\todo{Is there a better way to express $\bm{c}$ in terms of matrices?}
+Here $W \equiv W(\bm{z})$ is a probability distribution,
+$\bm{a} \equiv \bm{a}(\bm{z})$ is a vector function,
+$B \equiv B(\bm{z})$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources),
+$\partial_{\bm{z}}^T \equiv (\partial_{z_1} \ldots \partial_{z_M})$ is a vector differential,
+and $d\bm{Z}$ is a standard $L$-dimensional Wiener process.
+\end{lemma}
+\begin{proof}
+For details see~\cite{Risken1996}, sections 3.3 and 3.4.
+\todo{Consider the case of colored noise (\cite{Risken1996}, 3.1 and appendix A).}
+\end{proof}
+
 Theorem 1. FPE with ordinary differentials -> SDEs
 Theorem 2. FPE with functional differentials -> SDEs
