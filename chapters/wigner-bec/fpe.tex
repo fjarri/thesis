@@ -51,12 +51,13 @@ Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and repl
 \]
 
 \begin{lemma}[FPE--SDEs correspondence in convenient form.]
+\label{lmm:wigner-bec:fpe:fpe-sde-correspondence}
 If $\bm{z}^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables,
 Fokker-Planck equation
 \[
 	\frac{dW}{dt}
 	= -\bm{\partial}_{\bm{z}}^T \bm{a} W
-	+ \frac{1}{2} \Trace{ \bm{\partial}_{\bm{z}} \bm{\partial}_{\bm{z}}^T B B^T }  W
+	+ \frac{1}{2} \Trace{ \bm{\partial}_{\bm{z}} \bm{\partial}_{\bm{z}}^T B B^T } W
 \]
 is equivalent to a set of stochastic differential equations in It\^{o} form
 \[
@@ -83,6 +84,186 @@ and $d\bm{Z}$ is a standard $L$-dimensional Wiener process.
 \begin{proof}
 For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 \todo{Consider the case of colored noise (\cite{Risken1996}, 3.1 and appendix A).}
+\end{proof}
+
+\begin{theorem}
+If $\bm{\alpha}^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex-valued variables,
+Fokker-Planck equation
+\[
+	\frac{dW}{dt}
+	= -\bm{\partial}_{\bm{\alpha}}^T \bm{a} W - \bm{\partial}_{\bm{\alpha}^*}^T \bm{a}^* W
+	+ \Trace{ \bm{\partial}_{\bm{\alpha}} \bm{\partial}_{\bm{\alpha}^*}^T B B^H } W
+\]
+is equivalent to a set of stochastic differential equations in It\^{o} form
+\[
+	d\bm{\alpha} = \bm{a} dt + B d\bm{Z},
+\]
+or to Stratonovich form
+\[
+	d\bm{\alpha} = (\bm{a} - \bm{c}) dt + B d\bm{Z},
+\]
+where noise-induced drift term is
+\[
+	c_j = \Trace{ B^H \bm{\partial}_{\bm{\alpha}} \bm{e}_j^T B },
+\]
+and $d\bm{Z} = (d\bm{X} + id\bm{Y}) / \sqrt{2}$ is an $M$-dimensional complex-valued Wiener process,
+containing two standard $M$-dimensional Wiener processes $d\bm{X}$ and $d\bm{Y}$.
+
+\todo{Add Stratonovich analogue.}
+\end{theorem}
+\begin{proof}
+Let us expand the FPE using real values
+$\bm{\alpha} = \bm{x} + i \bm{y}$,
+$\bm{a} = \bm{u} + i \bm{v}$,
+$B = G + iF$,
+$\bm{\partial}_{\bm{\alpha}} = (\bm{\partial}_{\bm{x}} - i \bm{\partial}_{\bm{y}}) / 2$.
+Thus
+\begin{equation*}
+\begin{split}
+	\frac{dW}{dt}
+	& = - \bm{\partial}_{\bm{x}}^T \bm{u} W
+	- \bm{\partial}_{\bm{y}}^T \bm{v} W
+	+ \frac{1}{4} \Trace{
+		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
+			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
+		(F F^T + G G^T)
+		+ (\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
+			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+		(F G^T - G F^T)
+	} W \\
+	& - \frac{i}{4} \Trace{
+		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
+			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
+		(F G^T - G F^T)
+	} W
+	+ \frac{i}{4} \Trace{
+		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
+			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+		(F F^T + G G^T)
+	} W.
+\end{split}
+\end{equation*}
+Since $F F^T + G G^T$ and $\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T + \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T$ are symmetric matrices,
+and $F G^T - G F^T$ and $\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T - \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T$ are antisymmetric,
+corresponding traces are equal to zero,
+which gives us FPE in real variables
+\[
+	\frac{dW}{dt}
+	= - \bm{\partial}_{\bm{x}}^T \bm{u} W
+	- \bm{\partial}_{\bm{y}}^T \bm{v} W
+	+ \frac{1}{4} \Trace{
+		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
+			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
+		(F F^T + G G^T)
+		+ (\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
+			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+		(F G^T - G F^T)
+	} W.
+\]
+
+In order to use \lmmref{wigner-bec:fpe:fpe-sde-correspondence},
+we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\bm{z}^T \equiv (\bm{x}^T \bm{y}^T)$.
+This will give us an equation identical to one from the lemma,
+with $\bm{a}^T \equiv (\bm{u}^T \bm{v}^T)$ and diffusion matrix
+\[
+	B B^T \equiv \frac{1}{2} \begin{pmatrix}
+		F F^T + G G^T & F G^T - G F^T \\
+		G F^T - F G^T & F F^T + G G^T
+	\end{pmatrix},
+\]
+which gives noise matrix
+\[
+	B = \frac{1}{\sqrt{2}} \begin{pmatrix}
+		F & -G \\
+		G & F
+	\end{pmatrix}.
+\]
+Therefore the equivalent SDEs in It\^{o} form are
+\[
+	d\bm{z} = \bm{a} dt + B d\bm{Z},
+\]
+where $d\bm{Z}^T \equiv (d\bm{X}^T d\bm{Y}^T)$.
+Returning to our previous variables:
+\begin{equation*}
+\begin{split}
+	d\bm{x} & = \bm{u} dt + \frac{1}{\sqrt{2}} F d\bm{X} - \frac{1}{\sqrt{2}} G d\bm{Y} \\
+	d\bm{y} & = \bm{v} dt + \frac{1}{\sqrt{2}} G d\bm{X} + \frac{1}{\sqrt{2}} F d\bm{Y}.
+\end{split}
+\end{equation*}
+Multiplying the second equation by $i$ and adding it to the first one:
+\[
+	d\bm{\alpha} = \bm{a} dt + \frac{1}{\sqrt{2}} (F + iG) (d\bm{X} + id\bm{Y}),
+\]
+which leads to the It\^{o} part of the lemma statement.
+\[
+	d\bm{\alpha} = \bm{a} dt + B d\bm{Z}.
+\]
+
+Noice-induced drift term in Stratonovich case can be calculated as
+\begin{equation*}
+\begin{split}
+	c_j^{(x)}
+	& = \frac{1}{2} \Trace{
+		\begin{pmatrix}
+			F^T & G^T \\ -G^T & F^T
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bm{\partial}_{\bm{x}} \\
+			\bm{\partial}_{\bm{y}}
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bm{e}_j^T & 0
+		\end{pmatrix}
+		\begin{pmatrix}
+			F & -G \\ G & F
+		\end{pmatrix}
+	} \\
+	& = \frac{1}{2} \Trace{
+		\begin{pmatrix}
+			F^T & G^T \\ -G^T & F^T
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bm{\partial}_{\bm{x}} \\
+			\bm{\partial}_{\bm{y}}
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bm{e}_j^T F & - \bm{e}_j^T G
+		\end{pmatrix}
+	} \\
+	& = \frac{1}{2} \Trace{
+		\begin{pmatrix}
+			F^T & G^T \\ -G^T & F^T
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bm{\partial}_{\bm{x}} \bm{e}_j^T F & - \bm{\partial}_{\bm{x}} \bm{e}_j^T G \\
+			\bm{\partial}_{\bm{y}} \bm{e}_j^T F & - \bm{\partial}_{\bm{y}} \bm{e}_j^T G
+		\end{pmatrix}
+	} \\
+	& = \frac{1}{2} \left(
+		\Trace{ F^T \bm{\partial}_{\bm{x}} \bm{e}_j^T F }
+		+ \Trace{ G^T \bm{\partial}_{\bm{y}} \bm{e}_j^T F }
+		+ \Trace{ G^T \bm{\partial}_{\bm{x}} \bm{e}_j^T G }
+		- \Trace{ F^T \bm{\partial}_{\bm{y}} \bm{e}_j^T G }
+	\right).
+\end{split}
+\end{equation*}
+Similarly,
+\[
+	c_j^{(y)}
+	= \frac{1}{2} \left(
+		\Trace{ F^T \bm{\partial}_{\bm{x}} \bm{e}_j^T G }
+		+ \Trace{ G^T \bm{\partial}_{\bm{y}} \bm{e}_j^T G }
+		- \Trace{ G^T \bm{\partial}_{\bm{x}} \bm{e}_j^T F }
+		+ \Trace{ F^T \bm{\partial}_{\bm{y}} \bm{e}_j^T F }
+	\right).
+\]
+Therefore the final term in complex-valued SDEs is
+\[
+	c_j
+	= c_j^{(x)} + i c_j^{(y)}
+	= \Trace{ B^H \bm{\partial}_{\bm{\alpha}} \bm{e}_j^T B }.
+	\qedhere
+\]
 \end{proof}
 
 Theorem 1. FPE with ordinary differentials -> SDEs
