@@ -51,7 +51,7 @@ Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and repl
 \]
 
 \begin{lemma}[FPE--SDEs correspondence in convenient form.]
-\label{lmm:wigner-bec:fpe:fpe-sde-correspondence}
+\label{lmm:wigner-bec:fpe:fpe-sde-real}
 If $\bm{z}^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables,
 Fokker-Planck equation
 \[
@@ -87,6 +87,7 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 \end{proof}
 
 \begin{theorem}
+\label{thm:wigner-bec:fpe:fpe-sde-complex}
 If $\bm{\alpha}^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex-valued variables,
 Fokker-Planck equation
 \[
@@ -160,7 +161,7 @@ which gives us FPE in real variables
 	} W.
 \]
 
-In order to use \lmmref{wigner-bec:fpe:fpe-sde-correspondence},
+In order to use \lmmref{wigner-bec:fpe:fpe-sde-real},
 we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\bm{z}^T \equiv (\bm{x}^T \bm{y}^T)$.
 This will give us an equation identical to one from the lemma,
 with $\bm{a}^T \equiv (\bm{u}^T \bm{v}^T)$ and diffusion matrix
@@ -265,5 +266,34 @@ Therefore the final term in complex-valued SDEs is
 \]
 \end{proof}
 
-Theorem 1. FPE with ordinary differentials -> SDEs
+\begin{theorem}[Multi-component extension of \thmref{wigner-bec:fpe:fpe-sde-complex}]
+\label{thm:wigner-bec:fpe:mc-fpe-sde}
+If $\bm{\alpha}^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\bm{\alpha}^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_M^{(c)})$,
+then Fokker-Planck equation
+\[
+	\frac{dW}{dt}
+	= - \sum_{c=1}^C \bm{\partial}_{\bm{\alpha}^{(c)}}^T \bm{a}^{(c)} W
+	- \sum_{c=1}^C \bm{\partial}_{(\bm{\alpha}^{(c)})^*}^T (\bm{a}^{(c)})^* W
+	+ \sum_{m=1}^c \sum_{n=1}^c
+		\Trace{
+			\bm{\partial}_{\bm{\alpha}^{(n)}}
+			\bm{\partial}_{(\bm{\alpha}^{(m)})^*}^T
+			B^{(n)} (B^{(m)})^H
+		} W
+\]
+is equivalent to a set of stochastic differential equations in It\^{o} form
+\[
+	d\bm{\alpha}^{(c)} = \bm{a}^{(c)} dt + B^{(c)} d\bm{Z},\, c = 1..C
+\]
+or to Stratonovich form
+\[
+	d\bm{\alpha}^{(c)} = (\bm{a}^{(c)} - \bm{c}^{(c)}) dt + B^{(c)} d\bm{Z},
+\]
+where noise-induced drift term is
+\[
+	c_j^{(c)} = \Trace{ (B^{(c)})^H \bm{\partial}_{\bm{\alpha}^{(c)}} \bm{e}_j^T B^{(c)} },
+\]
+and $d\bm{Z}$ is an $M$-dimensional complex-valued Wiener process.
+\end{theorem}
+
 Theorem 2. FPE with functional differentials -> SDEs
