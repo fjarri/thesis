@@ -6,7 +6,7 @@
 
 The simplest case of initial state is a coherent state.
 
-\begin{lemma}
+\begin{theorem}
 The Wigner distribution for a multi-mode coherent state with with expectation values
 $\alpha_{\nvec}(0) = \alpha_{\nvec}^{(0)}$, $\nvec \in L$ is
 \[
@@ -14,7 +14,7 @@ $\alpha_{\nvec}(0) = \alpha_{\nvec}^{(0)}$, $\nvec \in L$ is
 	= \left( \frac{2}{\pi} \right)^N \prod_{\nvec \in L}
 		\exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2).
 \]
-\end{lemma}
+\end{theorem}
 \begin{proof}
 The density matrix of the state is
 \[
@@ -112,3 +112,23 @@ Finally, Wigner function is
 \end{split}
 \end{equation*}
 \end{proof}
+
+The resulting Wigner distribution is a product of independent complex-valued Gaussian distributions for each mode,
+with the expectation value equal to the expectation value of the mode,
+and the variance equal to $\frac{1}{2}$.
+Therefore the initial state can be sampled as
+\[
+	\alpha_{\nvec} = \alpha_{\nvec}^{(0)} + \frac{1}{2} \eta_{\nvec},
+\]
+where $\eta_{\nvec}$ are normally distributed complex random numbers with zero mean,
+$\langle \eta_{\mvec} \eta_{\nvec} \rangle = 0$ and
+$\langle \eta_{\mvec} \eta_{\nvec}^* \rangle = \delta_{\mvec,\nvec}$
+(in other words, with components distributed independently with variance $\frac{1}{2}$).
+This looks like adding half a ``vacuum particle'' to each mode.
+In functional form this can be written as
+\[
+	\Psi_j(\xvec, 0)
+	= \Psi_j^{(0)}(\xvec, 0)
+		+ \sum_{\nvec \in L} \frac{\eta_{j,\nvec}}{2} \phi_{\nvec}(\xvec),
+\]
+where $\Psi_j^{(0)}(\xvec, 0)$ is the ``classical'' ground state of the system.
