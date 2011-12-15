@@ -1,0 +1,114 @@
+% =============================================================================
+\section{Initial states}
+% =============================================================================
+
+\subsection{Coherent state}
+
+The simplest case of initial state is a coherent state.
+
+\begin{lemma}
+The Wigner distribution for a multi-mode coherent state with with expectation values
+$\alpha_{\nvec}(0) = \alpha_{\nvec}^{(0)}$, $\nvec \in L$ is
+\[
+	W_c (\bm{\alpha}^{(0)})
+	= \left( \frac{2}{\pi} \right)^N \prod_{\nvec \in L}
+		\exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2).
+\]
+\end{lemma}
+\begin{proof}
+The density matrix of the state is
+\[
+	\hat{\rho}
+	= \vert \alpha_{\nvec}^{(0)},\, \nvec \in L \rangle
+		\langle \alpha_{\nvec}^{(0)},\, \nvec \in L \vert
+	= \left( \prod_{\nvec \in L} \vert \alpha_{\nvec}^{(0)} \rangle \right)
+		\left( \prod_{\nvec \in L} \langle \alpha_{\nvec}^{(0)} \vert \right).
+\]
+Then the characteristic function is
+\begin{equation*}
+\begin{split}
+	\chi_W (\bm{\alpha}^{(0)})
+	& = \Trace{
+		\left( \prod_{\nvec \in L} \vert \alpha_{\nvec}^{(0)} \rangle \right)
+		\left( \prod_{\nvec \in L} \langle \alpha_{\nvec}^{(0)} \vert \right)
+		\left( \prod_{\nvec \in L} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*) \right)
+	} \\
+	& = \Trace{
+		\left( \prod_{\nvec \in L} \langle \alpha_{\nvec}^{(0)} \vert \right)
+		\left( \prod_{\nvec \in L} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*) \right)
+		\left( \prod_{\nvec \in L} \vert \alpha_{\nvec}^{(0)} \rangle \right)
+	} \\
+	& = \prod_{\nvec \in L}
+		\langle \alpha_{\nvec}^{(0)} \vert
+		\hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
+		\vert \alpha_{\nvec}^{(0)} \rangle
+\end{split}
+\end{equation*}
+Displacement operators obey multiplication law \todo{proof needed? taken from Cahill and Glauber}
+\[
+	\hat{D}(\lambda, \lambda^*) \hat{D}(\alpha, \alpha^*)
+	= \hat{D}(\lambda + \alpha, \lambda^* + \alpha^*)
+		\exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha)),
+\]
+and the scalar product of two coherent state is calculated as \todo{again, taken from Cahill and Glauber}
+\[
+	\langle \beta \vert \alpha \rangle
+	= \exp(-\frac{1}{2} |\alpha|^2 - \frac{1}{2} |\beta|^2 + \beta^* \alpha).
+\]
+Therefore
+\[
+	\hat{D}(\lambda, \lambda^*) \vert \alpha \rangle
+	= \hat{D}(\lambda, \lambda^*) \hat{D}(\alpha, \alpha^*) \vert 0 \rangle
+	= \hat{D}(\lambda + \alpha, \lambda^* + \alpha^*)
+		\exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha))
+		\vert 0 \rangle
+	= \exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha))
+		\vert \lambda + \alpha \rangle,
+\]
+and the characteristic function can be simplified as:
+\begin{equation*}
+\begin{split}
+	\chi_W (\bm{\alpha}^{(0)})
+	& = \prod_{\nvec \in L}
+		\exp(\frac{1}{2} (\lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
+			- \lambda_{\nvec}^* \alpha_{\nvec}^{(0)}))
+		\langle \alpha_{\nvec}^{(0)} \vert \lambda_{\nvec} + \alpha_{\nvec}^{(0)} \rangle \\
+	& = \prod_{\nvec \in L}
+		\exp(
+			- \lambda_{\nvec}^* \alpha_{\nvec}^{(0)}
+			+ \lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
+			- \frac{1}{2} |\lambda|^2
+		).
+\end{split}
+\end{equation*}
+
+Finally, Wigner function is
+\begin{equation*}
+\begin{split}
+	W_c (\bm{\alpha}^{(0)})
+	& = \frac{1}{\pi^{2N}} \int d^2\lambda_{\nvec} \dots
+		\prod_{\nvec \in L} \exp(
+			- \lambda_{\nvec} \alpha_{\nvec}^*
+			+ \lambda_{\nvec}^* \alpha_{\nvec}
+		)
+		\prod_{\nvec \in L} \exp(
+			- \lambda_{\nvec}^* \alpha_{\nvec}^{(0)}
+			+ \lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
+			- \frac{1}{2} |\lambda|^2
+		) \\
+	& = \frac{1}{\pi^{2N}} \prod_{\nvec \in L} \left(
+		\int d^2\lambda_{\nvec}
+			\exp(
+				- \lambda_{\nvec} (\alpha_{\nvec}^* - (\alpha_{\nvec}^{(0)})^*)
+				+ \lambda_{\nvec}^* (\alpha_{\nvec} - \alpha_{\nvec}^{(0)})
+				- \frac{1}{2} |\lambda|^2
+			)
+	\right) \\
+	& = \frac{1}{\pi^{2N}} \prod_{\nvec \in L}
+		2 \pi \exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2) \\
+	& = \left( \frac{2}{\pi} \right)^N \prod_{\nvec \in L}
+		\exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2).
+	\qedhere
+\end{split}
+\end{equation*}
+\end{proof}
