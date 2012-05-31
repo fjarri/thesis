@@ -1,18 +1,35 @@
-\documentclass[10pt,notitlepage]{report}
-\usepackage{indentfirst}
+\documentclass[a4paper,11pt]{report}
+%\usepackage{fullpage}
+
 \usepackage[pdftex]{graphicx}
-\usepackage{subfig}
+\usepackage[margin=5pt]{subfig}
+\usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{color}
+\usepackage[usenames]{color}
 \usepackage{bm}
 \usepackage{verbatim}
 \usepackage{dsfont}
+\usepackage{upgreek}
+\usepackage{psfrag}
+\usepackage[nottoc]{tocbibind}
+\usepackage{environ} % gives \NewEnviron macro
 
-\usepackage{fullpage}
+% For print
+%\usepackage[breaklinks,pdftex,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk}]{hyperref}
+% For screen
+\definecolor{darkgreen}{rgb}{0.00,0.50,0.25}
+\definecolor{darkblue}{rgb}{0.00,0.00,0.67}
+\usepackage[breaklinks,pdftex,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk},colorlinks,urlcolor=blue,citecolor=darkgreen,linkcolor=darkblue]{hyperref}
 
-\usepackage{hyperref}
+% Page layout
+% 1.5 interval
+\renewcommand{\baselinestretch}{1.5}
+\textwidth=15cm
+\evensidemargin=-0.28cm
+\oddsidemargin=1.13cm
+\pretolerance=2000
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -29,13 +46,13 @@
 \newcommand{\pvec}{\boldsymbol{p}}
 
 \newcommand{\ecut}{\epsilon_{\mathrm{cut}}}
-\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\Trace}[1]{\Tr \left\{ #1 \right\}}
 
 \newcommand{\symprod}[1]{\left\{ #1 \right\}_{\mathrm{sym}}}
 \newcommand{\pathavg}[1]{\langle #1 \rangle_{\mathrm{paths}}}
-\newcommand{\Real}{\mathrm{Re}}
-\newcommand{\Imag}{\mathrm{Im}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
 
 \newcommand{\Psivec}{\boldsymbol{\Psi}}
 \newcommand{\Psiop}{\hat{\Psi}}
@@ -52,6 +69,18 @@
 \newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
 \newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
 
+\NewEnviron{eqn}{%
+\begin{equation}\begin{split}
+  \BODY
+\end{split}\end{equation}
+}
+
+\NewEnviron{eqn*}{%
+\begin{equation*}\begin{split}
+  \BODY
+\end{split}\end{equation*}
+}
+
 \title{Two-component BEC dynamics simulations}
 \author{Bogdan Opanchuk}
 
@@ -67,7 +96,7 @@
 \appendix
 \include{chapters/appendices}
 
-\bibliographystyle{plain}
-\bibliography{notes}
+\bibliographystyle{unsrt}
+\bibliography{thesis}
 
 \end{document}

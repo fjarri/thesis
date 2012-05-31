@@ -8,5 +8,6 @@ chapters/*.aux
 *.tmproj
 *.out
 *.toc
+*.fdb_latexmk
 temp/*
 
