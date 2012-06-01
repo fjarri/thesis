@@ -10,6 +10,7 @@ Further extension of these rules to vectors and matrices is done in~\cite{Hjorun
 This section will outline these rules and provide some lemmas based on them, which will be used further.
 
 \begin{definition}
+\label{def:c-numbers:wirtinger}
 	For a complex variable $z = x + iy$ and a function $f(z) = u(x, y) + iv(x, y)$
 	\begin{eqn*}
 		\left( \frac{\partial f(z)}{\partial z} \right)
@@ -93,6 +94,7 @@ Now we can prove two lemmas which will help us deal with some integrals.
 \begin{proof}
 First, changing the variables in the integrals and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
 \begin{eqn}
+\label{eqn:c-numbers:fourier-real}
 	\int\limits_{-\infty}^{\infty} dv\, v^n \exp(\pm 2 i x v)
 	= \pi (\mp i / 2)^n \delta^{(n)}(x),
 \end{eqn}
@@ -108,7 +110,10 @@ Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial exp
 	& = \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
 		i^{r-l} (-i)^{s-m}
 		\int du\, u^{l+m} \exp(2ivx)
-		\int dv\, v^{r-l+s-m} \exp(-2iuy) \\
+		\int dv\, v^{r-l+s-m} \exp(-2iuy).
+\end{eqn}
+Applying~\eqnref{c-numbers:fourier-real} and grouping differentials:
+\begin{eqn}
 	& = \pi^2 \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
 		i^{r-l} (-i)^{s-m}
 		(-i/2)^{l+m} \delta^{(l+m)}(y)
@@ -122,7 +127,10 @@ Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial exp
 			\frac{1}{2^s}
 			(-i \partial / \partial y)^m
 			(\partial / \partial x)^{s-m}
-		\delta(y) \delta(x) \\
+		\delta(y) \delta(x).
+\end{eqn}
+Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
+\begin{eqn}
 	& = \pi^2
 		\left( \frac{1}{2} (-i \partial / \partial y - \partial / \partial x) \right)^r
 		\left( \frac{1}{2} (-i \partial / \partial y + \partial / \partial x) \right)^s
