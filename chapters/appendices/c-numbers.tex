@@ -1,5 +1,5 @@
 % =============================================================================
-\section{Relaxed operations with complex numbers}
+\chapter{Wirtinger differentiation}
 % =============================================================================
 
 Formally, a function of complex variable has to be holomorphic in order to be complex differentiable.
@@ -9,21 +9,23 @@ a very good review and a thorough description of their application can be found 
 Further extension of these rules to vectors and matrices is done in~\cite{Hjorungnes2007}.
 This section will outline these rules and provide some lemmas based on them, which will be used further.
 
-For a complex variable $z = x + iy$ and a function $f(z) = u(x, y) + iv(x, y)$
-\begin{eqn}
-	\left( \frac{df(z)}{dz} \right)_{phys}
-	= \frac{1}{2} \left(
-		\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
-	\right).
-\end{eqn}
+\begin{definition}
+	For a complex variable $z = x + iy$ and a function $f(z) = u(x, y) + iv(x, y)$
+	\begin{eqn*}
+		\left( \frac{\partial f(z)}{\partial z} \right)
+		= \frac{1}{2} \left(
+			\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
+		\right).
+	\end{eqn*}
+\end{definition}
 
 \begin{lemma}
-If $f(z)$ is holomorphic, then the Wirtinger differentiation is equivalent to the formal one.
+	If $f(z)$ is holomorphic, then the Wirtinger differentiation is equivalent to the standard definition.
 \end{lemma}
 
 \begin{lemma}
-For any ``good'' (even non-holomorphic) $f(z)$, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules
-(the former one is applied as if $f(z) \equiv f(z, z^*)$).
+	For any ``good'' (even non-holomorphic) $f(z)$, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules
+	(the former one is applied as if $f(z) \equiv f(z, z^*)$).
 \end{lemma}
 
 Hereinafter we will use Wirtinger differentiation unless explicitly stated otherwise,
@@ -31,24 +33,24 @@ because some important functions we will encounter are not holomorphic.
 This differentiation has all intuitively assumed properties, along with some not quite obvious ones.
 
 \begin{lemma}
-For any nonnegative integers $a$ and $b$.
-\[
-	\frac{d}{dz} (z^a (z^*)^b) = a z^{a-1} (z^*)^b,
-	\quad
-	\frac{d}{dz^*} (z^a (z^*)^b) = b z^a (z^*)^{b-1},
-\]
+	For any nonnegative integers $a$ and $b$.
+	\begin{eqn*}
+		\frac{\partial}{\partial z} (z^a (z^*)^b) = a z^{a-1} (z^*)^b,
+		\quad
+		\frac{\partial}{\partial z^*} (z^a (z^*)^b) = b z^a (z^*)^{b-1},
+	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Let us assume that the statement of the lemma is valid for some $a$ and $b$, then using chain rule
-\[
-	\frac{d}{dz} (z^{a+1} (z^*)^b)
-	= \frac{d}{dz} (z z^a (z^*)^b)
-	= z^a (z^*)^b + z \frac{d}{dz} (z^a (z^*)^b)
-	= z^a (z^*)^b + a z z^{a-1} (z^*)^b
+Let us assume that the statement of the lemma is valid for some $a$ and $b$, then using product rule
+\begin{eqn}
+	\frac{\partial}{\partial z} (z^{a+1} (z^*)^b)
+	& = \frac{\partial}{\partial z} (z z^a (z^*)^b)
+	= z^a (z^*)^b + z \frac{\partial}{\partial z} (z^a (z^*)^b) \\
+	& = z^a (z^*)^b + a z z^{a-1} (z^*)^b
 	= (a + 1) z^a (z^*)^b.
-\]
-The part for $d/dz^*$ can is proved in the same way.
-One can easily prove (by transition to real values) that $d(z z^*)/dz = z^*$ and $d(z z^*)/dz^* = z$.
+\end{eqn}
+The part for $\partial/\partial z^*$ can is proved in the same way.
+One can easily prove (by transition to real values) that $\partial(z z^*)/\partial z = z^*$ and $\partial (z z^*)/\partial z^* = z$.
 By induction, the statement is true for any natural $a$ and $b$,
 and it is obviously true if $a = 0$ or $b = 0$, which proves the lemma.
 \todo{This can be proved for any real $a$ and $b$, if necessary.}
@@ -56,42 +58,50 @@ and it is obviously true if $a = 0$ or $b = 0$, which proves the lemma.
 
 This is straightforwardly followed by
 \begin{lemma}
-\label{lmm:formalism:c-numbers:independent-vars}
-If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $df(z)/dz$ can be treated as partial differentiation of the function of two independent variables $z$ and $z^*$.
-In other words:
-\[
-	\frac{d}{dz} f(z) \equiv \frac{\partial}{\partial z} f(z, z^*),
-	\quad
-	\frac{d}{dz^*} f(z) \equiv \frac{\partial}{\partial z^*} f(z, z^*).
-\]
+\label{lmm:c-numbers:independent-vars}
+	If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $\partial f(z)/\partial z$ and $\partial f(z)/\partial z^*$ can be treated as partial differentiation of the function of two independent variables $z$ and $z^*$.
+	In other words:
+	\begin{eqn*}
+		\frac{\partial}{\partial z} f(z, z^*) \equiv \frac{\partial}{\partial u} f(u, v),
+		\quad
+		\frac{\partial}{\partial z^*} f(z, z^*) \equiv \frac{\partial}{\partial v} f(u, v).
+	\end{eqn*}
 \end{lemma}
 
+Therefore, although technically $f(z, z^*)$ depends on one complex variable, when differentiated it behaves as if it was a function of two complex variables.
 Now we can prove two lemmas which will help us deal with some integrals.
 
+\begin{definition}
+	For a complex variable $z = x + iy$ the integral
+	\begin{eqn*}
+		\int d^2 z \equiv \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} dx\, dy,
+	\end{eqn*}
+	or, in other words, stands for the two-dimensional integral over the complex plane.
+\end{definition}
+
 \begin{lemma}
-\label{lmm:formalism:c-numbers:fourier-of-moments}
-If $\alpha$ and $\lambda$ are complex variables and $\int d^2\alpha$ stands for the integral over the complex plane, then for any non-negative integers $r$ and $s$:
-\[
-	\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
-	= \pi^2
-		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\left( \frac{\partial}{\partial \lambda} \right)^s
-		\delta(\Real \lambda) \delta(\Imag \lambda)
-\]
+\label{lmm:c-numbers:fourier-of-moments}
+	For complex $\lambda$ and any non-negative integers $r$ and $s$:
+	\begin{eqn*}
+		\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		= \pi^2
+			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+			\left( \frac{\partial}{\partial \lambda} \right)^s
+			\delta(\Real \lambda) \delta(\Imag \lambda)
+	\end{eqn*}
 \end{lemma}
 \begin{proof}
 First, changing the variables in the integrals and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
-\[
+\begin{eqn}
 	\int\limits_{-\infty}^{\infty} dv\, v^n \exp(\pm 2 i x v)
 	= \pi (\mp i / 2)^n \delta^{(n)}(x),
-\]
+\end{eqn}
 Note that we have explicitly written integration limits here;
 they are swapped when we change the variable in the first integral.
 
 Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial expression as
-\begin{equation*}
-\begin{split}
-	\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+\begin{eqn}
+	& \int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
 	& = \int du dv \exp(2ivx - 2iuy)
 		\sum_{l=0}^r \binom{r}{l} u^l (iv)^{r-l}
 		\sum_{m=0}^s \binom{s}{m} u^m (-iv)^{s-m} \\
@@ -122,42 +132,38 @@ Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial exp
 		\left( \frac{\partial}{\partial \lambda} \right)^s
 		\delta(\Real \lambda) \delta(\Imag \lambda).
 		\qedhere
-\end{split}
-\end{equation*}
+\end{eqn}
 \end{proof}
 
-A notable special case of \lmmref{formalism:c-numbers:fourier-of-moments} is
-\[
+A notable special case of \lmmref{c-numbers:fourier-of-moments} is
+\begin{eqn}
 	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
 	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
-\]
+\end{eqn}
 
 \begin{lemma}
-\label{lmm:formalism:c-numbers:zero-integrals}
-For any non-negative integers $r$, $s$ and complex $\alpha$.
-\begin{equation*}
-\begin{split}
-	\int d^2\lambda
-		\frac{\partial}{\partial \lambda} \left(
-			\exp(-\lambda \alpha^* + \lambda^* \alpha)
-			\exp(ixy) x^r y^s
-		\right)
-	& = 0 \\
-	\int d^2\lambda
-		\frac{\partial}{\partial \lambda^*}
-		\left(
-			\exp(-\lambda \alpha^* + \lambda^* \alpha)
-			\exp(ixy) x^r y^s
-		\right)
-	& = 0.
-\end{split}
-\end{equation*}
+\label{lmm:c-numbers:zero-integrals}
+	For complex $\alpha$ and any non-negative integers $r$ and $s$:
+	\begin{eqn*}
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda} \left(
+				\exp(-\lambda \alpha^* + \lambda^* \alpha)
+				\exp(ixy) x^r y^s
+			\right)
+		& = 0 \\
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda^*}
+			\left(
+				\exp(-\lambda \alpha^* + \lambda^* \alpha)
+				\exp(ixy) x^r y^s
+			\right)
+		& = 0.
+	\end{eqn*}
 \end{lemma}
 \begin{proof}
 We will prove the first equation.
 First, note that complex-valued integral of derivative is evaluated as
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	\int d^2\lambda \frac{\partial}{\partial \lambda} f(\lambda, \lambda^*)
 	& = \frac{1}{2} \int\limits_{-\infty}^{\infty} dx \int\limits_{-\infty}^{\infty} dy
 		\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)
@@ -172,37 +178,34 @@ First, note that complex-valued integral of derivative is evaluated as
 		- \frac{i}{2} \int\limits_{-\infty}^{\infty} dx \left(
 			\left. g(x, y) \right|_{y=-\infty}^{\infty}
 		\right),
-\end{split}
-\end{equation*}
+\end{eqn}
 where we expanded $\lambda = x + iy$.
 Thus
-\begin{equation*}
-\begin{split}
-	\int d^2\lambda
+\begin{eqn2}
+	& \int && d^2\lambda
 		\frac{\partial}{\partial \lambda} \left(
 			\exp(-\lambda \alpha^* + \lambda^* \alpha)
 			\exp(ixy) x^r y^s
-		\right)
-	& = \frac{1}{2} \int dy \left. \left(
+		\right)  \\
+	& ={} && \frac{1}{2} \int dy \left. \left(
 			\exp(2ixv - 2iyu) \exp(ixy) x^r y^s
 		\right) \right|_{x = -\infty}^\infty \\
-	& - \frac{i}{2} \int dx \left. \left(
+	& && - \frac{i}{2} \int dx \left. \left(
 			\exp(2ixv - 2iyu) \exp(ixy) x^r y^s
 		\right) \right|_{y = -\infty}^\infty \\
-	& = \left(
+	& ={} && \left(
 			\frac{1}{2} \exp(2ixv) x^r \int dy \exp(iy(x-2u)) y^s
 		\right)_{x = -\infty}^\infty \\
-	& - \left(
+	& && - \left(
 			\frac{i}{2} \exp(-2ixy) y^s \int dx \exp(ix(y+2v)) x^r
 		\right)_{y = -\infty}^\infty \\
-	& = \left(
+	& ={} && \left(
 			\frac{1}{2} \exp(2ixv) x^r 2 \pi i^s \delta^{(s)}(x-2u)
 		\right)_{x = -\infty}^\infty \\
-	& - \left(
+	& && - \left(
 			\frac{i}{2} \exp(-2ixy) y^s 2 \pi i^r \delta^{(r)}(y+2v)
 		\right)_{y = -\infty}^\infty \\
-	& = 0,
-\end{split}
-\end{equation*}
+	& ={} && 0,
+\end{eqn2}
 because any derivative of delta function is zero on the infinity.
 \end{proof}
