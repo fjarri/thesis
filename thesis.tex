@@ -70,9 +70,20 @@
 \newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
 
 \NewEnviron{eqn}{%
-\begin{equation}\begin{split}
+\begin{align}\begin{split}
+%\begin{equation}\begin{split}
   \BODY
-\end{split}\end{equation}
+%\end{split}\end{equation}
+\end{split}\end{align}
+}
+
+% Split equation with three columns
+% - use && as the second separator
+% - write equal signs as ={} to get correct spacing
+\NewEnviron{eqn2}{%
+\begin{equation}\begin{alignedat}{2}
+  \BODY
+\end{alignedat}\end{equation}
 }
 
 \NewEnviron{eqn*}{%
