@@ -39,6 +39,9 @@
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 \newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
 
+\newcommand{\balpha}{\boldsymbol{\alpha}}
+\newcommand{\blambda}{\boldsymbol{\lambda}}
+
 \newcommand{\jvec}{\boldsymbol{j}}
 \newcommand{\xvec}{\boldsymbol{x}}
 \newcommand{\kvec}{\boldsymbol{k}}
@@ -62,7 +65,9 @@
 
 % {C, H} - i.e. either complex number or operator from Hilbert space
 % making it a macro, because I'm not sure what the letter should be
-\newcommand{\BasicType}{\mathbb{B}}
+\newcommand{\BasicType}{\todo{remove that}}
+\newcommand{\fullbasis}{\mathbb{B}}
+\newcommand{\restbasis}{\mathbb{M}}
 
 \newcommand{\eqnref}[1]{(\ref{eqn:#1})}
 \newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
@@ -70,6 +75,7 @@
 \newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
 \newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}}
 
 \NewEnviron{eqn}{\begin{align}\begin{split}\BODY\end{split}\end{align}}
 \NewEnviron{eqns}{\begin{align} \BODY \end{align}}
