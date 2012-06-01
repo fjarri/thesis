@@ -71,28 +71,15 @@
 \newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
 \newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
 
-\NewEnviron{eqn}{%
-\begin{align}\begin{split}
-%\begin{equation}\begin{split}
-  \BODY
-%\end{split}\end{equation}
-\end{split}\end{align}
-}
+\NewEnviron{eqn}{\begin{align}\begin{split}\BODY\end{split}\end{align}}
+\NewEnviron{eqns}{\begin{align} \BODY \end{align}}
+\NewEnviron{eqn*}{\begin{equation*}\begin{split} \BODY \end{split}\end{equation*}}
 
 % Split equation with three columns
 % - use && as the second separator
 % - write equal signs as ={} to get correct spacing
-\NewEnviron{eqn2}{%
-\begin{equation}\begin{alignedat}{2}
-  \BODY
-\end{alignedat}\end{equation}
-}
-
-\NewEnviron{eqn*}{%
-\begin{equation*}\begin{split}
-  \BODY
-\end{split}\end{equation*}
-}
+\NewEnviron{eqn2}{\begin{equation}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation}}
+\NewEnviron{eqn2*}{\begin{equation*}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation*}}
 
 \title{Two-component BEC dynamics simulations}
 \author{Bogdan Opanchuk}
