@@ -3,135 +3,149 @@
 % =============================================================================
 
 
-Single-mode definition~\eqnref{formalism:sm-wigner:w-transformation} of Wigner transformation can be extended to the case of many modes.
-Let $\bm{\lambda}$ and $\bm{\alpha}$ be vectors of $\lambda_n$ and $\alpha_n$ values respectively,
-with $n = 1 \ldots N$.
-\begin{equation}
-\label{eqn:formalism:mm-wigner:w-transformation}
-	\mathcal{W}[\hat{A}]
-	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
-		\left(
-			\prod_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
-		\right)
-		\Trace{
-			\hat{A}
-			\prod_n \hat{D}_n (\lambda_n, \lambda_n^*)
-		},
-\end{equation}
-where $\hat{D}_n = \exp(\lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)$.
-Corresponding definitions of multimode characteristic function and Wigner function are
-\[
-	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
-	= \Trace{
-		\hat{\rho}
-		\prod_n \hat{D}_n (\lambda_n, \lambda_n^*)
-	},
-\]
-\begin{equation}
-\label{eqn:formalism:mm-wigner:w-definition}
-	W (\bm{\alpha}, \bm{\alpha}^*)
-	\equiv \mathcal{W}[\hat{\rho}]
-	= \frac{1}{\pi^{2N}} \int d^2 \lambda_1 \ldots \int d^2 \lambda_N
-		\left(
-			\prod_n \exp(-\lambda_n \alpha_n^* + \lambda_n^* \alpha_n)
-		\right)
-		\chi_W (\bm{\lambda}, \bm{\lambda}^*).
-\end{equation}
+Single-mode \defref{formalism:sm-wigner:w-transformation} of Wigner transformation can be extended to the case of many modes.
+In this section we will assume that mode identifiers belong to some set $\restbasis$ \todo{Has nothing to do with $\restbasis$ from multi-mode part, use some other symbol probably?}.
 
-\begin{lemma}[Multimode extension of~\lmmref{formalism:sm-wigner:moments-from-chi}]
+\begin{definition}
+\label{def:formalism:mm-wigner:w-transformation}
+	Let $\blambda$ and $\balpha$ be vectors of $\lambda_{\nvec}$ and $\alpha_{\nvec}$ values respectively,
+	with $\nvec \in \restbasis$.
+	\begin{eqn*}
+		\mathcal{W}[\hat{A}]
+		= \frac{1}{\pi^{2|\restbasis|}}
+			\left( \prod_{\nvec \in \restbasis} \int d^2 \lambda_{\nvec} \right)
+			\left(
+				\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
+			\right)
+			\Trace{
+				\hat{A}
+				\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
+			},
+	\end{eqn*}
+	where $\hat{D}_{\nvec} = \exp(\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})$.
+\end{definition}
+
+Corresponding definitions of multimode characteristic function and Wigner function are
+
+\begin{definition}
+\label{def:formalism:mm-wigner:w-definition}
+	\begin{eqn*}
+		\chi_W (\blambda, \blambda^*)
+		= \Trace{
+			\hat{\rho}
+			\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
+		},
+	\end{eqn*}
+	\begin{eqn*}
+		W (\balpha, \balpha^*)
+		\equiv \mathcal{W}[\hat{\rho}]
+		= \frac{1}{\pi^{2|\restbasis|}}
+			\left( \prod_{\nvec \in \restbasis} \int d^2 \lambda_{\nvec} \right)
+			\left(
+				\prod_{\nvec \in \restbasis}
+				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
+			\right)
+			\chi_W (\blambda, \blambda^*).
+	\end{eqn*}
+\end{definition}
+
+\begin{theorem}[Multimode extension of \thmref{formalism:sm-wigner:correspondences}]
+\label{thm:formalism:mm-wigner:correspondences}
+	\begin{eqn*}
+		\mathcal{W} [ \hat{a}_k \hat{A} ]
+			& = \left( \alpha_k + \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+				\mathcal{W}[\hat{A}],
+		\quad
+		\mathcal{W} [ \hat{a}_k^\dagger \hat{A} ]
+			= \left( \alpha_k^* - \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+				\mathcal{W}[\hat{A}], \\
+		\mathcal{W} [ \hat{A} \hat{a}_k ]
+			& = \left( \alpha_k - \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+				\mathcal{W}[\hat{A}],
+		\quad
+		\mathcal{W} [ \hat{A} \hat{a}_k^\dagger ]
+			= \left( \alpha_k^* + \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+				\mathcal{W}[\hat{A}].
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+The procedure is the same as in \thmref{formalism:sm-wigner:correspondences}.
+\end{proof}
+
+\begin{lemma}[Multimode extension of \lmmref{formalism:sm-wigner:moments-from-chi}]
 \label{lmm:formalism:mm-wigner:moments-from-chi}
-\[
-	\langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle
-	= \left.
-		\left(
-			\prod_n
-			\left( \frac{\partial}{\partial \lambda_n} \right)^{s_n}
-			\left( -\frac{\partial}{\partial \lambda_n^*} \right)^{r_n}
-		\right)
-		\chi_W (\bm{\lambda}, \bm{\lambda}^*)
-	\right|_{\bm{\lambda}=0}.
-\]
+	\begin{eqn*}
+		\langle \symprod{ \prod_{\nvec \in \restbasis}
+			\hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}} } \rangle
+		= \left.
+			\left(
+				\prod_{\nvec \in \restbasis}
+				\left( \frac{\partial}{\partial \lambda_{\nvec}} \right)^{s_{\nvec}}
+				\left( -\frac{\partial}{\partial \lambda_{\nvec}^*} \right)^{r_{\nvec}}
+			\right)
+			\chi_W (\blambda, \blambda^*)
+		\right|_{\blambda=0}.
+	\end{eqn*}
 \end{lemma}
 \begin{proof}
 Mode operators with different indices commute, so
-\begin{equation*}
-\begin{split}
-	\chi_W (\bm{\lambda}, \bm{\lambda}^*)
+\begin{eqn}
+	\chi_W (\blambda, \blambda^*)
 	& = \Trace{
 		\hat{\rho}
-		\prod_n
-			\exp( \lambda_n \hat{a}_n^\dagger - \lambda_n^* \hat{a}_n)
-	} \\
-	& = \Trace{
-		\hat{\rho}
-		\prod_n \sum_{r_n, s_n}
-			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
-			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+		\prod_{\nvec \in \restbasis}
+			\exp( \lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})
 	} \\
 	& = \Trace{
 		\hat{\rho}
-		\sum_{r_1, s_1, \ldots, r_N, s_N} \prod_n
-			\frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
-			\symprod{ \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
+		\prod_{\nvec \in \restbasis}
+			\sum_{r_{\nvec} \in \restbasis, s_{\nvec} \in \restbasis}
+			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
+			\symprod{ \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
 	} \\
 	& = \Trace{
-		\sum_{r_1, s_1, \ldots, r_N, s_N}
-			\left(
-				\prod_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
-			\right)
-			\hat{\rho}
-			\symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
-	} \\
-	& = \sum_{r_1, s_1, \ldots, r_N, s_N}
+		\hat{\rho}
+		\left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
 		\left(
-			\prod_n \frac{(-\lambda_n^*)^{r_n} \lambda_n^{s_n}}{r_n! s_n!}
+			\prod_{\nvec \in \restbasis}
+			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
+			\symprod{ \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+		\right)
+	} \\
+	& = \Trace{
+		\left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
+		\left(
+			\prod_{\nvec \in \restbasis}
+			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
+		\right)
+		\hat{\rho}
+		\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+	} \\
+	& = \left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
+		\left(
+			\prod_{\nvec \in \restbasis}
+			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
 		\right)
 		\langle
-			\symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n}}
-		\rangle,
-\end{split}
-\end{equation*}
-which is straightforwardly followed by the statement of the lemma.
+			\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+		\rangle.
+\end{eqn}
+Same as in \lmmref{formalism:sm-wigner:moments-from-chi}, differentiating the resulting expression will leave only term with required $r_{\nvec}$ and $s_{\nvec}$.
 \end{proof}
 
 Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for single-mode case.
 
 \begin{theorem}[Multimode extension of \thmref{formalism:sm-wigner:moments}]
-\[
-	\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
-		\left(
-			\prod_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
-		\right) W(\bm{\alpha}, \bm{\alpha}^*)
-	= \langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
-\]
+	\begin{eqn*}
+		\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
+			\left(
+				\prod_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
+			\right) W(\balpha, \balpha^*)
+		= \langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
+	\end{eqn*}
 \end{theorem}
 \begin{proof}
 The proof is carried out similarly to~\thmref{formalism:sm-wigner:moments}:
 integrals over $\alpha_n$ are eliminated one by one using integration by parts and~\lmmref{formalism:sm-wigner:zero-integrals},
 until we get the right part of~\lmmref{formalism:mm-wigner:moments-from-chi}.
-\end{proof}
-
-\begin{theorem}[Multimode extension of \thmref{formalism:sm-wigner:correspondences}]
-\label{thm:formalism:mm-wigner:correspondences}
-\begin{equation*}
-\begin{split}
-	\mathcal{W} [ \hat{a}_k \hat{A} ]
-		& = \left( \alpha_k + \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
-			\mathcal{W}[\hat{A}],
-	\quad
-	\mathcal{W} [ \hat{a}_k^\dagger \hat{A} ]
-		= \left( \alpha_k^* - \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
-			\mathcal{W}[\hat{A}], \\
-	\mathcal{W} [ \hat{A} \hat{a}_k ]
-		& = \left( \alpha_k - \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
-			\mathcal{W}[\hat{A}],
-	\quad
-	\mathcal{W} [ \hat{A} \hat{a}_k^\dagger ]
-		= \left( \alpha_k^* + \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
-			\mathcal{W}[\hat{A}].
-\end{split}
-\end{equation*}
-\end{theorem}
-\begin{proof}
-Again, the procedure is the same as in \thmref{formalism:sm-wigner:correspondences}.
 \end{proof}
