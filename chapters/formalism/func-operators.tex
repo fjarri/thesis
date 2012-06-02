@@ -10,7 +10,7 @@ The commutators are
 	[ \Psiop_j, \Psiop_k^{\prime\dagger} ]
 	= \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
-Field operators have type $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_j)$. \todo{As far as I understand $\mathbb{H}_1 \oplus \ldots \oplus \mathbb{H}_C \equiv \mathbb{H}$, where $\rho \in \mathbb{H}$.}
+Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) = \mathbb{FH}_j$. \todo{As far as I understand $\mathbb{H}_1 \oplus \ldots \oplus \mathbb{H}_C \equiv \mathbb{H}$, where $\rho \in \mathbb{H}$.}
 Field operators can be decomposed using a single-particle basis \todo{explanation needed?}:
 \begin{eqn}
 	\Psiop_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
@@ -24,7 +24,7 @@ New restricted field operators are
 \begin{eqn}
 	\Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
-They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in \mathbb{H}_{\restbasis_j}$.
+They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
 Because of the restricted nature of these operators, commutation relations~\eqnref{formalism:func-operators:commutators} no longer apply.
 The following ones should be used instead:
 \begin{eqn}
