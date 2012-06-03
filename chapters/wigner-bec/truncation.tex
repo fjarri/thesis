@@ -3,23 +3,20 @@
 % =============================================================================
 
 In order to solve operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} numerically,
-we will transform it to ordinary differential equation using Wigner transformation~\eqnref{formalism:func-wigner:w-transformation}.
+we will transform it to ordinary differential equation using Wigner transformation from \defref{formalism:mc-wigner:w-transformation}.
 
-Namely, the term with $K_j$ is transformed using \thmref{formalism:transformations:w-commutator1} and \thmref{formalism:transformations:w-laplacian-commutator1}
-(since $K_j$ is basically a sum of Laplacian operator and functions of $\xvec$):
-\[
+Namely, the term with $K_j$ is transformed using \thmref{formalism:transformations:w-commutator1} and \thmref{formalism:transformations:w-laplacian-commutator1} (since $K_j$ is basically a sum of Laplacian operator and functions of $\xvec$):
+\begin{eqn}
 	\mathcal{W} \left[ [ \int d\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
 	= \int d\xvec \left(
 			- \frac{\delta}{\delta \Psi_j} K_{jk} \Psi_k
 			+ \frac{\delta}{\delta \Psi_k^*} K_{jk} \Psi_j^*
 		\right)
 		W,
-\]
+\end{eqn}
 where Wigner function $W = \mathcal{W}[\hat{\rho}]$.
-Nonlinear term is transformed with \thmref{formalism:transformations:w-commutator2}
-(minding the locality of interaction and integrating over $\xvec$):
-\begin{equation*}
-\begin{split}
+Nonlinear term is transformed with \thmref{formalism:transformations:w-commutator2} (minding the locality of interaction and integrating over $\xvec$):
+\begin{eqn}
 	\mathcal{W} \left[
 		[
 			\int d\xvec \frac{U_{jk}}{2}
@@ -30,19 +27,19 @@ Nonlinear term is transformed with \thmref{formalism:transformations:w-commutato
 	& = \int d\xvec \frac{U_{jk}}{2} \left(
 		\frac{\delta}{\delta \Psi_j} \left(
 			- \Psi_j \Psi_k \Psi_k^*
-			+ \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
+			+ \frac{\delta_{\restbasis_j}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
 		\right) \right. \\
 	&	\left. + \frac{\delta}{\delta \Psi_j^*} \left(
 			\Psi_j^* \Psi_k \Psi_k^*
-			- \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
+			- \frac{\delta_{\restbasis_j}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
 		\right) \right. \\
 	&	\left. + \frac{\delta}{\delta \Psi_k} \left(
 			- \Psi_j \Psi_j^* \Psi_k
-			+ \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j + \Psi_k )
+			+ \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j + \Psi_k )
 		\right) \right. \\
 	&	\left. + \frac{\delta}{\delta \Psi_k^*} \left(
 			\Psi_j \Psi_j^* \Psi_k^*
-			- \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j^* + \Psi_k^* )
+			- \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_j^* + \Psi_k^* )
 		\right) \right. \\
 	&	\left.
 			+ \frac{\delta}{\delta \Psi_j}
@@ -64,8 +61,7 @@ Nonlinear term is transformed with \thmref{formalism:transformations:w-commutato
 			\frac{\delta}{\delta \Psi_j^*}
 			\frac{1}{4} \Psi_j^*
 		\right) W.
-\end{split}
-\end{equation*}
+\end{eqn}
 Assuming $U_{kj} = U_{jk}$, it simplifies to
 \begin{equation*}
 \begin{split}
@@ -79,11 +75,11 @@ Assuming $U_{kj} = U_{jk}$, it simplifies to
 	& = \int d\xvec U_{jk} \left(
 		\frac{\delta}{\delta \Psi_j} \left(
 			- \Psi_j \Psi_k \Psi_k^*
-			+ \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
+			+ \frac{\delta_{\restbasis_j}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
 		\right) \right. \\
 	&	\left. + \frac{\delta}{\delta \Psi_j^*} \left(
 			\Psi_j^* \Psi_k \Psi_k^*
-			- \frac{\delta_P(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
+			- \frac{\delta_{\restbasis_j}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
 		\right) \right. \\
 	&	\left.
 			+ \frac{\delta}{\delta \Psi_j}
@@ -99,17 +95,16 @@ Assuming $U_{kj} = U_{jk}$, it simplifies to
 \end{equation*}
 
 Loss operator is transformed with \thmref{formalism:transformations:w-losses}.
-\todo{Not writing the resulting expression here, because with the absence of truncation it is too long,
-and is practically the same as in theorem statement.}
+\todo{Not writing the resulting expression here, because with the absence of truncation it is too long, and is practically the same as in theorem statement.}
 
 We can only solve the resulting differential equation if it does not have functional derivatives of order more than 2 \todo{citation needed}.
 \todo{Need to formally derive truncation condition.
-For now I am assuming that we can drop third- and higher-order derivatives and consider $\delta_P(\xvec, \xvec) \ll | \Psi_j |^2$ for any $j$.}
+For now I am assuming that we can drop third- and higher-order derivatives and consider $\delta_{\restbasis_j}(\xvec, \xvec) \ll | \Psi_j |^2$ for any $j$.}
 
 \begin{lemma}
 Assuming the conditions for Wigner truncation are satisfied,
 the result of Wigner transformation of the nonlinear term can be written as
-\[
+\begin{eqn}
 	\mathcal{W} \left[
 		[
 			\frac{U_{jk}}{2}
@@ -121,66 +116,52 @@ the result of Wigner transformation of the nonlinear term can be written as
 		\frac{\delta}{\delta \Psi_j^*} \Psi_j^* \Psi_k \Psi_k^*
 		- \frac{\delta}{\delta \Psi_j} \Psi_j \Psi_k \Psi_k^*
 	\right) W.
-\]
+\end{eqn}
 \end{lemma}
 
 \begin{theorem}
-Assuming the conditions for Wigner truncation are satisfied,
-i.e. we can drop differentials higher than the second order and consider $\delta_P(\xvec, \xvec) \ll | \Psi_j |^2$,
-the result of Wigner transformation of the loss term can be written as
-\begin{equation*}
-\begin{split}
-	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
-	= \sum_{n=1}^C
-			\frac{\delta}{\delta \Psi_n^*} \frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
-	+ \sum_{n=1}^C
-		\frac{\delta}{\delta \Psi_n} \frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
-	+ \sum_{n=1}^C \sum_{p=1}^C
-		\frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}.
-\end{split}
-\end{equation*}
-where $O_{\lvec} \equiv O_{\lvec}(\Psivec) = \prod_{c=1}^C \Psi_c^{l_c}$.
+	Assuming the conditions for Wigner truncation are satisfied, i.e. we can drop differentials higher than the second order and consider $\delta_{\restbasis_j}(\xvec, \xvec) \ll | \Psi_j |^2$, the result of Wigner transformation of the loss term can be written as
+	\begin{eqn*}
+		\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
+		= \sum_{n=1}^C
+				\frac{\delta}{\delta \Psi_n^*} \frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
+		+ \sum_{n=1}^C
+			\frac{\delta}{\delta \Psi_n} \frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
+		+ \sum_{n=1}^C \sum_{p=1}^C
+			\frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+			\frac{\partial O_{\lvec}}{\partial \Psi_n}
+			\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}.
+	\end{eqn*}
+	where $O_{\lvec} \equiv O_{\lvec}(\Psivec) = \prod_{c=1}^C \Psi_c^{l_c}$.
 \end{theorem}
 \begin{proof}
 The proof is basically a simplification of the result of \thmref{formalism:transformations:w-losses} under certain conditions.
 First, we are neglecting all occurrences of $\delta_P$, which means setting $m_c = 0$ for every $c$.
-Second, we are dropping all terms with high order differentials,
-which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
-The only combinations of $j_c$ and $k_c$ for which $Z(\jvec, \kvec)$ is not zero are thus
-$\{ j_c = \delta_{cn}, k_c = 0, n \in [1, C] \}$,
-$\{ j_c = 0, k_c = \delta_{cn}, n \in [1, C] \}$ and
-$\{ j_c = \delta_{cn}, k_c = \delta_{cp}, n \in [1, C], p \in [1, C] \}$.
-These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$,
-$\frac{\delta}{\delta \Psi_n}$ and
-$\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
-\begin{equation*}
-\begin{split}
+Second, we are dropping all terms with high order differentials, which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
+The only combinations of $j_c$ and $k_c$ for which $Z(\jvec, \kvec)$ is not zero are thus $\{ j_c = \delta_{cn}, k_c = 0, n \in [1, C] \}$, $\{ j_c = 0, k_c = \delta_{cn}, n \in [1, C] \}$ and $\{ j_c = \delta_{cn}, k_c = \delta_{cp}, n \in [1, C], p \in [1, C] \}$.
+These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$, $\frac{\delta}{\delta \Psi_n}$ and $\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
+\begin{eqn}
 	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
-	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
-		2 H[l_n - 1] Q_n(1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
-		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+		2 H[l_n - 1] Q(l_n, 1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
+		\prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
 	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		2 H[l_n - 1] Q_n(0, 1, 0) \Psi_n^{l_n} (\Psi_n^*)^{l_n - 1}
-		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+		2 H[l_n - 1] Q(l_n, 0, 1, 0) \Psi_n^{l_n} (\Psi_n^*)^{l_n - 1}
+		\prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
 	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		4 H[l_n - 1] Q_n(1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
-		H[l_p - 1] Q_p(0, 1, 0) \Psi_p^{l_p} (\Psi_p^*)^{l_p - 1} \\
-	&	\prod_{c=1, c \ne n, c \ne p}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
+		4 H[l_n - 1] Q(l_n, 1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n} \\
+	& \quad\quad H[l_p - 1] Q(l_p, 0, 1, 0) \Psi_p^{l_p} (\Psi_p^*)^{l_p - 1}
+		\prod_{c=1, c \ne n, c \ne p}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
 	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
-		4 H[l_n - 1] Q_n(1, 1, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n - 1}
-		\prod_{c=1, c \ne n}^C Q_c(0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c},
-\end{split}
-\end{equation*}
+		4 H[l_n - 1] Q(l_n, 1, 1, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n - 1} \\
+	& \quad\quad \prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c},
+\end{eqn}
 where $H[n]$ is the discrete Heavyside function.
 
-One can easily find that $Q_n(1, 0, 0) = Q_n(0, 1, 0) = l_n / 2$, $Q_n(0, 0, 0) = 1$ and $Q_n(1, 1, 0) =
-l_n^2 / 4$.
+One can easily find that $Q(l, 1, 0, 0) = Q(l, 0, 1, 0) = l / 2$, $Q(l, 0, 0, 0) = 1$ and $Q(l, 1, 1, 0) = l^2 / 4$.
 Therefore:
-\begin{equation*}
-\begin{split}
-	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+\begin{eqn}
+	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
 		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
 		O_{\lvec}^* \\
 	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
@@ -192,17 +173,17 @@ Therefore:
 	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
 		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
 		\left( H[l_n - 1] l_n (\Psi_n^*)^{l_n - 1} \prod_{c=1, c \ne n}^C (\Psi_c^*)^{l_c} \right) \\
-	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
 		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
 	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
-	+ \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec} \\
+	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
 		\frac{\partial O_{\lvec}}{\partial \Psi_n}
 	+ \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*}
 		\frac{\partial O_{\lvec}}{\partial \Psi_n} \\
-	& = \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
+	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
 		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
 	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
@@ -210,14 +191,12 @@ Therefore:
 		\frac{\partial O_{\lvec}}{\partial \Psi_n}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
 	\qedhere
-\end{split}
-\end{equation*}
+\end{eqn}
 \end{proof}
 
 Resulting Wigner-transformed master equation is
-\begin{equation}
+\begin{eqn}
 \label{eqn:wigner-bec:truncation:fpe}
-\begin{split}
 	\frac{dW}{dt}
 	& = \int d\xvec \left(
 		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \left(
@@ -242,6 +221,4 @@ Resulting Wigner-transformed master equation is
 		\frac{\partial O_{\lvec}}{\partial \Psi_j}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}
 	\right) W
-\end{split}
-\end{equation}
-
+\end{eqn}
