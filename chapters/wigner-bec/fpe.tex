@@ -3,83 +3,75 @@
 % =============================================================================
 
 The general approach to numerical solution of the Fokker-Planck equation~\eqnref{wigner-bec:truncation:fpe} is to transform it to the equivalent set of stochastic differential equations (SDEs) for $\Psi_j$.
-Since the transformation is defined for real-valued variables only \todo{citation needed},
-we have to modify the equation.
+Since the transformation is defined for real-valued variables only \todo{citation needed}, we have to modify the equation.
 
-First, noticing that $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ are real-valued
-(which is important for the further transformations),
-we can rewrite equation~\eqnref{wigner-bec:truncation:fpe} as
-\[
+First, noticing that $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ are real-valued (which is important for the further transformations), we can rewrite equation~\eqnref{wigner-bec:truncation:fpe} as
+\begin{eqn}
 	\frac{dW}{dt}
 	= \int d\xvec \left(
 		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} A_j
 		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} A_j^*
 		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k} D_{jk}
 	\right) W,
-\]
+\end{eqn}
 where
-\[
+\begin{eqn}
 	A_j = -\frac{i}{\hbar} \left(
 			\sum_{k=1}^C K_{jk} \Psi_k
 			+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
 		\right)
 		- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec},
-\]
+\end{eqn}
 and
-\[
+\begin{eqn}
 	D_{jk} = \sum_{\lvec} \kappa_{\lvec}
 		\frac{\partial O_{\lvec}}{\partial \Psi_j}
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}.
-\]
-Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
-\[
+\end{eqn}
+Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
+\begin{eqn}
 	\frac{dW}{dt}
-	= \left(
+	={} & \left(
 		- \sum_{j=1}^C \sum_{\nvec \in L}
 			\frac{\partial}{\partial \alpha_{j,\nvec}}
-			\int d\xvec \phi_{\nvec}^* A_j
+			\int d\xvec \phi_{j,\nvec}^* A_j
 		- \sum_{j=1}^C \sum_{\nvec \in L}
 			\frac{\partial}{\partial \alpha_{j,\nvec}^*}
-			\int d\xvec \phi_{\nvec} A_j^*
-		+ \sum_{j=1}^C \sum_{k=1}^C
-			\sum_{\mvec,\nvec \in L}
+			\int d\xvec \phi_{j,\nvec} A_j^* \right. \\
+	&	\left. + \sum_{j=1}^C \sum_{k=1}^C
+			\sum_{\mvec \in \restbasis_j,\nvec \in \restbasis_k}
 			\frac{\partial}{\partial \alpha_{j,\mvec}^*}
 			\frac{\partial}{\partial \alpha_{k,\nvec}}
 			\int d\xvec
-			\phi_{\mvec} \phi_{\nvec}^* D_{jk}
+			\phi_{j,\mvec} \phi_{k,\nvec}^* D_{jk}
 	\right) W.
-\]
+\end{eqn}
 
 \begin{lemma}[FPE--SDEs correspondence in convenient form.]
 \label{lmm:wigner-bec:fpe:fpe-sde-real}
-If $\bm{z}^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables,
-Fokker-Planck equation
-\[
-	\frac{dW}{dt}
-	= -\bm{\partial}_{\bm{z}}^T \bm{a} W
-	+ \frac{1}{2} \Trace{ \bm{\partial}_{\bm{z}} \bm{\partial}_{\bm{z}}^T B B^T } W
-\]
-is equivalent to a set of stochastic differential equations in It\^{o} form
-\[
-	d\bm{z} = \bm{a} dt + B d\bm{Z}
-\]
-and to a set of stochastic differential equations in Stratonovich form
-\[
-	d\bm{z} = (\bm{a} - \bm{c})dt + B d\bm{Z},
-\]
-where the noise-induced (or spurious) drift vector $\bm{c}$ has elements
-\[
-	c_i
-	= \sum_{k,j} B_{kj} \frac{\partial}{\partial z_k} B_{ij}
-	= \Trace{B^T \bm{\partial}_z \bm{e}_i^T B},
-\]
-$\bm{e}_i$ being the unit vector with elements $(\bm{e}_i)_j = \delta_{ij}$.
-\todo{Is there a better way to express $\bm{c}$ in terms of matrices?}
-Here $W \equiv W(\bm{z})$ is a probability distribution,
-$\bm{a} \equiv \bm{a}(\bm{z})$ is a vector function,
-$B \equiv B(\bm{z})$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources),
-$\partial_{\bm{z}}^T \equiv (\partial_{z_1} \ldots \partial_{z_M})$ is a vector differential,
-and $d\bm{Z}$ is a standard $L$-dimensional Wiener process.
+	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables, Fokker-Planck equation
+	\begin{eqn*}
+		\frac{dW}{dt}
+		= -\bpartial_{\zvec}^T \avec W
+		+ \frac{1}{2} \Trace{ \bpartial_{\zvec} \bpartial_{\zvec}^T B B^T } W
+	\end{eqn*}
+	is equivalent to a set of stochastic differential equations in It\^{o} form
+	\begin{eqn*}
+		d\zvec = \avec dt + B d\Zvec
+	\end{eqn*}
+	and to a set of stochastic differential equations in Stratonovich form
+	\begin{eqn*}
+		d\zvec = (\avec - \svec)dt + B d\Zvec,
+	\end{eqn*}
+	where the noise-induced (or spurious) drift vector $\svec$ has elements
+	\begin{eqn*}
+		s_i
+		= \sum_{k,j} B_{kj} \frac{\partial}{\partial z_k} B_{ij}
+		= \Trace{B^T \bpartial_z \evec_i^T B},
+	\end{eqn*}
+	$\evec_i$ being the unit vector with elements $(\evec_i)_j = \delta_{ij}$.
+	\todo{Is there a better way to express $\svec$ in terms of matrices?}
+	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources), $\bpartial_{\zvec}^T \equiv (\partial_{z_1} \ldots \partial_{z_M})$ is a vector differential, and $d\Zvec$ is a standard $L$-dimensional Wiener process.
 \end{lemma}
 \begin{proof}
 For details see~\cite{Risken1996}, sections 3.3 and 3.4.
@@ -88,131 +80,117 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 
 \begin{theorem}
 \label{thm:wigner-bec:fpe:fpe-sde-complex}
-If $\bm{\alpha}^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex-valued variables,
-Fokker-Planck equation
-\[
-	\frac{dW}{dt}
-	= -\bm{\partial}_{\bm{\alpha}}^T \bm{a} W - \bm{\partial}_{\bm{\alpha}^*}^T \bm{a}^* W
-	+ \Trace{ \bm{\partial}_{\bm{\alpha}} \bm{\partial}_{\bm{\alpha}^*}^T B B^H } W
-\]
-is equivalent to a set of stochastic differential equations in It\^{o} form
-\[
-	d\bm{\alpha} = \bm{a} dt + B d\bm{Z},
-\]
-or to Stratonovich form
-\[
-	d\bm{\alpha} = (\bm{a} - \bm{c}) dt + B d\bm{Z},
-\]
-where noise-induced drift term is
-\[
-	c_j = \Trace{ B^H \bm{\partial}_{\bm{\alpha}^*} \bm{e}_j^T B },
-\]
-and $d\bm{Z} = (d\bm{X} + id\bm{Y}) / \sqrt{2}$ is an $M$-dimensional complex-valued Wiener process,
-containing two standard $M$-dimensional Wiener processes $d\bm{X}$ and $d\bm{Y}$.
-\todo{Fix variable clashes with preceding lemma.}
+	If $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex-valued variables,
+	Fokker-Planck equation
+	\begin{eqn*}
+		\frac{dW}{dt}
+		= -\bpartial_{\balpha}^T \avec W - \bpartial_{\balpha^*}^T \avec^* W
+		+ \Trace{ \bpartial_{\balpha} \bpartial_{\balpha^*}^T B B^H } W
+	\end{eqn*}
+	is equivalent to a set of stochastic differential equations in It\^{o} form
+	\begin{eqn*}
+		d\balpha = \avec dt + B d\Zvec,
+	\end{eqn*}
+	or to Stratonovich form
+	\begin{eqn*}
+		d\balpha = (\avec - \svec) dt + B d\Zvec,
+	\end{eqn*}
+	where noise-induced drift term is
+	\begin{eqn*}
+		s_j = \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B },
+	\end{eqn*}
+	and $d\Zvec = (d\bm{X} + id\bm{Y}) / \sqrt{2}$ is an $M$-dimensional complex-valued Wiener process,
+	containing two standard $M$-dimensional Wiener processes $d\bm{X}$ and $d\bm{Y}$.
 \end{theorem}
 \begin{proof}
-Let us expand the FPE using real values
-$\bm{\alpha} = \bm{x} + i \bm{y}$,
-$\bm{a} = \bm{u} + i \bm{v}$,
-$B = G + iF$,
-$\bm{\partial}_{\bm{\alpha}} = (\bm{\partial}_{\bm{x}} - i \bm{\partial}_{\bm{y}}) / 2$.
+Let us expand the FPE using real values $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = G + iF$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
 Thus
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	\frac{dW}{dt}
-	& = - \bm{\partial}_{\bm{x}}^T \bm{u} W
-	- \bm{\partial}_{\bm{y}}^T \bm{v} W
+	={} & - \bpartial_{\bm{x}}^T \bm{u} W
+	- \bpartial_{\bm{y}}^T \bm{v} W
 	+ \frac{1}{4} \Trace{
-		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
-			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
-		(F F^T + G G^T)
-		+ (\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
-			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		(F F^T + G G^T) \right. \\
+	& \left. + (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 		(F G^T - G F^T)
 	} W \\
 	& - \frac{i}{4} \Trace{
-		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
-			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
 		(F G^T - G F^T)
-	} W
-	+ \frac{i}{4} \Trace{
-		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
-			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+	} W \\
+	& + \frac{i}{4} \Trace{
+		(\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 		(F F^T + G G^T)
 	} W.
-\end{split}
-\end{equation*}
-Since $F F^T + G G^T$ and $\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T + \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T$ are symmetric matrices,
-and $F G^T - G F^T$ and $\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T - \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T$ are antisymmetric,
-corresponding traces are equal to zero,
-which gives us FPE in real variables
-\[
+\end{eqn}
+Since $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T - \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T$ are antisymmetric, corresponding traces are equal to zero, which gives us FPE in real variables
+\begin{eqn}
 	\frac{dW}{dt}
-	= - \bm{\partial}_{\bm{x}}^T \bm{u} W
-	- \bm{\partial}_{\bm{y}}^T \bm{v} W
+	={} & - \bpartial_{\bm{x}}^T \bm{u} W
+	- \bpartial_{\bm{y}}^T \bm{v} W
 	+ \frac{1}{4} \Trace{
-		(\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{x}}^T
-			+ \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{y}}^T)
-		(F F^T + G G^T)
-		+ (\bm{\partial}_{\bm{x}} \bm{\partial}_{\bm{y}}^T
-			- \bm{\partial}_{\bm{y}} \bm{\partial}_{\bm{x}}^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		(F F^T + G G^T) \right. \\
+	& \left. + (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 		(F G^T - G F^T)
 	} W.
-\]
+\end{eqn}
 
 In order to use \lmmref{wigner-bec:fpe:fpe-sde-real},
-we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\bm{z}^T \equiv (\bm{x}^T \bm{y}^T)$.
-This will give us an equation identical to one from the lemma,
-with $\bm{a}^T \equiv (\bm{u}^T \bm{v}^T)$ and diffusion matrix
-\[
+we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\zvec^T \equiv \bm{x}^T \oplus \bm{y}^T$.
+This will give us an equation identical to one from the lemma, with $\avec^T \equiv \bm{u}^T \oplus \bm{v}^T$ and diffusion matrix
+\begin{eqn}
 	B B^T \equiv \frac{1}{2} \begin{pmatrix}
 		F F^T + G G^T & F G^T - G F^T \\
 		G F^T - F G^T & F F^T + G G^T
 	\end{pmatrix},
-\]
-which gives noise matrix
-\[
+\end{eqn}
+which gives a noise matrix
+\begin{eqn}
 	B = \frac{1}{\sqrt{2}} \begin{pmatrix}
 		F & -G \\
 		G & F
 	\end{pmatrix}.
-\]
+\end{eqn}
 Therefore the equivalent SDEs in It\^{o} form are
-\[
-	d\bm{z} = \bm{a} dt + B d\bm{Z},
-\]
-where $d\bm{Z}^T \equiv (d\bm{X}^T d\bm{Y}^T)$.
+\begin{eqn}
+	d\zvec = \avec dt + B d\Zvec,
+\end{eqn}
+where $d\Zvec^T \equiv d\bm{X}^T \oplus d\bm{Y}^T$.
 Returning to our previous variables:
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	d\bm{x} & = \bm{u} dt + \frac{1}{\sqrt{2}} F d\bm{X} - \frac{1}{\sqrt{2}} G d\bm{Y} \\
 	d\bm{y} & = \bm{v} dt + \frac{1}{\sqrt{2}} G d\bm{X} + \frac{1}{\sqrt{2}} F d\bm{Y}.
-\end{split}
-\end{equation*}
+\end{eqn}
 Multiplying the second equation by $i$ and adding it to the first one:
-\[
-	d\bm{\alpha} = \bm{a} dt + \frac{1}{\sqrt{2}} (F + iG) (d\bm{X} + id\bm{Y}),
-\]
+\begin{eqn}
+	d\balpha = \avec dt + \frac{1}{\sqrt{2}} (F + iG) (d\bm{X} + id\bm{Y}),
+\end{eqn}
 which leads to the It\^{o} part of the lemma statement.
-\[
-	d\bm{\alpha} = \bm{a} dt + B d\bm{Z}.
-\]
+\begin{eqn}
+	d\balpha = \avec dt + B d\Zvec.
+\end{eqn}
 
 Noise-induced drift term in Stratonovich case can be calculated as
-\begin{equation*}
-\begin{split}
-	c_j^{(x)}
+\begin{eqn}
+	s_j^{(x)}
 	& = \frac{1}{2} \Trace{
 		\begin{pmatrix}
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bm{\partial}_{\bm{x}} \\
-			\bm{\partial}_{\bm{y}}
+			\bpartial_{\bm{x}} \\
+			\bpartial_{\bm{y}}
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bm{e}_j^T & 0
+			\evec_j^T & 0
 		\end{pmatrix}
 		\begin{pmatrix}
 			F & -G \\ G & F
@@ -223,11 +201,11 @@ Noise-induced drift term in Stratonovich case can be calculated as
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bm{\partial}_{\bm{x}} \\
-			\bm{\partial}_{\bm{y}}
+			\bpartial_{\bm{x}} \\
+			\bpartial_{\bm{y}}
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bm{e}_j^T F & - \bm{e}_j^T G
+			\evec_j^T F & - \evec_j^T G
 		\end{pmatrix}
 	} \\
 	& = \frac{1}{2} \Trace{
@@ -235,79 +213,78 @@ Noise-induced drift term in Stratonovich case can be calculated as
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bm{\partial}_{\bm{x}} \bm{e}_j^T F & - \bm{\partial}_{\bm{x}} \bm{e}_j^T G \\
-			\bm{\partial}_{\bm{y}} \bm{e}_j^T F & - \bm{\partial}_{\bm{y}} \bm{e}_j^T G
+			\bpartial_{\bm{x}} \evec_j^T F & - \bpartial_{\bm{x}} \evec_j^T G \\
+			\bpartial_{\bm{y}} \evec_j^T F & - \bpartial_{\bm{y}} \evec_j^T G
 		\end{pmatrix}
 	} \\
 	& = \frac{1}{2} \left(
-		\Trace{ F^T \bm{\partial}_{\bm{x}} \bm{e}_j^T F }
-		+ \Trace{ G^T \bm{\partial}_{\bm{y}} \bm{e}_j^T F }
-		+ \Trace{ G^T \bm{\partial}_{\bm{x}} \bm{e}_j^T G }
-		- \Trace{ F^T \bm{\partial}_{\bm{y}} \bm{e}_j^T G }
+		\Trace{ F^T \bpartial_{\bm{x}} \evec_j^T F }
+		+ \Trace{ G^T \bpartial_{\bm{y}} \evec_j^T F }
+		+ \Trace{ G^T \bpartial_{\bm{x}} \evec_j^T G }
+		- \Trace{ F^T \bpartial_{\bm{y}} \evec_j^T G }
 	\right).
-\end{split}
-\end{equation*}
+\end{eqn}
 Similarly,
-\[
-	c_j^{(y)}
+\begin{eqn}
+	s_j^{(y)}
 	= \frac{1}{2} \left(
-		\Trace{ F^T \bm{\partial}_{\bm{x}} \bm{e}_j^T G }
-		+ \Trace{ G^T \bm{\partial}_{\bm{y}} \bm{e}_j^T G }
-		- \Trace{ G^T \bm{\partial}_{\bm{x}} \bm{e}_j^T F }
-		+ \Trace{ F^T \bm{\partial}_{\bm{y}} \bm{e}_j^T F }
+		\Trace{ F^T \bpartial_{\bm{x}} \evec_j^T G }
+		+ \Trace{ G^T \bpartial_{\bm{y}} \evec_j^T G }
+		- \Trace{ G^T \bpartial_{\bm{x}} \evec_j^T F }
+		+ \Trace{ F^T \bpartial_{\bm{y}} \evec_j^T F }
 	\right).
-\]
+\end{eqn}
 Therefore the final term in complex-valued SDEs is
-\[
-	c_j
-	= c_j^{(x)} + i c_j^{(y)}
-	= \Trace{ B^H \bm{\partial}_{\bm{\alpha}^*} \bm{e}_j^T B }.
+\begin{eqn}
+	s_j
+	= s_j^{(x)} + i s_j^{(y)}
+	= \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B }.
 	\qedhere
-\]
+\end{eqn}
 \end{proof}
 
 \begin{theorem}[Multi-component extension of \thmref{wigner-bec:fpe:fpe-sde-complex}]
 \label{thm:wigner-bec:fpe:mc-fpe-sde}
-If $\bm{\alpha}^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\bm{\alpha}^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_M^{(c)})$,
+If $\balpha^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_M^{(c)})$,
 then Fokker-Planck equation
 \[
 	\frac{dW}{dt}
-	= - \sum_{c=1}^C \bm{\partial}_{\bm{\alpha}^{(c)}}^T \bm{a}^{(c)} W
-	- \sum_{c=1}^C \bm{\partial}_{(\bm{\alpha}^{(c)})^*}^T (\bm{a}^{(c)})^* W
+	= - \sum_{c=1}^C \bpartial_{\balpha^{(c)}}^T \avec^{(c)} W
+	- \sum_{c=1}^C \bpartial_{(\balpha^{(c)})^*}^T (\avec^{(c)})^* W
 	+ \sum_{m=1}^c \sum_{n=1}^c
 		\Trace{
-			\bm{\partial}_{\bm{\alpha}^{(m)}}
-			\bm{\partial}_{(\bm{\alpha}^{(n)})^*}^T
+			\bpartial_{\balpha^{(m)}}
+			\bpartial_{(\balpha^{(n)})^*}^T
 			B^{(n)} (B^{(m)})^H
 		} W
 \]
 is equivalent to a set of stochastic differential equations in It\^{o} form
 \[
-	d\bm{\alpha}^{(c)} = \bm{a}^{(c)} dt + B^{(c)} d\bm{Z},\, c = 1..C
+	d\balpha^{(c)} = \avec^{(c)} dt + B^{(c)} d\Zvec,\, c = 1..C
 \]
 or to Stratonovich form
 \[
-	d\bm{\alpha}^{(c)} = (\bm{a}^{(c)} - \bm{c}^{(c)}) dt + B^{(c)} d\bm{Z},
+	d\balpha^{(c)} = (\avec^{(c)} - \bm{c}^{(c)}) dt + B^{(c)} d\Zvec,
 \]
 where noise-induced drift term is
 \[
 	c_j^{(c)} = \sum_{n=1}^C
-		\Trace{ (B^{(n)})^H \bm{\partial}_{(\bm{\alpha}^{(n)})^*} \bm{e}_j^T B^{(c)} },
+		\Trace{ (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)} },
 \]
-and $d\bm{Z}$ is an $L$-dimensional complex-valued Wiener process.
+and $d\Zvec$ is an $L$-dimensional complex-valued Wiener process.
 \end{theorem}
 \begin{proof}
-Let us join all variable sets $\bm{\alpha}^{(c)}$ into one set $\bm{\alpha}^T \equiv ((\bm{\alpha}^{(1)})^T \ldots (\bm{\alpha}^{(C)})^T)$.
+Let us join all variable sets $\balpha^{(c)}$ into one set $\balpha^T \equiv ((\balpha^{(1)})^T \ldots (\balpha^{(C)})^T)$.
 Then we can use \thmref{wigner-bec:fpe:fpe-sde-complex} with drift vector
 \[
-	\bm{a} = \begin{pmatrix}
-		\bm{a}^{(1)} \\ \vdots \\ \bm{a}^{(C)}
+	\avec = \begin{pmatrix}
+		\avec^{(1)} \\ \vdots \\ \avec^{(C)}
 	\end{pmatrix},
 \]
 differentials vector
 \[
-	\bm{\partial}_{\bm{\alpha}} = \begin{pmatrix}
-		\bm{\partial}_{\bm{\alpha}^{(1)}} \\ \vdots \\ \bm{\partial}_{\bm{\alpha}^{(C)}}
+	\bpartial_{\balpha} = \begin{pmatrix}
+		\bpartial_{\balpha^{(1)}} \\ \vdots \\ \bpartial_{\balpha^{(C)}}
 	\end{pmatrix},
 \]
 and noise matrix
@@ -318,9 +295,9 @@ and noise matrix
 \]
 This gives us SDEs in It\^{o} form
 \[
-	d\bm{\alpha} = \bm{a} dt + B d\bm{Z},
+	d\balpha = \avec dt + B d\Zvec,
 \]
-where $\bm{Z}$ is an $L$-dimensional complex-valued Wiener process.
+where $\Zvec$ is an $L$-dimensional complex-valued Wiener process.
 Splitting this equation for different components, we get the statement of the lemma.
 Stratonovich variant is obtained in the same way.
 Noise-induced drift term requires some work:
@@ -330,11 +307,11 @@ Noise-induced drift term requires some work:
 	& = \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
 		\begin{pmatrix}
-			\bm{\partial}_{(\bm{\alpha}^{(1)})^*} \\
+			\bpartial_{(\balpha^{(1)})^*} \\
 			\vdots \\
-			\bm{\partial}_{(\bm{\alpha}^{(C)})^*}
+			\bpartial_{(\balpha^{(C)})^*}
 		\end{pmatrix}
-		\begin{pmatrix} 0 & \cdots & \bm{e}_j^T & \cdots & 0 \end{pmatrix}
+		\begin{pmatrix} 0 & \cdots & \evec_j^T & \cdots & 0 \end{pmatrix}
 		\begin{pmatrix}
 			B^{(1)} \\
 			\vdots \\
@@ -344,15 +321,15 @@ Noise-induced drift term requires some work:
 	& = \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
 		\begin{pmatrix}
-			\bm{\partial}_{(\bm{\alpha}^{(1)})^*} \bm{e}_j^T B^{(c)} \\
+			\bpartial_{(\balpha^{(1)})^*} \evec_j^T B^{(c)} \\
 			\vdots \\
-			\bm{\partial}_{(\bm{\alpha}^{(C)})^*} \bm{e}_j^T B^{(c)}
+			\bpartial_{(\balpha^{(C)})^*} \evec_j^T B^{(c)}
 		\end{pmatrix}
 	} \\
 	& = \sum_{n=1}^C \Trace{
 		(B^{(n)})^H
-		\bm{\partial}_{(\bm{\alpha}^{(n)})^*}
-		\bm{e}_j^T
+		\bpartial_{(\balpha^{(n)})^*}
+		\evec_j^T
 		B^{(c)}
 	}.
 \end{split}
@@ -391,7 +368,7 @@ where
 \]
 and $\bm{Q}_{\lvec}$ is a functional Wiener process:
 \[
-	\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_j \bm{Z}_{\lvec,\nvec}.
+	\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_j \Zvec_{\lvec,\nvec}.
 \]
 \end{theorem}
 \begin{proof}
@@ -438,7 +415,7 @@ The diffusion term has to be transformed in order to conform to \thmref{wigner-b
 \end{equation*}
 Now we have the FPE from \thmref{wigner-bec:fpe:mc-fpe-sde} with
 \[
-	\bm{a}_{\mvec}^{(c)} = \int d\xvec \phi_{\mvec}^* A_c,\,\mvec \in L
+	\avec_{\mvec}^{(c)} = \int d\xvec \phi_{\mvec}^* A_c,\,\mvec \in L
 \]
 and
 \[
@@ -452,25 +429,25 @@ Therefore the initial FPE is equivalent to the set of SDEs in It\^{o} form
 	d\alpha_{\mvec}^{(c)}
 	= \int d\xvec \phi_{\mvec}^* A_c dt
 	+ \sum_{\nvec \in L \cup H, \lvec}
-		\int d\xvec \phi_{\mvec}^* B_{\lvec}^{(c)} \phi_{\nvec} d\bm{Z}_{\nvec,\lvec}.
+		\int d\xvec \phi_{\mvec}^* B_{\lvec}^{(c)} \phi_{\nvec} d\Zvec_{\nvec,\lvec}.
 \]
 Multiplying by $\phi_{\mvec}^\prime$ and grouping by component:
 \[
 	\sum_{\mvec} \phi_{\mvec}^\prime d\alpha_{\mvec}^{(c)}
 	= \sum_{\mvec} \phi_{\mvec}^\prime \int d\xvec \phi_{\mvec}^* A_c dt
 	+ \sum_{\mvec} \phi_{\mvec}^\prime \int d\xvec \phi_{\mvec}^*
-		\sum_{\nvec \in L \cup H, \lvec} B_{\lvec}^{(c)} \phi_{\nvec} d\bm{Z}_{\nvec,\lvec}.
+		\sum_{\nvec \in L \cup H, \lvec} B_{\lvec}^{(c)} \phi_{\nvec} d\Zvec_{\nvec,\lvec}.
 \]
-Recognising the definition of projection transformation~\eqnref{formalism:func-calculus:projector}:
+Recognising \defref{func-calculus:projector} of projection transformation:
 \[
 	d\Psi_c
 	= \mathcal{P} \left[
 		A_c dt
 		+ \sum_{\lvec} B_{\lvec}^{(c)}
-			\sum_{\nvec \in L \cup H} \phi_{\nvec} d\bm{Z}_{\nvec,\lvec}
+			\sum_{\nvec \in L \cup H} \phi_{\nvec} d\Zvec_{\nvec,\lvec}
 	\right].
 \]
-Defining functional Wiener process $\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_{\nvec} d\bm{Z}_{\nvec,\lvec}$:
+Defining functional Wiener process $\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_{\nvec} d\Zvec_{\nvec,\lvec}$:
 \[
 	d\Psi_c
 	= \mathcal{P} \left[
@@ -485,7 +462,7 @@ Performing the same multiplication and addition on Stratonovich term from \thmre
 	C_c
 	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime c_{\mvec}^{(c)} \\
 	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime \sum_{n=1}^C \Trace{
-		(B^{(n)})^H \bm{\partial}_{(\bm{\alpha}^{(n)})^*} \bm{e}_j^T B^{(c)}
+		(B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)}
 	} \\
 	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime \sum_{n=1}^C
 		\sum_{\jvec \in L} \sum_{\kvec \in L \cup H} \sum_{\lvec}
