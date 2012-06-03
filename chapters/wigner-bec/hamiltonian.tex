@@ -3,56 +3,48 @@
 % =============================================================================
 
 In order to take into account quantum effects, we must start from the master equation.
-The basic Hamiltonian is easily expressed using quantum fields $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
-where $\xvec$ is $D$-dimensional coordinate vector,
-$\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$,
-and $\Psiop_j(\xvec)$ destroys one;
-the commutators are defined by~\eqnref{formalism:func-aux:commutators}.
+The basic Hamiltonian is easily expressed using quantum fields $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\xvec$ is a $D$-dimensional coordinate vector, $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$ at location $\xvec$, and $\Psiop_j(\xvec)$ destroys one; the commutators are defined by~\eqnref{formalism:func-operators:commutators}.
 Second-quantized Hamiltonian for the system looks like:
-\begin{equation}
+\begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:H}
-\begin{split}
 	\hat{H} / \hbar = \int d\xvec \left\{
 		\Psiop_j^{\dagger} K_{jk} \Psiop_k
 		+ \frac{1}{2} \int d\xvec^\prime
-			\Psiop_j^\dagger (\xvec) \Psiop_k^\dagger (\xvec^\prime)
+			\Psiop_j^\dagger \Psiop_k^{\prime\dagger}
 			U_{jk}(\xvec - \xvec^\prime)
-			\Psiop_j (\xvec^\prime) \Psiop_k (\xvec)
+			\Psiop_j^\prime \Psiop_k
 	\right\}.
-\end{split}
-\end{equation}
+\end{eqn}
 Here we use the Einstein summation convention of summing over repeated indices.
 $U_{jk}$ is the two-body scattering potential, and $K_{jk}$ is the single-particle Hamiltonian:
-\begin{equation}
+\begin{eqn}
 	K_{jk} = \left(
 			-\frac{\hbar}{2m} \nabla^2 + \omega_j + V_j(\xvec) / \hbar
 		\right) \delta_{jk}
 		+ \tilde{\Omega}_{jk}(t),
-\end{equation}
+\end{eqn}
 where $V_j$ is the external trapping potential for spin $j$,
 $\omega_j$ is the internal energy of spin $j$,
 and $\tilde{\Omega}_{jk}$ represents a time-dependent coupling that is used to rotate one spin projection into another.
 In the subspace of two coupled components $\tilde{\Omega}_{jk}$ can be defined as:
-\[
+\begin{eqn}
 	\tilde{\Omega} = \frac{\Omega}{2} \begin{pmatrix}
 		0 & e^{i(\omega t + \alpha)} + e^{-i(\omega t + \alpha)} \\
 		e^{i (\omega t + \alpha)} + e^{-i(\omega t + \alpha)} & 0
 	\end{pmatrix},
-\]
+\end{eqn}
 where $\omega$ and $\alpha$ are frequency and phase of the oscillator,
 and $\Omega$ is Rabi frequency (cf. equation~\eqnref{mean-field:rotation-matrix}).
 
 If we impose an energy cutoff $\ecut$ and only take into account low-energy modes,
 the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by contact potential $U_{jk} \delta(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
-\begin{equation}
+\begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:effective-H}
-\begin{split}
 	\hat{H} / \hbar = \int d\xvec \left\{
 		\Psiop_j^{\dagger} K_{jk} \Psiop_k
 		+ \frac{U_{jk}}{2} \Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k
 	\right\}.
-\end{split}
-\end{equation}
+\end{eqn}
 
 For $s$-wave scattering in three dimensions the coefficient is $U_{jk} = 4 \pi \hbar a_{jk} / m$,
 where $a_{jk}$ is the scattering length.

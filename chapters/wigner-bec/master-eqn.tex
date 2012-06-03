@@ -4,42 +4,51 @@
 
 Hereinafter field operators and wave functions will be assumed to be defined in restricted basis, unless explicitly stated otherwise.
 The Markovian master equation for the system with the inclusion of losses can be written as~\cite{Jack2002}
-\begin{equation}
+\begin{eqn}
 \label{eqn:wigner-bec:master-eqn:master-eqn}
 	\frac{d\hat{\rho}}{dt} =
 		- \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
 		+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec
 			\mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
-\end{equation}
-where $\lvec = (l_1, l_2, \ldots, l_n)$ is a vector indicating the spins that are coupled,
-$n$ being the number of interacting particles,
-and we have introduced local Liouville loss terms,
-\begin{equation}
+\end{eqn}
+where $\lvec = (l_1, l_2, \ldots, l_C)$ is a vector containing the number of particles of the corresponding components participating in the interaction, $C$ being the number of components, and we have introduced local Liouville loss terms,
+\begin{eqn}
 	\mathcal{L}_{\lvec} \left[ \hat{\rho} \right] =
 		2\hat{O}_{\lvec} \hat{\rho} \hat{O}_{\lvec}^\dagger
 		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{\rho}
 		- \hat{\rho} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}.
-\end{equation}
-The reservoir coupling operators $\hat{O}_{\lvec}$ are the distinct $n$-fold products of local field annihilation operators,
-$\hat{O}_{\lvec} = \hat{O}_{\lvec} (\Psiopvec) =
-	\Psiop_{l_{1}} (\xvec)
-	\Psiop_{l_{2}} (\xvec) \ldots
-	\Psiop_{l_{n}} (\xvec),$
-describing local $n$-body collision losses.
+\end{eqn}
+The reservoir coupling operators $\hat{O}_{\lvec}$ are the distinct $n$-fold products of local field annihilation operators, $\hat{O}_{\lvec} = \hat{O}_{\lvec} (\Psiopvec) = \prod_{c=1}^C \Psiop_c^{l_c}$, describing local $(\sum l_c)$-body collision losses.
 
-The master equation allows us to derive an important property:
-\begin{equation*}
-\begin{split}
+The master equation allows us to derive an important property.
+
+\begin{theorem}
+	\begin{eqn*}
+		\frac{d}{dt} \langle \Psiop_j \rangle
+		= \mathcal{P}_{\restbasis_j} \left[
+			\langle
+				-\frac{i}{\hbar} \left(
+					K_{jm} \Psiop_m
+					+ U_{jm} \Psiop_m^\dagger \Psiop_m \Psiop_j
+				\right)
+				- \sum_{\lvec} \kappa_{\lvec}
+					\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
+			\rangle
+		\right]
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+\begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j \rangle
-	& = \frac{d}{dt} \Trace{ \hat{\rho} \Psiop_j }
+	={} & \frac{d}{dt} \Trace{ \hat{\rho} \Psiop_j }
 	= \Trace{ \frac{d\hat{\rho}}{dt} \Psiop_j } \\
-	& = \Trace{ -\frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right] \Psiop_j }
+	={} & \Trace{ -\frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right] \Psiop_j }
 	+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec^\prime
 		\Trace{
 			\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 			\Psiop_j
 		} \\
-	& = \int d\xvec^\prime \left(
+	={} & \int d\xvec^\prime \left(
 		- \frac{i}{\hbar} \Trace{
 			\left[
 				\Psiop_l^{\prime\dagger} K_{lm}^\prime \Psiop_m^\prime,
@@ -52,26 +61,22 @@ The master equation allows us to derive an important property:
 				\Psiop_l^\prime \Psiop_m^\prime,
 				\hat{\rho}
 			\right] \Psiop_j
-		}
-		+ \sum_{\lvec} \kappa_{\lvec}
+		} \right. \\
+	& \left. + \sum_{\lvec} \kappa_{\lvec}
 			\Trace{
 				\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 				\Psiop_j
 			}
 	\right),
-\end{split}
-\end{equation*}
-where $K_{lm}^\prime \equiv K_{lm}(\Psiop(\xvec^\prime), \xvec^\prime)$,
-$\mathcal{L}_{\lvec}^\prime \equiv \mathcal{L} [ O_{\lvec}^\prime ] \equiv \mathcal{L} [ O_{\lvec} ( \Psiopvec(\xvec^\prime) ) ]$,
-and $\Psiop_j^\prime \equiv \Psiop_j (\xvec^\prime)$.
+\end{eqn}
+where $K_{lm}^\prime \equiv K_{lm}(\xvec^\prime)$, $\mathcal{L}_{\lvec}^\prime \equiv \mathcal{L} [ O_{\lvec}^\prime ] \equiv \mathcal{L} [ O_{\lvec} ( \Psiopvec^\prime ) ]$.
 
 Let us transform each term separately.
 We will make extensive use of the fact that trace is invariant under cyclic permutations to re-order the operators in terms.
-In addition, the transformations are based on commutation relations proved in \lmmref{formalism:func-aux:functional-commutators}.
+In addition, the transformations are based on commutation relations proved in \lmmref{formalism:func-operators:functional-commutators}.
 
 Noticing that $[ K_{lm}^\prime, \Psiop_j ] \equiv 0$, the first term can be transformed as:
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	\Trace{
 		\left[
 			\Psiop_l^{\prime\dagger} K_{lm}^\prime \Psiop_m^\prime,
@@ -94,15 +99,13 @@ Noticing that $[ K_{lm}^\prime, \Psiop_j ] \equiv 0$, the first term can be tran
 		\right] K_{lm}^\prime \Psiop_m^\prime
 	} \\
 	& = \Trace{
-		\hat{\rho} \delta_{jl} \delta_P(\xvec^\prime - \xvec) K_{lm}^\prime \Psiop_m^\prime
+		\hat{\rho} \delta_{jl} \delta_{\restbasis_j}(\xvec^\prime - \xvec) K_{lm}^\prime \Psiop_m^\prime
 	}
-	= \delta_P(\xvec^\prime - \xvec) \langle K_{jm}^\prime \Psiop_m^\prime \rangle
-\end{split}
-\end{equation*}
+	= \delta_{\restbasis_j}(\xvec^\prime - \xvec) \langle K_{jm}^\prime \Psiop_m^\prime \rangle
+\end{eqn}
 
 Second (nonlinear) term:
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	U_{lm} \Trace{
 		\left[
 			\Psiop_l^{\prime\dagger} \Psiop_m^{\prime\dagger}
@@ -130,23 +133,21 @@ Second (nonlinear) term:
 		\right] \Psiop_l^\prime \Psiop_m^\prime
 	} \\
 	& = U_{lm} \Trace{
-		\hat{\rho} \delta_P(\xvec^\prime - \xvec) \left(
+		\hat{\rho} \delta_{\restbasis_j}(\xvec^\prime - \xvec) \left(
 			\delta_{jl} \Psiop_m^{\prime\dagger}
 			+ \delta_{jm} \Psiop_l^{\prime\dagger}
 		\right) \Psiop_l^\prime \Psiop_m^\prime
 	} \\
-	& = 2 U_{jm} \delta_P(\xvec^\prime - \xvec) \Trace{
+	& = 2 U_{jm} \delta_{\restbasis_j}(\xvec^\prime - \xvec) \Trace{
 		\hat{\rho} \Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
 	} \\
-	& = 2 U_{jm} \delta_P(\xvec^\prime - \xvec) \langle
+	& = 2 U_{jm} \delta_{\restbasis_j}(\xvec^\prime - \xvec) \langle
 		\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
 	\rangle
-\end{split}
-\end{equation*}
+\end{eqn}
 
 The third term, coming from the losses, can be calculated as
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	\Trace{
 		\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 		\Psiop_j
@@ -172,22 +173,20 @@ The third term, coming from the losses, can be calculated as
 			\hat{O}_{\lvec}^{\prime\dagger}, \Psiop_j
 		\right] \hat{O}_{\lvec}^\prime
 	} \\
-	& = -\delta_P(\xvec^\prime - \xvec)	\Trace{
+	& = -\delta_{\restbasis_j}(\xvec^\prime - \xvec) \Trace{
 		\hat{\rho} \frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 		\hat{O}_{\lvec}^\prime
 	} \\
-	& = -\delta_P(\xvec^\prime - \xvec) \langle
+	& = -\delta_{\restbasis_j}(\xvec^\prime - \xvec) \langle
 		\frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 		\hat{O}_{\lvec}^\prime
 	\rangle.
-\end{split}
-\end{equation*}
+\end{eqn}
 
 Thus the full relation is
-\begin{equation*}
-\begin{split}
+\begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j \rangle
-	& = \int d\xvec^\prime \delta_P(\xvec^\prime - \xvec) \left(
+	& = \int d\xvec^\prime \delta_{\restbasis_j}(\xvec^\prime - \xvec) \left(
 		- \frac{i}{\hbar} \langle K_{jm}^\prime \Psiop_m^\prime \rangle
 		- \frac{i U_{jm}}{\hbar} \langle
 			\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
@@ -196,16 +195,7 @@ Thus the full relation is
 			\frac{\partial \hat{O}_{\lvec}^{\prime\dagger}}{\partial \Psiop_j^{\prime\dagger}}
 			\hat{O}_{\lvec}^\prime
 		\rangle
-	\right) \\
-	& = P \left[
-		\langle
-			-\frac{i}{\hbar} \left(
-				K_{jm} \Psiop_m
-				+ U_{jm} \Psiop_m^\dagger \Psiop_m \Psiop_j
-			\right)
-			- \sum_{\lvec} \kappa_{\lvec}
-				\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
-		\rangle
-	\right]
-\end{split}
-\end{equation*}
+	\right),
+\end{eqn}
+which is equivalent to the statement of the theorem.
+\end{proof}

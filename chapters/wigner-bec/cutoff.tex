@@ -7,20 +7,20 @@ We will use the formalism for multimode operators described in \charef{formalism
 
 Two basis sets are used in this work.
 First is the basis of plane waves:
-\[
+\begin{eqn}
 	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
-\]
+\end{eqn}
 whose elements are eigenfunctions of kinetic term:
-\[
+\begin{eqn}
 	\left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
 	= E_{\nvec} \phi_{\nvec}
 	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
-\]
+\end{eqn}
 Integration area for this set is the box with volume $V = \prod_{j=1}^D L_j$.
 Spatial wave vectors are
-\[
+\begin{eqn}
 	\kvec_{\nvec} = \sum_{j=1}^D \frac{\pi n_j}{L_j} \vec{x}_j,
-\]
+\end{eqn}
 where $L_j$ are dimensions of the box, and $\vec{x}_j$ are spatial unit vectors.
 Field functions can be decomposed into this basis using common FFTs.
 
@@ -29,10 +29,10 @@ which have the whole space as an integration area.
 One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
 (see \appref{harmonic-transform} for technical details).
 
-We divide mode subspaces into low- and high-energy subsets $L$ and $H$,
+We divide mode subspaces into low- and high-energy subsets $\restbasis_j$ and $\fullbasis_j - \restbasis_j$,
 depending on whether $E_n$ is more or less than some cutoff energy $\ecut$,
-and limit field operators to the subset $L$.
-Restricted operators obey commutation relations~\eqnref{formalism:func-aux:restricted-commutators}.
+and limit field operators to the corresponding subset $\restbasis_j$.
+Restricted operators obey commutation relations~\eqnref{formalism:func-operators:restricted-commutators}.
 
 \begin{figure}
 \begin{center}
@@ -49,6 +49,6 @@ Restricted operators obey commutation relations~\eqnref{formalism:func-aux:restr
 \label{fig:wigner-bec:cutoff:restricted-delta}
 \end{figure}
 
-Shape of the module of restricted delta function~\eqnref{formalism:func-calculus:restricted-delta} for two different basis sets and two different cutoffs is shown in~\figref{wigner-bec:cutoff:restricted-delta}.
+Shape of the module of restricted delta function from \defref{func-calculus:restricted-delta} for two different basis sets and two different cutoffs is shown in~\figref{wigner-bec:cutoff:restricted-delta}.
 The higher cutoff is, the closer its shape gets to the ``ideal'' delta function,
 with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
