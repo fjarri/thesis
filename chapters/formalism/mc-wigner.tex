@@ -24,8 +24,8 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	Multi-component functional Wigner transformation $\mathcal{W}$ is defined as
 	\todo{Is the return value real or complex?}
 	\begin{eqn*}
-		& \mathcal{W} :: \left( \mathbb{R}^D \rightarrow \bigotimes_{j=1}^C \mathbb{H}_{\restbasis_j} \right)
-			\rightarrow \bigotimes_{j=1}^C \mathbb{F}_{\restbasis_j}
+		& \mathcal{W} :: \left( \mathbb{R}^D \rightarrow \prod_{j=1}^C \mathbb{H}_{\restbasis_j} \right)
+			\rightarrow \prod_{j=1}^C \mathbb{F}_{\restbasis_j}
 			\rightarrow \mathbb{C} \\
 		& \mathcal{W}[\hat{A}]
 		= \frac{1}{\pi^{2 \sum|\restbasis_j|}} \int \delta^2 \bLambda
@@ -41,7 +41,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 \label{def:formalism:mc-wigner:w-functional}
 	The Wigner functional is
 	\begin{eqn*}
-		& W :: \bigotimes_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{C} \\
+		& W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{C} \\
 		& W [\bPsi, \bPsi^*]
 		\equiv \mathcal{W}[\hat{\rho}]
 		= \frac{1}{\pi^{2 \sum|\restbasis_j|}} \int \delta^2 \bLambda
@@ -50,7 +50,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 	where $\chi_W [\Lambda, \Lambda^*]$ is the characteristic functional
 	\begin{eqn*}
-		& \chi_W :: \bigotimes_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R} \\
+		& \chi_W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R} \\
 		& \chi_W [\bLambda, \bLambda^*]
 		= \Trace{ \hat{\rho} \prod_{j=1}^C \hat{D}_j[\Lambda_j, \Lambda_j^*] }.
 	\end{eqn*}
