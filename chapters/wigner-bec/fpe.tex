@@ -243,67 +243,65 @@ Therefore the final term in complex-valued SDEs is
 \end{eqn}
 \end{proof}
 
-\begin{theorem}[Multi-component extension of \thmref{wigner-bec:fpe:fpe-sde-complex}]
+\begin{theorem}[Multi-component reformulation of \thmref{wigner-bec:fpe:fpe-sde-complex}]
 \label{thm:wigner-bec:fpe:mc-fpe-sde}
-If $\balpha^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_M^{(c)})$,
-then Fokker-Planck equation
-\[
-	\frac{dW}{dt}
-	= - \sum_{c=1}^C \bpartial_{\balpha^{(c)}}^T \avec^{(c)} W
-	- \sum_{c=1}^C \bpartial_{(\balpha^{(c)})^*}^T (\avec^{(c)})^* W
-	+ \sum_{m=1}^c \sum_{n=1}^c
-		\Trace{
-			\bpartial_{\balpha^{(m)}}
-			\bpartial_{(\balpha^{(n)})^*}^T
-			B^{(n)} (B^{(m)})^H
-		} W
-\]
-is equivalent to a set of stochastic differential equations in It\^{o} form
-\[
-	d\balpha^{(c)} = \avec^{(c)} dt + B^{(c)} d\Zvec,\, c = 1..C
-\]
-or to Stratonovich form
-\[
-	d\balpha^{(c)} = (\avec^{(c)} - \bm{c}^{(c)}) dt + B^{(c)} d\Zvec,
-\]
-where noise-induced drift term is
-\[
-	c_j^{(c)} = \sum_{n=1}^C
-		\Trace{ (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)} },
-\]
-and $d\Zvec$ is an $L$-dimensional complex-valued Wiener process.
+	If $\balpha^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_{M_c}^{(c)})$,
+	then Fokker-Planck equation
+	\begin{eqn*}
+		\frac{dW}{dt}
+		= - \sum_{c=1}^C \bpartial_{\balpha^{(c)}}^T \avec^{(c)} W
+		- \sum_{c=1}^C \bpartial_{(\balpha^{(c)})^*}^T (\avec^{(c)})^* W
+		+ \sum_{m=1}^C \sum_{n=1}^C
+			\Trace{
+				\bpartial_{\balpha^{(m)}}
+				\bpartial_{(\balpha^{(n)})^*}^T
+				B^{(n)} (B^{(m)})^H
+			} W
+	\end{eqn*}
+	is equivalent to a set of stochastic differential equations in It\^{o} form
+	\begin{eqn*}
+		d\balpha^{(c)} = \avec^{(c)} dt + B^{(c)} d\Zvec,\, c = 1..C
+	\end{eqn*}
+	or to Stratonovich form
+	\begin{eqn*}
+		d\balpha^{(c)} = (\avec^{(c)} - \svec^{(c)}) dt + B^{(c)} d\Zvec,
+	\end{eqn*}
+	where noise-induced drift term is
+	\begin{eqn*}
+		s_j^{(c)} = \sum_{n=1}^C
+			\Trace{ (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)} },
+	\end{eqn*}
+	and $d\Zvec$ is an $L$-dimensional complex-valued Wiener process.
 \end{theorem}
 \begin{proof}
-Let us join all variable sets $\balpha^{(c)}$ into one set $\balpha^T \equiv ((\balpha^{(1)})^T \ldots (\balpha^{(C)})^T)$.
+Let us join all variable sets $\balpha^{(c)}$ into one set
+\begin{eqn}
+	\balpha \equiv \bigoplus_{c=1}^C \balpha^{(c)}.
+\end{eqn}
 Then we can use \thmref{wigner-bec:fpe:fpe-sde-complex} with drift vector
-\[
-	\avec = \begin{pmatrix}
-		\avec^{(1)} \\ \vdots \\ \avec^{(C)}
-	\end{pmatrix},
-\]
+\begin{eqn}
+	\avec = \bigoplus_{c=1}^C \avec^{(c)},
+\end{eqn}
 differentials vector
-\[
-	\bpartial_{\balpha} = \begin{pmatrix}
-		\bpartial_{\balpha^{(1)}} \\ \vdots \\ \bpartial_{\balpha^{(C)}}
-	\end{pmatrix},
-\]
+\begin{eqn}
+	\bpartial_{\balpha} = \bigoplus_{c=1}^C \bpartial_{\balpha^{(c)}},
+\end{eqn}
 and noise matrix
-\[
+\begin{eqn}
 	B = \begin{pmatrix}
 		B^{(1)} \\ \vdots \\ B^{(C)}
 	\end{pmatrix}.
-\]
+\end{eqn}
 This gives us SDEs in It\^{o} form
-\[
+\begin{eqn}
 	d\balpha = \avec dt + B d\Zvec,
-\]
-where $\Zvec$ is an $L$-dimensional complex-valued Wiener process.
+\end{eqn}
+where $d\Zvec$ is an $L$-dimensional complex-valued Wiener process.
 Splitting this equation for different components, we get the statement of the lemma.
 Stratonovich variant is obtained in the same way.
 Noise-induced drift term requires some work:
-\begin{equation*}
-\begin{split}
-	c_j^{(c)}
+\begin{eqn}
+	s_j^{(c)}
 	& = \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
 		\begin{pmatrix}
@@ -332,171 +330,180 @@ Noise-induced drift term requires some work:
 		\evec_j^T
 		B^{(c)}
 	}.
-\end{split}
-\end{equation*}
+\end{eqn}
 \end{proof}
 
 \begin{theorem}
-Functional FPE
-\[
-	\frac{dW}{dt}
-	= \int d\xvec \left(
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} A_j
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} A_j^*
-		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j \delta \Psi_k^*}
-			\sum_{\lvec} B_{\lvec}^{(k)} (B_{\lvec}^{(j)})^*
-	\right) W
-\]
-is equivalent to the set of SDEs in It\^{o} form
-\[
-	d\Psi_j = \mathcal{P} \left[
-		A^{(j)} dt + \sum_{\lvec} B_{\lvec}^{(j)} d\bm{Q}_{\lvec}
-	\right],
-\]
-or in Stratonovich form
-\[
-	d\Psi_j = \mathcal{P} \left[
-		(A^{(j)} - C^{(j)}) dt + \sum_{\lvec} B_{\lvec}^{(j)} d\bm{Q}_{\lvec}
-	\right],
-\]
-where
-\[
-	C^{(j)} = \sum_{n=1}^C \sum_{\lvec}
-		(B_{\lvec}^{(n)})^*
-		\frac{\delta}{\delta \Psi_n^*}
-		B_{\lvec}^{(j)},
-\]
-and $\bm{Q}_{\lvec}$ is a functional Wiener process:
-\[
-	\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_j \Zvec_{\lvec,\nvec}.
-\]
+	Functional FPE
+	\begin{eqn*}
+		\frac{dW}{dt}
+		= \int d\xvec \left(
+			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \mathcal{A}^{(j)}
+			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} (\mathcal{A}^{(j)})^*
+			+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j \delta \Psi_k^*}
+				\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
+		\right) W
+	\end{eqn*}
+	is equivalent to the set of SDEs in It\^{o} form
+	\begin{eqn*}
+		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+			\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+		\right],
+	\end{eqn*}
+	or in Stratonovich form
+	\begin{eqn*}
+		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+			(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+		\right],
+	\end{eqn*}
+	where
+	\begin{eqn*}
+		\mathcal{S}^{(j)} = \sum_{n=1}^C \sum_{\lvec}
+			(\mathcal{B}_{\lvec}^{(n)})^*
+			\frac{\delta}{\delta \Psi_n^*}
+			\mathcal{B}_{\lvec}^{(j)},
+	\end{eqn*}
+	and $Q_{\lvec}$ is a functional Wiener process:
+	\begin{eqn*}
+		Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} Z_{\lvec,\nvec}.
+	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Considering $\Psi_j = \sum_{\nvec \in L} \phi_{\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
-\begin{equation*}
-\begin{split}
+Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
+\begin{eqn}
 	\frac{dW}{dt}
-	& = \left(
-		- \sum_{j=1}^C \sum_{\nvec \in L}
+	={} & \left(
+		- \sum_{j=1}^C \sum_{\nvec \in \restbasis_j}
 			\frac{\partial}{\partial \alpha_{j,\nvec}}
-			\int d\xvec \phi_{\nvec}^* A_j
-		- \sum_{j=1}^C \sum_{\nvec \in L}
+			\int d\xvec \phi_{j,\nvec}^* \mathcal{A}^{(j)}
+		- \sum_{j=1}^C \sum_{\nvec \in \restbasis_j}
 			\frac{\partial}{\partial \alpha_{j,\nvec}^*}
-			\int d\xvec \phi_{\nvec} A_j^*
+			\int d\xvec \phi_{j,\nvec} (\mathcal{A}^{(j)})^*
 		\right. \\
 	&	\left. + \sum_{j=1}^C \sum_{k=1}^C
-			\sum_{\mvec,\nvec \in L}
+			\sum_{\mvec \in \restbasis_j, \nvec \in \restbasis_k}
 			\frac{\partial}{\partial \alpha_{j,\mvec}}
 			\frac{\partial}{\partial \alpha_{k,\nvec}^*}
 			\int d\xvec
-			\phi_{\nvec} \phi_{\mvec}^*
-			\sum_{\lvec} B_{\lvec}^{(k)} (B_{\lvec}^{(j)})^*
+			\phi_{k,\nvec} \phi_{j,\mvec}^*
+			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
 	\right) W.
-\end{split}
-\end{equation*}
+\end{eqn}
 The diffusion term has to be transformed in order to conform to \thmref{wigner-bec:fpe:mc-fpe-sde}:
-\begin{equation*}
-\begin{split}
-	\int d\xvec \phi_{\nvec} \phi_{\mvec}^* \sum_{\lvec} B_{\lvec}^{(k)} (B_{\lvec}^{(j)})^*
+\begin{eqn}
+	\int d\xvec \phi_{k,\nvec} \phi_{j,\mvec}^* \sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
 	& = \int d\xvec \int d\xvec^\prime
-			\phi_{\nvec}^\prime \phi_{\mvec}^*
-			\sum_{\lvec} B_{\lvec}^{(k)} (B_{\lvec}^{(j)})^{\prime*}
+			\phi_{k,\nvec}^\prime \phi_{j,\mvec}^*
+			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^{\prime*}
 			\delta(\xvec - \xvec^\prime) \\
 	& = \int d\xvec \int d\xvec^\prime
-			\phi_{\nvec}^\prime \phi_{\mvec}^*
-			\sum_{\lvec} B_{\lvec}^{(k)} (B_{\lvec}^{(j)})^{\prime*}
-			\sum_{\pvec \in L \cup H} \phi_{\pvec}^{\prime*} \phi_{\pvec} \\
-	& = \sum_{\pvec \in L \cup H, \lvec}
+			\phi_{k,\nvec}^\prime \phi_{j,\mvec}^*
+			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^{\prime*}
+			\sum_{\pvec \in \fullbasis} \phi_{\pvec}^{\prime*} \phi_{\pvec} \\
+	& = \sum_{\pvec \in \fullbasis, \lvec}
 		\int d\xvec
-			\phi_{\nvec}^* B_{\lvec}^{(k)} \phi_{\pvec}
+			\phi_{k,\nvec}^* \mathcal{B}_{\lvec}^{(k)} \phi_{\pvec}
 		\int d\xvec
-			\phi_{\mvec} (B_{\lvec}^{(j)})^* \phi_{\pvec}^*
-\end{split}
-\end{equation*}
+			\phi_{j,\mvec} (\mathcal{B}_{\lvec}^{(j)})^* \phi_{\pvec}^*
+\end{eqn}
+Note that we did not specify the index of the full basis used to expand the delta function.
+It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$, this will not change the result.
+
 Now we have the FPE from \thmref{wigner-bec:fpe:mc-fpe-sde} with
-\[
-	\avec_{\mvec}^{(c)} = \int d\xvec \phi_{\mvec}^* A_c,\,\mvec \in L
-\]
+\begin{eqn}
+	\avec_{\mvec}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},\,\mvec \in \restbasis_c
+\end{eqn}
 and
-\[
-	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{\mvec}^* B_{\lvec}^{(c)} \phi_{\nvec},\,
-	\mvec \in L, \nvec \in L \cup H.
-\]
+\begin{eqn}
+\label{eqn:wigner-bec:fpe:func-noise-matrix}
+	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec},\,
+	\mvec \in \restbasis_c, \nvec \in \fullbasis.
+\end{eqn}
 Note that columns of $B$ are enumerated using compound index $\nvec,\lvec$.
 
 Therefore the initial FPE is equivalent to the set of SDEs in It\^{o} form
-\[
+\begin{eqn}
 	d\alpha_{\mvec}^{(c)}
-	= \int d\xvec \phi_{\mvec}^* A_c dt
-	+ \sum_{\nvec \in L \cup H, \lvec}
-		\int d\xvec \phi_{\mvec}^* B_{\lvec}^{(c)} \phi_{\nvec} d\Zvec_{\nvec,\lvec}.
-\]
-Multiplying by $\phi_{\mvec}^\prime$ and grouping by component:
-\[
-	\sum_{\mvec} \phi_{\mvec}^\prime d\alpha_{\mvec}^{(c)}
-	= \sum_{\mvec} \phi_{\mvec}^\prime \int d\xvec \phi_{\mvec}^* A_c dt
-	+ \sum_{\mvec} \phi_{\mvec}^\prime \int d\xvec \phi_{\mvec}^*
-		\sum_{\nvec \in L \cup H, \lvec} B_{\lvec}^{(c)} \phi_{\nvec} d\Zvec_{\nvec,\lvec}.
-\]
-Recognising \defref{func-calculus:projector} of projection transformation:
-\[
+	= \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
+	+ \sum_{\nvec \in \fullbasis, \lvec}
+		\int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+\end{eqn}
+Multiplying by $\phi_{c,\mvec}^\prime$ and grouping by component:
+\begin{eqn}
+	\sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime d\alpha_{\mvec}^{(c)}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
+	+ \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^*
+		\sum_{\nvec \in \fullbasis, \lvec} \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+\end{eqn}
+Recognizing \defref{func-calculus:projector} of projection transformation:
+\begin{eqn}
 	d\Psi_c
-	= \mathcal{P} \left[
-		A_c dt
-		+ \sum_{\lvec} B_{\lvec}^{(c)}
-			\sum_{\nvec \in L \cup H} \phi_{\nvec} d\Zvec_{\nvec,\lvec}
+	= \mathcal{P}_{\restbasis_c} \left[
+		\mathcal{A}^{(c)} dt
+		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)}
+			\sum_{\nvec \in \fullbasis} \phi_{\nvec} dZ_{\nvec,\lvec}
 	\right].
-\]
-Defining functional Wiener process $\bm{Q}_{\lvec} = \sum_{\nvec \in L \cup H} \phi_{\nvec} d\Zvec_{\nvec,\lvec}$:
-\[
+\end{eqn}
+Defining functional Wiener process $Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} dZ_{\nvec,\lvec}$:
+\begin{eqn}
 	d\Psi_c
-	= \mathcal{P} \left[
-		A_c dt
-		+ \sum_{\lvec} B_{\lvec}^{(c)} d\bm{Q}_{\lvec}
+	= \mathcal{P}_{\restbasis_c} \left[
+		\mathcal{A}^{(c)} dt
+		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)} dQ_{\lvec}
 	\right].
-\]
+\end{eqn}
 
-Performing the same multiplication and addition on Stratonovich term from \thmref{wigner-bec:fpe:mc-fpe-sde}:
-\begin{equation*}
-\begin{split}
-	C_c
-	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime c_{\mvec}^{(c)} \\
-	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime \sum_{n=1}^C \Trace{
-		(B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)}
-	} \\
-	& = \sum_{\mvec \in L} \phi_{\mvec}^\prime \sum_{n=1}^C
-		\sum_{\jvec \in L} \sum_{\kvec \in L \cup H} \sum_{\lvec}
-		\int d\xvec \phi_{\jvec} (B_{\lvec}^{(n)})^* \phi_{\kvec}^*
-		\int d\xvec \phi_{\mvec}
-			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*} B_{\lvec}^{(c)} \phi_{\kvec} \\
-	& = \mathcal{P} \left[
-		\sum_{n=1}^C
-		\sum_{\jvec \in L} \sum_{\kvec \in L \cup H} \sum_{\lvec}
-		\int d\xvec \phi_{\jvec} (B_{\lvec}^{(n)})^* \phi_{\kvec}^*
-		\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*} (B_{\lvec}^{(c)})^\prime \phi_{\kvec}^\prime
+Performing the same multiplication and summation on Stratonovich term from \thmref{wigner-bec:fpe:mc-fpe-sde}:
+\begin{eqn}
+	\mathcal{S}^{(c)}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime s_{\mvec}^{(c)}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C \Trace{
+		(B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_{\mvec}^T B^{(c)}
+	}.
+\end{eqn}
+Transforming trace to summation:
+\begin{eqn}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
+		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
+			(B_{\jvec (\pvec,\lvec)}^{(n)})^*
+			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
+			B_{\mvec (\pvec,\lvec)}^{(c)}.
+\end{eqn}
+Using the multimode form~\eqnref{wigner-bec:fpe:func-noise-matrix} of the noise matrix:
+\begin{eqn}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
+		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
+			\int d\xvec \phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^* \phi_{\pvec}^*
+			\int d\xvec \phi_{c,\mvec}^*
+				\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
+				\mathcal{B}_{\lvec}^{(c)} \phi_{\pvec}
+\end{eqn}
+Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\xvec - \xvec^\prime)$:
+\begin{eqn}
+	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime
+		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
+			\int d\xvec
+				\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
+				\phi_{c,\mvec}^* \frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
+				\mathcal{B}_{\lvec}^{(c)}
+\end{eqn}
+Recognizing the projection transformation and the functional differential:
+\begin{eqn}
+	& = \mathcal{P}_{\restbasis_c} \left[
+		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
+			\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
+			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
+			\mathcal{B}_{\lvec}^{(c)}
 	\right] \\
-	& = \mathcal{P} \left[
-		\sum_{n=1}^C
-		\sum_{\jvec \in L} \sum_{\lvec}
-		\int d\xvec \phi_{\jvec} (B_{\lvec}^{(n)})^* \delta(\xvec - \xvec^\prime)
-		\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*} (B_{\lvec}^{(c)})^\prime
-	\right] \\
-	& = \mathcal{P} \left[
+	& = \mathcal{P}_{\restbasis_c} \left[
 		\sum_{n=1}^C \sum_{\lvec}
-		(B_{\lvec}^{(n)})^*
-		\sum_{\jvec \in L}
-		\phi_{\jvec} \frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*} B_{\lvec}^{(c)}
-	\right] \\
-	& = \mathcal{P} \left[
-		\sum_{n=1}^C \sum_{\lvec}
-		(B_{\lvec}^{(n)})^*
+		(\mathcal{B}_{\lvec}^{(n)})^*
 		\frac{\delta}{\delta \Psi_n^*}
-		B_{\lvec}^{(c)}
-	\right]
-\end{split}
-\end{equation*}
+		\mathcal{B}_{\lvec}^{(c)}
+	\right].
+	\qedhere
+\end{eqn}
 \end{proof}
 
-\todo{Fix those awful variable clashes!}
 \todo{This means that Stratonovich term is equal to zero for our $B \equiv B(\Psivec)$.}
 
