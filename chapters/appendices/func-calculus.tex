@@ -296,6 +296,123 @@ Applying \lmmref{c-numbers:fourier-of-moments}, collapsing sums, and recognizing
 \end{eqn2}
 \end{proof}
 
+\begin{definition}
+	Displacement functional is
+	\begin{eqn}
+		& D :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
+		& D[\Lambda, \Lambda^*, \Psi, \Psi^*] = \exp \int d\xvec \left(
+			-\Lambda \Psi^* + \Lambda^* \Psi
+		\right).
+	\end{eqn}
+\end{definition}
+
+\begin{lemma}[Functional extension of \lmmref{c-numbers:zero-integrals}]
+\label{lmm:func-calculus:zero-integrals}
+	For a bounded functional $F(\blambda, \blambda^*)$
+	\begin{eqn*}
+		\int \delta^2\Lambda
+			\frac{\delta}{\delta \Lambda^\prime} \left(
+				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+				F[\Lambda, \Lambda^*]
+			\right)
+		& = 0 \\
+		\int \delta^2\Lambda
+			\frac{\delta}{\delta \Lambda^{\prime*}}
+			\left(
+				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+				F[\Lambda, \Lambda^*]
+			\right)
+		& = 0.
+	\end{eqn*}
+\end{lemma}
+\begin{proof}
+We will prove the first equation.
+Let $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ and $\Psi = \mathcal{C}_{\restbasis}(\balpha)$.
+Displacement functional can be represented as a function of mode vector:
+\begin{eqn}
+	D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+	& = \exp \int dx \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
+		- \phi_{\nvec} \phi_{\mvec}^* \lambda_{\nvec} \alpha_{\mvec}^*
+		+ \phi_{\nvec}^* \phi_{\mvec} \lambda_{\nvec}^* \alpha_{\mvec}
+	\right) \\
+	& = \exp \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
+		- \delta_{\nvec \mvec} \lambda_{\nvec} \alpha_{\nvec}^*
+		+ \delta_{\nvec \mvec} \lambda_{\nvec}^* \alpha_{\nvec}
+	\right) \\
+	& = \exp \sum_{\nvec \in \restbasis} \left(
+		-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}
+	\right).
+\end{eqn}
+
+We introduce the special notation for this lemma to indicate the subset of $\restbasis$ used by operators and functionals.
+With this notation, for fixed $\nvec$:
+\begin{eqn}
+	D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+	& = \prod_{\mvec \in \restbasis} \exp \left(
+		- \lambda_{\mvec} \alpha_{\mvec}^* + \lambda_{\mvec}^* \alpha_{\mvec}
+	\right) \\
+	& = \exp \left(
+		- \lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}
+	\right)
+	\prod_{\mvec \in \restbasis, \mvec \ne \nvec} \exp \left(
+		- \lambda_{\mvec} \alpha_{\mvec}^* + \lambda_{\mvec}^* \alpha_{\mvec}
+	\right) \\
+	& = D_{\lnot \nvec} D_{\nvec},
+\end{eqn}
+and, similarly,
+\begin{eqn}
+	\Lambda & = \Lambda_{\lnot \nvec} + \Lambda_{\nvec}, \\
+	\int d^2 \blambda & = \int d^2 \blambda_{\lnot \nvec} \int d^2 \lambda_{\nvec}.
+\end{eqn}
+
+With this notation:
+\begin{eqn}
+	& \int \delta^2\Lambda
+		\frac{\delta}{\delta \Lambda^\prime} \left(
+			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+			F[\Lambda, \Lambda^*]
+		\right) \\
+	& = \int d^2 \blambda
+		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*} \frac{\partial}{\partial \lambda_{\nvec}}
+			D_{\lnot \nvec} D_{\nvec}
+			F[\Lambda, \Lambda^*] \\
+	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+		\int d^2 \blambda_{\lnot \nvec} D_{\lnot \nvec}
+		\int d^2 \lambda_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}} D_{\nvec} F(\blambda, \blambda^*).
+\end{eqn}
+For each term the internal is equal to zero because of \lmmref{c-numbers:zero-integrals}, therefore the whole sum is zero.
+\end{proof}
+
+\begin{lemma}[Functional extension of \lmmref{c-numbers:zero-delta-integrals}]
+\label{lmm:func-calculus:zero-delta-integrals}
+	For $\Lambda \in \mathbb{F}_{\restbasis}$ \todo{Again, any limitations on $F$?}
+	\begin{eqn*}
+		\int \delta^2\Lambda
+			\frac{\delta}{\delta \Lambda} \left(
+				\left(
+					\left( \frac{\delta}{\delta \Lambda} \right)^s
+					\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+					\Delta_{\restbasis}[\Lambda]
+				\right)
+				F[\lambda, \lambda^*]
+			\right)
+		& = 0 \\
+		\int \delta^2\Lambda
+			\frac{\delta}{\delta \Lambda^*} \left(
+				\left(
+					\left( \frac{\delta}{\delta \Lambda} \right)^s
+					\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+					\Delta_{\restbasis}[\Lambda]
+				\right)
+				F[\lambda, \lambda^*]
+			\right)
+		& = 0 \\
+	\end{eqn*}
+\end{lemma}
+\begin{proof}
+Proved by expanding functional integration and differentials into modes and recognizing \lmmref{c-numbers:zero-delta-integrals}.
+\end{proof}
+
 In order to perform transformations of master equations in the future, we will need a lemma, which justifies certain operation with Laplacian (which is a part of kinetic term in Hamiltonian).
 
 \begin{lemma}
@@ -333,7 +450,7 @@ Using Green's first identity and the fact that eigenfunctions are equal to zero 
 \end{eqn}
 where $\bm{v}$ is the outward pointing unit normal of surface element $dS$.
 Thus
-\[
+\begin{eqn}
 	(*)
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
 			\int\limits_A d\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
@@ -342,7 +459,7 @@ Thus
 	= \int\limits_A d\xvec \frac{\delta}{\delta \Psi}
 		( \nabla^2 \Psi ) \mathcal{F}[\Psi, \Psi^*].
 	\qedhere
-\]
+\end{eqn}
 \end{proof}
 
 Note that this lemma imposes additional requirement for basis functions, but in practical applications it is always satisfied.

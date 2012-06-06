@@ -10,13 +10,6 @@ First, we will define functional analogue of the displacement operator~\eqnref{f
 	\right),
 \end{eqn}
 where $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ is some function from $\mathbb{F}_{\restbasis}$.
-It is convenient to also define displacement functional as
-\begin{eqn}
-	& D :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
-	& D[\Lambda, \Lambda^*, \Psi, \Psi^*] = \exp \int d\xvec \left(
-		-\Lambda \Psi^* + \Lambda^* \Psi
-	\right).
-\end{eqn}
 
 It can be shown that the displacement operator has properties similar to~\eqnref{formalism:sm-wigner:displacement-derivatives}.
 
@@ -105,142 +98,6 @@ Thus
 	\end{eqn*}
 \end{definition}
 
-\begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:zero-integrals}]
-\label{lmm:formalism:func-wigner:zero-integrals}
-	\begin{eqn*}
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda^\prime} \left(
-				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-				\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
-				\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
-				\hat{D}[\Lambda, \Lambda^*]
-			\right)
-		& = 0 \\
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda^{\prime*}}
-			\left(
-				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-				\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
-				\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
-				\hat{D}[\Lambda, \Lambda^*]
-			\right)
-		& = 0.
-	\end{eqn*}
-\end{lemma}
-\begin{proof}
-We will prove the first equation.
-Let $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ and $\Psi = \mathcal{C}_{\restbasis}(\balpha)$.
-Functional displacement operator can be represented as a function of mode vector:
-\begin{eqn}
-	\hat{D}[\Lambda, \Lambda^*]
-	& = \exp \int dx \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
-		\phi_{\nvec} \phi_{\mvec}^* \lambda_{\nvec} \hat{a}_{\mvec}^\dagger
-		- \phi_{\nvec}^* \phi_{\mvec} \lambda_{\nvec}^* \hat{a}_{\mvec}
-	\right) \\
-	& = \exp \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
-		\delta_{\nvec,\mvec} \lambda_{\nvec} \hat{a}_{\nvec}^\dagger
-		- \delta_{\nvec,\mvec} \lambda_{\nvec}^* \hat{a}_{\nvec}
-	\right) \\
-	& = \exp \sum_{\nvec \in \restbasis} \left(
-		\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec}
-	\right).
-\end{eqn}
-Similarly,
-\begin{eqn}
-	\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
-	= \prod_{\nvec \in \restbasis} \exp
-		(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
-\end{eqn}
-For brevity, we will use index in multimode functions and operators to specify the subset of $\restbasis$ they use.
-With this notation, for fixed $\nvec$:
-\begin{eqn}
-	\hat{D}[\Lambda, \Lambda^*]
-	& = \prod_{\mvec \in \restbasis} \exp \left(
-		\lambda_{\mvec} \hat{a}_{\mvec}^\dagger - \lambda_{\mvec}^* \hat{a}_{\mvec}
-	\right) \\
-	& = \exp \left(
-		\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec}
-	\right)
-	\prod_{\mvec \in \restbasis, \mvec \ne \nvec} \exp \left(
-		\lambda_{\mvec} \hat{a}_{\mvec}^\dagger - \lambda_{\mvec}^* \hat{a}_{\mvec}
-	\right) \\
-	& = \hat{D}_{\lnot \nvec} \hat{D}_{\nvec},
-\end{eqn}
-and, similarly,
-\begin{eqn}
-	\Lambda & = \Lambda_{\lnot \nvec} + \Lambda_{\nvec} \\
-	D[\Lambda, \Lambda^*, \Psi, \Psi^*]	& = D_{\lnot \nvec} D_{\nvec}, \\
-	\frac{\partial}{\partial \Lambda^\prime}
-	& = \left( \frac{\delta}{\delta \Lambda^\prime} \right)_{\lnot \nvec}
-	+ \left( \frac{\delta}{\delta \Lambda^\prime} \right)_{\nvec}
-	= \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime}
-	+ \frac{\partial}{\partial \Lambda_{\nvec}^\prime}.
-\end{eqn}
-
-Splitting displacement operators and functionals:
-\begin{eqn2}
-	& \int && \delta^2\Lambda
-		\frac{\delta}{\delta \Lambda^\prime} \left(
-			\exp \int d\xvec (-\Lambda \Psi^* + \Lambda^* \Psi)
-			\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
-			\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
-			\hat{D}[\Lambda, \Lambda^*]
-		\right) \\
-	& ={} && \left( \prod_{\mvec \in \restbasis} \int d^2\lambda_{\mvec} \right)
-		\sum_{\nvec \in \restbasis}
-		\phi_{\nvec}^{*\prime}
-		\frac{\partial}{\partial \lambda_{\nvec}} \\
-	& && \left(
-			D_{\lnot \nvec} D_{\nvec}
-			\left(
-				\frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime}
-				+ \frac{\partial}{\partial \Lambda_{\nvec}^\prime}
-			\right)^r
-			\left(
-				-\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}}
-				-\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}}
-			\right)^s
-			\hat{D}_{\lnot \nvec} \hat{D}_{\nvec}
-		\right)
-\end{eqn2}
-Separating terms with $\nvec$:
-\begin{eqn}
-	={} & \sum_{u=1}^r \sum_{v=1}^s \binom{r}{u} \binom{s}{v}
-		\sum_{\nvec \in \restbasis}
-		\left( \prod_{\mvec \in \restbasis} \int d^2\lambda_{\mvec} \right) \\
-	&	\phi_{\nvec}^{*\prime} D_{\lnot \nvec}
-		\frac{\partial}{\partial \lambda_{\nvec}}
-		\left( D_{\nvec}
-			\left(
-				\left( \frac{\partial}{\partial \Lambda_{\nvec}^\prime} \right)^u
-				\left( -\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}} \right)^v
-				\hat{D}_{\nvec}
-			\right)
-			\left(
-				\left( \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime} \right)^{r-u}
-				\left( -\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}} \right)^{s-v}
-				\hat{D}_{\lnot \nvec}
-			\right)
-		\right) \\
-	={} & \sum_{u=1}^r \sum_{v=1}^s \binom{r}{u} \binom{s}{v}
-		\sum_{\nvec \in \restbasis}
-		\left( \prod_{\mvec \in \restbasis, \mvec \ne \nvec} \int d^2\lambda_{\mvec} \right)
-		\left(
-			\phi_{\nvec}^{*\prime} D_{\lnot \nvec}
-			\left( \frac{\partial}{\partial \Lambda_{\lnot \nvec}^\prime} \right)^{r-u}
-			\left( -\frac{\partial}{\partial \Lambda_{\lnot \nvec}^{\prime*}} \right)^{s-v}
-			\hat{D}_{\lnot \nvec}
-		\right) \\
-	&	\int d^2\lambda_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}} \left(
-			D_{\nvec}
-			\left( \frac{\partial}{\partial \Lambda_{\nvec}^\prime} \right)^u
-			\left( -\frac{\partial}{\partial \Lambda_{\nvec}^{\prime*}} \right)^v
-			\hat{D}_{\nvec}
-		\right).
-\end{eqn}
-And the integral over $\lambda_{\nvec}$ is exactly the expression from \lmmref{c-numbers:zero-integrals}, which is equal to zero, thus proving the lemma.
-\end{proof}
-
 \begin{theorem}[Functional extension of \thmref{formalism:sm-wigner:correspondences}]
 \label{thm:formalism:func-wigner:correspondences}
 	\begin{eqn*}
@@ -275,10 +132,10 @@ Moving additional multiplier outside the integral:
 \begin{eqn}
 	\mathcal{W} [ \hat{\Psi} \hat{A} ]
 	& = \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
 		\Trace{ \Psiop \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
 	& = \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
 		\left(
 			-\frac{\delta}{\delta \Lambda^*}
 			-\frac{1}{2} \Lambda
@@ -286,11 +143,11 @@ Moving additional multiplier outside the integral:
 		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
 	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
 	- \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
 		\frac{\delta}{\delta \Lambda^*}
 		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
 \end{eqn}
-Using \lmmref{formalism:func-wigner:zero-integrals} to move the partial derivative over $\Lambda^*$:
+Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ \todo{need to proof that the trace is bounded}:
 \begin{eqn}
 	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
 	+ \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda \left(
@@ -384,17 +241,20 @@ By definition of Wigner functional:
 		\hat{D}[\Lambda, \Lambda^*]
 	}
 \end{eqn}
-Integrating by parts and eliminating terms which fit \lmmref{formalism:func-wigner:zero-integrals}:
-\begin{eqn}
-	= \frac{1}{\pi^{2|\restbasis|}} \Trace{ \hat{\rho}
-		\int \delta^2\Psi \int \delta^2\Lambda
-		\exp(-\Lambda \Psi^* + \Lambda^* \Psi)
-		\left( \frac{\delta}{\delta \Lambda} \right)^s
-		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-		\hat{D}[\Lambda, \Lambda^*]
-	}
-\end{eqn}
 Evaluating integral over $\Psi$ using \lmmref{func-calculus:fourier-of-moments}:
+\begin{eqn}
+	= \int \delta^2\Lambda
+		\left(
+			\left( \frac{\delta}{\delta \Lambda} \right)^s
+			\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+			\Delta_{\restbasis}[\Lambda]
+		\right)
+		\Trace{
+			\hat{\rho}
+			\hat{D}[\Lambda, \Lambda^*]
+		}.
+\end{eqn}
+Integrating by parts and eliminating terms which fit \lmmref{func-calculus:zero-delta-integrals}:
 \begin{eqn}
 	& = \int \delta^2\Lambda\,
 		\Delta_{\restbasis}[\Lambda]
