@@ -143,77 +143,56 @@ Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
 \end{eqn}
 \end{proof}
 
-A notable special case of \lmmref{c-numbers:fourier-of-moments} is
-\begin{eqn}
-	\int d^2\alpha \exp(-\lambda \alpha^* + \lambda^* \alpha)
-	= \pi^2 \delta(\Real \lambda) \delta(\Imag \lambda).
-\end{eqn}
-
 \begin{lemma}
 \label{lmm:c-numbers:zero-integrals}
-	For complex $\alpha$ and any non-negative integers $r$ and $s$:
+	If $f(\lambda, \lambda^*)$ is bounded, then for any complex $\alpha$:
 	\begin{eqn*}
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				\exp(ixy) x^r y^s
+				f(\lambda, \lambda^*)
 			\right)
 		& = 0 \\
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda^*}
 			\left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				\exp(ixy) x^r y^s
+				f(\lambda, \lambda^*)
 			\right)
 		& = 0.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-We will prove the first equation.
-First, note that complex-valued integral of derivative is evaluated as
-\begin{eqn}
-	\int d^2\lambda \frac{\partial}{\partial \lambda} f(\lambda, \lambda^*)
-	& = \frac{1}{2} \int\limits_{-\infty}^{\infty} dx \int\limits_{-\infty}^{\infty} dy
-		\left( \frac{\partial}{\partial x} - i \frac{\partial}{\partial y} \right)
-		g(x, y) \\
-	& = \frac{1}{2} \int\limits_{-\infty}^{\infty} dy \int\limits_{-\infty}^{\infty} dx
-			\frac{\partial}{\partial x} g(x, y)
-		- \frac{i}{2} \int\limits_{-\infty}^{\infty} dx \int\limits_{-\infty}^{\infty} dy
-			\frac{\partial}{\partial y} g(x, y) \\
-	& =	\frac{1}{2} \int\limits_{-\infty}^{\infty} dy \left(
-			\left. g(x, y) \right|_{x=-\infty}^{\infty}
-		\right)
-		- \frac{i}{2} \int\limits_{-\infty}^{\infty} dx \left(
-			\left. g(x, y) \right|_{y=-\infty}^{\infty}
-		\right),
-\end{eqn}
-where we expanded $\lambda = x + iy$.
-Thus
-\begin{eqn2}
-	& \int && d^2\lambda
-		\frac{\partial}{\partial \lambda} \left(
-			\exp(-\lambda \alpha^* + \lambda^* \alpha)
-			\exp(ixy) x^r y^s
-		\right)  \\
-	& ={} && \frac{1}{2} \int dy \left. \left(
-			\exp(2ixv - 2iyu) \exp(ixy) x^r y^s
-		\right) \right|_{x = -\infty}^\infty \\
-	& && - \frac{i}{2} \int dx \left. \left(
-			\exp(2ixv - 2iyu) \exp(ixy) x^r y^s
-		\right) \right|_{y = -\infty}^\infty \\
-	& ={} && \left(
-			\frac{1}{2} \exp(2ixv) x^r \int dy \exp(iy(x-2u)) y^s
-		\right)_{x = -\infty}^\infty \\
-	& && - \left(
-			\frac{i}{2} \exp(-2ixy) y^s \int dx \exp(ix(y+2v)) x^r
-		\right)_{y = -\infty}^\infty \\
-	& ={} && \left(
-			\frac{1}{2} \exp(2ixv) x^r 2 \pi i^s \delta^{(s)}(x-2u)
-		\right)_{x = -\infty}^\infty \\
-	& && - \left(
-			\frac{i}{2} \exp(-2ixy) y^s 2 \pi i^r \delta^{(r)}(y+2v)
-		\right)_{y = -\infty}^\infty \\
-	& ={} && 0,
-\end{eqn2}
-because any derivative of delta function is zero on the infinity.
+\todo{Needs proof!}
+\end{proof}
+
+\begin{lemma}
+\label{lmm:c-numbers:zero-delta-integrals}
+	\todo{Any limitations on $f$? It is bounded (on account of being $\chi_W$), for one.}
+	\begin{eqn*}
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda} \left(
+				\left(
+					\left( \frac{\partial}{\partial \lambda} \right)^s
+					\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+					\delta(\Real \lambda) \delta(\Imag \lambda)
+				\right)
+				f(\lambda, \lambda^*)
+			\right)
+		& = 0 \\
+		\int d^2\lambda
+			\frac{\partial}{\partial \lambda^*}
+			\left(
+				\left(
+					\left( \frac{\partial}{\partial \lambda} \right)^s
+					\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+					\delta(\Real \lambda) \delta(\Imag \lambda)
+				\right)
+				f(\lambda, \lambda^*)
+			\right)
+		& = 0.
+	\end{eqn*}
+\end{lemma}
+\begin{proof}
+Proved straightforwardly by expanding integrals in real values, separating variables and integrating, using the fact that any derivative of the delta function is zero on the infinity.
 \end{proof}
