@@ -33,15 +33,35 @@ Using the displacement operator we can define Wigner transformation.
 		= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 			\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
 	\end{eqn*}
-	The backward transformation (called the Weyl transformation) gives back matrix elements of the operator:
+	The backward transformation (called the Weyl transformation) gives back the operator:
 	\begin{eqn*}
-		\langle \alpha \lvert \mathcal{W}^{-1}[f(\alpha, \alpha^*)] \rvert \alpha \rangle
-		= \mathrm{\todo{find\,the\,expression}}.
+		\mathcal{W}^{-1}[f]
+		= \frac{1}{\pi} \int d^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
+			\int d^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*).
 	\end{eqn*}
-	Any operator is determined by its expectation in all coherent states~\cite{Gardiner2004}, therefore Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{R})$.
-	\todo{Is the result actually real, or is it complex?}
-	\todo{Is it true for any operator, or only for density matrix? Gardiner specifically proves that $W$ exists for any $\hat{\rho}$.}
+	\todo{Is the result actually real, or is it complex? M.b. real for density matrix?}
 \end{definition}
+
+It is easy to demonstrate that Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{R})$ \todo{at least, for Hilbert-Schmidt operators and square-integrable functions~\cite{Cahill1969}}.
+Let us assume $\hat{A} \equiv \mathcal{W}^{-1}[f]$.
+Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi, \xi^*) \hat{D}(\lambda, \lambda^*)} = \pi \delta(\Real \xi - \Real \lambda) \delta(\Imag \xi - \Imag \lambda)$~\cite{Cahill1969} and applying \lmmref{c-numbers:fourier-of-moments}:
+\begin{eqn}
+	\mathcal{W}[\hat{A}]
+	={} & \frac{1}{\pi^3} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
+	&	\times \Trace{
+			\int d^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
+				\int d^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*)
+			\hat{D}(\lambda, \lambda^*)
+		} \\
+	={} & \frac{1}{\pi^2} \int d^2 \lambda \int d^2 \eta
+	 	\exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\exp(-\eta \lambda^* + \eta^* \lambda) f(\eta, \eta^*) \\
+	={} & \frac{1}{\pi^2} \int d^2 \eta \int d^2 \lambda
+	 	\exp(-\lambda (\alpha^* - \eta^*) + \lambda^* (\alpha - \eta)) f(\eta, \eta^*) \\
+	={} & \int d^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta, \eta^*) \\
+	={} & f(\alpha, \alpha^*).
+\end{eqn}
+The proof for the other direction looks the same.
 
 \begin{definition}
 \label{def:formalism:sm-wigner:w-function}
@@ -65,6 +85,7 @@ where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
 
 \begin{theorem}[Operator correspondences]
 \label{thm:formalism:sm-wigner:correspondences}
+	For any Hilbert-Schmidt operator $\hat{A}$ \todo{needs definition?}
 	\begin{eqn*}
 		\mathcal{W} [ \hat{a} \hat{A} ]
 			& = \left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) \mathcal{W}[\hat{A}],
@@ -110,7 +131,7 @@ Using this:
 		\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
 \end{eqn}
 The second term is almost the definition of the Wigner function, except for the partial derivative over $\lambda^*$.
-Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} (application of which is justified by the fact that $\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }$ is bounded \todo{needs proof --- by analogy with the one for $\chi_W$ in~\cite{Gardiner2004}}):
+Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\hat{A}$ is Hilbert-Schmidt, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}):
 \begin{eqn}
 	= \frac{1}{2} \frac{\partial}{\partial \alpha^*} \mathcal{W} [\hat{A}]
 	+ \frac{1}{\pi^2} \int d^2 \lambda \left(
@@ -181,36 +202,28 @@ Now we can get the final relation.
 By definition of the Wigner function:
 \begin{eqn}
 	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
-	= \frac{1}{\pi^2} \Trace{ \hat{\rho}
+	= \frac{1}{\pi^2}
 		\int d^2\alpha\, \alpha^r (\alpha^*)^s
 		\int d^2\lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\hat{D}(\lambda, \lambda^*)
-	}
+		\chi_W (\lambda, \lambda^*).
 \end{eqn}
 Integrating over $\alpha$ using \lmmref{c-numbers:fourier-of-moments}:
 \begin{eqn}
-	= \Trace{ \hat{\rho}
-		\int d^2\lambda
+	= \int d^2\lambda
 		\left(
 			\left( \frac{\partial}{\partial \lambda} \right)^s
 			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
 			\delta(\Real \lambda) \delta(\Imag \lambda)
 		\right)
-		\hat{D} (\lambda, \lambda^*)
-	}
+		\chi_W (\lambda, \lambda^*).
 \end{eqn}
 Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delta-integrals}:
 \begin{eqn}
-	= \Trace{ \hat{\rho}
-		\int d^2\lambda
+	& = \int d^2\lambda
 		\delta(\Real \lambda) \delta(\Imag \lambda)
 		\left( \frac{\partial}{\partial \lambda} \right)^s
 		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\hat{D} (\lambda, \lambda^*)
-	}
-\end{eqn}
-Evaluating integral over $\lambda$:
-\begin{eqn}
+		\chi_W (\lambda, \lambda^*) \\
 	& = \left.
 		\left( \frac{\partial}{\partial \lambda} \right)^s
 		\left( -\frac{\partial}{\partial \lambda^*} \right)^r

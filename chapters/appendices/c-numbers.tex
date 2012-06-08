@@ -145,7 +145,7 @@ Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
 
 \begin{lemma}
 \label{lmm:c-numbers:zero-integrals}
-	If $f(\lambda, \lambda^*)$ is bounded, then for any complex $\alpha$:
+	If $f(\lambda, \lambda^*)$ is square-integrable, then for any complex $\alpha$:
 	\begin{eqn*}
 		\int d^2\lambda
 			\frac{\partial}{\partial \lambda} \left(
@@ -163,7 +163,7 @@ Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-\todo{Needs proof!}
+Square-integrability of $f$ means $\lim_{\Real \lambda \rightarrow \infty} = 0$ and $\lim_{\Imag \lambda \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
 \end{proof}
 
 \begin{lemma}
