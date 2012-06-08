@@ -73,12 +73,23 @@ Thus
 			\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
 	\end{eqn*}
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
-	The backward transformation (called the Weyl transformation) gives back matrix elements of the operator:
+	The corresponding functional Weyl transformation is:
 	\begin{eqn*}
-		\langle \Psi \lvert \mathcal{W}^{-1}[f[\Psi, \Psi^*]] \rvert \Psi \rangle
-		= \todo{\mathrm{find\,the\,expression}}.
+		\mathcal{W}^{-1}[F]
+		= \frac{1}{\pi^{|\restbasis|}} \int \delta^2 \Xi \hat{D}^{\dagger}[\Xi, \Xi^*]
+			\int \delta^2 \Phi D[\Phi, \Phi^*, \Xi, \Xi^*] F[\Phi, \Phi^*].
 	\end{eqn*}
 \end{definition}
+
+\begin{theorem}
+	For any $F$,
+	\begin{eqn*}
+		\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F.
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+\todo{Proved by expanding into modes.}
+\end{proof}
 
 \begin{definition}
 \label{def:formalism:func-wigner:w-functional}

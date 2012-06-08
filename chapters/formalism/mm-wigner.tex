@@ -10,10 +10,11 @@ In this section we will assume that mode identifiers belong to some set $\restba
 \label{def:formalism:mm-wigner:w-transformation}
 	Let $\blambda$ and $\balpha$ be vectors of $\lambda_{\nvec}$ and $\alpha_{\nvec}$ values respectively,
 	with $\nvec \in \restbasis$.
+	Multi-mode Wigner transformation is
 	\begin{eqn*}
 		\mathcal{W}[\hat{A}]
 		= \frac{1}{\pi^{2|\restbasis|}}
-			\left( \prod_{\nvec \in \restbasis} \int d^2 \lambda_{\nvec} \right)
+			\int d^2 \blambda
 			\left(
 				\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
 			\right)
@@ -23,7 +24,19 @@ In this section we will assume that mode identifiers belong to some set $\restba
 			},
 	\end{eqn*}
 	where $\hat{D}_{\nvec} = \exp(\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})$.
+	Multi-component Weyl transformation is
+	\begin{eqn*}
+		\mathcal{W}^{-1}[f]
+		= \frac{1}{\pi^{|\restbasis|}} \int d^2 \bxi
+			\left( \prod_{\nvec \in \restbasis} \hat{D}_{\nvec}^{\dagger}(\xi_{\nvec}, \xi_{\nvec}^*) \right)
+			\int d^2 \bfeta
+				\left( \prod_{\nvec \in \restbasis}
+					\exp(-\eta_{\nvec} \xi_{\nvec}^* + \eta_{\nvec}^* \xi_{\nvec})
+				\right) f(\bfeta, \bfeta^*).
+	\end{eqn*}
 \end{definition}
+
+The equality $\mathcal{W}[\mathcal{W}^-1[f]] \equiv f$ is proved in the same way as in single-mode case.
 
 Corresponding definitions of multimode characteristic function and Wigner function are
 

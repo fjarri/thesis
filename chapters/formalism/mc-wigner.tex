@@ -34,7 +34,15 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 	where $\Lambda_j \in \mathbb{F}_{\restbasis_j}$.
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi, \bPsi^*]$.
-	\todo{Add expression for Weyl transformation.}
+	Corresponding Weyl transformation is
+	\begin{eqn*}
+		\mathcal{W}^{-1}[F]
+		= \frac{1}{\pi^{\sum |\restbasis_j|}} \int \delta^2 \bXi
+			\left( \prod_{j=1}^C \hat{D}_j^{\dagger}[\Xi_j, \Xi_j^*] \right)
+			\int \delta^2 \bPhi
+				\left( \prod_{j=1}^C D[\Phi_j, \Phi_j^*, \Xi_j, \Xi_j^*] \right)
+				F[\bPhi, \bPhi^*].
+	\end{eqn*}
 \end{definition}
 
 \begin{definition}
