@@ -39,10 +39,9 @@ Using the displacement operator we can define Wigner transformation.
 		= \frac{1}{\pi} \int d^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
 			\int d^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*).
 	\end{eqn*}
-	\todo{Is the result actually real, or is it complex? M.b. real for density matrix?}
 \end{definition}
 
-It is easy to demonstrate that Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{R})$ \todo{at least, for Hilbert-Schmidt operators and square-integrable functions~\cite{Cahill1969}}.
+It is easy to demonstrate that Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{C})$ \todo{at least, for Hilbert-Schmidt operators and square-integrable functions~\cite{Cahill1969}}.
 Let us assume $\hat{A} \equiv \mathcal{W}^{-1}[f]$.
 Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi, \xi^*) \hat{D}(\lambda, \lambda^*)} = \pi \delta(\Real \xi - \Real \lambda) \delta(\Imag \xi - \Imag \lambda)$~\cite{Cahill1969} and applying \lmmref{c-numbers:fourier-of-moments}:
 \begin{eqn}
@@ -63,6 +62,27 @@ Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi, \xi^*) \hat{D}(\lambda,
 \end{eqn}
 The proof for the other direction looks the same.
 
+\begin{theorem}
+\label{thm:formalism:sm-wigner:w-real}
+	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real function.
+	\todo{It is a sufficient condition, but is it necessary?}
+\end{theorem}
+\begin{proof}
+Let us calculate the conjugation of $W[\hat{A}]$:
+\begin{eqn}
+	(W[\hat{A}])^*
+	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda^* \alpha + \lambda \alpha^*)
+		(\Trace{ \hat{A} \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}) })^*.
+\end{eqn}
+Changing variables as $\lambda \rightarrow -\lambda$ and using the fact that $(\Tr{\hat{B}})^* = \Tr{\hat{B}^\dagger}$:
+\begin{eqn}
+	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(\lambda^* \alpha - \lambda \alpha^*)
+		\Trace{ \hat{A}^\dagger \exp(-\lambda^* \hat{a} + \lambda \hat{a}^\dagger) } \\
+	& = W[\hat{A}^\dagger].
+\end{eqn}
+Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equal to itself and therefore is real.
+\end{proof}
+
 \begin{definition}
 \label{def:formalism:sm-wigner:w-function}
 	Wigner function is a Wigner transformation of the density matrix:
@@ -70,6 +90,7 @@ The proof for the other direction looks the same.
 		W(\alpha, \alpha^*) \equiv \mathcal{W}[\hat{\rho}].
 	\end{eqn*}
 	The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
+	Since the density matrix is Hermitian, according to \thmref{formalism:sm-wigner:w-real} $W$ is a real function.
 \end{definition}
 
 In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}

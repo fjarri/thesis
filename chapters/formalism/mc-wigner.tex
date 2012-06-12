@@ -22,7 +22,6 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 \begin{definition}
 \label{def:formalism:mc-wigner:w-transformation}
 	Multi-component functional Wigner transformation $\mathcal{W}$ is defined as
-	\todo{Is the return value real or complex?}
 	\begin{eqn*}
 		& \mathcal{W} :: \left( \mathbb{R}^D \rightarrow \prod_{j=1}^C \mathbb{H}_{\restbasis_j} \right)
 			\rightarrow \prod_{j=1}^C \mathbb{F}_{\restbasis_j}
@@ -34,6 +33,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 	where $\Lambda_j \in \mathbb{F}_{\restbasis_j}$.
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi, \bPsi^*]$.
+	It can be proved, same as in \thmref{formalism:sm-wigner:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 	Corresponding Weyl transformation is
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
@@ -49,7 +49,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 \label{def:formalism:mc-wigner:w-functional}
 	The Wigner functional is
 	\begin{eqn*}
-		& W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{C} \\
+		& W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R} \\
 		& W [\bPsi, \bPsi^*]
 		\equiv \mathcal{W}[\hat{\rho}]
 		= \frac{1}{\pi^{2 \sum|\restbasis_j|}} \int \delta^2 \bLambda
@@ -58,7 +58,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 	where $\chi_W [\Lambda, \Lambda^*]$ is the characteristic functional
 	\begin{eqn*}
-		& \chi_W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R} \\
+		& \chi_W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{C} \\
 		& \chi_W [\bLambda, \bLambda^*]
 		= \Trace{ \hat{\rho} \prod_{j=1}^C \hat{D}_j[\Lambda_j, \Lambda_j^*] }.
 	\end{eqn*}

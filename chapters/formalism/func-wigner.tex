@@ -63,7 +63,6 @@ Thus
 \begin{definition}
 \label{def:formalism:func-wigner:w-transformation}
 	Functional Wigner transformation $\mathcal{W}$ is defined as
-	\todo{Is the return value real or complex?}
 	\begin{eqn*}
 		& \mathcal{W} :: \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}
 			\rightarrow \mathbb{C} \\
@@ -73,6 +72,7 @@ Thus
 			\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
 	\end{eqn*}
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
+	It can be proved, same as in \thmref{formalism:sm-wigner:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 	The corresponding functional Weyl transformation is:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
@@ -95,7 +95,7 @@ Thus
 \label{def:formalism:func-wigner:w-functional}
 	The Wigner functional is
 	\begin{eqn*}
-		& W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
+		& W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
 		& W [\Psi, \Psi^*]
 		\equiv \mathcal{W}[\hat{\rho}]
 		= \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
@@ -104,7 +104,7 @@ Thus
 	\end{eqn*}
 	where $\chi_W [\Lambda, \Lambda^*]$ is the characteristic functional
 	\begin{eqn*}
-		& \chi_W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
+		& \chi_W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
 		& \chi_W [\Lambda, \Lambda^*] = \Trace{ \hat{\rho} \hat{D}[\Lambda, \Lambda^*] }.
 	\end{eqn*}
 \end{definition}

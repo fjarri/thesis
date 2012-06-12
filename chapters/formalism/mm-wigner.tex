@@ -24,6 +24,7 @@ In this section we will assume that mode identifiers belong to some set $\restba
 			},
 	\end{eqn*}
 	where $\hat{D}_{\nvec} = \exp(\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})$.
+	It can be proved, same as in \thmref{formalism:sm-wigner:w-real} for the single-mode case, that $W[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 	Multi-component Weyl transformation is
 	\begin{eqn*}
 		\mathcal{W}^{-1}[f]
@@ -52,8 +53,7 @@ Corresponding definitions of multimode characteristic function and Wigner functi
 	\begin{eqn*}
 		W (\balpha, \balpha^*)
 		\equiv \mathcal{W}[\hat{\rho}]
-		= \frac{1}{\pi^{2|\restbasis|}}
-			\left( \prod_{\nvec \in \restbasis} \int d^2 \lambda_{\nvec} \right)
+		= \frac{1}{\pi^{2|\restbasis|}} \int d^2 \blambda
 			\left(
 				\prod_{\nvec \in \restbasis}
 				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
