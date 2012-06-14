@@ -49,7 +49,7 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 
 \begin{lemma}[FPE--SDEs correspondence in convenient form.]
 \label{lmm:wigner-bec:fpe:fpe-sde-real}
-	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real-valued variables, Fokker-Planck equation
+	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real variables, Fokker-Planck equation
 	\begin{eqn*}
 		\frac{dW}{dt}
 		= -\bpartial_{\zvec}^T \avec W
@@ -71,7 +71,7 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 	\end{eqn*}
 	$\evec_i$ being the unit vector with elements $(\evec_i)_j = \delta_{ij}$.
 	\todo{Is there a better way to express $\svec$ in terms of matrices?}
-	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources), $\bpartial_{\zvec}^T \equiv (\partial_{z_1} \ldots \partial_{z_M})$ is a vector differential, and $d\Zvec$ is a standard $L$-dimensional Wiener process.
+	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources), $\bpartial_{\zvec}^T \equiv (\partial_{z_1} \ldots \partial_{z_M})$ is a vector differential, and $\Zvec$ is a standard $L$-dimensional Wiener process.
 \end{lemma}
 \begin{proof}
 For details see~\cite{Risken1996}, sections 3.3 and 3.4.
@@ -80,12 +80,12 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 
 \begin{theorem}
 \label{thm:wigner-bec:fpe:fpe-sde-complex}
-	If $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex-valued variables,
+	If $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex variables,
 	Fokker-Planck equation
 	\begin{eqn*}
 		\frac{dW}{dt}
 		= -\bpartial_{\balpha}^T \avec W - \bpartial_{\balpha^*}^T \avec^* W
-		+ \Trace{ \bpartial_{\balpha} \bpartial_{\balpha^*}^T B B^H } W
+		+ \Trace{ \bpartial_{\balpha^*} \bpartial_{\balpha}^T B B^H } W
 	\end{eqn*}
 	is equivalent to a set of stochastic differential equations in It\^{o} form
 	\begin{eqn*}
@@ -99,11 +99,11 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 	\begin{eqn*}
 		s_j = \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B },
 	\end{eqn*}
-	and $d\Zvec = (d\bm{X} + id\bm{Y}) / \sqrt{2}$ is an $M$-dimensional complex-valued Wiener process,
-	containing two standard $M$-dimensional Wiener processes $d\bm{X}$ and $d\bm{Y}$.
+	and $\Zvec = (\bm{X} + i\bm{Y}) / \sqrt{2}$ is an $L$-dimensional complex-valued Wiener process,
+	containing two standard $L$-dimensional Wiener processes $\bm{X}$ and $\bm{Y}$.
 \end{theorem}
 \begin{proof}
-Let us expand the FPE using real values $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = G + iF$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
+Let us expand the FPE using real values $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
 Thus
 \begin{eqn}
 	\frac{dW}{dt}
@@ -113,11 +113,11 @@ Thus
 		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
 			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
 		(F F^T + G G^T) \right. \\
-	& \left. + (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+	& \left. - (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
 			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 		(F G^T - G F^T)
 	} W \\
-	& - \frac{i}{4} \Trace{
+	& + \frac{i}{4} \Trace{
 		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
 			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
 		(F G^T - G F^T)
@@ -137,7 +137,7 @@ Since $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{
 		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
 			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
 		(F F^T + G G^T) \right. \\
-	& \left. + (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+	& \left. - (\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
 			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 		(F G^T - G F^T)
 	} W.
