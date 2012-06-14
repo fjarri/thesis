@@ -340,33 +340,36 @@ Noise-induced drift term requires some work:
 		= \int d\xvec \left(
 			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \mathcal{A}^{(j)}
 			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} (\mathcal{A}^{(j)})^*
-			+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j \delta \Psi_k^*}
-				\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
+			+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k}
+				\sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} (\mathcal{B}_{\lvec}^{(k)})^*
 		\right) W
 	\end{eqn*}
 	is equivalent to the set of SDEs in It\^{o} form
 	\begin{eqn*}
 		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-			\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+			\mathcal{A}^{(j)} dt + \sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^* dQ_{\lvec}
 		\right],
 	\end{eqn*}
 	or in Stratonovich form
 	\begin{eqn*}
 		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-			(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+			(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^* dQ_{\lvec}
 		\right],
 	\end{eqn*}
 	where
 	\begin{eqn*}
 		\mathcal{S}^{(j)} = \sum_{n=1}^C \sum_{\lvec}
-			(\mathcal{B}_{\lvec}^{(n)})^*
+			\mathcal{B}_{\lvec}^{(n)}
 			\frac{\delta}{\delta \Psi_n^*}
-			\mathcal{B}_{\lvec}^{(j)},
+			(\mathcal{B}_{\lvec}^{(j)})^*,
 	\end{eqn*}
 	and $Q_{\lvec}$ is a functional Wiener process:
 	\begin{eqn*}
 		Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} Z_{\lvec,\nvec}.
 	\end{eqn*}
+	\todo{Here we have a conjugated term in the SDE as opposed to previous theorems, because the order of indices in the diffusion term of FPE is different (j-k-j-k) instead of (j-k-k-j).
+	It was made so to correspond to the ``real'' FPE for BEC.
+	Perhaps it would be better to make $\mathcal{B}$ in SDEs be non-conjugated here and instead say that $\mathcal{B} = \delta / \delta \Psi_j^* \hat{O}^*$ when we talk about BEC.}
 \end{theorem}
 \begin{proof}
 Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
@@ -382,29 +385,29 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 		\right. \\
 	&	\left. + \sum_{j=1}^C \sum_{k=1}^C
 			\sum_{\mvec \in \restbasis_j, \nvec \in \restbasis_k}
-			\frac{\partial}{\partial \alpha_{j,\mvec}}
-			\frac{\partial}{\partial \alpha_{k,\nvec}^*}
+			\frac{\partial}{\partial \alpha_{j,\mvec}^*}
+			\frac{\partial}{\partial \alpha_{k,\nvec}}
 			\int d\xvec
-			\phi_{k,\nvec} \phi_{j,\mvec}^*
-			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
+			\phi_{j,\mvec} \phi_{k,\nvec}^*
+			\sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} (\mathcal{B}_{\lvec}^{(k)})^*
 	\right) W.
 \end{eqn}
 The diffusion term has to be transformed in order to conform to \thmref{wigner-bec:fpe:mc-fpe-sde}:
 \begin{eqn}
-	\int d\xvec \phi_{k,\nvec} \phi_{j,\mvec}^* \sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
+	\int d\xvec \phi_{j,\mvec} \phi_{k,\nvec}^* \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} (\mathcal{B}_{\lvec}^{(k)})^*
 	& = \int d\xvec \int d\xvec^\prime
-			\phi_{k,\nvec}^\prime \phi_{j,\mvec}^*
-			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^{\prime*}
+			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
+			\sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^\prime (\mathcal{B}_{\lvec}^{(k)})^*
 			\delta(\xvec - \xvec^\prime) \\
 	& = \int d\xvec \int d\xvec^\prime
-			\phi_{k,\nvec}^\prime \phi_{j,\mvec}^*
-			\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^{\prime*}
+			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
+			\sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^\prime (\mathcal{B}_{\lvec}^{(k)})^*
 			\sum_{\pvec \in \fullbasis} \phi_{\pvec}^{\prime*} \phi_{\pvec} \\
 	& = \sum_{\pvec \in \fullbasis, \lvec}
 		\int d\xvec
-			\phi_{k,\nvec}^* \mathcal{B}_{\lvec}^{(k)} \phi_{\pvec}
+			\phi_{j,\mvec} \mathcal{B}_{\lvec}^{(j)} \phi_{\pvec}^*
 		\int d\xvec
-			\phi_{j,\mvec} (\mathcal{B}_{\lvec}^{(j)})^* \phi_{\pvec}^*
+			\phi_{k,\nvec}^* (\mathcal{B}_{\lvec}^{(k)})^* \phi_{\pvec}
 \end{eqn}
 Note that we did not specify the index of the full basis used to expand the delta function.
 It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$, this will not change the result.
@@ -416,7 +419,7 @@ Now we have the FPE from \thmref{wigner-bec:fpe:mc-fpe-sde} with
 and
 \begin{eqn}
 \label{eqn:wigner-bec:fpe:func-noise-matrix}
-	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec},\,
+	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{c,\mvec}^* (\mathcal{B}_{\lvec}^{(c)})^* \phi_{\nvec},\,
 	\mvec \in \restbasis_c, \nvec \in \fullbasis.
 \end{eqn}
 Note that columns of $B$ are enumerated using compound index $\nvec,\lvec$.
@@ -426,21 +429,21 @@ Therefore the initial FPE is equivalent to the set of SDEs in It\^{o} form
 	d\alpha_{\mvec}^{(c)}
 	= \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
 	+ \sum_{\nvec \in \fullbasis, \lvec}
-		\int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+		\int d\xvec \phi_{c,\mvec}^* (\mathcal{B}_{\lvec}^{(c)})^* \phi_{\nvec} dZ_{\nvec,\lvec}.
 \end{eqn}
 Multiplying by $\phi_{c,\mvec}^\prime$ and grouping by component:
 \begin{eqn}
 	\sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime d\alpha_{\mvec}^{(c)}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
 	+ \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^*
-		\sum_{\nvec \in \fullbasis, \lvec} \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+		\sum_{\nvec \in \fullbasis, \lvec} (\mathcal{B}_{\lvec}^{(c)})^* \phi_{\nvec} dZ_{\nvec,\lvec}.
 \end{eqn}
 Recognizing \defref{func-calculus:projector} of projection transformation:
 \begin{eqn}
 	d\Psi_c
 	= \mathcal{P}_{\restbasis_c} \left[
 		\mathcal{A}^{(c)} dt
-		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)}
+		+ \sum_{\lvec} (\mathcal{B}_{\lvec}^{(c)})^*
 			\sum_{\nvec \in \fullbasis} \phi_{\nvec} dZ_{\nvec,\lvec}
 	\right].
 \end{eqn}
@@ -449,7 +452,7 @@ Defining functional Wiener process $Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi
 	d\Psi_c
 	= \mathcal{P}_{\restbasis_c} \left[
 		\mathcal{A}^{(c)} dt
-		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)} dQ_{\lvec}
+		+ \sum_{\lvec} (\mathcal{B}_{\lvec}^{(c)})^* dQ_{\lvec}
 	\right].
 \end{eqn}
 
@@ -473,37 +476,34 @@ Using the multimode form~\eqnref{wigner-bec:fpe:func-noise-matrix} of the noise 
 \begin{eqn}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
 		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
-			\int d\xvec \phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^* \phi_{\pvec}^*
+			\int d\xvec \phi_{n,\jvec} \mathcal{B}_{\lvec}^{(n)} \phi_{\pvec}^*
 			\int d\xvec \phi_{c,\mvec}^*
 				\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-				\mathcal{B}_{\lvec}^{(c)} \phi_{\pvec}
+				(\mathcal{B}_{\lvec}^{(c)})^* \phi_{\pvec}
 \end{eqn}
 Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\xvec - \xvec^\prime)$:
 \begin{eqn}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime
 		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
 			\int d\xvec
-				\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
+				\phi_{n,\jvec} \mathcal{B}_{\lvec}^{(n)}
 				\phi_{c,\mvec}^* \frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-				\mathcal{B}_{\lvec}^{(c)}
+				(\mathcal{B}_{\lvec}^{(c)})^*
 \end{eqn}
 Recognizing the projection transformation and the functional differential:
 \begin{eqn}
 	& = \mathcal{P}_{\restbasis_c} \left[
 		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
-			\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
+			\phi_{n,\jvec} \mathcal{B}_{\lvec}^{(n)}
 			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-			\mathcal{B}_{\lvec}^{(c)}
+			(\mathcal{B}_{\lvec}^{(c)})^*
 	\right] \\
 	& = \mathcal{P}_{\restbasis_c} \left[
 		\sum_{n=1}^C \sum_{\lvec}
-		(\mathcal{B}_{\lvec}^{(n)})^*
+		\mathcal{B}_{\lvec}^{(n)}
 		\frac{\delta}{\delta \Psi_n^*}
-		\mathcal{B}_{\lvec}^{(c)}
+		(\mathcal{B}_{\lvec}^{(c)})^*
 	\right].
 	\qedhere
 \end{eqn}
 \end{proof}
-
-\todo{This means that Stratonovich term is equal to zero for our $B \equiv B(\Psivec)$.}
-
