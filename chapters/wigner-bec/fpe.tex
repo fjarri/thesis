@@ -145,25 +145,25 @@ Since $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{
 
 In order to use \lmmref{wigner-bec:fpe:fpe-sde-real},
 we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\zvec^T \equiv \bm{x}^T \oplus \bm{y}^T$.
-This will give us an equation identical to one from the lemma, with $\avec^T \equiv \bm{u}^T \oplus \bm{v}^T$ and diffusion matrix
+This will give us an equation identical to one from the lemma, with the drift vector $\tilde{\avec}^T \equiv \bm{u}^T \oplus \bm{v}^T$ and the diffusion matrix
 \begin{eqn}
-	B B^T \equiv \frac{1}{2} \begin{pmatrix}
+	\tilde{B} \tilde{B}^T \equiv \frac{1}{2} \begin{pmatrix}
 		F F^T + G G^T & F G^T - G F^T \\
 		G F^T - F G^T & F F^T + G G^T
 	\end{pmatrix},
 \end{eqn}
 which gives a noise matrix
 \begin{eqn}
-	B = \frac{1}{\sqrt{2}} \begin{pmatrix}
+	\tilde{B} = \frac{1}{\sqrt{2}} \begin{pmatrix}
 		F & -G \\
 		G & F
 	\end{pmatrix}.
 \end{eqn}
 Therefore the equivalent SDEs in It\^{o} form are
 \begin{eqn}
-	d\zvec = \avec dt + B d\Zvec,
+	d\zvec = \tilde{\avec} dt + \tilde{B} d\tilde{\Zvec},
 \end{eqn}
-where $d\Zvec^T \equiv d\bm{X}^T \oplus d\bm{Y}^T$.
+where $d\tilde{\Zvec}^T \equiv d\bm{X}^T \oplus d\bm{Y}^T$.
 Returning to our previous variables:
 \begin{eqn}
 	d\bm{x} & = \bm{u} dt + \frac{1}{\sqrt{2}} F d\bm{X} - \frac{1}{\sqrt{2}} G d\bm{Y} \\
