@@ -39,7 +39,7 @@ This theorem can be extended to complex variables.
 			2 \Real (\avec \cdot \bpartial_{\balpha}) dt
 			+ \Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T } dt
 			+ 2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
-		\right) f(\zvec).
+		\right) f(\balpha).
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
@@ -153,4 +153,137 @@ Third term:
 \end{eqn}
 
 All terms have matched, thus proving the theorem.
+\end{proof}
+
+\begin{theorem}
+\label{thm:wigner-bec:ito-formula:mc-ito-f}
+	Let $\balpha^{(c)},\, c = 1..C$ be $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_{M_c}^{(c)})$.
+	For the SDE in It\^{o} form
+	\begin{eqn*}
+		d\balpha^{(c)} = \avec^{(c)} dt + B^{(c)} d\Zvec,
+	\end{eqn*}
+	the differential of a function $f(\balpha^{(1)}, \ldots, \balpha^{(C)})$ is
+	\begin{eqn*}
+		df ={} & \left(
+			2 \sum_{c=1}^C \Real (\avec^{(c)} \cdot \bpartial_{\balpha^{(c)}}) dt
+			+ \sum_{m=1}^C \sum_{n=1}^C \Trace{
+				B^{(m)} (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \bpartial_{\balpha^{(m)}}^T } dt \right. \\
+		& \left. + 2 \sum_{c=1}^C \Real \Trace{ B^{(c)} d\Zvec \bpartial_{\balpha^{(c)}}^T }
+		\right) f.
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+Proved analogously to \thmref{wigner-bec:fpe:mc-fpe-sde}, by combining $\balpha^{(c)}$ into a single vector	and applying \thmref{wigner-bec:ito-formula:ito-f-complex}.
+\end{proof}
+
+\begin{theorem}
+\label{thm:wigner-bec:ito-formula:func-ito-f}
+	Given functional SDEs in It\^{o} form
+	\begin{eqn*}
+		d\Psi^{(c)} = \mathcal{A}^{(c)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)} dQ_{\lvec},
+	\end{eqn*}
+	the differential of a functional $F[\Psivec]$ is
+	\begin{eqn*}
+		dF[\Psivec]
+		={} & \int d\xvec^\prime \left(
+			2 \sum_{c=1}^C \Real \left(
+				\mathcal{A}^{(c)\prime} \frac{\delta}{\delta \Psi_c^\prime}
+			\right) dt
+			+ \sum_{i=1}^C \sum_{j=1}^C \sum_{\lvec}
+				\mathcal{B}_{\lvec}^{(i)\prime}
+				\mathcal{B}_{\lvec}^{(j)\prime *}
+				\frac{\delta}{\delta \Psi_i^\prime}
+				\frac{\delta}{\delta \Psi_j^{\prime *}} dt
+			\right. \\
+		& \left. + 2 \sum_{c=1}^C \sum_{\lvec} \Real \left(
+				\mathcal{B}_{\lvec}^{(i)\prime}
+				dQ_{\lvec}^\prime
+				\frac{\delta}{\delta \Psi_c^\prime}
+			\right)
+		\right) F[\Psivec]
+	\end{eqn*}
+	\todo{Consider rewriting it as
+	\begin{eqn*}
+		dF[\Psivec]
+		= \int d\xvec^\prime \left(
+			2 \Real \left(
+				\vec{\mathcal{A}}^\prime \frac{\delta}{\delta \Psi_c^\prime}
+			\right) dt
+			+ \Trace{
+				\mathcal{B}^\prime
+				(\mathcal{B}^\prime)^H
+				\bdelta_{\Psivec^{\prime *}}
+				\bdelta_{\Psivec^\prime}^T
+			} dt
+			+ 2 \Real \Trace{
+				\mathcal{B}^\prime
+				d\vec{Q}^\prime
+				\bdelta_{\Psivec^\prime}^T
+			}
+		\right) F[\Psivec].
+	\end{eqn*}
+	}
+\end{theorem}
+\begin{proof}
+In terms of complex vectors SDEs can be rewritten as
+\begin{eqn}
+	d\alpha_{\mvec}^{(c)}
+	= \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
+	+ \sum_{\pvec \in \fullbasis, \lvec}
+		\int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\pvec} dZ_{\pvec,\lvec}.
+\end{eqn}
+Now, treating the functional as a function of complex vector $F \equiv F(\balpha^{(1)}, \ldots, \balpha^{(C)})$, we can use \thmref{wigner-bec:ito-formula:mc-ito-f} with
+\begin{eqn}
+	(\bm{a}^{(c)})_{\mvec} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},
+\end{eqn}
+and
+\begin{eqn}
+	(B^{(c)})_{\mvec,(\pvec,\lvec)}
+	= \int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\pvec}.
+\end{eqn}
+This gives us
+\begin{eqn}
+	dF
+	={} & \left(
+		2 \sum_{c=1}^C \sum_{\mvec \in \restbasis_c} \Real \left(
+			\int d\xvec^\prime \phi_{c,\mvec}^{\prime*} \mathcal{A}^{(c)\prime}
+			\frac{\partial}{\partial \alpha_{c,\mvec}}
+		\right) \right. \\
+	& \left. + \sum_{i=1}^C \sum_{j=1}^C
+			\sum_{\mvec \in \restbasis_i} \sum_{\nvec \in \restbasis_j}
+			\sum_{\pvec \in \fullbasis, \lvec}
+			\int d\xvec^\prime \phi_{i,\mvec}^{\prime *} \mathcal{B}_{\lvec}^{(i)\prime} \phi_{\pvec}^\prime
+			\int d\xvec^{\prime\prime} \phi_{j,\nvec}^{\prime\prime} \mathcal{B}_{\lvec}^{(j)\prime\prime *} \phi_{\pvec}^{\prime\prime *}
+			\frac{\partial}{\partial_{\alpha_{j,\nvec}^*}}
+			\frac{\partial}{\partial_{\alpha_{i,\mvec}}} \right. \\
+	& \left. + 2 \sum_{c=1}^C \Real \left(
+			\sum_{\mvec \in \restbasis_c}
+			\sum_{\pvec \in \fullbasis, \lvec}
+			\int d\xvec^\prime \phi_{i,\mvec}^{\prime*} \mathcal{B}_{\lvec}^{(i)\prime} \phi_{\pvec}^\prime
+			dZ_{\pvec,\lvec}
+			\partial_{\alpha_{c,\mvec}}
+		\right)
+	\right) F
+\end{eqn}
+Recognizing definitions of functional differentials, functional Wiener process, and the delta function, we get
+\begin{eqn}
+	={} & \left(
+		2 \sum_{c=1}^C \Real \left(
+			\int d\xvec^\prime \mathcal{A}^{(c)\prime}
+			\frac{\delta}{\delta \Psi_c^\prime}
+		\right) \right. \\
+	& \left. + \sum_{i=1}^C \sum_{j=1}^C \sum_{\lvec}
+			\int d\xvec^\prime \mathcal{B}_{\lvec}^{(i)\prime}
+			\mathcal{B}_{\lvec}^{(j)\prime *}
+			\frac{\delta}{\delta \Psi_i^\prime}
+			\frac{\delta}{\delta \Psi_j^{\prime *}}
+		\right. \\
+	& \left. + 2 \sum_{c=1}^C \sum_{\lvec} \Real \left(
+			\int d\xvec^\prime \mathcal{B}_{\lvec}^{(i)\prime}
+			dQ_{\lvec}^\prime
+			\frac{\delta}{\delta \Psi_c^\prime}
+		\right)
+	\right) F
+\end{eqn}
+Which leads to the statement of the theorem.
 \end{proof}
