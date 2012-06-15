@@ -1,0 +1,156 @@
+% =============================================================================
+\section{It\^{o} formula}
+% =============================================================================
+
+In this section we will derive the It\^{o} formula for the differential of a functional, based on the standard definition for multi-variable real-valued case.
+
+\begin{theorem}
+\label{thm:wigner-bec:ito-formula:ito-f-real}
+	Let $\zvec^T \equiv (z_1 \ldots z_M)$ be a set of real variables, and $\Zvec(t)$ be a standard $L$-dimensional Wiener process.
+	For the SDE in It\^{o} form
+	\begin{eqn*}
+		d\zvec = \avec(\zvec, t) dt + B(\zvec, t) d\Zvec(t),
+	\end{eqn*}
+	the differential of a function $f(\zvec)$ is
+	\begin{eqn*}
+		df(\zvec) = \left(
+			\avec \cdot \bpartial_{\zvec} dt
+			+ \frac{1}{2} \Trace{ B B^T \bpartial_{\zvec} \bpartial_{\zvec}^T } dt
+			+ \Trace{ B d\Zvec \bpartial_{\zvec}^T }
+		\right) f(\zvec).
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+This is just a statement from~\cite{Gardiner1997} expressed in matrix form.
+\end{proof}
+
+This theorem can be extended to complex variables.
+
+\begin{theorem}
+\label{thm:wigner-bec:ito-formula:ito-f-complex}
+	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables, and $\Zvec = (\bm{X} + i\bm{Y}) / \sqrt{2}$ be an $L$-dimensional complex-valued Wiener process, containing two standard $L$-dimensional Wiener processes $\bm{X}$ and $\bm{Y}$.
+	For the SDE in It\^{o} form
+	\begin{eqn*}
+		d\balpha = \avec(\balpha, t) dt + B(\balpha, t) d\Zvec(t),
+	\end{eqn*}
+	the differential of a function $f(\balpha)$ is
+	\begin{eqn*}
+		df(\balpha) = \left(
+			2 \Real (\avec \cdot \bpartial_{\balpha}) dt
+			+ \Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T } dt
+			+ 2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
+		\right) f(\zvec).
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+The proof follows the same scheme as \thmref{wigner-bec:fpe:fpe-sde-complex}, just in the opposite direction.
+Let $f = g + ih$, $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
+Then the set of SDEs from the statement is equivalent to
+\begin{eqn}
+	d \begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix}
+	= \begin{pmatrix} \bm{u} \\ \bm{v} \end{pmatrix} dt
+		+ \frac{1}{\sqrt{2}} \begin{pmatrix} F & -G \\ G & F \end{pmatrix}
+			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}.
+\end{eqn}
+Applying \thmref{wigner-bec:ito-formula:ito-f-real} for real-valued functions $g(\bm{x}, \bm{y})$ and $h(\bm{x}, \bm{y})$ and combining them into $f = g + ih$:
+\begin{eqn}
+	df ={} &
+		\begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix} \cdot
+			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix} f dt
+		+ \frac{1}{4} \Trace{
+			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
+			\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+		} f dt  \\
+	& + \frac{1}{\sqrt{2}} \Trace{
+			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
+			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+		} f
+\end{eqn}
+Now let us match this equation and the lemma statement term by term.
+
+First term:
+\begin{eqn}
+	2 \Real ( \avec \cdot \bpartial_{\balpha} )
+	& = \Real \left(
+			\left( \bm{u} + i\bm{v} \right) \cdot \left( \bpartial_{\bm{x}} - i \bpartial_{\bm{y}} \right)
+		\right) \\
+	& = \bm{u} \cdot \bpartial_{\bm{x}} + \bm{v} \cdot \bpartial_{\bm{y}} \\
+	& = \begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix} \cdot
+		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
+\end{eqn}
+
+Second term:
+\begin{eqn}
+	\Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T }
+	={} & \frac{1}{4} \Trace{
+		(F F^T + G G^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		} \\
+	& - \frac{1}{4} \Trace {
+		(F G^T - G F^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+		} \\
+	& + \frac{i}{4} \Trace{
+		(F G^T - G F^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+	} \\
+	& + \frac{i}{4} \Trace{
+		(G G^T + F F^T)
+		(\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+	}
+\end{eqn}
+Same as in \thmref{wigner-bec:fpe:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T - \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T$ are antisymmetric.
+Therefore the last two terms contain traces of antisymmetric matrices and are equal to zero.
+\begin{eqn}
+	={} & \frac{1}{4} \Trace{
+		(F F^T + G G^T) \bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
+		+ (F G^T - G F^T) \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+		} \\
+	& + \frac{1}{4} \Trace {
+		(G F^T - F G^T) \bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
+		+ (F F^T + G G^T) \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		} \\
+	={} & \frac{1}{4} \Trace {
+		\begin{pmatrix}
+			F F^T + G G^T & F G^T - G F^T \\
+			G F^T - F G^T & F F^T + G G^T
+		\end{pmatrix}
+		\begin{pmatrix}
+			\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T & \bpartial_{\bm{x}} \bpartial_{\bm{y}}^T \\
+			\bpartial_{\bm{y}} \bpartial_{\bm{x}}^T & \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T
+		\end{pmatrix}
+	} \\
+	={} & \frac{1}{4} \Trace{
+		\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
+		\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
+		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
+		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+	}.
+\end{eqn}
+
+Third term:
+\begin{eqn}
+	2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
+	& = \frac{1}{\sqrt{2}} \Real \Trace{
+		(F + iG) (d\bm{X} + id\bm{Y}) (\bpartial_{\bm{x}} - i\bpartial_{\bm{y}})
+	} \\
+	& = \frac{1}{\sqrt{2}} \Trace{
+		F d\bm{X} \bpartial_{\bm{x}} + F d\bm{Y} \bpartial_{\bm{y}}
+		- G d\bm{Y} \bpartial_{\bm{x}} + G d\bm{X} \bpartial_{\bm{y}}
+	} \\
+	& = \frac{1}{\sqrt{2}} \Trace{
+			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
+			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+		}.
+\end{eqn}
+
+All terms have matched, thus proving the theorem.
+\end{proof}
