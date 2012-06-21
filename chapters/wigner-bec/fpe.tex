@@ -52,7 +52,7 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real variables, Fokker-Planck equation
 	\begin{eqn*}
 		\frac{dW}{dt}
-		= -\bpartial_{\zvec}^T \avec W
+		= -\bpartial_{\zvec}^T \cdot \avec W
 		+ \frac{1}{2} \Trace{ \bpartial_{\zvec} \bpartial_{\zvec}^T B B^T } W
 	\end{eqn*}
 	is equivalent to a set of stochastic differential equations in It\^{o} form
@@ -66,8 +66,8 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 	where the noise-induced (or spurious) drift vector $\svec$ has elements
 	\begin{eqn*}
 		s_i
-		= \sum_{k,j} B_{kj} \frac{\partial}{\partial z_k} B_{ij}
-		= \Trace{B^T \bpartial_z \evec_i^T B},
+		= \frac{1}{2} \sum_{k,j} B_{kj} \frac{\partial}{\partial z_k} B_{ij}
+		= \frac{1}{2} \Trace{B^T \bpartial_z \evec_i^T B},
 	\end{eqn*}
 	$\evec_i$ being the unit vector with elements $(\evec_i)_j = \delta_{ij}$.
 	\todo{Is there a better way to express $\svec$ in terms of matrices?}
@@ -97,7 +97,7 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 	\end{eqn*}
 	where noise-induced drift term is
 	\begin{eqn*}
-		s_j = \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B },
+		s_j = \frac{1}{2} \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B },
 	\end{eqn*}
 	and $\Zvec = (\bm{X} + i\bm{Y}) / \sqrt{2}$ is an $L$-dimensional complex-valued Wiener process,
 	containing two standard $L$-dimensional Wiener processes $\bm{X}$ and $\bm{Y}$.
@@ -181,7 +181,7 @@ which leads to the It\^{o} part of the lemma statement.
 Noise-induced drift term in Stratonovich case can be calculated as
 \begin{eqn}
 	s_j^{(x)}
-	& = \frac{1}{2} \Trace{
+	& = \frac{1}{4} \Trace{
 		\begin{pmatrix}
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
@@ -196,7 +196,7 @@ Noise-induced drift term in Stratonovich case can be calculated as
 			F & -G \\ G & F
 		\end{pmatrix}
 	} \\
-	& = \frac{1}{2} \Trace{
+	& = \frac{1}{4} \Trace{
 		\begin{pmatrix}
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
@@ -208,7 +208,7 @@ Noise-induced drift term in Stratonovich case can be calculated as
 			\evec_j^T F & - \evec_j^T G
 		\end{pmatrix}
 	} \\
-	& = \frac{1}{2} \Trace{
+	& = \frac{1}{4} \Trace{
 		\begin{pmatrix}
 			F^T & G^T \\ -G^T & F^T
 		\end{pmatrix}
@@ -217,7 +217,7 @@ Noise-induced drift term in Stratonovich case can be calculated as
 			\bpartial_{\bm{y}} \evec_j^T F & - \bpartial_{\bm{y}} \evec_j^T G
 		\end{pmatrix}
 	} \\
-	& = \frac{1}{2} \left(
+	& = \frac{1}{4} \left(
 		\Trace{ F^T \bpartial_{\bm{x}} \evec_j^T F }
 		+ \Trace{ G^T \bpartial_{\bm{y}} \evec_j^T F }
 		+ \Trace{ G^T \bpartial_{\bm{x}} \evec_j^T G }
@@ -227,7 +227,7 @@ Noise-induced drift term in Stratonovich case can be calculated as
 Similarly,
 \begin{eqn}
 	s_j^{(y)}
-	= \frac{1}{2} \left(
+	= \frac{1}{4} \left(
 		\Trace{ F^T \bpartial_{\bm{x}} \evec_j^T G }
 		+ \Trace{ G^T \bpartial_{\bm{y}} \evec_j^T G }
 		- \Trace{ G^T \bpartial_{\bm{x}} \evec_j^T F }
@@ -238,7 +238,7 @@ Therefore the final term in complex-valued SDEs is
 \begin{eqn}
 	s_j
 	= s_j^{(x)} + i s_j^{(y)}
-	= \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B }.
+	= \frac{1}{2} \Trace{ B^H \bpartial_{\balpha^*} \evec_j^T B }.
 	\qedhere
 \end{eqn}
 \end{proof}
