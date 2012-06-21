@@ -243,6 +243,36 @@ Therefore the final term in complex-valued SDEs is
 \end{eqn}
 \end{proof}
 
+Note the asymmetry in the expression for Stratonovich term: if $B = B(\alpha)$, then $\bm{s} \equiv 0$.
+It is initially caused by the asymmetry in the target SDEs.
+Truly general form of FPE would be
+\begin{eqn}
+	\frac{dW}{dt}
+	={} & - \Real \left( \bpartial_{\balpha}^T \avec \right) W
+	+ \Trace{ \bpartial_{\balpha^*} \bpartial_{\balpha}^T B_1 B_1^H } W
+	+ \Trace{ \bpartial_{\balpha^*} \bpartial_{\balpha}^T B_2 B_2^H } W \\
+	& + \Real \left(
+		\Trace{ \bpartial_{\balpha} \bpartial_{\balpha}^T B_1 B_2^T }
+		+ \Trace{ \bpartial_{\balpha} \bpartial_{\balpha}^T B_2 B_1^T }
+	\right) W,
+\end{eqn}
+which corresponds to the system of SDEs
+\begin{eqn}
+	d\balpha = (\avec - \svec) dt + B_1 d\Zvec + B_2 d\Zvec^*,
+\end{eqn}
+with
+\begin{eqn}
+	s_j = \frac{1}{2} \left(
+		\Trace{ B_1^H \bpartial_{\balpha^*} \evec_j^T B_1 }
+		+ \Trace{ B_2^H \bpartial_{\balpha^*} \evec_j^T B_2 }
+		+ \Trace{ B_1^T \bpartial_{\balpha} \evec_j^T B_2 }
+		+ \Trace{ B_2^T \bpartial_{\balpha} \evec_j^T B_1 }
+	\right).
+\end{eqn}
+
+In the theorem above we limit the space of possible SDEs to those with $B_2 \equiv 0$, leading to the asymmetry.
+
+
 \begin{theorem}[Multi-component reformulation of \thmref{wigner-bec:fpe:fpe-sde-complex}]
 \label{thm:wigner-bec:fpe:mc-fpe-sde}
 	If $\balpha^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_{M_c}^{(c)})$,
