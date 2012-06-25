@@ -1,0 +1,42 @@
+% =============================================================================
+\section{Fokker-Planck equation for the BEC}
+% =============================================================================
+
+The general approach to numerical solution of the Fokker-Planck equation~\eqnref{wigner-bec:truncation:fpe} is to transform it to the equivalent set of stochastic differential equations (SDEs) for $\Psi_j$.
+Since the transformation is defined for real-valued variables only \todo{citation needed}, we have to modify the equation.
+
+First, noticing that $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ are real-valued (which is important for the further transformations), we can rewrite equation~\eqnref{wigner-bec:truncation:fpe} as
+\begin{eqn}
+	\frac{dW}{dt}
+	= \int d\xvec \left(
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \mathcal{A}_j
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \mathcal{A}_j^*
+		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k} D_{jk}
+	\right) W,
+\end{eqn}
+where
+\begin{eqn}
+	\mathcal{A}_j = -\frac{i}{\hbar} \left(
+			\sum_{k=1}^C K_{jk} \Psi_k
+			+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
+		\right)
+		- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec},
+\end{eqn}
+and
+\begin{eqn}
+	D_{jk} = \sum_{\lvec} \kappa_{\lvec}
+		\frac{\partial O_{\lvec}}{\partial \Psi_j}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}.
+\end{eqn}
+
+This allows us to apply \thmref{wigner-bec:fpe:fpe-sde-func} with
+\begin{eqn}
+	\mathcal{B}_{\lvec}^{(j)}
+	= \sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}.
+\end{eqn}
+to get the equivalent set of SDEs in It\^{o} form
+\begin{eqn}
+	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+		\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+	\right].
+\end{eqn}
