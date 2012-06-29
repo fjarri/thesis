@@ -36,7 +36,95 @@ This allows us to apply \thmref{wigner-bec:fpe:fpe-sde-func} with
 \end{eqn}
 to get the equivalent set of SDEs in It\^{o} form
 \begin{eqn}
+\label{eqn:wigner-bec:fpe-bec:sde}
 	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 		\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
 	\right].
 \end{eqn}
+
+% =============================================================================
+\subsection{Integral averages}
+% =============================================================================
+
+It is interesting to get an expression for time dependence of some simple observables using SDEs~\eqnref{wigner-bec:fpe-bec:sde} and It\^{o}'s formula (\thmref{wigner-bec:ito-formula:func-ito-f}).
+Namely, we are interested in population $N_i = \int d\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$ and interferometric contrast in two-component BEC $V = 2 \left| \int d\xvec \langle \Psiop_1^\dagger \Psiop_2 \rangle \right| / (N_1 + N_2)$.
+
+\begin{theorem}
+	Given a set of SDEs~\eqnref{wigner-bec:fpe-bec:sde}, the population changes in time as
+	\begin{eqn*}
+		\frac{dN_i}{dt}
+		=
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+First let us find the expression for $\int d\xvec \langle dF[\Psivec] \rangle$ using It\^{o}'s formula with $F = \Psi_i^* \Psi_i$.
+The differentials are evaluated as $\delta F / \delta \Psi_c^\prime = \delta_{ic} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)$, $\delta F / \delta \Psi_c^{\prime *} = \delta_{ic} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)$, $\delta^2 F / \delta \Psi_j^\prime \delta \Psi_k^{\prime *} = \delta_{ij} \delta_{ik} \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)$.
+Averages $\langle dQ_{\lvec} \rangle$ are equal to zero, so the average of the whole third term in It\^{o} formula is equal to zero.
+Also we can safely simplify drift terms to
+\begin{eqn}
+	\mathcal{A}^{(i)}
+	= - \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*} O_{\lvec},
+\end{eqn}
+since the unitary evolution part obviously does not affect the total population.
+
+Thus:
+\begin{eqn}
+	\langle dF[\Psivec] \rangle
+	= \langle \int d\xvec^\prime
+		\mathcal{A}^{(i)\prime} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)
+		+ \mathcal{A}^{(i)\prime *} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(i)\prime} \mathcal{B}_{\lvec}^{(i)\prime *}
+			\delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+	\rangle
+\end{eqn}
+Integrating by $d\xvec$, and expanding $\Psi_i$ and restricted delta functions:
+\begin{eqn}
+	\iint d\xvec d\xvec^\prime \mathcal{A}^{(i)\prime} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)
+	& = \iint d\xvec d\xvec^\prime \mathcal{A}^{(i)\prime}
+		\sum_{\nvec \in \restbasis_i} \phi_{i,\nvec}^* \alpha_{i,\nvec}^*
+		\sum_{\mvec \in \restbasis_i} \phi_{i,\mvec} \phi_{i,\mvec}^{\prime *} \\
+	& = \int d\xvec^\prime \mathcal{A}^{(i)\prime}
+		\sum_{\mvec \in \restbasis_i} \sum_{\nvec \in \restbasis_i} \delta_{\mvec,\nvec} \alpha_{i,\nvec}^*
+		\phi_{i,\mvec}^{\prime *} \\
+	& = \int d\xvec^\prime \mathcal{A}^{(i)\prime}
+		\sum_{\mvec \in \restbasis_i} \alpha_{i,\mvec}^* \phi_{i,\mvec}^{\prime *} \\
+	& = \int d\xvec \mathcal{A}^{(i)} \Psi_i^*.
+\end{eqn}
+Similarly,
+\begin{eqn}
+	\iint d\xvec d\xvec^\prime \mathcal{A}^{(i)\prime *} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+	= \int d\xvec \mathcal{A}^{(i)*} \Psi_i,
+\end{eqn}
+and
+\begin{eqn}
+	\iint d\xvec d\xvec^\prime \mathcal{B}_{\lvec}^{(i)\prime} \mathcal{B}_{\lvec}^{(i)\prime *}
+		\delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+	= \int d\xvec \mathcal{B}_{\lvec}^{(i)} \mathcal{B}_{\lvec}^{(i)*} \delta_{\restbasis_i}^*(\xvec, \xvec).
+\end{eqn}
+
+The whole expression is therefore
+\begin{eqn}
+	\frac{d}{dt} \int d\xvec \langle F[\Psivec] \rangle
+	& = \int d\xvec \langle
+		\mathcal{A}^{(i)} \Psi_i^*
+		+ \mathcal{A}^{(i)*} \Psi_i
+		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(i)} \mathcal{B}_{\lvec}^{(i)*} \delta_{\restbasis_i}^*(\xvec, \xvec)
+	\rangle \\
+	& = \sum_{\lvec} \kappa_{\lvec} \int d\xvec \langle
+		- \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*} O_{\lvec} \Psi_i^*
+		- \frac{\partial O_{\lvec}}{\partial \Psi_i} O_{\lvec}^* \Psi_i
+		+ \frac{\partial O_{\lvec}}{\partial \Psi_i} \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
+			\delta_{\restbasis_i}^*(\xvec, \xvec)
+	\rangle
+\end{eqn}
+
+In order to rewrite the expression above in terms of more intuitive quantities, like component densities, we have to employ the relation \todo{change variable name for coefficient to not clash with nonlinear interactions?}
+\begin{eqn}
+	\langle \prod_{c=1}^C (\Psiop_c^\dagger)^{l_c} \Psiop_c^{l_c} \rangle
+	= g_{\lvec} \prod_{c=1}^C \langle (\Psiop_c^\dagger) \Psiop_c \rangle^{l_c}.
+\end{eqn}
+In other words, coefficients $g_{\lvec}$ define the degree of high-order correlations.
+In the ideal condensate they are equal to 1, and increase with the temperature (the so called photon bunching, or atom bunching).
+For example, the theoretical maximum value for $g_{111}$ is $3!$~\cite{Kagan1985}, which was confirmed experimentally~\cite{Burt1997}.
+
+\end{proof}
