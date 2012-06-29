@@ -39,7 +39,25 @@ to get the equivalent set of SDEs in It\^{o} form
 \label{eqn:wigner-bec:fpe-bec:sde}
 	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 		\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
-	\right].
+	\right],
+\end{eqn}
+or, alternatively, in Stratonovich form
+\begin{eqn}
+	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+		(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+	\right],
+\end{eqn}
+where the Stratonovich term is
+\begin{eqn}
+	\mathcal{S}^{(j)}
+	= \sum_{n=1}^C \sum_{\lvec}
+		\sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}}{\partial \Psi_n}
+		\frac{\delta}{\delta \Psi_n^*}
+		\sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}
+	= \sum_{n=1}^C \sum_{\lvec} \kappa_{\lvec}
+		\frac{\partial O_{\lvec}}{\partial \Psi_n}
+		\left(\frac{\partial^2 O_{\lvec}}{\partial \Psi_n \partial \Psi_j} \right)^*
+		\delta_{\restbasis_n} (\xvec, \xvec).
 \end{eqn}
 
 % =============================================================================
