@@ -1,9 +1,10 @@
-\chapter{Mean-field approximation}
-\label{cha:mean-field}
+% =============================================================================
+\section{Mean-field approximation}
+% =============================================================================
 
 
 % =============================================================================
-\section{Thomas-Fermi approximation}
+\subsection{Thomas-Fermi approximation}
 % =============================================================================
 
 We are looking for the ground state of the system with pseudopotential model hamiltonian~\cite{Pitaevskii2003}:
@@ -126,7 +127,7 @@ and for $10^3$ atoms it differs significantly, as expected.
 
 
 % =============================================================================
-\section{Ground state calculation}
+\subsection{Ground state calculation}
 % =============================================================================
 
 The ground state obtained using Thomas-Fermi approximation is good for estimation purposes,
@@ -187,7 +188,7 @@ where $n = \lvert \Psi \rvert^2$,
 and compare it to the previous value, waiting for the desired precision to be reached.
 
 Now how do we propagate the state of the system?
-There are a lot of possibilities, one of which is split-step Fourier method (see \appref{split-step}).
+There are a lot of possibilities, one of which is split-step Fourier method (see \todo{reference split-step section}).
 The propagation in imaginary time can be described as:
 \[
 	\frac{\partial \Psi}{\partial \tau} = - \frac{1}{\hbar} \hat{H} \Psi.
@@ -200,7 +201,7 @@ Therefore, differential and nonlinear operator, necessary for split-step method,
 
 
 % =============================================================================
-\section{Two-component condensate}
+\subsection{Two-component condensate}
 % =============================================================================
 
 Hereafter we are discussing $^{87}$Rb condensate and two of its $5^2S_{1/2}$ states: $\vert1,-1\rangle$ and $\vert2,1\rangle$,
@@ -257,7 +258,7 @@ scattering lengths were taken to be equal to $a_{11} = 100.40\ a_0$, $a_{22} = 9
 
 
 % =============================================================================
-\section{Two-component evolution}
+\subsection{Two-component evolution}
 % =============================================================================
 
 Full evolution equations can be constructed from the basic form~\eqnref{mean-field:two-comp-energy},
@@ -384,7 +385,7 @@ In particular, for two-pulse Ramsey scheme, $\phi_2 = \phi_1 + \delta (t_{R} + t
 
 Coupled equations~\eqnref{mean-field:cgpes_simplified} require slightly improved split-step method,
 because nonlinear matrix $\hat{N}$ is no longer diagonal.
-See \appref{split-step} for details.
+See \todo{reference split-step section} for details.
 
 But if one uses ``instantaneous'' pulses, evolution without coupling terms can be simulated with the simple split-step method.
 Differential and nonlinear operators will look as following then:

@@ -26,3 +26,7 @@ Questions:
   transforming master equation to FPE (in form of \delta(x, x)) and possibly makes
   proofs in Formalism chapter not entirely mathematically correct.
   Moreover, the validity criterion for truncation is n(x) >> \delta(x, x).
+- (notation) Do we need explicit statement about the format of types for functions/functionals?
+- (notation) Do we need explicit notation for "restricted" functions, like tilda over restricted operators?
+- (feature) Do we need to proof that W transformation of Hermitian operator is a real-valued function?
+- fix F[\lambda] -> F[\Lambda] in zero-delta-integrals lemma

@@ -109,16 +109,34 @@
 
 \tableofcontents
 
-\include{chapters/formalism}
-\include{chapters/mean_field}
+\include{chapters/introduction}
+
+% theory
+\include{chapters/op-calculus}
+\include{chapters/wigner}
+\include{chapters/wigner-spec}
 \include{chapters/wigner-bec}
+
+% applications
+\include{chapters/bec-noise}
+\include{chapters/bec-squeezing}
+\include{chapters/epr-two-well}
+\include{chapters/bell-ineq}
+
+\include{chapters/conclusion}
 
 \appendix
 \counterwithin{lemma}{chapter}
 \counterwithin{theorem}{chapter}
 \counterwithin{definition}{chapter}
 
-\include{chapters/appendices}
+\include{chapters/c-numbers}
+\include{chapters/func-calculus}
+\include{chapters/fpe-sde}
+\include{chapters/numerical}
+
+% unsorted stuff that may be useful; to be removed the in final version
+\include{chapters/notes}
 
 \bibliographystyle{unsrt}
 \bibliography{thesis}

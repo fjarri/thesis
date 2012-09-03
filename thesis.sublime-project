@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Volumes/Data/Workbench/github/thesis",
+			"file_exclude_patterns": [
+				"*.sublime-workspace",
+				"*.pdf", "*.aux", "*.bbl", "*.blg", "*.fdb_latexmk", "*.log", "*.out",
+				"*.synctex.gz", "*.toc"
+			],
+			"folder_exclude_patterns": [
+				"temp",
+				"figures_generated",
+				"figures_precreated"
+			]
+		}
+	]
+}

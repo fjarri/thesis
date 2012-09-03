@@ -3,6 +3,7 @@ chapters/*.aux
 *.bbl
 *.blg
 *.log
+*.fls
 *.pdf
 *.synctex.gz
 *.tmproj
