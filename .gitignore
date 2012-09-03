@@ -11,4 +11,5 @@ chapters/*.aux
 *.toc
 *.fdb_latexmk
 temp/*
+*.sublime-workspace
 
