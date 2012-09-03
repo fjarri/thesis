@@ -6,7 +6,7 @@ We will need the displacement operator which was first introduced by Weyl~\cite{
 
 \begin{definition}
 	\begin{eqn*}
-	\label{eqn:formalism:sm-wigner:dispacement-op}
+	\label{eqn:wigner:sm:dispacement-op}
 		\hat{D}(\lambda, \lambda^*) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}),
 	\end{eqn*}
 	where $\hat{a}^\dagger$ and $\hat{a}$ are bosonic creation and annihilation operators, and $\lambda$ is a complex variable.
@@ -14,7 +14,7 @@ We will need the displacement operator which was first introduced by Weyl~\cite{
 Using Baker-Hausdorff theorem to split non-commuting operators in the exponent,
 one can find that
 \begin{eqn}
-\label{eqn:formalism:sm-wigner:displacement-derivatives}
+\label{eqn:wigner:sm:displacement-derivatives}
 	\frac{\partial}{\partial \lambda} \hat{D}(\lambda, \lambda^*)
 	& = \hat{D}(\lambda, \lambda^*) (\hat{a}^\dagger + \frac{1}{2} \lambda^*)
 	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda, \lambda^*), \\
@@ -26,7 +26,7 @@ one can find that
 Using the displacement operator we can define Wigner transformation.
 
 \begin{definition}
-\label{def:formalism:sm-wigner:w-transformation}
+\label{def:wigner:sm:w-transformation}
 	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha, \alpha^*)$ on phase space.
 	\begin{eqn*}
 		\mathcal{W}[\hat{A}]
@@ -63,7 +63,7 @@ Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi, \xi^*) \hat{D}(\lambda,
 The proof for the other direction looks the same.
 
 \begin{theorem}
-\label{thm:formalism:sm-wigner:w-real}
+\label{thm:wigner:sm:w-real}
 	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real function.
 	\todo{It is a sufficient condition, but is it necessary?}
 \end{theorem}
@@ -84,13 +84,13 @@ Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equa
 \end{proof}
 
 \begin{definition}
-\label{def:formalism:sm-wigner:w-function}
+\label{def:wigner:sm:w-function}
 	Wigner function is a Wigner transformation of the density matrix:
 	\begin{eqn*}
 		W(\alpha, \alpha^*) \equiv \mathcal{W}[\hat{\rho}].
 	\end{eqn*}
 	The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
-	Since the density matrix is Hermitian, according to \thmref{formalism:sm-wigner:w-real} $W$ is a real function.
+	Since the density matrix is Hermitian, according to \thmref{wigner:sm:w-real} $W$ is a real function.
 \end{definition}
 
 In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}
@@ -105,7 +105,7 @@ where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
 \end{eqn}
 
 \begin{theorem}[Operator correspondences]
-\label{thm:formalism:sm-wigner:correspondences}
+\label{thm:wigner:sm:correspondences}
 	For any Hilbert-Schmidt operator $\hat{A}$ \todo{needs definition?}
 	\begin{eqn*}
 		\mathcal{W} [ \hat{a} \hat{A} ]
@@ -122,7 +122,7 @@ where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
 \end{theorem}
 \begin{proof}
 We will prove the first correspondence.
-First, let us transform the trace using~\eqnref{formalism:sm-wigner:displacement-derivatives}:
+First, let us transform the trace using~\eqnref{wigner:sm:displacement-derivatives}:
 \begin{eqn}
 	\Trace{ \hat{a} \hat{A} \hat{D} }
 	= \Trace{ \hat{A} \hat{D} \hat{a}}
@@ -165,7 +165,7 @@ Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\ha
 \end{proof}
 
 \begin{lemma}
-\label{lmm:formalism:sm-wigner:moments-from-chi}
+\label{lmm:wigner:sm:moments-from-chi}
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.
@@ -213,7 +213,7 @@ leaving only $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 
 Now we can get the final relation.
 \begin{theorem}
-\label{thm:formalism:sm-wigner:moments}
+\label{thm:wigner:sm:moments}
 	\begin{eqn*}
 		\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
 		= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
@@ -251,5 +251,5 @@ Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delt
 		\chi_W (\lambda, \lambda^*)
 	\right|_{\lambda=0}.
 \end{eqn}
-Now, recognising the final expression as a part of \lmmref{formalism:sm-wigner:moments-from-chi}, we immideately get the statement of the theorem.
+Now, recognising the final expression as a part of \lmmref{wigner:sm:moments-from-chi}, we immideately get the statement of the theorem.
 \end{proof}

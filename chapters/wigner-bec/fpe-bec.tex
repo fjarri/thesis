@@ -29,14 +29,14 @@ and
 		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}.
 \end{eqn}
 
-This allows us to apply \thmref{wigner-bec:fpe:fpe-sde-func} with
+This allows us to apply \thmref{fpe-sde:corr:fpe-sde-func} with
 \begin{eqn}
 	\mathcal{B}_{\lvec}^{(j)}
 	= \sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}.
 \end{eqn}
 to get the equivalent set of SDEs in It\^{o} form
 \begin{eqn}
-\label{eqn:wigner-bec:fpe-bec:sde}
+\label{eqn:fpe-sde:corr-bec:sde}
 	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 		\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
 	\right],
@@ -64,11 +64,11 @@ where the Stratonovich term is
 \subsection{Integral averages}
 % =============================================================================
 
-It is interesting to get an expression for time dependence of some simple observables using SDEs~\eqnref{wigner-bec:fpe-bec:sde} and It\^{o}'s formula (\thmref{wigner-bec:ito-formula:func-ito-f}).
+It is interesting to get an expression for time dependence of some simple observables using SDEs~\eqnref{fpe-sde:corr-bec:sde} and It\^{o}'s formula (\thmref{fpe-sde:ito-formula:func-ito-f}).
 Namely, we are interested in population $N_i = \int d\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$ and interferometric contrast in two-component BEC $V = 2 \left| \int d\xvec \langle \Psiop_1^\dagger \Psiop_2 \rangle \right| / (N_1 + N_2)$.
 
 \begin{theorem}
-	Given a set of SDEs~\eqnref{wigner-bec:fpe-bec:sde}, the population changes in time as
+	Given a set of SDEs~\eqnref{fpe-sde:corr-bec:sde}, the population changes in time as
 	\begin{eqn*}
 		\frac{dN_i}{dt}
 		=

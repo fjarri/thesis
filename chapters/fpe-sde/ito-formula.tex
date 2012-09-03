@@ -5,7 +5,7 @@
 In this section we will derive the It\^{o} formula for the differential of a functional, based on the standard definition for multi-variable real-valued case.
 
 \begin{theorem}
-\label{thm:wigner-bec:ito-formula:ito-f-real}
+\label{thm:fpe-sde:ito-formula:ito-f-real}
 	Let $\zvec^T \equiv (z_1 \ldots z_M)$ be a set of real variables, and $\Zvec(t)$ be a standard $L$-dimensional Wiener process.
 	For the SDE in It\^{o} form
 	\begin{eqn*}
@@ -27,7 +27,7 @@ This is just a statement from~\cite{Gardiner1997} expressed in matrix form.
 This theorem can be extended to complex variables.
 
 \begin{theorem}
-\label{thm:wigner-bec:ito-formula:ito-f-complex}
+\label{thm:fpe-sde:ito-formula:ito-f-complex}
 	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables, and $\Zvec = (\bm{X} + i\bm{Y}) / \sqrt{2}$ be an $L$-dimensional complex-valued Wiener process, containing two standard $L$-dimensional Wiener processes $\bm{X}$ and $\bm{Y}$.
 	For the SDE in It\^{o} form
 	\begin{eqn*}
@@ -43,7 +43,7 @@ This theorem can be extended to complex variables.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-The proof follows the same scheme as \thmref{wigner-bec:fpe:fpe-sde-complex}, just in the opposite direction.
+The proof follows the same scheme as \thmref{fpe-sde:corr:fpe-sde-complex}, just in the opposite direction.
 Let $f = g + ih$, $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
 Then the set of SDEs from the statement is equivalent to
 \begin{eqn}
@@ -52,7 +52,7 @@ Then the set of SDEs from the statement is equivalent to
 		+ \frac{1}{\sqrt{2}} \begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}.
 \end{eqn}
-Applying \thmref{wigner-bec:ito-formula:ito-f-real} for real-valued functions $g(\bm{x}, \bm{y})$ and $h(\bm{x}, \bm{y})$ and combining them into $f = g + ih$:
+Applying \thmref{fpe-sde:ito-formula:ito-f-real} for real-valued functions $g(\bm{x}, \bm{y})$ and $h(\bm{x}, \bm{y})$ and combining them into $f = g + ih$:
 \begin{eqn}
 	df ={} &
 		\begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix} \cdot
@@ -106,7 +106,7 @@ Second term:
 			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
 	}
 \end{eqn}
-Same as in \thmref{wigner-bec:fpe:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T - \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T$ are antisymmetric.
+Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T - \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T$ are antisymmetric.
 Therefore the last two terms contain traces of antisymmetric matrices and are equal to zero.
 \begin{eqn}
 	={} & \frac{1}{4} \Trace{
@@ -156,7 +156,7 @@ All terms have matched, thus proving the theorem.
 \end{proof}
 
 \begin{theorem}
-\label{thm:wigner-bec:ito-formula:mc-ito-f}
+\label{thm:fpe-sde:ito-formula:mc-ito-f}
 	Let $\balpha^{(c)},\, c = 1..C$ be $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_{M_c}^{(c)})$.
 	For the SDE in It\^{o} form
 	\begin{eqn*}
@@ -173,11 +173,11 @@ All terms have matched, thus proving the theorem.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved analogously to \thmref{wigner-bec:fpe:mc-fpe-sde}, by combining $\balpha^{(c)}$ into a single vector	and applying \thmref{wigner-bec:ito-formula:ito-f-complex}.
+Proved analogously to \thmref{fpe-sde:corr:mc-fpe-sde}, by combining $\balpha^{(c)}$ into a single vector	and applying \thmref{fpe-sde:ito-formula:ito-f-complex}.
 \end{proof}
 
 \begin{theorem}
-\label{thm:wigner-bec:ito-formula:func-ito-f}
+\label{thm:fpe-sde:ito-formula:func-ito-f}
 	Given functional SDEs in It\^{o} form
 	\begin{eqn*}
 		d\Psi^{(c)} = \mathcal{A}^{(c)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)} dQ_{\lvec},
@@ -232,7 +232,7 @@ In terms of complex vectors SDEs can be rewritten as
 	+ \sum_{\pvec \in \fullbasis, \lvec}
 		\int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\pvec} dZ_{\pvec,\lvec}.
 \end{eqn}
-Now, treating the functional as a function of complex vector $F \equiv F(\balpha^{(1)}, \ldots, \balpha^{(C)})$, we can use \thmref{wigner-bec:ito-formula:mc-ito-f} with
+Now, treating the functional as a function of complex vector $F \equiv F(\balpha^{(1)}, \ldots, \balpha^{(C)})$, we can use \thmref{fpe-sde:ito-formula:mc-ito-f} with
 \begin{eqn}
 	(\bm{a}^{(c)})_{\mvec} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},
 \end{eqn}

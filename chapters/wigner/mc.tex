@@ -2,7 +2,7 @@
 \section{Multi-component functional Wigner representation}
 % =============================================================================
 
-The definition of Wigner transformation, along with \thmref{formalism:func-wigner:correspondences} and \thmref{formalism:func-wigner:moments} can be further extended to the case of several components.
+The definition of Wigner transformation, along with \thmref{wigner:func:correspondences} and \thmref{wigner:func:moments} can be further extended to the case of several components.
 
 \begin{definition}
 	\begin{eqn*}
@@ -20,7 +20,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 \end{definition}
 
 \begin{definition}
-\label{def:formalism:mc-wigner:w-transformation}
+\label{def:wigner:mc:w-transformation}
 	Multi-component functional Wigner transformation $\mathcal{W}$ is defined as
 	\begin{eqn*}
 		& \mathcal{W} :: \left( \mathbb{R}^D \rightarrow \prod_{j=1}^C \mathbb{H}_{\restbasis_j} \right)
@@ -33,7 +33,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 	where $\Lambda_j \in \mathbb{F}_{\restbasis_j}$.
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi, \bPsi^*]$.
-	It can be proved, same as in \thmref{formalism:sm-wigner:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
+	It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 	Corresponding Weyl transformation is
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
@@ -46,7 +46,7 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 \end{definition}
 
 \begin{definition}
-\label{def:formalism:mc-wigner:w-functional}
+\label{def:wigner:mc:w-functional}
 	The Wigner functional is
 	\begin{eqn*}
 		& W :: \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R} \\
@@ -64,8 +64,8 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 \end{definition}
 
-\begin{theorem}[Multi-component extension of \thmref{formalism:func-wigner:correspondences}]
-\label{thm:formalism:mc-wigner:correspondences}
+\begin{theorem}[Multi-component extension of \thmref{wigner:func:correspondences}]
+\label{thm:wigner:mc:correspondences}
 	\begin{eqn*}
 		\mathcal{W} [ \Psiop_j \hat{A} ]
 			& = \left( \Psi_j + \frac{1}{2} \frac{\delta}{\delta \Psi_j^*} \right) \mathcal{W}[\hat{A}],
@@ -80,11 +80,11 @@ The definition of Wigner transformation, along with \thmref{formalism:func-wigne
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved in exactly the same way as \thmref{formalism:func-wigner:correspondences}.
+Proved in exactly the same way as \thmref{wigner:func:correspondences}.
 \end{proof}
 
-\begin{theorem}[Multi-component extension of \thmref{formalism:func-wigner:moments}]
-\label{thm:formalism:mc-wigner:moments}
+\begin{theorem}[Multi-component extension of \thmref{wigner:func:moments}]
+\label{thm:wigner:mc:moments}
 	For any non-negative integer $r_j$, $s_j$
 	\begin{eqn*}
 		\int \delta^2 \bPsi\,
@@ -93,5 +93,5 @@ Proved in exactly the same way as \thmref{formalism:func-wigner:correspondences}
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved in exactly the same way as \thmref{formalism:func-wigner:moments}, processing each component successively.
+Proved in exactly the same way as \thmref{wigner:func:moments}, processing each component successively.
 \end{proof}

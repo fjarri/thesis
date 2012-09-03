@@ -8,7 +8,7 @@ which will be useful when transforming the master equation.
 Need to write it formally.}
 
 \begin{theorem}
-\label{thm:formalism:transformations:w-commutator1}
+\label{thm:wigner-spec:w-commutator1}
     \begin{eqn*}
         \mathcal{W} \left[ [\int d\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
         = \int d\xvec \left(
@@ -67,7 +67,7 @@ Commutators with Laplacian inside require somewhat special treatment, because it
 For our purposes we only need one specific case, and, fortunately, in this case it does act like a constant.
 
 \begin{theorem}
-\label{thm:formalism:transformations:w-laplacian-commutator1}
+\label{thm:wigner-spec:w-laplacian-commutator1}
     \begin{eqn*}
         \mathcal{W} \left[
             \int d\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
@@ -89,7 +89,7 @@ and
     \mathcal{W} [ \nabla^2 \hat{B}(\xvec) \hat{A} ]
     = \nabla^2 \mathcal{W} [\hat{B}(\xvec) \hat{A}].
 \end{eqn}
-Let us now expand the commutator and apply correspondences from \thmref{formalism:func-wigner:correspondences}:
+Let us now expand the commutator and apply correspondences from \thmref{wigner:func:correspondences}:
 \begin{eqn2}
     & \mathcal{W} && \left[
         \int d\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
@@ -181,7 +181,7 @@ Now using \lmmref{func-calculus:move-laplacian} we can get the final result:
 \end{proof}
 
 \begin{theorem}
-\label{thm:formalism:transformations:w-commutator2}
+\label{thm:wigner-spec:w-commutator2}
     \todo{Check that deltas have correct basis indices.}
     \begin{eqn*}
         & \mathcal{W} \left[
@@ -235,11 +235,11 @@ Now using \lmmref{func-calculus:move-laplacian} we can get the final result:
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-Proof is the same as in case of \thmref{formalism:transformations:w-commutator1}.
+Proof is the same as in case of \thmref{wigner-spec:w-commutator1}.
 \end{proof}
 
 \begin{lemma}
-\label{lmm:formalism:transformations:swap-differential}
+\label{lmm:wigner-spec:swap-differential}
     \begin{eqn*}
         \Psi^a \left( \frac{\delta}{\delta \Psi} \right)^b \mathcal{F}[\Psi, \Psi^*]
         = \sum_{j=0}^{\min(a, b)}
@@ -328,7 +328,7 @@ we can attach two leftover terms to the sum too, obtaining the statement of the 
 \end{proof}
 
 \begin{lemma}[Sum rearrangement]
-\label{lmm:formalism:transformations:sum-rearrangement}
+\label{lmm:wigner-spec:sum-rearrangement}
     \todo{Change indices to match theorem about losses?}
     For integer $l$, $u$:
     \begin{eqn*}
@@ -447,7 +447,7 @@ which gives us the statement of the lemma.
 \end{proof}
 
 \begin{theorem}
-\label{thm:formalism:transformations:w-losses}
+\label{thm:wigner-spec:w-losses}
     If loss operator $\hat{\mathcal{L}}_{\lvec}$ is defined as
     \begin{eqn*}
         \hat{\mathcal{L}}_{\lvec} [\hat{A}]
@@ -528,7 +528,7 @@ Let us perform the transformation for each term of loss operator.
         \right)
         \mathcal{W}[\hat{A}].
 \end{eqn}
-Using \lmmref{formalism:transformations:swap-differential} to swap $\Psi_c$ and $\delta / \delta \Psi_c$:
+Using \lmmref{wigner-spec:swap-differential} to swap $\Psi_c$ and $\delta / \delta \Psi_c$:
 \begin{eqn}
     ={} & \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
@@ -548,7 +548,7 @@ Using \lmmref{formalism:transformations:swap-differential} to swap $\Psi_c$ and 
         \mathcal{W}[\hat{A}] \\
     ={} & (*).
 \end{eqn}
-Using \lmmref{formalism:transformations:sum-rearrangement} with
+Using \lmmref{wigner-spec:sum-rearrangement} with
 \begin{eqn}
     f & = \frac{\delta}{\delta \Psi_c}, \\
     g & = \binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}

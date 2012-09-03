@@ -3,9 +3,9 @@
 % =============================================================================
 
 In order to solve operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} numerically,
-we will transform it to ordinary differential equation using Wigner transformation from \defref{formalism:mc-wigner:w-transformation}.
+we will transform it to ordinary differential equation using Wigner transformation from \defref{wigner:mc:w-transformation}.
 
-Namely, the term with $K_j$ is transformed using \thmref{formalism:transformations:w-commutator1} and \thmref{formalism:transformations:w-laplacian-commutator1} (since $K_j$ is basically a sum of Laplacian operator and functions of $\xvec$):
+Namely, the term with $K_j$ is transformed using \thmref{wigner-spec:w-commutator1} and \thmref{wigner-spec:w-laplacian-commutator1} (since $K_j$ is basically a sum of Laplacian operator and functions of $\xvec$):
 \begin{eqn}
 	\mathcal{W} \left[ [ \int d\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
 	= \int d\xvec \left(
@@ -15,7 +15,7 @@ Namely, the term with $K_j$ is transformed using \thmref{formalism:transformatio
 		W,
 \end{eqn}
 where Wigner function $W = \mathcal{W}[\hat{\rho}]$.
-Nonlinear term is transformed with \thmref{formalism:transformations:w-commutator2} (minding the locality of interaction and integrating over $\xvec$):
+Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (minding the locality of interaction and integrating over $\xvec$):
 \begin{eqn}
 	\mathcal{W} \left[
 		[
@@ -94,7 +94,7 @@ Assuming $U_{kj} = U_{jk}$, it simplifies to
 \end{split}
 \end{equation*}
 
-Loss operator is transformed with \thmref{formalism:transformations:w-losses}.
+Loss operator is transformed with \thmref{wigner-spec:w-losses}.
 \todo{Not writing the resulting expression here, because with the absence of truncation it is too long, and is practically the same as in theorem statement.}
 
 We can only solve the resulting differential equation if it does not have functional derivatives of order more than 2 \todo{citation needed}.
@@ -135,7 +135,7 @@ the result of Wigner transformation of the nonlinear term can be written as
 	where $O_{\lvec} \equiv O_{\lvec}(\Psivec) = \prod_{c=1}^C \Psi_c^{l_c}$.
 \end{theorem}
 \begin{proof}
-The proof is basically a simplification of the result of \thmref{formalism:transformations:w-losses} under certain conditions.
+The proof is basically a simplification of the result of \thmref{wigner-spec:w-losses} under certain conditions.
 First, we are neglecting all occurrences of $\delta_P$, which means setting $m_c = 0$ for every $c$.
 Second, we are dropping all terms with high order differentials, which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
 The only combinations of $j_c$ and $k_c$ for which $Z(\jvec, \kvec)$ is not zero are thus $\{ j_c = \delta_{cn}, k_c = 0, n \in [1, C] \}$, $\{ j_c = 0, k_c = \delta_{cn}, n \in [1, C] \}$ and $\{ j_c = \delta_{cn}, k_c = \delta_{cp}, n \in [1, C], p \in [1, C] \}$.

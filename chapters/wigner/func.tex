@@ -2,7 +2,7 @@
 \section{Functional Wigner representation}
 % =============================================================================
 
-First, we will define functional analogue of the displacement operator~\eqnref{formalism:sm-wigner:dispacement-op}:
+First, we will define functional analogue of the displacement operator~\eqnref{wigner:sm:dispacement-op}:
 \begin{eqn}
 	& \hat{D} :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis} \\
 	& \hat{D}[\Lambda, \Lambda^*] = \exp \int d\xvec \left(
@@ -11,10 +11,10 @@ First, we will define functional analogue of the displacement operator~\eqnref{f
 \end{eqn}
 where $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ is some function from $\mathbb{F}_{\restbasis}$.
 
-It can be shown that the displacement operator has properties similar to~\eqnref{formalism:sm-wigner:displacement-derivatives}.
+It can be shown that the displacement operator has properties similar to~\eqnref{wigner:sm:displacement-derivatives}.
 
 \begin{lemma}
-\label{lmm:formalism:func-wigner:displacement-derivatives}
+\label{lmm:wigner:func:displacement-derivatives}
 	\begin{eqn*}
 		\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
 		& = \hat{D}[\Lambda, \Lambda^*] (\Psiop^{\prime\dagger} + \frac{1}{2} \Lambda^{\prime*})
@@ -61,7 +61,7 @@ Thus
 \end{proof}
 
 \begin{definition}
-\label{def:formalism:func-wigner:w-transformation}
+\label{def:wigner:func:w-transformation}
 	Functional Wigner transformation $\mathcal{W}$ is defined as
 	\begin{eqn*}
 		& \mathcal{W} :: \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}
@@ -72,7 +72,7 @@ Thus
 			\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
 	\end{eqn*}
 	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
-	It can be proved, same as in \thmref{formalism:sm-wigner:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
+	It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 	The corresponding functional Weyl transformation is:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
@@ -92,7 +92,7 @@ Thus
 \end{proof}
 
 \begin{definition}
-\label{def:formalism:func-wigner:w-functional}
+\label{def:wigner:func:w-functional}
 	The Wigner functional is
 	\begin{eqn*}
 		& W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
@@ -109,8 +109,8 @@ Thus
 	\end{eqn*}
 \end{definition}
 
-\begin{theorem}[Functional extension of \thmref{formalism:sm-wigner:correspondences}]
-\label{thm:formalism:func-wigner:correspondences}
+\begin{theorem}[Functional extension of \thmref{wigner:sm:correspondences}]
+\label{thm:wigner:func:correspondences}
 	\begin{eqn*}
 		\mathcal{W} [ \Psiop \hat{A} ]
 			& = \left( \Psi + \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W}[\hat{A}],
@@ -126,7 +126,7 @@ Thus
 \end{theorem}
 \begin{proof}
 We will prove the first correspondence.
-First, let us transform the trace using \lmmref{formalism:func-wigner:displacement-derivatives}:
+First, let us transform the trace using \lmmref{wigner:func:displacement-derivatives}:
 \begin{eqn}
 	\Trace{ \Psiop \hat{A} \hat{D} }
 	& = \Trace{ \hat{A} \hat{D} \Psiop}
@@ -171,8 +171,8 @@ Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over 
 \end{eqn}
 \end{proof}
 
-\begin{lemma}[Functional extension of \lmmref{formalism:sm-wigner:moments-from-chi}]
-\label{lmm:formalism:func-wigner:moments-from-chi}
+\begin{lemma}[Functional extension of \lmmref{wigner:sm:moments-from-chi}]
+\label{lmm:wigner:func:moments-from-chi}
 	\begin{eqn*}
 		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
 		= \left.
@@ -235,8 +235,8 @@ leaving only one operator product with required order:
 \end{eqn}
 \end{proof}
 
-\begin{theorem}[Functional extension of \thmref{formalism:sm-wigner:moments}]
-\label{thm:formalism:func-wigner:moments}
+\begin{theorem}[Functional extension of \thmref{wigner:sm:moments}]
+\label{thm:wigner:func:moments}
 	\begin{eqn*}
 		\int \delta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi, \Psi^*]
 		= \langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
@@ -281,6 +281,6 @@ Integrating by parts and eliminating terms which fit \lmmref{func-calculus:zero-
 		\chi_W [\Lambda, \Lambda^*]
 	\right|_{\Lambda \equiv 0}.
 \end{eqn}
-Now, recognising the final expression as a part of \lmmref{formalism:func-wigner:moments-from-chi},
+Now, recognising the final expression as a part of \lmmref{wigner:func:moments-from-chi},
 we immideately get the statement of the theorem.
 \end{proof}

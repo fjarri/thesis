@@ -7,7 +7,7 @@ Multimode fields are described by operators $\Psiop_j^{\dagger}(\xvec)$ and $\Ps
 Same as with functions of coordinates, we will use the same scheme, abbreviating $\Psiop_j \equiv \Psiop_j(\xvec)$ and $\Psiop_j^\prime \equiv \Psiop_j(\xvec^\prime)$.
 The commutators are
 \begin{eqn}
-\label{eqn:formalism:func-operators:commutators}
+\label{eqn:op-calculus:commutators}
     [ \Psiop_j, \Psiop_k^{\prime\dagger} ]
     = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
@@ -17,7 +17,7 @@ Field operators can be decomposed using a single-particle basis \todo{explanatio
     \Psiop_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
 Note that each component can have its own basis.
-Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{formalism:mm-aux:commutators},
+Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{wigner:mm-aux:commutators},
 the pair $j,\nvec$ serving as a mode identifier.
 
 We want to restrict ourselves only to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$ \todo{Or $\subseteq$ if we allow infinite $\restbasis$? This will lead to some mathematical difficulties}.
@@ -26,17 +26,17 @@ New restricted field operators are
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
 They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
-Because of the restricted nature of these operators, commutation relations~\eqnref{formalism:func-operators:commutators} no longer apply.
+Because of the restricted nature of these operators, commutation relations~\eqnref{op-calculus:commutators} no longer apply.
 The following ones should be used instead:
 \begin{eqn}
-\label{eqn:formalism:func-operators:restricted-commutators}
+\label{eqn:op-calculus:restricted-commutators}
     \left[ \Psiop_j, \Psiop_k^\prime \right]
     & = \left[ \Psiop_j^\dagger, \Psiop_k^{\prime\dagger} \right] = 0, \\
     \left[ \Psiop_j, \Psiop_k^{\prime\dagger} \right]
     & = \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec).
 \end{eqn}
 
-Let us now find the expression for high-order commutators of restricted field operators, analogous to \lmmref{formalism:mm-aux:high-order-commutators} for single-mode operators.
+Let us now find the expression for high-order commutators of restricted field operators, analogous to \lmmref{wigner:mm-aux:high-order-commutators} for single-mode operators.
 It can be done using the similar recursive procedure.
 
 \begin{lemma}
@@ -68,12 +68,12 @@ the commutator of higher order can be expanded as
         \Psiop, ( \Psiop^{\prime\dagger} )^{l-1}
     ].
 \end{eqn}
-Now we can get the commutator of any order starting from the known relation~\eqnref{formalism:func-operators:restricted-commutators}.
+Now we can get the commutator of any order starting from the known relation~\eqnref{op-calculus:restricted-commutators}.
 \end{proof}
 
 A further generalisation of these relations is
 \begin{lemma}
-\label{lmm:formalism:func-operators:functional-commutators}
+\label{lmm:op-calculus:functional-commutators}
     For $\Psiop \in \mathbb{H}_{\restbasis}$
     \begin{eqn*}
         \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]

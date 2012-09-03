@@ -3,7 +3,7 @@
 % =============================================================================
 
 \begin{lemma}[FPE--SDEs correspondence in convenient form.]
-\label{lmm:wigner-bec:fpe:fpe-sde-real}
+\label{lmm:fpe-sde:corr:fpe-sde-real}
 	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real variables, Fokker-Planck equation
 	\begin{eqn*}
 		\frac{dW}{dt}
@@ -34,7 +34,7 @@ For details see~\cite{Risken1996}, sections 3.3 and 3.4.
 \end{proof}
 
 \begin{theorem}
-\label{thm:wigner-bec:fpe:fpe-sde-complex}
+\label{thm:fpe-sde:corr:fpe-sde-complex}
 	If $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex variables,
 	Fokker-Planck equation
 	\begin{eqn*}
@@ -98,7 +98,7 @@ Since $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{
 	} W.
 \end{eqn}
 
-In order to use \lmmref{wigner-bec:fpe:fpe-sde-real},
+In order to use \lmmref{fpe-sde:corr:fpe-sde-real},
 we need to join variables $\bm{x}$ and $\bm{y}$ into the one variable vector $\zvec^T \equiv \bm{x}^T \oplus \bm{y}^T$.
 This will give us an equation identical to one from the lemma, with the drift vector $\tilde{\avec}^T \equiv \bm{u}^T \oplus \bm{v}^T$ and the diffusion matrix
 \begin{eqn}
@@ -228,8 +228,8 @@ with
 In the theorem above we limit the space of possible SDEs to those with $B_2 \equiv 0$, leading to the asymmetry.
 
 
-\begin{theorem}[Multi-component reformulation of \thmref{wigner-bec:fpe:fpe-sde-complex}]
-\label{thm:wigner-bec:fpe:mc-fpe-sde}
+\begin{theorem}[Multi-component reformulation of \thmref{fpe-sde:corr:fpe-sde-complex}]
+\label{thm:fpe-sde:corr:mc-fpe-sde}
 	If $\balpha^{(c)},\, c = 1..C$ are $C$ sets of complex variables $\balpha^{(c)} \equiv (\alpha_1^{(c)} \ldots \alpha_{M_c}^{(c)})$,
 	then Fokker-Planck equation
 	\begin{eqn*}
@@ -263,7 +263,7 @@ Let us join all variable sets $\balpha^{(c)}$ into one set
 \begin{eqn}
 	\balpha \equiv \bigoplus_{c=1}^C \balpha^{(c)}.
 \end{eqn}
-Then we can use \thmref{wigner-bec:fpe:fpe-sde-complex} with drift vector
+Then we can use \thmref{fpe-sde:corr:fpe-sde-complex} with drift vector
 \begin{eqn}
 	\avec = \bigoplus_{c=1}^C \avec^{(c)},
 \end{eqn}
@@ -319,7 +319,7 @@ Noise-induced drift term requires some work:
 \end{proof}
 
 \begin{theorem}
-\label{thm:wigner-bec:fpe:fpe-sde-func}
+\label{thm:fpe-sde:corr:fpe-sde-func}
 	Functional FPE
 	\begin{eqn*}
 		\frac{dW}{dt}
@@ -384,7 +384,7 @@ Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nv
 			\sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} (\mathcal{B}_{\lvec}^{(k)})^*
 	\right) W.
 \end{eqn}
-The diffusion term has to be transformed in order to conform to \thmref{wigner-bec:fpe:mc-fpe-sde}:
+The diffusion term has to be transformed in order to conform to \thmref{fpe-sde:corr:mc-fpe-sde}:
 \begin{eqn}
 	\int d\xvec \phi_{j,\mvec} \phi_{k,\nvec}^* \sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
 	& = \int d\xvec \int d\xvec^\prime
@@ -404,13 +404,13 @@ The diffusion term has to be transformed in order to conform to \thmref{wigner-b
 Note that we did not specify the index of the full basis used to expand the delta function.
 It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$, this will not change the result.
 
-Now we have the FPE from \thmref{wigner-bec:fpe:mc-fpe-sde} with
+Now we have the FPE from \thmref{fpe-sde:corr:mc-fpe-sde} with
 \begin{eqn}
 	\avec_{\mvec}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},\,\mvec \in \restbasis_c
 \end{eqn}
 and
 \begin{eqn}
-\label{eqn:wigner-bec:fpe:func-noise-matrix}
+\label{eqn:fpe-sde:corr:func-noise-matrix}
 	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec},\,
 	\mvec \in \restbasis_c, \nvec \in \fullbasis.
 \end{eqn}
@@ -448,7 +448,7 @@ Defining functional Wiener process $Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi
 	\right].
 \end{eqn}
 
-Performing the same multiplication and summation on Stratonovich term from \thmref{wigner-bec:fpe:mc-fpe-sde}:
+Performing the same multiplication and summation on Stratonovich term from \thmref{fpe-sde:corr:mc-fpe-sde}:
 \begin{eqn}
 	\mathcal{S}^{(c)}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime s_{\mvec}^{(c)}
@@ -464,7 +464,7 @@ Transforming trace to summation:
 			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
 			B_{\mvec (\pvec,\lvec)}^{(c)}.
 \end{eqn}
-Using the multimode form~\eqnref{wigner-bec:fpe:func-noise-matrix} of the noise matrix:
+Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise matrix:
 \begin{eqn}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
 		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
