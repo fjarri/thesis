@@ -1,28 +1,67 @@
 \documentclass[a4paper,11pt]{report}
 %\usepackage{fullpage}
 
-\usepackage[pdftex]{graphicx}
-\usepackage[margin=5pt]{subfig}
-\usepackage{amssymb}
+% A bit of magic to make amsfonts work with unicode-math
+\usepackage[no-math]{fontspec}
+\ExplSyntaxOn
+\int_new:N \l_mathcode_minus_int
+\int_new:N \l_mathcode_equal_int
+\exp_args:Nx \AtBeginDocument {
+  \exp_not:n {
+    \int_set:Nn \l_mathcode_minus_int { \XeTeXmathcodenum `\- }
+    \int_set:Nn \l_mathcode_equal_int { \XeTeXmathcodenum `\= }
+  }
+  \mathcode \int_eval:n { `\- } = \number \mathcode `\- \scan_stop:
+  \mathcode \int_eval:n { `\= } = \number \mathcode `\= \scan_stop:
+}
 \usepackage{amsmath}
-\usepackage{amsthm}
+\AtBeginDocument {
+  \XeTeXmathcodenum `\- = \l_mathcode_minus_int
+  \XeTeXmathcodenum `\= = \l_mathcode_equal_int
+}
+\ExplSyntaxOff
+\usepackage[italic,noendash]{mathastext}
+
 \usepackage{amsfonts}
-\usepackage[usenames]{color}
-\usepackage{bm}
-\usepackage{verbatim}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{unicode-math}
 \usepackage{dsfont}
-\usepackage{upgreek}
+
+\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
+\setmainfont[Ligatures=TeX,Numbers={Lining,Proportional}]{Baskerville}
+\setmathfont{XITS Math Mod}
+%\setmainfont[Ligatures=TeX,Numbers={Lining,Proportional}]{Palatino}
+%\setmathfont{Asana Math}
+\setsansfont[Ligatures=TeX,Numbers={Lining,Proportional}]{Helvetica}
+\usepackage{microtype}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=british]{english}
+
+%\usepackage[xetex]{graphicx}
+\usepackage[margin=5pt]{subfig}
+\usepackage{amsthm}
+\usepackage{verbatim}
 \usepackage{psfrag}
 \usepackage[nottoc]{tocbibind}
 \usepackage{environ} % gives \NewEnviron macro
 \usepackage{chngcntr} % provides \counterwithin to add appendix letter to theorems, lemmas etc
 
-% For print
-%\usepackage[breaklinks,pdftex,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk}]{hyperref}
-% For screen
-\definecolor{darkgreen}{rgb}{0.00,0.50,0.25}
-\definecolor{darkblue}{rgb}{0.00,0.00,0.67}
-\usepackage[breaklinks,pdftex,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk},colorlinks,urlcolor=blue,citecolor=darkgreen,linkcolor=darkblue]{hyperref}
+\usepackage{xcolor}
+\definecolor{citation}{HTML}{A60000}
+\definecolor{link}{HTML}{3515B0}
+\usepackage[backref=page,breaklinks,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk},colorlinks,urlcolor=blue,citecolor=citation,linkcolor=link]{hyperref}
+%\renewcommand{\backref}[1]{[pp #1]}
+\renewcommand*{\backref}[1]{}% for backref < 1.33 necessary
+\renewcommand*{\backrefalt}[4]{%
+\ifcase #1 % No citations.%
+\or
+[\,p #2]%
+\else
+[\,pp #2]%
+\fi }
 
 % Page layout
 % 1.5 interval
@@ -39,30 +78,30 @@
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 \newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
 
-\newcommand{\balpha}{\boldsymbol{\alpha}}
-\newcommand{\bdelta}{\boldsymbol{\delta}}
-\newcommand{\blambda}{\boldsymbol{\lambda}}
-\newcommand{\bfeta}{\boldsymbol{\eta}}
-\newcommand{\bxi}{\boldsymbol{\xi}}
-\newcommand{\bPsi}{\boldsymbol{\Psi}}
-\newcommand{\bLambda}{\boldsymbol{\Lambda}}
-\newcommand{\bPhi}{\boldsymbol{\Phi}}
-\newcommand{\bXi}{\boldsymbol{\Xi}}
+\newcommand{\balpha}{\mathbf{\alpha}}
+\newcommand{\bdelta}{\mathbf{\delta}}
+\newcommand{\blambda}{\mathbf{\lambda}}
+\newcommand{\bfeta}{\mathbf{\eta}}
+\newcommand{\bxi}{\mathbf{\xi}}
+\newcommand{\bPsi}{\mathbf{\Psi}}
+\newcommand{\bLambda}{\mathbf{\Lambda}}
+\newcommand{\bPhi}{\mathbf{\Phi}}
+\newcommand{\bXi}{\mathbf{\Xi}}
 
-\newcommand{\avec}{\boldsymbol{a}}
-\newcommand{\evec}{\boldsymbol{e}}
-\newcommand{\jvec}{\boldsymbol{j}}
-\newcommand{\kvec}{\boldsymbol{k}}
-\newcommand{\lvec}{\boldsymbol{l}}
-\newcommand{\mvec}{\boldsymbol{m}}
-\newcommand{\nvec}{\boldsymbol{n}}
-\newcommand{\pvec}{\boldsymbol{p}}
-\newcommand{\svec}{\boldsymbol{s}}
-\newcommand{\xvec}{\boldsymbol{x}}
-\newcommand{\zvec}{\boldsymbol{z}}
-\newcommand{\Zvec}{\boldsymbol{Z}}
+\newcommand{\avec}{\mathbf{a}}
+\newcommand{\evec}{\mathbf{e}}
+\newcommand{\jvec}{\mathbf{j}}
+\newcommand{\kvec}{\mathbf{k}}
+\newcommand{\lvec}{\mathbf{l}}
+\newcommand{\mvec}{\mathbf{m}}
+\newcommand{\nvec}{\mathbf{n}}
+\newcommand{\pvec}{\mathbf{p}}
+\newcommand{\svec}{\mathbf{s}}
+\newcommand{\xvec}{\mathbf{x}}
+\newcommand{\zvec}{\mathbf{z}}
+\newcommand{\Zvec}{\mathbf{Z}}
 
-\newcommand{\bpartial}{\boldsymbol{\partial}}
+\newcommand{\bpartial}{\mathbf{\partial}}
 
 \newcommand{\ecut}{\epsilon_{\mathrm{cut}}}
 \newcommand{\Tr}{\operatorname{Tr}}
@@ -73,9 +112,9 @@
 \newcommand{\Real}{\operatorname{Re}}
 \newcommand{\Imag}{\operatorname{Im}}
 
-\newcommand{\Psivec}{\boldsymbol{\Psi}}
+\newcommand{\Psivec}{\mathbf{\Psi}}
 \newcommand{\Psiop}{\hat{\Psi}}
-\newcommand{\Psiopvec}{\hat{\boldsymbol{\Psi}}}
+\newcommand{\Psiopvec}{\hat{\mathbf{\Psi}}}
 
 % {C, H} - i.e. either complex number or operator from Hilbert space
 % making it a macro, because I'm not sure what the letter should be
@@ -105,6 +144,7 @@
 \author{Bogdan Opanchuk}
 
 \begin{document}
+
 \maketitle
 
 \tableofcontents
@@ -138,7 +178,7 @@
 % unsorted stuff that may be useful; to be removed the in final version
 \include{chapters/notes}
 
-\bibliographystyle{unsrt}
+\bibliographystyle{aip}
 \bibliography{thesis}
 
 \end{document}
