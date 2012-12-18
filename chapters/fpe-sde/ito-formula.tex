@@ -28,7 +28,7 @@ This theorem can be extended to complex variables.
 
 \begin{theorem}
 \label{thm:fpe-sde:ito-formula:ito-f-complex}
-	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables, and $\Zvec = (\bm{X} + i\bm{Y}) / \sqrt{2}$ be an $L$-dimensional complex-valued Wiener process, containing two standard $L$-dimensional Wiener processes $\bm{X}$ and $\bm{Y}$.
+	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables, and $\Zvec = (\mathbf{X} + i\mathbf{Y}) / \sqrt{2}$ be an $L$-dimensional complex-valued Wiener process, containing two standard $L$-dimensional Wiener processes $\mathbf{X}$ and $\mathbf{Y}$.
 	For the SDE in It\^{o} form
 	\begin{eqn*}
 		d\balpha = \avec(\balpha, t) dt + B(\balpha, t) d\Zvec(t),
@@ -44,29 +44,29 @@ This theorem can be extended to complex variables.
 \end{theorem}
 \begin{proof}
 The proof follows the same scheme as \thmref{fpe-sde:corr:fpe-sde-complex}, just in the opposite direction.
-Let $f = g + ih$, $\balpha = \bm{x} + i \bm{y}$, $\avec = \bm{u} + i \bm{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\bm{x}} - i \bpartial_{\bm{y}}) / 2$.
+Let $f = g + ih$, $\balpha = \mathbf{x} + i \mathbf{y}$, $\avec = \mathbf{u} + i \mathbf{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\mathbf{x}} - i \bpartial_{\mathbf{y}}) / 2$.
 Then the set of SDEs from the statement is equivalent to
 \begin{eqn}
-	d \begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix}
-	= \begin{pmatrix} \bm{u} \\ \bm{v} \end{pmatrix} dt
+	d \begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix}
+	= \begin{pmatrix} \mathbf{u} \\ \mathbf{v} \end{pmatrix} dt
 		+ \frac{1}{\sqrt{2}} \begin{pmatrix} F & -G \\ G & F \end{pmatrix}
-			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}.
+			\begin{pmatrix} d\mathbf{X} \\ d\mathbf{Y} \end{pmatrix}.
 \end{eqn}
-Applying \thmref{fpe-sde:ito-formula:ito-f-real} for real-valued functions $g(\bm{x}, \bm{y})$ and $h(\bm{x}, \bm{y})$ and combining them into $f = g + ih$:
+Applying \thmref{fpe-sde:ito-formula:ito-f-real} for real-valued functions $g(\mathbf{x}, \mathbf{y})$ and $h(\mathbf{x}, \mathbf{y})$ and combining them into $f = g + ih$:
 \begin{eqn}
 	df ={} &
-		\begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix} \cdot
-			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix} f dt
+		\begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix} \cdot
+			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix} f dt
 		+ \frac{1}{4} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 			\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
 		} f dt  \\
 	& + \frac{1}{\sqrt{2}} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
-			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+			\begin{pmatrix} d\mathbf{X} \\ d\mathbf{Y} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
 		} f
 \end{eqn}
 Now let us match this equation and the lemma statement term by term.
@@ -75,11 +75,11 @@ First term:
 \begin{eqn}
 	2 \Real ( \avec \cdot \bpartial_{\balpha} )
 	& = \Real \left(
-			\left( \bm{u} + i\bm{v} \right) \cdot \left( \bpartial_{\bm{x}} - i \bpartial_{\bm{y}} \right)
+			\left( \mathbf{u} + i\mathbf{v} \right) \cdot \left( \bpartial_{\mathbf{x}} - i \bpartial_{\mathbf{y}} \right)
 		\right) \\
-	& = \bm{u} \cdot \bpartial_{\bm{x}} + \bm{v} \cdot \bpartial_{\bm{y}} \\
-	& = \begin{pmatrix} \bm{x} \\ \bm{y} \end{pmatrix} \cdot
-		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
+	& = \mathbf{u} \cdot \bpartial_{\mathbf{x}} + \mathbf{v} \cdot \bpartial_{\mathbf{y}} \\
+	& = \begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix} \cdot
+		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
 \end{eqn}
 
 Second term:
@@ -87,35 +87,35 @@ Second term:
 	\Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T }
 	={} & \frac{1}{4} \Trace{
 		(F F^T + G G^T)
-		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
-			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
+			+ \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
 		} \\
 	& - \frac{1}{4} \Trace {
 		(F G^T - G F^T)
-		(\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
-			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
+			- \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
 		} \\
 	& + \frac{i}{4} \Trace{
 		(F G^T - G F^T)
-		(\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
-			+ \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
+			+ \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
 	} \\
 	& + \frac{i}{4} \Trace{
 		(G G^T + F F^T)
-		(\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
-			- \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
+			- \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
 	}
 \end{eqn}
-Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T + \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\bm{x}} \bpartial_{\bm{y}}^T - \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T$ are antisymmetric.
+Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T + \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T - \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T$ are antisymmetric.
 Therefore the last two terms contain traces of antisymmetric matrices and are equal to zero.
 \begin{eqn}
 	={} & \frac{1}{4} \Trace{
-		(F F^T + G G^T) \bpartial_{\bm{x}} \bpartial_{\bm{x}}^T
-		+ (F G^T - G F^T) \bpartial_{\bm{y}} \bpartial_{\bm{x}}^T)
+		(F F^T + G G^T) \bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
+		+ (F G^T - G F^T) \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
 		} \\
 	& + \frac{1}{4} \Trace {
-		(G F^T - F G^T) \bpartial_{\bm{x}} \bpartial_{\bm{y}}^T
-		+ (F F^T + G G^T) \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T)
+		(G F^T - F G^T) \bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
+		+ (F F^T + G G^T) \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
 		} \\
 	={} & \frac{1}{4} \Trace {
 		\begin{pmatrix}
@@ -123,15 +123,15 @@ Therefore the last two terms contain traces of antisymmetric matrices and are eq
 			G F^T - F G^T & F F^T + G G^T
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bpartial_{\bm{x}} \bpartial_{\bm{x}}^T & \bpartial_{\bm{x}} \bpartial_{\bm{y}}^T \\
-			\bpartial_{\bm{y}} \bpartial_{\bm{x}}^T & \bpartial_{\bm{y}} \bpartial_{\bm{y}}^T
+			\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T & \bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T \\
+			\bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T & \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T
 		\end{pmatrix}
 	} \\
 	={} & \frac{1}{4} \Trace{
 		\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 		\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
-		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}
-		\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
+		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
 	}.
 \end{eqn}
 
@@ -139,16 +139,16 @@ Third term:
 \begin{eqn}
 	2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
 	& = \frac{1}{\sqrt{2}} \Real \Trace{
-		(F + iG) (d\bm{X} + id\bm{Y}) (\bpartial_{\bm{x}} - i\bpartial_{\bm{y}})
+		(F + iG) (d\mathbf{X} + id\mathbf{Y}) (\bpartial_{\mathbf{x}} - i\bpartial_{\mathbf{y}})
 	} \\
 	& = \frac{1}{\sqrt{2}} \Trace{
-		F d\bm{X} \bpartial_{\bm{x}} + F d\bm{Y} \bpartial_{\bm{y}}
-		- G d\bm{Y} \bpartial_{\bm{x}} + G d\bm{X} \bpartial_{\bm{y}}
+		F d\mathbf{X} \bpartial_{\mathbf{x}} + F d\mathbf{Y} \bpartial_{\mathbf{y}}
+		- G d\mathbf{Y} \bpartial_{\mathbf{x}} + G d\mathbf{X} \bpartial_{\mathbf{y}}
 	} \\
 	& = \frac{1}{\sqrt{2}} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
-			\begin{pmatrix} d\bm{X} \\ d\bm{Y} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\bm{x}} \\ \bpartial_{\bm{y}} \end{pmatrix}^T
+			\begin{pmatrix} d\mathbf{X} \\ d\mathbf{Y} \end{pmatrix}
+			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
 		}.
 \end{eqn}
 
@@ -234,7 +234,7 @@ In terms of complex vectors SDEs can be rewritten as
 \end{eqn}
 Now, treating the functional as a function of complex vector $F \equiv F(\balpha^{(1)}, \ldots, \balpha^{(C)})$, we can use \thmref{fpe-sde:ito-formula:mc-ito-f} with
 \begin{eqn}
-	(\bm{a}^{(c)})_{\mvec} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},
+	(\mathbf{a}^{(c)})_{\mvec} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},
 \end{eqn}
 and
 \begin{eqn}

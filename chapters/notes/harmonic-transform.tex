@@ -113,17 +113,17 @@ The number of sampling points is determined by the order of $P(x)$:
 Since we usually need population for all modes at once,
 it is more convenient to use the decomposition in matrix form:
 \[
-	\bm{c}
-	= \Phi^T\,\mathrm{diag}(\tilde{\bm{w}}) \bm{f}
-	= \Phi^T (\tilde{\bm{w}} \circ \bm{f}),
+	\mathbf{c}
+	= \Phi^T\,\mathrm{diag}(\tilde{\mathbf{w}}) \mathbf{f}
+	= \Phi^T (\tilde{\mathbf{w}} \circ \mathbf{f}),
 \]
 where $\Phi_{im} = \phi_m(\tilde{x}_i)$,
-$\tilde{\bm{w}}$ is a vector of elements $\tilde{w}_i$,
-$\bm{f}$ is a vector of elements $f(\tilde{x}_i)$,
+$\tilde{\mathbf{w}}$ is a vector of elements $\tilde{w}_i$,
+$\mathbf{f}$ is a vector of elements $f(\tilde{x}_i)$,
 and the symbol $\circ$ stands for Hadamard (element wise) product.
 Corresponding backward transform is then expressed as
 \[
-	\bm{f} = \Phi \bm{c}.
+	\mathbf{f} = \Phi \mathbf{c}.
 \]
 
 Note that the same method is applicable for $f(x) = \Psi(x)^a (\Psi^*(x))^b$,
