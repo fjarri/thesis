@@ -91,6 +91,17 @@ def arxivRefsIOP(entries):
                 entry_fields['eprint'] = aid[:4] + '.' + aid[5:]
                 entries[i] = ('unpublished', entry_key, entry_fields)
 
+def arxivRefsThesis(entries):
+    for entry_type, entry_key, entry_fields in entries:
+        if 'arxivId' in entry_fields:
+            if 'journal' in entry_fields:
+            # already published, no need to cite arxiv
+                del entry_fields['arxivId']
+            else:
+                aid = entry_fields['arxivId']
+                entry_fields['arxivId'] = aid[:4] + '.' + aid[5:]
+                entry_fields['archivePrefix'] = 'arXiv'
+
 def authorsGeneral(entries):
     for entry_type, entry_key, entry_fields in entries:
         if 'author' in entry_fields:
@@ -178,7 +189,7 @@ def prepare(entries):
     #initialsToBack(entries) # required for unsrt style
     journalAbbreviations(entries)
     removeFields(entries)
-    arxivRefsIOP(entries)
+    arxivRefsThesis(entries)
     removePaperTitles(entries)
 
 if __name__ == '__main__':
