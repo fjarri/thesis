@@ -15,7 +15,9 @@
 	% The file btxbst.doc has the documentation for this style.
 
 ENTRY
-  { address
+  { arxivId
+    archivePrefix
+    address
     author
     booktitle
     chapter
@@ -35,6 +37,7 @@ ENTRY
     series
     title
     type
+    url
     volume
     year
   }
@@ -219,7 +222,7 @@ FUNCTION {format.names}
 	      if$
 	      t "others" =
 	      etal or
-		{ " et~al." * }
+		{ " \textit{et~al.}" * }
 		{ " and " * t * }
 	      if$
 	    }
@@ -424,6 +427,11 @@ FUNCTION {format.vol.num.pages}
   if$
 }
 
+FUNCTION {format.arxivid}
+{ arxivId field.or.null
+  ":" swap$ * *
+}
+
 FUNCTION {format.chapter.pages}
 { chapter empty$
     'format.pages
@@ -567,15 +575,25 @@ FUNCTION {article}
   format.authors "author" output.check
   new.block
   crossref missing$
-    { journal field.or.null
-      format.vol.num.pages 
+    { arxivId missing$
+      { journal field.or.null
+        format.vol.num.pages
+      }
+      { archivePrefix field.or.null
+        format.arxivid
+      }
+      if$
       format.date empty$
-	'skip$
-	{ duplicate$ empty$
-	    { pop$ format.date paren }
-            { " " * format.date paren * }
-	  if$
-	}
+    	'skip$
+    	{ duplicate$ empty$
+    	    { pop$ format.date paren }
+                { " " * format.date paren * }
+    	  if$
+    	}
+      if$
+      url missing$
+      {}
+      {" \href{" url * "}{" * swap$ * "}" *}
       if$
       output
     }
