@@ -65,10 +65,7 @@ def removeFields(entries):
             if field in entry_fields:
                 del entry_fields[field]
         if 'doi' in entry_fields:
-            entry_fields['note'] = '\href{http://dx.doi.org/doi:' + entry_fields['doi'] + '}' + \
-                '{doi:' + entry_fields['doi'] + '}'
-        elif 'url' in entry_fields:
-            entry_fields['note'] = '\url{' + entry_fields['url'] + '}'
+            entry_fields['url'] = 'http://dx.doi.org/doi:' + entry_fields['doi']
 
 def arxivRefsPRL(entries):
     for entry_type, entry_key, entry_fields in entries:
