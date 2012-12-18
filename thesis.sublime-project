@@ -6,7 +6,7 @@
 			"file_exclude_patterns": [
 				"*.sublime-workspace",
 				"*.pdf", "*.aux", "*.bbl", "*.blg", "*.fdb_latexmk", "*.log", "*.out",
-				"*.synctex.gz", "*.toc", "*.fls"
+				"*.synctex.gz", "*.toc", "*.fls", "*.brf"
 			],
 			"folder_exclude_patterns": [
 				"temp",
