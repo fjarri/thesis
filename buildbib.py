@@ -172,6 +172,11 @@ def journalAbbreviations(entries):
         'Journal of the Optical Society of America B': 'J. Opt. Soc. Am. B',
         'Quantum and Semiclassical Optics: Journal of the European Optical Society Part B': 'Quantum Semiclass. Opt.',
         'Physics Reports': 'Phys. Rep.',
+        "JETP Letters": "JETP Lett.",
+        "IEEE Transactions on Signal Processing": "IEEE T. Signal Proces.",
+        "Journal of Computational Physics": "J. Comput. Phys.",
+        "SIAM Journal on Numerical Analysis": "SIAM J. Numer. Anal.",
+        "Journal of Lightwave Technology": "J. Lightwave Technol.",
     }
 
     for entry_type, entry_key, entry_fields in entries:
