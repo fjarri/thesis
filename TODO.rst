@@ -30,3 +30,22 @@ Questions:
 - (notation) Do we need explicit notation for "restricted" functions, like tilda over restricted operators?
 - (feature) Do we need to proof that W transformation of Hermitian operator is a real-valued function?
 - fix F[\lambda] -> F[\Lambda] in zero-delta-integrals lemma
+
+
+Fonts to consider
+-----------------
+
+For text:
+- Baskerville (ITC Baskerville seems to have better italics)
+- Sabon (designed by Jan Tschichold)
+- Cambria (goes with Cambria Math)
+- Lucida (goes with Lucida Math)
+- Minion (goes with Minion Math)
+
+For math:
+- XITS
+- Asana
+- Cambria
+- Lucida
+- Minion Math
+- CMR
