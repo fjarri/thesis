@@ -1,5 +1,6 @@
 % replace oneside by twoside for final print
-\documentclass[headings=optiontohead,chapterprefix=true,oneside,a4paper,11pt]{scrbook}
+\documentclass[headings=optiontohead,chapterprefix=true,twoside,a4paper,11pt,
+    cleardoublepage=empty]{scrbook}
 
 
 % A bit of magic to make amsfonts work with unicode-math
@@ -81,23 +82,21 @@
 \setkomafont{subsection}{\Large\captionfont\bfseries}
 \setkomafont{chapterentry}{\rmfamily\bfseries}
 \setkomafont{chapterentrypagenumber}{\rmfamily\bfseries}
-\setkomafont{pagehead}{\scshape}
-\setkomafont{pageheadfoot}{\scshape}
 
 
 % Page headers and footers
 \pagestyle{fancy}
-\renewcommand{\chapterpagestyle}{empty}
-\lhead{\nouppercase{\rightmark}}
-\rhead{\nouppercase{\leftmark}}
+\renewcommand{\chapterpagestyle}{empty} % force no page headers or footers on chapter pages
+\lhead{\nouppercase{\rightmark}} % get rid of uppercaseness in headings
+\rhead{\nouppercase{\leftmark}} % get rid of uppercaseness in headings
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
-\fancyfoot{}
+\fancyfoot{} % no footers
 
 \if@twoside
-\fancyhead[RO,LE]{\textsc\leftmark}
-\fancyhead[RE,LO]{\thepage}
+\fancyhead[RO,LE]{\scshape\leftmark} % chapter name in small caps on the inner side
+\fancyhead[RE,LO]{\thepage} % page number on the outer side
 \else
-\fancyhead[L]{\textsc\leftmark}
+\fancyhead[L]{\scshape\leftmark}
 \fancyhead[R]{\thepage}
 \fi
 
@@ -166,6 +165,9 @@
 
 % unsorted stuff that may be useful; to be removed the in final version
 \include{chapters/notes}
+
+% have to do it explicitly, because otherwise I cannot get rid of uppercaseness
+\fancyhead[L]{\scshape Bibliography}
 
 \bibliographystyle{aip}
 \bibliography{thesis}
