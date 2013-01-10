@@ -1,0 +1,68 @@
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+\newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
+
+\newcommand{\balpha}{\mathbf{\alpha}}
+\newcommand{\bdelta}{\mathbf{\delta}}
+\newcommand{\blambda}{\mathbf{\lambda}}
+\newcommand{\bfeta}{\mathbf{\eta}}
+\newcommand{\bxi}{\mathbf{\xi}}
+\newcommand{\bPsi}{\mathbf{\Psi}}
+\newcommand{\bLambda}{\mathbf{\Lambda}}
+\newcommand{\bPhi}{\mathbf{\Phi}}
+\newcommand{\bXi}{\mathbf{\Xi}}
+
+\newcommand{\avec}{\mathbf{a}}
+\newcommand{\evec}{\mathbf{e}}
+\newcommand{\jvec}{\mathbf{j}}
+\newcommand{\kvec}{\mathbf{k}}
+\newcommand{\lvec}{\mathbf{l}}
+\newcommand{\mvec}{\mathbf{m}}
+\newcommand{\nvec}{\mathbf{n}}
+\newcommand{\pvec}{\mathbf{p}}
+\newcommand{\svec}{\mathbf{s}}
+\newcommand{\xvec}{\mathbf{x}}
+\newcommand{\zvec}{\mathbf{z}}
+\newcommand{\Zvec}{\mathbf{Z}}
+
+\newcommand{\bpartial}{\mathbf{\partial}}
+
+\newcommand{\ecut}{\epsilon_{\mathrm{cut}}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Trace}[1]{\Tr \left\{ #1 \right\}}
+
+\newcommand{\symprod}[1]{\left\{ #1 \right\}_{\mathrm{sym}}}
+\newcommand{\pathavg}[1]{\langle #1 \rangle_{\mathrm{paths}}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+
+\newcommand{\Psivec}{\mathbf{\Psi}}
+\newcommand{\Psiop}{\hat{\Psi}}
+\newcommand{\Psiopvec}{\hat{\mathbf{\Psi}}}
+
+% {C, H} - i.e. either complex number or operator from Hilbert space
+% making it a macro, because I'm not sure what the letter should be
+\newcommand{\BasicType}{\todo{remove that}}
+\newcommand{\fullbasis}{\mathbb{B}}
+\newcommand{\restbasis}{\mathbb{M}}
+
+\newcommand{\eqnref}[1]{(\ref{eqn:#1})}
+\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
+\newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}}
+
+\NewEnviron{eqn}{\begin{align}\begin{split}\BODY\end{split}\end{align}}
+\NewEnviron{eqns}{\begin{align} \BODY \end{align}}
+\NewEnviron{eqn*}{\begin{equation*}\begin{split} \BODY \end{split}\end{equation*}}
+
+% Split equation with three columns
+% - use && as the second separator
+% - write equal signs as ={} to get correct spacing
+\NewEnviron{eqn2}{\begin{equation}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation}}
+\NewEnviron{eqn2*}{\begin{equation*}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation*}}

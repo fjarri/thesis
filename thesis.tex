@@ -1,5 +1,5 @@
-\documentclass[a4paper,11pt]{report}
-%\usepackage{fullpage}
+\documentclass[headings=optiontohead,chapterprefix=true,twoside,a4paper,11pt]{scrbook}
+
 
 % A bit of magic to make amsfonts work with unicode-math
 \usepackage[no-math]{fontspec}
@@ -22,40 +22,94 @@
 \ExplSyntaxOff
 \usepackage[italic,noendash]{mathastext}
 
+
+% regular includes
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-
 \usepackage{unicode-math}
 \usepackage{dsfont}
-
-\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
-\setmainfont[Ligatures=TeX,Numbers={Lining,Proportional}]{ITC New Baskerville Std}
-%\setmathfont{XITS Math Mod}
-\setmathfont{Asana Math}
-\setsansfont[Ligatures=TeX,Numbers={Lining,Proportional}]{Helvetica}
-\setmonofont{Menlo}
 \usepackage{microtype}
-\DeclareMicrotypeSet{maintext}{family = {ITC New Baskerville Std}}
-\UseMicrotypeSet[protrusion]{maintext}
-
 \usepackage{polyglossia}
-\setmainlanguage[variant=british]{english}
-
-%\usepackage[xetex]{graphicx}
 \usepackage[margin=5pt]{subfig}
-\usepackage{amsthm}
 \usepackage{verbatim}
 \usepackage{psfrag}
 \usepackage[nottoc]{tocbibind}
 \usepackage{environ} % gives \NewEnviron macro
 \usepackage{chngcntr} % provides \counterwithin to add appendix letter to theorems, lemmas etc
-
 \usepackage{xcolor}
+\usepackage{fancyhdr}
+
+
+% Set document fonts
+\defaultfontfeatures{Ligatures=TeX, Numbers={Lining,Proportional},
+  Scale=MatchLowercase, Mapping=tex-text}
+\newfontfamily{\captionfont}
+  [UprightFont={* Medium Caption},
+   ItalicFont={* Medium Italic Caption},
+   BoldFont={* Bold Caption},
+   BoldItalicFont={* Bold Italic Caption}]
+  {Minion Pro}
+\setmainfont
+  [UprightFont={* Medium},
+   ItalicFont={* Medium Italic},
+   BoldFont={* Bold},
+   BoldItalicFont={* Bold Italic}]
+  {Minion Pro}
+%\setmathfont{XITS Math Mod}
+\setmathfont{Asana Math}
+\setsansfont{Helvetica}
+\setmonofont{Menlo}
+\DeclareMicrotypeSet{maintext}{family = {Minion Pro}}
+\UseMicrotypeSet[protrusion]{maintext}
+
+
+% Hyphenation properties
+\setmainlanguage[variant=british]{english}
+
+
+% Page layout
+\usepackage[top=30mm, bottom=20mm, left=40mm, right=20mm]{geometry}
+\renewcommand{\baselinestretch}{1.5} % 1.5 interval
+
+
+% Font for elements
+\setkomafont{chapterprefix}{\Huge\captionfont\bfseries\scshape}
+\setkomafont{chapter}{\HUGE\captionfont\bfseries\scshape}
+\setkomafont{section}{\LARGE\captionfont\bfseries}
+\setkomafont{chapterentry}{\rmfamily\bfseries}
+\setkomafont{chapterentrypagenumber}{\rmfamily\bfseries}
+\setkomafont{pagehead}{\scshape}
+\setkomafont{pageheadfoot}{\scshape}
+
+
+% Page headers and footers
+\pagestyle{fancy}
+\renewcommand{\chapterpagestyle}{empty}
+\lhead{\nouppercase{\rightmark}}
+\rhead{\nouppercase{\leftmark}}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\fancyhead[RO,LE]{\textsc\leftmark}
+\fancyhead[RE,LO]{\thepage}
+\fancyfoot{}
+
+
+% All sorts of macros used in the text
+\include{macros}
+
+
+% Document properties
+\title{Two-component BEC dynamics simulations}
+\author{Bogdan Opanchuk}
+
+
+% PDF properties
 \definecolor{citation}{HTML}{A60000}
 \definecolor{link}{HTML}{3515B0}
-\usepackage[unicode,pdfencoding=auto,backref=page,breaklinks,pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk},colorlinks,urlcolor=blue,citecolor=citation,linkcolor=link]{hyperref}
-%\renewcommand{\backref}[1]{[pp #1]}
+\usepackage[bookmarks, bookmarkstype=toc, unicode, pdfencoding=auto, backref=page, breaklinks, pdftitle={PhD thesis: Two-component BEC dynamics simulations}, pdfauthor={Bogdan Opanchuk}, colorlinks, urlcolor=blue, citecolor=citation, linkcolor=link]{hyperref}
+
+
+% Format for back references in bibliography
 \renewcommand*{\backref}[1]{}% for backref < 1.33 necessary
 \renewcommand*{\backrefalt}[4]{%
 \ifcase #1 % No citations.%
@@ -65,91 +119,16 @@
 [pp #2]%
 \fi }
 
-% Page layout
-% 1.5 interval
-\renewcommand{\baselinestretch}{1.5}
-\textwidth=15cm
-\evensidemargin=-0.28cm
-\oddsidemargin=1.13cm
-\pretolerance=2000
-
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
-
-\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
-\newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
-
-\newcommand{\balpha}{\mathbf{\alpha}}
-\newcommand{\bdelta}{\mathbf{\delta}}
-\newcommand{\blambda}{\mathbf{\lambda}}
-\newcommand{\bfeta}{\mathbf{\eta}}
-\newcommand{\bxi}{\mathbf{\xi}}
-\newcommand{\bPsi}{\mathbf{\Psi}}
-\newcommand{\bLambda}{\mathbf{\Lambda}}
-\newcommand{\bPhi}{\mathbf{\Phi}}
-\newcommand{\bXi}{\mathbf{\Xi}}
-
-\newcommand{\avec}{\mathbf{a}}
-\newcommand{\evec}{\mathbf{e}}
-\newcommand{\jvec}{\mathbf{j}}
-\newcommand{\kvec}{\mathbf{k}}
-\newcommand{\lvec}{\mathbf{l}}
-\newcommand{\mvec}{\mathbf{m}}
-\newcommand{\nvec}{\mathbf{n}}
-\newcommand{\pvec}{\mathbf{p}}
-\newcommand{\svec}{\mathbf{s}}
-\newcommand{\xvec}{\mathbf{x}}
-\newcommand{\zvec}{\mathbf{z}}
-\newcommand{\Zvec}{\mathbf{Z}}
-
-\newcommand{\bpartial}{\mathbf{\partial}}
-
-\newcommand{\ecut}{\epsilon_{\mathrm{cut}}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\Trace}[1]{\Tr \left\{ #1 \right\}}
-
-\newcommand{\symprod}[1]{\left\{ #1 \right\}_{\mathrm{sym}}}
-\newcommand{\pathavg}[1]{\langle #1 \rangle_{\mathrm{paths}}}
-\newcommand{\Real}{\operatorname{Re}}
-\newcommand{\Imag}{\operatorname{Im}}
-
-\newcommand{\Psivec}{\mathbf{\Psi}}
-\newcommand{\Psiop}{\hat{\Psi}}
-\newcommand{\Psiopvec}{\hat{\mathbf{\Psi}}}
-
-% {C, H} - i.e. either complex number or operator from Hilbert space
-% making it a macro, because I'm not sure what the letter should be
-\newcommand{\BasicType}{\todo{remove that}}
-\newcommand{\fullbasis}{\mathbb{B}}
-\newcommand{\restbasis}{\mathbb{M}}
-
-\newcommand{\eqnref}[1]{(\ref{eqn:#1})}
-\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
-\newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
-\newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
-\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
-\newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
-\newcommand{\defref}[1]{Definition~\ref{def:#1}}
-
-\NewEnviron{eqn}{\begin{align}\begin{split}\BODY\end{split}\end{align}}
-\NewEnviron{eqns}{\begin{align} \BODY \end{align}}
-\NewEnviron{eqn*}{\begin{equation*}\begin{split} \BODY \end{split}\end{equation*}}
-
-% Split equation with three columns
-% - use && as the second separator
-% - write equal signs as ={} to get correct spacing
-\NewEnviron{eqn2}{\begin{equation}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation}}
-\NewEnviron{eqn2*}{\begin{equation*}\begin{alignedat}{2} \BODY \end{alignedat}\end{equation*}}
-
-\title{Two-component BEC dynamics simulations}
-\author{Bogdan Opanchuk}
 
 \begin{document}
+
+\frontmatter
 
 \maketitle
 
 \tableofcontents
+
+\mainmatter
 
 \include{chapters/introduction}
 
