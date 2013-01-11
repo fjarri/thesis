@@ -92,13 +92,24 @@
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
 \fancyfoot{} % no footers
 
+\newcommand{\normalheaders}{
 \if@twoside
 \fancyhead[RO,LE]{\scshape\leftmark} % chapter name in small caps on the inner side
 \fancyhead[RE,LO]{\thepage} % page number on the outer side
 \else
 \fancyhead[L]{\scshape\leftmark}
 \fancyhead[R]{\thepage}
-\fi
+\fi}
+
+% have to do it explicitly, because otherwise I cannot get rid of uppercaseness
+\newcommand{\bibliographyheaders}{
+\if@twoside
+\fancyhead[RO,LE]{\scshape Bibliography} % chapter name in small caps on the inner side
+\fancyhead[RE,LO]{\thepage} % page number on the outer side
+\else
+\fancyhead[L]{\scshape Bibliography}
+\fancyhead[R]{\thepage}
+\fi}
 
 
 % All sorts of macros used in the text
@@ -128,6 +139,8 @@
 
 
 \begin{document}
+
+\normalheaders
 
 \frontmatter
 
@@ -167,9 +180,7 @@
 % unsorted stuff that may be useful; to be removed the in final version
 \include{chapters/notes}
 
-% have to do it explicitly, because otherwise I cannot get rid of uppercaseness
-\fancyhead[L]{\scshape Bibliography}
-
+\bibliographyheaders
 \bibliographystyle{aip}
 \bibliography{thesis}
 
