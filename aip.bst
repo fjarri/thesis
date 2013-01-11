@@ -200,19 +200,26 @@ INTEGERS { nameptr namesleft numnames }
 
 INTEGERS { etal }
 
+FUNCTION {smallcapsify}
+{ duplicate$ empty$
+    { pop$ "" }
+    { "\textsc{" swap$ * "}" * }
+  if$
+}
+
 FUNCTION {format.names}
 { 's :=
   #1 'nameptr :=
   s num.names$ 'numnames :=
   numnames #5 >
-  s numnames "{ll}" format.name$ "others" = numnames #1 > and
+  s numnames "{ll}" format.name$ smallcapsify "others" = numnames #1 > and
   or 'etal :=
   etal
     { #1 #1 + 'namesleft := }
     { numnames 'namesleft := }
   if$
     { namesleft #0 > }
-    { s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
+    { s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ smallcapsify 't :=
       nameptr #1 >
 	{ namesleft #1 >
 	    { ", " * t * }
@@ -504,15 +511,15 @@ FUNCTION {format.article.crossref}
 }
 
 FUNCTION {format.crossref.editor}
-{ editor #1 "{vv~}{ll}" format.name$
+{ editor #1 "{vv~}{ll}" format.name$ smallcapsify
   editor num.names$ duplicate$
   #2 >
     { pop$ " et~al." * }
     { #2 <
 	'skip$
-	{ editor #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
+	{ editor #2 "{ff }{vv }{ll}{ jj}" format.name$ smallcapsify "others" =
 	    { " et~al." * }
-	    { " and " * editor #2 "{vv~}{ll}" format.name$ * }
+	    { " and " * editor #2 "{vv~}{ll}" format.name$ smallcapsify * }
 	  if$
 	}
       if$
