@@ -195,7 +195,7 @@ def prepare(entries):
     journalAbbreviations(entries)
     removeFields(entries)
     arxivRefsThesis(entries)
-    removePaperTitles(entries)
+    #removePaperTitles(entries)
 
 if __name__ == '__main__':
     entries = loadMendeleyBib(sys.argv[1])
