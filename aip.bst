@@ -581,6 +581,8 @@ FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
   new.block
+  format.btitle "title" output.check
+  new.block
   crossref missing$
     { arxivId missing$
       { journal field.or.null
