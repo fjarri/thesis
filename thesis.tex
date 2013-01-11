@@ -41,6 +41,7 @@
 \usepackage{chngcntr} % provides \counterwithin to add appendix letter to theorems, lemmas etc
 \usepackage{xcolor}
 \usepackage{fancyhdr}
+\usepackage{setspace}
 
 
 % Set document fonts
@@ -146,8 +147,10 @@
 
 \include{frontmatter}
 
+\begin{spacing}{1}
 \listoffigures
 \tableofcontents
+\end{spacing}
 
 \mainmatter
 
@@ -180,8 +183,10 @@
 % unsorted stuff that may be useful; to be removed the in final version
 \include{chapters/notes}
 
+\begin{spacing}{1}
 \bibliographyheaders
 \bibliographystyle{thesis}
 \bibliography{thesis}
+\end{spacing}
 
 \end{document}
