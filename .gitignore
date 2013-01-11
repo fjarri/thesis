@@ -13,4 +13,5 @@ chapters/*.aux
 *.fdb_latexmk
 temp/*
 *.sublime-workspace
+*.lof
 
