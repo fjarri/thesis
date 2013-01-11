@@ -143,6 +143,7 @@ def journalAbbreviations(entries):
         'Physical Review': 'Phys. Rev.',
         'Physical Review A': 'Phys. Rev. A',
         'Physical Review D': 'Phys. Rev. D',
+        'Physical Review E': 'Phys. Rev. E',
         'Journal of Physics A: Mathematical and General': 'J. Phys. A: Math. Gen.',
         'Journal of Physics B: Atomic, Molecular and Optical Physics': 'J. Phys. B',
         'Journal of Physics A: General Physics': 'J. Phys. A: Gen. Phys.',
@@ -177,11 +178,15 @@ def journalAbbreviations(entries):
         "Journal of Computational Physics": "J. Comput. Phys.",
         "SIAM Journal on Numerical Analysis": "SIAM J. Numer. Anal.",
         "Journal of Lightwave Technology": "J. Lightwave Technol.",
+        "Nature": "Nature",
     }
 
     for entry_type, entry_key, entry_fields in entries:
-        if 'journal' in entry_fields and entry_fields['journal'] in abbreviations:
-            entry_fields['journal'] = abbreviations[entry_fields['journal']]
+        if 'journal' in entry_fields:
+            if entry_fields['journal'] in abbreviations:
+                entry_fields['journal'] = abbreviations[entry_fields['journal']]
+            else:
+                print "Missing abbreviation:", entry_fields['journal']
 
 def removePaperTitles(entries):
     for entry_type, entry_key, entry_fields in entries:
