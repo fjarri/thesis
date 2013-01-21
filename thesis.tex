@@ -46,26 +46,8 @@
 
 
 % Set document fonts
-\defaultfontfeatures{Ligatures=TeX, Numbers={Lining,Proportional},
-  Scale=MatchLowercase, Mapping=tex-text}
-\newfontfamily{\captionfont}
-  [UprightFont={* Medium Caption},
-   ItalicFont={* Medium Italic Caption},
-   BoldFont={* Bold Caption},
-   BoldItalicFont={* Bold Italic Caption}]
-  {Minion Pro}
-\setmainfont
-  [UprightFont={* Medium},
-   ItalicFont={* Medium Italic},
-   BoldFont={* Bold},
-   BoldItalicFont={* Bold Italic}]
-  {Minion Pro}
-%\setmathfont{XITS Math Mod}
-\setmathfont{Asana Math}
-\setsansfont{Helvetica}
-\setmonofont{Menlo}
-\DeclareMicrotypeSet{maintext}{family = {Minion Pro}}
-\UseMicrotypeSet[protrusion]{maintext}
+\include{fonts}
+\UseMicrotypeSet[protrusion]{maintext} % 'maintext' family is defined in fonts.tex
 
 
 % Hyphenation properties
