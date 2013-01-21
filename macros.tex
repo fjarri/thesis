@@ -1,6 +1,29 @@
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
+% Some magic necessary to use small caps letters in all references to stuff from Appendices
+
+\makeatletter
+
+% Equation labels in small caps
+\let\old@tagform@=\tagform@
+\renewcommand{\tagform@}[1]{\old@tagform@{\scshape#1}}
+
+% This command is used to make theorem number upright in theorem heading.
+\renewcommand{\@upn}[1]{\textsc{#1}}
+
+%\renewcommand*{\chapterformat}{\textsc{\thechapter}\autodot\enskip}
+
+% We can assign text style to these counters, because, as opposed to \thechapter,
+% they are not used in labels. \thechapter is handled separately by chapter heading style
+% This takes care both of section/subsection headings, and section/subsection numbers in ToC
+\let\old@thesection\thesection
+\renewcommand{\thesection}{\textsc{\old@thesection}}
+
+\makeatother
+
+
+\declaretheorem[name=Theorem]{theorem}
+\declaretheorem[name=Lemma]{lemma}
+\declaretheorem[name=Definition]{definition}
+
 
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 \newcommand{\citationneeded}{\textcolor{red}{[citation needed]}}
@@ -49,13 +72,14 @@
 \newcommand{\fullbasis}{\mathbb{B}}
 \newcommand{\restbasis}{\mathbb{M}}
 
-\newcommand{\eqnref}[1]{(\ref{eqn:#1})}
-\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
-\newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
-\newcommand{\appref}[1]{Appendix~\ref{cha:appendix:#1}}
-\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
-\newcommand{\lmmref}[1]{Lemma~\ref{lmm:#1}}
-\newcommand{\defref}[1]{Definition~\ref{def:#1}}
+% References in small caps
+\newcommand{\eqnref}[1]{(\textsc{\ref{eqn:#1}})}
+\newcommand{\figref}[1]{Fig.~\textsc{\ref{fig:#1}}}
+\newcommand{\charef}[1]{Chapter~\textsc{\ref{cha:#1}}}
+\newcommand{\appref}[1]{Appendix~\textsc{\ref{cha:appendix:#1}}}
+\newcommand{\thmref}[1]{Theorem~\textsc{\ref{thm:#1}}}
+\newcommand{\lmmref}[1]{Lemma~\textsc{\ref{lmm:#1}}}
+\newcommand{\defref}[1]{Definition~\textsc{\ref{def:#1}}}
 
 \NewEnviron{eqn}{\begin{align}\begin{split}\BODY\end{split}\end{align}}
 \NewEnviron{eqns}{\begin{align} \BODY \end{align}}

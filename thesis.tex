@@ -29,6 +29,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{thmtools} % more convenient theorem style definitions
 \usepackage{unicode-math}
 \usepackage{dsfont}
 \usepackage{microtype}
@@ -77,12 +78,15 @@
 
 
 % Font for elements
-\setkomafont{chapterprefix}{\Huge\captionfont\bfseries\scshape}
-\setkomafont{chapter}{\HUGE\captionfont\bfseries\scshape}
-\setkomafont{section}{\LARGE\captionfont\bfseries}
-\setkomafont{subsection}{\Large\captionfont\bfseries}
-\setkomafont{chapterentry}{\rmfamily\bfseries}
-\setkomafont{chapterentrypagenumber}{\rmfamily\bfseries}
+\addtokomafont{chapterprefix}{\captionfont}
+\addtokomafont{chapter}{\captionfont\scshape}
+\addtokomafont{section}{\captionfont}
+\addtokomafont{subsection}{\captionfont}
+\addtokomafont{chapterentry}{\rmfamily\scshape\bfseries}
+\addtokomafont{chapterentrypagenumber}{\normalfont\rmfamily\bfseries}
+
+\captionsetup[figure]{labelfont=sc}
+\captionsetup[subfigure]{labelfont=normalfont}
 
 
 % Page headers and footers
@@ -148,7 +152,12 @@
 \include{frontmatter}
 
 \begin{spacing}{1}
-\listoffigures
+% There is a problem with the list of figures and "small caps appendices labels":
+% I cannot find a way to display figure labels in small caps in this list without
+% making the whole caption small caps.
+% So I am commenting that for the time being, becuase, frankly,
+% the list of figures seems to be quite useless.
+%\listoffigures
 \tableofcontents
 \end{spacing}
 
@@ -171,6 +180,11 @@
 \include{chapters/conclusion}
 
 \appendix
+
+% In order to use small caps in all labels including appendix number,
+% we need the counter to use small letters.
+\renewcommand{\thechapter}{\alph{chapter}}
+
 \counterwithin{lemma}{chapter}
 \counterwithin{theorem}{chapter}
 \counterwithin{definition}{chapter}
