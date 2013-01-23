@@ -2,13 +2,51 @@
 \chapter{Introduction}
 % =============================================================================
 
-Main papers to mention:
-Wigner representation introduced: \cite{Wigner1932}, \cite{Moyal1947}, \cite{Dirac1945}.
-Simulating the dynamics of bosonic quantum fields (not BEC) with Wigner: \cite{Drummond1993}, \cite{Drummond1993a}, \cite{Corney2006}, \cite{Corney2008}.
-Simulating BEC with Wigner: \cite{Steel1998}, \cite{Norrie2005}, \cite{Norrie2006}, \cite{Deuar2007}, \cite{Egorov2011}, \cite{Opanchuk2012}.
-Direct diagonalization approaches: \cite{Sakmann2009}.
+The problem of calculating the dynamics of quantum systems has been around since the dawn of quantum mechanics itself.
+In most cases the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with the particle number.
+The continuing increase of the available computational power has made it possible to apply the direct diagonalisation method for relatively large systems with as many as 100 particles~\cite{Sakmann2009} \todo{other examples?}.
+But larger systems, such as Bose-Einstein condensates (\abbrev{bec}s), still remain unreachable for exact simulation approaches.
+
+This lead Feynman to postulate as early as 1982~\cite{Feynman1982} that quantum computers are the most perspective way to simulate quantum systems effectively.
+But even today quantum computers of any useable size are not readily available, and prognoses about the speed of their development seem rather grim.
+At the moment of writing this thesis, the largest universal quantum computer operates with 6 qubits~\cite{Lanyon2011}.
+If one restricts himself to a particular algorithm, somewhat larger numbers are available (8 qubits for quantum factorisation, for instance~\cite{Xu2012}).
+Among the problems current quantum computers are facing today are decoherence, circuit errors, and the exponentially growing number of measurements (and, consequently, experiments) one has to perform in order to get the result of a computation.
+Therefore, even despite a number of recent developments in the field, it will require a major breakthrough for quantum computers to overcome classical ones in the near future.
+
+That is why, in order to handle existing quantum dynamics problems, approximations of varying accuracy have been developed in parallel with the quantum computing research.
+This thesis is dedicated to one of such approaches --- quasiprobabilities.
+
+\section{Rationale}
+
+The essence of the quasiprobability methods is representing the system's density matrix in form of a probability distribution, or at least a probability distribution-like function.
+This function can be then propagated in time (directly or by means of Monte-Karlo approach) and used to obtain required observables.
+First quasiprobability representations, Wigner~\cite{Wigner1932,Dirac1945,Moyal1947} and Husimi Q-function~\cite{Husimi1940} were introduced as early as the first half of the 20th century.
+They were followed by Glauber-Sudarshan P-representation~\cite{Sudarshan1963,Glauber1963b,Glauber1963} and its improved version by Drummond, Gardiner and Walls, positive-P representation~\cite{Drummond1980,Drummond1981}.
+These representations circumvent Feynmans claim (based on the Bell's theorem~\cite{Bell1964}) about the impossibility of simulating quantum systems probabilistically~\cite{Feynman1982}.
+They use complex phase space, have a domain larger than values of observables predicted by quantum mechanics, and only give the correct values of those observables on average \todo{cite our GHZ paper}.
+
+Different representation may perform better or worse depending on the system in question.
+Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (see~\charef{bell-ineq}).
+
+Positive-P representation is characterised by sampling error quickly growing in time.
+This can be in some cases handled by exploiting its non-uniqueness and tailoring the exact form of the function for the task, resulting in gauge-P representation~\cite{Deuar2002}.
+Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error \todo{cite projection paper if there is any}.
+
+Wigner distribution is, in general, not positive, although one can make some approximations which will make it strictly positive.
+This method has been applied to a number of problems in both quantum optical~\cite{Drummond1993,Drummond1993a,Corney2008,Corney2006} and \abbrev{bec} systems, including fragmentation~\cite{Isella2006,Isella2005,Gross2011}, dissipative atom transport~\cite{Ruostekoski2005}, dynamically unstable lattice dynamics~\cite{Shrestha2009}, dark solitons~\cite{Martin2010,Martin2010a}, turbulence~\cite{Norrie2005,Norrie2006a}, quantum noise and decoherence~\cite{Steel1998,Egorov2011}, and squeezing~\cite{Opanchuk2012,Opanchuk2012a}.
+This fact, coupled with its ability to produce evolution equations in convenient form, made it the best choice for the task of simulating \abbrev{bec} dynamics.
+
+This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments, and is focused primarily on this area, which
+
+Simulating BEC with Wigner:\cite{Norrie2005}, \cite{Norrie2006}, \cite{Deuar2007},
 Two-mode variational approaches: \cite{Sinatra2011}, \cite{Li2008}, \cite{Li2009}.
 
 Functional representation: \cite{Graham1970}, \cite{Graham1970a}.
 Functional representation used: \cite{Steel1998}, \cite{Isella2006}, \cite{Norrie2006a}.
 Truncation: \cite{Drummond1993}, \cite{Steel1998}, \cite{Sinatra2002}.
+
+
+\section{Thesis structure}
+
+
