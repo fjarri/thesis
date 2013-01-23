@@ -179,6 +179,7 @@ def journalAbbreviations(entries):
         "SIAM Journal on Numerical Analysis": "SIAM J. Numer. Anal.",
         "Journal of Lightwave Technology": "J. Lightwave Technol.",
         "Nature": "Nature",
+        "Physics": "Physics",
     }
 
     for entry_type, entry_key, entry_fields in entries:
