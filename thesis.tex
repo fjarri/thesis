@@ -147,6 +147,10 @@
 
 \include{chapters/introduction}
 
+\counterwithin{lemma}{chapter}
+\counterwithin{theorem}{chapter}
+\counterwithin{definition}{chapter}
+
 % theory
 \include{chapters/op-calculus}
 \include{chapters/wigner}
@@ -166,10 +170,6 @@
 % In order to use small caps in all labels including appendix number,
 % we need the counter to use small letters.
 \renewcommand{\thechapter}{\alph{chapter}}
-
-\counterwithin{lemma}{chapter}
-\counterwithin{theorem}{chapter}
-\counterwithin{definition}{chapter}
 
 \include{chapters/c-numbers}
 \include{chapters/func-calculus}
