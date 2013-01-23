@@ -199,3 +199,73 @@ Thus the full relation is
 \end{eqn}
 which is equivalent to the statement of the theorem.
 \end{proof}
+
+The same method can be applied to calculating the time derivative of component population.
+
+\begin{theorem}
+	\begin{eqn*}
+		\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+		= -2 \sum_{\lvec} \kappa_{\lvec}
+			\langle
+				\Psiop_j^\dagger
+				\mathcal{P}_{\restbasis_j} \left[
+					\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger} \hat{O}_{\lvec}
+				\right]
+			\rangle
+	\end{eqn*}
+\end{theorem}
+\begin{proof}
+Again, starting from master equation, and ignoring unitary evolution (which, obviously, will not contribute to the population change):
+\begin{eqn}
+	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+	= \sum_{\lvec} \kappa_{\lvec}
+			\int d\xvec^\prime \Trace{
+				\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
+				\Psiop_j^\dagger \Psiop_j
+			}.
+\end{eqn}
+Expanding the loss operator:
+\begin{eqn}
+	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+	={} & \sum_{\lvec} \kappa_{\lvec}
+			\int d\xvec^\prime \Trace{
+				\hat{\rho} \left(
+					2 \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^\prime
+					- \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
+					- \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime \Psiop_j^\dagger \Psiop_j
+				\right)
+			} \\
+	={} & \sum_{\lvec} \kappa_{\lvec}
+			\int d\xvec^\prime \langle
+				\Psiop_j^\dagger \left[
+					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
+				\right]
+				+ \left[
+					\Psiop_j^\dagger, \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
+				\right] \Psiop_j
+			\rangle \\
+	={} & \sum_{\lvec} \kappa_{\lvec}
+			\int d\xvec^\prime 2 \Real \langle
+				\Psiop_j^\dagger \left[
+					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
+				\right]
+			\rangle \\
+	={} & -2\sum_{\lvec} \kappa_{\lvec}
+			\int d\xvec^\prime \Real \langle
+				\Psiop_j^\dagger
+				\delta_{\restbasis_j}(\xvec^\prime, \xvec)
+				\frac{\partial \left(
+					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
+					\right)}{\partial \Psiop_j^{\prime\dagger}}
+			\rangle \\
+	={} & -2\sum_{\lvec} \kappa_{\lvec}
+			\langle
+				\Psiop_j^\dagger
+				\mathcal{P}_{\restbasis_j} \left[
+					\frac{\partial \hat{O}_{\lvec}^\dagger}{\partial \Psiop_j^\dagger}
+					\hat{O}_{\lvec}
+				\right]
+			\rangle.
+\end{eqn}
+
+\end{proof}
