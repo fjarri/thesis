@@ -253,7 +253,7 @@ In the theorem above we limit the space of possible SDEs to those with $B_2 \equ
 	\end{eqn*}
 	where noise-induced drift term is
 	\begin{eqn*}
-		s_j^{(c)} = \sum_{n=1}^C
+		s_j^{(c)} = \frac{1}{2} \sum_{n=1}^C
 			\Trace{ (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_j^T B^{(c)} },
 	\end{eqn*}
 	and $d\Zvec$ is an $L$-dimensional complex-valued Wiener process.
@@ -287,7 +287,7 @@ Stratonovich variant is obtained in the same way.
 Noise-induced drift term requires some work:
 \begin{eqn}
 	s_j^{(c)}
-	& = \Trace{
+	& = \frac{1}{2} \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
 		\begin{pmatrix}
 			\bpartial_{(\balpha^{(1)})^*} \\
@@ -301,7 +301,7 @@ Noise-induced drift term requires some work:
 			B^{(C)}
 		\end{pmatrix}
 	} \\
-	& = \Trace{
+	& = \frac{1}{2} \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
 		\begin{pmatrix}
 			\bpartial_{(\balpha^{(1)})^*} \evec_j^T B^{(c)} \\
@@ -309,7 +309,7 @@ Noise-induced drift term requires some work:
 			\bpartial_{(\balpha^{(C)})^*} \evec_j^T B^{(c)}
 		\end{pmatrix}
 	} \\
-	& = \sum_{n=1}^C \Trace{
+	& = \frac{1}{2} \sum_{n=1}^C \Trace{
 		(B^{(n)})^H
 		\bpartial_{(\balpha^{(n)})^*}
 		\evec_j^T
@@ -353,7 +353,7 @@ Noise-induced drift term requires some work:
 	\end{eqn*}
 	where
 	\begin{eqn*}
-		\mathcal{S}^{(j)} = \sum_{n=1}^C \sum_{\lvec}
+		\mathcal{S}^{(j)} = \frac{1}{2} \sum_{n=1}^C \sum_{\lvec}
 			(\mathcal{B}_{\lvec}^{(n)})^*
 			\frac{\delta}{\delta \Psi_n^*}
 			\mathcal{B}_{\lvec}^{(j)},
@@ -452,13 +452,13 @@ Performing the same multiplication and summation on Stratonovich term from \thmr
 \begin{eqn}
 	\mathcal{S}^{(c)}
 	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime s_{\mvec}^{(c)}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C \Trace{
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C \Trace{
 		(B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \evec_{\mvec}^T B^{(c)}
 	}.
 \end{eqn}
 Transforming trace to summation:
 \begin{eqn}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
 		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
 			(B_{\jvec (\pvec,\lvec)}^{(n)})^*
 			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
@@ -466,7 +466,7 @@ Transforming trace to summation:
 \end{eqn}
 Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise matrix:
 \begin{eqn}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
 		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
 			\int d\xvec \phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^* \phi_{\pvec}^*
 			\int d\xvec \phi_{c,\mvec}^*
@@ -475,7 +475,7 @@ Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise ma
 \end{eqn}
 Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\xvec - \xvec^\prime)$:
 \begin{eqn}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime
 		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
 			\int d\xvec
 				\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
@@ -485,13 +485,13 @@ Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\
 Recognizing the projection transformation and the functional differential:
 \begin{eqn}
 	& = \mathcal{P}_{\restbasis_c} \left[
-		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
+		\frac{1}{2} \sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
 			\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
 			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
 			\mathcal{B}_{\lvec}^{(c)}
 	\right] \\
 	& = \mathcal{P}_{\restbasis_c} \left[
-		\sum_{n=1}^C \sum_{\lvec}
+		\frac{1}{2} \sum_{n=1}^C \sum_{\lvec}
 		(\mathcal{B}_{\lvec}^{(n)})^*
 		\frac{\delta}{\delta \Psi_n^*}
 		\mathcal{B}_{\lvec}^{(c)}
