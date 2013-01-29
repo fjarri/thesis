@@ -4,158 +4,187 @@
 % =============================================================================
 
 Formally, a function of complex variable has to be holomorphic in order to be complex differentiable.
-In many cases it is enough to have less strict ``physicists'\,'' complex differentiation rules.
-These rules were developed by Wirtinger in~\cite{Wirtinger1927};
-a very good review and a thorough description of their application can be found in~\cite{Kreutz-Delgado2009}.
-Further extension of these rules to vectors and matrices is done in~\cite{Hjorungnes2007}.
-This section will outline these rules and provide some lemmas based on them, which will be used further.
+In many cases, however, it is enough to have less strict ``physicists'\,'' complex differentiation rules, which only requre the function's real and complex part to be differentiable, without imposing additional constraints.
+Such rules were developed by Wirtinger~\cite{Wirtinger1927}; further extension to vectors and matrices was performed by Hj{\o}rungnes and Gesbert~\cite{Hjorungnes2007}.
+A very good review and a thorough description of their application was made by Kreutz-Delgado~\cite{Kreutz-Delgado2009}.
+This section will outline Wirtinger differentiation rules and provide some lemmas based on them, which, in turn, are going to be used in the further Appendices, and in the main body of the thesis.
+
+
+% =============================================================================
+\section{Differentiation}
+% =============================================================================
+
+We will start from the definition of the differentiation:
 
 \begin{definition}
 \label{def:c-numbers:wirtinger}
-	For a complex variable $z = x + iy$ and a function $f(z) = u(x, y) + iv(x, y)$
+	For a complex variable $z \equiv x + iy$, and a function $f(z) \equiv u(x, y) + iv(x, y)$
 	\begin{eqn*}
-		\left( \frac{\partial f(z)}{\partial z} \right)
+		\left( \frac{\upd f(z)}{\upd z} \right)
 		= \frac{1}{2} \left(
-			\frac{\partial f}{\partial x} - i \frac{\partial f}{\partial y}
+			\frac{\upd f}{\upd x} - i \frac{\upd f}{\upd y}
 		\right).
 	\end{eqn*}
 \end{definition}
 
-\begin{lemma}
-	If $f(z)$ is holomorphic, then the Wirtinger differentiation is equivalent to the standard definition.
-\end{lemma}
+One can easily check that if $f(z)$ is holomorphic, this definition is equivalent to the standard complex differentiation.
+Wirtinger differentiation is quite intuitive in the sense that it obeys all the basic rules associated with a real-valued differentiation:
 
-\begin{lemma}
-	For any ``good'' (even non-holomorphic) $f(z)$, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules
-	(the former one is applied as if $f(z) \equiv f(z, z^*)$).
-\end{lemma}
-
-Hereinafter we will use Wirtinger differentiation unless explicitly stated otherwise,
-because some important functions we will encounter are not holomorphic.
-This differentiation has all intuitively assumed properties, along with some not quite obvious ones.
-
-\begin{lemma}
-	For any nonnegative integers $a$ and $b$.
+\begin{theorem}
+\label{thm:c-numbers:diff-properties}
+	For any $f(z)$ with differentiable real and complex parts, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules.
+	The former one is applied as if $f(z)$ was a function of two independent variables $z$ and $z^*$:
 	\begin{eqn*}
-		\frac{\partial}{\partial z} (z^a (z^*)^b) = a z^{a-1} (z^*)^b,
-		\quad
-		\frac{\partial}{\partial z^*} (z^a (z^*)^b) = b z^a (z^*)^{b-1},
+		\frac{\upd f(g(z))}{\upd z}
+		= \frac{\upp f}{\upp g} \frac{\upd g}{\upd z}
+			+ \frac{\upp f}{\upp g^*} \frac{\upd g^*}{\upd z}.
+	\end{eqn*}
+\end{theorem}
+
+Some important functions we will encounter in this thesis are not holomorphic.
+Therefore, hereinafter we will use Wirtinger differentiation unless explicitly stated otherwise,
+along with notation $\upd f/\upd z$ (to avoid confusion with regular partial derivatives).
+Consequently, by ``differentiability'' we will mean the property used in the above theorem, i.e. the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axis.
+
+It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for common real-valued differentiation.
+We will start from the theorem for differentials of products:
+
+\begin{lemma}
+	For any non-negative integers $r$ and $s$
+	\begin{eqn*}
+		\frac{\upd}{\upd z} (z^r (z^*)^s) = r z^{r-1} (z^*)^s.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Let us assume that the statement of the lemma is valid for some $a$ and $b$, then using product rule
+First, one can easily prove (by transition to real values) that $\upd (z z^*)/\upd z = z^*$ and $\upd (z z^*)/\upd z^* = z$.
+Let us assume that the statement of the theorem is true for some $a$ and $b$; then, using the product rule,
 \begin{eqn}
-	\frac{\partial}{\partial z} (z^{a+1} (z^*)^b)
-	& = \frac{\partial}{\partial z} (z z^a (z^*)^b)
-	= z^a (z^*)^b + z \frac{\partial}{\partial z} (z^a (z^*)^b) \\
-	& = z^a (z^*)^b + a z z^{a-1} (z^*)^b
-	= (a + 1) z^a (z^*)^b.
+	\frac{\upd}{\upd z} (z^{r+1} (z^*)^s)
+	& = \frac{\upd}{\upd z} (z z^r (z^*)^s)
+		= z^r (z^*)^s + z \frac{\upd}{\upd z} (z^r (z^*)^s) \\
+	& = z^r (z^*)^s + r z z^{r-1} (z^*)^s
+		= (r + 1) z^r (z^*)^s.
 \end{eqn}
-The part for $\partial/\partial z^*$ can is proved in the same way.
-One can easily prove (by transition to real values) that $\partial(z z^*)/\partial z = z^*$ and $\partial (z z^*)/\partial z^* = z$.
-By induction, the statement is true for any natural $a$ and $b$,
-and it is obviously true if $a = 0$ or $b = 0$, which proves the lemma.
-\todo{This can be proved for any real $a$ and $b$, if necessary.}
+By induction, the statement is true for any natural $r$ and $s$,
+and it is obviously true if $r = 0$ or $s = 0$, which proves the lemma.
 \end{proof}
 
-This is straightforwardly followed by
-\begin{lemma}
-\label{lmm:c-numbers:independent-vars}
-	If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $\partial f(z)/\partial z$ and $\partial f(z)/\partial z^*$ can be treated as partial differentiation of the function of two independent variables $z$ and $z^*$.
+The above lemma can be straightforwardly generalized to operate on arbitrary functions:
+
+\begin{theorem}
+\label{thm:c-numbers:independent-vars}
+	If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $\upd f/\upd z$ and $\upd f/\upd z^*$ can be calculated as partial derivatives of $f$ expressed in terms of $z$ and $z*$, over $z$ and $z^*$ respectively.
 	In other words:
 	\begin{eqn*}
-		\frac{\partial}{\partial z} f(z, z^*) \equiv \frac{\partial}{\partial u} f(u, v),
+		\frac{\upd}{\upd z} f(z) \equiv \frac{\upp}{\upp z} f(z, z^*),
 		\quad
-		\frac{\partial}{\partial z^*} f(z, z^*) \equiv \frac{\partial}{\partial v} f(u, v).
+		\frac{\upd}{\upd z^*} f(z) \equiv \frac{\upp}{\upp z^*} f(z, z^*).
 	\end{eqn*}
-\end{lemma}
+\end{theorem}
 
-Therefore, although technically $f(z, z^*)$ depends on one complex variable, when differentiated it behaves as if it was a function of two complex variables.
-Now we can prove two lemmas which will help us deal with some integrals.
+The chain differentiation rule in~\thmref{c-numbers:diff-properties} and the above theorem give rise to the common notation used in conjunction with Wirtinger differentiation.
+In order to emphasize the ``independent'' behavior of $z$ and $z^*$, function arguments are often written as $f(z, z^*)$, even though technically they are not independent.
+We will use such notation throughout the thesis.
+
+
+% =============================================================================
+\section{Integration}
+% =============================================================================
+
+Wirtinger differentiation can be paired with the somewhat more common integration over the complex plane:
 
 \begin{definition}
-	For a complex variable $z = x + iy$ the integral
+\label{def:c-numbers:integration}
+	For a complex $z = x + iy$
 	\begin{eqn*}
-		\int d^2 z \equiv \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} dx\, dy,
+		\int \upd^2 z \equiv \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \upd x\, \upd y.
 	\end{eqn*}
-	or, in other words, stands for the two-dimensional integral over the complex plane.
 \end{definition}
+
+This definition allows us to prove an analogue of one of the properties of the Fourier transform expressed in terms of Wirtinger differentiation:
 
 \begin{lemma}
 \label{lmm:c-numbers:fourier-of-moments}
-	For complex $\lambda$ and any non-negative integers $r$ and $s$:
+	For a complex $\lambda$ and any non-negative integers $r$ and $s$
 	\begin{eqn*}
-		\int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		= \pi^2
-			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-			\left( \frac{\partial}{\partial \lambda} \right)^s
-			\delta(\Real \lambda) \delta(\Imag \lambda)
+			\left( -\frac{\upp}{\upp \lambda^*} \right)^r
+			\left( \frac{\upp}{\upp \lambda} \right)^s
+			\delta(\Real \lambda) \delta(\Imag \lambda).
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-First, changing the variables in the integrals and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
+First, by changing a variable in the integral and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
 \begin{eqn}
 \label{eqn:c-numbers:fourier-real}
-	\int\limits_{-\infty}^{\infty} dv\, v^n \exp(\pm 2 i x v)
-	= \pi (\mp i / 2)^n \delta^{(n)}(x),
+	\int\limits_{-\infty}^{\infty} \upd v\, v^n \exp(\pm 2 i x v)
+	= \pi (\mp i / 2)^n \delta^{(n)}(x).
 \end{eqn}
 Note that we have explicitly written integration limits here;
 they are swapped when we change the variable in the first integral.
 
 Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial expression as
 \begin{eqn}
-	& \int d^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
-	& = \int du dv \exp(2ivx - 2iuy)
-		\sum_{l=0}^r \binom{r}{l} u^l (iv)^{r-l}
-		\sum_{m=0}^s \binom{s}{m} u^m (-iv)^{s-m} \\
-	& = \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
-		i^{r-l} (-i)^{s-m}
-		\int du\, u^{l+m} \exp(2ivx)
-		\int dv\, v^{r-l+s-m} \exp(-2iuy).
+	& \int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
+	& = \int \upd u\, \upd v\, \exp(2ivx - 2iuy)
+		\sum_{m=0}^r \binom{r}{m} u^m (iv)^{r-m}
+		\sum_{n=0}^s \binom{s}{n} u^n (-iv)^{s-n} \\
+	& = \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n}
+		i^{r-m} (-i)^{s-n}
+		\int \upd u\, u^{m+n} \exp(2ivx)
+		\int \upd v\, v^{r-m+s-n} \exp(-2iuy).
 \end{eqn}
 Applying~\eqnref{c-numbers:fourier-real} and grouping differentials:
 \begin{eqn}
-	& = \pi^2 \sum_{l=0}^r \sum_{m=0}^s \binom{r}{l} \binom{s}{m}
-		i^{r-l} (-i)^{s-m}
-		(-i/2)^{l+m} \delta^{(l+m)}(y)
-		(i/2)^{r-l+s-m} \delta^{(r-l+s-m)}(x) \\
+	& = \pi^2 \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n}
+		i^{r-m} (-i)^{s-n}
+		(-i/2)^{m+n} \delta^{(m+n)}(y)
+		(i/2)^{r-m+s-n} \delta^{(r-m+s-n)}(x) \\
 	& = \pi^2
-		\sum_{l=0}^r \binom{r}{l}
+		\sum_{m=0}^r \binom{r}{m}
 			\frac{1}{2^r}
-			(-i \partial / \partial y)^l
-			(-\partial / \partial x)^{r-l}
-		\sum_{m=0}^s \binom{s}{m}
+			(-i \upd / \upd y)^m
+			(-\upd / \upd x)^{r-m}
+		\sum_{n=0}^s \binom{s}{n}
 			\frac{1}{2^s}
-			(-i \partial / \partial y)^m
-			(\partial / \partial x)^{s-m}
+			(-i \upd / \upd y)^n
+			(\upd / \upd x)^{s-n}
 		\delta(y) \delta(x).
 \end{eqn}
 Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
 \begin{eqn}
 	& = \pi^2
-		\left( \frac{1}{2} (-i \partial / \partial y - \partial / \partial x) \right)^r
-		\left( \frac{1}{2} (-i \partial / \partial y + \partial / \partial x) \right)^s
+		\left( \frac{1}{2} (-i \upd / \upd y - \upd / \upd x) \right)^r
+		\left( \frac{1}{2} (-i \upd / \upd y + \upd / \upd x) \right)^s
 		\delta(y) \delta(x) \\
 	& = \pi^2
-		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\left( \frac{\partial}{\partial \lambda} \right)^s
+		\left( -\frac{\upd}{\upd \lambda^*} \right)^r
+		\left( \frac{\upd}{\upd \lambda} \right)^s
 		\delta(\Real \lambda) \delta(\Imag \lambda).
 		\qedhere
 \end{eqn}
 \end{proof}
 
+It can be proved by expansion in real variables that the formally written rule of integration by parts works for the integral from~\defref{c-numbers:integration}:
+\begin{eqn}
+	\int \upd z\, f \frac{\upd g}{\upd z}
+	= \int \upd z \frac{\upd (fg)}{\upd z} - \int \upd z \frac{\upd f}{\upd z} g.
+\end{eqn}
+Integration by parts will be used extensively in further proofs, and we will need two lemmas that will handle the first term in the right part of the above expression.
+
 \begin{lemma}
 \label{lmm:c-numbers:zero-integrals}
-	If $f(\lambda, \lambda^*)$ is square-integrable, then for any complex $\alpha$:
+	For a square-integrable $f(\lambda, \lambda^*)$, and a complex $\alpha$
 	\begin{eqn*}
-		\int d^2\lambda
-			\frac{\partial}{\partial \lambda} \left(
+		\int \upd^2\lambda
+			\frac{\upd}{\upd \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
 				f(\lambda, \lambda^*)
 			\right)
-		& = 0 \\
-		\int d^2\lambda
-			\frac{\partial}{\partial \lambda^*}
+		& = 0, \\
+		\int \upd^2\lambda
+			\frac{\upd}{\upd \lambda^*}
 			\left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
 				f(\lambda, \lambda^*)
@@ -164,32 +193,28 @@ Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Square-integrability of $f$ means $\lim_{\Real \lambda \rightarrow \infty} = 0$ and $\lim_{\Imag \lambda \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
+From the square-integrability of $f$ it follows that $\lim_{\Real \lambda \rightarrow \infty} = 0$ and $\lim_{\Imag \lambda \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
 \end{proof}
 
 \begin{lemma}
 \label{lmm:c-numbers:zero-delta-integrals}
-	\todo{Any limitations on $f$? It is bounded (on account of being $\chi_W$), for one.}
+	For a bounded $f(\lambda, \lambda^*)$
 	\begin{eqn*}
-		\int d^2\lambda
-			\frac{\partial}{\partial \lambda} \left(
-				\left(
-					\left( \frac{\partial}{\partial \lambda} \right)^s
-					\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-					\delta(\Real \lambda) \delta(\Imag \lambda)
-				\right)
+		\int \upd^2\lambda
+			\frac{\upd}{\upd \lambda} \left(
 				f(\lambda, \lambda^*)
+				\left( \frac{\upd}{\upd \lambda} \right)^s
+				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
+				\delta(\Real \lambda) \delta(\Imag \lambda)
 			\right)
-		& = 0 \\
-		\int d^2\lambda
-			\frac{\partial}{\partial \lambda^*}
+		& = 0, \\
+		\int \upd^2\lambda
+			\frac{\upd}{\upd \lambda^*}
 			\left(
-				\left(
-					\left( \frac{\partial}{\partial \lambda} \right)^s
-					\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-					\delta(\Real \lambda) \delta(\Imag \lambda)
-				\right)
 				f(\lambda, \lambda^*)
+				\left( \frac{\upd}{\upd \lambda} \right)^s
+				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
+				\delta(\Real \lambda) \delta(\Imag \lambda)
 			\right)
 		& = 0.
 	\end{eqn*}
