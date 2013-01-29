@@ -1,7 +1,13 @@
 % replace oneside by twoside for final print
 \documentclass[headings=optiontohead,chapterprefix=true,oneside,a4paper,11pt,
-    DIV=9,BCOR=6mm,
+    %DIV=9,BCOR=0mm,
     cleardoublepage=empty]{scrbook}
+
+
+% Page layout
+\usepackage[top=20mm, bottom=30mm, left=20mm, right=40mm]{geometry}
+\renewcommand{\baselinestretch}{1.5} % 1.5 interval
+
 
 % A bit of magic to make amsfonts work with unicode-math
 \usepackage[no-math]{fontspec}
@@ -52,11 +58,6 @@
 
 % Hyphenation properties
 \setmainlanguage[variant=british]{english}
-
-
-% Page layout
-%\usepackage[top=30mm, bottom=20mm, left=40mm, right=20mm]{geometry}
-\renewcommand{\baselinestretch}{1.5} % 1.5 interval
 
 
 % Font for elements
