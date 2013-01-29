@@ -17,6 +17,7 @@ Therefore, even despite a number of recent developments in the field, it will re
 That is why, in order to handle existing quantum dynamics problems, approximations of varying accuracy have been developed in parallel with the quantum computing research.
 This thesis is dedicated to one of such approaches --- quasiprobabilities.
 
+
 \section{Rationale}
 
 The essence of the quasiprobability methods is representing the system's density matrix in form of a probability distribution, or at least a probability distribution-like function.
@@ -26,27 +27,57 @@ They were followed by Glauber-Sudarshan P-representation~\cite{Sudarshan1963,Gla
 These representations circumvent Feynmans claim (based on the Bell's theorem~\cite{Bell1964}) about the impossibility of simulating quantum systems probabilistically~\cite{Feynman1982}.
 They use complex phase space, have a domain larger than values of observables predicted by quantum mechanics, and only give the correct values of those observables on average \todo{cite our GHZ paper}.
 
-Different representation may perform better or worse depending on the system in question.
-Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (see~\charef{bell-ineq}).
+This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments, and is focused primarily on this area.
+Since different representation may perform better or worse depending on the system in question, we had to pick one that was best suited for our problem.
 
+Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (it will make a brief appearance in~\charef{bell-ineq}).
 Positive-P representation is characterised by sampling error quickly growing in time.
 This can be in some cases handled by exploiting its non-uniqueness and tailoring the exact form of the function for the task, resulting in gauge-P representation~\cite{Deuar2002}.
 Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error \todo{cite projection paper if there is any}.
 
-Wigner distribution is, in general, not positive, although one can make some approximations which will make it strictly positive.
-This method has been applied to a number of problems in both quantum optical~\cite{Drummond1993,Drummond1993a,Corney2008,Corney2006} and \abbrev{bec} systems, including fragmentation~\cite{Isella2006,Isella2005,Gross2011}, dissipative atom transport~\cite{Ruostekoski2005}, dynamically unstable lattice dynamics~\cite{Shrestha2009}, dark solitons~\cite{Martin2010,Martin2010a}, turbulence~\cite{Norrie2005,Norrie2006a}, quantum noise and decoherence~\cite{Steel1998,Egorov2011}, and squeezing~\cite{Opanchuk2012,Opanchuk2012a}.
-This fact, coupled with its ability to produce evolution equations in convenient form, made it the best choice for the task of simulating \abbrev{bec} dynamics.
+Wigner distribution is, in general, not positive, which presents problems when simulating systems with small number of particles.
+Fortunately, in the assumption of large number of particles (our case), one can make certain approximations which will make it strictly positive.
+In addition to that, it is known to reduce the initial master equation to a set of stochastic differential equations, which have a lot of well-known methods of numerical integration.
+Of course, it is not the only method for this type of system; a very perspective group of variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011},
+but it has some difficulties handling nonlinear losses in \abbrev{bec}s.
 
-This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments, and is focused primarily on this area, which
+This combination of features made the truncated Wigner representation the best choice for the task of simulating \abbrev{bec} dynamics, along with other types of systems, like quantum optical ones~\cite{Drummond1993,Drummond1993a,Corney2008,Corney2006}.
+For \abbrev{bec} systems, its applications include fragmentation~\cite{Isella2006,Isella2005,Gross2011}, dissipative atom transport~\cite{Ruostekoski2005}, dynamically unstable lattice dynamics~\cite{Shrestha2009}, dark solitons~\cite{Martin2010,Martin2010a}, turbulence~\cite{Norrie2005,Norrie2006}, quantum noise and decoherence~\cite{Steel1998,Norrie2006a,Egorov2011}, squeezing~\cite{Opanchuk2012} and entanglement~\cite{Opanchuk2012a}.
 
-Simulating BEC with Wigner:\cite{Norrie2005}, \cite{Norrie2006}, \cite{Deuar2007},
-Two-mode variational approaches: \cite{Sinatra2011}, \cite{Li2008}, \cite{Li2009}.
+Although initially Wigner representation was formulated for a single-mode system, the definition and associated methods were later extended to operate on field operators and wave functions.
+First such description was produced by Graham~\cite{Graham1970,Graham1970a}, followed by its usage in various other works~\cite{Steel1998,Gardiner2003,Isella2006,Norrie2006,Norrie2006a,Blakie2008,Martin2010,Polkovnikov2010,Gross2011}.
+These papers did not include the formal definition of the representation.
 
-Functional representation: \cite{Graham1970}, \cite{Graham1970a}.
-Functional representation used: \cite{Steel1998}, \cite{Isella2006}, \cite{Norrie2006a}.
-Truncation: \cite{Drummond1993}, \cite{Steel1998}, \cite{Sinatra2002}.
+The associated approximation, called the Wigner truncation, was, to varying level of detail, described in~\cite{Drummond1993,Steel1998,Sinatra2002}.
+The truncation is described in detail in~\secref{wigner-bec:truncation}.
 
 
 \section{Thesis structure}
 
+This thesis is laid out in the mathematical tradition, with the formalism preceeding its application.
+Supplementary information, methods, and parts of the formalism that are not directly connected to quantum mechanics can be found in the Appendices.
 
+First three chapters contain the foundation for the functional Wigner transformation.
+\charef{op-calculus} introduces the restricted basis formalism and its application to bosonic field operators.
+\charef{wigner} applies these restricted operators to build the transformation, starting from the well-known single mode case to familiarize a reader with the notation.
+Finally, \charef{wigner-spec} derives the result of the transformation applied to several particular operators, which will be useful later on during the transformation of the master equation describing a \abbrev{bec}.
+
+\charef{wigner-bec} applies the formalism from the previous chapters to transform a master equation describing a \abbrev{bec} to a set of stochastic differential equations (\abbrev{sde}s).
+It discusses the required approximation (Wigner truncation), along with some of its consequences.
+
+Next three chapters describe several applications of the truncated Wigner formalism.
+\charef{bec-noise} is dedicated to the theoretical description of the quantum interferometry experiments performed in Swinburne University.
+It shows how truncated Wigner can predict the visibility dynamics (including its decay) in the experiment, along with the growth of the phase noise.
+\charef{bec-squeezing} illustrates how truncated Wigner can be used to calculate squeezing in the interferometry experiments with complex dynamics.
+\charef{epr-two-well} shows how truncated Wigner was applied to predict the entanglement in the two-well system with nonlinear interactions.
+
+\charef{bell-ineq} stands a bit aside, since it mostly makes use of the different quasiprobability method, Husimi Q-function (in its \abbrev{su(2)} variation).
+The Q-function is used to sample the ``Shr\"{o}dinger cat'' state and to show that the probabilistical methods can indeed violate the Bell inequality.
+
+Finally, \charef{conclusion} summarizes the thesis and discusses some possible directions of the development in the field of quasiprobability representations.
+
+The thesis includes several Appendices which deal with auxiliary topics.
+\appref{c-numbers} briefly describes the relaxed complex (Wirtinger) differentiation and associated integration, which are commonly used in the field of quasiprobabilities.
+\appref{func-calculus} applies these differentiation rules to define the similar formalism for functionals.
+\appref{fpe-sde} contains several theorem which deal with the equivalence correspondence between Fokker-Planck equation and a set of stochastic differential equations, for complex variables and functional form.
+\appref{numerical} outlines numerical methods used in the thesis to obtain simulation results.
