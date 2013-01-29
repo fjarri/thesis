@@ -180,6 +180,7 @@ def journalAbbreviations(entries):
         "Journal of Lightwave Technology": "J. Lightwave Technol.",
         "Nature": "Nature",
         "Physics": "Physics",
+        'Annals of Physics': 'Ann. Phys.',
     }
 
     for entry_type, entry_key, entry_fields in entries:
