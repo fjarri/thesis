@@ -4,8 +4,12 @@ import codecs
 
 
 def accentSymbols(s):
-    return s.replace(u'\u012d', '\u{\i}').replace('\\AA ', '{\\r{A}}')
-
+    return s.replace(
+        u'\u012d', '\u{\i}').replace(
+        '\\AA ', '{\\r{A}}').replace(
+        u'\u201c', '``').replace(
+        u'\u201d', "''").replace(
+        u'\u2013', "--")
 
 def loadMendeleyBib(fname):
 
