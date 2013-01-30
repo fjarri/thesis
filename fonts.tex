@@ -1,23 +1,19 @@
 \defaultfontfeatures{Ligatures=TeX, Numbers={OldStyle,Proportional},
   Scale=MatchLowercase, Mapping=tex-text, Contextuals=Swash}
 
-\newfontfamily{\captionfont}
-  [UprightFont={* Medium Caption},
-   ItalicFont={* Medium Italic Caption},
-   BoldFont={* Bold Caption},
-   BoldItalicFont={* Bold Italic Caption}]
-  {Minion Pro}
-\setmainfont
-  [UprightFont={* Medium},
-   ItalicFont={* Medium Italic},
-   BoldFont={* Bold},
-   BoldItalicFont={* Bold Italic}]
-  {Minion Pro}
+\usepackage{libertine}
+\renewcommand{\captionfont}{\rmfamily}
 
-
-\setmathfont{XITS Math Mod}
+%\setmathfont[StylisticSet=1]{XITS Math Mod}
 %\setmathfont{Asana Math}
-\setsansfont{Helvetica}
-\setmonofont{Menlo}
+\setmathfont{TG Pagella Math}
+\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{Latin Modern Math}
 
-\DeclareMicrotypeSet{maintext}{family={Minion Pro}}
+\DeclareMicrotypeSet{maintext}{family={LinLibertine}}
+\UseMicrotypeSet[protrusion,expansion,tracking]{maintext}
+
+% Fleurons
+% Libertine has
+\newfontface{\fleurons}{FreeSerif}
+\newcommand{\vfleuron}{{\upshape\fleurons\symbol{\string"2766}}} % vertical
+\newcommand{\hfleuron}{{\upshape\fleurons\symbol{\string"2767}}} % horizontal

@@ -1,3 +1,5 @@
+%% Build with LuaLaTeX
+
 % replace oneside by twoside for final print
 \documentclass[headings=optiontohead,chapterprefix=true,oneside,a4paper,12pt,
     %DIV=9,BCOR=0mm,
@@ -9,37 +11,15 @@
 \renewcommand{\baselinestretch}{1.5} % 1.5 interval
 
 
-% A bit of magic to make amsfonts work with unicode-math
-\usepackage[no-math]{fontspec}
-\ExplSyntaxOn
-\int_new:N \l_mathcode_minus_int
-\int_new:N \l_mathcode_equal_int
-\exp_args:Nx \AtBeginDocument {
-  \exp_not:n {
-    \int_set:Nn \l_mathcode_minus_int { \XeTeXmathcodenum `\- }
-    \int_set:Nn \l_mathcode_equal_int { \XeTeXmathcodenum `\= }
-  }
-  \mathcode \int_eval:n { `\- } = \number \mathcode `\- \scan_stop:
-  \mathcode \int_eval:n { `\= } = \number \mathcode `\= \scan_stop:
-}
-\usepackage{amsmath}
-\AtBeginDocument {
-  \XeTeXmathcodenum `\- = \l_mathcode_minus_int
-  \XeTeXmathcodenum `\= = \l_mathcode_equal_int
-}
-\ExplSyntaxOff
-\usepackage[italic,noendash]{mathastext}
-
-
 % regular includes
-\usepackage{amsfonts}
-\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{thmtools} % more convenient theorem style definitions
 \usepackage{unicode-math}
 \usepackage{dsfont}
 \usepackage{microtype}
-\usepackage{polyglossia}
+\usepackage[british]{babel}
 \usepackage[margin=5pt]{subfig}
 \usepackage{verbatim}
 \usepackage{psfrag}
@@ -54,11 +34,6 @@
 
 % Set document fonts
 \include{fonts}
-\UseMicrotypeSet[protrusion]{maintext} % 'maintext' family is defined in fonts.tex
-
-
-% Hyphenation properties
-\setmainlanguage[variant=british]{english}
 
 
 % Font for elements
