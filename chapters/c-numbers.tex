@@ -115,34 +115,34 @@ Note that we have explicitly written integration limits here;
 they are swapped when we change the variable in the first integral.
 
 Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial expression as
-\begin{eqn}
-	& \int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
-	& = \int \upd u\, \upd v\, \exp(2ivx - 2iuy)
-		\sum_{m=0}^r \binom{r}{m} u^m (iv)^{r-m}
+\begin{eqn2}
+	& \int && \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
+	& ={} && \int \upd u\, \upd v\, \exp(2ivx - 2iuy) \\
+	& && \times \sum_{m=0}^r \binom{r}{m} u^m (iv)^{r-m}
 		\sum_{n=0}^s \binom{s}{n} u^n (-iv)^{s-n} \\
-	& = \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n}
-		i^{r-m} (-i)^{s-n}
-		\int \upd u\, u^{m+n} \exp(2ivx)
+	& ={} && \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n}
+		i^{r-m} (-i)^{s-n} \\
+	& && \times \int \upd u\, u^{m+n} \exp(2ivx)
 		\int \upd v\, v^{r-m+s-n} \exp(-2iuy).
-\end{eqn}
+\end{eqn2}
 Applying~\eqnref{c-numbers:fourier-real} and grouping differentials:
 \begin{eqn}
-	& = \pi^2 \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n}
-		i^{r-m} (-i)^{s-n}
+	={} & \pi^2 \sum_{m=0}^r \sum_{n=0}^s \binom{r}{m} \binom{s}{n} \\
+	& \times i^{r-m} (-i)^{s-n}
 		(-i/2)^{m+n} \delta^{(m+n)}(y)
 		(i/2)^{r-m+s-n} \delta^{(r-m+s-n)}(x) \\
-	& = \pi^2
+	={} & \pi^2
 		\sum_{m=0}^r \binom{r}{m}
 			\frac{1}{2^r}
 			(-i \upd / \upd y)^m
-			(-\upd / \upd x)^{r-m}
-		\sum_{n=0}^s \binom{s}{n}
+			(-\upd / \upd x)^{r-m} \\
+	& \times \sum_{n=0}^s \binom{s}{n}
 			\frac{1}{2^s}
 			(-i \upd / \upd y)^n
 			(\upd / \upd x)^{s-n}
 		\delta(y) \delta(x).
 \end{eqn}
-Collapsing sums and recognizing \defref{c-numbers:wirtinger}:
+Collapsing sums and recognising \defref{c-numbers:wirtinger}:
 \begin{eqn}
 	& = \pi^2
 		\left( \frac{1}{2} (-i \upd / \upd y - \upd / \upd x) \right)^r
