@@ -3,7 +3,7 @@
 \label{cha:appendix:func-calculus}
 % =============================================================================
 
-The definitions of differentiation and integration from~\appref{c-numbers} can be extended to operate on functions and functionals.
+The definitions of differentiation and integration from \appref{c-numbers} can be extended to operate on functions and functionals.
 This proved to be a useful tool in the derivation of the functional Wigner transformation and expressing accompanied results, as it helps encapsulate bases and mode populations inside wave functions and field operators.
 It has been introduced (among other places) in most of the papers treating functional extensions of quasiprobability with varying level of detail.
 The most extensive description was made by Dalton~\cite{Dalton2011}.
@@ -109,7 +109,7 @@ Let $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some 
 Such operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
 Note that in general this operator is nor linear, therefore its result is not guaranteed to belong to the same restricted basis as its argument.
 
-Composition and decomposition transformations from~\defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
+Composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
 Therefore any functional operator $\mathcal{F}$ can be alternatively treated as a function of a vector of mode populations and a coordinate vector:
 \begin{eqn}
 	& F \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}
@@ -143,11 +143,11 @@ Using this correspondence, we can define the differentiation in the space of fun
 Note that the type of the returned operator differs from the argument type: the result depends on two coordinates, not just one.
 The second coordinate ($\xvec^\prime$) comes from the function $f^\prime \equiv f(\xvec^\prime)$ we are differentiating by.
 
-This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similar to the Wirtinger derivative from~\appref{c-numbers}.
+This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similar to the Wirtinger derivative from \appref{c-numbers}.
 Let us first demonstrate that the definition obeys standard differentiation rules.
 
 \begin{theorem}
-	Functional differentiation from~\defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
+	Functional differentiation from \defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
 	The latter one is applied as if $\mathcal{F}[f]$ was a function of two independent variables $f$ and $f^*$:
 	\begin{eqn*}
 		\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
@@ -160,7 +160,7 @@ Let us first demonstrate that the definition obeys standard differentiation rule
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-First tree rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into~\defref{func-calculus:func-diff}.
+First tree rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into \defref{func-calculus:func-diff}.
 To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
 \begin{eqn}
 \label{eqn:func-calculus:chain-expansion}
@@ -220,7 +220,7 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 					\frac{\upd \mathcal{G}^*[\mathcal{C}(\balpha)]}{\upd \alpha_{\nvec}}
 				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
 \end{eqn}
-Recognizing~\defref{func-calculus:func-diff} for $\updelta \mathcal{F} / \updelta \mathcal{G}$ and $\updelta \mathcal{G} / \updelta \mathcal{f}$, we get the final expression
+Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we get the final expression
 \begin{eqn}
 	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
 		= \int \upd\xvec^{\prime\prime} \left(
@@ -235,7 +235,7 @@ Recognizing~\defref{func-calculus:func-diff} for $\updelta \mathcal{F} / \updelt
 The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$ --- much like complex-valued functions with respect to Wirtinger differentiation.
 
 Most of the time we will deal with functional operators in a particular form, namely the algebraic expressions of their arguments.
-It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent~\defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
+It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
 	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, where $g(z, z^*)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
@@ -254,7 +254,7 @@ It turns out that for this subset functional differentiation behaves almost exac
 \begin{proof}
 We will prove the first identity.
 Without loss of generality, we can consider $\mathcal{F} = f^r (f^*)^s$.
-Substituting this into~\defref{func-calculus:func-diff}, differentiating the composition according to~\defref{func-calculus:composition} and recognizing the restricted delta function:
+Substituting this into \defref{func-calculus:func-diff}, differentiating the composition according to \defref{func-calculus:composition} and recognising the restricted delta function:
 \begin{eqn}
 	\frac{\updelta \mathcal{F}}{\updelta f^\prime}
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
