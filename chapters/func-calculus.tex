@@ -238,17 +238,17 @@ Most of the time we will deal with functional operators in a particular form, na
 It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
-	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, where $g(z, z^*)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
+	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f] \equiv g(f)$, where $g(z)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f)$ over $f$ and $f^*$, respectively, times the restricted delta function:
 	\begin{eqn*}
 		\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z, z^*)}{\upd z}
-		\right|_{z=f(x)},
+			\frac{\upd g(z)}{\upd z}
+		\right|_{z=f(\xvec)},
 		\quad
 		\frac{\fdelta \mathcal{F}}{\fdelta f^{\prime*}}
 		= \delta_{\restbasis}^*(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z, z^*)}{\upd z^*}
-		\right|_{z=f(x)}.
+			\frac{\upd g(z)}{\upd z^*}
+		\right|_{z=f(\xvec)}.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
@@ -272,8 +272,8 @@ Substituting this into \defref{func-calculus:func-diff}, differentiating the com
 		\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
 	& = r \delta_{\restbasis}(\xvec^\prime, \xvec) f^{r-1} (f^*)^s
 	= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z, z^*)}{\upd z}
-		\right|_{z=f(x)}.
+			\frac{\upd g(z)}{\upd z}
+		\right|_{z=f(\xvec)}.
 \end{eqn}
 The second identity is proved in the same way.
 \end{proof}

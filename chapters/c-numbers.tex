@@ -33,7 +33,7 @@ Wirtinger differentiation is quite intuitive in the sense that it obeys all the 
 \begin{theorem}
 \label{thm:c-numbers:diff-properties}
 	For any $f(z)$ with differentiable real and complex parts, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules.
-	The latter one is applied as if $f(z)$ was a function of two independent variables $z$ and $z^*$:
+	The latter one is applied as if the function $f(z)$ had two independent arguments $z$ and $z^*$:
 	\begin{eqn*}
 		\frac{\upd f(g(z))}{\upd z}
 		= \frac{\upd f}{\upd g} \frac{\upd g}{\upd z}
@@ -43,7 +43,7 @@ Wirtinger differentiation is quite intuitive in the sense that it obeys all the 
 
 Some important functions we will encounter in this thesis are not holomorphic.
 Therefore, hereinafter we will use Wirtinger differentiation unless explicitly stated otherwise,
-along with notation $\upd f/\upd z$ (to avoid confusion with regular partial derivatives).
+along with the notation $\upd f/\upd z$.
 Consequently, by ``differentiability'' we will mean the property used in the above theorem, i.e. the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axis.
 
 It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for common real-valued differentiation.
@@ -73,8 +73,8 @@ By induction, the statement is true for any natural $r$ and $s$, and it is obvio
 \end{proof}
 
 The chain differentiation rule in \thmref{c-numbers:diff-properties} and the above theorem give rise to the common notation used in conjunction with Wirtinger differentiation.
-In order to emphasize the ``independent'' behavior of $z$ and $z^*$, function arguments are often written as $f(z, z^*)$, even though technically they are not independent.
-We will use such notation throughout the thesis.
+In order to emphasize the ``independent'' behavior of $z$ and $z^*$, function arguments are sometimes written as $f(z, z^*)$, even though technically they are not independent.
+We will not use such notation in this thesis, because it will create a lot of clutter later on.
 
 
 % =============================================================================
@@ -170,14 +170,14 @@ Integration by parts will be used extensively in further proofs, and we will nee
 		\int \upd^2\lambda
 			\frac{\upd}{\upd \lambda} \left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				f(\lambda, \lambda^*)
+				f(\lambda)
 			\right)
 		& = 0, \\
 		\int \upd^2\lambda
 			\frac{\upd}{\upd \lambda^*}
 			\left(
 				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				f(\lambda, \lambda^*)
+				f(\lambda)
 			\right)
 		& = 0.
 	\end{eqn*}
@@ -192,7 +192,7 @@ From the square-integrability of $f$ it follows that $\lim_{\Real \lambda \right
 	\begin{eqn*}
 		\int \upd^2\lambda
 			\frac{\upd}{\upd \lambda} \left(
-				f(\lambda, \lambda^*)
+				f(\lambda)
 				\left( \frac{\upd}{\upd \lambda} \right)^s
 				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
 				\delta(\Real \lambda) \delta(\Imag \lambda)
@@ -201,7 +201,7 @@ From the square-integrability of $f$ it follows that $\lim_{\Real \lambda \right
 		\int \upd^2\lambda
 			\frac{\upd}{\upd \lambda^*}
 			\left(
-				f(\lambda, \lambda^*)
+				f(\lambda)
 				\left( \frac{\upd}{\upd \lambda} \right)^s
 				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
 				\delta(\Real \lambda) \delta(\Imag \lambda)
