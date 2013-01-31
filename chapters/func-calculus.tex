@@ -238,41 +238,7 @@ Most of the time we will deal with functional operators in a particular form, na
 It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent~\defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
-	If $g(t)$ is a function that can be expanded into power series, and functional $\mathcal{F}[f] \equiv g(f)$, $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, then
-	\begin{eqn*}
-		\frac{\delta \mathcal{F}[f]}{\delta f(\xvec^\prime)} (\xvec)
-		= \delta_{\restbasis}(\xvec^\prime - \xvec)
-			\left. \frac{\partial g(t)}{\partial t} \right|_{t = f(\xvec)}
-	\end{eqn*}
-\end{theorem}
-\begin{proof}
-We will consider $g(t) = t^k$ case first, which will straightforwardly lead to the statement of the lemma.
-For $k = 1$, obviously,
-\begin{eqn}
-	\frac{\delta f}{\delta f(\xvec^\prime)} (\xvec)
-	= \delta_{\restbasis}(\xvec^\prime, \xvec)
-\end{eqn}
-Then for other values of $k$:
-\begin{eqn}
-	\frac{\delta \mathcal{F}[f]}{\delta f(\xvec^\prime)} (\xvec)
-	& = \frac{\delta f^k}{\delta f(\xvec^\prime)} (\xvec)
-	= \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-		\frac{\partial f^k}{\partial \alpha_{\nvec}} \\
-	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-		\frac{\partial f^k}{\partial f}
-		\frac{\partial f}{\partial \alpha_{\nvec}}
-	= k f^{k-1}
-		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-		\frac{\partial f}{\partial \alpha_{\nvec}} \\
-	& = k \delta_{\restbasis}(\xvec^\prime, \xvec) f^{k-1}(\xvec)
-	= \delta_{\restbasis}(\xvec^\prime, \xvec)
-		\left. \frac{\partial t^k}{\partial t} \right|_{t = f(\xvec)}.
-	\qedhere
-\end{eqn}
-\end{proof}
-
-\begin{lemma}
-	If $g(z, z^*)$ can be expanded into power series of $z^n (z^*)^m$, and functional $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
+	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, where $g(z, z^*)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
 	\begin{eqn*}
 		\frac{\updelta \mathcal{F}}{\updelta f^\prime}
 		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
@@ -284,11 +250,33 @@ Then for other values of $k$:
 			\frac{\upd g(z, z^*)}{\upd z^*}
 		\right|_{z=f(x)}.
 	\end{eqn*}
-\end{lemma}
+\end{theorem}
 \begin{proof}
-Proof is similar to \thmref{c-numbers:independent-vars}.
+We will prove the first identity.
+Without loss of generality, we can consider $\mathcal{F} = f^r (f^*)^s$.
+Substituting this into~\defref{func-calculus:func-diff}, differentiating the composition according to~\defref{func-calculus:composition} and recognizing the restricted delta function:
+\begin{eqn}
+	\frac{\updelta \mathcal{F}}{\updelta f^\prime}
+	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+		\left.
+			\frac{\upd \left(
+				\mathcal{C}_{\restbasis}^r(\balpha)
+				(\mathcal{C}_{\restbasis}^*(\balpha))^s
+			\right)}{\upd \alpha_{\nvec}}
+		\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
+	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+		r \phi_{\nvec}
+		\left.
+			\mathcal{C}_{\restbasis}^{r-1}(\balpha)
+			(\mathcal{C}_{\restbasis}^*(\balpha))^s
+		\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
+	& = r \delta_{\restbasis}(\xvec^\prime, \xvec) f^{r-1} (f^*)^s
+	= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
+			\frac{\upd g(z, z^*)}{\upd z}
+		\right|_{z=f(x)}.
+\end{eqn}
+The second identity is proved in the same way.
 \end{proof}
-
 
 
 % =============================================================================
