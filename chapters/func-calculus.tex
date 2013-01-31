@@ -124,7 +124,7 @@ Using this correspondence, we can define the differentiation in the space of fun
 \label{def:func-calculus:func-diff}
 	Derivative of a functional operator is
 	\begin{eqn*}
-		& \frac{\updelta}{\updelta f^\prime} \in
+		& \frac{\fdelta}{\fdelta f^\prime} \in
 		\left(
 			\mathbb{F}_{\restbasis} \rightarrow \mathbb{F}
 		\right)
@@ -132,7 +132,7 @@ Using this correspondence, we can define the differentiation in the space of fun
 		\left(
 			\mathbb{R}^D \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}
 		\right) \\
-		& \frac{\updelta \mathcal{F}[f]}{\updelta f^\prime}
+		& \frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
 		= \left.
 				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 				\frac{\upd \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]}{\upd \alpha_{\nvec}}
@@ -150,12 +150,12 @@ Let us first demonstrate that the definition obeys standard differentiation rule
 	Functional differentiation from \defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
 	The latter one is applied as if $\mathcal{F}[f]$ was a function of two independent variables $f$ and $f^*$:
 	\begin{eqn*}
-		\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+		\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 			= \int \upd\xvec^{\prime\prime} \left(
-				\frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime}}
-				\frac{\updelta \mathcal{G}}{\updelta \mathcal{f}^{\prime}}
-				+ \frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime*}}
-				\frac{\updelta \mathcal{G}^*}{\updelta \mathcal{f}^{\prime}}
+				\frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime}}
+				\frac{\fdelta \mathcal{G}}{\fdelta \mathcal{f}^{\prime}}
+				+ \frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime*}}
+				\frac{\fdelta \mathcal{G}^*}{\fdelta \mathcal{f}^{\prime}}
 			\right).
 	\end{eqn*}
 \end{theorem}
@@ -164,7 +164,7 @@ First tree rules are proved straightforwardly by substituting $\mathcal{F} + \ma
 To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
 \begin{eqn}
 \label{eqn:func-calculus:chain-expansion}
-	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 		& = \left.
 				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 				\frac{\upd \mathcal{F}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}{\upd \alpha_{\nvec}}
@@ -197,7 +197,7 @@ Applying the chain rule for Wirtinger derivatives, and recalling the definition 
 \end{eqn}
 Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 \begin{eqn}
-	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 		={} & \int \upd\xvec^{\prime\prime}
 			\sum_{\mvec \in \fullbasis}
 				\phi_{\mvec}^{\prime\prime*}
@@ -222,12 +222,12 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 \end{eqn}
 Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we get the final expression
 \begin{eqn}
-	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 		= \int \upd\xvec^{\prime\prime} \left(
-			\frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime}}
-			\frac{\updelta \mathcal{G}}{\updelta \mathcal{f}^{\prime}}
-			+ \frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime*}}
-			\frac{\updelta \mathcal{G}^*}{\updelta \mathcal{f}^{\prime}}
+			\frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime}}
+			\frac{\fdelta \mathcal{G}}{\fdelta \mathcal{f}^{\prime}}
+			+ \frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime*}}
+			\frac{\fdelta \mathcal{G}^*}{\fdelta \mathcal{f}^{\prime}}
 		\right).
 \end{eqn}
 \end{proof}
@@ -238,14 +238,14 @@ Most of the time we will deal with functional operators in a particular form, na
 It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
-	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, where $g(z, z^*)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
+	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, where $g(z, z^*)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
 	\begin{eqn*}
-		\frac{\updelta \mathcal{F}}{\updelta f^\prime}
+		\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
 			\frac{\upd g(z, z^*)}{\upd z}
 		\right|_{z=f(x)},
 		\quad
-		\frac{\updelta \mathcal{F}}{\updelta f^{\prime*}}
+		\frac{\fdelta \mathcal{F}}{\fdelta f^{\prime*}}
 		= \delta_{\restbasis}^*(\xvec^\prime, \xvec) \left.
 			\frac{\upd g(z, z^*)}{\upd z^*}
 		\right|_{z=f(x)}.
@@ -256,7 +256,7 @@ We will prove the first identity.
 Without loss of generality, we can consider $\mathcal{F} = f^r (f^*)^s$.
 Substituting this into \defref{func-calculus:func-diff}, differentiating the composition according to \defref{func-calculus:composition} and recognising the restricted delta function:
 \begin{eqn}
-	\frac{\updelta \mathcal{F}}{\updelta f^\prime}
+	\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 		\left.
 			\frac{\upd \left(
@@ -283,79 +283,79 @@ The second identity is proved in the same way.
 \section{Functional integration}
 % =============================================================================
 
-Functional integration is defined as
+In this section we will only postulate the expression for an integral of a functional operator; for the rationale behind this definition one can refer to~\cite{Dalton2011}.
+Same as in the differentiation case, we will make use of the equivalence between a functional operator and a function of two vectors.
 
 \begin{definition}
+	An integral of a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ is an integral of the corresponding function over mode variables:
 	\begin{eqn*}
-		& \int \delta^2 f \in (\mathbb{F}_{\restbasis} \rightarrow \mathbb{F}) \rightarrow \mathbb{C} \\
-		& \int \delta^2 f \mathcal{F}[f]
-		= \int d^2\balpha \mathcal{F}(\balpha)
+		& \int \fdelta^2 f \in (\mathbb{F}_{\restbasis} \rightarrow \mathbb{F})
+			\rightarrow (\mathbb{R}^D \rightarrow \mathbb{C}) \\
+		& \int \fdelta^2 f \mathcal{F}[f]
+		= \int \upd^2\balpha \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
 		= \left(
-			\prod_{\nvec \in \restbasis} \int d^2\alpha_{\nvec}
-		\right) \mathcal{F}(\balpha),
+			\prod_{\nvec \in \restbasis} \int \upd^2\alpha_{\nvec}
+		\right) \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)],
 	\end{eqn*}
 	where the product of integrals stands for their successive application.
-    If the basis contains an infinite number of modes, the integral is treated as a limit $|\restbasis| \rightarrow \infty$.
-	\todo{\cite{Dalton2011} has detailed explanation, do we need it here?}
+    If the restricted basis contains an infinite number of modes, the integral is treated as a limit $|\restbasis| \rightarrow \infty$.
 \end{definition}
 
-Functional integration has the Fourier-like property analogous to \lmmref{c-numbers:fourier-of-moments}, but its statement requires the definition of the delta functional:
+Functional integration has a Fourier-like property analogous to \lmmref{c-numbers:fourier-of-moments}, but its statement requires the definition of the delta functional:
 
 \begin{definition}
 \label{def:func-calculus:delta-functional}
-	For a function $\Lambda \in \mathbb{F}_{\restbasis}$ the delta functional is
+	For a restricted basis $\restbasis$, the delta functional is
 	\begin{eqn*}
-		\Delta_{\restbasis}[\Lambda]
+		& \Delta_{\restbasis} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
+		& \Delta_{\restbasis}[\Lambda]
 		\equiv \prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}),
 	\end{eqn*}
 	where $\blambda = \mathcal{C}_{\restbasis}^{-1}[\Lambda]$.
 \end{definition}
 
-The delta functional has the same property as the common delta function:
+The delta functional has the sifting property in functional integrals:
 \begin{eqn}
-	\int \delta^2 \Lambda \mathcal{F}[\Lambda] \Delta_{\restbasis}[\Lambda]
+	\int \fdelta^2 \Lambda \mathcal{F}[\Lambda] \Delta_{\restbasis}[\Lambda]
 	& = \left(
-			\prod_{\nvec \in \restbasis} \int d^2\lambda_{\nvec}
+			\prod_{\nvec \in \restbasis} \int \upd^2\lambda_{\nvec}
 		\right)
 		\mathcal{F}(\blambda)
 		\prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
 	& = \left. \mathcal{F}(\blambda) \right|_{\forall \nvec \in \restbasis\, \lambda_{\nvec} = 0} \\
-	& = \left. \mathcal{F}[\Lambda] \right|_{\Lambda \equiv 0}
+	& = \left. \mathcal{F}[\Lambda] \right|_{\Lambda \equiv 0}.
 \end{eqn}
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:fourier-of-moments}]
 \label{lmm:func-calculus:fourier-of-moments}
 	For $\Psi \in \mathbb{F}_{\restbasis}$ and $\Lambda \in \mathbb{F}_{\restbasis}$, and for any non-negative integers $r$ and $s$:
 	\begin{eqn*}
-		\int \delta^2\Psi\, \Psi^r (\Psi^*)^s \exp
-			\int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s \exp
+			\int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
 		= \pi^{2|\restbasis|}
-			\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-			\left( \frac{\delta}{\delta \Lambda} \right)^s
-			\Delta_{\restbasis}[\Lambda]
+			\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
+			\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
+			\Delta_{\restbasis}[\Lambda].
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
+We will start by representing the functional integral and the integrand in mode form:
 \begin{eqn}
-	& \int \delta^2\Psi\, \Psi^r (\Psi^*)^s \exp
-		\int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \\
-	& = \left(
-			\prod_{\nvec \in \restbasis} \int d^2\alpha_{\nvec}
-		\right)
+	& \int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s \exp
+		\int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \\
+	& = \int \upd^2\balpha
 		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec} \right)^r
 		\left( \sum_{\nvec \in \restbasis} \phi^*_{\nvec} \alpha_{\nvec}^* \right)^s
 		\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}).
 \end{eqn}
 Expanding powers of $\Psi$ and $\Psi^*$ using multinomial theorem:
 \begin{eqn2}
-	& ={} && \left(
-			\prod_{\nvec \in \restbasis} \int d^2\alpha_{\nvec}
-		\right)
+	& ={} && \int \upd^2\balpha
 		\left(
 			\sum_{\sum u_{\mvec} = r} \binom{r}{ \left\{ u_{\mvec} \right\} }
 			\prod_{\nvec \in \restbasis} \phi_{\nvec}^{u_{\nvec}} \alpha_{\nvec}^{u_{\nvec}}
 		\right) \\
-	& && \left(
+	& && \times \left(
 			\sum_{\sum v_{\mvec} = s} \binom{s}{ \left\{ v_{\mvec} \right\} }
 			\prod_{\nvec \in \restbasis} (\phi_{\nvec}^*)^{v_{\nvec}} (\alpha_{\nvec}^*)^{v_{\nvec}}
 		\right)
@@ -374,27 +374,30 @@ Splitting variables:
 				(\alpha_{\nvec}^*)^{v_{\nvec}}
 				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}).
 \end{eqn2}
-Applying \lmmref{c-numbers:fourier-of-moments}, collapsing sums, and recognizing \defref{func-calculus:func-diff} and \defref{func-calculus:delta-functional}:
-\begin{eqn2}
-	& ={} && \sum_{\sum u_{\mvec} = r,\, \sum v_{\mvec} = s}
+Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alpha_{\nvec}$:
+\begin{eqn}
+	={} & \sum_{\sum u_{\mvec} = r,\, \sum v_{\mvec} = s}
 		\binom{r}{ \left\{ u_{\mvec} \right\} }
 		\binom{s}{ \left\{ v_{\mvec} \right\} }
 		\pi^{2|\restbasis|} \\
-	& && \prod_{\nvec \in \restbasis}
+	& \times \prod_{\nvec \in \restbasis}
 			\phi_{\nvec}^{u_{\nvec}} (\phi_{\nvec}^*)^{v_{\nvec}}
-			\left( -\frac{\partial}{\partial \lambda_{\nvec}^*} \right)^{u_{\nvec}}
-			\left( \frac{\partial}{\partial \lambda_{\nvec}} \right)^{v_{\nvec}}
-			\delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
-	& ={} && \pi^{2|\restbasis|}
-		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}^*} \right)^r
-		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\partial}{\partial \lambda_{\nvec}} \right)^s
+			\left( -\frac{\upd}{\upd \lambda_{\nvec}^*} \right)^{u_{\nvec}}
+			\left( \frac{\upd}{\upd \lambda_{\nvec}} \right)^{v_{\nvec}}
+			\delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}).
+\end{eqn}
+Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the functional delta (\defref{func-calculus:delta-functional}):
+\begin{eqn}
+	& = \pi^{2|\restbasis|}
+		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\upd}{\upd \lambda_{\nvec}^*} \right)^r
+		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\upd}{\upd \lambda_{\nvec}} \right)^s
 		\prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
-	& ={} && \pi^{2|\restbasis|}
-		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-		\left( \frac{\delta}{\delta \Lambda} \right)^s
-		\Delta_{\restbasis}[\Lambda]
+	& = \pi^{2|\restbasis|}
+		\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
+		\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
+		\Delta_{\restbasis}[\Lambda].
 	\qedhere
-\end{eqn2}
+\end{eqn}
 \end{proof}
 
 \begin{definition}
@@ -511,7 +514,7 @@ For each term the internal is equal to zero because of \lmmref{c-numbers:zero-in
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Proved by expanding functional integration and differentials into modes and recognizing \lmmref{c-numbers:zero-delta-integrals}.
+Proved by expanding functional integration and differentials into modes and recognising \lmmref{c-numbers:zero-delta-integrals}.
 \end{proof}
 
 In order to perform transformations of master equations in the future, we will need a lemma, which justifies certain operation with Laplacian (which is a part of kinetic term in Hamiltonian).
