@@ -47,29 +47,6 @@ along with notation $\upd f/\upd z$ (to avoid confusion with regular partial der
 Consequently, by ``differentiability'' we will mean the property used in the above theorem, i.e. the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axis.
 
 It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for common real-valued differentiation.
-We will start from the theorem for differentials of products:
-
-\begin{lemma}
-	For any non-negative integers $r$ and $s$
-	\begin{eqn*}
-		\frac{\upd}{\upd z} (z^r (z^*)^s) = r z^{r-1} (z^*)^s.
-	\end{eqn*}
-\end{lemma}
-\begin{proof}
-First, one can easily prove (by transition to real values) that $\upd (z z^*)/\upd z = z^*$ and $\upd (z z^*)/\upd z^* = z$.
-Let us assume that the statement of the theorem is true for some $a$ and $b$; then, using the product rule,
-\begin{eqn}
-	\frac{\upd}{\upd z} (z^{r+1} (z^*)^s)
-	& = \frac{\upd}{\upd z} (z z^r (z^*)^s)
-		= z^r (z^*)^s + z \frac{\upd}{\upd z} (z^r (z^*)^s) \\
-	& = z^r (z^*)^s + r z z^{r-1} (z^*)^s
-		= (r + 1) z^r (z^*)^s.
-\end{eqn}
-By induction, the statement is true for any natural $r$ and $s$,
-and it is obviously true if $r = 0$ or $s = 0$, which proves the lemma.
-\end{proof}
-
-The above lemma can be straightforwardly generalized to operate on arbitrary functions:
 
 \begin{theorem}
 \label{thm:c-numbers:independent-vars}
@@ -80,6 +57,20 @@ The above lemma can be straightforwardly generalized to operate on arbitrary fun
 		\frac{\upd f(z)}{\upd z^*} \equiv \frac{\upp f(z, z^*)}{\upp z^*}.
 	\end{eqn*}
 \end{theorem}
+\begin{proof}
+We will prove the first identity.
+Without loss of generality, we can consider $f(z) = z^r (z^*)^s$.
+First, one can easily prove (by transition to real values) that $\upd (z z^*)/\upd z = z^*$ and $\upd (z z^*)/\upd z^* = z$.
+Let us assume that the identity is true for some $r$ and $s$; then, using the product rule,
+\begin{eqn}
+	\frac{\upd}{\upd z} (z^{r+1} (z^*)^s)
+	& = \frac{\upd}{\upd z} (z z^r (z^*)^s)
+		= z^r (z^*)^s + z \frac{\upd}{\upd z} (z^r (z^*)^s) \\
+	& = z^r (z^*)^s + r z z^{r-1} (z^*)^s
+		= (r + 1) z^r (z^*)^s.
+\end{eqn}
+By induction, the statement is true for any natural $r$ and $s$, and it is obviously true if $r = 0$ or $s = 0$, which proves the theorem.
+\end{proof}
 
 The chain differentiation rule in~\thmref{c-numbers:diff-properties} and the above theorem give rise to the common notation used in conjunction with Wirtinger differentiation.
 In order to emphasize the ``independent'' behavior of $z$ and $z^*$, function arguments are often written as $f(z, z^*)$, even though technically they are not independent.
