@@ -33,11 +33,11 @@ Wirtinger differentiation is quite intuitive in the sense that it obeys all the 
 \begin{theorem}
 \label{thm:c-numbers:diff-properties}
 	For any $f(z)$ with differentiable real and complex parts, Wirtinger differentiation obeys sum, product, quotient, and chain differentiation rules.
-	The former one is applied as if $f(z)$ was a function of two independent variables $z$ and $z^*$:
+	The latter one is applied as if $f(z)$ was a function of two independent variables $z$ and $z^*$:
 	\begin{eqn*}
 		\frac{\upd f(g(z))}{\upd z}
-		= \frac{\upp f}{\upp g} \frac{\upd g}{\upd z}
-			+ \frac{\upp f}{\upp g^*} \frac{\upd g^*}{\upd z}.
+		= \frac{\upd f}{\upd g} \frac{\upd g}{\upd z}
+			+ \frac{\upd f}{\upd g^*} \frac{\upd g^*}{\upd z}.
 	\end{eqn*}
 \end{theorem}
 
@@ -73,12 +73,11 @@ The above lemma can be straightforwardly generalized to operate on arbitrary fun
 
 \begin{theorem}
 \label{thm:c-numbers:independent-vars}
-	If $f(z)$ can be expanded into series of $z^n (z^*)^m$, $\upd f/\upd z$ and $\upd f/\upd z^*$ can be calculated as partial derivatives of $f$ expressed in terms of $z$ and $z*$, over $z$ and $z^*$ respectively.
-	In other words:
+	If a function $f(z)$ can be expanded into series of $z^n (z^*)^m$, then $\upd f/\upd z$ and $\upd f/\upd z^*$ can be calculated as partial derivatives of the function $f$ expressed in terms of $z$ and $z^*$, over $z$ and $z^*$ respectively:
 	\begin{eqn*}
-		\frac{\upd}{\upd z} f(z) \equiv \frac{\upp}{\upp z} f(z, z^*),
+		\frac{\upd f(z)}{\upd z} \equiv \frac{\upp f(z, z^*)}{\upp z},
 		\quad
-		\frac{\upd}{\upd z^*} f(z) \equiv \frac{\upp}{\upp z^*} f(z, z^*).
+		\frac{\upd f(z)}{\upd z^*} \equiv \frac{\upp f(z, z^*)}{\upp z^*}.
 	\end{eqn*}
 \end{theorem}
 
@@ -109,8 +108,8 @@ This definition allows us to prove an analogue of one of the properties of the F
 	\begin{eqn*}
 		\int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		= \pi^2
-			\left( -\frac{\upp}{\upp \lambda^*} \right)^r
-			\left( \frac{\upp}{\upp \lambda} \right)^s
+			\left( -\frac{\upd}{\upd \lambda^*} \right)^r
+			\left( \frac{\upd}{\upd \lambda} \right)^s
 			\delta(\Real \lambda) \delta(\Imag \lambda).
 	\end{eqn*}
 \end{lemma}
