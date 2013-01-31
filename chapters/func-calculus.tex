@@ -20,8 +20,10 @@ For example, for a three-dimensional harmonic potential, the mode identifier wil
 
 Orthonormality and completeness conditions for basis functions are, respectively,
 \begin{eqns}
-	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) \upd\xvec & = \delta_{\nvec\mvec}, \\
-	\sum_{\nvec} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime) & = \delta(\xvec^\prime - \xvec),
+	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) \upd\xvec
+	& = \delta_{\nvec\mvec}, \\
+	\sum_{\nvec \in \fullbasis} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime)
+	& = \delta(\xvec^\prime - \xvec),
 \end{eqns}
 where the integration area $A$ depends on the basis set (for example, $A$ is the whole space for harmonic oscillator modes, and a box for plane waves).
 Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, for functions of coordinates the argument list will be omitted (i.e. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$) except where it is necessary for clarity.
@@ -29,7 +31,8 @@ Hereinafter we assume that the integration $\int \upd\xvec$ is always performed 
 Various functions can be combined from all, or the certain subset of basis modes by means of a composition:
 
 \begin{definition}
-	For some subset of the full basis $\restbasis \subseteq \fullbasis$, composition transformation creates a function from a vector of mode populations:
+\label{def:func-calculus:composition}
+	For some subset of the full basis $\restbasis \subseteq \fullbasis$, the composition transformation creates a function from a vector of mode populations:
 	\begin{eqn*}
 		\mathcal{C}_{\restbasis}(\balpha)
 		= \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec}.
@@ -67,7 +70,7 @@ The result of any non-linear transformation of a function $f \in \mathbb{F}_{\re
 		& \proj{\restbasis}[f](\xvec)
 		\equiv (\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f])) (\xvec)
 		= \sum_{\nvec \in \restbasis} \phi_{\nvec} \int
-			d\xvec^\prime\, \phi_{\nvec}^{\prime*} f^\prime.
+			\upd\xvec^\prime\, \phi_{\nvec}^{\prime*} f^\prime.
 	\end{eqn*}
 	Obviously, $\proj{\fullbasis} \equiv \mathds{1}$.
 \end{definition}
@@ -76,7 +79,7 @@ Being applied to the delta function, the projection function produces a restrict
 
 \begin{definition}
 \label{def:func-calculus:restricted-delta}
-	The restricted delta function $\delta_{\restbasis} \in \mathbb{F}_{\restbasis}$ is defined as
+	The restricted delta function $\delta_{\restbasis} \in \mathbb{F}_{\restbasis}$ is a projected form of standard delta function:
 	\begin{eqn*}
 		\delta_{\restbasis}(\xvec^\prime, \xvec)
 		= \proj{\restbasis}[\delta]
@@ -88,12 +91,12 @@ Being applied to the delta function, the projection function produces a restrict
 
 Projection transformation can be, in turn, expressed using the restricted delta function:
 \begin{eqn}
-	\proj{\restbasis}[f](\xvec) = \int d\xvec^\prime \delta_{\restbasis}(\xvec^\prime, \xvec) f^\prime.
+	\proj{\restbasis}[f](\xvec) = \int \upd\xvec^\prime \delta_{\restbasis}(\xvec^\prime, \xvec) f^\prime.
 \end{eqn}
 The conjugate of $\proj{\restbasis}$ is therefore
 \begin{eqn}
 	(\proj{\restbasis}[f](\xvec))^*
-	= \int d\xvec^\prime \delta_{\restbasis}^*(\xvec^\prime, \xvec) f^{\prime*}
+	= \int \upd\xvec^\prime \delta_{\restbasis}^*(\xvec^\prime, \xvec) f^{\prime*}
 	= \proj{\restbasis}^* [f^*](\xvec).
 \end{eqn}
 
@@ -102,21 +105,26 @@ The conjugate of $\proj{\restbasis}$ is therefore
 \section{Functional differentiation}
 % =============================================================================
 
-First we must introduce some operations on functions, which will replace common differentials and integrals used in single and multi-mode cases
+Let $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some arbitrary functional operator (not to be confused with quantum mechanical operators) acting on functions from a restricted basis.
+Such operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
+Note that in general this operator is nor linear, therefore its result is not guaranteed to belong to the same restricted basis as its argument.
 
-Let $\mathcal{F}[f] :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some transformation (note that the result is not guaranteed to belong to the restricted basis).
-Because of the bijection between $\mathbb{F}_{\restbasis}$ and $\mathbb{C}^{|\restbasis|}$, $\mathcal{F}$ can be alternatively treated as a function of a vector of complex numbers:
+Composition and decomposition transformations from~\defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
+Therefore any functional operator $\mathcal{F}$ can be alternatively treated as a function of a vector of mode populations and a coordinate vector:
 \begin{eqn}
-	& \mathcal{F} :: \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{C}^\infty \\
-	& \mathcal{F}(\balpha) \equiv \mathcal{C}_{\restbasis}^{-1}[\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]].
+	& F \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}
+		\equiv \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{R}^D \rightarrow \mathbb{C} \\
+	& F(\balpha, \xvec) \equiv \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)](\xvec).
 \end{eqn}
-Using this correspondence, we can define the functional differentiation.
+Since the operator is not linear, this correspondence in general cannot be expressed in a form of matrix.
+
+Using this correspondence, we can define the differentiation in the space of functional operators:
 
 \begin{definition}
 \label{def:func-calculus:func-diff}
-	Functional derivative is defined as
+	Derivative of a functional operator is
 	\begin{eqn*}
-		& \frac{\delta}{\delta f^\prime} ::
+		& \frac{\updelta}{\updelta f^\prime} \in
 		\left(
 			\mathbb{F}_{\restbasis} \rightarrow \mathbb{F}
 		\right)
@@ -124,32 +132,119 @@ Using this correspondence, we can define the functional differentiation.
 		\left(
 			\mathbb{R}^D \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}
 		\right) \\
-		& \frac{\delta \mathcal{F}[f]}{\delta f^\prime}
-		= \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-			\frac{\partial \mathcal{F}(\balpha)}{\partial \alpha_{\nvec}}.
+		& \frac{\updelta \mathcal{F}[f]}{\updelta f^\prime}
+		= \left.
+				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+				\frac{\upd \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]}{\upd \alpha_{\nvec}}
+			\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
 	\end{eqn*}
 \end{definition}
 
-Note that the transformation being returned differs from the one which was taken:
-the result of new transformation is a function depending on two variables from $\mathbb{R}^D$, not one.
-The second variable comes from the function we are differentiating by.
+Note that the type of the returned operator differs from the argument type: the result depends on two coordinates, not just one.
+The second coordinate ($\xvec^\prime$) comes from the function $f^\prime \equiv f(\xvec^\prime)$ we are differentiating by.
 
-Functional derivative definition behaves in many ways similar to common derivative.
-\begin{lemma}
+This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similar to the Wirtinger derivative from~\appref{c-numbers}.
+Let us first demonstrate that the definition obeys standard differentiation rules.
+
+\begin{theorem}
 	Functional differentiation from~\defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
-\end{lemma}
+	The latter one is applied as if $\mathcal{F}[f]$ was a function of two independent variables $f$ and $f^*$:
+	\begin{eqn*}
+		\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+			= \int \upd\xvec^{\prime\prime} \left(
+				\frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime}}
+				\frac{\updelta \mathcal{G}}{\updelta \mathcal{f}^{\prime}}
+				+ \frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime*}}
+				\frac{\updelta \mathcal{G}^*}{\updelta \mathcal{f}^{\prime}}
+			\right).
+	\end{eqn*}
+\end{theorem}
 \begin{proof}
-\todo{Sum, product and quotient are more or less obvious; but should we prove chain differentiation?}
+First tree rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into~\defref{func-calculus:func-diff}.
+To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
+\begin{eqn}
+\label{eqn:func-calculus:chain-expansion}
+	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+		& = \left.
+				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+				\frac{\upd \mathcal{F}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}{\upd \alpha_{\nvec}}
+			\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
+		& = \left.
+				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
+				\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \alpha_{\nvec}}
+			\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}.
+\end{eqn}
+Applying the chain rule for Wirtinger derivatives, and recalling the definition of the decomposition transformation:
+\begin{eqn}
+	\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \alpha_{\nvec}}
+	= \sum_{\mvec \in \fullbasis} \left(
+		\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}}
+		\frac{\upd \beta_{\mvec}}{\upd \alpha_{\nvec}}
+		+ \frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}^*}
+		\frac{\upd \beta_{\mvec}^*}{\upd \alpha_{\nvec}}
+	\right),
+\end{eqn}
+\begin{eqn}
+	\frac{\upd \beta_{\mvec}}{\upd \alpha_{\nvec}}
+	= \frac{\upd (\mathcal{C}^{-1}[G(\balpha, \xvec)])_{\mvec}}{\upd \alpha_{\nvec}}
+	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime*}
+		\frac{\upd G(\balpha, \xvec)}{\upd \alpha_{\nvec}},
+\end{eqn}
+\begin{eqn}
+	\frac{\upd \beta_{\mvec}^*}{\upd \alpha_{\nvec}}
+	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime}
+		\frac{\upd G^*(\balpha, \xvec)}{\upd \alpha_{\nvec}}.
+\end{eqn}
+Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
+\begin{eqn}
+	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+		={} & \int \upd\xvec^{\prime\prime}
+			\sum_{\mvec \in \fullbasis}
+				\phi_{\mvec}^{\prime\prime*}
+				\left.
+					\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}}
+				\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[f]]}
+			\sum_{\nvec \in \restbasis}
+				\phi_{\nvec}^{\prime*}
+				\left.
+					\frac{\upd \mathcal{G}[\mathcal{C}(\balpha)]}{\upd \alpha_{\nvec}}
+				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
+		& + \sum_{\mvec \in \fullbasis}
+				\phi_{\mvec}^{\prime\prime}
+				\left.
+					\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}^*}
+				\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[f]]}
+			\sum_{\nvec \in \restbasis}
+				\phi_{\nvec}^{\prime*}
+				\left.
+					\frac{\upd \mathcal{G}^*[\mathcal{C}(\balpha)]}{\upd \alpha_{\nvec}}
+				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
+\end{eqn}
+Recognizing~\defref{func-calculus:func-diff} for $\updelta \mathcal{F} / \updelta \mathcal{G}$ and $\updelta \mathcal{G} / \updelta \mathcal{f}$, we get the final expression
+\begin{eqn}
+	\frac{\updelta \mathcal{F}[\mathcal{G}[f]]}{\updelta f^\prime}
+		= \int \upd\xvec^{\prime\prime} \left(
+			\frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime}}
+			\frac{\updelta \mathcal{G}}{\updelta \mathcal{f}^{\prime}}
+			+ \frac{\updelta \mathcal{F}}{\updelta \mathcal{G}^{\prime\prime*}}
+			\frac{\updelta \mathcal{G}^*}{\updelta \mathcal{f}^{\prime}}
+		\right).
+\end{eqn}
 \end{proof}
 
-\begin{lemma}
+The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$ --- much like complex-valued functions with respect to Wirtinger differentiation.
+
+Most of the time we will deal with functional operators in a particular form, namely the algebraic expressions of their arguments.
+It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent~\defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
+
+\begin{theorem}
 	If $g(t)$ is a function that can be expanded into power series, and functional $\mathcal{F}[f] \equiv g(f)$, $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, then
 	\begin{eqn*}
 		\frac{\delta \mathcal{F}[f]}{\delta f(\xvec^\prime)} (\xvec)
 		= \delta_{\restbasis}(\xvec^\prime - \xvec)
 			\left. \frac{\partial g(t)}{\partial t} \right|_{t = f(\xvec)}
 	\end{eqn*}
-\end{lemma}
+\end{theorem}
 \begin{proof}
 We will consider $g(t) = t^k$ case first, which will straightforwardly lead to the statement of the lemma.
 For $k = 1$, obviously,
@@ -177,23 +272,23 @@ Then for other values of $k$:
 \end{proof}
 
 \begin{lemma}
-	If $g(z, z^*)$ can be expanded into series of $z^n (z^*)^m$, and functional $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be treated as a partial differentiation of the functional of two independent variables $f$ and $f^*$.
-	In other words:
+	If $g(z, z^*)$ can be expanded into power series of $z^n (z^*)^m$, and functional $\mathcal{F}[f, f^*] \equiv g(f, f^*)$, $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, then $\delta \mathcal{F} / \delta f^\prime$ and $\delta \mathcal{F} / \delta f^{\prime*}$ can be calculated as derivatives of $g(f, f^*)$ over $f$ and $f^*$, respectively, times the restricted delta function:
 	\begin{eqn*}
-		\frac{\delta \mathcal{F}}{\delta f^\prime}
-		= \delta_P(\xvec^\prime, \xvec) \left.
-			\frac{\partial g(z, z^*)}{\partial z}
+		\frac{\updelta \mathcal{F}}{\updelta f^\prime}
+		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
+			\frac{\upd g(z, z^*)}{\upd z}
 		\right|_{z=f(x)},
 		\quad
-		\frac{\delta \mathcal{F}}{\delta f^{\prime*}}
-		= \delta_P^*(\xvec^\prime, \xvec) \left.
-			\frac{\partial g(z, z^*)}{\partial z^*}
-		\right|_{z=f(x)}
+		\frac{\updelta \mathcal{F}}{\updelta f^{\prime*}}
+		= \delta_{\restbasis}^*(\xvec^\prime, \xvec) \left.
+			\frac{\upd g(z, z^*)}{\upd z^*}
+		\right|_{z=f(x)}.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 Proof is similar to \thmref{c-numbers:independent-vars}.
 \end{proof}
+
 
 
 % =============================================================================
@@ -204,7 +299,7 @@ Functional integration is defined as
 
 \begin{definition}
 	\begin{eqn*}
-		& \int \delta^2 f :: (\mathbb{F}_{\restbasis} \rightarrow \mathbb{F}) \rightarrow \mathbb{C} \\
+		& \int \delta^2 f \in (\mathbb{F}_{\restbasis} \rightarrow \mathbb{F}) \rightarrow \mathbb{C} \\
 		& \int \delta^2 f \mathcal{F}[f]
 		= \int d^2\balpha \mathcal{F}(\balpha)
 		= \left(
@@ -317,7 +412,7 @@ Applying \lmmref{c-numbers:fourier-of-moments}, collapsing sums, and recognizing
 \begin{definition}
 	Displacement functional is
 	\begin{eqn}
-		& D :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
+		& D \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
 		& D[\Lambda, \Lambda^*, \Psi, \Psi^*] = \exp \int d\xvec \left(
 			-\Lambda \Psi^* + \Lambda^* \Psi
 		\right).
