@@ -64,7 +64,7 @@ The result of any non-linear transformation of a function $f \in \mathbb{F}_{\re
 
 \begin{definition}
 \label{def:func-calculus:projector}
-	An arbitrary function can be projected to $\mathbb{F}_{\restbasis}$ using the projection transformation:
+	An arbitrary function can be projected to $\mathbb{F}_{\restbasis}$ using the projection operator:
 	\begin{eqn*}
 		& \proj{\restbasis} \in \mathbb{F} \rightarrow \mathbb{F}_{\restbasis} \\
 		& \proj{\restbasis}[f](\xvec)
@@ -75,7 +75,7 @@ The result of any non-linear transformation of a function $f \in \mathbb{F}_{\re
 	Obviously, $\proj{\fullbasis} \equiv \mathds{1}$.
 \end{definition}
 
-Being applied to the delta function, the projection function produces a restricted delta function:
+Being applied to the delta function, the projection operator produces a restricted delta function:
 
 \begin{definition}
 \label{def:func-calculus:restricted-delta}
@@ -108,6 +108,8 @@ The conjugate of $\proj{\restbasis}$ is therefore
 Let $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some arbitrary functional operator (not to be confused with quantum mechanical operators) acting on functions from a restricted basis.
 Such operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
 Note that in general this operator is nor linear, therefore its result is not guaranteed to belong to the same restricted basis as its argument.
+Also, since $\mathbb{C}$ is a specific case of $\mathbb{F}$ (a constant function of coordinates), a specific case of a functional operator is a functional $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$).
+This means that the calculus described in this section applies to functionals as well.
 
 Composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
 Therefore any functional operator $\mathcal{F}$ can be alternatively treated as a function of a vector of mode populations and a coordinate vector:
@@ -292,7 +294,7 @@ Same as in the differentiation case, we will make use of the equivalence between
 		& \int \fdelta^2 f \in (\mathbb{F}_{\restbasis} \rightarrow \mathbb{F})
 			\rightarrow (\mathbb{R}^D \rightarrow \mathbb{C}) \\
 		& \int \fdelta^2 f \mathcal{F}[f]
-		= \int \upd^2\balpha \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
+		= \int \upd^2\balpha\, \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
 		= \left(
 			\prod_{\nvec \in \restbasis} \int \upd^2\alpha_{\nvec}
 		\right) \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)],
@@ -308,47 +310,61 @@ Functional integration has a Fourier-like property analogous to \lmmref{c-number
 	For a restricted basis $\restbasis$, the delta functional is
 	\begin{eqn*}
 		& \Delta_{\restbasis} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
-		& \Delta_{\restbasis}[\Lambda]
-		\equiv \prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}),
+		& \Delta_{\restbasis}[f]
+		\equiv \prod_{\nvec \in \restbasis} \delta(\Real \alpha_{\nvec}) \delta(\Imag \alpha_{\nvec}),
 	\end{eqn*}
-	where $\blambda = \mathcal{C}_{\restbasis}^{-1}[\Lambda]$.
+	where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$.
 \end{definition}
 
 The delta functional has the sifting property in functional integrals:
 \begin{eqn}
-	\int \fdelta^2 \Lambda \mathcal{F}[\Lambda] \Delta_{\restbasis}[\Lambda]
-	& = \left(
-			\prod_{\nvec \in \restbasis} \int \upd^2\lambda_{\nvec}
-		\right)
-		\mathcal{F}(\blambda)
-		\prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
-	& = \left. \mathcal{F}(\blambda) \right|_{\forall \nvec \in \restbasis\, \lambda_{\nvec} = 0} \\
-	& = \left. \mathcal{F}[\Lambda] \right|_{\Lambda \equiv 0}.
+	\int \fdelta^2 f \mathcal{F}[f] \Delta_{\restbasis}[f]
+	& = \int \upd^2\balpha\,
+		\mathcal{F}(\mathcal{C}_{\restbasis}[\balpha])
+		\prod_{\nvec \in \restbasis} \delta(\Real \alpha_{\nvec}) \delta(\Imag \alpha_{\nvec}) \\
+	& = \left.
+			\mathcal{F}(\mathcal{C}_{\restbasis}[\balpha])
+		\right|_{\forall \nvec \in \restbasis\, \alpha_{\nvec} = 0} \\
+	& = \left. \mathcal{F}[f] \right|_{f \equiv 0}.
 \end{eqn}
+
+By analogy with the field displacement operator from \defref{wigner:func:displacement-op}, we can define a displacement functional, which will often appear in the formulation of functional Wigner transformation (\defref{wigner:func:w-transformation}) and accompanying proofs:
+
+\begin{definition}
+	Displacement functional takes two functions as arguments and returns a complex result:
+	\begin{eqn*}
+		& D \in \mathbb{F} \rightarrow \mathbb{F} \rightarrow \mathbb{C} \\
+		& D[g, f] = \exp \int \upd\xvec \left(
+			-g f^* + g^* f
+		\right).
+	\end{eqn*}
+\end{definition}
+
+The displacement functional exhibits Fourier-like properties in functional integrals.
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:fourier-of-moments}]
 \label{lmm:func-calculus:fourier-of-moments}
-	For $\Psi \in \mathbb{F}_{\restbasis}$ and $\Lambda \in \mathbb{F}_{\restbasis}$, and for any non-negative integers $r$ and $s$:
+	For $f \in \mathbb{F}_{\restbasis}$ and $g \in \mathbb{F}_{\restbasis}$, and for any non-negative integers $r$ and $s$:
 	\begin{eqn*}
-		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s \exp
-			\int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+		\int \fdelta^2 f\, f^r (f^*)^s D[g, f]
 		= \pi^{2|\restbasis|}
-			\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
-			\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
-			\Delta_{\restbasis}[\Lambda].
+			\left( -\frac{\fdelta}{\fdelta g^*} \right)^r
+			\left( \frac{\fdelta}{\fdelta g} \right)^s
+			\Delta_{\restbasis}[g].
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 We will start by representing the functional integral and the integrand in mode form:
 \begin{eqn}
-	& \int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s \exp
-		\int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \\
+	& \int \fdelta^2 f\, f^r (f^*)^s \exp
+		\int \upd\xvec \left( -g f^* + g^* f \right) \\
 	& = \int \upd^2\balpha
 		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec} \right)^r
 		\left( \sum_{\nvec \in \restbasis} \phi^*_{\nvec} \alpha_{\nvec}^* \right)^s
-		\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}).
+		\prod_{\nvec \in \restbasis} \exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}),
 \end{eqn}
-Expanding powers of $\Psi$ and $\Psi^*$ using multinomial theorem:
+where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$ and $\bbeta = \mathcal{C}_{\restbasis}^{-1}[g]$.
+Expanding powers of $f$ and $f^*$ using multinomial theorem:
 \begin{eqn2}
 	& ={} && \int \upd^2\balpha
 		\left(
@@ -359,7 +375,7 @@ Expanding powers of $\Psi$ and $\Psi^*$ using multinomial theorem:
 			\sum_{\sum v_{\mvec} = s} \binom{s}{ \left\{ v_{\mvec} \right\} }
 			\prod_{\nvec \in \restbasis} (\phi_{\nvec}^*)^{v_{\nvec}} (\alpha_{\nvec}^*)^{v_{\nvec}}
 		\right)
-		\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}),
+		\prod_{\nvec \in \restbasis} \exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}),
 \end{eqn2}
 where $\binom{r}{ \left\{ u_{\mvec} \right\} } \equiv r! / (\prod u_{\mvec}!)$ are multinomial coefficients.
 Splitting variables:
@@ -372,7 +388,7 @@ Splitting variables:
 			\int d^2\alpha_{\nvec}
 				\alpha_{\nvec}^{u_{\nvec}}
 				(\alpha_{\nvec}^*)^{v_{\nvec}}
-				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}).
+				\exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}).
 \end{eqn2}
 Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alpha_{\nvec}$:
 \begin{eqn}
@@ -382,190 +398,185 @@ Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alph
 		\pi^{2|\restbasis|} \\
 	& \times \prod_{\nvec \in \restbasis}
 			\phi_{\nvec}^{u_{\nvec}} (\phi_{\nvec}^*)^{v_{\nvec}}
-			\left( -\frac{\upd}{\upd \lambda_{\nvec}^*} \right)^{u_{\nvec}}
-			\left( \frac{\upd}{\upd \lambda_{\nvec}} \right)^{v_{\nvec}}
-			\delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}).
+			\left( -\frac{\upd}{\upd \beta_{\nvec}^*} \right)^{u_{\nvec}}
+			\left( \frac{\upd}{\upd \beta_{\nvec}} \right)^{v_{\nvec}}
+			\delta(\Real \beta_{\nvec}) \delta(\Imag \beta_{\nvec}).
 \end{eqn}
 Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the functional delta (\defref{func-calculus:delta-functional}):
 \begin{eqn}
 	& = \pi^{2|\restbasis|}
-		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\upd}{\upd \lambda_{\nvec}^*} \right)^r
-		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\upd}{\upd \lambda_{\nvec}} \right)^s
-		\prod_{\nvec \in \restbasis} \delta(\Real \lambda_{\nvec}) \delta(\Imag \lambda_{\nvec}) \\
+		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\upd}{\upd \beta_{\nvec}^*} \right)^r
+		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\upd}{\upd \beta_{\nvec}} \right)^s
+		\prod_{\nvec \in \restbasis} \delta(\Real \beta_{\nvec}) \delta(\Imag \beta_{\nvec}) \\
 	& = \pi^{2|\restbasis|}
-		\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
-		\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
-		\Delta_{\restbasis}[\Lambda].
+		\left( -\frac{\fdelta}{\fdelta g^*} \right)^r
+		\left( \frac{\fdelta}{\fdelta g} \right)^s
+		\Delta_{\restbasis}[g].
 	\qedhere
 \end{eqn}
 \end{proof}
 
-\begin{definition}
-	Displacement functional is
-	\begin{eqn}
-		& D \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
-		& D[\Lambda, \Lambda^*, \Psi, \Psi^*] = \exp \int d\xvec \left(
-			-\Lambda \Psi^* + \Lambda^* \Psi
-		\right).
-	\end{eqn}
-\end{definition}
+It is easy to show that functional integration has the same integration by parts property as common integration:
+\begin{eqn}
+	\int \fdelta^2 f
+		\frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
+		\mathcal{G}[f]
+	= \int \fdelta^2 f
+		\frac{\fdelta (\mathcal{F}[f] \mathcal{G}[f])}{\fdelta f^\prime}
+		- \int \fdelta^2 f
+		\frac{\fdelta \mathcal{G}[f]}{\fdelta f^\prime}
+		\mathcal{F}[f].
+\end{eqn}
+Functional integration by parts serves as the foundation of several theorems from \charef{wigner}, and will need several theorems that will help us eliminate the first term in the right part of the expression.
+Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with the addition of one more functional-specific lemma.
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:zero-integrals}]
 \label{lmm:func-calculus:zero-integrals}
-	For a bounded functional $F(\blambda, \blambda^*)$
+	For a square-integrable functional operator $\mathcal{F}$ (i.e., a functional operator that produces only square-integrable functions),
 	\begin{eqn*}
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda^\prime} \left(
-				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-				F[\Lambda, \Lambda^*]
-			\right)
-		& = 0 \\
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda^{\prime*}}
-			\left(
-				D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-				F[\Lambda, \Lambda^*]
-			\right)
+		\int \fdelta^2 g
+			\frac{\fdelta}{\fdelta g^\prime} \left( D[g, f] \mathcal{F}[g] \right)
+		& = 0, \\
+		\int \fdelta^2 g
+			\frac{\fdelta}{\fdelta g^{\prime*}} \left( D[g, f] \mathcal{F}[g] \right)
 		& = 0.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 We will prove the first equation.
-Let $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ and $\Psi = \mathcal{C}_{\restbasis}(\balpha)$.
-Displacement functional can be represented as a function of mode vector:
+Let $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$ and $\bbeta = \mathcal{C}_{\restbasis}^{-1}[g]$.
+Displacement functional can be represented as a function of mode vectors:
 \begin{eqn}
-	D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-	& = \exp \int dx \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
-		- \phi_{\nvec} \phi_{\mvec}^* \lambda_{\nvec} \alpha_{\mvec}^*
-		+ \phi_{\nvec}^* \phi_{\mvec} \lambda_{\nvec}^* \alpha_{\mvec}
+	D[g, f]
+	& = \exp \int \upd x \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
+		- \phi_{\nvec} \phi_{\mvec}^* \beta_{\nvec} \alpha_{\mvec}^*
+		+ \phi_{\nvec}^* \phi_{\mvec} \beta_{\nvec}^* \alpha_{\mvec}
 	\right) \\
 	& = \exp \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
-		- \delta_{\nvec \mvec} \lambda_{\nvec} \alpha_{\nvec}^*
-		+ \delta_{\nvec \mvec} \lambda_{\nvec}^* \alpha_{\nvec}
+		- \delta_{\nvec \mvec} \beta_{\nvec} \alpha_{\nvec}^*
+		+ \delta_{\nvec \mvec} \beta_{\nvec}^* \alpha_{\nvec}
 	\right) \\
 	& = \exp \sum_{\nvec \in \restbasis} \left(
-		-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}
+		-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}
 	\right).
 \end{eqn}
 
-We introduce the special notation for this lemma to indicate the subset of $\restbasis$ used by operators and functionals.
+We introduce a special notation for this lemma to indicate the subset of $\restbasis$ used by operators and functionals.
 With this notation, for fixed $\nvec$:
 \begin{eqn}
-	D[\Lambda, \Lambda^*, \Psi, \Psi^*]
+	D[g, f]
 	& = \prod_{\mvec \in \restbasis} \exp \left(
-		- \lambda_{\mvec} \alpha_{\mvec}^* + \lambda_{\mvec}^* \alpha_{\mvec}
+		- \beta_{\mvec} \alpha_{\mvec}^* + \beta_{\mvec}^* \alpha_{\mvec}
 	\right) \\
 	& = \exp \left(
-		- \lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec}
+		- \beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}
 	\right)
 	\prod_{\mvec \in \restbasis, \mvec \ne \nvec} \exp \left(
-		- \lambda_{\mvec} \alpha_{\mvec}^* + \lambda_{\mvec}^* \alpha_{\mvec}
+		- \beta_{\mvec} \alpha_{\mvec}^* + \beta_{\mvec}^* \alpha_{\mvec}
 	\right) \\
 	& = D_{\lnot \nvec} D_{\nvec},
 \end{eqn}
 and, similarly,
 \begin{eqn}
-	\Lambda & = \Lambda_{\lnot \nvec} + \Lambda_{\nvec}, \\
-	\int d^2 \blambda & = \int d^2 \blambda_{\lnot \nvec} \int d^2 \lambda_{\nvec}.
+	g & = g_{\lnot \nvec} + g_{\nvec},
+\end{eqn}
+\begin{eqn}
+	\int \upd^2 \bbeta & = \int \upd^2 \bbeta_{\lnot \nvec} \int \upd^2 \beta_{\nvec}.
 \end{eqn}
 
 With this notation:
 \begin{eqn}
-	& \int \delta^2\Lambda
-		\frac{\delta}{\delta \Lambda^\prime} \left(
-			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-			F[\Lambda, \Lambda^*]
-		\right) \\
-	& = \int d^2 \blambda
-		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*} \frac{\partial}{\partial \lambda_{\nvec}}
+	\int \fdelta^2g
+		\frac{\fdelta}{\fdelta g^\prime} \left(D[g, f] \mathcal{F}[g] \right)
+	& = \int \upd^2 \bbeta
+		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*} \frac{\upd}{\upd \beta_{\nvec}}
 			D_{\lnot \nvec} D_{\nvec}
-			F[\Lambda, \Lambda^*] \\
+			\mathcal{F}[g] \\
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-		\int d^2 \blambda_{\lnot \nvec} D_{\lnot \nvec}
-		\int d^2 \lambda_{\nvec} \frac{\partial}{\partial \lambda_{\nvec}} D_{\nvec} F(\blambda, \blambda^*).
+		\int \upd^2 \bbeta_{\lnot \nvec} D_{\lnot \nvec}
+		\int \upd^2 \beta_{\nvec} \frac{\upd}{\upd \beta_{\nvec}}
+			D_{\nvec} \mathcal{F}[\mathcal{C}_{\restbasis}(\bbeta)].
 \end{eqn}
 For each term the internal is equal to zero because of \lmmref{c-numbers:zero-integrals}, therefore the whole sum is zero.
 \end{proof}
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:zero-delta-integrals}]
 \label{lmm:func-calculus:zero-delta-integrals}
-	For $\Lambda \in \mathbb{F}_{\restbasis}$ \todo{Again, any limitations on $F$?}
+	For a square-integrable functional operator $\mathcal{F}$ (i.e., a functional operator that produces only square-integrable functions), restricted function $f \in \mathbb{F}_{\restbasis}$, and non-negative integers $r$ and $s$,
 	\begin{eqn*}
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda} \left(
-				\left(
-					\left( \frac{\delta}{\delta \Lambda} \right)^s
-					\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-					\Delta_{\restbasis}[\Lambda]
-				\right)
-				F[\lambda, \lambda^*]
+		\int \fdelta^2 f
+			\frac{\fdelta}{\fdelta f} \left(
+				\mathcal{F}[f]
+				\left( \frac{\fdelta}{\fdelta f} \right)^s
+				\left( -\frac{\fdelta}{\fdelta f^*} \right)^r
+				\Delta_{\restbasis}[f]
 			\right)
-		& = 0 \\
-		\int \delta^2\Lambda
-			\frac{\delta}{\delta \Lambda^*} \left(
-				\left(
-					\left( \frac{\delta}{\delta \Lambda} \right)^s
-					\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-					\Delta_{\restbasis}[\Lambda]
-				\right)
-				F[\lambda, \lambda^*]
+		& = 0, \\
+		\int \fdelta^2 f
+			\frac{\fdelta}{\fdelta f^*} \left(
+				\mathcal{F}[f]
+				\left( \frac{\fdelta}{\fdelta f} \right)^s
+				\left( -\frac{\fdelta}{\fdelta f^*} \right)^r
+				\Delta_{\restbasis}[f]
 			\right)
-		& = 0 \\
+		& = 0. \\
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 Proved by expanding functional integration and differentials into modes and recognising \lmmref{c-numbers:zero-delta-integrals}.
 \end{proof}
 
-In order to perform transformations of master equations in the future, we will need a lemma, which justifies certain operation with Laplacian (which is a part of kinetic term in Hamiltonian).
+In order to perform transformations of master equations in the future, we will need a lemma which justifies certain operation with Laplacian (which is a part of kinetic term in a Hamiltonian).
 
 \begin{lemma}
 \label{lmm:func-calculus:move-laplacian}
-	If $\forall \nvec \in \restbasis\, \xvec \in \partial A$ $\phi_n(\xvec) = 0$, then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$
+	If in each mode of the restricted basis $\restbasis$ the corresponding mode function is zero at the integration border associated with the basis (in mathematical terms, $\forall \nvec \in \restbasis,\, \xvec \in \partial A \,|\, \phi_n(\xvec) = 0$), then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$,
 	\begin{eqn*}
-		\int\limits_A d\xvec \left(
-			\nabla^2 \frac{\delta}{\delta \Psi}
-		\right) \Psi \mathcal{F}[\Psi, \Psi^*]
-		= \int\limits_A d\xvec \frac{\delta}{\delta \Psi}
-		( \nabla^2 \Psi ) \mathcal{F}[\Psi, \Psi^*]
+		\int\limits_A \upd\xvec \left(
+			\nabla^2 \frac{\fdelta}{\fdelta f}
+		\right) f \mathcal{F}[f]
+		= \int\limits_A \upd\xvec \frac{\fdelta}{\fdelta f}
+		( \nabla^2 f ) \mathcal{F}[f]
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 Integration limits play an important role in this proof, so we will write them explicitly.
 \begin{eqn}
 	\int\limits_A d\xvec \left(
-		\nabla^2 \frac{\delta}{\delta \Psi}
-	\right) \Psi
+		\nabla^2 \frac{\fdelta}{\fdelta f}
+	\right) f
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
 			\int\limits_A d\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 		\right)
-		\frac{\partial}{\partial \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha})
-	= (*)
+		\frac{\upd}{\upd \alpha_{\nvec}} \alpha_{\mvec}
+			\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
+	= (*),
 \end{eqn}
+where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$.
 Using Green's first identity and the fact that eigenfunctions are equal to zero at the boundary of $A$:
 \begin{eqn}
-	\int\limits_A d\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
-	& = \oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) dS
-	- \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
-	& = 0 - \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
-	& = \oint\limits_{\partial A} \phi_{\nvec}^* (\nabla \phi_{\mvec} \cdot \mathbf{v}) dS
-	- \int\limits_A d\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
-	& = \int\limits_A d\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
+	\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+	& = \oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
+	- \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = 0 - \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = \oint\limits_{\partial A} \phi_{\nvec}^* (\nabla \phi_{\mvec} \cdot \mathbf{v}) \upd S
+	- \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = \int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
 \end{eqn}
-where $\mathbf{v}$ is the outward pointing unit normal of surface element $dS$.
+where $\mathbf{v}$ is the outward pointing unit normal of surface element $\upd S$.
 Thus
 \begin{eqn}
 	(*)
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
-			\int\limits_A d\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
+			\int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
 		\right)
-		\frac{\partial}{\partial \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha})
-	= \int\limits_A d\xvec \frac{\delta}{\delta \Psi}
-		( \nabla^2 \Psi ) \mathcal{F}[\Psi, \Psi^*].
+		\frac{\upd}{\upd \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha})
+	= \int\limits_A \upd\xvec \frac{\fdelta}{\fdelta f}
+		( \nabla^2 f ) \mathcal{F}[f].
 	\qedhere
 \end{eqn}
 \end{proof}
 
-Note that this lemma imposes additional requirement for basis functions, but in practical applications it is always satisfied.
+Note that this lemma imposes additional requirement on basis functions, but in practical applications it is always satisfied.
 For example, in plane wave basis eigenfunctions are equal to zero at the border of the bounding box, and in harmonic oscillator basis they are equal to zero on the infinity (which can be considered the boundary of their integration area).
 Hereinafter we will assume that this condition is true for any basis we work with.
