@@ -95,13 +95,13 @@ This definition allows us to prove an analogue of one of the properties of the F
 
 \begin{lemma}
 \label{lmm:c-numbers:fourier-of-moments}
-	For a complex $\lambda$ and any non-negative integers $r$ and $s$
+	For a complex $\beta$ and any non-negative integers $r$ and $s$
 	\begin{eqn*}
-		\int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\int \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\beta \alpha^* + \beta^* \alpha)
 		= \pi^2
-			\left( -\frac{\upd}{\upd \lambda^*} \right)^r
-			\left( \frac{\upd}{\upd \lambda} \right)^s
-			\delta(\Real \lambda) \delta(\Imag \lambda).
+			\left( -\frac{\upd}{\upd \beta^*} \right)^r
+			\left( \frac{\upd}{\upd \beta} \right)^s
+			\delta(\Real \beta) \delta(\Imag \beta).
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
@@ -114,9 +114,9 @@ First, by changing a variable in the integral and using known Fourier transform 
 Note that we have explicitly written integration limits here;
 they are swapped when we change the variable in the first integral.
 
-Denoting $\alpha = u + iv$ and $\lambda = x + iy$, we can expand the initial expression as
+Denoting $\alpha = u + iv$ and $\beta = x + iy$, we can expand the initial expression as
 \begin{eqn2}
-	& \int && \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
+	& \int && \upd^2\alpha\, \alpha^r (\alpha^*)^s \exp(-\beta \alpha^* + \beta^* \alpha) \\
 	& ={} && \int \upd u\, \upd v\, \exp(2ivx - 2iuy) \\
 	& && \times \sum_{m=0}^r \binom{r}{m} u^m (iv)^{r-m}
 		\sum_{n=0}^s \binom{s}{n} u^n (-iv)^{s-n} \\
@@ -149,9 +149,9 @@ Collapsing sums and recognising \defref{c-numbers:wirtinger}:
 		\left( \frac{1}{2} (-i \upd / \upd y + \upd / \upd x) \right)^s
 		\delta(y) \delta(x) \\
 	& = \pi^2
-		\left( -\frac{\upd}{\upd \lambda^*} \right)^r
-		\left( \frac{\upd}{\upd \lambda} \right)^s
-		\delta(\Real \lambda) \delta(\Imag \lambda).
+		\left( -\frac{\upd}{\upd \beta^*} \right)^r
+		\left( \frac{\upd}{\upd \beta} \right)^s
+		\delta(\Real \beta) \delta(\Imag \beta).
 		\qedhere
 \end{eqn}
 \end{proof}
@@ -165,46 +165,46 @@ Integration by parts will be used extensively in further proofs, and we will nee
 
 \begin{lemma}
 \label{lmm:c-numbers:zero-integrals}
-	For a square-integrable $f(\lambda, \lambda^*)$, and a complex $\alpha$
+	For a square-integrable $f(\beta)$, and a complex $\alpha$
 	\begin{eqn*}
-		\int \upd^2\lambda
-			\frac{\upd}{\upd \lambda} \left(
-				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				f(\lambda)
+		\int \upd^2\beta
+			\frac{\upd}{\upd \beta} \left(
+				\exp(-\beta \alpha^* + \beta^* \alpha)
+				f(\beta)
 			\right)
 		& = 0, \\
-		\int \upd^2\lambda
-			\frac{\upd}{\upd \lambda^*}
+		\int \upd^2\beta
+			\frac{\upd}{\upd \beta^*}
 			\left(
-				\exp(-\lambda \alpha^* + \lambda^* \alpha)
-				f(\lambda)
+				\exp(-\beta \alpha^* + \beta^* \alpha)
+				f(\beta)
 			\right)
 		& = 0.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-From the square-integrability of $f$ it follows that $\lim_{\Real \lambda \rightarrow \infty} = 0$ and $\lim_{\Imag \lambda \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
+From the square-integrability of $f$ it follows that $\lim_{\Real \beta \rightarrow \infty} = 0$ and $\lim_{\Imag \beta \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
 \end{proof}
 
 \begin{lemma}
 \label{lmm:c-numbers:zero-delta-integrals}
-	For a bounded $f(\lambda, \lambda^*)$
+	For a bounded $f(z)$
 	\begin{eqn*}
-		\int \upd^2\lambda
-			\frac{\upd}{\upd \lambda} \left(
-				f(\lambda)
-				\left( \frac{\upd}{\upd \lambda} \right)^s
-				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
-				\delta(\Real \lambda) \delta(\Imag \lambda)
+		\int \upd^2 z
+			\frac{\upd}{\upd z} \left(
+				f(z)
+				\left( \frac{\upd}{\upd z} \right)^s
+				\left( -\frac{\upd}{\upd z^*} \right)^r
+				\delta(\Real z) \delta(\Imag z)
 			\right)
 		& = 0, \\
-		\int \upd^2\lambda
-			\frac{\upd}{\upd \lambda^*}
+		\int \upd^2 z
+			\frac{\upd}{\upd z^*}
 			\left(
-				f(\lambda)
-				\left( \frac{\upd}{\upd \lambda} \right)^s
-				\left( -\frac{\upd}{\upd \lambda^*} \right)^r
-				\delta(\Real \lambda) \delta(\Imag \lambda)
+				f(z)
+				\left( \frac{\upd}{\upd z} \right)^s
+				\left( -\frac{\upd}{\upd z^*} \right)^r
+				\delta(\Real z) \delta(\Imag z)
 			\right)
 		& = 0.
 	\end{eqn*}
