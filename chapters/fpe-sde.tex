@@ -3,5 +3,19 @@
 \label{cha:appendix:fpe-sde}
 % =============================================================================
 
+Wigner transformation, to which the majority of this thesis is dedicated to, produces a Fokker-Planck equation (\abbrev{fpe}), or its functional equivalent, from an initial master equation.
+FPE is an equation in partial derivatives, and, in general, is not easy to solve --- even numerically.
+The major part of the usefullness of the Wigner transformation paired with the Wigner truncation is that it produces \abbrev{fpe} in a special form, which can be further transformed to a set of stochastic differential equations (\abbrev{sde}s), with the Wigner function playing the role of a probability distribution.
+Algorithms of solving such equations numerically are much more straightforward.
+
+The actual correspondence between \abbrev{fpe} and \abbrev{sde}s is formulated and proved for real-valued coefficients in literature~\cite{Risken1996}.
+In this thesis we will need to transform \abbrev{fpe}s with complex coefficients, or even functional operator ones.
+While it is always possible to express them in real-valued form, it is much more convenient to derive correspondence theorems that work directly on such \abbrev{fpe}s.
+In this Appendix we will do that by proceeding successively from the initial real-valued theorem to complex-valued and functional correspondences.
+
+In addition, we will do the same for the It\^{o} formula, which provides the expression for the time derivative of any function of transverse variables.
+This formula is useful, among other cases, if one wants to derive the time dependence of some integral observable (for instance, population), without solving \abbrev{sde}s themselves.
+Alternatively, it can serve as an additional test of a numerical algorithm used to propagate \abbrev{sde}s in time.
+
 \input{chapters/fpe-sde/corr}
 \input{chapters/fpe-sde/ito-formula}
