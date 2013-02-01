@@ -14,9 +14,9 @@ In this section we will derive the It\^{o} formula for the differential of a fun
 	the differential of a function $f(\zvec)$ is
 	\begin{eqn*}
 		df(\zvec) = \left(
-			\avec \cdot \bpartial_{\zvec} dt
-			+ \frac{1}{2} \Trace{ B B^T \bpartial_{\zvec} \bpartial_{\zvec}^T } dt
-			+ \Trace{ B d\Zvec \bpartial_{\zvec}^T }
+			\avec \cdot \vcwd_{\zvec} dt
+			+ \frac{1}{2} \Trace{ B B^T \vcwd_{\zvec} \vcwd_{\zvec}^T } dt
+			+ \Trace{ B d\Zvec \vcwd_{\zvec}^T }
 		\right) f(\zvec).
 	\end{eqn*}
 \end{theorem}
@@ -36,15 +36,15 @@ This theorem can be extended to complex variables.
 	the differential of a function $f(\balpha)$ is
 	\begin{eqn*}
 		df(\balpha) = \left(
-			2 \Real (\avec \cdot \bpartial_{\balpha}) dt
-			+ \Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T } dt
-			+ 2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
+			2 \Real (\avec \cdot \vcwd_{\balpha}) dt
+			+ \Trace{ B B^H \vcwd_{\balpha^*} \vcwd_{\balpha}^T } dt
+			+ 2 \Real \Trace{ B d\Zvec \vcwd_{\balpha}^T }
 		\right) f(\balpha).
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
 The proof follows the same scheme as \thmref{fpe-sde:corr:fpe-sde-complex}, just in the opposite direction.
-Let $f = g + ih$, $\balpha = \mathbf{x} + i \mathbf{y}$, $\avec = \mathbf{u} + i \mathbf{v}$, $B = F + iG$, $\bpartial_{\balpha} = (\bpartial_{\mathbf{x}} - i \bpartial_{\mathbf{y}}) / 2$.
+Let $f = g + ih$, $\balpha = \mathbf{x} + i \mathbf{y}$, $\avec = \mathbf{u} + i \mathbf{v}$, $B = F + iG$, $\vcwd_{\balpha} = (\vcwd_{\mathbf{x}} - i \vcwd_{\mathbf{y}}) / 2$.
 Then the set of SDEs from the statement is equivalent to
 \begin{eqn}
 	d \begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix}
@@ -56,66 +56,66 @@ Applying \thmref{fpe-sde:ito-formula:ito-f-real} for real-valued functions $g(\m
 \begin{eqn}
 	df ={} &
 		\begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix} \cdot
-			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix} f dt
+			\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix} f dt
 		+ \frac{1}{4} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 			\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
+			\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}
+			\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}^T
 		} f dt  \\
 	& + \frac{1}{\sqrt{2}} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 			\begin{pmatrix} d\mathbf{X} \\ d\mathbf{Y} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
+			\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}^T
 		} f
 \end{eqn}
 Now let us match this equation and the lemma statement term by term.
 
 First term:
 \begin{eqn}
-	2 \Real ( \avec \cdot \bpartial_{\balpha} )
+	2 \Real ( \avec \cdot \vcwd_{\balpha} )
 	& = \Real \left(
-			\left( \mathbf{u} + i\mathbf{v} \right) \cdot \left( \bpartial_{\mathbf{x}} - i \bpartial_{\mathbf{y}} \right)
+			\left( \mathbf{u} + i\mathbf{v} \right) \cdot \left( \vcwd_{\mathbf{x}} - i \vcwd_{\mathbf{y}} \right)
 		\right) \\
-	& = \mathbf{u} \cdot \bpartial_{\mathbf{x}} + \mathbf{v} \cdot \bpartial_{\mathbf{y}} \\
+	& = \mathbf{u} \cdot \vcwd_{\mathbf{x}} + \mathbf{v} \cdot \vcwd_{\mathbf{y}} \\
 	& = \begin{pmatrix} \mathbf{x} \\ \mathbf{y} \end{pmatrix} \cdot
-		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
+		\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}
 \end{eqn}
 
 Second term:
 \begin{eqn}
-	\Trace{ B B^H \bpartial_{\balpha^*} \bpartial_{\balpha}^T }
+	\Trace{ B B^H \vcwd_{\balpha^*} \vcwd_{\balpha}^T }
 	={} & \frac{1}{4} \Trace{
 		(F F^T + G G^T)
-		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
-			+ \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
+		(\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T
+			+ \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T)
 		} \\
 	& - \frac{1}{4} \Trace {
 		(F G^T - G F^T)
-		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
-			- \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
+		(\vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T
+			- \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T)
 		} \\
 	& + \frac{i}{4} \Trace{
 		(F G^T - G F^T)
-		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
-			+ \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
+		(\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T
+			+ \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T)
 	} \\
 	& + \frac{i}{4} \Trace{
 		(G G^T + F F^T)
-		(\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
-			- \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
+		(\vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T
+			- \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T)
 	}
 \end{eqn}
-Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T + \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T - \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T$ are antisymmetric.
+Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T + \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T - \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T$ are antisymmetric.
 Therefore the last two terms contain traces of antisymmetric matrices and are equal to zero.
 \begin{eqn}
 	={} & \frac{1}{4} \Trace{
-		(F F^T + G G^T) \bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T
-		+ (F G^T - G F^T) \bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T)
+		(F F^T + G G^T) \vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T
+		+ (F G^T - G F^T) \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T)
 		} \\
 	& + \frac{1}{4} \Trace {
-		(G F^T - F G^T) \bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T
-		+ (F F^T + G G^T) \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T)
+		(G F^T - F G^T) \vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T
+		+ (F F^T + G G^T) \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T)
 		} \\
 	={} & \frac{1}{4} \Trace {
 		\begin{pmatrix}
@@ -123,32 +123,32 @@ Therefore the last two terms contain traces of antisymmetric matrices and are eq
 			G F^T - F G^T & F F^T + G G^T
 		\end{pmatrix}
 		\begin{pmatrix}
-			\bpartial_{\mathbf{x}} \bpartial_{\mathbf{x}}^T & \bpartial_{\mathbf{x}} \bpartial_{\mathbf{y}}^T \\
-			\bpartial_{\mathbf{y}} \bpartial_{\mathbf{x}}^T & \bpartial_{\mathbf{y}} \bpartial_{\mathbf{y}}^T
+			\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T & \vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T \\
+			\vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T & \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T
 		\end{pmatrix}
 	} \\
 	={} & \frac{1}{4} \Trace{
 		\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 		\begin{pmatrix} F^T & G^T \\ -G^T & F^T \end{pmatrix}
-		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}
-		\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
+		\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}
+		\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}^T
 	}.
 \end{eqn}
 
 Third term:
 \begin{eqn}
-	2 \Real \Trace{ B d\Zvec \bpartial_{\balpha}^T }
+	2 \Real \Trace{ B d\Zvec \vcwd_{\balpha}^T }
 	& = \frac{1}{\sqrt{2}} \Real \Trace{
-		(F + iG) (d\mathbf{X} + id\mathbf{Y}) (\bpartial_{\mathbf{x}} - i\bpartial_{\mathbf{y}})
+		(F + iG) (d\mathbf{X} + id\mathbf{Y}) (\vcwd_{\mathbf{x}} - i\vcwd_{\mathbf{y}})
 	} \\
 	& = \frac{1}{\sqrt{2}} \Trace{
-		F d\mathbf{X} \bpartial_{\mathbf{x}} + F d\mathbf{Y} \bpartial_{\mathbf{y}}
-		- G d\mathbf{Y} \bpartial_{\mathbf{x}} + G d\mathbf{X} \bpartial_{\mathbf{y}}
+		F d\mathbf{X} \vcwd_{\mathbf{x}} + F d\mathbf{Y} \vcwd_{\mathbf{y}}
+		- G d\mathbf{Y} \vcwd_{\mathbf{x}} + G d\mathbf{X} \vcwd_{\mathbf{y}}
 	} \\
 	& = \frac{1}{\sqrt{2}} \Trace{
 			\begin{pmatrix} F & -G \\ G & F \end{pmatrix}
 			\begin{pmatrix} d\mathbf{X} \\ d\mathbf{Y} \end{pmatrix}
-			\begin{pmatrix} \bpartial_{\mathbf{x}} \\ \bpartial_{\mathbf{y}} \end{pmatrix}^T
+			\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}^T
 		}.
 \end{eqn}
 
@@ -165,10 +165,10 @@ All terms have matched, thus proving the theorem.
 	the differential of a function $f(\balpha^{(1)}, \ldots, \balpha^{(C)})$ is
 	\begin{eqn*}
 		df ={} & \left(
-			2 \sum_{c=1}^C \Real (\avec^{(c)} \cdot \bpartial_{\balpha^{(c)}}) dt
+			2 \sum_{c=1}^C \Real (\avec^{(c)} \cdot \vcwd_{\balpha^{(c)}}) dt
 			+ \sum_{m=1}^C \sum_{n=1}^C \Trace{
-				B^{(m)} (B^{(n)})^H \bpartial_{(\balpha^{(n)})^*} \bpartial_{\balpha^{(m)}}^T } dt \right. \\
-		& \left. + 2 \sum_{c=1}^C \Real \Trace{ B^{(c)} d\Zvec \bpartial_{\balpha^{(c)}}^T }
+				B^{(m)} (B^{(n)})^H \vcwd_{(\balpha^{(n)})^*} \vcwd_{\balpha^{(m)}}^T } dt \right. \\
+		& \left. + 2 \sum_{c=1}^C \Real \Trace{ B^{(c)} d\Zvec \vcwd_{\balpha^{(c)}}^T }
 		\right) f.
 	\end{eqn*}
 \end{theorem}

@@ -137,7 +137,7 @@ Using this correspondence, we can define the differentiation in the space of fun
 		& \frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
 		= \left.
 				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-				\frac{\upd \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]}{\upd \alpha_{\nvec}}
+				\frac{\cwd \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]}{\cwd \alpha_{\nvec}}
 			\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
 	\end{eqn*}
 \end{definition}
@@ -169,33 +169,33 @@ To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the defin
 	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 		& = \left.
 				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-				\frac{\upd \mathcal{F}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}{\upd \alpha_{\nvec}}
+				\frac{\cwd \mathcal{F}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}{\cwd \alpha_{\nvec}}
 			\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
 		& = \left.
 				\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
-				\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \alpha_{\nvec}}
+				\frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \alpha_{\nvec}}
 			\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[\mathcal{C}_{\restbasis}(\balpha)]]}.
 \end{eqn}
 Applying the chain rule for Wirtinger derivatives, and recalling the definition of the decomposition transformation:
 \begin{eqn}
-	\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \alpha_{\nvec}}
+	\frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \alpha_{\nvec}}
 	= \sum_{\mvec \in \fullbasis} \left(
-		\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}}
-		\frac{\upd \beta_{\mvec}}{\upd \alpha_{\nvec}}
-		+ \frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}^*}
-		\frac{\upd \beta_{\mvec}^*}{\upd \alpha_{\nvec}}
+		\frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \beta_{\mvec}}
+		\frac{\cwd \beta_{\mvec}}{\cwd \alpha_{\nvec}}
+		+ \frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \beta_{\mvec}^*}
+		\frac{\cwd \beta_{\mvec}^*}{\cwd \alpha_{\nvec}}
 	\right),
 \end{eqn}
 \begin{eqn}
-	\frac{\upd \beta_{\mvec}}{\upd \alpha_{\nvec}}
-	= \frac{\upd (\mathcal{C}^{-1}[G(\balpha, \xvec)])_{\mvec}}{\upd \alpha_{\nvec}}
-	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime*}
-		\frac{\upd G(\balpha, \xvec)}{\upd \alpha_{\nvec}},
+	\frac{\cwd \beta_{\mvec}}{\cwd \alpha_{\nvec}}
+	= \frac{\cwd (\mathcal{C}^{-1}[G(\balpha, \xvec)])_{\mvec}}{\cwd \alpha_{\nvec}}
+	= \int \cwd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime*}
+		\frac{\cwd G(\balpha, \xvec)}{\cwd \alpha_{\nvec}},
 \end{eqn}
 \begin{eqn}
-	\frac{\upd \beta_{\mvec}^*}{\upd \alpha_{\nvec}}
-	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime}
-		\frac{\upd G^*(\balpha, \xvec)}{\upd \alpha_{\nvec}}.
+	\frac{\cwd \beta_{\mvec}^*}{\cwd \alpha_{\nvec}}
+	= \int \cwd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime}
+		\frac{\cwd G^*(\balpha, \xvec)}{\cwd \alpha_{\nvec}}.
 \end{eqn}
 Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 \begin{eqn}
@@ -204,22 +204,22 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 			\sum_{\mvec \in \fullbasis}
 				\phi_{\mvec}^{\prime\prime*}
 				\left.
-					\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}}
+					\frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \beta_{\mvec}}
 				\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[f]]}
 			\sum_{\nvec \in \restbasis}
 				\phi_{\nvec}^{\prime*}
 				\left.
-					\frac{\upd \mathcal{G}[\mathcal{C}(\balpha)]}{\upd \alpha_{\nvec}}
+					\frac{\cwd \mathcal{G}[\mathcal{C}(\balpha)]}{\cwd \alpha_{\nvec}}
 				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
 		& + \sum_{\mvec \in \fullbasis}
 				\phi_{\mvec}^{\prime\prime}
 				\left.
-					\frac{\upd \mathcal{F}[\mathcal{C}(\bbeta)]}{\upd \beta_{\mvec}^*}
+					\frac{\cwd \mathcal{F}[\mathcal{C}(\bbeta)]}{\cwd \beta_{\mvec}^*}
 				\right|_{\bbeta = \mathcal{C}^{-1}[\mathcal{G}[f]]}
 			\sum_{\nvec \in \restbasis}
 				\phi_{\nvec}^{\prime*}
 				\left.
-					\frac{\upd \mathcal{G}^*[\mathcal{C}(\balpha)]}{\upd \alpha_{\nvec}}
+					\frac{\cwd \mathcal{G}^*[\mathcal{C}(\balpha)]}{\cwd \alpha_{\nvec}}
 				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
 \end{eqn}
 Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we get the final expression
@@ -244,12 +244,12 @@ It turns out that for this subset functional differentiation behaves almost exac
 	\begin{eqn*}
 		\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z)}{\upd z}
+			\frac{\cwd g(z)}{\cwd z}
 		\right|_{z=f(\xvec)},
 		\quad
 		\frac{\fdelta \mathcal{F}}{\fdelta f^{\prime*}}
 		= \delta_{\restbasis}^*(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z)}{\upd z^*}
+			\frac{\cwd g(z)}{\cwd z^*}
 		\right|_{z=f(\xvec)}.
 	\end{eqn*}
 \end{theorem}
@@ -261,10 +261,10 @@ Substituting this into \defref{func-calculus:func-diff}, differentiating the com
 	\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 		\left.
-			\frac{\upd \left(
+			\frac{\cwd \left(
 				\mathcal{C}_{\restbasis}^r(\balpha)
 				(\mathcal{C}_{\restbasis}^*(\balpha))^s
-			\right)}{\upd \alpha_{\nvec}}
+			\right)}{\cwd \alpha_{\nvec}}
 		\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 		r \phi_{\nvec}
@@ -274,7 +274,7 @@ Substituting this into \defref{func-calculus:func-diff}, differentiating the com
 		\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]} \\
 	& = r \delta_{\restbasis}(\xvec^\prime, \xvec) f^{r-1} (f^*)^s
 	= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
-			\frac{\upd g(z)}{\upd z}
+			\frac{\cwd g(z)}{\cwd z}
 		\right|_{z=f(\xvec)}.
 \end{eqn}
 The second identity is proved in the same way.
@@ -398,15 +398,15 @@ Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alph
 		\pi^{2|\restbasis|} \\
 	& \times \prod_{\nvec \in \restbasis}
 			\phi_{\nvec}^{u_{\nvec}} (\phi_{\nvec}^*)^{v_{\nvec}}
-			\left( -\frac{\upd}{\upd \beta_{\nvec}^*} \right)^{u_{\nvec}}
-			\left( \frac{\upd}{\upd \beta_{\nvec}} \right)^{v_{\nvec}}
+			\left( -\frac{\cwd}{\cwd \beta_{\nvec}^*} \right)^{u_{\nvec}}
+			\left( \frac{\cwd}{\cwd \beta_{\nvec}} \right)^{v_{\nvec}}
 			\delta(\Real \beta_{\nvec}) \delta(\Imag \beta_{\nvec}).
 \end{eqn}
 Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the functional delta (\defref{func-calculus:delta-functional}):
 \begin{eqn}
 	& = \pi^{2|\restbasis|}
-		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\upd}{\upd \beta_{\nvec}^*} \right)^r
-		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\upd}{\upd \beta_{\nvec}} \right)^s
+		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\cwd}{\cwd \beta_{\nvec}^*} \right)^r
+		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\cwd}{\cwd \beta_{\nvec}} \right)^s
 		\prod_{\nvec \in \restbasis} \delta(\Real \beta_{\nvec}) \delta(\Imag \beta_{\nvec}) \\
 	& = \pi^{2|\restbasis|}
 		\left( -\frac{\fdelta}{\fdelta g^*} \right)^r
@@ -489,12 +489,12 @@ With this notation:
 	\int \fdelta^2g
 		\frac{\fdelta}{\fdelta g^\prime} \left(D[g, f] \mathcal{F}[g] \right)
 	& = \int \upd^2 \bbeta
-		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*} \frac{\upd}{\upd \beta_{\nvec}}
+		\sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*} \frac{\cwd}{\cwd \beta_{\nvec}}
 			D_{\lnot \nvec} D_{\nvec}
 			\mathcal{F}[g] \\
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
 		\int \upd^2 \bbeta_{\lnot \nvec} D_{\lnot \nvec}
-		\int \upd^2 \beta_{\nvec} \frac{\upd}{\upd \beta_{\nvec}}
+		\int \upd^2 \beta_{\nvec} \frac{\cwd}{\cwd \beta_{\nvec}}
 			D_{\nvec} \mathcal{F}[\mathcal{C}_{\restbasis}(\bbeta)].
 \end{eqn}
 For each term the internal is equal to zero because of \lmmref{c-numbers:zero-integrals}, therefore the whole sum is zero.
@@ -542,13 +542,13 @@ In order to perform transformations of master equations in the future, we will n
 \begin{proof}
 Integration limits play an important role in this proof, so we will write them explicitly.
 \begin{eqn}
-	\int\limits_A d\xvec \left(
+	\int\limits_A \upd\xvec \left(
 		\nabla^2 \frac{\fdelta}{\fdelta f}
 	\right) f
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
-			\int\limits_A d\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+			\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 		\right)
-		\frac{\upd}{\upd \alpha_{\nvec}} \alpha_{\mvec}
+		\frac{\cwd}{\cwd \alpha_{\nvec}} \alpha_{\mvec}
 			\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
 	= (*),
 \end{eqn}
@@ -570,7 +570,7 @@ Thus
 	& = \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
 			\int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
 		\right)
-		\frac{\upd}{\upd \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha}) \\
+		\frac{\cwd}{\cwd \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha}) \\
 	& = \int\limits_A \upd\xvec \frac{\fdelta}{\fdelta f}
 		( \nabla^2 f ) \mathcal{F}[f].
 	\qedhere
