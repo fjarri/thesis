@@ -89,9 +89,14 @@
 
 
 % PDF properties
-\definecolor{citation}{HTML}{A60000}
-\definecolor{link}{HTML}{3515B0}
-\usepackage[bookmarks, bookmarkstype=toc, unicode, pdfencoding=auto, backref=page, breaklinks, pdftitle={PhD thesis: \plainthesisname}, pdfauthor={Bogdan Opanchuk}, colorlinks, urlcolor=blue, citecolor=citation, linkcolor=link]{hyperref}
+\definecolor{mainred}{HTML}{E63717}
+\definecolor{darkred}{HTML}{8F4B3F}
+\definecolor{mainblue}{HTML}{1F409A}
+\definecolor{lightblue}{HTML}{7392E6}
+\usepackage[bookmarks, bookmarkstype=toc, unicode, pdfencoding=auto, backref=page, breaklinks, pdftitle={PhD thesis: \plainthesisname}, pdfauthor={Bogdan Opanchuk}, colorlinks, urlcolor=lightblue, citecolor=darkred, linkcolor=mainblue]{hyperref}
+
+\newcommand{\todo}[1]{\textcolor{mainred}{[#1]}}
+\newcommand{\citationneeded}{\textcolor{mainred}{[citation needed]}}
 
 
 % Format for back references in bibliography
