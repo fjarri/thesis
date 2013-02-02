@@ -6,17 +6,18 @@ We will start by formulating the known real-valued correspondence in a form whic
 
 \begin{lemma}[real-valued \abbrev{fpe}--\abbrev{sde}s correspondence in convenient form.]
 \label{lmm:fpe-sde:corr:fpe-sde-real}
-	If $\zvec^T \equiv (z_1 \ldots z_M)$ is a set of real variables, a \abbrev{fpe}
+	Let $\zvec^T \equiv (z_1 \ldots z_M)$ be a set of real variables.
+	Then the \abbrev{fpe}
 	\begin{eqn*}
 		\frac{\upd W}{\upd t}
 		= -\vcwd_{\zvec}^T \cdot \avec W
 		+ \frac{1}{2} \Trace{ \vcwd_{\zvec} \vcwd_{\zvec}^T B B^T } W
 	\end{eqn*}
-	is equivalent to a the set of \abbrev{sde}s in It\^{o} form
+	is equivalent to the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
 		\upd\zvec = \avec \upd t + B \upd\Zvec
 	\end{eqn*}
-	and to a set of \abbrev{sde}s in Stratonovich form
+	and to the set of \abbrev{sde}s in Stratonovich form
 	\begin{eqn*}
 		\upd\zvec = (\avec - \svec)\upd t + B \upd\Zvec,
 	\end{eqn*}
@@ -30,7 +31,7 @@ We will start by formulating the known real-valued correspondence in a form whic
 	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources), $\vcwd_{\zvec}^T \equiv (\upd/\upd z_1 \ldots \upd/\upd z_M)$ is a cogradient vector, and $\Zvec$ is a standard $L$-dimensional Wiener process with $\langle \upd Z_j^2 \rangle = \upd t$.
 \end{lemma}
 \begin{proof}
-For detailed proof see~\cite{Risken1996}, sections 3.3 and 3.4.
+For the detailed proof see~\cite{Risken1996}, sections 3.3 and 3.4.
 \end{proof}
 
 The above theorem can be extended to work with complex Wirtinger derivatives and complex-valued coefficients.
@@ -38,17 +39,18 @@ Of couse, in order to produce the real-valued $\upd W/\upd t$ in the left part, 
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-complex}
-	If $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ is a set of complex variables, a \abbrev{fpe}
+	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables.
+	Then the \abbrev{fpe}
 	\begin{eqn*}
 		\frac{\upd W}{\upd t}
 		= -\vcwd_{\balpha}^T \avec W - \vcwd_{\balpha^*}^T \avec^* W
 		+ \Trace{ \vcwd_{\balpha^*} \vcwd_{\balpha}^T B B^H } W
 	\end{eqn*}
-	is equivalent to a set of \abbrev{sde}s in It\^{o} form
+	is equivalent to the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
 		\upd\balpha = \avec \upd t + B \upd\Zvec,
 	\end{eqn*}
-	and to a set of \abbrev{sde}s in Stratonovich form
+	and to the set of \abbrev{sde}s in Stratonovich form
 	\begin{eqn*}
 		\upd\balpha = (\avec - \svec) \upd t + B \upd\Zvec,
 	\end{eqn*}
@@ -237,7 +239,8 @@ We will now reformulate the previous theorem, including this component distincti
 
 \begin{theorem}[Multi-component reformulation of \thmref{fpe-sde:corr:fpe-sde-complex}]
 \label{thm:fpe-sde:corr:mc-fpe-sde}
-	If $\balpha^{(j)},\, j = 1 \ldots C$ are $C$ sets of complex variables $\balpha^{(j)} \equiv (\alpha_1^{(j)} \ldots \alpha_{M_j}^{(j)})$, then a \abbrev{fpe}
+	Let $\balpha^{(j)},\, j = 1 \ldots C$ be $C$ sets of complex variables $\balpha^{(j)} \equiv (\alpha_1^{(j)} \ldots \alpha_{M_j}^{(j)})$.
+	Then the \abbrev{fpe}
 	\begin{eqn*}
 		\frac{\upd W}{\upd t}
 		={} & - \sum_{j=1}^C \vcwd_{\balpha^{(j)}}^T \avec^{(j)} W
@@ -249,11 +252,11 @@ We will now reformulate the previous theorem, including this component distincti
 				B^{(k)} (B^{(j)})^H
 			} W
 	\end{eqn*}
-	is equivalent to a set of \abbrev{sde}s in It\^{o} form
+	is equivalent to the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
 		\upd\balpha^{(j)} = \avec^{(j)} \upd t + B^{(j)} \upd\Zvec,
 	\end{eqn*}
-	or to a set of \abbrev{sde}s in Stratonovich form
+	or to the set of \abbrev{sde}s in Stratonovich form
 	\begin{eqn*}
 		\upd\balpha^{(j)} = (\avec^{(j)} - \svec^{(j)}) \upd t + B^{(j)} \upd\Zvec,
 	\end{eqn*}
@@ -331,7 +334,7 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-func}
-	A \abbrev{fpe} in functional form
+	The \abbrev{fpe} in functional form
 	\begin{eqn*}
 		\frac{\upd W}{\upd t}
 		={} & \int \upd\xvec \left(
@@ -341,14 +344,14 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 				\sum_{\lvec \in \mathbb{L}} \mathcal{B}_{k,\lvec} \mathcal{B}_{j,\lvec}^* W
 		\right)
 	\end{eqn*}
-	is equivalent to a the set of \abbrev{sde}s in It\^{o} form
+	is equivalent to the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
 		\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 			\mathcal{A}_j \upd t
 			+ \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec} \upd Q_{\lvec}
 		\right],
 	\end{eqn*}
-	or a the set of \abbrev{sde}s in It\^{o} form
+	or the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
 		\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 			(\mathcal{A}_j - \mathcal{S}_j) \upd t
@@ -363,7 +366,7 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 			\mathcal{B}_{j,\lvec}.
 	\end{eqn*}
 	Here $\Psi_j \in \mathbb{F}_{\mathbb{M}_j}$, $\mathcal{A}_j \equiv \mathcal{A}_j[\bPsi]$ and $\mathcal{B}_{j,\lvec} \equiv \mathcal{B}_{j,\lvec}[\bPsi]$ are functional operators, $W \equiv W[\bPsi]$ is a probability functional, and $\mathbb{L}$ is a set of noise sources.
-	Functional Wiener processes $Q_{\lvec}$ are compositions of standard complex-valued Wiener processes:
+	Standard functional Wiener processes $Q_{\lvec}$ are compositions of standard complex-valued Wiener processes:
 	\begin{eqn*}
 		Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} Z_{\lvec,\nvec}.
 	\end{eqn*}
@@ -449,7 +452,7 @@ Recognizing \defref{func-calculus:projector} of the projection operator:
 			\sum_{\pvec \in \fullbasis} \phi_{\pvec} \upd Z_{\pvec,\lvec}
 	\right].
 \end{eqn}
-Defining the functional Wiener process as $Q_{\lvec} = \sum_{\pvec \in \fullbasis} \phi_{\pvec} \upd Z_{\pvec,\lvec}$:
+Defining the standard functional Wiener process as $Q_{\lvec} = \sum_{\pvec \in \fullbasis} \phi_{\pvec} \upd Z_{\pvec,\lvec}$:
 \begin{eqn}
 	\upd\Psi_c
 	= \proj{\restbasis_j} \left[
@@ -514,8 +517,8 @@ Alternatively, the \abbrev{fpe} from the above theorem can be expressed in a sho
 \begin{eqn}
 	\frac{dW}{dt}
 	= \int d\xvec \left(
-		- \vfdelta_{\bPsi} \cdot \mathbf{\mathcal{A}} W
-		- \vfdelta_{\bPsi^*} \cdot \mathbf{\mathcal{A}}^* W
+		- \vfdelta_{\bPsi} \cdot \mathbfcal{A} W
+		- \vfdelta_{\bPsi^*} \cdot \mathbfcal{A}^* W
 		+ \Trace{ \vfdelta_{\bPsi^*} \vfdelta_{\bPsi}^T \mathcal{B} \mathcal{B}^H } W
 	\right),
 \end{eqn}
