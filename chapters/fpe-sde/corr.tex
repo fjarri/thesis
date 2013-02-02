@@ -327,184 +327,197 @@ Multiplying matrices successively:
 which is the expression from the theorem statement.
 \end{proof}
 
+Most of the time we will deal with \abbrev{fpe}s in functional form, so we will reformulate the correspondence once again, now using functional derivatives.
+
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-func}
-	Functional \abbrev{fpe}
+	A \abbrev{fpe} in functional form
 	\begin{eqn*}
-		\frac{dW}{dt}
-		= \int d\xvec \left(
-			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \mathcal{A}^{(j)}
-			- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} (\mathcal{A}^{(j)})^*
-			+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k}
-				\sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
-		\right) W
+		\frac{\upd W}{\upd t}
+		={} & \int \upd\xvec \left(
+			- \sum_{j=1}^C \frac{\fdelta}{\fdelta \Psi_j} \mathcal{A}_j W
+			- \sum_{j=1}^C \frac{\fdelta}{\fdelta \Psi_j^*} \mathcal{A}_j^* W \right. \\
+		& \left. + \sum_{j=1}^C \sum_{k=1}^C \frac{\fdelta^2}{\fdelta \Psi_j^* \fdelta \Psi_k}
+				\sum_{\lvec \in \mathbb{L}} \mathcal{B}_{k,\lvec} \mathcal{B}_{j,\lvec}^* W
+		\right)
 	\end{eqn*}
-	\todo{Or, in matrix form
+	is equivalent to a the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
-		\frac{dW}{dt}
-		= \int d\xvec \left(
-			- 2 \Real \left( \bdelta_{\bPsi} \cdot \vec{\mathcal{A}} \right)
-			+ \Trace{ \bdelta_{\bPsi^*} \bdelta_{\bPsi}^T \mathcal{B} \mathcal{B}^H }
-		\right) W
-	\end{eqn*}
-	}
-	is equivalent to the set of \abbrev{sde}s in It\^{o} form
-	\begin{eqn*}
-		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-			\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+		\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+			\mathcal{A}_j \upd t
+			+ \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec} \upd Q_{\lvec}
 		\right],
 	\end{eqn*}
-	or in Stratonovich form
+	or a the set of \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
-		d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-			(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+		\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+			(\mathcal{A}_j - \mathcal{S}_j) \upd t
+			+ \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec} \upd Q_{\lvec}
 		\right],
 	\end{eqn*}
 	where
 	\begin{eqn*}
-		\mathcal{S}^{(j)} = \frac{1}{2} \sum_{n=1}^C \sum_{\lvec}
-			(\mathcal{B}_{\lvec}^{(n)})^*
-			\frac{\delta}{\delta \Psi_n^*}
-			\mathcal{B}_{\lvec}^{(j)},
+		\mathcal{S}_j = \frac{1}{2} \sum_{k=1}^C \sum_{\lvec \in \mathbb{L}}
+			\mathcal{B}_{k,\lvec}^*
+			\frac{\fdelta}{\fdelta \Psi_k^*}
+			\mathcal{B}_{j,\lvec}.
 	\end{eqn*}
-	and $Q_{\lvec}$ is a functional Wiener process:
+	Here $\Psi_j \in \mathbb{F}_{\mathbb{M}_j}$, $\mathcal{A}_j \equiv \mathcal{A}_j[\bPsi]$ and $\mathcal{B}_{j,\lvec} \equiv \mathcal{B}_{j,\lvec}[\bPsi]$ are functional operators, $W \equiv W[\bPsi]$ is a probability functional, and $\mathbb{L}$ is a set of noise sources.
+	Functional Wiener processes $Q_{\lvec}$ are compositions of standard complex-valued Wiener processes:
 	\begin{eqn*}
 		Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} Z_{\lvec,\nvec}.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Considering $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$ and replacing functional derivatives with ordinary ones:
+Expanding functional derivatives according to \defref{func-calculus:func-diff} with $\Psi_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$:
 \begin{eqn}
-	\frac{dW}{dt}
+	\frac{\upd W}{\upd t}
 	={} & \left(
 		- \sum_{j=1}^C \sum_{\nvec \in \restbasis_j}
-			\frac{\partial}{\partial \alpha_{j,\nvec}}
-			\int d\xvec \phi_{j,\nvec}^* \mathcal{A}^{(j)}
+			\frac{\cwd}{\cwd \alpha_{j,\nvec}}
+			\int \upd\xvec\, \phi_{j,\nvec}^* \mathcal{A}_j W
 		- \sum_{j=1}^C \sum_{\nvec \in \restbasis_j}
-			\frac{\partial}{\partial \alpha_{j,\nvec}^*}
-			\int d\xvec \phi_{j,\nvec} (\mathcal{A}^{(j)})^*
+			\frac{\cwd}{\cwd \alpha_{j,\nvec}^*}
+			\int \upd\xvec\, \phi_{j,\nvec} \mathcal{A}_j^* W
 		\right. \\
 	&	\left. + \sum_{j=1}^C \sum_{k=1}^C
 			\sum_{\mvec \in \restbasis_j, \nvec \in \restbasis_k}
-			\frac{\partial}{\partial \alpha_{j,\mvec}^*}
-			\frac{\partial}{\partial \alpha_{k,\nvec}}
-			\int d\xvec
+			\frac{\cwd}{\cwd \alpha_{j,\mvec}^*}
+			\frac{\cwd}{\cwd \alpha_{k,\nvec}}
+			\int \upd\xvec
 			\phi_{j,\mvec} \phi_{k,\nvec}^*
-			\sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} (\mathcal{B}_{\lvec}^{(k)})^*
-	\right) W.
+			\sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec}^* \mathcal{B}_{k,\lvec} W
+	\right).
 \end{eqn}
 The diffusion term has to be transformed in order to conform to \thmref{fpe-sde:corr:mc-fpe-sde}:
 \begin{eqn}
-	\int d\xvec \phi_{j,\mvec} \phi_{k,\nvec}^* \sum_{\lvec} \mathcal{B}_{\lvec}^{(k)} (\mathcal{B}_{\lvec}^{(j)})^*
-	& = \int d\xvec \int d\xvec^\prime
+	\int \upd\xvec \phi_{j,\mvec} \phi_{k,\nvec}^* \sum_{\lvec \in \mathbb{L}}
+		\mathcal{B}_{k,\lvec} \mathcal{B}_{j,\lvec}^*
+	& = \int \upd\xvec \int \upd\xvec^\prime
 			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
-			\sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^{\prime *} \mathcal{B}_{\lvec}^{(k)}
+			\sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec}^{\prime *} \mathcal{B}_{k,\lvec}
 			\delta(\xvec - \xvec^\prime) \\
-	& = \int d\xvec \int d\xvec^\prime
+	& = \int \upd\xvec \int \upd\xvec^\prime
 			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
-			\sum_{\lvec} (\mathcal{B}_{\lvec}^{(j)})^{\prime *} \mathcal{B}_{\lvec}^{(k)}
+			\sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec}^{\prime *} \mathcal{B}_{k,\lvec}
 			\sum_{\pvec \in \fullbasis} \phi_{\pvec}^{\prime*} \phi_{\pvec} \\
-	& = \sum_{\pvec \in \fullbasis, \lvec}
-		\int d\xvec
-			\phi_{j,\mvec} (\mathcal{B}_{\lvec}^{(j)})^* \phi_{\pvec}^*
-		\int d\xvec
-			\phi_{k,\nvec}^* \mathcal{B}_{\lvec}^{(k)} \phi_{\pvec}
+	& = \sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
+		\int \upd\xvec\,
+			\phi_{j,\mvec} \mathcal{B}_{j,\lvec}^* \phi_{\pvec}^*
+		\int \upd\xvec\,
+			\phi_{k,\nvec}^* \mathcal{B}_{k,\lvec} \phi_{\pvec}.
 \end{eqn}
 Note that we did not specify the index of the full basis used to expand the delta function.
-It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$, this will not change the result.
+It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$ --- this will not change the result.
 
-Now we have the \abbrev{fpe} from \thmref{fpe-sde:corr:mc-fpe-sde} with
+Now we have the \abbrev{fpe} in the from required by \thmref{fpe-sde:corr:mc-fpe-sde} with
 \begin{eqn}
-	\avec_{\mvec}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)},\,\mvec \in \restbasis_c
+	a_{\mvec}^{(j)}
+	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j,\,
+	\mvec \in \restbasis_j,
 \end{eqn}
 and
 \begin{eqn}
 \label{eqn:fpe-sde:corr:func-noise-matrix}
-	B_{\mvec,(\nvec,\lvec)}^{(c)} = \int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec},\,
-	\mvec \in \restbasis_c, \nvec \in \fullbasis.
+	B_{\mvec,(\pvec,\lvec)}^{(j)}
+	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{j,\lvec} \phi_{\pvec},\,
+	\mvec \in \restbasis_j, \pvec \in \fullbasis, \lvec \in \mathbb{L}.
 \end{eqn}
-Note that columns of $B$ are enumerated using compound index $\nvec,\lvec$.
+Note that columns of $B$ are enumerated using the compound index $\pvec,\lvec$.
 
 Therefore the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in It\^{o} form
 \begin{eqn}
-	d\alpha_{\mvec}^{(c)}
-	= \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
-	+ \sum_{\nvec \in \fullbasis, \lvec}
-		\int d\xvec \phi_{c,\mvec}^* \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+	\upd\alpha_{\mvec}^{(j)}
+	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t
+	+ \sum_{\pvec \in \fullbasis, \lvec \in \mathbb{L}}
+		\int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{j,\lvec} \phi_{\pvec} \upd Z_{\pvec,\lvec}.
 \end{eqn}
-Multiplying by $\phi_{c,\mvec}^\prime$ and grouping by component:
+Multiplying by $\phi_{j,\mvec}^\prime$ and grouping by component:
 \begin{eqn}
-	\sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime d\alpha_{\mvec}^{(c)}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^* \mathcal{A}^{(c)} dt
-	+ \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \int d\xvec \phi_{c,\mvec}^*
-		\sum_{\nvec \in \fullbasis, \lvec} \mathcal{B}_{\lvec}^{(c)} \phi_{\nvec} dZ_{\nvec,\lvec}.
+	\sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \upd\alpha_{\mvec}^{(j)}
+	={} & \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t \\
+	& + \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \int \upd\xvec\, \phi_{j,\mvec}^*
+		\sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
+			\mathcal{B}_{j,\lvec} \phi_{\pvec} \upd Z_{\pvec,\lvec}.
 \end{eqn}
-Recognizing \defref{func-calculus:projector} of projection transformation:
+Recognizing \defref{func-calculus:projector} of the projection operator:
 \begin{eqn}
-	d\Psi_c
-	= \mathcal{P}_{\restbasis_c} \left[
-		\mathcal{A}^{(c)} dt
-		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)}
-			\sum_{\nvec \in \fullbasis} \phi_{\nvec} dZ_{\nvec,\lvec}
+	\upd\Psi_j
+	= \proj{\restbasis_j} \left[
+		\mathcal{A}_j \upd t
+		+ \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec}
+			\sum_{\pvec \in \fullbasis} \phi_{\pvec} \upd Z_{\pvec,\lvec}
 	\right].
 \end{eqn}
-Defining functional Wiener process $Q_{\lvec} = \sum_{\nvec \in \fullbasis} \phi_{\nvec} dZ_{\nvec,\lvec}$:
+Defining the functional Wiener process as $Q_{\lvec} = \sum_{\pvec \in \fullbasis} \phi_{\pvec} \upd Z_{\pvec,\lvec}$:
 \begin{eqn}
-	d\Psi_c
-	= \mathcal{P}_{\restbasis_c} \left[
-		\mathcal{A}^{(c)} dt
-		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(c)} dQ_{\lvec}
+	\upd\Psi_c
+	= \proj{\restbasis_j} \left[
+		\mathcal{A}_j \upd t
+		+ \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{j,\lvec} \upd Q_{\lvec}
 	\right].
 \end{eqn}
 
-Performing the same multiplication and summation on Stratonovich term from \thmref{fpe-sde:corr:mc-fpe-sde}:
+Performing the same multiplication and summation on the Stratonovich term from \thmref{fpe-sde:corr:mc-fpe-sde}:
 \begin{eqn}
-	\mathcal{S}^{(c)}
-	= \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime s_{\mvec}^{(c)}
-	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C \Trace{
-		(B^{(n)})^H \vcwd_{(\balpha^{(n)})^*} \evec_{\mvec}^T B^{(c)}
+	\mathcal{S}_j
+	= \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime s_{\mvec}^{(j)}
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \sum_{k=1}^C \Trace{
+		(B^{(k)})^H \vcwd_{(\balpha^{(k)})^*} \evec_{\mvec}^T B^{(j)}
 	}.
 \end{eqn}
-Transforming trace to summation:
+Transforming the trace to a summation:
 \begin{eqn}
-	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
-		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
-			(B_{\jvec (\pvec,\lvec)}^{(n)})^*
-			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-			B_{\mvec (\pvec,\lvec)}^{(c)}.
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{j,\mvec}^\prime \sum_{k=1}^C
+		\sum_{\nvec \in \restbasis_k} \sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
+			(B_{\nvec (\pvec,\lvec)}^{(k)})^*
+			\frac{\cwd}{\cwd (\alpha_{\nvec}^{(k)})^*}
+			B_{\mvec (\pvec,\lvec)}^{(j)}.
 \end{eqn}
 Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise matrix:
 \begin{eqn}
-	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime \sum_{n=1}^C
-		\sum_{\jvec \in \restbasis_n} \sum_{\pvec \in \fullbasis, \lvec}
-			\int d\xvec \phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^* \phi_{\pvec}^*
-			\int d\xvec \phi_{c,\mvec}^*
-				\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-				\mathcal{B}_{\lvec}^{(c)} \phi_{\pvec}
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \sum_{k=1}^C
+		\sum_{\nvec \in \restbasis_k} \sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
+			\int \upd\xvec\, \phi_{k,\nvec} \mathcal{B}_{k,\lvec}^* \phi_{\pvec}^*
+			\int \upd\xvec\, \phi_{j,\mvec}^*
+				\frac{\cwd}{\cwd (\alpha_{\nvec}^{(k)})^*}
+				\mathcal{B}_{j,\lvec} \phi_{\pvec}.
 \end{eqn}
 Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\xvec - \xvec^\prime)$:
 \begin{eqn}
-	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{c,\mvec}^\prime
-		\sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
-			\int d\xvec
-				\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
-				\phi_{c,\mvec}^* \frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-				\mathcal{B}_{\lvec}^{(c)}
+	= \frac{1}{2} \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime
+		\sum_{k=1}^C \sum_{\nvec \in \restbasis_k} \sum_{\lvec \in \mathbb{L}}
+			\int \upd\xvec\,
+				\phi_{k,\nvec} \mathcal{B}_{k,\lvec}^*
+				\phi_{j,\mvec}^* \frac{\cwd}{\cwd (\alpha_{\nvec}^{(k)})^*}
+				\mathcal{B}_{j,\lvec}.
 \end{eqn}
 Recognizing the projection transformation and the functional differential:
 \begin{eqn}
-	& = \mathcal{P}_{\restbasis_c} \left[
-		\frac{1}{2} \sum_{n=1}^C \sum_{\jvec \in \restbasis_n} \sum_{\lvec}
-			\phi_{n,\jvec} (\mathcal{B}_{\lvec}^{(n)})^*
-			\frac{\partial}{\partial (\alpha_{\jvec}^{(n)})^*}
-			\mathcal{B}_{\lvec}^{(c)}
+	& = \proj{\restbasis_j} \left[
+		\frac{1}{2} \sum_{k=1}^C \sum_{\nvec \in \restbasis_k} \sum_{\lvec \in \mathbb{L}}
+			\phi_{k,\nvec} \mathcal{B}_{k,\lvec}^*
+			\frac{\cwd}{\cwd (\alpha_{\nvec}^{(k)})^*}
+			\mathcal{B}_{j,\lvec}
 	\right] \\
-	& = \mathcal{P}_{\restbasis_c} \left[
-		\frac{1}{2} \sum_{n=1}^C \sum_{\lvec}
-		(\mathcal{B}_{\lvec}^{(n)})^*
-		\frac{\delta}{\delta \Psi_n^*}
-		\mathcal{B}_{\lvec}^{(c)}
+	& = \proj{\restbasis_j} \left[
+		\frac{1}{2} \sum_{k=1}^C \sum_{\lvec \in \mathbb{L}}
+		\mathcal{B}_{k,\lvec}^*
+		\frac{\fdelta}{\fdelta \Psi_k^*}
+		\mathcal{B}_{j,\lvec}
 	\right].
 	\qedhere
 \end{eqn}
 \end{proof}
+
+Alternatively, the \abbrev{fpe} from the above theorem can be expressed in a short matrix form:
+\begin{eqn}
+	\frac{dW}{dt}
+	= \int d\xvec \left(
+		- \vfdelta_{\bPsi} \cdot \mathbf{\mathcal{A}} W
+		- \vfdelta_{\bPsi^*} \cdot \mathbf{\mathcal{A}}^* W
+		+ \Trace{ \vfdelta_{\bPsi^*} \vfdelta_{\bPsi}^T \mathcal{B} \mathcal{B}^H } W
+	\right),
+\end{eqn}
+where the functional cogradient $\vfdelta_{\bPsi} = \left( \fdelta/\fdelta \Psi_1 \ldots \fdelta/\fdelta \Psi_C \right)$, $\mathbf{\mathcal{A}}$ is a vector of $C$ functional operators, and $\mathcal{B}$ is a matrix of $C \times |\mathbb{L}|$ functional operators.
+
