@@ -182,40 +182,40 @@ Finally, we can use the multi-component reformulation to derive the It\^{o} form
 \label{thm:fpe-sde:ito-formula:func-ito-f}
 	Given the set of functional \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
-		\upd\Psi^{(j)} = \mathcal{A}^{(j)} dt + \sum_{\lvec \in \mathbb{L}} \mathcal{B}_{\lvec}^{(j)} \upd Q_{\lvec},
+		\upd f_j = \mathcal{A}_j dt + \sum_{l=1}^L \mathcal{B}_{jl} \upd Q_l,
 	\end{eqn*}
-	the differential of a functional operator $\mathcal{F}[\Psivec]$ is
+	the differential of a functional operator $\mathcal{F}[\fvec]$ is
 	\begin{eqn*}
-		\upd \mathcal{F}[\Psivec]
+		\upd \mathcal{F}[\fvec]
 		={} & \int \upd\xvec^\prime \left(
 			2 \sum_{j=1}^C \Real \left(
-				\mathcal{A}_j^\prime \frac{\fdelta}{\fdelta \Psi_j^\prime}
-			\right) \mathcal{F}[\Psivec] \upd t \right. \\
-		& + \sum_{j=1}^C \sum_{k=1}^C \sum_{\lvec \in \mathbb{L}}
-				\mathcal{B}_{j,\lvec}^\prime
-				\mathcal{B}_{k,\lvec}^{\prime *}
-				\frac{\fdelta}{\fdelta \Psi_j^\prime}
-				\frac{\fdelta}{\fdelta \Psi_k^{\prime *}} \mathcal{F}[\Psivec] \upd t \\
-		& \left. + 2 \sum_{j=1}^C \sum_{\lvec \in \mathbb{L}}
+				\mathcal{A}_j^\prime \frac{\fdelta}{\fdelta f_j^\prime}
+			\right) \mathcal{F}[\fvec] \upd t \right. \\
+		& + \sum_{j=1}^C \sum_{k=1}^C \sum_{l=1}^L
+				\mathcal{B}_{jl}^\prime
+				\mathcal{B}_{kl}^{\prime *}
+				\frac{\fdelta}{\fdelta f_j^\prime}
+				\frac{\fdelta}{\fdelta f_k^{\prime *}} \mathcal{F}[\fvec] \upd t \\
+		& \left. + 2 \sum_{j=1}^C \sum_{l=1}^L
 			\Real \left(
-				\mathcal{B}_{j,\lvec}^\prime
-				\upd Q_{\lvec}^\prime
-				\frac{\fdelta}{\fdelta \Psi_j^\prime}
+				\mathcal{B}_{jl}^\prime
+				\upd Q_l^\prime
+				\frac{\fdelta}{\fdelta f_j^\prime}
 			\right)
-			\mathcal{F}[\Psivec]
+			\mathcal{F}[\fvec]
 		\right).
 	\end{eqn*}
-	Here $\Psi_j$, $\mathcal{A}_j$, $\mathcal{B}_{j,\lvec}$, $W$, $\mathbb{L}$, and $Q_{\lvec}$ are defined the same as in \thmref{fpe-sde:corr:fpe-sde-func}.
+	Here $f_j$, $\mathcal{A}_j$, $\mathcal{B}_{jl}$, $W$, $\mathbb{L}$, and $Q_l$ are defined the same as in \thmref{fpe-sde:corr:fpe-sde-func}.
 \end{theorem}
 \begin{proof}
 The set of \abbrev{sde}s can be rewritten in terms of complex vectors as
 \begin{eqn}
 	\upd\alpha_{\mvec}^{(j)}
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t
-	+ \sum_{\pvec \in \fullbasis, \lvec}
-		\int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{j,\lvec} \phi_{\pvec} \upd Z_{\pvec,\lvec}.
+	+ \sum_{l=1}^L \sum_{\pvec \in \fullbasis}
+		\int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{jl} \phi_{\pvec} \upd Z_{\pvec,l}.
 \end{eqn}
-Now, treating the functional operator as a function of $M$ complex vectors
+Now, treating the functional operator as a function of $C$ complex vectors
 \begin{eqn}
 	\mathcal{F} \equiv \mathcal{F}[\mathcal{C}_{\restbasis_1}(\balpha^{(1)}), \ldots, \mathcal{C}_{\restbasis_C}(\balpha^{(C)})],
 \end{eqn}
@@ -225,8 +225,8 @@ we can use \thmref{fpe-sde:ito-formula:mc-ito-f} with drift vectors
 \end{eqn}
 and noise matrices
 \begin{eqn}
-	B_{\mvec,(\pvec,\lvec)}^{(j)}
-	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{\lvec}^{(j)} \phi_{\pvec}.
+	B_{\mvec,(\pvec,l)}^{(j)}
+	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{jl} \phi_{\pvec}.
 \end{eqn}
 Applying \thmref{fpe-sde:ito-formula:mc-ito-f}:
 \begin{eqn}
@@ -238,16 +238,16 @@ Applying \thmref{fpe-sde:ito-formula:mc-ito-f}:
 		\right) \mathcal{F} \upd t \\
 	& + \sum_{j=1}^C \sum_{k=1}^C
 			\sum_{\mvec \in \restbasis_j} \sum_{\nvec \in \restbasis_k}
-			\sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
-			\int \upd\xvec^\prime \phi_{j,\mvec}^{\prime *} \mathcal{B}_{j,\lvec}^\prime \phi_{\pvec}^\prime
-			\int \upd\xvec^{\prime\prime} \phi_{k,\nvec}^{\prime\prime} \mathcal{B}_{k,\lvec}^{\prime\prime *} \phi_{\pvec}^{\prime\prime *}
+			\sum_{l=1}^L \sum_{\pvec \in \fullbasis}
+			\int \upd\xvec^\prime \phi_{j,\mvec}^{\prime *} \mathcal{B}_{jl}^\prime \phi_{\pvec}^\prime
+			\int \upd\xvec^{\prime\prime} \phi_{k,\nvec}^{\prime\prime} \mathcal{B}_{kl}^{\prime\prime *} \phi_{\pvec}^{\prime\prime *}
 			\frac{\cwd^2 \mathcal{F}}{\cwd \alpha_{k,\nvec}^* \cwd \alpha_{j,\mvec}}
 			\upd t \\
 	& + 2 \sum_{j=1}^C \Real \left(
 			\sum_{\mvec \in \restbasis_j}
-			\sum_{\lvec \in \mathbb{L}} \sum_{\pvec \in \fullbasis}
-			\int \upd\xvec^\prime \phi_{j,\mvec}^{\prime*} \mathcal{B}_{j,\lvec}^\prime \phi_{\pvec}^\prime
-			\upd Z_{\pvec,\lvec}
+			\sum_{l=1}^L \sum_{\pvec \in \fullbasis}
+			\int \upd\xvec^\prime \phi_{j,\mvec}^{\prime*} \mathcal{B}_{jl}^\prime \phi_{\pvec}^\prime
+			\upd Z_{\pvec,l}
 			\frac{\cwd}{\cwd \alpha_{j,\mvec}}
 			\mathcal{F}
 	\right).
@@ -256,17 +256,17 @@ Recognising definitions of functional differentials, functional Wiener process, 
 \begin{eqn}
 	={} & 2 \sum_{j=1}^C \Real \left(
 			\int \upd\xvec^\prime \mathcal{A}_j^\prime
-			\frac{\fdelta}{\fdelta \Psi_j^\prime}
+			\frac{\fdelta}{\fdelta f_j^\prime}
 		\right) \mathcal{F} \upd t
-	+ \sum_{j=1}^C \sum_{k=1}^C \sum_{\lvec \in \mathbb{L}}
-			\int \upd\xvec^\prime \mathcal{B}_{j,\lvec}^\prime
-			\mathcal{B}_{k,\lvec}^{\prime *}
-			\frac{\fdelta}{\fdelta \Psi_j^\prime}
-			\frac{\fdelta}{\fdelta \Psi_k^{\prime *}} \mathcal{F} \upd t \\
-	& + 2 \sum_{j=1}^C \sum_{\lvec \in \mathbb{L}} \Real \left(
-			\int \upd\xvec^\prime \mathcal{B}_{j,\lvec}^\prime
-			\upd Q_{\lvec}^\prime
-			\frac{\fdelta}{\fdelta \Psi_j^\prime}
+	+ \sum_{j=1}^C \sum_{k=1}^C \sum_{l=1}^L
+			\int \upd\xvec^\prime \mathcal{B}_{jl}^\prime
+			\mathcal{B}_{kl}^{\prime *}
+			\frac{\fdelta}{\fdelta f_j^\prime}
+			\frac{\fdelta}{\fdelta f_k^{\prime *}} \mathcal{F} \upd t \\
+	& + 2 \sum_{j=1}^C \sum_{l=1}^L \Real \left(
+			\int \upd\xvec^\prime \mathcal{B}_{jl}^\prime
+			\upd Q_l^\prime
+			\frac{\fdelta}{\fdelta f_j^\prime}
 		\right) \mathcal{F},
 \end{eqn}
 which leads to the statement of the theorem.
@@ -274,21 +274,21 @@ which leads to the statement of the theorem.
 
 Alternatively, the functional It\^{o} formula can be written in matrix form as
 \begin{eqn}
-	\upd \mathcal{F}[\Psivec]
+	\upd \mathcal{F}[\fvec]
 	={} & \int \upd\xvec^\prime \left(
 		2 \Real \left(
 			\mathbfcal{A}^\prime \cdot \vfdelta_{\bPsi^\prime}
-		\right) \mathcal{F}[\Psivec] \upd t
+		\right) \mathcal{F}[\fvec] \upd t
 		+ \Trace{
 			\mathcal{B}^\prime
 			(\mathcal{B}^\prime)^H
-			\vfdelta_{\Psivec^{\prime *}}
-			\vfdelta_{\Psivec^\prime}^T
-		} \mathcal{F}[\Psivec] \upd t \right. \\
+			\vfdelta_{\fvec^{\prime *}}
+			\vfdelta_{\fvec^\prime}^T
+		} \mathcal{F}[\fvec] \upd t \right. \\
 	& \left. + 2 \Real \Trace{
 			\mathcal{B}^\prime
 			\upd\mathbf{Q}^\prime
-			\vfdelta_{\Psivec^\prime}^T
-		} \mathcal{F}[\Psivec]
+			\vfdelta_{\fvec^\prime}^T
+		} \mathcal{F}[\fvec]
 	\right).
 \end{eqn}
