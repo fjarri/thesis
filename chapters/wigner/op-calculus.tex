@@ -1,13 +1,22 @@
 % =============================================================================
-\chapter{Field operator calculus}
-\label{cha:op-calculus}
+\section{Field operator calculus}
 % =============================================================================
 
-Multimode fields are described by operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\Psiop_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at location $\xvec$, and $\Psiop_j$ destroys one.
-Same as with functions of coordinates, we will use the same scheme, abbreviating $\Psiop_j \equiv \Psiop_j(\xvec)$ and $\Psiop_j^\prime \equiv \Psiop_j(\xvec^\prime)$.
+Description of complex bosonic systems with thousands of particles and strong nonlinear interactions often requires one to consider more than one mode per component.
+Although it is quite possible to use single-mode creation and annihilation operators exclusively,
+it is usually advantageous to employ a higher-level field operator representation.
+Field operators can simplify both the analysis of a master equation, and its transformation to a Fokker-Planck equation (\abbrev{fpe}) using phase-space methods, which is the main topic of this thesis.
+
+In this section we are going to outline the functional operator calculus, which is used extensively in this thesis.
+This calculus is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
+The similartiy and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
+
+Multimode fields are described by field operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\Psiop_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at location $\xvec$, and $\Psiop_j$ destroys one.
+We will use the same scheme as with functions of coordinates in \appref{func-calculus}, abbreviating $\Psiop_j \equiv \Psiop_j(\xvec)$ and $\Psiop_j^\prime \equiv \Psiop_j(\xvec^\prime)$.
+
 The commutators are
 \begin{eqn}
-\label{eqn:op-calculus:commutators}
+\label{eqn:wigner:op-calculus:commutators}
     [ \Psiop_j, \Psiop_k^{\prime\dagger} ]
     = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
@@ -26,10 +35,10 @@ New restricted field operators are
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
 They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
-Because of the restricted nature of these operators, commutation relations~\eqnref{op-calculus:commutators} no longer apply.
+Because of the restricted nature of these operators, commutation relations~\eqnref{wigner:op-calculus:commutators} no longer apply.
 The following ones should be used instead:
 \begin{eqn}
-\label{eqn:op-calculus:restricted-commutators}
+\label{eqn:wigner:op-calculus:restricted-commutators}
     \left[ \Psiop_j, \Psiop_k^\prime \right]
     & = \left[ \Psiop_j^\dagger, \Psiop_k^{\prime\dagger} \right] = 0, \\
     \left[ \Psiop_j, \Psiop_k^{\prime\dagger} \right]
@@ -68,12 +77,12 @@ the commutator of higher order can be expanded as
         \Psiop, ( \Psiop^{\prime\dagger} )^{l-1}
     ].
 \end{eqn}
-Now we can get the commutator of any order starting from the known relation~\eqnref{op-calculus:restricted-commutators}.
+Now we can get the commutator of any order starting from the known relation~\eqnref{wigner:op-calculus:restricted-commutators}.
 \end{proof}
 
 A further generalisation of these relations is
 \begin{lemma}
-\label{lmm:op-calculus:functional-commutators}
+\label{lmm:wigner:op-calculus:functional-commutators}
     For $\Psiop \in \mathbb{H}_{\restbasis}$
     \begin{eqn*}
         \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
