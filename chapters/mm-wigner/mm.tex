@@ -4,80 +4,85 @@
 
 
 Single-mode \defref{wigner:sm:w-transformation} of Wigner transformation can be extended to the case of many modes.
-In this section we will assume that mode identifiers belong to some set $\restbasis$ \todo{Has nothing to do with $\restbasis$ from multi-mode part, use some other symbol probably?}.
+Mode operators $\hat{a}_\nvec$, $\nvec \in \restbasis$, obey bosonic commutation relations:
+\begin{eqn}
+\label{eqn:wigner:mm:commutators}
+	[ \hat{a}_{\mvec}, \hat{a}_{\nvec} ]
+	& = [ \hat{a}_{\mvec}^\dagger, \hat{a}_{\nvec}^\dagger ] = 0, \\
+	[ \hat{a}_{\mvec}, \hat{a}_{\nvec}^\dagger ] & = \delta_{\mvec,\nvec}.
+\end{eqn}
 
 \begin{definition}
 \label{def:wigner:mm:w-transformation}
-	Let $\blambda$ and $\balpha$ be vectors of $\lambda_{\nvec}$ and $\alpha_{\nvec}$ values respectively,
-	with $\nvec \in \restbasis$.
+	Let $\blambda$ and $\balpha$ be vectors of $\lambda_{\nvec}$ and $\alpha_{\nvec}$ values respectively.
 	Multi-mode Wigner transformation is
 	\begin{eqn*}
 		\mathcal{W}[\hat{A}]
 		= \frac{1}{\pi^{2|\restbasis|}}
-			\int d^2 \blambda
+			\int \upd^2 \blambda
 			\left(
 				\prod_{\nvec \in \restbasis} \exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
 			\right)
 			\Trace{
 				\hat{A}
-				\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
+				\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec})
 			},
 	\end{eqn*}
-	where $\hat{D}_{\nvec} = \exp(\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})$.
-	It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $W[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
-	Multi-component Weyl transformation is
+	where $\hat{D}_{\nvec}(\lambda_{\nvec}) = \exp(\lambda_{\nvec} \hat{a}_{\nvec}^\dagger - \lambda_{\nvec}^* \hat{a}_{\nvec})$, and $|\restbasis|$ stands for the cardinality of $\restbasis$.
+	Multi-component Weyl transformation is, correspondingly,
 	\begin{eqn*}
 		\mathcal{W}^{-1}[f]
-		= \frac{1}{\pi^{|\restbasis|}} \int d^2 \bxi
-			\left( \prod_{\nvec \in \restbasis} \hat{D}_{\nvec}^{\dagger}(\xi_{\nvec}, \xi_{\nvec}^*) \right)
-			\int d^2 \bfeta
+		= \frac{1}{\pi^{|\restbasis|}} \int \upd^2 \bxi
+			\left( \prod_{\nvec \in \restbasis} \hat{D}_{\nvec}^{\dagger}(\xi_{\nvec}) \right)
+			\int \upd^2 \bfeta
 				\left( \prod_{\nvec \in \restbasis}
 					\exp(-\eta_{\nvec} \xi_{\nvec}^* + \eta_{\nvec}^* \xi_{\nvec})
-				\right) f(\bfeta, \bfeta^*).
+				\right) f(\bfeta).
 	\end{eqn*}
 \end{definition}
 
-The equality $\mathcal{W}[\mathcal{W}^-1[f]] \equiv f$ is proved in the same way as in single-mode case.
+It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $W[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
+The equality $\mathcal{W}[\mathcal{W}^-1[f]] \equiv f$ is proved analogously to the single-mode case as well.
 
-Corresponding definitions of multimode characteristic function and Wigner function are
+Corresponding definitions of multimode characteristic function and Wigner function are therefore
+\begin{eqn}
+	\chi_W (\blambda)
+	= \Trace{
+		\hat{\rho}
+		\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec})
+	},
+\end{eqn}
+and
+\begin{eqn}
+	W (\balpha)
+	\equiv \mathcal{W}[\hat{\rho}]
+	= \frac{1}{\pi^{2|\restbasis|}} \int \upd^2 \blambda
+		\left(
+			\prod_{\nvec \in \restbasis}
+			\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
+		\right)
+		\chi_W (\blambda).
+\end{eqn}
 
-\begin{definition}
-\label{def:wigner:mm:w-definition}
-	\begin{eqn*}
-		\chi_W (\blambda, \blambda^*)
-		= \Trace{
-			\hat{\rho}
-			\prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
-		},
-	\end{eqn*}
-	\begin{eqn*}
-		W (\balpha, \balpha^*)
-		\equiv \mathcal{W}[\hat{\rho}]
-		= \frac{1}{\pi^{2|\restbasis|}} \int d^2 \blambda
-			\left(
-				\prod_{\nvec \in \restbasis}
-				\exp(-\lambda_{\nvec} \alpha_{\nvec}^* + \lambda_{\nvec}^* \alpha_{\nvec})
-			\right)
-			\chi_W (\blambda, \blambda^*).
-	\end{eqn*}
-\end{definition}
+Following the single-mode scheme, we can formulate two theorems that govern the transformation of a master equation and subsequent calculation of observables.
 
 \begin{theorem}[Multimode extension of \thmref{wigner:sm:correspondences}]
 \label{thm:wigner:mm:correspondences}
+	For any Hilbert-Schmidt operator $\hat{A}$
 	\begin{eqn*}
-		\mathcal{W} [ \hat{a}_k \hat{A} ]
-			& = \left( \alpha_k + \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+		\mathcal{W} [ \hat{a}_{\nvec} \hat{A} ]
+			& = \left( \alpha_{\nvec} + \frac{1}{2} \frac{\cwd}{\cwd \alpha_{\nvec}^*} \right)
 				\mathcal{W}[\hat{A}],
 		\quad
-		\mathcal{W} [ \hat{a}_k^\dagger \hat{A} ]
-			= \left( \alpha_k^* - \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+		\mathcal{W} [ \hat{a}_{\nvec}^\dagger \hat{A} ]
+			= \left( \alpha_{\nvec}^* - \frac{1}{2} \frac{\cwd}{\cwd \alpha_{\nvec}} \right)
 				\mathcal{W}[\hat{A}], \\
-		\mathcal{W} [ \hat{A} \hat{a}_k ]
-			& = \left( \alpha_k - \frac{1}{2} \frac{\partial}{\partial \alpha_k^*} \right)
+		\mathcal{W} [ \hat{A} \hat{a}_{\nvec} ]
+			& = \left( \alpha_{\nvec} - \frac{1}{2} \frac{\cwd}{\cwd \alpha_{\nvec}^*} \right)
 				\mathcal{W}[\hat{A}],
 		\quad
-		\mathcal{W} [ \hat{A} \hat{a}_k^\dagger ]
-			= \left( \alpha_k^* + \frac{1}{2} \frac{\partial}{\partial \alpha_k} \right)
+		\mathcal{W} [ \hat{A} \hat{a}_{\nvec}^\dagger ]
+			= \left( \alpha_{\nvec}^* + \frac{1}{2} \frac{\cwd}{\cwd \alpha_{\nvec}} \right)
 				\mathcal{W}[\hat{A}].
 	\end{eqn*}
 \end{theorem}
@@ -87,23 +92,24 @@ The procedure is the same as in \thmref{wigner:sm:correspondences}.
 
 \begin{lemma}[Multimode extension of \lmmref{wigner:sm:moments-from-chi}]
 \label{lmm:wigner:mm:moments-from-chi}
+	For a system with the density matrix $\rho$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \prod_{\nvec \in \restbasis}
 			\hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}} } \rangle
 		= \left.
 			\left(
 				\prod_{\nvec \in \restbasis}
-				\left( \frac{\partial}{\partial \lambda_{\nvec}} \right)^{s_{\nvec}}
-				\left( -\frac{\partial}{\partial \lambda_{\nvec}^*} \right)^{r_{\nvec}}
+				\left( \frac{\cwd}{\cwd \lambda_{\nvec}} \right)^{s_{\nvec}}
+				\left( -\frac{\cwd}{\cwd \lambda_{\nvec}^*} \right)^{r_{\nvec}}
 			\right)
-			\chi_W (\blambda, \blambda^*)
+			\chi_W (\blambda)
 		\right|_{\blambda=0}.
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 Mode operators with different indices commute, so
 \begin{eqn}
-	\chi_W (\blambda, \blambda^*)
+	\chi_W (\blambda)
 	& = \Trace{
 		\hat{\rho}
 		\prod_{\nvec \in \restbasis}
@@ -112,51 +118,59 @@ Mode operators with different indices commute, so
 	& = \Trace{
 		\hat{\rho}
 		\prod_{\nvec \in \restbasis}
-			\sum_{r_{\nvec} \in \restbasis, s_{\nvec} \in \restbasis}
-			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
-			\symprod{ \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+			\sum_{j_{\nvec} \in \restbasis, k_{\nvec} \in \restbasis}
+			\frac{(-\lambda_{\nvec}^*)^{j_{\nvec}} \lambda_{\nvec}^{k_{\nvec}}}{j_{\nvec}! k_{\nvec}!}
+			\symprod{ \hat{a}_{\nvec}^{j_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{k_{\nvec}}}
 	} \\
 	& = \Trace{
 		\hat{\rho}
-		\left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
+		\left( \prod_{\nvec \in \restbasis} \sum_{j_{\nvec}, k_{\nvec}} \right)
 		\left(
 			\prod_{\nvec \in \restbasis}
-			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
-			\symprod{ \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+			\frac{(-\lambda_{\nvec}^*)^{j_{\nvec}} \lambda_{\nvec}^{k_{\nvec}}}{j_{\nvec}! k_{\nvec}!}
+			\symprod{ \hat{a}_{\nvec}^{j_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{k_{\nvec}}}
 		\right)
-	} \\
+	},
+\end{eqn}
+where we have used $\left( \prod_{\nvec \in \restbasis} \sum_{j_{\nvec}, k_{\nvec}} \right)$ in a sense of a sequence of summations $\ldots \sum_{j_{\nvec}, k_{\nvec}} \ldots$ for all values of $\nvec \in \restbasis$.
+Separating operator and scalar parts:
+\begin{eqn}
 	& = \Trace{
-		\left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
+		\left( \prod_{\nvec \in \restbasis} \sum_{j_{\nvec}, k_{\nvec}} \right)
 		\left(
 			\prod_{\nvec \in \restbasis}
-			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
+			\frac{(-\lambda_{\nvec}^*)^{j_{\nvec}} \lambda_{\nvec}^{k_{\nvec}}}{j_{\nvec}! k_{\nvec}!}
 		\right)
 		\hat{\rho}
-		\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+		\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{j_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{k_{\nvec}}}
 	} \\
-	& = \left( \prod_{\nvec \in \restbasis} \sum_{r_{\nvec}, s_{\nvec}} \right)
+	& = \left( \prod_{\nvec \in \restbasis} \sum_{j_{\nvec}, k_{\nvec}} \right)
 		\left(
 			\prod_{\nvec \in \restbasis}
-			\frac{(-\lambda_{\nvec}^*)^{r_{\nvec}} \lambda_{\nvec}^{s_{\nvec}}}{r_{\nvec}! s_{\nvec}!}
+			\frac{(-\lambda_{\nvec}^*)^{j_{\nvec}} \lambda_{\nvec}^{k_{\nvec}}}{j_{\nvec}! k_{\nvec}!}
 		\right)
 		\langle
-			\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}}
+			\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{j_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{k_{\nvec}}}
 		\rangle.
 \end{eqn}
-Same as in \lmmref{wigner:sm:moments-from-chi}, differentiating the resulting expression will leave only term with required $r_{\nvec}$ and $s_{\nvec}$.
+Same as in \lmmref{wigner:sm:moments-from-chi}, differentiating the resulting expression and setting $\blambda = 0$ will leave only term with required $j_{\nvec} = r_{\nvec}$ and $k_{\nvec} = s_{\nvec}$.
 \end{proof}
 
-Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for single-mode case.
+Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for the single-mode case.
 
 \begin{theorem}[Multimode extension of \thmref{wigner:sm:moments}]
+	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\balpha)$:
 	\begin{eqn*}
-		\int d^2\alpha_1 \ldots \int d^2\alpha_N\,
+		\langle \symprod{
+			\prod_{\nvec \in \restbasis}
+			\hat{a}_{\nvec}^{r_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{s_{\nvec}}
+		} \rangle
+		= \int \upd^2 \balpha
 			\left(
-				\prod_n \alpha_n^{r_n} (\alpha_n^*)^{s_n}
-			\right) W(\balpha, \balpha^*)
-		= \langle \symprod{ \prod_n \hat{a}_n^{r_n} (\hat{a}_n^\dagger)^{s_n} } \rangle.
+				\prod_{\nvec \in \restbasis} \alpha_{\nvec}^{r_{\nvec}} (\alpha_{\nvec}^*)^{s_{\nvec}}
+			\right) W(\balpha).
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-The proof is carried out similarly to \thmref{wigner:sm:moments}: integrals over $\alpha_n$ are eliminated one by one using \lmmref{c-numbers:fourier-of-moments}, resulting integrals over $\lambda_n$ are dealt with using integration by parts and \lmmref{c-numbers:zero-delta-integrals}, until we get the right part of \lmmref{wigner:mm:moments-from-chi}.
+The proof is carried out similarly to \thmref{wigner:sm:moments}: integrals over $\alpha_{\nvec}$ are eliminated one by one using \lmmref{c-numbers:fourier-of-moments}, resulting integrals over $\lambda_{\nvec}$ are dealt with using integration by parts and \lmmref{c-numbers:zero-delta-integrals}, until we get the right part of \lmmref{wigner:mm:moments-from-chi}.
 \end{proof}
