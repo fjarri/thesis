@@ -185,6 +185,9 @@ def journalAbbreviations(entries):
         "Nature": "Nature",
         "Physics": "Physics",
         'Annals of Physics': 'Ann. Phys.',
+        'Computer Physics Communications': 'Comput. Phys. Commun.',
+        'Frontiers of Physics': 'Front. Phys.',
+        'Physical Review B': 'Phys. Rev. B',
     }
 
     for entry_type, entry_key, entry_fields in entries:
