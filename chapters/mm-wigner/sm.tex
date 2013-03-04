@@ -1,123 +1,138 @@
 % =============================================================================
-\section{Single-mode Wigner representation}
+\section{Single-mode Wigner transformation}
 % =============================================================================
 
-We will need the displacement operator which was first introduced by Weyl~\cite{Weyl1950}.
+In this section we will work with a single-mode bosonic system with standard creation and annihilation operators
+\begin{eqn}
+	[ \hat{a}, \hat{a} ] & = [ \hat{a}^\dagger, \hat{a}^\dagger ] = 0, \\
+	[ \hat{a}, \hat{a}^\dagger ] & = 1.
+\end{eqn}
+The essential part of the definition is the displacement operator which was first introduced by Weyl~\cite{Weyl1950} and thoroughly described by Cahill and Glauber~\cite{Cahill1969}:
 
 \begin{definition}
+	Displacement operator is an operator-valued function of complex variable
 	\begin{eqn*}
 	\label{eqn:wigner:sm:displacement-op}
-		\hat{D}(\lambda, \lambda^*) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}),
+		\hat{D}(\lambda) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}).
 	\end{eqn*}
-	where $\hat{a}^\dagger$ and $\hat{a}$ are bosonic creation and annihilation operators, and $\lambda$ is a complex variable.
 \end{definition}
-Using Baker-Hausdorff theorem to split non-commuting operators in the exponent,
-one can find that
+
+Using Baker-Hausdorff theorem to split non-commuting creation and annihilation operator in the exponent, one can find that
 \begin{eqn}
 \label{eqn:wigner:sm:displacement-derivatives}
-	\frac{\partial}{\partial \lambda} \hat{D}(\lambda, \lambda^*)
-	& = \hat{D}(\lambda, \lambda^*) (\hat{a}^\dagger + \frac{1}{2} \lambda^*)
-	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda, \lambda^*), \\
-	-\frac{\partial}{\partial \lambda^*} \hat{D}(\lambda, \lambda^*)
-	& = \hat{D}(\lambda, \lambda^*) (\hat{a} + \frac{1}{2} \lambda)
-	= (\hat{a} - \frac{1}{2} \lambda) \hat{D}(\lambda, \lambda^*).
+	\frac{\cwd}{\cwd \lambda} \hat{D}(\lambda)
+	& = \hat{D}(\lambda) (\hat{a}^\dagger + \frac{1}{2} \lambda^*)
+	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda), \\
+	-\frac{\cwd}{\cwd \lambda^*} \hat{D}(\lambda)
+	& = \hat{D}(\lambda) (\hat{a} + \frac{1}{2} \lambda)
+	= (\hat{a} - \frac{1}{2} \lambda) \hat{D}(\lambda).
 \end{eqn}
 
-Using the displacement operator we can define Wigner transformation.
+Using the displacement operator we can define the Wigner transformation:
 
 \begin{definition}
 \label{def:wigner:sm:w-transformation}
-	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha, \alpha^*)$ on phase space.
+	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space.
 	\begin{eqn*}
 		\mathcal{W}\left[\hat{A}\right]
-		= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-			\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
+		= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+			\Trace{ \hat{A} \hat{D}(\lambda) }.
 	\end{eqn*}
 	The backward transformation (called the Weyl transformation) gives back the operator:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[f]
-		= \frac{1}{\pi} \int d^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
-			\int d^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*).
+		= \frac{1}{\pi} \int \upd^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
+			\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*).
 	\end{eqn*}
 \end{definition}
 
-It is easy to demonstrate that Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{C})$ \todo{at least, for Hilbert-Schmidt operators and square-integrable functions~\cite{Cahill1969}}.
+It is easy to demonstrate that Wigner and Weyl transformations define a bijection $\mathbb{H} \leftrightarrow (\mathbb{C} \rightarrow \mathbb{C})$ for Hilbert-Schmidt operators and square-integrable functions.
 Let us assume $\hat{A} \equiv \mathcal{W}^{-1}[f]$.
-Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi, \xi^*) \hat{D}(\lambda, \lambda^*)} = \pi \delta(\Real \xi - \Real \lambda) \delta(\Imag \xi - \Imag \lambda)$~\cite{Cahill1969} and applying \lmmref{c-numbers:fourier-of-moments}:
+Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi) \hat{D}(\lambda)} = \pi \delta(\Real \xi - \Real \lambda) \delta(\Imag \xi - \Imag \lambda)$~\cite{Cahill1969}:
 \begin{eqn}
 	\mathcal{W}[\hat{A}]
-	={} & \frac{1}{\pi^3} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
+	={} & \frac{1}{\pi^3} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
 	&	\times \Trace{
-			\int d^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
-				\int d^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*)
-			\hat{D}(\lambda, \lambda^*)
+			\int \upd^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
+				\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*)
+			\hat{D}(\lambda)
 		} \\
-	={} & \frac{1}{\pi^2} \int d^2 \lambda \int d^2 \eta
+	={} & \frac{1}{\pi^2} \int \upd^2 \lambda \int \upd^2 \eta
 	 	\exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\exp(-\eta \lambda^* + \eta^* \lambda) f(\eta, \eta^*) \\
-	={} & \frac{1}{\pi^2} \int d^2 \eta \int d^2 \lambda
+		\exp(-\eta \lambda^* + \eta^* \lambda) f(\eta, \eta^*).
+\end{eqn}
+Applying \lmmref{c-numbers:fourier-of-moments} to integrate over $\lambda$:
+\begin{eqn}
+	& = \frac{1}{\pi^2} \int \upd^2 \eta \int \upd^2 \lambda
 	 	\exp(-\lambda (\alpha^* - \eta^*) + \lambda^* (\alpha - \eta)) f(\eta, \eta^*) \\
-	={} & \int d^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta, \eta^*) \\
-	={} & f(\alpha, \alpha^*).
+	& = \int \upd^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta, \eta^*) \\
+	& = f(\alpha).
 \end{eqn}
 The proof for the other direction looks the same.
 
+Although in general the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it is can be proved to be always real-valued.
+
 \begin{theorem}
 \label{thm:wigner:sm:w-real}
-	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real function.
-	\todo{It is a sufficient condition, but is it necessary?}
+	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real-valued function.
 \end{theorem}
 \begin{proof}
 Let us calculate the conjugation of $W[\hat{A}]$:
 \begin{eqn}
 	(W[\hat{A}])^*
-	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda^* \alpha + \lambda \alpha^*)
+	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda^* \alpha + \lambda \alpha^*)
 		(\Trace{ \hat{A} \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}) })^*.
 \end{eqn}
 Changing variables as $\lambda \rightarrow -\lambda$ and using the fact that $(\Tr{\hat{B}})^* = \Tr{\hat{B}^\dagger}$:
 \begin{eqn}
-	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(\lambda^* \alpha - \lambda \alpha^*)
+	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(\lambda^* \alpha - \lambda \alpha^*)
 		\Trace{ \hat{A}^\dagger \exp(-\lambda^* \hat{a} + \lambda \hat{a}^\dagger) } \\
 	& = W[\hat{A}^\dagger].
 \end{eqn}
 Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equal to itself and therefore is real.
 \end{proof}
 
+Earlier in this section we have defined the Wigner transformation for arbitrary operators, but the most often occurring and the most important case is the transformation of a density matrix.
+
 \begin{definition}
 \label{def:wigner:sm:w-function}
-	Wigner function is a Wigner transformation of the density matrix:
+	Wigner function is the Wigner transformation of a density matrix:
 	\begin{eqn*}
-		W(\alpha, \alpha^*) \equiv \mathcal{W}[\hat{\rho}].
+		W(\alpha) \equiv \mathcal{W}[\hat{\rho}].
 	\end{eqn*}
-	The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
-	Since the density matrix is Hermitian, according to \thmref{wigner:sm:w-real} $W$ is a real function.
 \end{definition}
 
-In some cases it will be convenient to use Wigner function in form~\cite{Gardiner2004}
+The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
+Note also that since any density matrix is Hermitian, according to \thmref{wigner:sm:w-real} $W(\alpha)$ is a real-valued function.
+
+In some cases it will be convenient to use Wigner function in form
 \begin{eqn}
-	W (\alpha, \alpha^*)
-	= \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\chi_W (\lambda, \lambda^*),
+	W (\alpha)
+	= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\chi_W (\lambda),
 \end{eqn}
-where $\chi_W (\lambda, \lambda^*)$ is the characteristic function
+where $\chi_W (\lambda)$ is the characteristic function
 \begin{eqn}
-	\chi_W (\lambda, \lambda^*)	= \Trace{ \hat{\rho} \hat{D}(\lambda, \lambda^*) }.
+	\chi_W (\lambda) = \Trace{ \hat{\rho} \hat{D}(\lambda) }.
 \end{eqn}
+
+We will finish this section with the proofs of two main theorems which are required for any practical application of the Wigner function.
+The first theorem provides a way to transform any master equation written in terms of creation and annihilation operators to a partial differential equation for the Wigner function.
 
 \begin{theorem}[Operator correspondences]
 \label{thm:wigner:sm:correspondences}
-	For any Hilbert-Schmidt operator $\hat{A}$ \todo{needs definition?}
+	For any Hilbert-Schmidt operator $\hat{A}$
 	\begin{eqn*}
 		\mathcal{W} [ \hat{a} \hat{A} ]
-			& = \left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) \mathcal{W}[\hat{A}],
+			& = \left( \alpha + \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \right) \mathcal{W}[\hat{A}],
 		\quad
 		\mathcal{W} [ \hat{a}^\dagger \hat{A} ]
-			= \left( \alpha^* - \frac{1}{2} \frac{\partial}{\partial \alpha} \right) \mathcal{W}[\hat{A}], \\
+			= \left( \alpha^* - \frac{1}{2} \frac{\cwd}{\cwd \alpha} \right) \mathcal{W}[\hat{A}], \\
 		\mathcal{W} [ \hat{A} \hat{a} ]
-			& = \left( \alpha - \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) \mathcal{W}[\hat{A}],
+			& = \left( \alpha - \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \right) \mathcal{W}[\hat{A}],
 		\quad
 		\mathcal{W} [ \hat{A} \hat{a}^\dagger ]
-			= \left( \alpha^* + \frac{1}{2} \frac{\partial}{\partial \alpha} \right) \mathcal{W}[\hat{A}].
+			= \left( \alpha^* + \frac{1}{2} \frac{\cwd}{\cwd \alpha} \right) \mathcal{W}[\hat{A}].
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
@@ -126,52 +141,52 @@ First, let us transform the trace using~\eqnref{wigner:sm:displacement-derivativ
 \begin{eqn}
 	\Trace{ \hat{a} \hat{A} \hat{D} }
 	= \Trace{ \hat{A} \hat{D} \hat{a}}
-	= \Trace{ \hat{A} \left(
-		-\frac{\partial}{\partial \lambda^*}
-		-\frac{1}{2} \lambda
-	\right) \hat{D}}
 	= \left(
-		-\frac{\partial}{\partial \lambda^*}
+		-\frac{\cwd}{\cwd \lambda^*}
 		-\frac{1}{2} \lambda
-	\right) \Trace{ \hat{A} \hat{D}}
+	\right) \Trace{ \hat{A} \hat{D}}.
 \end{eqn}
-Using this:
+Subsituting this into the definition of the Wigner transformation:
 \begin{eqn}
 	\mathcal{W} [ \hat{a} \hat{A} ]
-	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\Trace{ \hat{a} \hat{A} \hat{D}(\lambda, \lambda^*) } \\
-	& = \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\Trace{ \hat{a} \hat{A} \hat{D}(\lambda) } \\
+	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 		\left(
-			-\frac{\partial}{\partial \lambda^*}
+			-\frac{\cwd}{\cwd \lambda^*}
 			-\frac{1}{2} \lambda
 		\right)
-		\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) } \\
-	& = \frac{1}{2} \frac{\partial}{\partial \alpha^*} \mathcal{W} [\hat{A}]
-	- \frac{1}{\pi^2} \int d^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\frac{\partial}{\partial \lambda^*}
-		\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) }.
+		\Trace{ \hat{A} \hat{D}(\lambda) } \\
+	& = \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
+	- \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\frac{\cwd}{\cwd \lambda^*}
+		\Trace{ \hat{A} \hat{D}(\lambda) }.
 \end{eqn}
-The second term is almost the definition of the Wigner function, except for the partial derivative over $\lambda^*$.
+The second term is almost the definition of the Wigner function, except for the derivative over $\lambda^*$.
 Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\hat{A}$ is Hilbert-Schmidt, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}):
 \begin{eqn}
-	= \frac{1}{2} \frac{\partial}{\partial \alpha^*} \mathcal{W} [\hat{A}]
-	+ \frac{1}{\pi^2} \int d^2 \lambda \left(
-		\frac{\partial}{\partial \lambda^*} \exp(-\lambda \alpha^* + \lambda^* \alpha)
+	= \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
+	+ \frac{1}{\pi^2} \int \upd^2 \lambda \left(
+		\frac{\cwd}{\cwd \lambda^*} \exp(-\lambda \alpha^* + \lambda^* \alpha)
 	\right)
-	\Trace{ \hat{A} \hat{D}(\lambda, \lambda^*) } \\
-	= \left( \alpha + \frac{1}{2} \frac{\partial}{\partial \alpha^*} \right) \mathcal{W} [\hat{A}].
+	\Trace{ \hat{A} \hat{D}(\lambda) } \\
+	= \left( \alpha + \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \right) \mathcal{W} [\hat{A}].
 	\qedhere
 \end{eqn}
 \end{proof}
 
+This theorem is paired with the second theorem, which helps extract observables (again, expressed in terms of creation and annihilation operators) from the known Wigner function.
+We will start by proving the auxiliary lemma which connects the expectation of an operator product and the characteristic function.
+
 \begin{lemma}
 \label{lmm:wigner:sm:moments-from-chi}
+	For a system with the density matrix $\rho$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.
-			\left( \frac{\partial}{\partial \lambda} \right)^s
-			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-			\chi_W (\lambda, \lambda^*)
+			\left( \frac{\cwd}{\cwd \lambda} \right)^s
+			\left( -\frac{\cwd}{\cwd \lambda^*} \right)^r
+			\chi_W (\lambda)
 		\right|_{\lambda=0}.
 	\end{eqn*}
 \end{lemma}
@@ -179,77 +194,80 @@ Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\ha
 The exponent in the expression for $\chi_W$ can be expanded as
 \begin{eqn}
 	\exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a})
-	= \sum_{r,s}
-		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
-		\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }.
+	= \sum_{m,n}
+		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
+		\symprod{ \hat{a}^m (\hat{a}^\dagger)^n }.
 \end{eqn}
 Thus
 \begin{eqn}
-	\chi_W(\lambda, \lambda^*)
-	& = \sum_{r,s}
-		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
+	\chi_W(\lambda)
+	& = \sum_{m,n}
+		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
 		\Trace{
-			\hat{\rho} \symprod{ \hat{a}^r (\hat{a}^\dagger)^s }
+			\hat{\rho} \symprod{ \hat{a}^m (\hat{a}^\dagger)^n }
 		} \\
-	& = \sum_{r,s}
-		\frac{(-\lambda^*)^r \lambda^s}{r!s!}
-		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+	& = \sum_{m,n}
+		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
+		\langle \symprod{ \hat{a}^m (\hat{a}^\dagger)^n } \rangle.
 \end{eqn}
-Apparently, the application of $(\partial / \partial \lambda)^s$ and $(-\partial / \partial \lambda^*)^r$ will eliminate all lower order moments,
-and setting $\lambda = 0$ afterwards will eliminate all higher order moments,
-leaving only $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
+Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $m < r$ and $n < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $m > r$ and $n > s$,
+leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 \begin{eqn}
 	\left.
-		\left( \frac{\partial}{\partial \lambda} \right)^s
-		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\chi_W (\lambda, \lambda^*)
+		\left( \frac{\cwd}{\cwd \lambda} \right)^s
+		\left( -\frac{\cwd}{\cwd \lambda^*} \right)^r
+		\chi_W (\lambda)
 	\right|_{\lambda=0}
-	= r! s! \frac{1}{r! s!}
-		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
-	= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle.
+	& = r! s! \frac{1}{r! s!}
+		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle \\
+	& = \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle.
 	\qedhere
 \end{eqn}
 \end{proof}
 
-Now we can get the final relation.
+Using this lemma we can now prove the main theorem which connects operator expectations and moments of the Wigner function.
+
 \begin{theorem}
 \label{thm:wigner:sm:moments}
+	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$:
 	\begin{eqn*}
-		\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
-		= \langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
+		= \int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha).
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
 By definition of the Wigner function:
 \begin{eqn}
-	\int d^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha, \alpha^*)
+	\int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha)
 	= \frac{1}{\pi^2}
-		\int d^2\alpha\, \alpha^r (\alpha^*)^s
-		\int d^2\lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\chi_W (\lambda, \lambda^*).
+		\int \upd^2\alpha\, \alpha^r (\alpha^*)^s
+		\int \upd^2\lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
+		\chi_W (\lambda).
 \end{eqn}
 Integrating over $\alpha$ using \lmmref{c-numbers:fourier-of-moments}:
 \begin{eqn}
-	= \int d^2\lambda
+	= \int \upd^2\lambda
 		\left(
-			\left( \frac{\partial}{\partial \lambda} \right)^s
-			\left( -\frac{\partial}{\partial \lambda^*} \right)^r
+			\left( \frac{\cwd}{\cwd \lambda} \right)^s
+			\left( -\frac{\cwd}{\cwd \lambda^*} \right)^r
 			\delta(\Real \lambda) \delta(\Imag \lambda)
 		\right)
-		\chi_W (\lambda, \lambda^*).
+		\chi_W (\lambda).
 \end{eqn}
 Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delta-integrals}:
 \begin{eqn}
-	& = \int d^2\lambda
+	& = \int \upd^2\lambda
 		\delta(\Real \lambda) \delta(\Imag \lambda)
-		\left( \frac{\partial}{\partial \lambda} \right)^s
-		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\chi_W (\lambda, \lambda^*) \\
+		\left( \frac{\cwd}{\cwd \lambda} \right)^s
+		\left( -\frac{\cwd}{\cwd \lambda^*} \right)^r
+		\chi_W (\lambda) \\
 	& = \left.
-		\left( \frac{\partial}{\partial \lambda} \right)^s
-		\left( -\frac{\partial}{\partial \lambda^*} \right)^r
-		\chi_W (\lambda, \lambda^*)
+		\left( \frac{\cwd}{\cwd \lambda} \right)^s
+		\left( -\frac{\cwd}{\cwd \lambda^*} \right)^r
+		\chi_W (\lambda)
 	\right|_{\lambda=0}.
 \end{eqn}
 Now, recognising the final expression as a part of \lmmref{wigner:sm:moments-from-chi}, we immideately get the statement of the theorem.
 \end{proof}
+
+With the help of \thmref{wigner:sm:correspondences} and \thmref{wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$, transform it to an ordinary differential equation, and use its solution to get expectations of any observables.
