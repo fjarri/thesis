@@ -194,23 +194,23 @@ We will start by proving the auxiliary lemma which connects the expectation of a
 The exponent in the expression for $\chi_W$ can be expanded as
 \begin{eqn}
 	\exp (\lambda \hat{a}^\dagger - \lambda^* \hat{a})
-	= \sum_{m,n}
-		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
-		\symprod{ \hat{a}^m (\hat{a}^\dagger)^n }.
+	= \sum_{j,k}
+		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
+		\symprod{ \hat{a}^j (\hat{a}^\dagger)^k }.
 \end{eqn}
 Thus
 \begin{eqn}
 	\chi_W(\lambda)
-	& = \sum_{m,n}
-		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
+	& = \sum_{j,k}
+		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
 		\Trace{
-			\hat{\rho} \symprod{ \hat{a}^m (\hat{a}^\dagger)^n }
+			\hat{\rho} \symprod{ \hat{a}^j (\hat{a}^\dagger)^k }
 		} \\
-	& = \sum_{m,n}
-		\frac{(-\lambda^*)^m \lambda^n}{m!n!}
-		\langle \symprod{ \hat{a}^m (\hat{a}^\dagger)^n } \rangle.
+	& = \sum_{j,k}
+		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
+		\langle \symprod{ \hat{a}^j (\hat{a}^\dagger)^k } \rangle.
 \end{eqn}
-Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $m < r$ and $n < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $m > r$ and $n > s$,
+Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $j < r$ and $k < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $j > r$ and $k > s$,
 leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 \begin{eqn}
 	\left.
