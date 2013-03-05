@@ -2,13 +2,9 @@
 \section{Field operator calculus}
 % =============================================================================
 
-Description of complex bosonic systems with thousands of particles and strong nonlinear interactions often requires one to consider more than one mode per component.
-Although it is quite possible to use single-mode creation and annihilation operators exclusively,
-it is usually advantageous to employ a higher-level field operator representation.
 Field operators can simplify both the analysis of a master equation, and its transformation to a Fokker-Planck equation (\abbrev{fpe}) using phase-space methods, which is the main topic of this thesis.
-
-In this section we are going to outline the functional operator calculus, which is used extensively in this thesis.
-This calculus is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
+In this section we are going to outline the functional operator calculus.
+It is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
 The similartiy and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
 
 Multimode fields are described by field operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\Psiop_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at location $\xvec$, and $\Psiop_j$ destroys one.
@@ -17,19 +13,22 @@ We will use the same scheme as with functions of coordinates in \appref{func-cal
 The commutators are
 \begin{eqn}
 \label{eqn:wigner:op-calculus:commutators}
-    [ \Psiop_j, \Psiop_k^{\prime\dagger} ]
-    = \delta_{jk} \delta(\xvec^\prime-\xvec).
+    [ \Psiopf_j, \Psiopf_k^{\prime} ]
+    & = [ \Psiopf_j^\dagger, \Psiopf_k^{\prime\dagger} ]
+    = 0, \\
+    [ \Psiopf_j, \Psiopf_k^{\prime\dagger} ]
+    & = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
-Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) = \mathbb{FH}_j$. \todo{As far as I understand $\mathbb{H}_1 \times \ldots \times \mathbb{H}_C \equiv \mathbb{H}$, where $\rho \in \mathbb{H}$.}
-Field operators can be decomposed using a single-particle basis \todo{explanation needed?}:
+Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ consitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
+Field operators can be decomposed using a single-particle orthonormal basis (see~\eqnref{func-calculus:basis}):
 \begin{eqn}
-    \Psiop_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
+    \Psiopf_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
 Note that each component can have its own basis.
-Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{wigner:mm-aux:commutators},
-the pair $j,\nvec$ serving as a mode identifier.
+Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{wigner:mm:commutators}, with the pair $j,\nvec$ serving as a mode identifier.
 
-We want to restrict ourselves only to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$ \todo{Or $\subseteq$ if we allow infinite $\restbasis$? This will lead to some mathematical difficulties}.
+In practice, one cannot use an infinitely sized basis in numerical calculations; some subset of modes is always chosen.
+To take this into account we will restrict ourselves to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$.
 New restricted field operators are
 \begin{eqn}
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
@@ -45,11 +44,10 @@ The following ones should be used instead:
     & = \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec).
 \end{eqn}
 
-Let us now find the expression for high-order commutators of restricted field operators, analogous to \lmmref{wigner:mm-aux:high-order-commutators} for single-mode operators.
-It can be done using the similar recursive procedure.
+Let us now find the expression for high-order commutators of restricted field operators, analogous to the one for single-mode operators which can be found in~\cite{Louisell1990}.
 
 \begin{lemma}
-    For $\Psiop \in \mathbb{H}_{\restbasis}$
+    For $\Psiop \in \mathbb{FH}_{\restbasis}$
     \begin{eqn*}
         \left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
         & = l \delta_{\restbasis} (\xvec^\prime, \xvec) ( \Psiop^{\prime\dagger} )^{l-1}, \\
@@ -58,6 +56,7 @@ It can be done using the similar recursive procedure.
     \end{eqn*}
 \end{lemma}
 \begin{proof}
+Proved by induction.
 Given that we know the expression for $\left[ \Psiop, ( \Psiop^{\prime\dagger} )^{l-1} \right]$,
 the commutator of higher order can be expanded as
 \begin{eqn}
@@ -83,7 +82,7 @@ Now we can get the commutator of any order starting from the known relation~\eqn
 A further generalisation of these relations is
 \begin{lemma}
 \label{lmm:wigner:op-calculus:functional-commutators}
-    For $\Psiop \in \mathbb{H}_{\restbasis}$
+    For $\Psiop \in \mathbb{FH}_{\restbasis}$
     \begin{eqn*}
         \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
         & = \delta_{\restbasis} (\xvec^\prime, \xvec) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}, \\
