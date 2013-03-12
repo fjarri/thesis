@@ -2,129 +2,116 @@
 \section{Functional Wigner representation}
 % =============================================================================
 
-First, we will define functional analogue of the displacement operator~\eqnref{wigner:sm:displacement-op}:
+Now we have all the tools we need to work with the functional Wigner representation.
+First, we will define functional analogue of the displacement operator~\eqnref{mm-wigner:sm:displacement-op}:
 \begin{definition}
 \label{def:wigner:func:displacement-op}
+Functional displacement operator $\hat{D} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis}$ is
 \begin{eqn}
-	& \hat{D} :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis} \\
-	& \hat{D}[\Lambda, \Lambda^*] = \exp \int d\xvec \left(
+	\hat{D}[\Lambda] = \exp \int \upd\xvec \left(
 		\Lambda \Psiop^\dagger - \Lambda^* \Psiop
-	\right),
+	\right).
 \end{eqn}
-where $\Lambda = \mathcal{C}_{\restbasis}(\blambda)$ is some function from $\mathbb{F}_{\restbasis}$.
 \end{definition}
 
-It can be shown that the displacement operator has properties similar to~\eqnref{wigner:sm:displacement-derivatives}.
+It can be shown that the displacement operator has properties similar to~\eqnref{mm-wigner:sm:displacement-derivatives}.
 
 \begin{lemma}
 \label{lmm:wigner:func:displacement-derivatives}
 	\begin{eqn*}
-		\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
-		& = \hat{D}[\Lambda, \Lambda^*] (\Psiop^{\prime\dagger} + \frac{1}{2} \Lambda^{\prime*})
-		= (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime*}) \hat{D}[\Lambda, \Lambda^*], \\
-		-\frac{\delta}{\delta \Lambda^{\prime*}} \hat{D}[\Lambda, \Lambda^*]
-		& = \hat{D}(\Lambda, \Lambda^*) (\Psiop^\prime + \frac{1}{2} \Lambda^\prime)
-		= (\Psiop^\prime - \frac{1}{2} \Lambda^\prime) \hat{D}[\Lambda, \Lambda^*].
+		\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
+		& = \hat{D}[\Lambda] (\Psiop^{\prime\dagger} + \frac{1}{2} \Lambda^{\prime*})
+		= (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime*}) \hat{D}[\Lambda], \\
+		-\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \hat{D}[\Lambda]
+		& = \hat{D}[\Lambda] (\Psiop^\prime + \frac{1}{2} \Lambda^\prime)
+		= (\Psiop^\prime - \frac{1}{2} \Lambda^\prime) \hat{D}[\Lambda].
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
 We will prove the second part of the first equation.
 Using Baker-Hausdorff theorem:
 \begin{eqn}
-	\hat{D}[\Lambda, \Lambda^*]
-	& = \exp \left( \int d\xvec \Lambda \Psiop^\dagger \right)
-		\exp \left( -\int d\xvec \Lambda^* \Psiop \right)
+	\hat{D}[\Lambda]
+	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
+		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
 		\exp \frac{1}{2} \left[
-			\int d\xvec^\prime \Lambda^\prime \Psiop^{\prime\dagger},
-			\int d\xvec \Lambda^* \Psiop
+			\int \upd\xvec^\prime \Lambda^\prime \Psiop^{\prime\dagger},
+			\int \upd\xvec \Lambda^* \Psiop
 		\right] \\
-	& = \exp \left( \int d\xvec \Lambda \Psiop^\dagger \right)
-		\exp \left( -\int d\xvec \Lambda^* \Psiop \right)
+	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
+		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
 		\exp \left(
-			-\frac{1}{2} \iint d\xvec d\xvec^\prime
+			-\frac{1}{2} \iint \upd\xvec \upd\xvec^\prime
 			\Lambda^\prime \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
 		\right) \\
-	& = \exp \left( \int d\xvec \Lambda \Psiop^\dagger \right)
-		\exp \left( -\int d\xvec \Lambda^* \Psiop \right)
+	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
+		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
 		\exp \left(
-			-\frac{1}{2} \int d\xvec \Lambda \Lambda^*
+			-\frac{1}{2} \int \upd\xvec \Lambda \Lambda^*
 		\right).
 \end{eqn}
 Note that, since $\Lambda \in \mathbb{F}_{\restbasis}$, it projects to itself, and so does $\Psiop^\dagger$.
 Thus
 \begin{eqn}
-	\frac{\delta}{\delta \Lambda^\prime} \hat{D}[\Lambda, \Lambda^*]
+	\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
 	& = \left(
-		\int dx \Psiop^\dagger \delta_{\restbasis}(\xvec^\prime, \xvec)
-		- \frac{1}{2} \int dx \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
-	\right) \hat{D}[\Lambda, \Lambda^*] \\
-	& = (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime *}) \hat{D}[\Lambda, \Lambda^*].
+		\int \upd\xvec \Psiop^\dagger \delta_{\restbasis}(\xvec^\prime, \xvec)
+		- \frac{1}{2} \int \upd\xvec \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
+	\right) \hat{D}[\Lambda] \\
+	& = (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime *}) \hat{D}[\Lambda].
 	\qedhere
 \end{eqn}
 \end{proof}
 
+The functional Wigner transformation is the same Fourier transform of the trace as in \defref{mm-wigner:sm:w-transformation}, but expressed in functional terms.
+
 \begin{definition}
 \label{def:wigner:func:w-transformation}
-	Functional Wigner transformation $\mathcal{W}$ is defined as
+	Functional Wigner transformation $\mathcal{W} \in \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}$ is defined as
 	\begin{eqn*}
-		& \mathcal{W} :: \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}
-			\rightarrow \mathbb{C} \\
-		& \mathcal{W}[\hat{A}]
-		= \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-			\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
+		\mathcal{W}[\hat{A}]
+		= \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda\,
+			D[\Lambda, \Psi]
+			\Trace{ \hat{A} \hat{D}[\Lambda] }.
 	\end{eqn*}
-	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi, \Psi^*]$.
-	It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
+	It transforms an operator $\hat{A}$ on a restricted subset of a Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\Psi]$.
 	The corresponding functional Weyl transformation is:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
-		= \frac{1}{\pi^{|\restbasis|}} \int \delta^2 \Xi \hat{D}^{\dagger}[\Xi, \Xi^*]
-			\int \delta^2 \Phi D[\Phi, \Phi^*, \Xi, \Xi^*] F[\Phi, \Phi^*].
+		= \frac{1}{\pi^{|\restbasis|}} \int \fdelta^2 \Xi\, \hat{D}^{\dagger}[\Xi]
+			\int \fdelta^2 \Phi\, D[\Phi, \Xi] F[\Phi].
 	\end{eqn*}
 \end{definition}
 
-\begin{theorem}
-	For any $F$,
-	\begin{eqn*}
-		\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F.
-	\end{eqn*}
-\end{theorem}
-\begin{proof}
-\todo{Proved by expanding into modes.}
-\end{proof}
+It can be proved, same as in \thmref{mm-wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian, and $\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F$ (by mode expansion).
+Following the single-mode and multi-mode cases we define the characteristic functional $\chi_W [\Lambda] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$
+\begin{eqn}
+	\chi_W [\Lambda] = \Trace{ \hat{\rho} \hat{D}[\Lambda] },
+\end{eqn}
+and the Wigner functional $W \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{R}$
+\begin{eqn}
+	W [\Psi]
+	\equiv \mathcal{W}[\hat{\rho}]
+	= \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda\,
+		D[\Lambda, \Psi]
+		\chi_W [\Lambda].
+\end{eqn}
 
-\begin{definition}
-\label{def:wigner:func:w-functional}
-	The Wigner functional is
-	\begin{eqn*}
-		& W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{R} \\
-		& W [\Psi, \Psi^*]
-		\equiv \mathcal{W}[\hat{\rho}]
-		= \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-			D[\Lambda, \Lambda^*, \Psi, \Psi^*]
-			\chi_W [\Lambda, \Lambda^*],
-	\end{eqn*}
-	where $\chi_W [\Lambda, \Lambda^*]$ is the characteristic functional
-	\begin{eqn*}
-		& \chi_W :: \mathbb{F}_{\restbasis} \rightarrow \mathbb{C} \\
-		& \chi_W [\Lambda, \Lambda^*] = \Trace{ \hat{\rho} \hat{D}[\Lambda, \Lambda^*] }.
-	\end{eqn*}
-\end{definition}
+Correspondence relations and moment extraction theorems have the same form as in the single-mode case.
 
-\begin{theorem}[Functional extension of \thmref{wigner:sm:correspondences}]
+\begin{theorem}[Functional extension of \thmref{mm-wigner:sm:correspondences}]
 \label{thm:wigner:func:correspondences}
 	\begin{eqn*}
 		\mathcal{W} [ \Psiop \hat{A} ]
-			& = \left( \Psi + \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W}[\hat{A}],
+			& = \left( \Psi + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \right) \mathcal{W}[\hat{A}],
 		\quad
 		\mathcal{W} [ \Psiop^\dagger \hat{A} ]
-			= \left( \Psi^* - \frac{1}{2} \frac{\delta}{\delta \Psi} \right) \mathcal{W}[\hat{A}], \\
+			= \left( \Psi^* - \frac{1}{2} \frac{\fdelta}{\fdelta \Psi} \right) \mathcal{W}[\hat{A}], \\
 		\mathcal{W} [ \hat{A} \Psiop ]
-			& = \left( \Psi - \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W}[\hat{A}],
+			& = \left( \Psi - \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \right) \mathcal{W}[\hat{A}],
 		\quad
 		\mathcal{W} [ \hat{A} \Psiop^\dagger ]
-			= \left( \Psi^* + \frac{1}{2} \frac{\delta}{\delta \Psi} \right) \mathcal{W}[\hat{A}].
+			= \left( \Psi^* + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi} \right) \mathcal{W}[\hat{A}].
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
@@ -134,54 +121,54 @@ First, let us transform the trace using \lmmref{wigner:func:displacement-derivat
 	\Trace{ \Psiop \hat{A} \hat{D} }
 	& = \Trace{ \hat{A} \hat{D} \Psiop}
 	= \Trace{ \hat{A} \left(
-		-\frac{\delta}{\delta \Lambda^*}
+		-\frac{\fdelta}{\fdelta \Lambda^*}
 		-\frac{1}{2} \Lambda
 	\right) \hat{D}} \\
 	& = \left(
-		-\frac{\delta}{\delta \Lambda^*}
+		-\frac{\fdelta}{\fdelta \Lambda^*}
 		-\frac{1}{2} \Lambda
-	\right) \Trace{ \hat{A} \hat{D}}
+	\right) \Trace{ \hat{A} \hat{D}}.
 \end{eqn}
 Moving additional multiplier outside the integral:
 \begin{eqn}
 	\mathcal{W} [ \hat{\Psi} \hat{A} ]
-	& = \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
-		\Trace{ \Psiop \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
-	& = \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
+	& = \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda
+		\left( \exp \int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
+		\Trace{ \Psiop \hat{A} \hat{D}[\Lambda] } \\
+	& = \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda
+		\left( \exp \int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
 		\left(
-			-\frac{\delta}{\delta \Lambda^*}
+			-\frac{\fdelta}{\fdelta \Lambda^*}
 			-\frac{1}{2} \Lambda
 		\right)
-		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
-	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
-	- \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda
-		\left( \exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
-		\frac{\delta}{\delta \Lambda^*}
-		\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] }.
+		\Trace{ \hat{A} \hat{D}[\Lambda] } \\
+	& = \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \mathcal{W} [\hat{A}]
+	- \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda
+		\left( \exp \int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right) \right)
+		\frac{\fdelta}{\fdelta \Lambda^*}
+		\Trace{ \hat{A} \hat{D}[\Lambda] }.
 \end{eqn}
 Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ \todo{need to proof that the trace is bounded}:
 \begin{eqn}
-	& = \frac{1}{2} \frac{\delta}{\delta \Psi^*} \mathcal{W} [\hat{A}]
-	+ \frac{1}{\pi^{2|\restbasis|}} \int \delta^2 \Lambda \left(
-		\frac{\delta}{\delta \Lambda^*}
-		\exp \int d\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
+	& = \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \mathcal{W} [\hat{A}]
+	+ \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda \left(
+		\frac{\fdelta}{\fdelta \Lambda^*}
+		\exp \int \upd\xvec \left( -\Lambda \Psi^* + \Lambda^* \Psi \right)
 	\right)
-	\Trace{ \hat{A} \hat{D}[\Lambda, \Lambda^*] } \\
-	& = \left( \Psi + \frac{1}{2} \frac{\delta}{\delta \Psi^*} \right) \mathcal{W} [\hat{A}].
+	\Trace{ \hat{A} \hat{D}[\Lambda] } \\
+	& = \left( \Psi + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \right) \mathcal{W} [\hat{A}].
 	\qedhere
 \end{eqn}
 \end{proof}
 
-\begin{lemma}[Functional extension of \lmmref{wigner:sm:moments-from-chi}]
+\begin{lemma}[Functional extension of \lmmref{mm-wigner:sm:moments-from-chi}]
 \label{lmm:wigner:func:moments-from-chi}
 	\begin{eqn*}
 		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
 		= \left.
-			\left( \frac{\delta}{\delta \Lambda^\prime} \right)^s
-			\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^r
-			\chi_W [\Lambda, \Lambda^*]
+			\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^s
+			\left( -\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \right)^r
+			\chi_W [\Lambda]
 		\right|_{\Lambda \equiv 0}.
 	\end{eqn*}
 \end{lemma}
@@ -193,31 +180,31 @@ The exponent in the $\chi_W$ can be expanded as
 	= \sum_{r,s}
 		\frac{
 			\symprod{
-				\left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
-				\left( -\int d\xvec \Lambda^* \Psiop \right)^s
+				\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^r
+				\left( -\int \upd\xvec \Lambda^* \Psiop \right)^s
 			}
 		}
 		{r!s!}.
 \end{eqn}
 We can swap functional derivative with both integration and multiplication by independent function, so:
 \begin{eqn}
-	\frac{\delta}{\delta \Lambda^\prime} \left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
-	& = r \int d\xvec \frac{\delta \Lambda}{\delta \Lambda^\prime} \Psiop^\dagger
-		\left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
-	& = r \int d\xvec \delta_{\restbasis}(\xvec^\prime, \xvec) \Psiop^\dagger
-		\left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
-	& = r \Psiop^{\prime\dagger} \left( \int d\xvec \Lambda \Psiop^\dagger \right)^{r-1},
+	\frac{\fdelta}{\fdelta \Lambda^\prime} \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^r
+	& = r \int \upd\xvec \frac{\fdelta \Lambda}{\fdelta \Lambda^\prime} \Psiop^\dagger
+		\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
+	& = r \int \upd\xvec \delta_{\restbasis}(\xvec^\prime, \xvec) \Psiop^\dagger
+		\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
+	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1},
 \end{eqn}
 and multiple application of the differential gives us
 \begin{eqn}
-	\left( \frac{\delta}{\delta \Lambda^\prime} \right)^r
-	\left( \int d\xvec \Lambda \Psiop^\dagger \right)^r
+	\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^r
+	\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^r
 	= r! ( \Psiop^{\prime\dagger} )^r.
 \end{eqn}
 Similarly for the other differential:
 \begin{eqn}
-	\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^s
-	\left( -\int d\xvec \Lambda \Psiop^\dagger \right)^s
+	\left( -\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \right)^s
+	\left( -\int \upd\xvec \Lambda \Psiop^\dagger \right)^s
 	= s! ( \Psiop^{\prime\dagger} )^s.
 \end{eqn}
 
@@ -227,9 +214,9 @@ and all higher order terms will be eliminated by setting $\Lambda \equiv 0$,
 leaving only one operator product with required order:
 \begin{eqn}
 	\left.
-		\left( \frac{\delta}{\delta \Lambda^\prime} \right)^s
-		\left( -\frac{\delta}{\delta \Lambda^{\prime*}} \right)^r
-		\chi_W [\Lambda, \Lambda^*]
+		\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^s
+		\left( -\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \right)^r
+		\chi_W [\Lambda]
 	\right|_{\Lambda \equiv 0}
 	& = r! s! \frac{1}{r! s!}
 		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle \\
@@ -238,50 +225,50 @@ leaving only one operator product with required order:
 \end{eqn}
 \end{proof}
 
-\begin{theorem}[Functional extension of \thmref{wigner:sm:moments}]
+\begin{theorem}[Functional extension of \thmref{mm-wigner:sm:moments}]
 \label{thm:wigner:func:moments}
 	\begin{eqn*}
-		\int \delta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi, \Psi^*]
+		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi]
 		= \langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
 By definition of Wigner functional:
 \begin{eqn}
-	\int & \delta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi, \Psi^*] \\
+	\int & \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi] \\
 	={} & \frac{1}{\pi^{2|\restbasis|}} \Trace{ \hat{\rho}
-		\int \delta^2\Psi\, \Psi^r (\Psi^*)^s
-		\int \delta^2\Lambda \exp(-\Lambda \Psi^* + \Lambda^* \Psi)
-		\hat{D}[\Lambda, \Lambda^*]
+		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s
+		\int \fdelta^2\Lambda \exp(-\Lambda \Psi^* + \Lambda^* \Psi)
+		\hat{D}[\Lambda]
 	}
 \end{eqn}
 Evaluating integral over $\Psi$ using \lmmref{func-calculus:fourier-of-moments}:
 \begin{eqn}
-	= \int \delta^2\Lambda
+	= \int \fdelta^2\Lambda
 		\left(
-			\left( \frac{\delta}{\delta \Lambda} \right)^s
-			\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+			\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
+			\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
 			\Delta_{\restbasis}[\Lambda]
 		\right)
 		\Trace{
 			\hat{\rho}
-			\hat{D}[\Lambda, \Lambda^*]
+			\hat{D}[\Lambda]
 		}.
 \end{eqn}
 Integrating by parts and eliminating terms which fit \lmmref{func-calculus:zero-delta-integrals}:
 \begin{eqn}
-	& = \int \delta^2\Lambda\,
+	& = \int \fdelta^2\Lambda\,
 		\Delta_{\restbasis}[\Lambda]
-		\left( \frac{\delta}{\delta \Lambda} \right)^s
-		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
+		\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
+		\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
 		\Trace{
 			\hat{\rho}
-			\hat{D}[\Lambda, \Lambda^*]
+			\hat{D}[\Lambda]
 		} \\
 	& = \left.
-		\left( \frac{\delta}{\delta \Lambda} \right)^s
-		\left( -\frac{\delta}{\delta \Lambda^*} \right)^r
-		\chi_W [\Lambda, \Lambda^*]
+		\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
+		\left( -\frac{\fdelta}{\fdelta \Lambda^*} \right)^r
+		\chi_W [\Lambda]
 	\right|_{\Lambda \equiv 0}.
 \end{eqn}
 Now, recognising the final expression as a part of \lmmref{wigner:func:moments-from-chi},
