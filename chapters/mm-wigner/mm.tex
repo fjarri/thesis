@@ -3,17 +3,17 @@
 % =============================================================================
 
 
-Single-mode \defref{wigner:sm:w-transformation} of Wigner transformation can be extended to the case of many modes.
+Single-mode \defref{mm-wigner:sm:w-transformation} of Wigner transformation can be extended to the case of many modes.
 Mode operators $\hat{a}_\nvec$, $\nvec \in \restbasis$, obey bosonic commutation relations:
 \begin{eqn}
-\label{eqn:wigner:mm:commutators}
+\label{eqn:mm-wigner:mm:commutators}
 	[ \hat{a}_{\mvec}, \hat{a}_{\nvec} ]
 	& = [ \hat{a}_{\mvec}^\dagger, \hat{a}_{\nvec}^\dagger ] = 0, \\
 	[ \hat{a}_{\mvec}, \hat{a}_{\nvec}^\dagger ] & = \delta_{\mvec,\nvec}.
 \end{eqn}
 
 \begin{definition}
-\label{def:wigner:mm:w-transformation}
+\label{def:mm-wigner:mm:w-transformation}
 	Let $\blambda$ and $\balpha$ be vectors of $\lambda_{\nvec}$ and $\alpha_{\nvec}$ values respectively.
 	Multi-mode Wigner transformation is
 	\begin{eqn*}
@@ -41,7 +41,7 @@ Mode operators $\hat{a}_\nvec$, $\nvec \in \restbasis$, obey bosonic commutation
 	\end{eqn*}
 \end{definition}
 
-It can be proved, same as in \thmref{wigner:sm:w-real} for the single-mode case, that $W[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
+It can be proved, same as in \thmref{mm-wigner:sm:w-real} for the single-mode case, that $W[\hat{A}]$ is real if $\hat{A}$ is Hermitian.
 The equality $\mathcal{W}[\mathcal{W}^-1[f]] \equiv f$ is proved analogously to the single-mode case as well.
 
 Corresponding definitions of multimode characteristic function and Wigner function are therefore
@@ -66,8 +66,8 @@ and
 
 Following the single-mode scheme, we can formulate two theorems that govern the transformation of a master equation and subsequent calculation of observables.
 
-\begin{theorem}[Multimode extension of \thmref{wigner:sm:correspondences}]
-\label{thm:wigner:mm:correspondences}
+\begin{theorem}[Multimode extension of \thmref{mm-wigner:sm:correspondences}]
+\label{thm:mm-wigner:mm:correspondences}
 	For any Hilbert-Schmidt operator $\hat{A}$
 	\begin{eqn*}
 		\mathcal{W} [ \hat{a}_{\nvec} \hat{A} ]
@@ -87,11 +87,11 @@ Following the single-mode scheme, we can formulate two theorems that govern the 
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-The procedure is the same as in \thmref{wigner:sm:correspondences}.
+The procedure is the same as in \thmref{mm-wigner:sm:correspondences}.
 \end{proof}
 
-\begin{lemma}[Multimode extension of \lmmref{wigner:sm:moments-from-chi}]
-\label{lmm:wigner:mm:moments-from-chi}
+\begin{lemma}[Multimode extension of \lmmref{mm-wigner:sm:moments-from-chi}]
+\label{lmm:mm-wigner:mm:moments-from-chi}
 	For a system with the density matrix $\rho$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \prod_{\nvec \in \restbasis}
@@ -153,12 +153,12 @@ Separating operator and scalar parts:
 			\symprod{ \prod_{\nvec \in \restbasis} \hat{a}_{\nvec}^{j_{\nvec}} (\hat{a}_{\nvec}^\dagger)^{k_{\nvec}}}
 		\rangle.
 \end{eqn}
-Same as in \lmmref{wigner:sm:moments-from-chi}, differentiating the resulting expression and setting $\blambda = 0$ will leave only term with required $j_{\nvec} = r_{\nvec}$ and $k_{\nvec} = s_{\nvec}$.
+Same as in \lmmref{mm-wigner:sm:moments-from-chi}, differentiating the resulting expression and setting $\blambda = 0$ will leave only term with required $j_{\nvec} = r_{\nvec}$ and $k_{\nvec} = s_{\nvec}$.
 \end{proof}
 
 Moments of multimode Wigner function correspond to the averages of symmetrically ordered products in the same way as for the single-mode case.
 
-\begin{theorem}[Multimode extension of \thmref{wigner:sm:moments}]
+\begin{theorem}[Multimode extension of \thmref{mm-wigner:sm:moments}]
 	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\balpha)$:
 	\begin{eqn*}
 		\langle \symprod{
@@ -172,5 +172,5 @@ Moments of multimode Wigner function correspond to the averages of symmetrically
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-The proof is carried out similarly to \thmref{wigner:sm:moments}: integrals over $\alpha_{\nvec}$ are eliminated one by one using \lmmref{c-numbers:fourier-of-moments}, resulting integrals over $\lambda_{\nvec}$ are dealt with using integration by parts and \lmmref{c-numbers:zero-delta-integrals}, until we get the right part of \lmmref{wigner:mm:moments-from-chi}.
+The proof is carried out similarly to \thmref{mm-wigner:sm:moments}: integrals over $\alpha_{\nvec}$ are eliminated one by one using \lmmref{c-numbers:fourier-of-moments}, resulting integrals over $\lambda_{\nvec}$ are dealt with using integration by parts and \lmmref{c-numbers:zero-delta-integrals}, until we get the right part of \lmmref{mm-wigner:mm:moments-from-chi}.
 \end{proof}

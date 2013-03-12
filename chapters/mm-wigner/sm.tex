@@ -12,14 +12,14 @@ The essential part of the definition is the displacement operator which was firs
 \begin{definition}
 	Displacement operator is an operator-valued function of complex variable
 	\begin{eqn*}
-	\label{eqn:wigner:sm:displacement-op}
+	\label{eqn:mm-wigner:sm:displacement-op}
 		\hat{D}(\lambda) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}).
 	\end{eqn*}
 \end{definition}
 
 Using Baker-Hausdorff theorem to split non-commuting creation and annihilation operator in the exponent, one can find that
 \begin{eqn}
-\label{eqn:wigner:sm:displacement-derivatives}
+\label{eqn:mm-wigner:sm:displacement-derivatives}
 	\frac{\cwd}{\cwd \lambda} \hat{D}(\lambda)
 	& = \hat{D}(\lambda) (\hat{a}^\dagger + \frac{1}{2} \lambda^*)
 	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda), \\
@@ -31,7 +31,7 @@ Using Baker-Hausdorff theorem to split non-commuting creation and annihilation o
 Using the displacement operator we can define the Wigner transformation:
 
 \begin{definition}
-\label{def:wigner:sm:w-transformation}
+\label{def:mm-wigner:sm:w-transformation}
 	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space.
 	\begin{eqn*}
 		\mathcal{W}\left[\hat{A}\right]
@@ -73,7 +73,7 @@ The proof for the other direction looks the same.
 Although in general the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it is can be proved to be always real-valued.
 
 \begin{theorem}
-\label{thm:wigner:sm:w-real}
+\label{thm:mm-wigner:sm:w-real}
 	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real-valued function.
 \end{theorem}
 \begin{proof}
@@ -95,7 +95,7 @@ Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equa
 Earlier in this section we have defined the Wigner transformation for arbitrary operators, but the most often occurring and the most important case is the transformation of a density matrix.
 
 \begin{definition}
-\label{def:wigner:sm:w-function}
+\label{def:mm-wigner:sm:w-function}
 	Wigner function is the Wigner transformation of a density matrix:
 	\begin{eqn*}
 		W(\alpha) \equiv \mathcal{W}[\hat{\rho}].
@@ -103,7 +103,7 @@ Earlier in this section we have defined the Wigner transformation for arbitrary 
 \end{definition}
 
 The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
-Note also that since any density matrix is Hermitian, according to \thmref{wigner:sm:w-real} $W(\alpha)$ is a real-valued function.
+Note also that since any density matrix is Hermitian, according to \thmref{mm-wigner:sm:w-real} $W(\alpha)$ is a real-valued function.
 
 In some cases it will be convenient to use Wigner function in form
 \begin{eqn}
@@ -120,7 +120,7 @@ We will finish this section with the proofs of two main theorems which are requi
 The first theorem provides a way to transform any master equation written in terms of creation and annihilation operators to a partial differential equation for the Wigner function.
 
 \begin{theorem}[Operator correspondences]
-\label{thm:wigner:sm:correspondences}
+\label{thm:mm-wigner:sm:correspondences}
 	For any Hilbert-Schmidt operator $\hat{A}$
 	\begin{eqn*}
 		\mathcal{W} [ \hat{a} \hat{A} ]
@@ -137,7 +137,7 @@ The first theorem provides a way to transform any master equation written in ter
 \end{theorem}
 \begin{proof}
 We will prove the first correspondence.
-First, let us transform the trace using~\eqnref{wigner:sm:displacement-derivatives}:
+First, let us transform the trace using~\eqnref{mm-wigner:sm:displacement-derivatives}:
 \begin{eqn}
 	\Trace{ \hat{a} \hat{A} \hat{D} }
 	= \Trace{ \hat{A} \hat{D} \hat{a}}
@@ -179,7 +179,7 @@ This theorem is paired with the second theorem, which helps extract observables 
 We will start by proving the auxiliary lemma which connects the expectation of an operator product and the characteristic function.
 
 \begin{lemma}
-\label{lmm:wigner:sm:moments-from-chi}
+\label{lmm:mm-wigner:sm:moments-from-chi}
 	For a system with the density matrix $\rho$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
@@ -228,7 +228,7 @@ leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 Using this lemma we can now prove the main theorem which connects operator expectations and moments of the Wigner function.
 
 \begin{theorem}
-\label{thm:wigner:sm:moments}
+\label{thm:mm-wigner:sm:moments}
 	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
@@ -267,7 +267,7 @@ Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delt
 		\chi_W (\lambda)
 	\right|_{\lambda=0}.
 \end{eqn}
-Now, recognising the final expression as a part of \lmmref{wigner:sm:moments-from-chi}, we immideately get the statement of the theorem.
+Now, recognising the final expression as a part of \lmmref{mm-wigner:sm:moments-from-chi}, we immideately get the statement of the theorem.
 \end{proof}
 
-With the help of \thmref{wigner:sm:correspondences} and \thmref{wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$, transform it to an ordinary differential equation, and use its solution to get expectations of any observables.
+With the help of \thmref{mm-wigner:sm:correspondences} and \thmref{mm-wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$, transform it to an ordinary differential equation, and use its solution to get expectations of any observables.
