@@ -101,6 +101,7 @@ Correspondence relations and moment extraction theorems have the same form as in
 
 \begin{theorem}[Functional extension of \thmref{mm-wigner:sm:correspondences}]
 \label{thm:wigner:func:correspondences}
+	For any Hilbert-Schmidt operator $\hat{A}$
 	\begin{eqn*}
 		\mathcal{W} [ \Psiop \hat{A} ]
 			& = \left( \Psi + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \right) \mathcal{W}[\hat{A}],
@@ -148,7 +149,7 @@ Moving additional multiplier outside the integral:
 		\frac{\fdelta}{\fdelta \Lambda^*}
 		\Trace{ \hat{A} \hat{D}[\Lambda] }.
 \end{eqn}
-Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ \todo{need to proof that the trace is bounded}:
+Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ ($\hat{D}[\Lambda]$ equals to a product of single-mode displacement operators, which makes the operator in the trace Hilbert-Schmidt, and the trace itself bounded):
 \begin{eqn}
 	& = \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \mathcal{W} [\hat{A}]
 	+ \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda \left(
@@ -163,6 +164,7 @@ Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over 
 
 \begin{lemma}[Functional extension of \lmmref{mm-wigner:sm:moments-from-chi}]
 \label{lmm:wigner:func:moments-from-chi}
+	For a system with the density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
 		= \left.
@@ -173,7 +175,7 @@ Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over 
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-The proof follows the same general scheme as in single-mode case.
+The proof follows the same general scheme as in the single-mode case.
 The exponent in the $\chi_W$ can be expanded as
 \begin{eqn}
 	\exp (\Lambda \Psiop^\dagger - \Lambda^* \Psiop)
@@ -186,32 +188,29 @@ The exponent in the $\chi_W$ can be expanded as
 		}
 		{r!s!}.
 \end{eqn}
-We can swap functional derivative with both integration and multiplication by independent function, so:
+We can swap a functional derivative with both integration and multiplication by an independent function, so:
 \begin{eqn}
 	\frac{\fdelta}{\fdelta \Lambda^\prime} \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^r
 	& = r \int \upd\xvec \frac{\fdelta \Lambda}{\fdelta \Lambda^\prime} \Psiop^\dagger
 		\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
-	& = r \int \upd\xvec \delta_{\restbasis}(\xvec^\prime, \xvec) \Psiop^\dagger
-		\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
-	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1},
+	& = r \int \upd\xvec\, \delta_{\restbasis}(\xvec^\prime, \xvec) \Psiop^\dagger
+		\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1} \\
+	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1},
 \end{eqn}
 and multiple application of the differential gives us
 \begin{eqn}
 	\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^r
-	\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^r
+	\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^r
 	= r! ( \Psiop^{\prime\dagger} )^r.
 \end{eqn}
 Similarly for the other differential:
 \begin{eqn}
 	\left( -\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \right)^s
-	\left( -\int \upd\xvec \Lambda \Psiop^\dagger \right)^s
+	\left( -\int \upd\xvec\, \Lambda \Psiop^\dagger \right)^s
 	= s! ( \Psiop^{\prime\dagger} )^s.
 \end{eqn}
 
-Thus, same as in single-mode case,
-differentiation will eliminate all lower order terms in the expansion,
-and all higher order terms will be eliminated by setting $\Lambda \equiv 0$,
-leaving only one operator product with required order:
+Thus, same as in the single-mode case, the differentiation will eliminate all lower order terms in the expansion, and all higher order terms will be eliminated by setting $\Lambda \equiv 0$, leaving only one operator product with the required order:
 \begin{eqn}
 	\left.
 		\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^s
@@ -227,13 +226,14 @@ leaving only one operator product with required order:
 
 \begin{theorem}[Functional extension of \thmref{mm-wigner:sm:moments}]
 \label{thm:wigner:func:moments}
+	For a system with the density matrix $\hat{\rho}$ and the corresponding Wigner functional $W[\Psi]$, and any non-negative integer $r$, $s$:
 	\begin{eqn*}
-		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi]
-		= \langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
+		\langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
+		= \int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi].
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-By definition of Wigner functional:
+By definition of the Wigner functional:
 \begin{eqn}
 	\int & \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi] \\
 	={} & \frac{1}{\pi^{2|\restbasis|}} \Trace{ \hat{\rho}
