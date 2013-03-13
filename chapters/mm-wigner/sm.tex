@@ -180,7 +180,7 @@ We will start by proving the auxiliary lemma which connects the expectation of a
 
 \begin{lemma}
 \label{lmm:mm-wigner:sm:moments-from-chi}
-	For a system with the density matrix $\rho$ and the corresponding characteristic function $\chi_W$:
+	For a system with the density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.
@@ -229,7 +229,7 @@ Using this lemma we can now prove the main theorem which connects operator expec
 
 \begin{theorem}
 \label{thm:mm-wigner:sm:moments}
-	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$:
+	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$, and any non-negative integer $r$, $s$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha).
