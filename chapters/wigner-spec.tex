@@ -1,236 +1,220 @@
 % =============================================================================
-\chapter{Special cases of Wigner transformation}
+\chapter{Transformation of the master equation}
 \label{cha:wigner-spec}
 % =============================================================================
 
-This section contains some theorems concerning transformations of specific operator sequences,
-which will be useful when transforming the master equation.
-\todo{Throughout this section all wave functions and field operators belong to restricted bases etc.
-Need to write it formally.}
+Although the functional correspondences from \thmref{wigner:mc:correspondences} are relatively straightforward, there is a certain amount of work required to apply them to actual master equations arising in real world problems.
+This chapter contains several theorems describing transformations of specific operator sequences,
+encountered in master equations describing \abbrev{bec} evolution.
+
+The simplest non-trivial element of the Hamiltonian one is the density operator $\Psiop_j^\dagger \Psiop_k$, which describes, for instance, a potential or a coupling field.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator1}
+    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$, 
     \begin{eqn*}
-        \mathcal{W} \left[ [\int d\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
-        = \int d\xvec \left(
-            - \frac{\delta}{\delta \Psi_j} \Psi_k
-            + \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
+        \mathcal{W} \left[ [\int \upd\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
+        = \int \upd\xvec \left(
+            - \frac{\fdelta}{\fdelta \Psi_j} \Psi_k
+            + \frac{\fdelta}{\fdelta \Psi_k^*} \Psi_j^*
         \right) \mathcal{W}[\hat{A}].
     \end{eqn*}
 \end{theorem}
 \begin{proof}
+Expanding the commutator and applying \thmref{wigner:mc:correspondences}:
 \begin{eqn}
-    \mathcal{W} \left[ [\int d\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
-    ={} & \int d\xvec \left(
+    \mathcal{W} \left[ [\int \upd\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
+    ={} & \int \upd\xvec \left(
         \left(
-            \Psi_j^* - \frac{1}{2} \frac{\delta}{\delta \Psi_j}
+            \Psi_j^* - \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_j}
         \right)
         \left(
-            \Psi_k + \frac{1}{2} \frac{\delta}{\delta \Psi_k^*}
+            \Psi_k + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_k^*}
         \right) \right. \\
     &   \left. - \left(
-            \Psi_k - \frac{1}{2} \frac{\delta}{\delta \Psi_k^*}
+            \Psi_k - \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_k^*}
         \right)
         \left(
-            \Psi_j^* + \frac{1}{2} \frac{\delta}{\delta \Psi_j}
+            \Psi_j^* + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_j}
         \right)
     \right)
     \mathcal{W}[\hat{A}] \\
-    ={} & \frac{1}{2} \int d\xvec \left(
-        - \frac{\delta}{\delta \Psi_j} \Psi_k
-        + \Psi_j^* \frac{\delta}{\delta \Psi_k^*}
-        + \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
-        - \Psi_k \frac{\delta}{\delta \Psi_j}
+    ={} & \frac{1}{2} \int \upd\xvec \left(
+        - \frac{\fdelta}{\fdelta \Psi_j} \Psi_k
+        + \Psi_j^* \frac{\fdelta}{\fdelta \Psi_k^*}
+        + \frac{\fdelta}{\fdelta \Psi_k^*} \Psi_j^*
+        - \Psi_k \frac{\fdelta}{\fdelta \Psi_j}
     \right)
-    \mathcal{W}[\hat{A}] \\
-    ={} & (*).
+    \mathcal{W}[\hat{A}].
 \end{eqn}
 Changing the order of derivatives and functions using the relation
 \begin{eqn}
-    \Psi_k \frac{\delta}{\delta \Psi_j} \mathcal{F}
+    \Psi_k \frac{\fdelta}{\fdelta \Psi_j} \mathcal{F}
     = \left(
-        \frac{\delta}{\delta \Psi_j} \Psi_k
+        \frac{\fdelta}{\fdelta \Psi_j} \Psi_k
         - \delta_{jk} \delta_{\restbasis_j}(\xvec, \xvec)
     \right) \mathcal{F},
 \end{eqn}
 we get
 \begin{eqn}
-    (*) = \int d\xvec \left(
-        - \frac{\delta}{\delta \Psi_j} \Psi_k
-        + \frac{\delta}{\delta \Psi_k^*} \Psi_j^*
+    \mathcal{W} \left[ [\int \upd\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
+    = \int \upd\xvec \left(
+        - \frac{\fdelta}{\fdelta \Psi_j} \Psi_k
+        + \frac{\fdelta}{\fdelta \Psi_k^*} \Psi_j^*
     \right)
-    \mathcal{W}[\hat{A}].
-    \qedhere
+    \mathcal{W}[\hat{A}],
 \end{eqn}
+which is the statement of the theorem.
 \end{proof}
 
-Commutators with Laplacian inside require somewhat special treatment, because it acts on basis functions and, in general, cannot be dragged around like a constant.
+Commutators with the Laplacian inside require somewhat special treatment, because it acts on basis functions and, in general, cannot be dragged around like a constant.
 For our purposes we only need one specific case, and, fortunately, in this case it does act like a constant.
+The target expression describes kinetic energy in a Hamiltonian.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-laplacian-commutator1}
+    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
     \begin{eqn*}
         \mathcal{W} \left[
-            \int d\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
+            \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
         \right]
-        = \int d\xvec \left(
-            - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-            + \frac{\delta}{\delta \Psi^*} \nabla^2 \Psi^*
+        = \int \upd\xvec \left(
+            - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
+            + \frac{\fdelta}{\fdelta \Psi^*} \nabla^2 \Psi^*
         \right) \mathcal{W}[\hat{A}].
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-First, it is obvious from the definition of the Wigner transformation that
+First, it is obvious from the definition of the Wigner transformation that an integral or a derivative acting on coordinates can be moved in and out of the transformation:
 \begin{eqn}
-    \mathcal{W} \left[ \int d\xvec \hat{B}(\xvec) \hat{A} \right]
-    = \int d\xvec \mathcal{W} [\hat{B}(\xvec) \hat{A}]
-\end{eqn}
-and
-\begin{eqn}
+    \mathcal{W} \left[ \int \upd\xvec \hat{B}(\xvec) \hat{A} \right]
+    & = \int \upd\xvec \mathcal{W} [\hat{B}(\xvec) \hat{A}], \\
     \mathcal{W} [ \nabla^2 \hat{B}(\xvec) \hat{A} ]
-    = \nabla^2 \mathcal{W} [\hat{B}(\xvec) \hat{A}].
+    & = \nabla^2 \mathcal{W} [\hat{B}(\xvec) \hat{A}].
 \end{eqn}
 Let us now expand the commutator and apply correspondences from \thmref{wigner:func:correspondences}:
 \begin{eqn2}
     & \mathcal{W} && \left[
-        \int d\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
+        \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
     \right] \\
-    & ={} && \mathcal{W} \left[
-            \int d\xvec \Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec) \hat{A}
-        \right]
-        - \mathcal{W} \left[
-                \int d\xvec \hat{A} \Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec)
-        \right] \\
-    & ={} && \int d\xvec \left(
-            \Psi^* - \frac{1}{2} \frac{\delta}{\delta \Psi}
+    & ={} && \int \upd\xvec \left(
+            \Psi^* - \frac{1}{2} \frac{\fdelta}{\fdelta \Psi}
         \right)
         \left(
-            \nabla^2 \Psi + \frac{1}{2} \nabla^2 \frac{\delta}{\delta \Psi^*}
+            \nabla^2 \Psi + \frac{1}{2} \nabla^2 \frac{\fdelta}{\fdelta \Psi^*}
         \right)
         \mathcal{W}[\hat{A}] \\
-    & && - \int d\xvec \left(
-            \nabla^2 \Psi - \frac{1}{2} \nabla^2 \frac{\delta}{\delta \Psi^*}
+    & && - \int \upd\xvec \left(
+            \nabla^2 \Psi - \frac{1}{2} \nabla^2 \frac{\fdelta}{\fdelta \Psi^*}
         \right)
         \left(
-            \Psi^* + \frac{1}{2} \frac{\delta}{\delta \Psi}
+            \Psi^* + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi}
         \right)
         \mathcal{W}[\hat{A}] \\
-    & ={} && \int d\xvec \left(
-            \Psi^* \nabla^2 \Psi
-            - \frac{1}{2} \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-            + \frac{1}{2} \Psi^* \nabla^2 \frac{\delta}{\delta \Psi^*}
-            - \frac{1}{4} \frac{\delta}{\delta \Psi} \nabla^2 \frac{\delta}{\delta \Psi^*}
+    & ={} && \frac{1}{2} \int \upd\xvec \left(
+            - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
+            + \Psi^* \nabla^2 \frac{\fdelta}{\fdelta \Psi^*}
+            + \left( \nabla^2 \frac{\fdelta}{\fdelta \Psi^*} \right) \Psi^*
+            - \left( \nabla^2 \Psi \right) \frac{\fdelta}{\fdelta \Psi}
         \right)
-        \mathcal{W}[\hat{A}] \\
-    & && - \int d\xvec \left(
-            \Psi^* \nabla^2 \Psi
-            - \frac{1}{2} \left( \nabla^2 \frac{\delta}{\delta \Psi^*} \right) \Psi^*
-            + \frac{1}{2} \left( \nabla^2 \Psi \right) \frac{\delta}{\delta \Psi}
-            - \frac{1}{4} \left(
-                \nabla^2 \frac{\delta}{\delta \Psi^*}
-            \right) \frac{\delta}{\delta \Psi}
-        \right)
-        \mathcal{W}[\hat{A}] \\
-    & ={} && \frac{1}{2} \int d\xvec \left(
-            - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-            + \Psi^* \nabla^2 \frac{\delta}{\delta \Psi^*}
-            + \left( \nabla^2 \frac{\delta}{\delta \Psi^*} \right) \Psi^*
-            - \left( \nabla^2 \Psi \right) \frac{\delta}{\delta \Psi}
-        \right)
-        \mathcal{W}[\hat{A}] \\
-    & ={} && (*)
+        \mathcal{W}[\hat{A}].
 \end{eqn2}
 
-Using basis expansion, one can easily see that
+Using the basis expansion, one can easily check that
 \begin{eqn}
-    \Psi^* \nabla^2 \frac{\delta}{\delta \Psi^*} \mathcal{F}[\Psi, \Psi^*]
-    = \left( \nabla^2 \frac{\delta}{\delta \Psi^*} \right) \Psi^* \mathcal{F}[\Psi, \Psi^*]
-    - \sum_{\nvec \in L} \phi_{\nvec}^* \nabla^2 \phi_{\nvec} \mathcal{F}[\Psi, \Psi^*]
+    \Psi^* \nabla^2 \frac{\fdelta}{\fdelta \Psi^*} \mathcal{F}[\Psi]
+    = \left( \nabla^2 \frac{\fdelta}{\fdelta \Psi^*} \right) \Psi^* \mathcal{F}[\Psi]
+    - \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \nabla^2 \phi_{\nvec} \mathcal{F}[\Psi],
 \end{eqn}
 and
 \begin{eqn}
-    \left( \nabla^2 \Psi \right) \frac{\delta}{\delta \Psi} \mathcal{F}[\Psi, \Psi^*]
-    = \frac{\delta}{\delta \Psi} \left( \nabla^2 \Psi \right) \mathcal{F}[\Psi, \Psi^*]
-    - \sum_{\nvec \in L} \phi_{\nvec}^* \nabla^2 \phi_{\nvec} \mathcal{F}[\Psi, \Psi^*].
+    \left( \nabla^2 \Psi \right) \frac{\fdelta}{\fdelta \Psi} \mathcal{F}[\Psi]
+    = \frac{\fdelta}{\fdelta \Psi} \left( \nabla^2 \Psi \right) \mathcal{F}[\Psi]
+    - \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \nabla^2 \phi_{\nvec} \mathcal{F}[\Psi].
 \end{eqn}
 Therefore:
 \begin{eqn}
-    (*)
-    = \frac{1}{2} \int d\xvec \left(
-        - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-        + \left( \nabla^2 \frac{\delta}{\delta \Psi^*} \right) \Psi^*
-        + \left( \nabla^2 \frac{\delta}{\delta \Psi^*} \right) \Psi^*
-        - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
+    & \mathcal{W} \left[
+        \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
+    \right] \\
+    & = \frac{1}{2} \int \upd\xvec \left(
+        - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
+        + \left( \nabla^2 \frac{\fdelta}{\fdelta \Psi^*} \right) \Psi^*
+        + \left( \nabla^2 \frac{\fdelta}{\fdelta \Psi^*} \right) \Psi^*
+        - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
     \right)
-    \mathcal{W}[\hat{A}]
+    \mathcal{W}[\hat{A}].
 \end{eqn}
 Now using \lmmref{func-calculus:move-laplacian} we can get the final result:
 \begin{eqn}
-    & = \frac{1}{2} \int d\xvec \left(
-        - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-        + \frac{\delta}{\delta \Psi^*} \nabla^2 \Psi^*
-        + \frac{\delta}{\delta \Psi^*} \nabla^2 \Psi^*
-        - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
+    & = \frac{1}{2} \int \upd\xvec \left(
+        - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
+        + \frac{\fdelta}{\fdelta \Psi^*} \nabla^2 \Psi^*
+        + \frac{\fdelta}{\fdelta \Psi^*} \nabla^2 \Psi^*
+        - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
     \right)
     \mathcal{W}[\hat{A}] \\
-    & = \int d\xvec \left(
-        - \frac{\delta}{\delta \Psi} \nabla^2 \Psi
-        + \frac{\delta}{\delta \Psi^*} \nabla^2 \Psi^*
+    & = \int \upd\xvec \left(
+        - \frac{\fdelta}{\fdelta \Psi} \nabla^2 \Psi
+        + \frac{\fdelta}{\fdelta \Psi^*} \nabla^2 \Psi^*
     \right) \mathcal{W}[\hat{A}].
     \qedhere
 \end{eqn}
 \end{proof}
 
+The next usual term in \abbrev{bec} Hamiltonians is a fourth order nonlinear interaction term.
+We will provide the transformation for its general non-local form, which can be later simplified to the local one by intergration with the delta function.
+
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator2}
-    \todo{Check that deltas have correct basis indices.}
+    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
     \begin{eqn*}
         & \mathcal{W} \left[
             [
-                \int d\xvec \int d\xvec^\prime
+                \int \upd\xvec \int \upd\xvec^\prime
                 \Psiop_j^\dagger \Psiop_k^{\prime\dagger} \Psiop_j^\prime \Psiop_k,
                 \hat{A}
             ]
         \right] \\
-        & = \int d\xvec \int d\xvec^\prime \left(
-            \frac{\delta}{\delta \Psi_j} \left(
+        & = \int \upd\xvec \int \upd\xvec^\prime \left(
+            \frac{\fdelta}{\fdelta \Psi_j} \left(
                 - \Psi_j^\prime \Psi_k \Psi_k^{\prime*}
                 + \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec^\prime) \Psi_k
                 + \frac{1}{2} \delta_{\restbasis_j}(\xvec, \xvec^\prime) \Psi_j^\prime
             \right) \right . \\
-        &   \left. + \frac{\delta}{\delta \Psi_j^{\prime*}} \left(
+        &   \left. + \frac{\fdelta}{\fdelta \Psi_j^{\prime*}} \left(
                 \Psi_j^* \Psi_k \Psi_k^{\prime*}
                 - \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec, \xvec) \Psi_k^{\prime*}
                 - \frac{1}{2} \delta_{\restbasis_j}(\xvec, \xvec^\prime) \Psi_j^*
             \right) \right. \\
-        &   \left. + \frac{\delta}{\delta \Psi_k^\prime} \left(
+        &   \left. + \frac{\fdelta}{\fdelta \Psi_k^\prime} \left(
                 - \Psi_j^\prime \Psi_j^* \Psi_k
                 + \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec, \xvec) \Psi_j^\prime
                 + \frac{1}{2} \delta_{\restbasis_k}(\xvec^\prime, \xvec) \Psi_k
             \right) \right .\\
-        &   \left. + \frac{\delta}{\delta \Psi_k^*} \left(
+        &   \left. + \frac{\fdelta}{\fdelta \Psi_k^*} \left(
                 \Psi_j^\prime \Psi_j^* \Psi_k^{\prime*}
                 - \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec^\prime) \Psi_j^*
                 - \frac{1}{2} \delta_{\restbasis_k}(\xvec^\prime, \xvec) \Psi_k^{\prime*}
             \right) \right. \\
         &   \left.
-                + \frac{\delta}{\delta \Psi_j}
-                \frac{\delta}{\delta \Psi_j^{\prime*}}
-                \frac{\delta}{\delta \Psi_k^\prime}
+                + \frac{\fdelta}{\fdelta \Psi_j}
+                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
+                \frac{\fdelta}{\fdelta \Psi_k^\prime}
                 \frac{1}{4} \Psi_k
-                - \frac{\delta}{\delta \Psi_j}
-                \frac{\delta}{\delta \Psi_j^{\prime*}}
-                \frac{\delta}{\delta \Psi_k^*}
+                - \frac{\fdelta}{\fdelta \Psi_j}
+                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
+                \frac{\fdelta}{\fdelta \Psi_k^*}
                 \frac{1}{4} \Psi_k^{\prime*}
             \right. \\
         &   \left.
-                + \frac{\delta}{\delta \Psi_k^\prime}
-                \frac{\delta}{\delta \Psi_k^*}
-                \frac{\delta}{\delta \Psi_j}
+                + \frac{\fdelta}{\fdelta \Psi_k^\prime}
+                \frac{\fdelta}{\fdelta \Psi_k^*}
+                \frac{\fdelta}{\fdelta \Psi_j}
                 \frac{1}{4} \Psi_j^\prime
-                - \frac{\delta}{\delta \Psi_k^\prime}
-                \frac{\delta}{\delta \Psi_k^*}
-                \frac{\delta}{\delta \Psi_j^{\prime*}}
+                - \frac{\fdelta}{\fdelta \Psi_k^\prime}
+                \frac{\fdelta}{\fdelta \Psi_k^*}
+                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
                 \frac{1}{4} \Psi_j^*
         \right) \mathcal{W}[\hat{A}].
     \end{eqn*}
@@ -242,13 +226,13 @@ Proof is the same as in case of \thmref{wigner-spec:w-commutator1}.
 \begin{lemma}
 \label{lmm:wigner-spec:swap-differential}
     \begin{eqn*}
-        \Psi^a \left( \frac{\delta}{\delta \Psi} \right)^b \mathcal{F}[\Psi, \Psi^*]
+        \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}[\Psi]
         = \sum_{j=0}^{\min(a, b)}
             \binom{b}{j} \frac{(-1)^j a!}{(a - j)!}
             \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b - j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b - j}
             \Psi^{a - j}
-            \mathcal{F}[\Psi, \Psi^*]
+            \mathcal{F}[\Psi]
     \end{eqn*}
 \end{lemma}
 \begin{proof}
@@ -257,45 +241,45 @@ Let us assume that the statement is true for $b - 1$, and prove it for $b$
 (also assuming non-trivial case of $a > 0$).
 Moving a single differential to the left:
 \begin{eqn}
-    \Psi^a \left( \frac{\delta}{\delta \Psi} \right)^b \mathcal{F}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     = \left(
-            \frac{\delta}{\delta \Psi} \Psi^a
+            \frac{\fdelta}{\fdelta \Psi} \Psi^a
             - a \Psi^{a - 1} \delta_{\restbasis}(\xvec, \xvec)
         \right)
-        \left( \frac{\delta}{\delta \Psi} \right)^{b-1}
+        \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1}
         \mathcal{F}
 \end{eqn}
 Using known relation for $b-1$:
 \begin{eqn}
-    ={} & \frac{\delta}{\delta \Psi} \sum_{j = 0}^{\min(a, b-1)}
+    ={} & \frac{\fdelta}{\fdelta \Psi} \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-j}
             \mathcal{F} \\
     & - a \delta_{\restbasis}(\xvec, \xvec) \sum_{j = 0}^{\min(a-1, b-1)}
             \binom{b-1}{j} \frac{(-1)^j (a-1)!}{(a-1-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
             \mathcal{F}
 \end{eqn}
 Merging coefficients before sums into the internal expressions:
 \begin{eqn}
     ={} & \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F} \\
     & + \sum_{j = 0}^{\min(a-1, b-1)}
             \binom{b-1}{j} \frac{(-1)^{j+1} a!}{(a-1-j)!} \delta_{\restbasis}^{j+1}(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
             \mathcal{F}
 \end{eqn}
 Shifting counter in the second sum:
 \begin{eqn}
     ={} & \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F} \\
     & + \sum_{j = 1}^{\min(a, b)}
             \binom{b-1}{j-1} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F}
 \end{eqn}
 Now we can join sums, noticing that $\binom{b-1}{j} + \binom{b-1}{j-1} = \binom{b}{j}$.
@@ -305,15 +289,15 @@ The former term appears only if $\min(a,b) > \min(a, b-1)$,
 or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-1) = b-1$).
 \begin{eqn}
     ={} & \binom{b-1}{0} \frac{(-1)^0 a!}{(a-0)!} \delta_{\restbasis}^0(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-0} \Psi^{a-0}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-0} \Psi^{a-0}
             \mathcal{F} \\
     & + \sum_{j = 1}^{\min(a, b-1)}
             \binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F} \\
     & + H[a - b]
             \binom{b-1}{b-1} \frac{(-1)^j a!}{(a-b)!} \delta_{\restbasis}^b(\xvec, \xvec)
-            \left( \frac{\delta}{\delta \Psi} \right)^{b-b} \Psi^{a-b}
+            \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-b} \Psi^{a-b}
             \mathcal{F},
 \end{eqn}
 Where $H[n]$ is the discrete Heaviside step function.
@@ -322,7 +306,7 @@ we can attach two leftover terms to the sum too, obtaining the statement of the 
 \begin{eqn}
     = \sum_{j = 0}^{\min(a, b)}
         \binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
-        \left( \frac{\delta}{\delta \Psi} \right)^{b-j} \Psi^{a-j}
+        \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
         \mathcal{F}
     \qedhere
 \end{eqn}
@@ -464,14 +448,14 @@ which gives us the statement of the lemma.
     \end{eqn*}
     then its Wigner transformation is
     \begin{eqn*}
-        \mathcal{W} \left[ \int d\xvec \hat{\mathcal{L}}_{\lvec} [\hat{A}] \right]
-        = \int d\xvec
+        \mathcal{W} \left[ \int \upd\xvec \hat{\mathcal{L}}_{\lvec} [\hat{A}] \right]
+        = \int \upd\xvec
             \sum_{j_1=0}^{l_1} \sum_{k_1=0}^{l_1} \ldots
             \sum_{j_C=0}^{l_C} \sum_{k_C=0}^{l_C}
                 \left(
                     \prod_{c=1}^C
-                        \left( \frac{\delta}{\delta \Psi_c^*} \right)^{j_c}
-                        \left( \frac{\delta}{\delta \Psi_c} \right)^{k_c}
+                        \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^{j_c}
+                        \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^{k_c}
                 \right)
                 L_{\lvec, \jvec, \kvec}
             \mathcal{W}[\hat{A}],
@@ -501,20 +485,20 @@ Let us perform the transformation for each term of loss operator.
     W_1
     & = \mathcal{W}[\hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger] \\
     & = \prod_{c=1}^C \left(
-            \Psi_c + \frac{1}{2} \frac{\delta}{\delta \Psi_c^*}
+            \Psi_c + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_c^*}
         \right)^{l_c}
         \left(
-            \Psi_c^* + \frac{1}{2} \frac{\delta}{\delta \Psi_c}
+            \Psi_c^* + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi_c}
         \right)^{l_c}
         \mathcal{W}[\hat{A}] \\
     & = \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
                 \binom{l_c}{j} \left( \frac{1}{2} \right)^j
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
                 \Psi_c^{l_c - j}
             \sum_{k=0}^{l_c}
                 \binom{l_c}{k} \left( \frac{1}{2} \right)^k
-                \left( \frac{\delta}{\delta \Psi_c} \right)^k
+                \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^k
                 (\Psi_c^*)^{l_c - k}
         \right)
         \mathcal{W}[\hat{A}] \\
@@ -522,27 +506,27 @@ Let us perform the transformation for each term of loss operator.
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
                 \binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
                 \Psi_c^{l_c - j}
-                \left( \frac{\delta}{\delta \Psi_c} \right)^k
+                \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^k
                 (\Psi_c^*)^{l_c - k}
         \right)
         \mathcal{W}[\hat{A}].
 \end{eqn}
-Using \lmmref{wigner-spec:swap-differential} to swap $\Psi_c$ and $\delta / \delta \Psi_c$:
+Using \lmmref{wigner-spec:swap-differential} to swap $\Psi_c$ and $\fdelta / \fdelta \Psi_c$:
 \begin{eqn}
     ={} & \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
                 \binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
         \right. \\
         & \left.
                 \sum_{m=0}^{\min(l_c - j, k)}
                     \binom{k}{m}
                     \frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}
                     \delta_{\restbasis_c}^m(\xvec, \xvec)
-                    \left( \frac{\delta}{\delta \Psi_c} \right)^{k - m}
+                    \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^{k - m}
                     \Psi_c^{l_c - j - m}
                 (\Psi_c^*)^{l_c - k}
         \right)
@@ -551,7 +535,7 @@ Using \lmmref{wigner-spec:swap-differential} to swap $\Psi_c$ and $\delta / \del
 \end{eqn}
 Using \lmmref{wigner-spec:sum-rearrangement} with
 \begin{eqn}
-    f & = \frac{\delta}{\delta \Psi_c}, \\
+    f & = \frac{\fdelta}{\fdelta \Psi_c}, \\
     g & = \binom{l_c}{j} \binom{l_c}{k} \left( \frac{1}{2} \right)^{j + k}
         \binom{k}{m}
         \frac{(-1)^m (l_c - j)!}{(l_c - j - m)!}
@@ -564,8 +548,8 @@ we obtain
     (*) = \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
-                \left( \frac{\delta}{\delta \Psi_c} \right)^k
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^k
                 \sum_{m=0}^{l_c - \max(j, k)}
                 Q_1(l, j, k, m)
                 \delta_{\restbasis_c}^m(\xvec, \xvec)
@@ -589,8 +573,8 @@ Similarly,
     & = \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
-                \left( \frac{\delta}{\delta \Psi_c} \right)^k
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^k
                 \sum_{m=0}^{l_c - \max(j, k)}
                 Q_2(l, j, k, m)
                 \delta_{\restbasis_c}^m(\xvec, \xvec)
@@ -613,8 +597,8 @@ and
     & = \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
-                \left( \frac{\delta}{\delta \Psi_c^*} \right)^j
-                \left( \frac{\delta}{\delta \Psi_c} \right)^k
+                \left( \frac{\fdelta}{\fdelta \Psi_c^*} \right)^j
+                \left( \frac{\fdelta}{\fdelta \Psi_c} \right)^k
                 \sum_{m=0}^{l_c - \max(j, k)}
                 Q_3(l, j, k, m)
                 \delta_{\restbasis_c}^m(\xvec, \xvec)
