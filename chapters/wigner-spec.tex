@@ -172,55 +172,43 @@ We will provide the transformation for its general non-local form, which can be 
         & \mathcal{W} \left[
             [
                 \int \upd\xvec \int \upd\xvec^\prime
-                \Psiop_j^\dagger \Psiop_k^{\prime\dagger} \Psiop_j^\prime \Psiop_k,
+                \Psiop_j^\dagger \Psiop_k^{\prime\dagger} \Psiop_j \Psiop_k^\prime,
                 \hat{A}
             ]
         \right] \\
         & = \int \upd\xvec \int \upd\xvec^\prime \left(
-            \frac{\fdelta}{\fdelta \Psi_j} \left(
-                - \Psi_j^\prime \Psi_k \Psi_k^{\prime*}
-                + \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec^\prime) \Psi_k
-                + \frac{1}{2} \delta_{\restbasis_j}(\xvec, \xvec^\prime) \Psi_j^\prime
-            \right) \right . \\
-        &   \left. + \frac{\fdelta}{\fdelta \Psi_j^{\prime*}} \left(
-                \Psi_j^* \Psi_k \Psi_k^{\prime*}
-                - \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec, \xvec) \Psi_k^{\prime*}
-                - \frac{1}{2} \delta_{\restbasis_j}(\xvec, \xvec^\prime) \Psi_j^*
-            \right) \right. \\
-        &   \left. + \frac{\fdelta}{\fdelta \Psi_k^\prime} \left(
-                - \Psi_j^\prime \Psi_j^* \Psi_k
-                + \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec, \xvec) \Psi_j^\prime
-                + \frac{1}{2} \delta_{\restbasis_k}(\xvec^\prime, \xvec) \Psi_k
-            \right) \right .\\
-        &   \left. + \frac{\fdelta}{\fdelta \Psi_k^*} \left(
-                \Psi_j^\prime \Psi_j^* \Psi_k^{\prime*}
-                - \frac{1}{2} \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec^\prime) \Psi_j^*
-                - \frac{1}{2} \delta_{\restbasis_k}(\xvec^\prime, \xvec) \Psi_k^{\prime*}
-            \right) \right. \\
-        &   \left.
-                + \frac{\fdelta}{\fdelta \Psi_j}
-                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
+            -\frac{\fdelta}{\fdelta \Psi_j} \mathcal{Q}_{jk} \right.
+            + \frac{\fdelta}{\fdelta \Psi_j^*} \mathcal{Q}_{jk}^*
+            - \frac{\fdelta}{\fdelta \Psi_k} \mathcal{Q}_{kj}
+            + \frac{\fdelta}{\fdelta \Psi_k^*} \mathcal{Q}_{kj}^* \\
+        &   \left. \quad + \frac{\fdelta}{\fdelta \Psi_j^*}
+            \frac{\fdelta}{\fdelta \Psi_j}
+            \left(
                 \frac{\fdelta}{\fdelta \Psi_k^\prime}
-                \frac{1}{4} \Psi_k
-                - \frac{\fdelta}{\fdelta \Psi_j}
-                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
-                \frac{\fdelta}{\fdelta \Psi_k^*}
-                \frac{1}{4} \Psi_k^{\prime*}
-            \right. \\
-        &   \left.
-                + \frac{\fdelta}{\fdelta \Psi_k^\prime}
-                \frac{\fdelta}{\fdelta \Psi_k^*}
-                \frac{\fdelta}{\fdelta \Psi_j}
-                \frac{1}{4} \Psi_j^\prime
-                - \frac{\fdelta}{\fdelta \Psi_k^\prime}
-                \frac{\fdelta}{\fdelta \Psi_k^*}
-                \frac{\fdelta}{\fdelta \Psi_j^{\prime*}}
-                \frac{1}{4} \Psi_j^*
-        \right) \mathcal{W}[\hat{A}].
+                \frac{\Psi_k^\prime}{4}
+                - \frac{\fdelta}{\fdelta \Psi_k^{\prime *}}
+                \frac{\Psi_k^{\prime *}}{4}
+            \right)
+            + \frac{\fdelta}{\fdelta \Psi_k^*}
+            \frac{\fdelta}{\fdelta \Psi_k}
+            \left(
+                \frac{\fdelta}{\fdelta \Psi_j^\prime}
+                \frac{\Psi_j^\prime}{4}
+                - \frac{\fdelta}{\fdelta \Psi_j^{\prime *}}
+                \frac{\Psi_j^{\prime *}}{4}
+            \right)
+        \right) \mathcal{W}[\hat{A}],
+    \end{eqn*}
+    where we denoted
+    \begin{eqn*}
+        \mathcal{Q}_{jk}[\bPsi](\xvec, \xvec^\prime)
+        = \Psi_j | \Psi_k^\prime |^2
+            -\frac{1}{2} \Psi_j \delta_{\restbasis_k}(\xvec^\prime, \xvec^\prime)
+            -\frac{\delta_{j k} }{2} \Psi_j^\prime \delta_{\restbasis_k}(\xvec^\prime, \xvec).
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-Proof is the same as in case of \thmref{wigner-spec:w-commutator1}.
+Proved by straightforward application of \thmref{wigner:mc:correspondences} and simplification of the resulting expression, similarly to \thmref{wigner-spec:w-commutator1}.
 \end{proof}
 
 \begin{lemma}
