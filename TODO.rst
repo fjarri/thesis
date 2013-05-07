@@ -49,3 +49,10 @@ For math:
 - Lucida
 - Minion Math
 - CMR
+
+
+Conventions
+-----------
+
+- "in the theorem", but "in theorem 1".
+
