@@ -174,6 +174,7 @@ def journalAbbreviations(entries):
         'Die Naturwissenschaften': 'Naturwissenschaften',
         'Nature communications': 'Nat. Commun.',
         'Science (New York, N.Y.)': 'Science',
+        'Science': 'Science',
         'Journal of the Optical Society of America B': 'J. Opt. Soc. Am. B',
         'Quantum and Semiclassical Optics: Journal of the European Optical Society Part B': 'Quantum Semiclass. Opt.',
         'Physics Reports': 'Phys. Rep.',
@@ -188,6 +189,11 @@ def journalAbbreviations(entries):
         'Computer Physics Communications': 'Comput. Phys. Commun.',
         'Frontiers of Physics': 'Front. Phys.',
         'Physical Review B': 'Phys. Rev. B',
+        'Physics Letters': 'Phys. Lett.',
+        'Physics Letters B': 'Phys. Lett. B',
+        'The Astrophysical Journal': 'Astrophys. J.',
+        'Journal of Mathematical Physics': 'J. Math. Phys.',
+        'Proceedings of the National Academy of Sciences of the United States of America': 'P. Natl. Acad. Sci. USA',
     }
 
     for entry_type, entry_key, entry_fields in entries:
