@@ -531,7 +531,13 @@ In order to perform transformations of master equations in the future, we will n
 
 \begin{lemma}
 \label{lmm:func-calculus:move-laplacian}
-	If in each mode of the restricted basis $\restbasis$ the corresponding mode function is zero at the integration border associated with the basis (in mathematical terms, $\forall \nvec \in \restbasis,\, \xvec \in \partial A \,|\, \phi_n(\xvec) = 0$), then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$,
+	Let mode functions in the restricted basis $\restbasis$ satisfy the condition that for any pair of modes $\mvec,\nvec \in \restbasis$ it is true that
+	\begin{eqn*}
+		\oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
+		= 0,
+	\end{eqn*}
+	where $A$ is the integration area associated with the basis, $\partial A$ is its boundary, and $\mathbf{v}$ is the outward pointing unit normal of surface element $\upd S$.
+	Then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$,
 	\begin{eqn*}
 		\int\limits_A \upd\xvec \left(
 			\nabla^2 \frac{\fdelta}{\fdelta f}
@@ -543,6 +549,7 @@ In order to perform transformations of master equations in the future, we will n
 \begin{proof}
 Integration limits play an important role in this proof, so we will write them explicitly.
 \begin{eqn}
+\label{eqn:func-calculus:move-laplasian-expansion}
 	\int\limits_A \upd\xvec \left(
 		\nabla^2 \frac{\fdelta}{\fdelta f}
 	\right) f
@@ -554,7 +561,7 @@ Integration limits play an important role in this proof, so we will write them e
 	= (*),
 \end{eqn}
 where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$.
-Using Green's first identity and the fact that eigenfunctions are equal to zero at the boundary of $A$:
+Using Green's first identity and the condition for the integrals over the boundary of $A$:
 \begin{eqn}
 	\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 	& = \oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
@@ -564,8 +571,7 @@ Using Green's first identity and the fact that eigenfunctions are equal to zero 
 	- \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
 	& = \int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
 \end{eqn}
-where $\mathbf{v}$ is the outward pointing unit normal of surface element $\upd S$.
-Thus
+Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 \begin{eqn}
 	(*)
 	& = \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
@@ -578,6 +584,24 @@ Thus
 \end{eqn}
 \end{proof}
 
-Note that this lemma imposes additional requirement on basis functions, but in practical applications it is always satisfied.
-For example, in plane wave basis eigenfunctions are equal to zero at the border of the bounding box, and in harmonic oscillator basis they are equal to zero on the infinity (which can be considered the boundary of their integration area).
+Note that this lemma imposes an additional requirement on basis functions, which is, essentially, a generalised form of periodicity in the zeroth and first derivative over $A$.
+In this work we use two bases: plane waves and harmonic modes \todo{reference the corresponding appendix}.
+
+For the harmonic basis the condition is obviously true, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function are zero there.
+
+For the plane wave basis $A$ is a box (let us suppose for definiteness that it spans from $0$ to $L_j$ in every dimension $j$), and the mode functions are separable ($\phi_{\nvec}(\xvec) \equiv \prod_{j=1}^D \phi_{n_j}^{(j)}(x_j)$) so the variables in the integral from the condition can be easily separated too:
+\begin{eqn}
+	\oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
+	& = \sum_{j=1}^D
+		\left. \phi_{m_j}^{(j)} \frac{\upd \phi_{n_j}^{(j)*}}{\upd x_j} \right|_{x_j = 0}^{L_j}
+		\prod_{k=1,k \ne j}^D \int_0^{L_k} \upd x_k \phi_{m_k}^{(k)} \phi_{n_k}^{(k)*}.
+\end{eqn}
+It is obvious from \todo{eqnref for the basis} that for any mode $\nvec$
+\begin{eqn}
+	\phi_{n_j}^{(j)}(0) = \phi_{n_j}^{(j)}(L_j), \quad
+	\left. \frac{\upd \phi_{n_j}^{(j)}}{\upd x_j} \right|_{x_j=0}
+	= \left. \frac{\upd \phi_{n_j}^{(j)}}{\upd x_j} \right|_{x_j=L_j},
+\end{eqn}
+which makes the integral above zero.
+
 Hereinafter we will assume that this condition is true for any basis we work with.
