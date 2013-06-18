@@ -27,64 +27,66 @@ The plane wave basis consists of eigenfunctions of the kinetic term of the Hamil
     \left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
     = E_{\nvec} \phi_{\nvec}.
 \end{eqn}
-The eigenfunctions are defined in a box with the shape $(L_1, \ldots, L_D)$ with $\prod_{d=1}^D L_d \equiv V$ (which corresponds to the integration area $A$ which is referred to in \appref{func-calculus}):
+The eigenfunctions are defined in a $D$-dimensional box with the shape $(L_1, \ldots, L_D)$ with $\prod_{d=1}^D L_d \equiv V$ (which corresponds to the integration area $A$ which is referred to in \appref{func-calculus}):
 \begin{eqn}
 \label{eqn:bases:plane-wave-modes}
     \phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
 \end{eqn}
 and have the energy
 \begin{eqn}
-    E_{\nvec} \phi_{\nvec}
+    E_{\nvec}
     = \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m}.
 \end{eqn}
 Because of the periodic boundary conditions at the edges of the box, possible values of the components of the spatial frequency vector $\kvec$ are
 \begin{eqn}
-(\kvec_{\nvec})_d = \frac{2 \pi n_d}{L_d},
+(\kvec_{\nvec})_d = \frac{2 \pi n_d}{L_d}.
 \end{eqn}
-where $d = 1 \ldots D$ is a dimension number.
 
 This basis set is the most computationally effective.
 Functions defined on a discrete grid $x_d = 0, h, \ldots, L_d - h$ (the step $d = L_d / M_d$, where $M_d$ is the number of modes in the dimension $d$) can be decomposed into this basis using Fast Fourier transform (\abbrev{fft}), which is available for a wide range of platforms and programming languages, and has the asymptotical complexity $\mathcal{O}(M \log_2 M)$ (where the total number of modes $M = \prod_{d=1}^D M_d$).
 
 While this basis is far from being natural for a harmonically confined \abbrev{bec} with nonlinear interactions, its effectiveness overweighs all the disadvantages; plane wave modes can be viewed as pixels for the mode space.
 
-% =============================================================================
-\section{Transformation to harmonic oscillator basis}
-% =============================================================================
-
-
-This chapter briefly describes transformations to and from harmonic basis,
-which were explained in detail in~\cite{Dion2003}.
-
 
 % =============================================================================
-\subsection{One-dimensional oscillator}
+\section{Harmonic oscillator basis}
 % =============================================================================
 
-Consider one-dimensional harmonic oscillator with the Hamiltonian
-\[
-    H = -\frac{\hbar^2 \nabla^2}{2 M} + \frac{M \omega^2 x^2}{2},
-\]
-where $m$ is the mass of a particle and $\omega$ is the oscillator frequency.
-Characteristic length for this oscillator is
-\[
-    l_x = \sqrt{\frac{\hbar}{M \omega}}.
-\]
-Then the eigenfunctions of the Hamiltonian are
-\begin{equation}
-\label{eqn:harmonic-transform:harmonic-modes}
-    \phi_m = \frac{1}{\sqrt{2^m m! l_x} \sqrt[4]{\pi}} H_m(x / l_x)
-        \exp \left( -\frac{x^2}{2 l_x^2} \right),
-\end{equation}
-where $H_m$ is ``physicists'\,'' Hermite polynomial of order $m$.
-Corresponding eigenvalues are
-\[
-    E_m = \hbar \omega (m + \frac{1}{2}).
-\]
-One can easily check that this set is orthonormal:
-\[
-    \int\limits_{-\infty}^{\infty} \phi_m(x) \phi_n(x) dx = \delta_{mn}.
-\]
+It often happens that for a pseudo-\abbrev{1d} \abbrev{bec} the confinement in transverse dimensions is strong enough to make the nonlinear interaction negligible.
+In these cases it can be advantageous to use a harmonic oscillator basis for these dimensions despite its computational drawbacks.
+
+The harmonic basis consists of eigenfunctions of the kinetic and potential terms of the Hamiltonian:
+\begin{eqn}
+    \left(
+        -\frac{\hbar^2}{2m} \nabla^2
+        + \frac{m \sum_{d=1}^D \omega_d^2 x_d^2}{2}
+    \right) \phi_{\nvec}
+    = E_{\nvec} \phi_{\nvec}.
+\end{eqn}
+The eigenfunctions are:
+\begin{eqn}
+\label{eqn:bases:harmonic-modes}
+    \phi_{\nvec} = \prod_{d=1}^D
+        \frac{1}{\sqrt{2^{n_d} n_d! l_d} \sqrt[4]{\pi}}
+        H_{n_d} \left( \frac{x_d}{l_d} \right)
+        \exp \left( -\frac{x_d^2}{2 l_d^2} \right),
+\end{eqn}
+where $H_{n_d}$ is the ``physicists'\,'' Hermite polynomial of order $n_d$, and $l_d = \sqrt{\hbar / (m \omega_d)}$ is the characteristic length.
+Corresponding energy is
+\begin{eqn}
+    E_{\nvec} = \hbar \sum_{d=1}^D \omega_d (n_d + \frac{1}{2}).
+\end{eqn}
+
+Decomposition into this basis is less computationally effective than \abbrev{fft} in terms of speed, memory, and even precision (due to extremely large range of weight coefficients needed for the decomposition).
+There are even some restrictions on the function being transformed.
+The next section describes the algorithm and these restrictions in detail.
+
+
+% =============================================================================
+\section{Discrete harmonic transform}
+% =============================================================================
+
+The numerical algorithm for the decomposition of a funtion defined on a discrete grid in a harmonic basis~\cite{Dion2003} is much less known than \abbrev{fft}, and has some unusual properties, so it is worth describing in brief.
 
 Given some function $f(x)$, one can expand it into harmonic oscillator basis as
 \[
@@ -125,7 +127,7 @@ This means that we need to integrate
 \[
     c_m = \int \Psi(x)^s \phi_m(x) dx.
 \]
-By definition of mode functions~\eqnref{harmonic-transform:harmonic-modes},
+By definition of mode functions~\eqnref{bases:harmonic-modes},
 \[
     \Psi(x)^s \phi_m(x) = P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right),
 \]
