@@ -29,29 +29,37 @@ It can be shown that the displacement operator has properties similar to~\eqnref
 \end{lemma}
 \begin{proof}
 We will prove the second part of the first equation.
-Using Baker-Hausdorff theorem:
+Using Baker-Hausdorff theorem, the functional displacement operator can be rewritten as
 \begin{eqn}
 	\hat{D}[\Lambda]
-	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
+	= \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
 		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
 		\exp \frac{1}{2} \left[
 			\int \upd\xvec^\prime \Lambda^\prime \Psiop^{\prime\dagger},
 			\int \upd\xvec \Lambda^* \Psiop
-		\right] \\
-	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
-		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
-		\exp \left(
-			-\frac{1}{2} \iint \upd\xvec \upd\xvec^\prime
-			\Lambda^\prime \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
-		\right) \\
-	& = \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
+		\right].
+\end{eqn}
+Recognizing the commutator of field operators, we can simplify
+\begin{eqn}
+	\left[
+		\int \upd\xvec^\prime \Lambda^\prime \Psiop^{\prime\dagger},
+		\int \upd\xvec \Lambda^* \Psiop
+	\right]
+	& = \iint \upd\xvec \upd\xvec^\prime
+		\Lambda^\prime \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec) \\
+	& = \int \upd\xvec \Lambda \Lambda^*,
+\end{eqn}
+resulting in the expression for the displacement operator
+\begin{eqn}
+	\hat{D}[\Lambda]
+	= \exp \left( \int \upd\xvec \Lambda \Psiop^\dagger \right)
 		\exp \left( -\int \upd\xvec \Lambda^* \Psiop \right)
 		\exp \left(
 			-\frac{1}{2} \int \upd\xvec \Lambda \Lambda^*
 		\right).
 \end{eqn}
 Note that, since $\Lambda \in \mathbb{F}_{\restbasis}$, it projects to itself, and so does $\Psiop^\dagger$.
-Thus
+Thus, differentiation of the displacement operator gives
 \begin{eqn}
 	\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
 	& = \left(
@@ -59,8 +67,8 @@ Thus
 		- \frac{1}{2} \int \upd\xvec \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
 	\right) \hat{D}[\Lambda] \\
 	& = (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime *}) \hat{D}[\Lambda].
-	\qedhere
 \end{eqn}
+The remaining equations from the statement are proved analogously.
 \end{proof}
 
 The functional Wigner transformation is the same Fourier transform of the trace as in \defref{mm-wigner:sm:w-transformation}, but expressed in functional terms.
