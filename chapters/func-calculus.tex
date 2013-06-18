@@ -585,9 +585,9 @@ Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 \end{proof}
 
 Note that this lemma imposes an additional requirement on basis functions, which is, essentially, a generalised form of periodicity in the zeroth and first derivative over $A$.
-In this work we use two bases: plane waves and harmonic modes \todo{reference the corresponding appendix}.
+In this work we use two bases: plane waves and harmonic modes (see \appref{bases} for details).
 
-For the harmonic basis the condition is obviously true, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function are zero there.
+For the harmonic basis the condition is obviously true, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function~\eqnref{bases:harmonic-modes} are zero there.
 
 For the plane wave basis $A$ is a box (let us suppose for definiteness that it spans from $0$ to $L_j$ in every dimension $j$), and the mode functions are separable ($\phi_{\nvec}(\xvec) \equiv \prod_{j=1}^D \phi_{n_j}^{(j)}(x_j)$) so the variables in the integral from the condition can be easily separated too:
 \begin{eqn}
@@ -596,7 +596,7 @@ For the plane wave basis $A$ is a box (let us suppose for definiteness that it s
 		\left. \phi_{m_j}^{(j)} \frac{\upd \phi_{n_j}^{(j)*}}{\upd x_j} \right|_{x_j = 0}^{L_j}
 		\prod_{k=1,k \ne j}^D \int_0^{L_k} \upd x_k \phi_{m_k}^{(k)} \phi_{n_k}^{(k)*}.
 \end{eqn}
-It is obvious from \todo{eqnref for the basis} that for any mode $\nvec$
+It is obvious from~\eqnref{bases:plane-wave-modes} that for any mode $\nvec$
 \begin{eqn}
 	\phi_{n_j}^{(j)}(0) = \phi_{n_j}^{(j)}(L_j), \quad
 	\left. \frac{\upd \phi_{n_j}^{(j)}}{\upd x_j} \right|_{x_j=0}

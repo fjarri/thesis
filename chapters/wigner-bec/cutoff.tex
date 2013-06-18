@@ -3,19 +3,30 @@
 % =============================================================================
 
 As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
-We will use the formalism for multimode operators described in \charef{wigner}.
+Considering the Hamiltonian, two types of mode sets seem practical: plain waves and harmonic modes.
 
-Two basis sets are used in this work.
-First is the basis of plane waves:
+The former one consists of eigenfunctions of the kinetic term:
+\begin{eqn}
+    \left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
+    = E_{\nvec} \phi_{\nvec}.
+\end{eqn}
+The eigenfunctions are defined in a box with the shape $(L_x, L_y, \ldots)$ with $L_x L_y \ldots = V$:
 \begin{eqn}
 	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
 \end{eqn}
-whose elements are eigenfunctions of kinetic term:
+and have the energy
 \begin{eqn}
-	\left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
-	= E_{\nvec} \phi_{\nvec}
-	= \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m} \phi_{\nvec}.
+    E_{\nvec} \phi_{\nvec}
+    = \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m}.
 \end{eqn}
+Because of the periodic boundary conditions at the edges of the box, possible values of the spatial frequency vector $\kvec$ are
+\begin{eqn}
+(\kvec_{\nvec})_d = \frac{2 \pi n_d}{L_d},
+\end{eqn}
+where $d=x,y,\ldots$.
+
+
+
 Integration area for this set is the box with volume $V = \prod_{j=1}^D L_j$.
 Spatial wave vectors are
 \begin{eqn}

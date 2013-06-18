@@ -1,0 +1,264 @@
+% =============================================================================
+\chapter{Basis sets}
+\label{cha:appendix:bases}
+% =============================================================================
+
+While it is possible to apply the main theorems from this work to many different basis set satisfying the orthonormality and completeness conditions~\eqnref{func-calculus:basis}, other factors restrict the choice in practical applications.
+Ideally, one would want the following to be true:
+\begin{itemize}
+    \item basis modes are natural to the physical problem in question (e.g., plain waves for a freely expanding \abbrev{bec});
+    \item decomposition of a function defined on a discrete spatial grid in the basis is computationally effective; and
+    \item a generalised periodicity condition from \lmmref{func-calculus:move-laplacian} applies.
+\end{itemize}
+
+For the applications discussed in this work the first condition is the hardest to satisfy, since the equations governing the system evolution are nonlinear, which make ground and excited states of the system inexpressable algebraically (with some exceptions, when the nonlinearity is negligible).
+The advantage of this condition being true is that less modes will be required to describe the dynamics of a system, thus making it easier to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
+
+Taking this into account, we have settled on two basis sets to use in this work.
+Unless explicitly stated otherwise, the plane wave basis is the primary one, and the harmonic oscillator basis is the backup one (although it usually did not require less modes than the plane wave basis, and was more difficult to work with from the computational point of view).
+
+
+% =============================================================================
+\section{Plane wave basis}
+% =============================================================================
+
+The plane wave basis consists of eigenfunctions of the kinetic term of the Hamiltonian:
+\begin{eqn}
+    \left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
+    = E_{\nvec} \phi_{\nvec}.
+\end{eqn}
+The eigenfunctions are defined in a box with the shape $(L_1, \ldots, L_D)$ with $\prod_{d=1}^D L_d \equiv V$ (which corresponds to the integration area $A$ which is referred to in \appref{func-calculus}):
+\begin{eqn}
+\label{eqn:bases:plane-wave-modes}
+    \phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
+\end{eqn}
+and have the energy
+\begin{eqn}
+    E_{\nvec} \phi_{\nvec}
+    = \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m}.
+\end{eqn}
+Because of the periodic boundary conditions at the edges of the box, possible values of the components of the spatial frequency vector $\kvec$ are
+\begin{eqn}
+(\kvec_{\nvec})_d = \frac{2 \pi n_d}{L_d},
+\end{eqn}
+where $d = 1 \ldots D$ is a dimension number.
+
+This basis set is the most computationally effective.
+Functions defined on a discrete grid $x_d = 0, h, \ldots, L_d - h$ (the step $d = L_d / M_d$, where $M_d$ is the number of modes in the dimension $d$) can be decomposed into this basis using Fast Fourier transform (\abbrev{fft}), which is available for a wide range of platforms and programming languages, and has the asymptotical complexity $\mathcal{O}(M \log_2 M)$ (where the total number of modes $M = \prod_{d=1}^D M_d$).
+
+While this basis is far from being natural for a harmonically confined \abbrev{bec} with nonlinear interactions, its effectiveness overweighs all the disadvantages; plane wave modes can be viewed as pixels for the mode space.
+
+% =============================================================================
+\section{Transformation to harmonic oscillator basis}
+% =============================================================================
+
+
+This chapter briefly describes transformations to and from harmonic basis,
+which were explained in detail in~\cite{Dion2003}.
+
+
+% =============================================================================
+\subsection{One-dimensional oscillator}
+% =============================================================================
+
+Consider one-dimensional harmonic oscillator with the Hamiltonian
+\[
+    H = -\frac{\hbar^2 \nabla^2}{2 M} + \frac{M \omega^2 x^2}{2},
+\]
+where $m$ is the mass of a particle and $\omega$ is the oscillator frequency.
+Characteristic length for this oscillator is
+\[
+    l_x = \sqrt{\frac{\hbar}{M \omega}}.
+\]
+Then the eigenfunctions of the Hamiltonian are
+\begin{equation}
+\label{eqn:harmonic-transform:harmonic-modes}
+    \phi_m = \frac{1}{\sqrt{2^m m! l_x} \sqrt[4]{\pi}} H_m(x / l_x)
+        \exp \left( -\frac{x^2}{2 l_x^2} \right),
+\end{equation}
+where $H_m$ is ``physicists'\,'' Hermite polynomial of order $m$.
+Corresponding eigenvalues are
+\[
+    E_m = \hbar \omega (m + \frac{1}{2}).
+\]
+One can easily check that this set is orthonormal:
+\[
+    \int\limits_{-\infty}^{\infty} \phi_m(x) \phi_n(x) dx = \delta_{mn}.
+\]
+
+Given some function $f(x)$, one can expand it into harmonic oscillator basis as
+\[
+    c_m = \int f(x) \phi_m(x) dx,
+\]
+and the backward transformation is, obviously,
+\[
+    f(x) = \sum_{m} c_m \phi_m(x).
+\]
+In general, when we do not know anything about $f(x)$,
+the value of the integral can be calculated only approximately.
+But we can obtain exact results for functions of a certain type,
+and by choosing points where we want to sample $f(x)$.
+
+The method is based on a Gauss-Hermite quadrature \todo{citation needed?},
+which states that the value of the integral can be approximated as
+\[
+    \int\limits_{-\infty}^{\infty} g(x) e^{-x^2} dx
+    = \sum_{i=1}^N w_i g(r_i) + E,
+\]
+where $N$ is the number of sample points.
+Weights $w_i$ are calculated as
+\[
+    w_i = \frac{2^{N-1} N! \sqrt{\pi}}{N^2 (H_{N-1}(r_i))^2},
+\]
+and sample points $r_i$ are roots of Hermite polynomial $H_N$.
+The error term is
+\[
+    E = \frac{N! \sqrt{\pi}}{2^N (2N)!} g^{(2N)}(\xi).
+\]
+Therefore if $g(x)$ is a polynomial of order $M$,
+one can eliminate the error term by choosing $N$ so that $2N \ge M + 1$,
+thus making the integration exact.
+
+Now let us say we want to find population of the first $M$ modes for $f(x) = \Psi(x)^s$,
+where $\Psi(x) = \sum_{m=0}^{M-1} c_m \phi_m(x)$ and $s$ is a natural number.
+This means that we need to integrate
+\[
+    c_m = \int \Psi(x)^s \phi_m(x) dx.
+\]
+By definition of mode functions~\eqnref{harmonic-transform:harmonic-modes},
+\[
+    \Psi(x)^s \phi_m(x) = P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right),
+\]
+where $P(x)$ is the polynomial of order less than $(M-1)s + m$.
+Since we want to have the same set of sample points for any $m \in [0, M-1]$,
+we will consider the worst case $m = M-1$,
+which makes the order of $P(x)$ limited by $(M-1)(s+1)$.
+The integral can now be transformed to the form necessary to apply Gauss-Hermite quadrature:
+\begin{equation*}
+\begin{split}
+    c_m
+    & = \int P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right) dx \\
+    & = \int l_x \sqrt{\frac{2}{s+1}} P \left( y \sqrt{\frac{2}{s+1}} \right) e^{-y^2} dy \\
+    & = \sum_{i=1}^N w_i P \left( r_i \sqrt{\frac{2}{s+1}} \right) l_x \sqrt{\frac{2}{s+1}} \\
+    & = \sum_{i=1}^N w_i
+        \Psi \left( l_x r_i \sqrt{\frac{2}{s+1}} \right)^s
+        \phi_m \left( l_x r_i \sqrt{\frac{2}{s+1}} \right)
+        \exp(r_i^2) l_x \sqrt{\frac{2}{s+1}} \\
+    & = \sum_{i=1}^N \tilde{w}_i \phi_m(\tilde{x}_i) f(\tilde{x}_i).
+\end{split}
+\end{equation*}
+Here the sample points are
+\[
+    \tilde{x}_i = l_x r_i \sqrt{\frac{2}{s+1}},
+\]
+and modified weights are
+\[
+    \tilde{w}_i = w_i l_x \sqrt{\frac{2}{s+1}} \exp(r_i^2).
+\]
+The number of sampling points is determined by the order of $P(x)$:
+\[
+    N \ge \frac{(M - 1)(s + 1)}{2}.
+\]
+
+Since we usually need population for all modes at once,
+it is more convenient to use the decomposition in matrix form:
+\[
+    \mathbf{c}
+    = \Phi^T\,\mathrm{diag}(\tilde{\mathbf{w}}) \mathbf{f}
+    = \Phi^T (\tilde{\mathbf{w}} \circ \mathbf{f}),
+\]
+where $\Phi_{im} = \phi_m(\tilde{x}_i)$,
+$\tilde{\mathbf{w}}$ is a vector of elements $\tilde{w}_i$,
+$\mathbf{f}$ is a vector of elements $f(\tilde{x}_i)$,
+and the symbol $\circ$ stands for Hadamard (element wise) product.
+Corresponding backward transform is then expressed as
+\[
+    \mathbf{f} = \Phi \mathbf{c}.
+\]
+
+Note that the same method is applicable for $f(x) = \Psi(x)^a (\Psi^*(x))^b$,
+in which case $s = a + b$.
+
+
+% =============================================================================
+\subsection{Three-dimensional oscillator}
+% =============================================================================
+
+Three-dimensional harmonic oscillator has the Hamiltonian
+\[
+    H = -\frac{\hbar^2 \nabla^2}{2 M}
+        + \frac{M}{2} (
+            \omega_1^2 x_1^2 + \omega_2^2 x_2^2 + \omega_3^2 x_3^2
+        ),
+\]
+where $M$ is the mass of a particle and $\omega_j$ are oscillator frequencies.
+Characteristic lengths for this oscillator are
+\[
+    l_j = \sqrt{\frac{\hbar}{M \omega_j}}.
+\]
+Then the eigenfunctions of the Hamiltonian are
+\[
+    \phi_{\mvec} (\xvec)
+    = \prod_{j=1}^3
+        \frac{1}{\sqrt{2^{m_j} m_j! l_j} \sqrt[4]{\pi}} H_{m_j}(x_j / l_j)
+        \exp \left( -\frac{x_j^2}{2 l_j^2} \right)
+    = \prod_{j=1}^3 \phi_{m_j}^{(j)} (x_j)
+\]
+Corresponding eigenvalues:
+\[
+    E_{\mvec} = \sum_{j=1}^3 \hbar \omega_j (m_j + \frac{1}{2}).
+\]
+
+Therefore if we need to find mode expansion of $f(\xvec) = \Psi(\xvec)^s$ in 3D, we have to calculate
+\[
+    c_{\mvec} = \int \Psi(\xvec)^s \phi_{\mvec}(\xvec) d\xvec.
+\]
+The whole integral can be split into three integrals over each of the spatial dimensions,
+which can be evaluated using the same procedure as in 1D case.
+We will not go into details here and just present the result.
+
+If we want to get decomposition into $(M_1, M_2, M_3)$ modes,
+the minimal number of samples for $\Psi(\xvec)$ is
+\[
+    N_j \ge \frac{(M_j - 1)(s + 1)}{2}.
+\]
+Coordinates of sample points are
+\[
+    \tilde{x}_{i}^{(j)} = l_j r_i^{(N_j)} \sqrt{\frac{2}{s+1}},
+\]
+and modified weights are
+\[
+    \tilde{w}_{i}^{(j)} = w_i^{(N_j)} l_j \sqrt{\frac{2}{s+1}} \exp((r_i^{(N_j)})^2),
+\]
+where $r_i^{(N_j)}$ and $w_i^{(N_j)}$ are roots and weights for Hermite polynomial of order $N_j$.
+With these definitions the integration can be replaced by sum
+\[
+    c_{\mvec}
+    = \sum_{n_1=1}^{N_1} w_{n_1}^{(1)} \phi_{m_1}^{(1)} (\tilde{x}_{n_1}^{(1)})
+        \sum_{n_2=1}^{N_2} w_{n_2}^{(2)} \phi_{m_2}^{(2)} (\tilde{x}_{n_2}^{(2)})
+        \sum_{n_3=1}^{N_3} w_{n_3}^{(3)} \phi_{m_3}^{(3)} (\tilde{x}_{n_3}^{(3)})
+        f(\tilde{x}_{n_1}^{(1)}, \tilde{x}_{n_2}^{(2)}, \tilde{x}_{n_3}^{(3)}).
+\]
+
+In applications it is more convenient to express this formula using matrix multiplications and permutations,
+since these primitives are well-optimised and exist in any numerical library.
+We will operate with three-dimensional arrays,
+so we need to introduce corresponding notation.
+First, an array $A_{ijk}$ with size $N_1 \times N_2 \times N_3$ can be considered to be a common two-dimensional matrix $A_{i(jk)}$ (with size $N_1 \times N_2 N_3$) or $A_{(ij)k}$ (with size $N_1 N_2 \times N_3$),
+where $(jk)$ or $(ij)$ serve as compound index.
+Therefore, for example, the result of multiplication $AB_{N_3 \times M_3} = A_{N_1 N_2 \times N_3} B_{N_3 \times M_3} = C_{N1 N2 \times M3} = C_{N1 \times N2 \times M3}$.
+This is just a view of the matrix and does not change the way matrix elements are stored,
+which is important for numerical algorithms.
+Second, we define the permutation operator $P: A_{ijk} \rightarrow A_{jki}$.
+With these definitions the transformation can be written as:
+\[
+    C = P[P[(W \circ F) \Phi^{(3)}] \Phi^{(1)}] \Phi^{(2)},
+\]
+where matrix $F_{n_1 n_2 n_3} = f(\tilde{x}_{n_1}^{(1)}, \tilde{x}_{n_2}^{(2)}, \tilde{x}_{n_3}^{(3)})$ has size $N_1 \times N_2 \times N_3$,
+$\Phi^{(j)}_{n_j m_j} = \phi_{m_j}^{(j)} (\tilde{x}_{n_j}^{(j)})$,
+and $W_{n_1 n_2 n_3} = \prod_{j=1}^3 w_{n_j}^{(j)}$.
+Backward transform is
+\[
+    F = P[P[f (\Phi^{(3)})^T] (\Phi^{(1)})^T] (\Phi^{(2)})^T.
+\]
+
