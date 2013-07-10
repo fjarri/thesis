@@ -5,9 +5,9 @@
 The second-quantized Hamiltonian of a $C$-component \abbrev{bec} in $D$ effective dimensions is expressed using quantum field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$ defined by~\eqnref{wigner:op-calculus:field}, with the commutators~\eqnref{wigner:op-calculus:commutators}.
 \begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:H}
-	\hat{H} = \int d\xvec \left\{
+	\hat{H} = \int \upd \xvec \left\{
 		\Psiopf_j^{\dagger} K_{jk} \Psiopf_k
-		+ \frac{1}{2} \int d\xvec^\prime
+		+ \frac{1}{2} \int \upd \xvec^\prime
 			\Psiopf_j^\dagger \Psiopf_k^{\prime\dagger}
 			U_{jk}(\xvec - \xvec^\prime)
 			\Psiopf_j^\prime \Psiopf_k
@@ -30,7 +30,7 @@ If we impose an energy cutoff $\ecut$ and only take into account low-energy mode
 the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by the contact potential $U_{jk} \delta(\xvec - \xvec^\prime)$~\cite{Morgan2000} \todo{just how low should the energy be? need to elaborate on that}, giving the effective Hamiltonian
 \begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:effective-H}
-	\hat{H} = \int d\xvec \left\{
+	\hat{H} = \int \upd \xvec \left\{
 		\Psiop_j^{\dagger} K_{jk} \Psiop_k
 		+ \frac{U_{jk}}{2} \Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k
 	\right\},

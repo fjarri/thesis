@@ -6,9 +6,9 @@ Hereinafter field operators and wave functions will be assumed to be defined in 
 The Markovian master equation for the system with the inclusion of losses can be written as~\cite{Jack2002}
 \begin{eqn}
 \label{eqn:wigner-bec:master-eqn:master-eqn}
-	\frac{d\hat{\rho}}{dt} =
+	\frac{\upd\hat{\rho}}{\upd t} =
 		- \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
-		+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec
+		+ \sum_{\lvec} \kappa_{\lvec} \int \upd \xvec
 			\mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
 \end{eqn}
 where $\lvec = (l_1, l_2, \ldots, l_C)$ is a vector containing the number of particles of the corresponding components participating in the interaction, $C$ being the number of components, and we have introduced local Liouville loss terms,
@@ -43,12 +43,12 @@ The master equation allows us to derive an important property.
 	={} & \frac{d}{dt} \Trace{ \hat{\rho} \Psiop_j }
 	= \Trace{ \frac{d\hat{\rho}}{dt} \Psiop_j } \\
 	={} & \Trace{ -\frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right] \Psiop_j }
-	+ \sum_{\lvec} \kappa_{\lvec} \int d\xvec^\prime
+	+ \sum_{\lvec} \kappa_{\lvec} \int \upd \xvec^\prime
 		\Trace{
 			\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 			\Psiop_j
 		} \\
-	={} & \int d\xvec^\prime \left(
+	={} & \int \upd \xvec^\prime \left(
 		- \frac{i}{\hbar} \Trace{
 			\left[
 				\Psiop_l^{\prime\dagger} K_{lm}^\prime \Psiop_m^\prime,
@@ -186,7 +186,7 @@ The third term, coming from the losses, can be calculated as
 Thus the full relation is
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j \rangle
-	& = \int d\xvec^\prime \delta_{\restbasis_j}(\xvec^\prime - \xvec) \left(
+	& = \int \upd \xvec^\prime \delta_{\restbasis_j}(\xvec^\prime - \xvec) \left(
 		- \frac{i}{\hbar} \langle K_{jm}^\prime \Psiop_m^\prime \rangle
 		- \frac{i U_{jm}}{\hbar} \langle
 			\Psiop_m^{\prime\dagger} \Psiop_m^\prime \Psiop_j^\prime
@@ -219,7 +219,7 @@ Again, starting from master equation, and ignoring unitary evolution (which, obv
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
 	= \sum_{\lvec} \kappa_{\lvec}
-			\int d\xvec^\prime \Trace{
+			\int \upd \xvec^\prime \Trace{
 				\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 				\Psiop_j^\dagger \Psiop_j
 			}.
@@ -228,7 +228,7 @@ Expanding the loss operator:
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & \sum_{\lvec} \kappa_{\lvec}
-			\int d\xvec^\prime \Trace{
+			\int \upd \xvec^\prime \Trace{
 				\hat{\rho} \left(
 					2 \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^\prime
 					- \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
@@ -236,7 +236,7 @@ Expanding the loss operator:
 				\right)
 			} \\
 	={} & \sum_{\lvec} \kappa_{\lvec}
-			\int d\xvec^\prime \langle
+			\int \upd \xvec^\prime \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
@@ -245,13 +245,13 @@ Expanding the loss operator:
 				\right] \Psiop_j
 			\rangle \\
 	={} & \sum_{\lvec} \kappa_{\lvec}
-			\int d\xvec^\prime 2 \Real \langle
+			\int \upd \xvec^\prime 2 \Real \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
 			\rangle \\
 	={} & -2\sum_{\lvec} \kappa_{\lvec}
-			\int d\xvec^\prime \Real \langle
+			\int \upd \xvec^\prime \Real \langle
 				\Psiop_j^\dagger
 				\delta_{\restbasis_j}(\xvec^\prime, \xvec)
 				\frac{\partial \left(
