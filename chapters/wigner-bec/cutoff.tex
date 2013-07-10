@@ -3,63 +3,11 @@
 % =============================================================================
 
 As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
-Considering the Hamiltonian, two types of mode sets seem practical: plain waves and harmonic modes.
+In numerical simulations we use two different bases, plane waves and harmonic oscillator modes (see \appref{bases} for details).
+Both have analytical expressions for modes and corresponding energies, which makes the selection of the modes straightforward.
 
-The former one consists of eigenfunctions of the kinetic term:
-\begin{eqn}
-    \left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
-    = E_{\nvec} \phi_{\nvec}.
-\end{eqn}
-The eigenfunctions are defined in a box with the shape $(L_x, L_y, \ldots)$ with $L_x L_y \ldots = V$:
-\begin{eqn}
-	\phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
-\end{eqn}
-and have the energy
-\begin{eqn}
-    E_{\nvec} \phi_{\nvec}
-    = \frac{\hbar^2 \lvert \kvec_{\nvec} \rvert^2}{2 m}.
-\end{eqn}
-Because of the periodic boundary conditions at the edges of the box, possible values of the spatial frequency vector $\kvec$ are
-\begin{eqn}
-(\kvec_{\nvec})_d = \frac{2 \pi n_d}{L_d},
-\end{eqn}
-where $d=x,y,\ldots$.
-
-
-
-Integration area for this set is the box with volume $V = \prod_{j=1}^D L_j$.
-Spatial wave vectors are
-\begin{eqn}
-	\kvec_{\nvec} = \sum_{j=1}^D \frac{\pi n_j}{L_j} \vec{x}_j,
-\end{eqn}
-where $L_j$ are dimensions of the box, and $\vec{x}_j$ are spatial unit vectors.
-Field functions can be decomposed into this basis using common FFTs.
-
-More sophisticated basis can be constructed out of harmonic oscillator modes,
-which have the whole space as an integration area.
-One of the ways to decompose wave function into this basis is the Gauss-Hermite quadrature
-(see \todo{need to reference harmonic transform section from notes?} for technical details).
-
-We divide mode subspaces into low- and high-energy subsets $\restbasis_j$ and $\fullbasis_j - \restbasis_j$,
-depending on whether $E_n$ is more or less than some cutoff energy $\ecut$,
-and limit field operators to the corresponding subset $\restbasis_j$.
-Restricted operators obey commutation relations~\eqnref{wigner:op-calculus:restricted-commutators}.
-
-\begin{figure}
-\begin{center}
-\subfloat[Uniform grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/wigner/delta_uniform_1000.eps}}
-\subfloat[Harmonic grid, $\ecut = 1000\,\hbar\omega$]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/wigner/delta_harmonic_1000.eps}} \\
-\subfloat[Uniform grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/wigner/delta_uniform_all.eps}}
-\subfloat[Harmonic grid, no explicit cutoff]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/wigner/delta_harmonic_all.eps}}
-\end{center}
-\caption{Absolute value of restricted delta function $\lvert \delta_P(z^\prime - z) \rvert$ with and without explicit cutoff.}
-\label{fig:wigner-bec:cutoff:restricted-delta}
-\end{figure}
-
-Shape of the module of restricted delta function from \defref{func-calculus:restricted-delta} for two different basis sets and two different cutoffs is shown in~\figref{wigner-bec:cutoff:restricted-delta}.
-The higher cutoff is, the closer its shape gets to the ``ideal'' delta function,
-with nonlocality scaling as $\ecut^{-1/2}$ \todo{proof needed}.
+Besides being a requirement for using the contact interaction in the Hamiltonian, the energy cutoff has other important functions.
+First, it allows one to check for the convergence of the integration with respect to decreasing step of the spatial grid.
+It effectively separates the propagation in momentum space (which remains constant) from the propagating of the nonlinear parts of the equation in coordinate space (which, hopefully, becomes more precise when the grid step is decreased).
+Alternatively, the energy cutoff can work in a different direction, lowering the amount of modes under consideration, while keeping the spatial grid constant.
+This helps to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
