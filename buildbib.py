@@ -5,11 +5,11 @@ import codecs
 
 def accentSymbols(s):
     return s.replace(
-        u'\u012d', '\u{\i}').replace(
+        '\u012d', r'\u{\i}').replace(
         '\\AA ', '{\\r{A}}').replace(
-        u'\u201c', '``').replace(
-        u'\u201d', "''").replace(
-        u'\u2013', "--")
+        '\u201c', '``').replace(
+        '\u201d', "''").replace(
+        '\u2013', "--")
 
 def loadMendeleyBib(fname):
 
@@ -57,7 +57,7 @@ def saveTexBib(fname, entries):
             try:
                 f.write('\t' + field + ' = {' + entry_fields[field] + '},\n')
             except:
-                print entry_fields[field]
+                print(entry_fields[field])
                 raise
         f.write('}\n\n')
 
@@ -201,7 +201,7 @@ def journalAbbreviations(entries):
             if entry_fields['journal'] in abbreviations:
                 entry_fields['journal'] = abbreviations[entry_fields['journal']]
             else:
-                print "Missing abbreviation:", entry_fields['journal']
+                print("Missing abbreviation:", entry_fields['journal'])
 
 def removePaperTitles(entries):
     for entry_type, entry_key, entry_fields in entries:
