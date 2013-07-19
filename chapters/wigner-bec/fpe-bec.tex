@@ -2,6 +2,35 @@
 \section{Fokker-Planck equation for the BEC}
 % =============================================================================
 
+Resulting Wigner-transformed master equation is
+\begin{eqn}
+\label{eqn:wigner-bec:truncation:fpe}
+	\frac{dW}{dt}
+	& = \int d\xvec \left(
+		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \left(
+			-\frac{i}{\hbar} \left(
+				\sum_{k=1}^C K_{jk} \Psi_k
+				+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
+			\right)
+			- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec}
+		\right)
+	\right. \\
+	& \left.
+		+ \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \left(
+			-\frac{i}{\hbar} \left(
+				\sum_{k=1}^C K_{jk} \Psi_k^*
+				+ \sum_{k=1}^C U_{jk} \Psi_j^* \Psi_k \Psi_k^*
+			\right)
+			+ \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}}{\partial \Psi_j} O_{\lvec}^*
+		\right)
+	\right. \\
+	& \left. + \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k}
+		\sum_{\lvec} \kappa_{\lvec}
+		\frac{\partial O_{\lvec}}{\partial \Psi_j}
+		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}
+	\right) W
+\end{eqn}
+
 The general approach to numerical solution of the Fokker-Planck equation~\eqnref{wigner-bec:truncation:fpe} is to transform it to the equivalent set of stochastic differential equations (SDEs) for $\Psi_j$.
 Since the transformation is defined for real-valued variables only \todo{citation needed}, we have to modify the equation.
 

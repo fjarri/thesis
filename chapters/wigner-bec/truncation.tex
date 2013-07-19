@@ -15,8 +15,9 @@ Namely, the term with $K_{jk}$ is transformed using \thmref{wigner-spec:w-commut
 		W,
 \end{eqn}
 where Wigner function $W = \mathcal{W}[\hat{\rho}]$.
-Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming $U_{kj} = U_{jk}$):
+Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming the locality of the interaction, and $U_{kj} = U_{jk}$):
 \begin{eqn}
+\label{eqn:wigner-bec:truncation:full-nonlinear}
 	\mathcal{W} \left[
 		[
 			\int d\xvec \frac{U_{jk}}{2}
@@ -118,123 +119,123 @@ The use of this Wigner truncation allows us to simplify the results of \thmref{w
 Wigner truncation is an expansion up to the order $1/N_j$, so during the simplification, along with the higher order derivatives, we drop all components with $\delta_{\restbasis_j}$ of order higher than $1$ in the drift terms, and of order higher than $0$ in the diffusion terms.
 \copypaste{Copypaste ends here.}
 
-\begin{lemma}
-Assuming the conditions for Wigner truncation are satisfied, the result of Wigner transformation of the nonlinear term can be written as
-\begin{eqn}
+\begin{theorem}
+Assuming the conditions for Wigner truncation are satisfied, the result of the Wigner transformation of the nonlinear term is
+\begin{eqn*}
 	\mathcal{W} \left[
 		[
-			\frac{U_{jk}}{2}
+			\int \upd\xvec \frac{U_{jk}}{2}
 				\Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k,
 			\hat{\rho}
 		]
 	\right]
-	= U_{jk} \left(
-		\frac{\delta}{\delta \Psi_j^*} \Psi_j^* \Psi_k \Psi_k^*
-		- \frac{\delta}{\delta \Psi_j} \Psi_j \Psi_k \Psi_k^*
-	\right) W.
-\end{eqn}
-\end{lemma}
-
-\begin{theorem}
-	Assuming the conditions for Wigner truncation are satisfied, i.e. we can drop differentials higher than the second order and consider $\delta_{\restbasis_j}(\xvec, \xvec) \ll | \Psi_j |^2$, the result of Wigner transformation of the loss term can be written as
-	\begin{eqn*}
-		\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
-		= \sum_{n=1}^C
-				\frac{\delta}{\delta \Psi_n^*} \frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
-		+ \sum_{n=1}^C
-			\frac{\delta}{\delta \Psi_n} \frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
-		+ \sum_{n=1}^C \sum_{p=1}^C
-			\frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-			\frac{\partial O_{\lvec}}{\partial \Psi_n}
-			\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}.
-	\end{eqn*}
-	where $O_{\lvec} \equiv O_{\lvec}(\Psivec) = \prod_{c=1}^C \Psi_c^{l_c}$.
+	\approx{} & \int \upd\xvec U_{jk} \left(
+		\frac{\fdelta}{\fdelta \Psi_j} \left(
+			- \Psi_j \Psi_k \Psi_k^*
+			+ \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
+		\right) \right. \\
+	&	\left. + \frac{\fdelta}{\fdelta \Psi_j^*} \left(
+			\Psi_j^* \Psi_k \Psi_k^*
+			- \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k^* + \Psi_j^* )
+		\right) \right) W.
+\end{eqn*}
 \end{theorem}
 \begin{proof}
-The proof is basically a simplification of the result of \thmref{wigner-spec:w-losses} under certain conditions.
-First, we are neglecting all occurrences of $\delta_P$, which means setting $m_c = 0$ for every $c$.
-Second, we are dropping all terms with high order differentials, which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
-The only combinations of $j_c$ and $k_c$ for which $Z(\jvec, \kvec)$ is not zero are thus $\{ j_c = \delta_{cn}, k_c = 0, n \in [1, C] \}$, $\{ j_c = 0, k_c = \delta_{cn}, n \in [1, C] \}$ and $\{ j_c = \delta_{cn}, k_c = \delta_{cp}, n \in [1, C], p \in [1, C] \}$.
-These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$, $\frac{\delta}{\delta \Psi_n}$ and $\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
-\begin{eqn}
-	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
-	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
-		2 H[l_n - 1] Q(l_n, 1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n}
-		\prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
-	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		2 H[l_n - 1] Q(l_n, 0, 1, 0) \Psi_n^{l_n} (\Psi_n^*)^{l_n - 1}
-		\prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
-	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		4 H[l_n - 1] Q(l_n, 1, 0, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n} \\
-	& \quad\quad H[l_p - 1] Q(l_p, 0, 1, 0) \Psi_p^{l_p} (\Psi_p^*)^{l_p - 1}
-		\prod_{c=1, c \ne n, c \ne p}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c} \\
-	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
-		4 H[l_n - 1] Q(l_n, 1, 1, 0) \Psi_n^{l_n - 1} (\Psi_n^*)^{l_n - 1} \\
-	& \quad\quad \prod_{c=1, c \ne n}^C Q(l_c, 0, 0, 0) \Psi_c^{l_c} (\Psi_c^*)^{l_c},
-\end{eqn}
-where $H[n]$ is the discrete Heavyside function.
-
-One can easily find that $Q(l, 1, 0, 0) = Q(l, 0, 1, 0) = l / 2$, $Q(l, 0, 0, 0) = 1$ and $Q(l, 1, 1, 0) = l^2 / 4$.
-Therefore:
-\begin{eqn}
-	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
-		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
-		O_{\lvec}^* \\
-	& + \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		\left( H[l_n - 1] l_n (\Psi_n^*)^{l_n - 1} \prod_{c=1, c \ne n}^C (\Psi_c^*)^{l_c} \right)
-		O_{\lvec} \\
-	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
-		\left( H[l_p - 1] l_p (\Psi_p^*)^{l_p - 1} \prod_{c=1, c \ne p}^C (\Psi_c^*)^{l_c} \right) \\
-	& + \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
-		\left( H[l_n - 1] l_n \Psi_n^{l_n - 1} \prod_{c=1, c \ne n}^C \Psi_c^{l_c} \right)
-		\left( H[l_n - 1] l_n (\Psi_n^*)^{l_n - 1} \prod_{c=1, c \ne n}^C (\Psi_c^*)^{l_c} \right) \\
-	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
-	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec} \\
-	& + \sum_{n=1}^C \sum_{p=1, p \ne n}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n}
-	+ \sum_{n=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n} \\
-	={} & \sum_{n=1}^C \frac{\delta}{\delta \Psi_n^*}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n} O_{\lvec}^*
-	+ \sum_{n=1}^C \frac{\delta}{\delta \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_n^*} O_{\lvec}
-	+ \sum_{n=1}^C \sum_{p=1}^C \frac{\delta^2}{\delta \Psi_n^* \delta \Psi_p}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_p^*}
-	\qedhere
-\end{eqn}
+A straigtforward result of neglecting high-order terms in~\eqnref{wigner-bec:truncation:full-nonlinear}.
 \end{proof}
 
-Resulting Wigner-transformed master equation is
+\begin{theorem}
+Assuming the conditions for Wigner truncation are satisfied, the result of the Wigner transformation of the loss term is
+\begin{eqn*}
+	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
+	\approx{} & \left(
+		\sum_{m=1}^C \frac{\fdelta}{\fdelta\Psi_m^*}
+		\left(
+			\frac{\upp O_{\lvec}}{\upp \Psi_m} O_{\lvec}^*
+			- \frac{1}{2} \sum_{n=1}^{C} \delta_{\restbasis_n}(\xvec, \xvec)
+				\frac{\upp^2 O_{\lvec}}{\upp\Psi_m \upp\Psi_n}
+				\frac{\upp O_{\lvec}^*}{\upp\Psi_n^*}
+		\right)
+	\right. \\
+	& + \sum_{m=1}^C \frac{\fdelta}{\fdelta\Psi_m}
+	\left(
+		\frac{\upp O_{\lvec}^*}{\upp \Psi_m^*} O_{\lvec}
+		- \frac{1}{2}\sum_{n=1}^C \delta_{\restbasis_n}(\xvec, \xvec)
+			\frac{\upp^2 O_{\lvec}^*}{\upp\Psi_m^* \upp\Psi_n^*}
+			\frac{\upp O_{\lvec}}{\upp\Psi_n}
+	\right) \\
+	& \left. + \sum_{m=1}^C \sum_{n=1}^C
+		\frac{\fdelta^2}{\fdelta\Psi_m^* \fdelta\Psi_n}
+		\frac{\upp O_{\lvec}}{\upp\Psi_m} \frac{\upp O_{\lvec}^*}{\upp\Psi_n^*}
+	\right) W,
+	\end{eqn*}
+where coupling functionals $O_{\lvec} \equiv O_{\lvec}[\Psivec] = \prod_{c=1}^C \Psi_c^{l_c}$.
+\end{theorem}
+\begin{proof}
+The proof is basically a simplification of the result of \thmref{wigner-spec:w-losses} under two conditions following from neglecting the terms smaller than $1 / N$.
+First, we are dropping all terms with high order differentials, which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
+Second, we are only considering the terms with the restricted delta function of up to first order in the drift part (containing the functional differentials of order $1$), and terms with no restricted delta functions in the diffusion part (containing the functional differentials of order $2$).
+
+The only combinations of $j_c$ and $k_c$ for which $Z_{\lvec,\jvec,\kvec}$ is not zero are thus $\{ j_c = \delta_{cm}, k_c = 0, m \in [1, C] \}$, $\{ j_c = 0, k_c = \delta_{cm}, m \in [1, C] \}$ and $\{ j_c = \delta_{cm}, k_c = \delta_{cn}, m \in [1, C], n \in [1, C] \}$.
+These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$, $\frac{\delta}{\delta \Psi_n}$ and $\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
 \begin{eqn}
-\label{eqn:wigner-bec:truncation:fpe}
-	\frac{dW}{dt}
-	& = \int d\xvec \left(
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \left(
-			-\frac{i}{\hbar} \left(
-				\sum_{k=1}^C K_{jk} \Psi_k
-				+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
-			\right)
-			- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec}
-		\right)
+\label{eqn:wigner-bec:truncation:truncated-losses}
+	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
+	\approx{} & \left(
+		\sum_{m=1}^C \frac{\fdelta}{\fdelta \Psi_m^*} H[l_m - 1] Z_{\lvec, \evec_m, \mathbf{0}}
+		+ \sum_{m=1}^C \frac{\fdelta}{\fdelta \Psi_m} H[l_m - 1] Z_{\lvec, \mathbf{0}, \evec_m}
 	\right. \\
-	& \left.
-		+ \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \left(
-			-\frac{i}{\hbar} \left(
-				\sum_{k=1}^C K_{jk} \Psi_k^*
-				+ \sum_{k=1}^C U_{jk} \Psi_j^* \Psi_k \Psi_k^*
-			\right)
-			+ \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}}{\partial \Psi_j} O_{\lvec}^*
-		\right)
-	\right. \\
-	& \left. + \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k}
-		\sum_{\lvec} \kappa_{\lvec}
-		\frac{\partial O_{\lvec}}{\partial \Psi_j}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}
-	\right) W
+	& \left. + \sum_{m=1}^C \sum_{n=1}^C \frac{\fdelta^2}{\fdelta \Psi_m^* \fdelta \Psi_n^*}
+			H[l_m - 1] H[l_n - 1] Z_{\lvec, \evec_m, \evec_n}
+	\right) W,
 \end{eqn}
+where $\evec_n$ is a vector consisting of zeros and a single $1$ at the $n$-th position, and $H[n]$ is the discrete Heavyside function.
+
+Evaluating the partially parametrized $Z$ function in the first term using the expression in \thmref{wigner-spec:w-losses}:
+\begin{eqn}
+	Z_{\lvec, \evec_m, \mathbf{0}}
+	= l_m \prod_{c=1}^C
+		\exp \left(
+			-\frac{\delta_{\restbasis_c}(\xvec, \xvec)}{2}
+			\frac{\upp^2}{\upp \Psi_c \upp \Psi_c^*}
+		\right)
+		\Psi_c^{l_c - \delta_{cm}} (\Psi_c^*)^{l_c}.
+\end{eqn}
+Expanding the exponent in series and discarding the terms with more than one restricted delta function:
+\begin{eqn}
+	Z_{\lvec, \evec_m, \mathbf{0}}
+	& \approx l_m \left(
+		\prod_{c=1}^C \Psi_c^{l_c - \delta_{cm}} (\Psi_c^*)^{l_c}
+		- \frac{1}{2} \sum_{n=1}^C
+			\delta_{\restbasis_n}(\xvec, \xvec)
+			\frac{\upp^2}{\upp \Psi_n \upp \Psi_p^*}
+			\prod_{c=1}^C
+				\Psi_c^{l_c - \delta_{cm}} (\Psi_c^*)^{l_c}
+	\right).
+\end{eqn}
+Multiplied by the Heavyside function, this can be expressed using derivatives of the coupling functional $O_{\lvec}$:
+\begin{eqn}
+	H[l_m - 1] Z_{\lvec, \evec_m, \mathbf{0}}
+	\approx \frac{\upp O_{\lvec}}{\upp \Psi_m} O_{\lvec}^*
+		- \frac{1}{2} \sum_{n=1}^C
+			\delta_{\restbasis_n}(\xvec, \xvec)
+			\frac{\upp^2 O_{\lvec}}{\upp \Psi_m \upp \Psi_n}
+			\frac{\upp O_{\lvec}^*}{\upp \Psi_n^*}.
+\end{eqn}
+
+Analogously, for the second term in~\eqnref{wigner-bec:truncation:truncated-losses} we get
+\begin{eqn}
+	H[l_m - 1] Z_{\lvec, \mathbf{0}, \evec_m}
+	\approx \frac{\upp O_{\lvec}^*}{\upp \Psi_m^*} O_{\lvec}
+		- \frac{1}{2} \sum_{n=1}^C
+			\delta_{\restbasis_n}(\xvec, \xvec)
+			\frac{\upp^2 O_{\lvec}^*}{\upp \Psi_m^* \upp \Psi_n^*}
+			\frac{\upp O_{\lvec}}{\upp \Psi_n},
+\end{eqn}
+and for the third term (discarding all terms with the restricted delta function in the expansion of the exponent):
+\begin{eqn}
+	H[l_m - 1] H[l_n - 1] Z_{\lvec, \evec_m, \evec_n}
+	\approx \frac{\upp O_{\lvec}}{\upp\Psi_m} \frac{\upp O_{\lvec}^*}{\upp\Psi_n^*}.
+\end{eqn}
+Substituting these expressions back into~\eqnref{wigner-bec:truncation:truncated-losses}, we get the statement of the theorem.
+\end{proof}
