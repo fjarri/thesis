@@ -53,7 +53,7 @@ def saveTexBib(fname, entries):
     f = open(fname, 'w')
     for entry_type, entry_key, entry_fields in entries:
         f.write('@' + entry_type + '{' + entry_key + ',\n')
-        for field in entry_fields:
+        for field in sorted(entry_fields):
             try:
                 f.write('\t' + field + ' = {' + entry_fields[field] + '},\n')
             except:
