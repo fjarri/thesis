@@ -7,8 +7,8 @@ In order to solve operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} wi
 
 Namely, the term with $K_{jk}$ is transformed using \thmref{wigner-spec:w-commutator1} and \thmref{wigner-spec:w-laplacian-commutator1} (since $K_{jk}$ is basically a sum of the Laplacian operator and functions of $\xvec$):
 \begin{eqn}
-	\mathcal{W} \left[ [ \int d\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
-	= \int d\xvec \left(
+	\mathcal{W} \left[ [ \int \upd\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
+	= \int \upd\xvec \left(
 			- \frac{\delta}{\delta \Psi_j} K_{jk} \Psi_k
 			+ \frac{\delta}{\delta \Psi_k^*} K_{jk} \Psi_j^*
 		\right)
@@ -20,12 +20,12 @@ Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming 
 \label{eqn:wigner-bec:truncation:full-nonlinear}
 	\mathcal{W} \left[
 		[
-			\int d\xvec \frac{U_{jk}}{2}
+			\int \upd\xvec \frac{U_{jk}}{2}
 				\Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k,
 			\hat{\rho}
 		]
 	\right]
-	& = \int d\xvec U_{jk} \left(
+	& = \int \upd\xvec U_{jk} \left(
 		\frac{\delta}{\delta \Psi_j} \left(
 			- \Psi_j \Psi_k \Psi_k^*
 			+ \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
