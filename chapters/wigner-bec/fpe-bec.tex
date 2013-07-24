@@ -2,99 +2,89 @@
 \section{Fokker-Planck equation for the BEC}
 % =============================================================================
 
-Resulting Wigner-transformed master equation is
+With the Wigner truncation applied, we can get rid of the third- and higher-order functional derivatives in~\eqnref{wigner-bec:truncation:untruncated-fpe}.
+Under the reasonable assumption of $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ being real-valued,
+this results in the functional equation
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:fpe}
-	\frac{dW}{dt}
-	& = \int d\xvec \left(
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \left(
-			-\frac{i}{\hbar} \left(
-				\sum_{k=1}^C K_{jk} \Psi_k
-				+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
-			\right)
-			- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec}
-		\right)
-	\right. \\
-	& \left.
-		+ \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \left(
-			-\frac{i}{\hbar} \left(
-				\sum_{k=1}^C K_{jk} \Psi_k^*
-				+ \sum_{k=1}^C U_{jk} \Psi_j^* \Psi_k \Psi_k^*
-			\right)
-			+ \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}}{\partial \Psi_j} O_{\lvec}^*
-		\right)
-	\right. \\
-	& \left. + \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k}
-		\sum_{\lvec} \kappa_{\lvec}
-		\frac{\partial O_{\lvec}}{\partial \Psi_j}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}
-	\right) W
-\end{eqn}
-
-The general approach to numerical solution of the Fokker-Planck equation~\eqnref{wigner-bec:truncation:fpe} is to transform it to the equivalent set of stochastic differential equations (SDEs) for $\Psi_j$.
-Since the transformation is defined for real-valued variables only \todo{citation needed}, we have to modify the equation.
-
-First, noticing that $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ are real-valued (which is important for the further transformations), we can rewrite equation~\eqnref{wigner-bec:truncation:fpe} as
-\begin{eqn}
-	\frac{dW}{dt}
-	= \int d\xvec \left(
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j} \mathcal{A}_j
-		- \sum_{j=1}^C \frac{\delta}{\delta \Psi_j^*} \mathcal{A}_j^*
-		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\delta^2}{\delta \Psi_j^* \delta \Psi_k} D_{jk}
+	\frac{\upd W}{\upd t}
+	= \int \upd\xvec \left(
+		- \sum_{j=1}^C \frac{\fdelta}{\fdelta \Psi_j} \mathcal{A}_j
+		- \sum_{j=1}^C \frac{\fdelta}{\fdelta \Psi_j^*} \mathcal{A}_j^*
+		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\fdelta^2}{\fdelta \Psi_j^* \fdelta \Psi_k}
+			\mathcal{D}_{jk}
 	\right) W,
 \end{eqn}
-where
+with the drift terms
 \begin{eqn}
-	\mathcal{A}_j = -\frac{i}{\hbar} \left(
-			\sum_{k=1}^C K_{jk} \Psi_k
-			+ \sum_{k=1}^C U_{jk} \Psi_j \Psi_k \Psi_k^*
+\label{eqn:wigner-bec:truncation:drift-term}
+	\mathcal{A}_j
+	={} & -\frac{i}{\hbar} \left(
+		\sum_{k=1}^C K_{jk} \Psi_k
+		+ \Psi_j \sum_{k=1}^C U_{jk} \left(
+			|\Psi_k|^2 - \frac{\delta_{jk} + 1}{2} \delta_{\restbasis_k}(\xvec, \xvec)
 		\right)
-		- \sum_{\lvec} \kappa_{\lvec} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*} O_{\lvec},
+	\right) \\
+	& - \sum_{\lvec \in L} \kappa_{\lvec} \left(
+		\frac{\upp O_{\lvec}^*}{\upp \Psi_j^*} O_{\lvec}
+		- \frac{1}{2} \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
+			\frac{\upp^2 O_{\lvec}^*}{\upp \Psi_j^* \upp \Psi_k^*}
+			\frac{\upp O_{\lvec}}{\upp \Psi_k}
+	\right),
 \end{eqn}
-and
+and the diffusion matrix
 \begin{eqn}
-	D_{jk} = \sum_{\lvec} \kappa_{\lvec}
-		\frac{\partial O_{\lvec}}{\partial \Psi_j}
-		\frac{\partial O_{\lvec}^*}{\partial \Psi_k^*}.
+	\mathcal{D}_{jk} = \sum_{\lvec \in L} \kappa_{\lvec}
+		\frac{\upp O_{\lvec}}{\upp \Psi_j}
+		\frac{\upp O_{\lvec}^*}{\upp \Psi_k^*}.
 \end{eqn}
 
-This allows us to apply \thmref{fpe-sde:corr:fpe-sde-func} with
+It can be shown (see \appref{fpe-sde} for details) that this truncated equation has a positive-definite diffusion matrix $\mathcal{D}$ and is therefore a Fokker-Planck equation (\abbrev{fpe}), with its solution $W(t)$ being a probability distribution (provided that $W(0)$ was a probability distribution).
+This differs from the original Wigner function(al), which can be negative, and is the result of the truncation.
+Thus the solution of this equation may not be equivalent to the solution of the orignal master equation~\eqnref{wigner-bec:master-eqn:master-eqn} (if the corresponding density matrices have non-positive Wigner functions), but, given that the truncation conditions are satisfied, the effect is negligible.
+
+Direct solution of the above \abbrev{fpe} is generally impractical, and a Monte Carlo or sampled calculation is called for. The equation can be further transformed to the equivalent set of stochastic differential equations using \thmref{fpe-sde:corr:fpe-sde-func} with
 \begin{eqn}
-	\mathcal{B}_{\lvec}^{(j)}
+	\mathcal{B}_{j\lvec}
 	= \sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}.
 \end{eqn}
-to get the equivalent set of SDEs in It\^{o} form
+This results in the set of functional \abbrev{sde}s in It\^{o} form
 \begin{eqn}
 \label{eqn:fpe-sde:corr-bec:sde}
-	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-		\mathcal{A}^{(j)} dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+	\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+		\mathcal{A}_j \upd t
+		+ \sum_{\lvec \in L} \mathcal{B}_{j\lvec} \upd Q_{\lvec}
 	\right],
 \end{eqn}
 or, alternatively, in Stratonovich form
 \begin{eqn}
-	d\Psi_j = \mathcal{P}_{\restbasis_j} \left[
-		(\mathcal{A}^{(j)} - \mathcal{S}^{(j)}) dt + \sum_{\lvec} \mathcal{B}_{\lvec}^{(j)} dQ_{\lvec}
+	\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
+		(\mathcal{A}_j - \mathcal{S}_j) \upd t
+		+ \sum_{\lvec \in L} \mathcal{B}_{j\lvec} \upd Q_{\lvec}
 	\right],
 \end{eqn}
 where the Stratonovich term is
 \begin{eqn}
-	\mathcal{S}^{(j)}
-	= \sum_{n=1}^C \sum_{\lvec}
-		\sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}}{\partial \Psi_n}
-		\frac{\delta}{\delta \Psi_n^*}
-		\sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}
-	= \sum_{n=1}^C \sum_{\lvec} \kappa_{\lvec}
-		\frac{\partial O_{\lvec}}{\partial \Psi_n}
-		\left(\frac{\partial^2 O_{\lvec}}{\partial \Psi_n \partial \Psi_j} \right)^*
-		\delta_{\restbasis_n} (\xvec, \xvec).
+	\mathcal{S}_j
+	& = \frac{1}{2} \sum_{k=1}^C \sum_{\lvec \in L}
+		\mathcal{B}_{k\lvec}^*
+		\frac{\fdelta}{\fdelta \Psi_k^*}
+		\mathcal{B}_{j\lvec} \\
+	& = \frac{1}{2} \sum_{k=1}^C \sum_{\lvec \in L}
+		\delta_{\restbasis_k}(\xvec, \xvec)
+		\frac{\upp^2 O_{\lvec}^*}{\upp \Psi_k^* \upp \Psi_j^*}
+		\frac{\upp O_{\lvec}}{\upp \Psi_k}.
 \end{eqn}
+Note that the Stratonovich term is exactly equal to the correction in the loss-induced part of the drift term~\eqnref{wigner-bec:truncation:drift-term}.
+This means that in Stratonovich form the \abbrev{sde}s are actually simpler.
+
 
 % =============================================================================
 \subsection{Integral averages}
 % =============================================================================
 
 It is interesting to get an expression for time dependence of some simple observables using SDEs~\eqnref{fpe-sde:corr-bec:sde} and It\^{o}'s formula (\thmref{fpe-sde:ito-formula:func-ito-f}).
-Namely, we are interested in population $N_i = \int d\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$ and interferometric contrast in two-component BEC $V = 2 \left| \int d\xvec \langle \Psiop_1^\dagger \Psiop_2 \rangle \right| / (N_1 + N_2)$.
+Namely, we are interested in population $N_i = \int \upd\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$ and interferometric contrast in two-component BEC $V = 2 \left| \int \upd\xvec \langle \Psiop_1^\dagger \Psiop_2 \rangle \right| / (N_1 + N_2)$.
 
 \begin{theorem}
 	Given a set of SDEs~\eqnref{fpe-sde:corr-bec:sde}, the population changes in time as
@@ -104,7 +94,7 @@ Namely, we are interested in population $N_i = \int d\xvec \langle \Psiop_i^\dag
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-First let us find the expression for $\int d\xvec \langle dF[\Psivec] \rangle$ using It\^{o}'s formula with $F = \Psi_i^* \Psi_i$.
+First let us find the expression for $\int \upd\xvec \langle dF[\Psivec] \rangle$ using It\^{o}'s formula with $F = \Psi_i^* \Psi_i$.
 The differentials are evaluated as $\delta F / \delta \Psi_c^\prime = \delta_{ic} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)$, $\delta F / \delta \Psi_c^{\prime *} = \delta_{ic} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)$, $\delta^2 F / \delta \Psi_j^\prime \delta \Psi_k^{\prime *} = \delta_{ij} \delta_{ik} \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)$.
 Averages $\langle dQ_{\lvec} \rangle$ are equal to zero, so the average of the whole third term in It\^{o} formula is equal to zero.
 Also we can safely simplify drift terms to
@@ -117,7 +107,7 @@ since the unitary evolution part obviously does not affect the total population.
 Thus:
 \begin{eqn}
 	\langle dF[\Psivec] \rangle
-	= \langle \int d\xvec^\prime
+	= \langle \int \upd\xvec^\prime
 		\mathcal{A}^{(i)\prime} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)
 		+ \mathcal{A}^{(i)\prime *} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
 		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(i)\prime} \mathcal{B}_{\lvec}^{(i)\prime *}
@@ -130,34 +120,34 @@ Integrating by $d\xvec$, and expanding $\Psi_i$ and restricted delta functions:
 	& = \iint d\xvec d\xvec^\prime \mathcal{A}^{(i)\prime}
 		\sum_{\nvec \in \restbasis_i} \phi_{i,\nvec}^* \alpha_{i,\nvec}^*
 		\sum_{\mvec \in \restbasis_i} \phi_{i,\mvec} \phi_{i,\mvec}^{\prime *} \\
-	& = \int d\xvec^\prime \mathcal{A}^{(i)\prime}
+	& = \int \upd\xvec^\prime \mathcal{A}^{(i)\prime}
 		\sum_{\mvec \in \restbasis_i} \sum_{\nvec \in \restbasis_i} \delta_{\mvec,\nvec} \alpha_{i,\nvec}^*
 		\phi_{i,\mvec}^{\prime *} \\
-	& = \int d\xvec^\prime \mathcal{A}^{(i)\prime}
+	& = \int \upd\xvec^\prime \mathcal{A}^{(i)\prime}
 		\sum_{\mvec \in \restbasis_i} \alpha_{i,\mvec}^* \phi_{i,\mvec}^{\prime *} \\
-	& = \int d\xvec \mathcal{A}^{(i)} \Psi_i^*.
+	& = \int \upd\xvec \mathcal{A}^{(i)} \Psi_i^*.
 \end{eqn}
 Similarly,
 \begin{eqn}
 	\iint d\xvec d\xvec^\prime \mathcal{A}^{(i)\prime *} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
-	= \int d\xvec \mathcal{A}^{(i)*} \Psi_i,
+	= \int \upd\xvec \mathcal{A}^{(i)*} \Psi_i,
 \end{eqn}
 and
 \begin{eqn}
 	\iint d\xvec d\xvec^\prime \mathcal{B}_{\lvec}^{(i)\prime} \mathcal{B}_{\lvec}^{(i)\prime *}
 		\delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
-	= \int d\xvec \mathcal{B}_{\lvec}^{(i)} \mathcal{B}_{\lvec}^{(i)*} \delta_{\restbasis_i}^*(\xvec, \xvec).
+	= \int \upd\xvec \mathcal{B}_{\lvec}^{(i)} \mathcal{B}_{\lvec}^{(i)*} \delta_{\restbasis_i}^*(\xvec, \xvec).
 \end{eqn}
 
 The whole expression is therefore
 \begin{eqn}
-	\frac{d}{dt} \int d\xvec \langle F[\Psivec] \rangle
-	& = \int d\xvec \langle
+	\frac{d}{dt} \int \upd\xvec \langle F[\Psivec] \rangle
+	& = \int \upd\xvec \langle
 		\mathcal{A}^{(i)} \Psi_i^*
 		+ \mathcal{A}^{(i)*} \Psi_i
 		+ \sum_{\lvec} \mathcal{B}_{\lvec}^{(i)} \mathcal{B}_{\lvec}^{(i)*} \delta_{\restbasis_i}^*(\xvec, \xvec)
 	\rangle \\
-	& = \sum_{\lvec} \kappa_{\lvec} \int d\xvec \langle
+	& = \sum_{\lvec} \kappa_{\lvec} \int \upd\xvec \langle
 		- \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*} O_{\lvec} \Psi_i^*
 		- \frac{\partial O_{\lvec}}{\partial \Psi_i} O_{\lvec}^* \Psi_i
 		+ \frac{\partial O_{\lvec}}{\partial \Psi_i} \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
