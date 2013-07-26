@@ -91,32 +91,30 @@ Denoting $\Psiop(\xvec) \equiv \Psiop$ and $\Psiop(\xvec^\prime) \equiv \Psiop^\
 \end{split}
 \end{equation*}
 Therefore the average of $\hat{N}^2$ is:
-\begin{equation*}
-\begin{split}
+\begin{eqn*}
 	\langle \hat{N}^2 \rangle & = \int
 		\langle
 			\Psiop^\dagger \Psiop \Psiop^{\prime\dagger} \Psiop^\prime
 		\rangle
 	d\xvec d\xvec^\prime \\
-	& = \int \pathavg{
+	& = \int \pathavgleft
 		\Psi^* \Psi \Psi^{\prime *} \Psi^\prime
 		- \frac{\delta_P(\xvec^\prime,\xvec^\prime)}{2} \Psi^* \Psi
-		- \frac{\delta_P(\xvec,\xvec) }{2} \Psi^{\prime *} \Psi^\prime \\
-	&	- \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi
+		- \frac{\delta_P(\xvec,\xvec) }{2} \Psi^{\prime *} \Psi^\prime \right. \\
+	&	\left. - \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi
 		+ \frac{\delta_P(\xvec^\prime,\xvec)}{2} \Psi^* \Psi^\prime
 		+ \frac{\delta_P(\xvec,\xvec) \delta_P(\xvec^\prime,\xvec^\prime)}{2}
-	} d\xvec d\xvec^\prime \\
-	& = \pathavg{
+	\pathavgright d\xvec d\xvec^\prime \\
+	& = \pathavgleft
 		\int \Psi^* \Psi d\xvec \int \Psi^* \Psi d\xvec
 		- \frac{M}{2} \int \Psi^* \Psi d\xvec
-		- \frac{M}{2} \int \Psi^* \Psi d\xvec \\
-	&	- \int \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi d\xvec d\xvec^\prime
+		- \frac{M}{2} \int \Psi^* \Psi d\xvec \right. \\
+	&	\left. - \int \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi d\xvec d\xvec^\prime
 		+ \int \frac{\delta_P(\xvec^\prime,\xvec)}{2} \Psi^* \Psi^\prime d\xvec d\xvec^\prime
 		+ \frac{M^2}{2}
-	} \\
+	\pathavgright \\
 	& = \pathavg{N^2 - M N + \frac{M^2}{2}}.
-\end{split}
-\end{equation*}
+\end{eqn*}
 Here we used the correspondence between the average of the symmetric product of field operators and the average of wavefunctions over simulation paths.
 Then we can split variables in double integrals, allowing us to group terms and simplify the whole equation.
 Substituting this into equation for $(\Delta N)^2$:
@@ -206,11 +204,11 @@ Second-order moments of spin operators can be obtained similarly to second-order
 			+ \symprod{ \Psiop^\dagger_1 \Psiop^\prime_2 }
 		\right)
 	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \pathavg{
+	& = \frac{1}{4} \pathavgleft
 		\int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \\
-	&	+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec } \\
+		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \right. \\
+	&	\left. + \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
+		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec \pathavgright \\
 	& = \frac{1}{4} \pathavg{ (I^*)^2 + I I^* + I^2 + I^* I } \\
 	& = \pathavg{ (\Real I)^2 } = \pathavg{ S^2_x }
 \end{split}
@@ -239,11 +237,11 @@ Second-order moments of spin operators can be obtained similarly to second-order
 			- \symprod{ \Psiop^\dagger_1 \Psiop^\prime_1 }
 		\right)
 	\right) d\xvec d\xvec^\prime \rangle \\
-	& = - \frac{1}{4} \pathavg{
+	& = - \frac{1}{4} \pathavgleft
 		\int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \\
-	&	+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		- \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec } \\
+		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \right. \\
+	&	\left. + \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
+		- \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec \pathavgright \\
 	& = - \frac{1}{4} \pathavg{ (I^*)^2 - I I^* + I^2 - I^* I } \\
 	& = \pathavg{ ( \Imag I )^2 } = \pathavg{ S^2_y }
 \end{split}
@@ -272,11 +270,11 @@ Second-order moments of spin operators can be obtained similarly to second-order
 			- \symprod{ \Psiop_1 \Psiop^{\prime\dagger}_1 }
 		\right)
 	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \pathavg{
+	& = \frac{1}{4} \pathavgleft
 		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec \\
-	&	- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		+ \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec } \\
+		- \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec \right. \\
+	&	\left. - \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
+		+ \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec \pathavgright \\
 	& = \frac{1}{4} \pathavg{ N^2_1 - N_1 N_2 - N_2 N_1 + N^2_2 } \\
 	& = \frac{1}{4} \pathavg{ (N_1 - N_2)^2 } = \pathavg{ S^2_z }
 \end{split}
@@ -340,16 +338,16 @@ Second-order moments of spin operators can be obtained similarly to second-order
 		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
 		- \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
 	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \pathavg{
+	& = \frac{1}{4} \pathavgleft
 		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
 		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
 		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \\
-	&	- \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
+		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \right. \\
+	&	\left. - \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
 		+ \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
 		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
 		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-	} \\
+	\pathavgright \\
 	& = \frac{1}{4} \pathavg{
 		N_1 I^*
 		- N_2 I
@@ -393,16 +391,16 @@ Second-order moments of spin operators can be obtained similarly to second-order
 		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
 		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
 	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{i}{4} \pathavg{
+	& = \frac{i}{4} \pathavgleft
 		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
 		+ \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
 		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \\
-	&	- \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
+		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \right. \\
+	&	\left. - \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
 		- \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
 		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
 		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-	} \\
+	\pathavgright \\
 	& = \frac{i}{4} \pathavg{
 		N_1 I^*
 		+ N_2 I
