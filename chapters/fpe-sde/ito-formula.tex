@@ -182,7 +182,9 @@ Finally, we can use the multi-component reformulation to derive the It\^{o} form
 \label{thm:fpe-sde:ito-formula:func-ito-f}
 	Given the set of functional \abbrev{sde}s in It\^{o} form
 	\begin{eqn*}
-		\upd f_j = \mathcal{A}_j dt + \sum_{l=1}^L \mathcal{B}_{jl} \upd Q_l,
+		\upd f_j = \proj{\restbasis{j}} \left[
+			\mathcal{A}_j \upd t + \sum_{l=1}^L \mathcal{B}_{jl} \upd Q_l
+		\right],
 	\end{eqn*}
 	the differential of a functional operator $\mathcal{F}[\fvec]$ is
 	\begin{eqn*}
@@ -205,7 +207,7 @@ Finally, we can use the multi-component reformulation to derive the It\^{o} form
 			\mathcal{F}[\fvec]
 		\right).
 	\end{eqn*}
-	Here $f_j$, $\mathcal{A}_j$, $\mathcal{B}_{jl}$, $W$, $\mathbb{L}$, and $Q_l$ are defined the same as in \thmref{fpe-sde:corr:fpe-sde-func}.
+	Here $f_j$, $\mathcal{A}_j$, $\mathcal{B}_{jl}$, $L$, and $Q_l$ are defined in the same way as in \thmref{fpe-sde:corr:fpe-sde-func}.
 \end{theorem}
 \begin{proof}
 The set of \abbrev{sde}s can be rewritten in terms of complex vectors as
@@ -213,7 +215,8 @@ The set of \abbrev{sde}s can be rewritten in terms of complex vectors as
 	\upd\alpha_{\mvec}^{(j)}
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t
 	+ \sum_{l=1}^L \sum_{\pvec \in \fullbasis}
-		\int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{jl} \phi_{\pvec} \upd Z_{\pvec,l}.
+		\int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{jl} \phi_{\pvec} \upd Z_{\pvec,l},\quad
+	\mvec \in \restbasis_j.
 \end{eqn}
 Now, treating the functional operator as a function of $C$ complex vectors
 \begin{eqn}
