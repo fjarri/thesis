@@ -51,7 +51,7 @@ def loadMendeleyBib(fname):
 
 def saveTexBib(fname, entries):
     f = open(fname, 'w')
-    for entry_type, entry_key, entry_fields in entries:
+    for entry_type, entry_key, entry_fields in sorted(entries, key=lambda x: x[1]):
         f.write('@' + entry_type + '{' + entry_key + ',\n')
         for field in sorted(entry_fields):
             try:
