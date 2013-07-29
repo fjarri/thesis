@@ -2,15 +2,18 @@
 \section{Initial states}
 % =============================================================================
 
+Before integrating the evolution equations~\eqnref{fpe-sde:corr-bec:sde} or~\eqnref{fpe-sde:corr-bec:sde-stratonovich}, the initial value of $\Psi_j$ at $t=0$ has to be sampled.
+The general procedure is to take the density matrix of the desired initial state and find its Wigner transformation using \defref{wigner:mc:w-transformation}.
+The resulting Wigner function is then sampled.
+
 \subsection{Coherent state}
 
 The simplest case of initial state is a coherent state.
 
 \begin{theorem}
-	The Wigner distribution for a multimode coherent state with with expectation values
-	$\alpha_{\nvec}(0) = \alpha_{\nvec}^{(0)}$, $\nvec \in \restbasis$ is
+	The Wigner distribution for a multimode coherent state with with the expectation value $\Psi^{(0)} \equiv \sum_{\nvec \in restbasis} \alpha_{\nvec}^{(0)} \phi_{\nvec}$ is
 	\begin{eqn*}
-		W_{\mathrm{coh}} (\balpha^{(0)})
+		W_{\mathrm{coh}} [\Psi]
 		= \left( \frac{2}{\pi} \right)^{|\restbasis|} \prod_{\nvec \in \restbasis}
 			\exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2).
 	\end{eqn*}
@@ -24,31 +27,27 @@ The density matrix of the state is
 	= \left( \prod_{\nvec \in \restbasis} \vert \alpha_{\nvec}^{(0)} \rangle \right)
 		\left( \prod_{\nvec \in \restbasis} \langle \alpha_{\nvec}^{(0)} \vert \right).
 \end{eqn}
-Then the characteristic function is
+Then the characteristic functional for this state can be expressed as
 \begin{eqn}
-	\chi_W (\balpha^{(0)})
+	\chi_W [\Lambda]
 	& = \Trace{
 		\left( \prod_{\nvec \in \restbasis} \vert \alpha_{\nvec}^{(0)} \rangle \right)
 		\left( \prod_{\nvec \in \restbasis} \langle \alpha_{\nvec}^{(0)} \vert \right)
 		\left( \prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*) \right)
-	} \\
-	& = \Trace{
-		\left( \prod_{\nvec \in \restbasis} \langle \alpha_{\nvec}^{(0)} \vert \right)
-		\left( \prod_{\nvec \in \restbasis} \hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*) \right)
-		\left( \prod_{\nvec \in \restbasis} \vert \alpha_{\nvec}^{(0)} \rangle \right)
 	} \\
 	& = \prod_{\nvec \in \restbasis}
 		\langle \alpha_{\nvec}^{(0)} \vert
 		\hat{D}_{\nvec} (\lambda_{\nvec}, \lambda_{\nvec}^*)
-		\vert \alpha_{\nvec}^{(0)} \rangle
+		\vert \alpha_{\nvec}^{(0)} \rangle,
 \end{eqn}
-Displacement operators obey multiplication law \todo{proof needed? taken from Cahill and Glauber}
+where $\Lambda = \sum_{\nvec \in \restbasis} \lambda_{\nvec} \phi_{\nvec}$.
+Displacement operators obey the multiplication law~\cite{Cahill1969}
 \begin{eqn}
 	\hat{D}(\lambda, \lambda^*) \hat{D}(\alpha, \alpha^*)
 	= \hat{D}(\lambda + \alpha, \lambda^* + \alpha^*)
 		\exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha)),
 \end{eqn}
-and the scalar product of two coherent state is calculated as \todo{again, taken from Cahill and Glauber}
+and the scalar product of two coherent state is calculated as~\cite{Cahill1969}
 \begin{eqn}
 	\langle \beta \vert \alpha \rangle
 	= \exp(-\frac{1}{2} |\alpha|^2 - \frac{1}{2} |\beta|^2 + \beta^* \alpha).
@@ -56,17 +55,13 @@ and the scalar product of two coherent state is calculated as \todo{again, taken
 Therefore
 \begin{eqn}
 	\hat{D}(\lambda, \lambda^*) \vert \alpha \rangle
-	& = \hat{D}(\lambda, \lambda^*) \hat{D}(\alpha, \alpha^*) \vert 0 \rangle
-	= \hat{D}(\lambda + \alpha, \lambda^* + \alpha^*)
-		\exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha))
-		\vert 0 \rangle \\
+	& = \hat{D}(\lambda, \lambda^*) \hat{D}(\alpha, \alpha^*) \vert 0 \rangle \\
 	& = \exp(\frac{1}{2} (\lambda \alpha^* - \lambda^* \alpha))
 		\vert \lambda + \alpha \rangle,
 \end{eqn}
-and the characteristic function can be simplified as:
-\begin{equation*}
-\begin{split}
-	\chi_W (\balpha^{(0)})
+and the characteristic functional can be simplified as:
+\begin{eqn}
+	\chi_W [\Lambda]
 	& = \prod_{\nvec \in \restbasis}
 		\exp(\frac{1}{2} (\lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
 			- \lambda_{\nvec}^* \alpha_{\nvec}^{(0)}))
@@ -77,51 +72,31 @@ and the characteristic function can be simplified as:
 			+ \lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
 			- \frac{1}{2} |\lambda|^2
 		).
-\end{split}
-\end{equation*}
+\end{eqn}
 
-Finally, Wigner function is
-\begin{equation*}
-\begin{split}
-	W_c (\balpha^{(0)})
-	& = \frac{1}{\pi^{2|\restbasis|}} \int d^2\blambda
-		\left( \prod_{\nvec \in \restbasis} \exp(
-			- \lambda_{\nvec} \alpha_{\nvec}^*
-			+ \lambda_{\nvec}^* \alpha_{\nvec}
-		) \right)
-		\left( \prod_{\nvec \in \restbasis} \exp(
-			- \lambda_{\nvec}^* \alpha_{\nvec}^{(0)}
-			+ \lambda_{\nvec} (\alpha_{\nvec}^{(0)})^*
-			- \frac{1}{2} |\lambda|^2
-		) \right) \\
+Finally, the Wigner functional is
+\begin{eqn}
+	W_c [\Psi]
 	& = \frac{1}{\pi^{2|\restbasis|}} \prod_{\nvec \in \restbasis} \left(
-		\int d^2\lambda_{\nvec}
+		\int \upd^2\lambda_{\nvec}
 			\exp(
 				- \lambda_{\nvec} (\alpha_{\nvec}^* - (\alpha_{\nvec}^{(0)})^*)
 				+ \lambda_{\nvec}^* (\alpha_{\nvec} - \alpha_{\nvec}^{(0)})
 				- \frac{1}{2} |\lambda|^2
 			)
 	\right) \\
-	& = \frac{1}{\pi^{2|\restbasis|}} \prod_{\nvec \in \restbasis}
-		2 \pi \exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2) \\
 	& = \left( \frac{2}{\pi} \right)^{|\restbasis|} \prod_{\nvec \in \restbasis}
 		\exp(-2 |\alpha_{\nvec} - \alpha_{\nvec}^{(0)}|^2).
 	\qedhere
-\end{split}
-\end{equation*}
+\end{eqn}
 \end{proof}
 
-The resulting Wigner distribution is a product of independent complex-valued Gaussian distributions for each mode,
-with the expectation value equal to the expectation value of the mode,
-and the variance equal to $\frac{1}{2}$.
+The resulting Wigner distribution is a product of independent complex-valued Gaussian distributions for each mode, with an expectation value equal to the expectation value of the mode, and the variance equal to $\frac{1}{2}$.
 Therefore the initial state can be sampled as
 \begin{eqn}
 	\alpha_{\nvec} = \alpha_{\nvec}^{(0)} + \frac{1}{\sqrt{2}} \eta_{\nvec},
 \end{eqn}
-where $\eta_{\nvec}$ are normally distributed complex random numbers with zero mean,
-$\langle \eta_{\mvec} \eta_{\nvec} \rangle = 0$ and
-$\langle \eta_{\mvec} \eta_{\nvec}^* \rangle = \delta_{\mvec,\nvec}$
-(in other words, with components distributed independently with variance $\frac{1}{2}$).
+where $\eta_{\nvec}$ are normally distributed complex random numbers with zero mean, $\langle \eta_{\mvec} \eta_{\nvec} \rangle = 0$ and $\langle \eta_{\mvec} \eta_{\nvec}^* \rangle = \delta_{\mvec,\nvec}$, or, in other words, with components distributed independently with variance $\frac{1}{2}$.
 This looks like adding half a ``vacuum particle'' to each mode.
 In functional form this can be written as
 \begin{eqn}
@@ -130,3 +105,10 @@ In functional form this can be written as
 		+ \sum_{\nvec \in \restbasis} \frac{\eta_{j,\nvec}}{\sqrt{2}} \phi_{\nvec}(\xvec),
 \end{eqn}
 where $\Psi_j^{(0)}(\xvec, 0)$ is the ``classical'' ground state of the system.
+
+\subsection{Other cases}
+
+\copypaste{
+More involved examples, including thermalized states and Bogoliubov states, are reviewed by Blakie~\textit{et~al}~\cite{Blakie2008}, and Ruostekoski and Martin~\cite{Ruostekoski2010}.
+In particular, a numerically efficient way to sample a Wigner distribution for Bogoliubov states was developed by Sinatra~\textit{et~al}~\cite{Sinatra2002}.
+}
