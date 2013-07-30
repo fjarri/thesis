@@ -51,7 +51,7 @@ Direct solution of the above \abbrev{fpe} is generally impractical, and a Monte 
 \end{eqn}
 This results in the set of functional \abbrev{sde}s in It\^{o} form
 \begin{eqn}
-\label{eqn:fpe-sde:corr-bec:sde}
+\label{eqn:wigner-bec:fpe-bec:sde}
 	\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 		\mathcal{A}_j \upd t
 		+ \sum_{\lvec \in L} \mathcal{B}_{j\lvec} \upd Q_{\lvec}
@@ -59,7 +59,7 @@ This results in the set of functional \abbrev{sde}s in It\^{o} form
 \end{eqn}
 or, alternatively, in Stratonovich form
 \begin{eqn}
-\label{eqn:fpe-sde:corr-bec:sde-stratonovich}
+\label{eqn:wigner-bec:fpe-bec:sde-stratonovich}
 	\upd\Psi_j = \mathcal{P}_{\restbasis_j} \left[
 		(\mathcal{A}_j - \mathcal{S}_j) \upd t
 		+ \sum_{\lvec \in L} \mathcal{B}_{j\lvec} \upd Q_{\lvec}
@@ -80,7 +80,7 @@ where the Stratonovich term is
 Note that the Stratonovich term is exactly equal to the correction in the loss-induced part of the drift term~\eqnref{wigner-bec:truncation:drift-term}.
 This means that in Stratonovich form the \abbrev{sde}s are actually simpler.
 
-The equations~\eqnref{fpe-sde:corr-bec:sde} can be solved by conventional integration methods for \abbrev{sde}s. \todo{reference the numericals appendix?}
+The equations~\eqnref{wigner-bec:fpe-bec:sde} can be solved by conventional integration methods for \abbrev{sde}s. \todo{reference the numericals appendix?}
 The required expectations of symmetrically ordered operator products can be obtained by averaging results from multiple independent solutions according to \thmref{wigner:mc:moments}, since the truncated $W$ function is a probability distribution:
 \begin{eqn}
 \label{eqn:wigner-bec:fpe-bec:moments}
@@ -99,11 +99,12 @@ Naturally, the second approximate equality becomes exact in the limit of the inf
 \subsection{Integral averages}
 % =============================================================================
 
-It is interesting to get an expression for time dependence of some simple observables using \abbrev{sde}s~\eqnref{fpe-sde:corr-bec:sde} and It\^{o}'s formula (\thmref{fpe-sde:ito-formula:func-ito-f}).
+It is interesting to get an expression for time dependence of some simple observables using \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde} and It\^{o}'s formula (\thmref{fpe-sde:ito-formula:func-ito-f}).
 Namely, we are interested in population $N_i = \int \upd\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$.
 
 \begin{theorem}
-	In a \abbrev{bec} with the evolution governed by the set of \abbrev{sde}s~\eqnref{fpe-sde:corr-bec:sde}, the population changes in time as
+\label{thm:wigner-bec:fpe-bec:population-change}
+	In a \abbrev{bec} with the evolution governed by the set of \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde}, the population changes in time as
 	\begin{eqn*}
 		\frac{\upd N_i}{\upd t}
 		={} & - \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
@@ -240,8 +241,9 @@ where we have used the fact that $O_{\lvec}$ are products of integer powers of $
 \todo{It should be possible to proof that this formula agrees with the classical one up to the $1/N$ order, same as we do for particular cases later or in the theoretical paper.}
 
 In practice, it is more convenient to use the above equation using more intuitive quantities, namely real component densities $n_i = \langle \Psiop_i^\dagger \Psiop_i \rangle$.
-To do that, we have to rewrite the resulting path averages of the moments of $\Psi_j$ as averages of symmetric products of $\Psiop_j$, transform them to the normal order using the analogue of the ordering transformation formula~\cite{Cahill1969} for field operators
+To do that, we have to rewrite the resulting path averages of the moments of $\Psi_j$ as averages of symmetric products of $\Psiop_j$, transform them to the normal order using the analogue of the ordering transformation formula~\cite{Cahill1969} \todo{proof needed?} for field operators
 \begin{eqn}
+\label{eqn:wigner-bec:fpe-bec:ordering-transformation}
 	\symprod{
 		(\Psiop_j^\dagger)^r \Psiop_j^s
 	}
