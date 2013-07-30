@@ -2,7 +2,7 @@
 	"folders":
 	[
 		{
-			"path": "/Volumes/Data/Workbench/github/thesis",
+			"path": "./",
 			"file_exclude_patterns": [
 				"*.sublime-workspace",
 				"*.pdf", "*.aux", "*.bbl", "*.blg", "*.fdb_latexmk", "*.log", "*.out",
