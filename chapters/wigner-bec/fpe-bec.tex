@@ -106,7 +106,7 @@ Namely, we are interested in population $N_i = \int \upd\xvec \langle \Psiop_i^\
 	In a \abbrev{bec} with the evolution governed by the set of \abbrev{sde}s~\eqnref{fpe-sde:corr-bec:sde}, the population changes in time as
 	\begin{eqn*}
 		\frac{\upd N_i}{\upd t}
-		={} & \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
+		={} & - \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
 			2 \frac{\upp O_{\lvec}^*}{\upp \Psi_i^*} O_{\lvec} \Psi_i^*
 				- \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
 					\frac{\upp^2 O_{\lvec}^*}{\upp \Psi_i^* \upp \Psi_k^*}
@@ -114,7 +114,7 @@ Namely, we are interested in population $N_i = \int \upd\xvec \langle \Psiop_i^\
 					\Psi_i^*
 			\right. \\
 		& \quad \left.
-			+ \frac{\partial O_{\lvec}}{\partial \Psi_i}
+			- \frac{\partial O_{\lvec}}{\partial \Psi_i}
 				\frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
 				\delta_{\restbasis_i}(\xvec, \xvec)
 		\pathavgright.
@@ -221,7 +221,7 @@ Thus the drift terms can be safely simplified to
 which gives the population change rate
 \begin{eqn}
 	\frac{\upd N_i}{\upd t}
-	={} & \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
+	={} & - \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
 		2 \frac{\upp O_{\lvec}^*}{\upp \Psi_i^*} O_{\lvec} \Psi_i^*
 			- \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
 				\frac{\upp^2 O_{\lvec}^*}{\upp \Psi_i^* \upp \Psi_k^*}
@@ -229,7 +229,7 @@ which gives the population change rate
 				\Psi_i^*
 		\right. \\
 	& \quad \left.
-		+ \frac{\partial O_{\lvec}}{\partial \Psi_i}
+		- \frac{\partial O_{\lvec}}{\partial \Psi_i}
 			\frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
 			\delta_{\restbasis_i}(\xvec, \xvec)
 	\pathavgright,
