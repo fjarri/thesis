@@ -194,6 +194,8 @@ def journalAbbreviations(entries):
         'The Astrophysical Journal': 'Astrophys. J.',
         'Journal of Mathematical Physics': 'J. Math. Phys.',
         'Proceedings of the National Academy of Sciences of the United States of America': 'P. Natl. Acad. Sci. USA',
+        'Parallel Computing': 'Parallel Comput.',
+        'Computing in Science \& Engineering': 'Comput. Sci. Eng.',
     }
 
     for entry_type, entry_key, entry_fields in entries:
