@@ -190,6 +190,7 @@ def journalAbbreviations(entries):
         'Frontiers of Physics': 'Front. Phys.',
         'Physical Review B': 'Phys. Rev. B',
         'Physics Letters': 'Phys. Lett.',
+        'Physics Letters A': 'Phys. Lett. A',
         'Physics Letters B': 'Phys. Lett. B',
         'The Astrophysical Journal': 'Astrophys. J.',
         'Journal of Mathematical Physics': 'J. Math. Phys.',
