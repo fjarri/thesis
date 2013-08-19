@@ -2,76 +2,20 @@
 \section{Mean-field approximation}
 % =============================================================================
 
-We will start from the classical model of the trapped \abbrev{bec} --- the mean-field approximation.
+We will start from the classical model of a trapped \abbrev{bec} --- the mean-field approximation.
 While it cannot predict quantum effects, it provides the basis for comparison with the truncated Wigner method, and can be also applied to calculate the ground state of a trapped \abbrev{bec} numerically.
+For definiteness we will consider a two-component \abbrev{bec}, although the equations in this section can be easily generalised to describe an arbitrary number of components.
 
 
 % =============================================================================
 \subsection{Two-component condensate}
 % =============================================================================
 
-Hereafter we are discussing $^{87}$Rb condensate and two of its $5^2S_{1/2}$ states: $\vert1,-1\rangle$ and $\vert2,1\rangle$,
-called $\vert1\rangle$ and $\vert2\rangle$, correspondingly.
-The energy of the mixture of two states is~\cite{Pitaevskii2003}:
+The classical \abbrev{bec} is described by the wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
+The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations
 \begin{eqn}
-\label{eqn:mean-field:two-comp-energy}
-	E(\Psi) = & \int\limits_V \left(
-		- \frac{\hbar^2 \Psi_1^* \nabla^2 \Psi_1}{2m}
-		- \frac{\hbar^2 \Psi_2^* \nabla^2 \Psi_2}{22m}
-	\right. \\
-	& \left.
-		+ (V_1 + \hbar \omega_1) n_1 + (V_2 + \hbar \omega_2) n_2
-		+ \frac{g_{11}}{2} n_1^2 + \frac{g_{22}}{2} n_2^2 + g_{12} n_1 n_2
-	\right) d\xvec.
-\end{eqn}
-External trap potential $V_1$ and $V_2$ can be different for each component, depending on experimental setup.
-Interaction coefficients $g_{11}$, $g_{12}$ and $g_{22}$ depend on corresponding scattering lengths:
-\[
-	g_{ij} = \frac{4 \pi \hbar^2 a_{ij}}{m}.
-\]
-The quantity $\omega_{hf}$ is the hyperfine splitting for $5^2S_{1/2}$ and equals
-$\omega_{hf} \approx 2 \pi \times 6.8 \textrm{GHz}$~\cite{Steck2009}.
-
-One can obtain coupled GPEs from~\eqnref{mean-field:two-comp-energy} using the variational principle $i \hbar \partial \Psi_i / \partial t = \delta E / \delta \Psi_i^*$:
-\begin{align}
-\label{eqn:mean-field:two-comp-cgpes}
-\begin{split}
-	i \hbar \frac{\partial \Psi_1}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_1 + \hbar \omega_1
-		+ g_{11} \lvert \Psi_1 \rvert^2 + g_{12} \lvert \Psi_2 \rvert^2
-	\right) \Psi_1 \\
-	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_2
-		+ g_{22} \lvert \Psi_2 \rvert^2 + g_{12} \lvert \Psi_1 \rvert^2
-	\right) \Psi_2
-\end{split}
-\end{align}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs.eps}
-\caption{Two-component ground state for immiscible regime.}
-\label{fig:mean-field:two-comp-gs}
-\end{center}
-\end{figure}
-
-Ground state for two-component condensate can be found by propagating these equations in imaginary time simultaneously,
-waiting for total energy~\eqnref{mean-field:two-comp-energy} to stop changing.
-\figref{mean-field:two-comp-gs} shows the axial projection of two-component ground state for a mixture of 40,000 $\vert 1 \rangle$ and 40.000 $\vert 2 \rangle$ atoms;
-scattering lengths were taken to be equal to $a_{11} = 100.40\ a_0$, $a_{22} = 95.68\ a_0$ and $a_{12} = 98.13\ a_0$, where $a_0$ is the Bohr radius.
-
-
-% =============================================================================
-\subsection{Two-component evolution}
-% =============================================================================
-
-Full evolution equations can be constructed from the basic form~\eqnref{mean-field:two-comp-energy},
-with the inclusion of electromagnetic coupling terms~\cite{Pitaevskii2003}
-and loss terms~\cite{Mertes2007}:
-\begin{align}
-\label{eqn:mean-field:two-comp-evolution-cgpes}
-\begin{split}
-	i \hbar \frac{\partial \Psi_1}{\partial t} & = \left(
+\label{eqn:bec-noise:mean-field:cgpes}
+	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_1 + \hbar \omega_1
 		+ g_{11} \lvert \Psi_1 \rvert^2
 		+ g_{12} \lvert \Psi_2 \rvert^2
@@ -80,7 +24,7 @@ and loss terms~\cite{Mertes2007}:
 	& + \frac{\hbar \Omega}{2} \left(
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
 	\right) \Psi_2, \\
-	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
+	i \hbar \frac{\upd \Psi_2}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_2
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
@@ -88,33 +32,34 @@ and loss terms~\cite{Mertes2007}:
 	\right) \Psi_2 \\
 	& + \frac{\hbar \Omega}{2} \left(
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
-	\right) \Psi_1,
-\end{split}
-\end{align}
-where $\Gamma_1 = \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2$,
-and $\Gamma_2 = \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2$.
-Loss rates $\gamma$ can be found in~\cite{Mertes2007} and~\cite{Burt1997}:
-\[
-	\gamma_{111} = 5.4(11) \times 10^{-30}\ \textrm{cm}^6/\textrm{s},\,
-	\gamma_{12} = 0.780(19) \times 10^{-13}\ \textrm{cm}^3/\textrm{s},\,
-	\gamma_{22} = 1.194(19) \times 10^{-13}\ \textrm{cm}^3/\textrm{s}.
-\]
-The difference between internal energies of spins $1$ and $2$ is the hyperfine frequency $\omega_{hf} = \omega_1 - \omega_2$.
-Coupling frequency $\omega$ is slightly detuned from the hyperfine frequency in the experiment:
-$\omega = \omega_{hf} + \delta,\, \delta \ll \omega_{hf}$.
-Coupling coefficient $\Omega$ is the Rabi frequency (its exact value depends on the nature of coupling process),
-and $\alpha$ is the phase of the coupling field.
+	\right) \Psi_1.
+\end{eqn}
+Here $V_j(\xvec)$ are external potentials, $\omega_j$ is the internal energy of the component $j$, $g_{jk} = 4 \pi \hbar^2 a_{jk} / m$ are nonlinear interaction coefficients (where $a_{jk}$ are the scattering lengths), $\Gamma_j$ represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the phase of the coupling).
+The \abbrev{cgpe}s without loss or coupling terms were introduced in~\cite{Zeng1995,Ho1996}.
+The coupling terms were first included in~\cite{Ballagh1997}, and the loss terms in~\cite{Yurovsky1999}.
+A detailed description of the mean-field approximation can be found in~\cite{Pitaevskii2003}.
 
-The fact that $\hbar \omega_{1,2} \gg V_2$ can cause problems when performing calculations with low precision.
-Therefore it is convenient to use equations~\eqnref{mean-field:two-comp-evolution-cgpes}
-in a rotating frame:
-$\Psi_1 \rightarrow \Psi_1 e^{i \omega_1 t}$, $\Psi_2 \rightarrow \Psi_2 e^{i \omega_2 t}$.
-This transformation eliminates $\omega_1$ and $\omega_2$ from the equations and does not change single-time observable values;
-but one must remember that it does change relative phase of the components, which may be significant in some cases.
-Transformed equations look like:
-\begin{align*}
-\begin{split}
-	i \hbar \frac{\partial \Psi_1}{\partial t} & = \left(
+The exact expression of the loss parameters $\Gamma_j$ depends on the loss processes in the particular experiment.
+For example, the dominant three-body and two-body losses in the two-component \Rb \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in
+\begin{eqn}
+	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
+	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
+\end{eqn}
+We have already seen in \secref{wigner-bec:examples}, and will see later in this chapter, how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
+
+The difference between the internal energies of spins $1$ and $2$ is the hyperfine frequency $\omega_{hf} = \omega_1 - \omega_2$.
+The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
+
+The fact that $\hbar \omega_j \gg V_j$ can cause problems when performing calculations with low precision.
+Therefore it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
+\begin{eqn}
+	\Psi_1 & \rightarrow \Psi_1 e^{i \omega_1 t}, \\
+	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2 t}.
+\end{eqn}
+This transformation eliminates $\omega_1$ and $\omega_2$ from the equations and does not change single-time observable values.
+The transformed equations look like:
+\begin{eqn}
+	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
 		+ g_{11} \lvert \Psi_1 \rvert^2
 		+ g_{12} \lvert \Psi_2 \rvert^2
@@ -122,8 +67,8 @@ Transformed equations look like:
 	\right) \Psi_1 \\
 	& + \frac{\hbar \Omega}{2} \left(
 		e^{i ((\omega + \omega_{hf}) t + \alpha)} + e^{-i (\delta t + \alpha)}
-	\right) \Psi_2 \\
-	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
+	\right) \Psi_2, \\
+	i \hbar \frac{\upd \Psi_2}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_2
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
@@ -131,48 +76,40 @@ Transformed equations look like:
 	\right) \Psi_2 \\
 	& + \frac{\hbar \Omega}{2} \left(
 		e^{i (\delta t + \alpha)} + e^{-i ((\omega + \omega_{hf}) t + \alpha)}
-	\right) \Psi_1
-\end{split}
-\end{align*}
+	\right) \Psi_1.
+\end{eqn}
 
-In the experiment coupling field is applied for short periods of time $t_{pulse}$,
-where $1 / \omega \ll t_{pulse} \ll 1 / \delta$.
-This allows us to neglect fast oscillating terms:
-\begin{align}
-\label{eqn:mean-field:cgpes_simplified}
-\begin{split}
-	i \hbar \frac{\partial \Psi_1}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V
+Furthermore, in the experiment the coupling field is applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
+This allows us to neglect the quickly oscillating terms:
+\begin{eqn}
+\label{eqn:bec-noise:mean-field:cgpes-simplified}
+	i \hbar \frac{\upd \Psi_1}{\upd t} & = \left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
 		+ g_{11} \lvert \Psi_1 \rvert^2
 		+ g_{12} \lvert \Psi_2 \rvert^2
 		- i \hbar \Gamma_1
 	\right) \Psi_1
 	+ \frac{\hbar \Omega}{2} e^{-i (\delta t + \alpha)} \Psi_2, \\
-	i \hbar \frac{\partial \Psi_2}{\partial t} & = \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V
+	i \hbar \frac{\upd \Psi_2}{\upd t} & = \left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
 		- i \hbar \Gamma_2
 	\right) \Psi_2 +
-	\frac{\hbar \Omega}{2} e^{i (\delta t + \alpha)} \Psi_1,
-\end{split}
-\end{align}
-where $\alpha$ is the starting phase of the coupling field.
-When pulse is applied twice using the same coupling field (which is the case for Ramsey interferometry),
-it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse;
-therefore $\alpha$ stays the same too.
-If one wants to apply pulse with the different detuning, phase information is lost,
-and the value of $\alpha$ has to become random before this pulse.
+	\frac{\hbar \Omega}{2} e^{i (\delta t + \alpha)} \Psi_1.
+\end{eqn}
+When the pulse is applied twice using the same coupling field (which is the case for the Ramsey interferometry), it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse; therefore $\alpha$ stays the same too.
+If one wants to apply pulse with the different detuning, the phase information is lost, and the value of $\alpha$ has to become random before this pulse.
 
-Application of the coupling field can be simplified, if certain additional conditions are valid, namely:
+The application of the coupling field can be simplified, if certain additional conditions are valid, namely:
 \begin{enumerate}
 	\item $\mu / \hbar \ll \Omega$, where $\mu$ is the chemical potential of the first component;
 	\item $\delta \ll \Omega$;
-	\item mean field interaction can be neglected \textcolor{red}{[mathematical condition needed]}.
+	\item the characteristic time of the other terms in~\eqnref{bec-noise:mean-field:cgpes} is much greater than $t_{\mathrm{pulse}}$.
 \end{enumerate}
-This allows us to use ``instantaneous'' pulse, multiplying state vector by rotation matrix:
-\begin{equation}
-\label{eqn:mean-field:rotation-matrix}
+This allows us to use the ``instantaneous'' pulse, multiplying the state vector by a rotation matrix:
+\begin{eqn}
+\label{eqn:bec-noise:mean-field:rotation-matrix}
 	\begin{pmatrix}
 		\Psi^\prime_1 \\ \Psi^\prime_2
 	\end{pmatrix} =
@@ -183,27 +120,99 @@ This allows us to use ``instantaneous'' pulse, multiplying state vector by rotat
 	\begin{pmatrix}
 		\Psi_1 \\ \Psi_2
 	\end{pmatrix},
-\end{equation}
-where $\theta = \Omega t_{pulse}$, and $\phi$ is the phase of the coupling field at the beginning of the pulse.
-In particular, for two-pulse Ramsey scheme, $\phi_2 = \phi_1 + \delta (t_{R} + t_{pulse}) \approx \phi_1 + \delta t_{R}$.
+\end{eqn}
+where $\theta = \Omega t_{\mathrm{pulse}}$, and $\phi$ is the phase of the coupling field at the beginning of the pulse.
+In particular, for the two-pulse Ramsey scheme with the time $t_R$ between pulses, $\phi_2 = \phi_1 + \delta t_R$.
 
-Coupled equations~\eqnref{mean-field:cgpes_simplified} require slightly improved split-step method,
-because nonlinear matrix $\hat{N}$ is no longer diagonal.
-See \todo{reference split-step section} for details.
 
-But if one uses ``instantaneous'' pulses, evolution without coupling terms can be simulated with the simple split-step method.
-Differential and nonlinear operators will look as following then:
-\[
-	\hat{D} = \frac{i \hbar}{2m} \nabla^2,
-\]
-\[
-	\hat{N}_1 = -\frac{i}{\hbar} \left( V + g_{11} n_1 + g_{12} n_2 \right) - \Gamma_1,
-\]
-\[
-	\hat{N}_2 = -\frac{i}{\hbar} \left( V + g_{12} n_1 + g_{22} n_2 \right) - \Gamma_2.
-\]
+% =============================================================================
+\subsection{Ground state calculation}
+% =============================================================================
 
-Gross-Pitaevskii equations give a good approximation of BEC behaviour.
+At the beginning of the simulation the \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
+The ground state is a solution of the stationary \abbrev{cgpe}s
+\begin{eqn}
+\label{eqn:bec-noise:mean-field:cgpes-stationary}
+	\mu_1 \Psi_1 & = \left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
+		+ g_{11} \lvert \Psi_1 \rvert^2
+		+ g_{12} \lvert \Psi_2 \rvert^2
+	\right) \Psi_1, \\
+	\mu_2 \Psi_2 & = \left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2
+		+ g_{22} \lvert \Psi_2 \rvert^2
+		+ g_{12} \lvert \Psi_1 \rvert^2
+	\right) \Psi_2,
+\end{eqn}
+where $\mu_1$ and $\mu_2$ are chemical potentials of the components.
+
+The most common method to find the ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
+The essense of the method is that propagating an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
+The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-simplified} without the loss or coupling terms:
+\begin{eqn}
+\label{eqn:bec-noise:mean-field:imaginary-time}
+	\hbar \frac{\upd \Psi_1}{\upd \tau} & = -\left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
+		+ g_{11} \lvert \Psi_1 \rvert^2
+		+ g_{12} \lvert \Psi_2 \rvert^2
+	\right) \Psi_1, \\
+	\hbar \frac{\upd \Psi_2}{\upd \tau} & = -\left(
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2
+		+ g_{22} \lvert \Psi_2 \rvert^2
+		+ g_{12} \lvert \Psi_1 \rvert^2
+	\right) \Psi_2.
+\end{eqn}
+
+The rigorous proof of this method can be found in~\cite{Bao2004}.
+The idea can be roughly illustrated by considering a one-component system with the linear Hamiltonian $\hat{H}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$, where the lowest eigenvalue corresponds to ground state we want to find.
+The steady solution of the time-dependent \abbrev{gpe}
+\begin{eqn}
+	i \hbar \frac{\upd \Psi}{\upd t} = \hat{H} \Psi
+\end{eqn}
+then looks like
+\begin{eqn}
+	\Psi(\xvec, t) = \sum_k e^{-\frac{i}{\hbar}\mu_k t} f_k(\xvec),
+\end{eqn}
+where $f_k$ are eigenfunctions of $\hat{H}$ corresponding to the eigenvalues $\mu_k$.
+After the substitution $t \rightarrow \tau = it$ the solution will become fading, with higher-energy components fading faster:
+\begin{eqn}
+	\Psi(\xvec, \tau) = \sum_k e^{-\frac{1}{\hbar}\mu_k \tau} f_k(\xvec).
+\end{eqn}
+
+Therefore, if we take some random initial solution and propagate it long enough in imaginary time using~\eqnref{bec-noise:mean-field:imaginary-time}, the higher-energy components will eventually die out (in comparison with the lowest-energy state) and leave us with the desired ground state.
+The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one, since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
+
+Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, renormalisation after each step will be required.
+Known total number of atoms in ground state serves best in this case (because we will have to renormalise the final ground state anyway):
+\begin{eqn}
+	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 \upd V = N.
+\end{eqn}
+
+Propagation is terminated when the Gross-Pitaevskii energy of the state converges to the required precision (that is, only one component with the lowest energy is left out).
+The energy of the two-component condensate~\cite{Pitaevskii2003}
+\begin{eqn}
+\label{eqn:bec-noise:mean-field:two-comp-energy}
+	E[\Psivec] ={} & \int\limits_A \left(
+		- \frac{\hbar^2 \Psi_1^* \nabla^2 \Psi_1}{2m}
+		- \frac{\hbar^2 \Psi_2^* \nabla^2 \Psi_2}{2m}
+	\right. \\
+	& \left.
+		+ (V_1 + \hbar \omega_1) n_1 + (V_2 + \hbar \omega_2) n_2
+		+ \frac{g_{11}}{2} n_1^2 + \frac{g_{22}}{2} n_2^2 + g_{12} n_1 n_2
+	\right) \upd\xvec
+\end{eqn}
+thus has to be calculated after each step and compared to the previous value, waiting for the desired precision to be reached.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs.eps}
+\caption{Two-component ground state for immiscible regime.}
+\label{fig:mean-field:two-comp-gs}
+\end{center}
+\end{figure}
+
+\figref{mean-field:two-comp-gs} shows the axial projection of two-component ground state for a mixture of 40,000 $\vert 1 \rangle$ and 40.000 $\vert 2 \rangle$ atoms;
+scattering lengths were taken to be equal to $a_{11} = 100.40\ a_0$, $a_{22} = 95.68\ a_0$ and $a_{12} = 98.13\ a_0$, where $a_0$ is the Bohr radius.
 
 
 % =============================================================================
@@ -213,7 +222,7 @@ Gross-Pitaevskii equations give a good approximation of BEC behaviour.
 We are looking for the ground state of the system with pseudopotential model hamiltonian~\cite{Pitaevskii2003}:
 \[
 	\hat{H} =
-		- \frac{\hbar^2}{2m} \frac{\partial^2}{\partial \xvec^2}
+		- \frac{\hbar^2}{2m} \frac{\upp^2}{\upp \xvec^2}
 		+ V(\xvec)
 		+ g_{11} \lvert \Psi(\xvec) \rvert^2,
 \]
@@ -329,75 +338,3 @@ for $10^5$ atoms Thomas-Fermi approximation is very close to accurately calculat
 and for $10^3$ atoms it differs significantly, as expected.
 
 
-% =============================================================================
-\subsection{Ground state calculation}
-% =============================================================================
-
-The ground state obtained using Thomas-Fermi approximation is good for estimation purposes,
-but not for real-life calculations---for example, it does not have continuous first derivative everywhere
-(namely, near the edges of the condensate).
-That is why we have to employ numerical calculations in order to find precise (to a certain extent) solution
-of the Gross-Pitaevskii equation~\eqnref{mean-field:gs-shroedinger}.
-One of the possible ways, the propagation in imaginary time, will be described in this section.
-
-The idea of the method is that propagating the system state using the time-dependent GPE,
-but with the substitution $t \rightarrow \tau = it$, diminishes energy of the system;
-therefore after the sufficient amount of time this propagation will lead us to ground state.
-The rigorous proof of this method can be found in \cite{Bao2004}, but there is a simple "hand-waving" explanation.
-It assumes the superposition principle works for GPE, though it does not because of the nonlinearity.
-
-Let us say we have the system with Hamiltonian $\hat{H}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$.
-They do not have to correspond to real states of BEC, we just know that this Hamiltonian must have discrete spectre
-(because of the form of the potential) and the lowest eigenvalue corresponds to ground state we want to find.
-The steady solution of time-dependent GPE
-\[
-	i \hbar \frac{\partial \Psi}{\partial t} = \hat{H} \Psi
-\]
-then looks like
-\[
-	\Psi(\xvec, t) = \sum_k e^{-\frac{i}{\hbar}\mu_k t} f_k(\xvec),
-\]
-where $f_k$ are eigenfunctions of $\hat{H}$, corresponding to eigenvalues $\mu_k$.
-Now consider the substitution $t \rightarrow \tau = it$; after it the steady solution will become fading,
-with higher-energy components fading faster:
-\[
-	\Psi(\xvec, \tau) = \sum_k e^{-\frac{1}{\hbar}\mu_k \tau} f_k(\xvec).
-\]
-
-Therefore, if we take some random initial solution and propagate it for a sufficient amount of time,
-higher-energy components will eventually die out (in comparison with the lowest-energy state)
-and leave us with desired ground state.
-The state obtained from Thomas-Fermi approximated GPE can be taken as an initial one,
-since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
-
-Since the energy will decrease exponentially after each step and the precision of numerical calculations is limited,
-renormalisation after each step will be required.
-Known total number of atoms in ground state serves best in this case
-(because we will have to renormalise the final ground state anyway):
-\[
-	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 dV = N.
-\]
-
-Propagation is terminated when the total energy of the state stops changing
-(that is, only one component with the lowest energy is left out).
-So, we need to calculate the total energy after each step:
-\[
-	E(\Psi) = \int\limits_V \Psi^* \hat{H} \Psi dV
-	= \int\limits_V \left(
-		-\frac{\hbar^2}{2 m} \Psi^* \nabla^2 \Psi + V(\xvec) n + \frac{g_{11}}{2} n^2
-	\right) dV,
-\]
-where $n = \lvert \Psi \rvert^2$,
-and compare it to the previous value, waiting for the desired precision to be reached.
-
-Now how do we propagate the state of the system?
-There are a lot of possibilities, one of which is split-step Fourier method (see \todo{reference split-step section}).
-The propagation in imaginary time can be described as:
-\[
-	\frac{\partial \Psi}{\partial \tau} = - \frac{1}{\hbar} \hat{H} \Psi.
-\]
-Therefore, differential and nonlinear operator, necessary for split-step method, are:
-\[
-	\hat{D} = \frac{\hbar}{2 m}\nabla^2,\,
-	\hat{N} = -\frac{1}{\hbar}\left( V(\xvec) + g_{11} \lvert \Psi(\xvec) \rvert^2 \right).
-\]
