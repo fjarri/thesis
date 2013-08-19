@@ -40,7 +40,7 @@ The coupling terms were first included in~\cite{Ballagh1997}, and the loss terms
 A detailed description of the mean-field approximation can be found in~\cite{Pitaevskii2003}.
 
 The exact expression of the loss parameters $\Gamma_j$ depends on the loss processes in the particular experiment.
-For example, the dominant three-body and two-body losses in the two-component \Rb \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in
+For example, the dominant three-body and two-body losses in the two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in
 \begin{eqn}
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
 	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
@@ -205,136 +205,100 @@ thus has to be calculated after each step and compared to the previous value, wa
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs.eps}
-\caption{Two-component ground state for immiscible regime.}
-\label{fig:mean-field:two-comp-gs}
+\subfloat[Miscible regime]{\includegraphics[width=0.5\textwidth]{figures/mean-field/two_comp_gs_miscible.eps}}
+\subfloat[Immiscible regime]{\includegraphics[width=0.5\textwidth]{figures/mean-field/two_comp_gs_immiscible.eps}}
 \end{center}
+\caption{Two-component ground state for miscible and immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$.
+Intra-component scattering lengths are $a_{11} = 100.40\ r_B$, $a_{22} = 95.68\ r_B$; inter-component scattering length is (a) $a_{12} = 97.8\ r_B$ and (b) $a_{11} = 98.2\ r_B$, where $r_B$ is the Bohr radius.}
+\label{fig:bec-noise:mean-field:two-comp-gs}
 \end{figure}
 
-\figref{mean-field:two-comp-gs} shows the axial projection of two-component ground state for a mixture of 40,000 $\vert 1 \rangle$ and 40.000 $\vert 2 \rangle$ atoms;
-scattering lengths were taken to be equal to $a_{11} = 100.40\ a_0$, $a_{22} = 95.68\ a_0$ and $a_{12} = 98.13\ a_0$, where $a_0$ is the Bohr radius.
+As an example, \figref{bec-noise:mean-field:two-comp-gs} shows the axial projection of the two-component ground state for an equal mix of two states of \Rb{} \abbrev{bec}.
+Two parts of the figure illustrate the difference between the miscible ($a_{12}^2 < a_{11} a_{22}$) and immiscible ($a_{12}^2 > a_{11} a_{22}$) regimes.
 
 
 % =============================================================================
 \subsection{Thomas-Fermi approximation}
 % =============================================================================
 
-We are looking for the ground state of the system with pseudopotential model hamiltonian~\cite{Pitaevskii2003}:
-\[
-	\hat{H} =
-		- \frac{\hbar^2}{2m} \frac{\upp^2}{\upp \xvec^2}
-		+ V(\xvec)
-		+ g_{11} \lvert \Psi(\xvec) \rvert^2,
-\]
-\[
-	g_{11} = \frac{4 \pi \hbar^2 a_{11}}{m},
-\]
+As was mentioned earlier in this section, the starting state for the imaginary time propagation can be set to the Thomas-Fermi approximated state to minimize the propagation time.
+Thomas-Fermi approximation consists of neglecting the kinetic term in the stationary equations~\eqnref{bec-noise:mean-field:cgpes-stationary}.
+For a one-component state ($\Psi_2 \equiv 0$) the resulting equations can be solved analytically:
 \begin{equation}
-\label{eqn:mean-field:trap-potential}
-	V(\xvec) = \frac{m}{2} \left(
-		\omega_x^2 x^2 + \omega_y^2 y^2 + \omega_z^2 z^2
-	\right).
+\label{eqn:bec-noise:mean-field:tf-gs}
+	| \Psi_1(\xvec) |^2 = \frac{1}{g_{11}} \max \left( \mu_1 - V_1(\xvec), 0 \right).
 \end{equation}
-where $V(\xvec)$ is the potential energy of parabolic trap, $g_{11}$ is the interaction coefficient,
-and $a_{11}$ is the scattering length for atoms in non-excited state.
+In the $D$-dimensional harmonic trap potential
+\begin{equation}
+\label{eqn:bec-noise:mean-field:trap-potential}
+	V_1(\xvec) = \frac{m}{2} \sum_{d=1}^D \omega_d^2 x_d^2
+\end{equation}
+this solution has the shape of an ellipsoid with radii $r_d = \sqrt{2\mu_1 / (m \omega_d^2)}$.
 
-The ground state satisfies the Gross-Pitaevskii equation~\cite{Pitaevskii2003}:
-\begin{equation}
-\label{eqn:mean-field:gs-shroedinger}
-	\hat{H} \Psi = \mu \Psi,
-\end{equation}
-where $\mu$ is the chemical potential of the state.
-To get the first approximation of the state function,
-we consider the kinetic term to be small as compared to other terms and omit it.
-The conditions for this operation to be valid will be determined later in this section.
-Thus we get the simple equation:
-\[
-	\left( V(\xvec) + g_{11} \lvert \Psi(\xvec) \rvert^2 \right) \Psi(\xvec) = \mu \Psi(\xvec),
-\]
-which leads us to the state function:
-\begin{equation}
-\label{eqn:mean-field:tf-gs}
-	\lvert \Psi(\xvec) \rvert^2 = \frac{1}{g_{11}} \max \left( \mu - V(\xvec), 0 \right).
-\end{equation}
-The condition for $V(\xvec)$ defines the shape of the condensate---it is the ellipsoid with the following radii:
-\begin{equation}
-\label{eqn:mean-field:tf-radii}
-	r_x = \sqrt{\frac{2\mu}{m \omega_x^2}},\,
-	r_y = \sqrt{\frac{2\mu}{m \omega_y^2}},\,
-	r_z = \sqrt{\frac{2\mu}{m \omega_z^2}}.
-\end{equation}
-
-Normalisation condition for the ground state function gives us the connection
-between the number of atoms in the condensate and the chemical potential:
-\[
-	\mu =
-		\left( \frac{15 N}{8 \pi} \right)^\frac{2}{5}
-		\left( \frac{m \bar{\omega}^2}{2} \right)^\frac{3}{5}
-		{g_{11}}^\frac{2}{5},
-\]
+The chemical potential $\mu_1$ is fixed by the normalisation condition $\int |\Psi_1|^2 \upd \xvec = N_1$.
+For a \abbrev{3d} trap it can be shown to be
+\begin{eqn}
+	\mu_1^{\mathrm{(3D)}} =
+		\left( \frac{15 N_1}{8 \pi} \right)^{\frac{2}{5}}
+		\left( \frac{m \bar{\omega}^2}{2} \right)^{\frac{3}{5}}
+		{g_{11}}^{\frac{2}{5}},
+\end{eqn}
 where $\bar{\omega} = \sqrt[3]{\omega_x \omega_y \omega_z}$.
+For a \abbrev{1d} trap it has the form
+\begin{eqn}
+	\mu_1^{\mathrm{(1D)}} =
+		\left( \frac{3 g_{11} N_1}{4} \right)^{\frac{2}{3}}
+		\left( \frac{m \omega_1^2}{2} \right)^{\frac{1}{3}}.
+\end{eqn}
 
 Now we can roughly estimate the conditions necessary to drop the kinetic term from equation.
-Substituting approximate solution~\eqnref{mean-field:tf-gs} to~\eqnref{mean-field:gs-shroedinger}
-and comparing kinetic and potential term, we can get the following inequation:
+Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref{bec-noise:mean-field:cgpes-stationary} and comparing the kinetic term with the potential term, we get the following inequation:
 \begin{equation}
-\label{eqn:mean-field:tf-inequation}
+\label{eqn:bec-noise:mean-field:tf-inequation}
 	\frac{\hbar^2}{2m} \left(
-		\frac{m \left( \omega_x^2 + \omega_y^2 + \omega_z^2 \right)}{2}
-		+ \frac{m^2 \left( \omega_x^4 x^2 + \omega_y^4 y^2 + \omega_z^4 z^2 \right)}
-			{4 \left( \mu - V(\xvec) \right)}
+		\frac{m \sum_{d=1}^D \omega_d^2}{2}
+		+ \frac{m^2 \sum_{d=1}^D \omega_d^4 x_d^2}
+			{4 \left( \mu_1 - V_1(\xvec) \right)}
 	\right) \ll
-	\mu \left(\mu - V(\xvec)\right).
+	\mu \left(\mu_1 - V_1(\xvec)\right).
 \end{equation}
 Near the centre of the condensate this inequation simplifies to
 \begin{equation}
-\label{eqn:mean-field:tf-condition}
-	\mu \gg \frac{\hbar}{2} \sqrt{\omega_x^2 + \omega_y^2 + \omega_z^2}.
+\label{eqn:bec-noise:mean-field:tf-condition}
+	\mu \gg \frac{\hbar}{2} |\bomega|,
 \end{equation}
+where $\bomega \equiv (\omega_1, \ldots, \omega_D)^T$ is the vector of trap frequencies.
 
-On the other hand, near the edges of the cloud the left-hand side of the inequation~\eqnref{mean-field:tf-inequation} diverges,
-while the right-hand side equals zero there.
+On the other hand, near the edges of the cloud the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation} diverges, while the right-hand side tends to zero.
 This means that near the edges Thomas-Fermi approximation fails regardless of the conditions.
-Fortunately, the density of the particles there is low, so we can estimate the width $h$ of the "belt"
-where our first approximation of the state function is significantly incorrect.
+Fortunately, the density of the particles there is low, so we can estimate the width $h$ of the ``belt'' where our first approximation of the state function is significantly incorrect.
 If it happens to be small as compared to the size of the condensate, the approximation can be considered valid.
 
-The first term at the left-hand side of the inequation~\eqnref{mean-field:tf-inequation}
-is constant and can be dropped in the limit of $V(\xvec) \rightarrow \mu$.
-Then, for the sake of simplicity, we consider two of three coordinates to be zero and the third one to equal to $r - h$,
-where $r$ is the corresponding radius of the condensate.
-After replacing ``$\ll$'' by ``$\approx$'' and assuming $h$ to be small as compared to $r$,
-we obtain the conditions for each coordinate:
-\[
-	h_x \approx \sqrt{\frac{\hbar^2}{2 \mu m}},\,\ldots
-\]
-They have to be much smaller than corresponding radii, which gives us:
-\[
-	\mu \gg \frac{1}{2} \hbar \omega_x,\ldots
-\]
-These conditions are less strict than the condition for the center of the condensate.
-Therefore, we have only one condition justifying the application of Thomas-Fermi approximation is~\eqnref{mean-field:tf-condition}.
+The first term at the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation}
+is constant and can be dropped in the limit of $V_1(\xvec) \rightarrow \mu_1$.
+Then, for the sake of simplicity, we consider all but one of coordinates to be zero and the remaining one to be equal to $r_d - h_d$, where $r_d$ is the corresponding radius of the condensate.
+After replacing ``$\ll$'' by ``$\approx$'' and assuming $h_d$ to be small as compared to $r_d$, we obtain the conditions for each coordinate:
+\begin{eqn}
+	h_d \approx \sqrt{\frac{\hbar^2}{2 \mu_1 m}},\,d \in [1, \ldots, D].
+\end{eqn}
+They have to be much smaller than corresponding radii, which gives us
+\begin{eqn}
+	\mu_1 \gg \frac{1}{2} \hbar \max_{d \in [1, \ldots, D]} \omega_d.
+\end{eqn}
+This conditions is less strict than the condition for the center of the condensate.
+Therefore, we have only one condition justifying the application of the Thomas-Fermi approximation is~\eqnref{bec-noise:mean-field:tf-condition}.
 
 \begin{figure}
 \begin{center}
-\subfloat[100,000 atoms]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/mean_field/ground_states_100k.eps}}
-\subfloat[1,000 atoms]{\includegraphics[width=0.5\textwidth]{%
-	figures_generated/mean_field/ground_states_1k.eps}}
+\subfloat[100,000 atoms]{\includegraphics[width=0.5\textwidth]{figures/mean-field/ground_states_100k.eps}}
+\subfloat[1,000 atoms]{\includegraphics[width=0.5\textwidth]{figures/mean-field/ground_states_1k.eps}}
 \end{center}
 \caption{Numerically calculated and Thomas-Fermi approximated ground states}
-\label{fig:mean-field:tf-vs-accurate}
+\label{fig:bec-noise:mean-field:tf-vs-accurate}
 \end{figure}
 
-Let us use some real-life experimental parameters and check how well Thomas-Fermi approximation works.
-For three-dimensional trap with frequencies $f_x = f_y = 97.6 \textrm{ Hz}$ and $f_x = 11.96 \textrm{ Hz}$
-and $10^5$ rubidium atoms (which have scattering length $a_{11} = 100.4 a_0$, where $a_0$ is the Bohr radius),
-we have $\mu \approx 7.67 \hbar \omega_x$.
-This means that Thomas-Fermi approximation produces solution which is close to the real one.
-But for lower amount of atoms, say $10^3$, we get $\mu \approx 1.28 \hbar \omega_x$,
-which is a sign that the we are reaching the limit of the approximation's applicability.
-\figref{mean-field:tf-vs-accurate} shows the density along the z axis for both cases:
-for $10^5$ atoms Thomas-Fermi approximation is very close to accurately calculated ground state (see the following section for details),
-and for $10^3$ atoms it differs significantly, as expected.
-
-
+Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
+For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_x = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
+This means that the Thomas-Fermi approximation produces solution which is close to the real one.
+But for lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
+\figref{bec-noise:mean-field:tf-vs-accurate} shows the density along the z axis for both cases: for $10^5$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state, and for $10^3$ atoms it differs significantly, as expected.
