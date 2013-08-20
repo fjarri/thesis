@@ -205,11 +205,12 @@ thus has to be calculated after each step and compared to the previous value, wa
 
 \begin{figure}
 \begin{center}
-\subfloat[Miscible regime]{\includegraphics[width=0.5\textwidth]{figures/mean-field/two_comp_gs_miscible.eps}}
-\subfloat[Immiscible regime]{\includegraphics[width=0.5\textwidth]{figures/mean-field/two_comp_gs_immiscible.eps}}
+\subfloat[Miscible regime]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs_miscible.pdf}}
+\subfloat[Immiscible regime]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs_immiscible.pdf}}
 \end{center}
-\caption{Two-component ground state for miscible and immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$.
-Intra-component scattering lengths are $a_{11} = 100.40\ r_B$, $a_{22} = 95.68\ r_B$; inter-component scattering length is (a) $a_{12} = 97.8\ r_B$ and (b) $a_{11} = 98.2\ r_B$, where $r_B$ is the Bohr radius.}
+\caption{Two-component ground state for miscible and immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms of states ${\ket{F=1,\, m_F=-1}}$ (solid blue lines) and ${\ket{F=2,\, m_F=+1}}$ (dashed red lines).
+The lines show the particle density in a \abbrev{3d} harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$, integrated over $x$ and $y$ axes.
+Intra-component scattering lengths are $a_{11} = 100.40\ r_B$, $a_{22} = 95.68\ r_B$; inter-component scattering length is (a)~$a_{12} = 97.0\ r_B$ and (b)~$a_{11} = 99.0\ r_B$, where $r_B$ is the Bohr radius.}
 \label{fig:bec-noise:mean-field:two-comp-gs}
 \end{figure}
 
@@ -290,15 +291,18 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 
 \begin{figure}
 \begin{center}
-\subfloat[100,000 atoms]{\includegraphics[width=0.5\textwidth]{figures/mean-field/ground_states_100k.eps}}
-\subfloat[1,000 atoms]{\includegraphics[width=0.5\textwidth]{figures/mean-field/ground_states_1k.eps}}
+\subfloat[100,000 atoms]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/one_comp_gs_large.pdf}}
+\subfloat[1,000 atoms]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/one_comp_gs_small.pdf}}
 \end{center}
-\caption{Numerically calculated and Thomas-Fermi approximated ground states}
+\caption{Numerically calculated (solid blue lines) and Thomas-Fermi approximated (dashed red lines) ground states for a one-component \Rb{} \abbrev{bec} of (a) 100,000 atoms, and (b) 1,000 atoms.}
 \label{fig:bec-noise:mean-field:tf-vs-accurate}
 \end{figure}
 
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
-For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_x = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
+For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
 This means that the Thomas-Fermi approximation produces solution which is close to the real one.
 But for lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
-\figref{bec-noise:mean-field:tf-vs-accurate} shows the density along the z axis for both cases: for $10^5$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state, and for $10^3$ atoms it differs significantly, as expected.
+\figref{bec-noise:mean-field:tf-vs-accurate} shows the particle density integrated over transverse ($x$ and $y$) axes for both cases: for $10^5$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state, and for $10^3$ atoms it differs significantly, as expected.
+
+More extended discussion of the Thomas-Fermi approximation can be found in~\cite{Dalfovo1999}.
+It is possible to work out the Thomas-Fermi approximation for the two-component condensate, but it requires some non-trivial handling of various misibility/immiscibility cases~\cite{Anderson2010}.
