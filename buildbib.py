@@ -5,15 +5,15 @@ import codecs
 
 def accentSymbols(s):
     return s.replace(
-        '\u012d', r'\u{\i}').replace(
+        u'\u012d', r'\u{\i}').replace(
         '\\AA ', '{\\r{A}}').replace(
-        '\u201c', '``').replace(
-        '\u201d', "''").replace(
-        '\u2013', "--")
+        u'\u201c', '``').replace(
+        u'\u201d', "''").replace(
+        u'\u2013', "--")
 
 def loadMendeleyBib(fname):
 
-    f = codecs.open(fname, 'r', 'utf-8')
+    f = codecs.open(fname, 'rt', 'utf-8')
     text = f.read()
     f.close()
 
@@ -50,7 +50,7 @@ def loadMendeleyBib(fname):
     return entries
 
 def saveTexBib(fname, entries):
-    f = open(fname, 'w')
+    f = open(fname, 'wt')
     for entry_type, entry_key, entry_fields in sorted(entries, key=lambda x: x[1]):
         f.write('@' + entry_type + '{' + entry_key + ',\n')
         for field in sorted(entry_fields):
