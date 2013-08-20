@@ -15,4 +15,4 @@ temp/*
 *.sublime-workspace
 *.lof
 *.pyc
-
+figures_precreated/*.pdf
