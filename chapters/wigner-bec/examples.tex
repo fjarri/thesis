@@ -1,15 +1,11 @@
 % =============================================================================
-\section{Usage examples}
+\section{Usage example}
 \label{sec:wigner-bec:examples}
 % =============================================================================
 
-The general theorems in the sections above may seem complicated, so in this section we will see into two examples of how they can be applied to real systems.
+The general theorems in the sections above may seem complicated, so in this section we will see into a simple example of how they can be applied to real systems.
 
-% =============================================================================
-\subsection{Single-component example}
-% =============================================================================
-
-First, we will first consider a simple case with a single component \abbrev{bec}, with 3-body loss and no unitary evolution (the same as described by Norrie~\textit{et~al}~\cite{Norrie2006a}).
+We will first consider a simple case with a single component \abbrev{bec}, with a 3-body loss process and no unitary evolution (the same as described in~\cite{Norrie2006a}).
 For this system we have $K \equiv 0$, $U \equiv 0$ and $\hat{O} = \Psiop^3$ (and, consequently, $O = \Psi^3$), and we also denote $\gamma = 6\kappa$.
 The \abbrev{fpe} for this system is therefore
 \begin{eqn}
@@ -99,48 +95,4 @@ Substituting above expressions into the equation for the population change rate:
     \right).
 \end{eqn}
 We see that the second highest term in the expression is canceled, which agrees with the expansion being correct up to the order $1/N$.
-If the quantum correction term to the drift is omitted, one finds that a physically incorrect quadratic nonlinear term proportional to $n^2$ is obtained, which is inconsistent with an exact short-time solution to the master equation~\cite{Norrie2006a}.
-
-
-% =============================================================================
-\subsection{Two-component example}
-% =============================================================================
-
-As a more involved example, let us consider a two component $^{87}$Rb \abbrev{bec} from recent experiments~\cite{Egorov2011,Opanchuk2012}.
-In this case we have both unitary evolution (including nonlinear interaction)~\eqnref{wigner-bec:hamiltonian:effective-H}, and three sources of losses: three-body recombination $\hat{O}_{111}=\Psiop_{1}^3$, two-body interspecies loss $\hat{O}_{12}=\Psiop_{1}\Psiop_{2}$ and two-body intraspecies loss $\hat{O}_{22}=\Psiop_{2}^2$.
-This gives us \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde} with drift terms
-\begin{eqn}
-    \mathcal{A}_1
-    ={} & - \frac{i}{\hbar} \left(
-            \sum_{k=1}^2 K_{1k} \Psi_k
-            + \Psi_1 \sum_{k=1}^2 U_{1k} \left(
-                |\Psi_k|^2 - \frac{\delta_{1k} + 1}{2} \delta_{\restbasis_k}(\xvec, \xvec)
-            \right)
-        \right) \\
-    & - 3\kappa_{111} \left( |\Psi_1|^2
-        - 3 \delta_{\restbasis_1}(\xvec, \xvec) \right) |\Psi_1|^2 \Psi_1
-        - \kappa_{12} \left( |\Psi_{2}|^2
-        - \frac{\delta_{\restbasis_2}(\xvec, \xvec)}{2} \right) \Psi_1, \\
-    \mathcal{A}_2
-    ={} & - \frac{i}{\hbar} \left(
-            \sum_{k=1}^2 K_{2k} \Psi_k
-            + \Psi_2 \sum_{k=1}^2 U_{2k} \left(
-                |\Psi_{k}|^2 - \frac{\delta_{2k} + 1}{2} \delta_{\restbasis_k}(\xvec, \xvec)
-            \right)
-        \right) \\
-    & - \kappa_{12} \left(|\Psi_1|^2 - \frac{\delta_{\restbasis_1}(\xvec, \xvec)}{2} \right) \Psi_2
-    - 2\kappa_{22} \left(|\Psi_2|^2 - \delta_{\restbasis_2}(\xvec, \xvec) \right)\Psi_2,
-\end{eqn}
-and noise terms
-\begin{eqn}
-    \mathcal{B}_{1,111} = 3 \sqrt{\kappa_{111}} \left( \Psi_1^* \right)^2,\quad
-    \mathcal{B}_{1,12} = \sqrt{\kappa_{12}} \Psi_2^*,\quad
-    \mathcal{B}_{1,22} = 0,
-\end{eqn}
-\begin{eqn}
-    \mathcal{B}_{2,111} = 0,\quad
-    \mathcal{B}_{2,12} = \sqrt{\kappa_{12}} \Psi_1^*,\quad
-    \mathcal{B}_{2,22} = 2\sqrt{\kappa_{22}} \Psi_2^*.
-\end{eqn}
-
-This type of stochastic equation is needed to treat coherent \abbrev{bec} interferometry in the presence of nonlinear loss terms caused by two and three body collisions.
+If the quantum correction term to the drift is omitted, one finds that a physically incorrect quadratic nonlinear term proportional to $n^2$ is obtained, which is inconsistent with the exact short-time solution to the master equation~\cite{Norrie2006a}.

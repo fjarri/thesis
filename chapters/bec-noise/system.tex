@@ -1,0 +1,52 @@
+% =============================================================================
+\section{Two-component trapped BEC}
+% =============================================================================
+
+The system we are interested in is a harmonically trapped \abbrev{bec} such as the one in~\cite{Riedel2010,Egorov2011,Egorov2013}.
+The \abbrev{bec} in question has two components with a significant nonlinear repulsive interaction (both inter- and intra-component), nonlinear losses and perhaps some additional linear unitary effects, such as electromagnetic coupling between components.
+The number of components is only set to two in order to simplify resulting equations for the experiments described in this chapter; it can be easily increased if necessary.
+
+
+\copypaste{
+We start by assuming that the BEC has $s$-wave interactions, together with Markovian losses due to $n$-body collisions.
+We employ a master equation together with the Wigner-Moyal quantum phase-space representation~\cite{Gardiner2004} and a truncation of third- and higher-order derivatives in the equations of motion.
+If we regard the commonly used Gross-Pitaevskii equation as a classical, first approximation to mean-field condensate dynamics, the truncated Wigner approach is best thought of as the second term in an expansion in inverse particle number.
+}
+
+In the present Letter, we treat an ultra-cold,
+interacting multi-component spinor Bose gas in $D$ effective dimensions.
+The basic Hamiltonian is easily expressed using quantum fields
+$\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$,
+where $\Psiop_j^{\dagger}(\xvec)$ creates a bosonic atom of spin $j$
+at location $\xvec$, and $\Psiop_j(\xvec)$ destroys one;
+the commutators are
+$[\Psiop_j(\xvec),\Psiop_k^{\dagger}(\xvec^\prime)] =
+\delta^{(D)}(\xvec-\xvec^\prime)\delta_{jk}.$
+The resulting physics of a dilute, low-temperature Bose gas
+is well-described in the $s$-wave scattering limit by an effective Hamiltonian
+with contact interactions and external potentials:
+\begin{equation}
+    \hat{H} / \hbar = \int \upd^{D}\xvec \left\{
+        \Psiop_j^{\dagger} K_{jk} \Psiop_k +
+        \frac{U_{jk}}{2} \Psiop_j^{\dagger} \Psiop_k^{\dagger}
+        \Psiop_k \Psiop_j
+    \right\}.
+\end{equation}
+Here we omit the field argument $(\xvec)$ for brevity,
+and use the Einstein summation convention of summing over repeated indices.
+$K_{jk}$ is the single-particle Hamiltonian:
+\begin{equation}
+    K_{jk} = \left( -\frac{\hbar}{2m} \nabla^2 + \omega_j + V_j(\xvec) / \hbar \right) \delta_{jk} +
+        \tilde{\Omega}_{jk}(t),
+\end{equation}
+where $m$ is the atomic mass, $V_j$ is the external trapping potential for spin $j$,
+$\omega_j$ is the internal energy of spin $j$,
+$\tilde{\Omega}_{jk}$ represents a time-dependent coupling
+that is used to rotate one spin projection into another,
+and $U_{jk}$ is the atom-atom interaction term.
+Thus, $n_j = \langle \Psiop_j^{\dagger} \Psiop_j \rangle$
+is the spin-$j$ atomic density.
+For a dilute gas at low enough temperatures,
+$U_{jk}=4\pi\hbar a_{jk} / m$, where $a_{jk}$ is the $s$-wave scattering length in three dimensions.
+Here we assume a momentum cutoff $k_{c} \ll 1 / a_{jk}$,
+otherwise the couplings must be renormalized~\cite{Sinatra2002}.
