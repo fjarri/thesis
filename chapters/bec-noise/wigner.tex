@@ -1,22 +1,67 @@
 % =============================================================================
 \section{Quasiprobability approach}
+\label{sec:bec-noise:wigner}
 % =============================================================================
 
-While mean-field approximation gives a fast way to get a qualitative picture of the \abbrev{bec} dynamics, it ignores many important effects that originate from the inherent quantum nature of the system.
+Having discussed the classical mean-field approach in the previous section, we will now apply the functional truncated Wigner method described in \charef{wigner-bec}.
+While the mean-field approximation gives a fast way to get a qualitative picture of the \abbrev{bec} dynamics, it ignores many important effects that originate from the inherent quantum nature of the system.
+We will see how the initial master equation produces \abbrev{cgpe}s very similar to~\eqnref{bec-noise:mean-field:cgpes-simplified} with the loss terms similar to~\eqnref{bec-noise:mean-field:losses}.
 
+Since we assume that the \abbrev{bec} has $s$-wave interactions, we can use the effective Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H} expressed using quantum field creation and annihilation operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$:
+\begin{eqn}
+\label{eqn:bec-noise:wigner:master-eqn}
+    \hat{H} = \int \upd \xvec \sum_{j=1}^2 \sum_{k=1}^2 \left\{
+        \Psiop_j^{\dagger} K_{jk} \Psiop_k
+        + \frac{g_{jk}}{2} \Psiop_j^\dagger \Psiop_k^\dagger \Psiop_j \Psiop_k
+    \right\},
+\end{eqn}
+where $g_{jk}$ are nonlinear interaction coefficients~\eqnref{bec-noise:system:g}.
+The single-particle Hamiltonian $K_{jk}$ includes the electromagnetic coupling terms, added by analogy with \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified}:
+\begin{eqn}
+    K_{jk}
+    = \left(
+            -\frac{\hbar^2}{2m} \nabla^2 + V_j(\xvec)
+        \right) \delta_{jk}
+        + \hbar \tilde{\Omega}_{jk}(t).
+\end{eqn}
+Here, same as in the classical \abbrev{cgpe}s, $V_j(\xvec)$ are external potentials~\eqnref{bec-noise:system:V}, and $\tilde{\Omega}$ is the linear coupling matrix
+\begin{eqn}
+    \tilde{\Omega}
+    = \frac{\hbar \Omega}{2}
+        \begin{pmatrix}
+            0 & e^{-i (\delta t + \alpha)} \\
+            e^{i (\delta t + \alpha)} & 0
+        \end{pmatrix}.
+\end{eqn}
 
+Taking the nonlinear losses into account, the evolution of the system's density matrix $\hat{\rho}$ is described by the Markovian master equation~\eqnref{wigner-bec:master-eqn:master-eqn}:
+\begin{eqn}
+    \frac{\upd\hat{\rho}}{\upd t} =
+        - \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
+        + \sum_{\lvec \in L} \kappa_{\lvec} \int \upd \xvec
+            \mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
+\end{eqn}
+where $\mathcal{L}$ are loss operators~\eqnref{wigner-bec:master-eqn:loss-op}, and $L$ is the set of loss processes that are experimentally shown to affect the trapped \Rb{} \abbrev{bec}~\cite{Mertes2007,Egorov2011}:
+\begin{itemize}
+    \item three-body recombination $\hat{O}_{111}=\Psiop_{1}^3$,
+    \item two-body interspecies loss $\hat{O}_{12}=\Psiop_{1}\Psiop_{2}$, and
+    \item two-body intraspecies loss $\hat{O}_{22}=\Psiop_{2}^2$,
+\end{itemize}
+with the coefficients depending on the components used in the particular experiment.
 
-
-
-
-
-
-
-
-
-As a more involved example, let us consider a two component $^{87}$Rb \abbrev{bec} from recent experiments~\cite{Egorov2011,Opanchuk2012}.
-In this case we have both unitary evolution (including nonlinear interaction)~\eqnref{wigner-bec:hamiltonian:effective-H}, and three sources of losses: three-body recombination $\hat{O}_{111}=\Psiop_{1}^3$, two-body interspecies loss $\hat{O}_{12}=\Psiop_{1}\Psiop_{2}$ and two-body intraspecies loss $\hat{O}_{22}=\Psiop_{2}^2$.
-This gives us \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde} with drift terms
+Applying the general formulas from \charef{wigner-bec}, we can transform the master equation~\eqnref{bec-noise:wigner:master-eqn} to a \abbrev{fpe} for the truncated Wigner functional, and further to a set of \abbrev{sde}s in the It\^{o} form~\eqnref{wigner-bec:fpe-bec:sde}
+\begin{eqn}
+\label{eqn:bec-noise:wigner:sde}
+    \upd\Psi_1 & = \mathcal{P}_{\restbasis_1} \left[
+        \mathcal{A}_1 \upd t
+        + \sum_{\lvec \in L} \mathcal{B}_{1,\lvec} \upd Q_{\lvec}
+    \right], \\
+    \upd\Psi_2 & = \mathcal{P}_{\restbasis_2} \left[
+        \mathcal{A}_2 \upd t
+        + \sum_{\lvec \in L} \mathcal{B}_{2,\lvec} \upd Q_{\lvec}
+    \right].
+\end{eqn}
+with the drift terms
 \begin{eqn}
     \mathcal{A}_1
     ={} & - \frac{i}{\hbar} \left(
@@ -39,7 +84,7 @@ This gives us \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde} with drift terms
     & - \kappa_{12} \left(|\Psi_1|^2 - \frac{\delta_{\restbasis_1}(\xvec, \xvec)}{2} \right) \Psi_2
     - 2\kappa_{22} \left(|\Psi_2|^2 - \delta_{\restbasis_2}(\xvec, \xvec) \right)\Psi_2,
 \end{eqn}
-and noise terms
+and the noise terms
 \begin{eqn}
     \mathcal{B}_{1,111} = 3 \sqrt{\kappa_{111}} \left( \Psi_1^* \right)^2,\quad
     \mathcal{B}_{1,12} = \sqrt{\kappa_{12}} \Psi_2^*,\quad
@@ -50,125 +95,24 @@ and noise terms
     \mathcal{B}_{2,12} = \sqrt{\kappa_{12}} \Psi_1^*,\quad
     \mathcal{B}_{2,22} = 2\sqrt{\kappa_{22}} \Psi_2^*.
 \end{eqn}
+Note that the main order of the loss components in the drift terms coincides with the phenomenological loss components of \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes}.
 
-This type of stochastic equation is needed to treat coherent \abbrev{bec} interferometry in the presence of nonlinear loss terms caused by two and three body collisions.
-
-
-
-
-\todo{
-This section should be mostly dedicated to results in \cite{Egorov2011} and \cite{Opanchuk2012} (and possibly \cite{Egorov2013}).
+\copypaste{
+For initial conditions in interferometry it is usually sufficient to consider a coherent state amplitude $\Psi_j^{(c)}$, corresponding to a typical initial state with Poissonian number fluctuations, as produced by a beam splitter.
+For greater accuracy, the initial state can be modified to account for initial  correlations, thermal noise, or additional fluctuations.
+If normal ordered correlations are measured, one has to express them as a sum of symmetrically ordered terms.
 }
 
-
-
-We proceed by using a stochastic phase-space method that allows a numerical
-simulation of the quantum dynamics~\cite{Drummond1993,Steel1998,Hoffmann2008}.
-Defining a Wigner function $W(\Psivec)$, where $\Psi_j$
-is a c-number field corresponding to the quantum field $\hat{\Psi}_j$, this has a unitary time-evolution equation:
-\begin{equation}
-    \frac{\partial W}{\partial t} = \int \upd^D\xvec \left\{
-        - \frac{\delta}{\delta\Psi_j} A_j
-        - \frac{\delta}{\delta\Psi_j^*}A_j^*
-        + \mbox{O} \left[ \frac{\delta^3}{\delta\Psi_j^3} \right]
-    \right\} W.
-\end{equation}
-Next, higher-derivative terms of type $\mbox{O} \left[ \delta^3 / \delta\Psi_j^3 \right]$ are truncated.
-This approximation neglects higher-order terms in an expansion in $1 / \sqrt{N}$,
-and is therefore valid in the limit of $N \gg M$
-where $N$ is the atom number and $M$ is the number of low-energy modes included~\cite{Drummond1993,Sinatra2002,Norrie2006}.
-In free-space calculations it is important to maintain this mode truncation.
-In the relevant limits where the technique is applicable, the equations
-simply reduce to Gross-Pitaevskii equations with Gaussian fluctuations
-of the initial conditions:
-\begin{equation}
-\label{eqn:SDE-1}
-    \frac{\upd\Psi_j}{\upd t} = -i \left(
-        K_{jk} \Psi_k + U_{jk} \lvert \Psi_k \rvert^2 \Psi_j
-    \right).
-\end{equation}
-For initial conditions in interferometry it is usually sufficient to consider
-a coherent state amplitude $\Psi_s^c$,
-corresponding to a typical initial state with Poissonian number fluctuations,
-as produced by a beam-splitter.
-In this case the initial Wigner amplitude has a Gaussian random distribution, with
-$\Psi_j(\xvec, t_0) = \Psi_j^c(\xvec) + \Delta \Psi_j(\xvec)$, where:
-$\left\langle \Delta \Psi_j(\xvec) \Delta \Psi_k^*(\xvec^{\prime}) \right\rangle =
-\delta_{jk} \delta^D(\xvec - \xvec^{\prime}) / 2.$
-This initial noise is necessary because the Wigner representation generates
-symmetrically ordered correlation functions, and includes vacuum fluctuations.
-For greater accuracy, the initial state can be modified to account for
-initial  correlations, thermal noise, or additional fluctuations.
-If normal ordered correlations are measured, one has to express them
-as a sum of symmetrically ordered terms.
-
-This includes all the known nonlinear quantum noise effects of quantum dynamics,
-like phase diffusion, entanglement and quantum squeezing, in the limit
-of large particle number.
-The initial noise terms do not occur in the semi-classical Gross-Pitaevskii
-approximation, which is therefore unable to predict these effects.
-Thus, while the lossless equations are identical to the Gross-Pitaevskii
-equations, the inclusion of initial noise terms together with nonlinear
-interactions leads to quantum phase-diffusion.
-Such methods can be used for either free-space or trapped atom interferometry,
-provided there is an appropriate mode truncation.
-
-Additional quantum noise enters from the effects of damping and losses,
-due to the fluctuation-dissipation theorem.
+\copypaste{
+This includes all the known nonlinear quantum noise effects of quantum dynamics, like phase diffusion, entanglement and quantum squeezing, in the limit of large particle number.
+The initial noise terms do not occur in the semi-classical Gross-Pitaevskii approximation, which is therefore unable to predict these effects.
+Thus, while the lossless equations are identical to the Gross-Pitaevskii equations, the inclusion of initial noise terms together with nonlinear interactions leads to quantum phase-diffusion.
+Such methods can be used for either free-space or trapped atom interferometry, provided there is an appropriate mode truncation.
+Additional quantum noise enters from the effects of damping and losses, due to the fluctuation-dissipation theorem.
 These effects are important at high densities in atomic traps.
-They can be included via an additional Markovian master equation~\cite{Jack2002}
-defined so that,
-\begin{equation}
-    \frac{\upd\hat{\rho}}{\upd t} =
-        - \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
-        + \sum_{n,\lvec} \kappa_{\lvec}^{(n)} \int \upd^{D}\xvec
-            \mathcal{L}_{\lvec}^{(n)} \left[ \hat{\rho} \right],
-\end{equation}
-where $n$ is the number of interacting particles,
-$\lvec = (l_1, l_2, \ldots, l_n)$ is a vector indicating the spins that are coupled,
-and we have introduced local Liouville loss terms,
-\begin{equation}
-    \mathcal{L}_{\lvec}^{(n)} \left[ \hat{\rho} \right] =
-        2\hat{O}_{\lvec}^{(n)} \hat{\rho} \hat{O}_{\lvec}^{(n)\dagger}
-        - \hat{O}_{\lvec}^{(n)\dagger} \hat{O}_{\lvec}^{(n)} \hat{\rho}
-        - \hat{\rho} \hat{O}_{\lvec}^{(n)\dagger} \hat{O}_{\lvec}^{(n)}.
-\end{equation}
-The reservoir coupling operators $\hat{O}_{\lvec}^{(n)}$ are the distinct $n$-fold products of local field annihilation operators,
-$\hat{O}_{\lvec}^{(n)} = \hat{O}_{\lvec}^{(n)} (\widehat{\Psivec}) =
-    \Psiop_{l_{1}} (\xvec)
-    \Psiop_{l_{2}} (\xvec) \ldots
-    \Psiop_{l_{n}} (\xvec),$
-describing local $n$-body collision losses.
+}
 
-After transforming these new terms to evolution equations for the Wigner distribution, the drift term $A_j$
-changes the Gross-Pitaevskii evolution to include nonlinear damping, while
-the next terms in the evolution equation give rise to additional Fokker-Planck
-diffusion terms associated with quantum noise from the loss reservoirs,
-given by:
-\begin{equation}
-    \frac{\delta^{2}}{\delta\Psi_j\delta\Psi_k^{*}} \left\{
-        \sum_{n,\lvec} \kappa_{\lvec}^{(n)}
-            \frac{\partial O_{\lvec}^{(n)*}}{\partial\Psi_j^{*}}
-            \frac{\partial O_{\lvec}^{(n)}}{\partial\Psi_k}
-        \right\} W.
-\end{equation}
-
-This leads to a stochastic equation:
-\begin{equation}
-\label{eqn:SDE}
-    \frac{\upd\Psi_j}{\upd t} =
-        - i\left( K_{jk} \Psi_k + U_{jk} \lvert \Psi_k \rvert^{2} \Psi_j \right)
-        - \Gamma_j
-        + \sum_{n,\lvec} \beta_{\lvec,j}^{(n)} \zeta_{\lvec}^{(n)}(\xvec,t),
-\end{equation}
-where the nonlinear loss has the form:
-\begin{equation}
-    \Gamma_j = \sum_{n,\lvec}
-        \kappa_{\lvec}^{(n)}
-        \frac{\partial O_{\lvec}^{(n)*} (\Psivec)}{\partial\Psi_j^{*} (\xvec)}
-        O_{\lvec}^{(n)}(\xvec),
-\end{equation}
-and $\zeta_{\lvec}^{(n)}(\xvec, t)$ is a corresponding complex,
+$\zeta_{\lvec}^{(n)}(\xvec, t)$ is a corresponding complex,
 stochastic delta-correlated Gaussian noise with
 \begin{equation}
     \left\langle
@@ -188,7 +132,7 @@ The multiplicative noise coefficient
 is a fluctuation-dissipation term,
 so that the Wigner variables remain equivalent to the corresponding operators.
 
-The loss coefficients in eq.~(\ref{eqn:SDE}) can be converted to the conventional form,
+The loss coefficients in~\eqnref{bec-noise:wigner:sde} can be converted to the conventional form,
 which is defined using atom number losses:
 \begin{equation}
     \dot{n}_j = - \gamma^{(n)}_{\lvec,j} n^{m_1}_1 n^{m_2}_2 \ldots ,

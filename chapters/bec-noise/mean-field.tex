@@ -1,10 +1,12 @@
 % =============================================================================
 \section{Mean-field approximation}
+\label{sec:bec-noise:mean-field}
 % =============================================================================
 
 We will start from the classical model of a trapped \abbrev{bec} --- the mean-field approximation.
 While it cannot predict quantum effects, it provides the basis for comparison with the truncated Wigner method, and can be also applied to calculate the ground state of a trapped \abbrev{bec} numerically.
-For definiteness we will consider a two-component \abbrev{bec}, although the equations in this section can be easily generalised to describe an arbitrary number of components.
+
+We will use the combined model which includes linear coupling and losses, and later in \secref{bec-noise:wigner}, dedicated to the application of the truncated Wigner method we will show how we can get almost identical equations from the first principles.
 
 
 % =============================================================================
@@ -12,11 +14,11 @@ For definiteness we will consider a two-component \abbrev{bec}, although the equ
 % =============================================================================
 
 The classical \abbrev{bec} is described by the wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
-The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations
+The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations (\abbrev{cgpe}s)
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes}
 	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_1 + \hbar \omega_1
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_1 + \hbar \omega_1^{(i)}
 		+ g_{11} \lvert \Psi_1 \rvert^2
 		+ g_{12} \lvert \Psi_2 \rvert^2
 		- i \hbar \Gamma_1
@@ -25,7 +27,7 @@ The evolution of the condensate is described by the system of coupled Gross-Pita
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
 	\right) \Psi_2, \\
 	i \hbar \frac{\upd \Psi_2}{\upd t} ={} & \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_2
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_2^{(i)}
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
 		- i \hbar \Gamma_2
@@ -34,29 +36,30 @@ The evolution of the condensate is described by the system of coupled Gross-Pita
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
 	\right) \Psi_1.
 \end{eqn}
-Here $V_j(\xvec)$ are external potentials, $\omega_j$ is the internal energy of the component $j$, $g_{jk} = 4 \pi \hbar^2 a_{jk} / m$ are nonlinear interaction coefficients (where $a_{jk}$ are the scattering lengths), $\Gamma_j$ represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the phase of the coupling).
+Here $V_j(\xvec)$ are external potentials~\eqnref{bec-noise:system:V}, $\omega_j^{(i)}$ is the internal energy of the component $j$, $g_{jk}$ are nonlinear interaction coefficients~\eqnref{bec-noise:system:g}, $\Gamma_j$ terms represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the phase of the coupling).
 The \abbrev{cgpe}s without loss or coupling terms were introduced in~\cite{Zeng1995,Ho1996}.
 The coupling terms were first included in~\cite{Ballagh1997}, and the loss terms in~\cite{Yurovsky1999}.
 A detailed description of the mean-field approximation can be found in~\cite{Pitaevskii2003}.
 
 The exact expression of the loss parameters $\Gamma_j$ depends on the loss processes in the particular experiment.
-For example, the dominant three-body and two-body losses in the two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in
+For example, the dominant three-body and two-body losses in the two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in~\cite{Burt1997,Mertes2007}
 \begin{eqn}
+\label{eqn:bec-noise:mean-field:losses}
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
 	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
 \end{eqn}
-We have already seen in \secref{wigner-bec:examples}, and will see later in this chapter, how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
+These equations were obtained empyrically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
 
-The difference between the internal energies of spins $1$ and $2$ is the hyperfine frequency $\omega_{hf} = \omega_1 - \omega_2$.
+The difference between the internal energies of spins $1$ and $2$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
 
 The fact that $\hbar \omega_j \gg V_j$ can cause problems when performing calculations with low precision.
 Therefore it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
 \begin{eqn}
-	\Psi_1 & \rightarrow \Psi_1 e^{i \omega_1 t}, \\
-	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2 t}.
+	\Psi_1 & \rightarrow \Psi_1 e^{i \omega_1^{(i)} t}, \\
+	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2^{(i)} t}.
 \end{eqn}
-This transformation eliminates $\omega_1$ and $\omega_2$ from the equations and does not change single-time observable values.
+This transformation eliminates $\omega_1^{(i)}$ and $\omega_2^{(i)}$ from the equations and does not change single-time observable values.
 The transformed equations look like:
 \begin{eqn}
 	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
@@ -208,7 +211,7 @@ thus has to be calculated after each step and compared to the previous value, wa
 \subfloat[Miscible regime]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs_miscible.pdf}}
 \subfloat[Immiscible regime]{\includegraphics[width=0.5\textwidth]{figures_generated/mean_field/two_comp_gs_immiscible.pdf}}
 \end{center}
-\caption{Two-component ground state for miscible and immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms of states ${\ket{F=1,\, m_F=-1}}$ (solid blue lines) and ${\ket{F=2,\, m_F=+1}}$ (dashed red lines).
+\caption{Two-component ground state for miscible and immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms.
 The lines show the particle density in a \abbrev{3d} harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$, integrated over $x$ and $y$ axes.
 Intra-component scattering lengths are $a_{11} = 100.40\ r_B$, $a_{22} = 95.68\ r_B$; inter-component scattering length is (a)~$a_{12} = 97.0\ r_B$ and (b)~$a_{11} = 99.0\ r_B$, where $r_B$ is the Bohr radius.}
 \label{fig:bec-noise:mean-field:two-comp-gs}

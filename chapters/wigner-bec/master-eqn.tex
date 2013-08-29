@@ -13,6 +13,7 @@ The time evolution of the density matrix $\hat{\rho}$ of a multi-component \abbr
 where $L$ is the set of all loss processes taken into account, and $\lvec = (l_1, l_2, \ldots, l_C)$ is a vector containing the number of particles of each component involved in the inelastic interaction causing the specific loss process (with $C$ being the number of components).
 Here we have introduced local Liouville loss terms that describe $n$-body collisional losses in the Markovian approximation,
 \begin{eqn}
+\label{eqn:wigner-bec:master-eqn:loss-op}
 	\mathcal{L}_{\lvec} \left[ \hat{\rho} \right] =
 		2\hat{O}_{\lvec} \hat{\rho} \hat{O}_{\lvec}^\dagger
 		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{\rho}
@@ -20,7 +21,7 @@ Here we have introduced local Liouville loss terms that describe $n$-body collis
 \end{eqn}
 The reservoir coupling operators $\hat{O}_{\lvec}$ are products of local field annihilation operators
 \begin{eqn}
-\hat{O}_{\lvec} \equiv \hat{O}_{\lvec} (\Psiopvec) = \prod_{j=1}^C \Psiop_j^{l_j},
+	\hat{O}_{\lvec} \equiv \hat{O}_{\lvec} (\Psiopvec) = \prod_{j=1}^C \Psiop_j^{l_j},
 \end{eqn}
 describing local $n=(\sum l_c)$-body collision losses.
 This definition assumes that $l_1, \ldots, l_C$ particles of internal states with quantum number $j=1,\ldots C$ respectively all collide simultaneously within the volume corresponding to the inverse momentum cutoff, and are removed from the Bose gas.
