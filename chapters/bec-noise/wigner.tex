@@ -51,41 +51,39 @@ where $\mathcal{L}$ are loss operators~\eqnref{wigner-bec:master-eqn:loss-op}, a
 \end{itemize}
 with the coefficients depending on the components used in the particular experiment.
 
-Applying the general formulas from \charef{wigner-bec}, we can transform the master equation~\eqnref{bec-noise:wigner:master-eqn} to a \abbrev{fpe} for the truncated Wigner functional, and further to a set of \abbrev{sde}s in the It\^{o} form~\eqnref{wigner-bec:fpe-bec:sde}
+Applying the general formulas from \charef{wigner-bec}, we can transform the master equation~\eqnref{bec-noise:wigner:master-eqn} to a \abbrev{fpe} for the truncated Wigner functional, and further to a set of \abbrev{sde}s in the Stratonovich form~\eqnref{wigner-bec:fpe-bec:sde-stratonovich}:
 \begin{eqn}
 \label{eqn:bec-noise:wigner:sde}
     \upd\Psi_1 & = \mathcal{P}_{\restbasis_1} \left[
-        \mathcal{A}_1 \upd t
+        \mathcal{A}_1^{(s)} \upd t
         + \sum_{\lvec \in L} \mathcal{B}_{1,\lvec} \upd Q_{\lvec}
     \right], \\
     \upd\Psi_2 & = \mathcal{P}_{\restbasis_2} \left[
-        \mathcal{A}_2 \upd t
+        \mathcal{A}_2^{(s)} \upd t
         + \sum_{\lvec \in L} \mathcal{B}_{2,\lvec} \upd Q_{\lvec}
     \right].
 \end{eqn}
 with the drift terms
 \begin{eqn}
 \label{eqn:bec-noise:wigner:drift}
-    \mathcal{A}_1
+    \mathcal{A}_1^{(s)}
     ={} & - \frac{i}{\hbar} \left(
             \sum_{k=1}^2 K_{1k} \Psi_k
             + \Psi_1 \sum_{k=1}^2 U_{1k} \left(
                 |\Psi_k|^2 - \frac{\delta_{1k} + 1}{2} \delta_{\restbasis_k}(\xvec, \xvec)
             \right)
         \right) \\
-    & - 3\kappa_{111} \left( |\Psi_1|^2
-        - 3 \delta_{\restbasis_1}(\xvec, \xvec) \right) |\Psi_1|^2 \Psi_1
-        - \kappa_{12} \left( |\Psi_{2}|^2
-        - \frac{\delta_{\restbasis_2}(\xvec, \xvec)}{2} \right) \Psi_1, \\
-    \mathcal{A}_2
+    & - 3\kappa_{111} |\Psi_1|^2 |\Psi_1|^2 \Psi_1
+        - \kappa_{12} |\Psi_2|^2 \Psi_1, \\
+    \mathcal{A}_2^{(s)}
     ={} & - \frac{i}{\hbar} \left(
             \sum_{k=1}^2 K_{2k} \Psi_k
             + \Psi_2 \sum_{k=1}^2 U_{2k} \left(
                 |\Psi_{k}|^2 - \frac{\delta_{2k} + 1}{2} \delta_{\restbasis_k}(\xvec, \xvec)
             \right)
         \right) \\
-    & - \kappa_{12} \left(|\Psi_1|^2 - \frac{\delta_{\restbasis_1}(\xvec, \xvec)}{2} \right) \Psi_2
-    - 2\kappa_{22} \left(|\Psi_2|^2 - \delta_{\restbasis_2}(\xvec, \xvec) \right)\Psi_2,
+    & - \kappa_{12} |\Psi_1|^2 \Psi_2
+    - 2\kappa_{22} |\Psi_2|^2 \Psi_2,
 \end{eqn}
 and the noise terms
 \begin{eqn}
