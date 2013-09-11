@@ -159,3 +159,8 @@ def figure(width=0.5, aspect=None):
 
         return plt.figure(figsize=[fig_width, fig_height])
 
+def aspect_modifier(s):
+    ys = s.get_ylim()
+    xs = s.get_xlim()
+    return (xs[1] - xs[0]) / (ys[1] - ys[0])
+

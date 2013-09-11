@@ -5,12 +5,6 @@ from figures import get_path
 import figures.mplhelpers as mplh
 
 
-def aspect_modifier(s):
-    ys = s.get_ylim()
-    xs = s.get_xlim()
-    return (xs[1] - xs[0]) / (ys[1] - ys[0])
-
-
 def _one_comp_gs(fname, N):
     with open(get_path(__file__, 'one_comp_gs.pickle'), 'rb') as f:
         data = pickle.load(f)
@@ -26,7 +20,7 @@ def _one_comp_gs(fname, N):
     s.plot(zs, n_z[0], color=mplh.color.f.blue.main, linestyle='-')
     s.plot(zs, tf_n_z[0], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
 
-    s.set_aspect((5 ** 0.5 - 1) / 2 * aspect_modifier(s))
+    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
@@ -54,7 +48,7 @@ def _two_comp_gs(fname, a12):
     s.plot(zs, n_z[0], color=mplh.color.f.blue.main, linestyle='-')
     s.plot(zs, n_z[1], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
 
-    s.set_aspect((5 ** 0.5 - 1) / 2 * aspect_modifier(s))
+    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
