@@ -43,7 +43,7 @@ In this work we use a basis of plane waves in the volume $V$, and the density of
 Here we use the fact that the approximate Wigner function is a probability distribution equivalent to an averaged sum over different simulation paths.
 
 \begin{figure}
-    %\includegraphics{figures/phase_noise/ramsey_visibility.eps}
+    \centerline{\includegraphics{figures_generated/phase_noise/ramsey_visibility_short.pdf}}
 
     \caption{
     Comparison of experimental and numerically simulated interferometric contrast in the Ramsey sequence.
@@ -54,14 +54,27 @@ Here we use the fact that the approximate Wigner function is a probability distr
 \end{figure}
 
 \begin{figure}
-    %\includegraphics{figures/phase_noise/ramsey_visibility.eps}
+    \centerline{\includegraphics{figures_generated/phase_noise/echo_visibility_short.pdf}}
 
     \caption{
     Comparison of experimental and numerically simulated interferometric contrast in the spin-echo sequence.
     The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
     $N = 5.5 \times 10^4$.}
 
-    \label{fig:bec-noise:phase-noise:spin-echo-visibility}
+    \label{fig:bec-noise:phase-noise:echo-visibility}
+\end{figure}
+
+\begin{figure}
+    \centerline{%
+    \includegraphics{figures_generated/phase_noise/ramsey_visibility_long.pdf}%
+    \includegraphics{figures_generated/phase_noise/echo_visibility_long.pdf}}
+
+    \caption{
+    Comparison of experimental and numerically simulated interferometric contrast in the Ramsey sequence.
+    The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
+    $N = 5.5 \times 10^4$.}
+
+    \label{fig:bec-noise:phase-noise:ramsey-visibility-long}
 \end{figure}
 
 One of the main reasons for the inerferometry contrast decay is the assymetricity of losses.
@@ -69,7 +82,7 @@ With the populations typical for the experiment (tens of thousands of atoms or l
 This can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
 The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as shown in~\figref{bec-noise:phase-noise:sequences},~(b).
 
-The mean-field model predicts the full recover of the visibility even at very long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:phase-noise:spin-echo-visibility}.
+The mean-field model predicts the full recover of the visibility even at very long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:phase-noise:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the noticeable decay of visibility with time.
 To achieve the quantitative prediction one has to include in the simulation other factors affecting the decay, namely uncertainties in the parameters of the experimental apparatus.
 This can be done easily by sampling these for each of the \abbrev{sde} integration paths independently, similarly to how the initial state is sampled.
