@@ -20,3 +20,6 @@ if __name__ == '__main__':
     plot_phase_noise.spinecho_short(FOLDER + 'phase_noise/echo_visibility_short' + FORMAT)
     plot_phase_noise.ramsey_long(FOLDER + 'phase_noise/ramsey_visibility_long' + FORMAT)
     plot_phase_noise.spinecho_long(FOLDER + 'phase_noise/echo_visibility_long' + FORMAT)
+
+    plot_phase_noise.ramsey_noise(FOLDER + 'phase_noise/ramsey_noise' + FORMAT)
+    plot_phase_noise.spinecho_noise(FOLDER + 'phase_noise/echo_noise' + FORMAT)

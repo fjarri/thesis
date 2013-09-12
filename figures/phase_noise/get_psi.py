@@ -8,7 +8,7 @@ import gc
 import sys
 
 
-def calculateRamsey(wigner=False, echo=False, t=1.0,
+def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 		steps=20000, samples=100, N=55000, ensembles=1, shape=(64, 8, 8)):
 
 	env = envs.cuda(device_num=0)
@@ -36,7 +36,7 @@ def calculateRamsey(wigner=False, echo=False, t=1.0,
 	if wigner:
 		psi.toWigner(ensembles)
 
-	pulse.apply(psi, numpy.pi / 2)
+	pulse.apply(psi, numpy.pi / 2, theta_noise=pulse_theta_noise)
 
 	if t > 0:
 		t1 = time.time()
@@ -158,15 +158,25 @@ if __name__ == '__main__':
 	"""
 
 	# Long time
+	"""
+	#elif sys.argv[1] == 'ramsey-wigner':
+	run(calculateRamsey, 'ramsey_long_wigner.pickle', 16,
+		t=6, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
 	#if sys.argv[1] == 'ramsey-gpe':
 	run(calculateRamsey, 'ramsey_long_gpe.pickle', 1,
 		t=5, steps=160000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
 	#elif sys.argv[1] == 'echo-gpe':
 	run(calculateEcho, 'echo_long_gpe.pickle', 1,
 		t=5, steps=160000, samples=40, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	#elif sys.argv[1] == 'ramsey-wigner':
-	run(calculateRamsey, 'ramsey_long_wigner.pickle', 16,
-		t=6, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
 	#elif sys.argv[1] == 'echo-wigner':
 	run(calculateEcho, 'echo_long_wigner.pickle', 16,
 		t=5, steps=320000, samples=40, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
+	"""
+
+	# Short time, varied pulse
+	#run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
+	#	pulse_theta_noise=0.02,
+	#	t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 16,
+		pulse_theta_noise=0.02,
+		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=64, shape=(64,8,8))

@@ -41,7 +41,6 @@ def get_visibility(fname):
     env.release()
     return numpy.array(res['times']), numpy.array(vis), numpy.array(vis_errors)
 
-
 t_r_gpe, v_r_gpe, _ = get_visibility('ramsey_gpe.pickle')
 t_e_gpe, v_e_gpe, _ = get_visibility('echo_gpe.pickle')
 t_r_wig, v_r_wig, ve_r_wig = get_visibility('ramsey_wigner.pickle')
@@ -75,3 +74,13 @@ with open('echo_long_wigner_vis.json', 'w') as f:
     json.dump(dict(times=t_e_wig.tolist(), visibility=v_e_wig.tolist(),
         visibility_errors=ve_e_wig.tolist()), f)
 
+
+#t_r_wig, v_r_wig, ve_r_wig = get_visibility('ramsey_wigner_varied_pulse.pickle')
+#t_e_wig, v_e_wig, ve_e_wig = get_visibility('echo_wigner_varied_pulse.pickle')
+
+#with open('ramsey_wigner_varied_pulse_vis.json', 'w') as f:
+#    json.dump(dict(times=t_r_wig.tolist(), visibility=v_r_wig.tolist(),
+#        visibility_errors=ve_r_wig.tolist()), f)
+#with open('echo_wigner_varied_pulse_vis.json', 'w') as f:
+#    json.dump(dict(times=t_e_wig.tolist(), visibility=v_e_wig.tolist(),
+#        visibility_errors=ve_e_wig.tolist()), f)
