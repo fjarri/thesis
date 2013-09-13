@@ -2,92 +2,24 @@
 \section{Phase noise}
 % =============================================================================
 
-In this section we will apply the model from the previous sections to the recent interferometry experiments involving a two-component \Rb{} \abbrev{bec} with two hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$~\cite{Egorov2011} (the components are denoted $\ket{1}$ and $\ket{2}$ further in this section).
-In the following simulations the intra- and interspecies scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
-
-The experiment starts with the ground state of the component $\ket{1}$ in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$, so that magnetic field dephasing is largely eliminated~\cite{Hall1998}.
-The experiment is then carried out using two protocols.
-
 \begin{figure}
-    \centerline{\includegraphics{figures_precreated/sequences.eps}}
-    \caption{
-    Timeline of the experiment for \textbf{(a)} the regular Ramsey sequence, and \textbf{(b)} the Ramsey sequence with spin echo.}
-    \label{fig:bec-noise:phase-noise:sequences}
-\end{figure}
-
-The first protocol is the conventional Ramsey sequence, depicted schematically in \figref{bec-noise:phase-noise:sequences},~(a): a $\pi/2$ \todo{define what we mean by $\pi/2$} pulse is applied by an electromagnetic coupler, creating a non-equilibrium superposition of components $\ket{1}$ and $\ket{2}$.
-During the further evolution of the system the components experience complex dynamics, separating and merging periodically~\cite{Mertes2007}.
-This, in turn, leads to periodic dephasing and self-rephasing of the \abbrev{bec} components.
-After some period of the freee evolution the second $\pi/2$-pulse is applied, transforming the phase difference between the two components in the superposition into the population difference which can be imaged.
-Many such experiments are performed with different free evolution times, contributing one time-point each, because the imaging effectively destroys the \abbrev{bec}.
-
-The rephasing cycles can be represented by a common interferometric quantity --- the fringe contrast, or visibility:
-\begin{eqn}
-\label{eqn:bec-noise:phase-noise:visibility}
-    \mathcal{V}
-    = \frac{2 \left| \int \langle \Psiop_1^\dagger \Psiop_2 \rangle \upd \xvec \right|}%
-        {\int \langle \Psiop_1^\dagger \Psiop_1 + \Psiop_2^\dagger \Psiop_2 \rangle \upd \xvec},
-\end{eqn}
-where the denominator is just a total number of atoms in the system.
-This quantity can be shown to be the envelope curve of the population fringes produced by the second $\pi/2$-pulse in the experiment.
-
-The visibility can serve as a good example of the differences introduced by taking into account quantum effects in the simulation of the experiment.
-The comparison of the time dependence of the visibility obtained by the propagation of mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified}, and the propagation of \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} is shown in \figref{bec-noise:phase-noise:ramsey-visibility}.
-
-In this work we use a basis of plane waves in the volume $V$, and the density of component $j$ is calculated as a probabilistic average:
-\begin{equation}
-\label{eqn:wigner-density}
-    n_j (\xvec)
-        = \langle \Psi^*_j (\xvec) \Psi_j (\xvec) \rangle_{\mathrm{paths}} - \frac{M}{2V}.
-\end{equation}
-Here we use the fact that the approximate Wigner function is a probability distribution equivalent to an averaged sum over different simulation paths.
-
-\begin{figure}
-    \centerline{\includegraphics{figures_generated/phase_noise/ramsey_visibility_short.pdf}}
+    \centerline{\includegraphics{figures_generated/bec_noise/ramsey_noise.pdf}}
 
     \caption{
-    Comparison of experimental and numerically simulated interferometric contrast in the Ramsey sequence.
-    The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
+    Comparison of Wigner-simulated and experimental phase noise for the normal sequence.
     $N = 5.5 \times 10^4$.}
 
-    \label{fig:bec-noise:phase-noise:ramsey-visibility}
+    \label{fig:bec-noise:phase-noise:ramsey-phnoise}
 \end{figure}
 
 \begin{figure}
-    \centerline{\includegraphics{figures_generated/phase_noise/echo_visibility_short.pdf}}
+    \centerline{\includegraphics{figures_generated/bec_noise/echo_noise.pdf}}
 
     \caption{
-    Comparison of experimental and numerically simulated interferometric contrast in the spin-echo sequence.
-    The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
+    Comparison of Wigner-simulated and experimental phase noise for the spin-echo sequence.
     $N = 5.5 \times 10^4$.}
 
-    \label{fig:bec-noise:phase-noise:echo-visibility}
+    \label{fig:bec-noise:phase-noise:echo-phnoise}
 \end{figure}
 
-\begin{figure}
-    \centerline{%
-    \includegraphics{figures_generated/phase_noise/ramsey_visibility_long.pdf}%
-    \includegraphics{figures_generated/phase_noise/echo_visibility_long.pdf}}
-
-    \caption{
-    Comparison of experimental and numerically simulated interferometric contrast in the Ramsey sequence.
-    The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
-    $N = 5.5 \times 10^4$.}
-
-    \label{fig:bec-noise:phase-noise:ramsey-visibility-long}
-\end{figure}
-
-One of the main reasons for the inerferometry contrast decay is the assymetricity of losses.
-With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
-This can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
-The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as shown in~\figref{bec-noise:phase-noise:sequences},~(b).
-
-The mean-field model predicts the full recover of the visibility even at very long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:phase-noise:echo-visibility}.
-On the other hand, the quasiprobability model qualitatively predicts the noticeable decay of visibility with time.
-To achieve the quantitative prediction one has to include in the simulation other factors affecting the decay, namely uncertainties in the parameters of the experimental apparatus.
-This can be done easily by sampling these for each of the \abbrev{sde} integration paths independently, similarly to how the initial state is sampled.
-
-This example demonsrates that the truncated Wigner approach gives correct long-time predictions of quantum effects for the system comprised of large number of atoms.
-Both of these features, large atom numbers and long time-scales, are essential to accurate interferometric measurements.
-The predictions remains correct even despite multi-mode dynamical motion in three dimensions and substantial losses of most of the condensate atoms.
-On longer time-scales, the experimental accuracy is limited by technical noises, and we have no data for comparisons.
+\todo{Phase noise}
