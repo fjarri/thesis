@@ -63,7 +63,8 @@ where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ i
 
     \caption{
     Comparison of experimental and numerically simulated interferometric contrast in the regular Ramsey sequence.
-    Plotted are the results obtained with mean-field and no losses (yellow dash-dotted lines), mean-field (red dotted lines), Wigner method (blue solid lines), and Wigner method with technical noises included (green dashed lines), along with the experimental points (black bars).}
+    Plotted are the results obtained with mean-field and no losses (yellow dash-dotted lines), mean-field (red dotted lines), Wigner method (blue solid lines), and Wigner method with technical noises included (green dashed lines), along with the experimental points (black bars).
+    Also the theoretical limit of the visibility~\eqnref{bec-noise:visibility:limit} is plotted using the populations from the mean-field model (dotted grey line).}
 
     \label{fig:bec-noise:visibility:ramsey-visibility}
 \end{figure}
@@ -71,13 +72,32 @@ where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ i
 The visibility can serve as a good example of the differences introduced by taking into account losses, quantum effects, and technical noises in the simulation of the experiment.
 The inclusion of these factors in the simulation of the Ramsey sequence is demonstrated in~\figref{bec-noise:visibility:ramsey-visibility}.
 The experimental results and their uncertainties are shown as the black bars in the figure.
-The simplest model --- the mean-field with losses turned off --- gives results that are completely off base: the visibility is completely restored during rephasings (yellow dash-dotted lines in the figure).
-The inclusion of nonlinear losses (red dotted lines) in the mean-field model closes the major part of the gap.
-Application of the Wigner method (blue solid lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will se later in~\figref{bec-noise:visibility:visibility-long}).
 
-The Wigner results can be further adjusted to account for the technical noises introduced by the experiment.
+The simplest model --- the mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} with losses turned off --- gives results that are completely off base: the visibility is completely restored during rephasings (yellow dash-dotted lines in the figure).
+This is to be expected, as the theoretical limit of visibility
+\begin{eqn}
+\label{eqn:bec-noise:visibility:limit}
+    \mathcal{V}_{\mathrm{max}}
+    = \frac{2 \sqrt{N_1 N_2}}{N_1 + N_2},
+\end{eqn}
+where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to $1$ in this case, and there are no other limiting factors.
 
-The comparison of the time dependence of the visibility obtained by the propagation of mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified}, and the propagation of \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} is shown in \figref{bec-noise:visibility:ramsey-visibility}.
+But in the experiment in question the losses are present and are significantly asymmetrical.
+With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
+This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} shows.
+The resulting mean-field prediction with the inclusion of nonlinear losses (red dotted lines) is much closer to the experimental data.
+
+The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (blue solid lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
+The Wigner results can be further adjusted to account for the noise introduced by the final measurement~\cite{Egorov2012}:
+\begin{eqn}
+    \mathcal{V}_{\mathrm{noisy}}(t)
+    = \mathcal{V}(t) \exp \left(
+        -\frac{\sigma_{\mathrm{img}}(t)^2 + \sigma_{\mathrm{MW}}^2}{2} \right),
+\end{eqn}
+where $\sigma_{\mathrm{img}}(t)$ and $\sigma_{\mathrm{MW}}(t)$ are time-dependent values of the imaging and oscillator noises, which are discussed in more detail in the next section.
+
+The final agreement with the experiment is still not ideal, and the explanation of this difference is an open question.
+Candidate factors include finite temperature effects and interaction with the surrounding cloud of non-condensed atoms.
 
 \begin{figure}
     \centerline{\includegraphics{figures_generated/bec_noise/echo_visibility_short.pdf}}
@@ -102,8 +122,6 @@ The comparison of the time dependence of the visibility obtained by the propagat
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
 
-One of the main reasons for the inerferometry contrast decay is the assymetricity of losses.
-With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
 The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as shown in~\figref{bec-noise:visibility:sequences},~(b).
 

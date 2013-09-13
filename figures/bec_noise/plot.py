@@ -9,8 +9,6 @@ import figures.mplhelpers as mplh
 def ramsey_short(fname):
     with open(get_path(__file__, 'visibility/ramsey_experimental.json')) as f:
         vis_exp = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_icols2011.json')) as f:
-        icols2011 = json.load(f)
     with open(get_path(__file__, 'visibility/ramsey_gpe_vis.json')) as f:
         gpe = json.load(f)
     with open(get_path(__file__, 'visibility/ramsey_wigner_vis.json')) as f:
@@ -20,14 +18,31 @@ def ramsey_short(fname):
     v_exp = numpy.array(vis_exp['yarray'])
     v_exp_err = numpy.array(vis_exp['yerrors'])
 
-    all_noise_t = numpy.array(icols2011['times'])
-    all_noise_v = numpy.array(icols2011['vis_classical_noise'])
-
     gpe_t = numpy.array(gpe['times'])
     gpe_v = numpy.array(gpe['visibility'])
     wig_t = numpy.array(wig['times'])
     wig_v = numpy.array(wig['visibility'])
     wig_v_err = numpy.array(wig['visibility_errors'])
+
+    gpe_N1 = numpy.array(gpe['N1'])
+    gpe_N2 = numpy.array(gpe['N2'])
+
+
+    with open(get_path(__file__, 'noise/ramsey_imaging_noise_exp.json')) as f:
+        imaging_exp = json.load(f)
+    with open(get_path(__file__, 'noise/ramsey_wigner_noise.json')) as f:
+        wig = json.load(f)
+
+    t_wig = numpy.array(wig['times'])
+    ph_wig = numpy.array(wig['phnoise'])
+
+    t_img_exp = numpy.array(imaging_exp['xarray'])
+    ph_img_exp = numpy.array(imaging_exp['yarray'])
+
+    sigma = combine_noises(wig_t,
+        (t_img_exp, ph_img_exp),
+        (t_img_exp, 0.5 * t_img_exp)) # see Egorov2011; MW freq instability of 0.5 rad/s
+
 
     fig = mplh.figure(width=0.75)
     s = fig.add_subplot(111,
@@ -36,6 +51,10 @@ def ramsey_short(fname):
     s.errorbar(t_exp, v_exp, yerr=v_exp_err, color='k', linestyle='none',
         capsize=1.5)
 
+    # Theoretical limit of visibility
+    s.plot(wig_t, 2 * numpy.sqrt(gpe_N1 * gpe_N2) / (gpe_N1 + gpe_N2), color='grey',
+        linestyle=':', dashes=mplh.dash[':'])
+
     # GPE
     s.plot(gpe_t, gpe_v, color=mplh.color.f.red.main,
         linestyle=':', dashes=mplh.dash[':'])
@@ -43,8 +62,9 @@ def ramsey_short(fname):
     s.plot(wig_t, wig_v, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
     # Wigner + technical noise
-    s.plot(all_noise_t, all_noise_v, color=mplh.color.f.green.main,
+    s.plot(wig_t, wig_v * numpy.exp(-sigma**2/2), color=mplh.color.f.green.main,
         linestyle='--', dashes=mplh.dash['--'])
+
 
     s.set_xlim((0, 1.3))
     s.set_ylim((0, 1.))
@@ -58,8 +78,6 @@ def ramsey_short(fname):
 def spinecho_short(fname):
     with open(get_path(__file__, 'visibility/echo_experimental.json')) as f:
         vis_exp = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_icols2011.json')) as f:
-        icols2011 = json.load(f)
     with open(get_path(__file__, 'visibility/echo_gpe_vis.json')) as f:
         gpe = json.load(f)
     with open(get_path(__file__, 'visibility/echo_wigner_vis.json')) as f:
@@ -69,14 +87,29 @@ def spinecho_short(fname):
     v_exp = numpy.array(vis_exp['yarray'])
     v_exp_err = numpy.array(vis_exp['yerrors'])
 
-    all_noise_t = numpy.array(icols2011['times'])
-    all_noise_v = numpy.array(icols2011['vis_classical_noise'])
-
     gpe_t = numpy.array(gpe['times'])
     gpe_v = numpy.array(gpe['visibility'])
     wig_t = numpy.array(wig['times'])
     wig_v = numpy.array(wig['visibility'])
     wig_v_err = numpy.array(wig['visibility_errors'])
+
+
+    with open(get_path(__file__, 'noise/echo_imaging_noise_exp.json')) as f:
+        imaging_exp = json.load(f)
+    with open(get_path(__file__, 'noise/echo_wigner_noise.json')) as f:
+        wig = json.load(f)
+
+    t_wig = numpy.array(wig['times'])
+    ph_wig = numpy.array(wig['phnoise'])
+
+    t_img_exp = numpy.array(imaging_exp['xarray'])
+    ph_img_exp = numpy.array(imaging_exp['yarray'])
+
+    sigma = combine_noises(wig_t,
+        (t_img_exp, ph_img_exp),
+        #(t_pulse_wig, ph_pulse_wig),
+        (t_img_exp, 0.125 * t_img_exp)) # see Egorov2011; MW freq instability of 0.125 rad/s
+
 
     fig = mplh.figure(width=0.75)
     s = fig.add_subplot(111,
@@ -92,8 +125,9 @@ def spinecho_short(fname):
     s.plot(wig_t, wig_v, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
     # Wigner + technical noise
-    s.plot(all_noise_t, all_noise_v, color=mplh.color.f.green.main,
+    s.plot(wig_t, wig_v * numpy.exp(-sigma**2/2), color=mplh.color.f.green.main,
         linestyle='--', dashes=mplh.dash['--'])
+
 
     s.set_xlim((0, 1.8))
     s.set_ylim((0, 1.))
@@ -110,10 +144,11 @@ def ramsey_long(fname):
     with open(get_path(__file__, 'visibility/ramsey_long_wigner_vis.json')) as f:
         wig = json.load(f)
 
-    t_gpe = numpy.array(gpe['xarray'])
-    v_gpe = numpy.array(gpe['yarray'])
-    t_wig = numpy.array(wig['xarray'])
-    v_wig = numpy.array(wig['yarray'])
+    t_gpe = numpy.array(gpe['times'])
+    v_gpe = numpy.array(gpe['visibility'])
+    t_wig = numpy.array(wig['times'])
+    v_wig = numpy.array(wig['visibility'])
+    v_wig_err = numpy.array(wig['visibility_errors'])
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -126,6 +161,8 @@ def ramsey_long(fname):
     # Pure Wigner
     s.plot(t_wig, v_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
+    s.plot(t_wig, v_wig + v_wig_err, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['--'])
 
     s.set_xlim((0, 5.))
     s.set_ylim((0, 1.))
@@ -142,10 +179,11 @@ def spinecho_long(fname):
     with open(get_path(__file__, 'visibility/echo_long_wigner_vis.json')) as f:
         wig = json.load(f)
 
-    t_gpe = numpy.array(gpe['xarray'])
-    v_gpe = numpy.array(gpe['yarray'])
-    t_wig = numpy.array(wig['xarray'])
-    v_wig = numpy.array(wig['yarray'])
+    t_gpe = numpy.array(gpe['times'])
+    v_gpe = numpy.array(gpe['visibility'])
+    t_wig = numpy.array(wig['times'])
+    v_wig = numpy.array(wig['visibility'])
+    v_wig_err = numpy.array(wig['visibility_errors'])
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -158,6 +196,8 @@ def spinecho_long(fname):
     # Pure Wigner
     s.plot(t_wig, v_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
+    s.plot(t_wig, v_wig + v_wig_err, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['--'])
 
     s.set_xlim((0, 5.))
     s.set_ylim((0, 1.))

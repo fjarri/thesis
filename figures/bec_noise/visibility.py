@@ -9,13 +9,20 @@ import sys
 
 
 def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
-		steps=20000, samples=100, N=55000, ensembles=1, shape=(64, 8, 8)):
+		steps=20000, samples=100, N=55000, ensembles=1, shape=(64, 8, 8),
+		losses=True):
 
-	env = envs.cuda(device_num=0)
+	env = envs.cuda(device_num=1)
 	constants_kwds = dict(
 		fx=97.0, fy=97.0 * 1.03, fz=11.69,
-		a11=100.4, a12=98.0, a22=95.44,
-		gamma111=5.4e-42, gamma12=1.51e-20, gamma22=8.1e-20)
+		a11=100.4, a12=98.0, a22=95.44)
+
+	if losses:
+		constants_kwds.update(
+			dict(gamma111=5.4e-42, gamma12=1.51e-20, gamma22=8.1e-20))
+	else:
+		constants_kwds.update(
+			dict(gamma111=0, gamma12=0, gamma22=0))
 
 	constants = Constants(
 		double=env.supportsDouble(),
@@ -36,13 +43,19 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 	if wigner:
 		psi.toWigner(ensembles)
 
-	pulse.apply(psi, numpy.pi / 2, theta_noise=pulse_theta_noise)
+	if wigner:
+		pulse.apply(psi, numpy.pi / 2, theta_noise=pulse_theta_noise)
+	else:
+		pulse.apply(psi, numpy.pi / 2)
 
 	if t > 0:
 		t1 = time.time()
 		if echo:
 			errors = evolution.run(psi, t / 2, steps / 2)
-			pulse.apply(psi, numpy.pi)
+			if wigner:
+				pulse.apply(psi, numpy.pi, theta_noise=pulse_theta_noise)
+			else:
+				pulse.apply(psi, numpy.pi)
 			errors = evolution.run(psi, t / 2, steps / 2)
 		else:
 			errors = evolution.run(psi, t, steps, callbacks=collectors, samples=samples)
@@ -174,9 +187,29 @@ if __name__ == '__main__':
 	"""
 
 	# Short time, varied pulse
-	#run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
-	#	pulse_theta_noise=0.02,
-	#	t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+	"""
+	run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
+		pulse_theta_noise=0.02,
+		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
 	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 16,
 		pulse_theta_noise=0.02,
 		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
+	"""
+
+	# Pure GPE with no losses
+	"""
+	run(calculateRamsey, 'ramsey_gpe_no_losses.pickle', 1,
+		losses=False,
+		t=1.3, steps=80000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
+	"""
+
+	# Many ansambles, few samples: for clound rendering
+	"""
+	run(calculateRamsey, 'ramsey_wigner_many_ensembles.pickle', 32,
+		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
+	"""
+
+	# A single echo run
+	run(calculateRamsey, 'echo_wigner_single_run.pickle', 32,
+		echo=True,
+		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
