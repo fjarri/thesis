@@ -21,5 +21,8 @@ if __name__ == '__main__':
     plot_bec_noise.ramsey_long(FOLDER + 'bec_noise/ramsey_visibility_long' + FORMAT)
     plot_bec_noise.spinecho_long(FOLDER + 'bec_noise/echo_visibility_long' + FORMAT)
 
+    plot_bec_noise.ramsey_single_run_population(FOLDER + 'bec_noise/ramsey_single_run_pop' + FORMAT)
+    plot_bec_noise.spinecho_single_run_population(FOLDER + 'bec_noise/echo_single_run_pop' + FORMAT)
+
     plot_bec_noise.ramsey_noise(FOLDER + 'bec_noise/ramsey_noise' + FORMAT)
     plot_bec_noise.spinecho_noise(FOLDER + 'bec_noise/echo_noise' + FORMAT)

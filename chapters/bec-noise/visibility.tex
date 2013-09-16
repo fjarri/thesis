@@ -59,11 +59,21 @@ In the Wigner representation we have to make the correlations symmetrically-orde
 where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ in the plane wave basis, where $M$ is the number of modes (for the grid we use $M = 64 \times 8 \times 8 = 4096$), and $V$ is the volume of the simulation area.
 
 \begin{figure}
+    \centerline{%
+    \includegraphics{figures_generated/bec_noise/ramsey_single_run_pop.pdf}%
+    \includegraphics{figures_generated/bec_noise/echo_single_run_pop.pdf}}
+
+    \caption{Numerically simulated population of components $\ket{1}$ (blue solid lines) and $\ket{2}$ (red dashed lines) in \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequence.}
+
+    \label{fig:bec-noise:visibility:population}
+\end{figure}
+
+\begin{figure}
     \centerline{\includegraphics{figures_generated/bec_noise/ramsey_visibility_short.pdf}}
 
     \caption{
     Comparison of experimental and numerically simulated interferometric contrast in the regular Ramsey sequence.
-    Plotted are the results obtained with mean-field and no losses (yellow dash-dotted lines), mean-field (red dotted lines), Wigner method (blue solid lines), and Wigner method with technical noises included (green dashed lines), along with the experimental points (black bars).
+    Plotted are the results obtained with mean-field and no losses (yellow dash-dotted line), mean-field (red dotted line), Wigner method (blue solid line), and Wigner method with technical noises included (green dashed line), along with the experimental points (black bars).
     Also the theoretical limit of the visibility~\eqnref{bec-noise:visibility:limit} is plotted using the populations from the mean-field model (dotted grey line).}
 
     \label{fig:bec-noise:visibility:ramsey-visibility}
@@ -82,7 +92,7 @@ This is to be expected, as the theoretical limit of visibility
 \end{eqn}
 where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to $1$ in this case, and there are no other limiting factors.
 
-But in the experiment in question the losses are present and are significantly asymmetrical.
+But in the experiment in question the losses are present and are significantly asymmetrical, as shown in~\figref{bec-noise:visibility:population},~(a).
 With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} shows.
 The resulting mean-field prediction with the inclusion of nonlinear losses (red dotted lines) is much closer to the experimental data.
@@ -90,6 +100,7 @@ The resulting mean-field prediction with the inclusion of nonlinear losses (red 
 The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (blue solid lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
 The Wigner results can be further adjusted to account for the noise introduced by the final measurement~\cite{Egorov2012}:
 \begin{eqn}
+\label{eqn:bec-noise:visibility:correction}
     \mathcal{V}_{\mathrm{noisy}}(t)
     = \mathcal{V}(t) \exp \left(
         -\frac{\sigma_{\mathrm{img}}(t)^2 + \sigma_{\mathrm{MW}}^2}{2} \right),
@@ -102,35 +113,31 @@ Candidate factors include finite temperature effects and interaction with the su
 \begin{figure}
     \centerline{\includegraphics{figures_generated/bec_noise/echo_visibility_short.pdf}}
 
-    \caption{
-    Comparison of experimental and numerically simulated interferometric contrast in the spin-echo sequence.
-    The figure shows mean-field (red dashed lines) and Wigner calculations (blue solid lines), along with the experimental points (black).
-    $N = 5.5 \times 10^4$.}
+    \caption{Comparison of experimental and numerically simulated interferometric contrast in the spin echo sequence.
+    Plotted are the results obtained with mean-field (red dotted line), Wigner method (blue solid line), and Wigner method with technical noises included (green dashed line), along with the experimental points (black bars).}
 
     \label{fig:bec-noise:visibility:echo-visibility}
 \end{figure}
+
+The asymmetricity introduced by the difference in loss rates can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
+The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as illustrated by~\figref{bec-noise:visibility:sequences},~(b).
+With this additional pulse by the end of the experimental sequence the populations of two components become equal again, as shown in~\figref{bec-noise:visibility:population},~(b), setting the theoretical limit~\eqnref{bec-noise:visibility:limit} back to $1$.
+
+The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:visibility:echo-visibility}.
+On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
+Same as in the case of the regular Ramsey sequence, the predictions of the simulation can be improved by including the technical noise according to~\eqnref{bec-noise:visibility:correction}.
 
 \begin{figure}
     \centerline{%
     \includegraphics{figures_generated/bec_noise/ramsey_visibility_long.pdf}%
     \includegraphics{figures_generated/bec_noise/echo_visibility_long.pdf}}
 
-    \caption{
-    Comparison of GPE and Wigner simulations for the normal and spin-echo sequences.
-    $N = 5.5 \times 10^4$.}
+    \caption{Numerically simulated interferometric contrast for \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequences.
+    Shown are mean-field (red dotted lines) and truncated Wigner (blue solid lines) results.}
 
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
 
-This can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
-The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as shown in~\figref{bec-noise:visibility:sequences},~(b).
-
-The mean-field model predicts the full recover of the visibility even at very long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:visibility:echo-visibility}.
-On the other hand, the quasiprobability model qualitatively predicts the noticeable decay of visibility with time.
-To achieve the quantitative prediction one has to include in the simulation other factors affecting the decay, namely uncertainties in the parameters of the experimental apparatus.
-This can be done easily by sampling these for each of the \abbrev{sde} integration paths independently, similarly to how the initial state is sampled.
-
-This example demonsrates that the truncated Wigner approach gives correct long-time predictions of quantum effects for the system comprised of large number of atoms.
-Both of these features, large atom numbers and long time-scales, are essential to accurate interferometric measurements.
-The predictions remains correct even despite multi-mode dynamical motion in three dimensions and substantial losses of most of the condensate atoms.
-On longer time-scales, the experimental accuracy is limited by technical noises, and we have no data for comparisons.
+The simulations can be performed for longer times, as shown in~\figref{bec-noise:visibility:visibility-long}.
+The difference between the mean-field and the truncated Wigner approach becomes more clear in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts the significant decrease in the amplitude of the rephasing oscillations, caused by the quantum noise.
+One must remember though that at such times the simulated atom densities become too low due to losses and violate the truncation validity criterion~\eqnref{wigner-bec:truncation:delta-condition}, thus making the predictions less reliable.

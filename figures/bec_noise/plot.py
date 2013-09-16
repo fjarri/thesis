@@ -9,6 +9,8 @@ import figures.mplhelpers as mplh
 def ramsey_short(fname):
     with open(get_path(__file__, 'visibility/ramsey_experimental.json')) as f:
         vis_exp = json.load(f)
+    with open(get_path(__file__, 'visibility/ramsey_gpe_no_losses_vis.json')) as f:
+        gpe_nl = json.load(f)
     with open(get_path(__file__, 'visibility/ramsey_gpe_vis.json')) as f:
         gpe = json.load(f)
     with open(get_path(__file__, 'visibility/ramsey_wigner_vis.json')) as f:
@@ -20,6 +22,10 @@ def ramsey_short(fname):
 
     gpe_t = numpy.array(gpe['times'])
     gpe_v = numpy.array(gpe['visibility'])
+
+    gpe_nl_t = numpy.array(gpe_nl['times'])
+    gpe_nl_v = numpy.array(gpe_nl['visibility'])
+
     wig_t = numpy.array(wig['times'])
     wig_v = numpy.array(wig['visibility'])
     wig_v_err = numpy.array(wig['visibility_errors'])
@@ -56,6 +62,8 @@ def ramsey_short(fname):
         linestyle=':', dashes=mplh.dash[':'])
 
     # GPE
+    s.plot(gpe_nl_t, gpe_nl_v, color=mplh.color.f.yellow.main,
+        linestyle='-.', dashes=mplh.dash['-.'])
     s.plot(gpe_t, gpe_v, color=mplh.color.f.red.main,
         linestyle=':', dashes=mplh.dash[':'])
     # Pure Wigner
@@ -131,6 +139,64 @@ def spinecho_short(fname):
 
     s.set_xlim((0, 1.8))
     s.set_ylim((0, 1.))
+
+    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.tight_layout(pad=0.3)
+    fig.savefig(fname)
+
+
+def ramsey_single_run_population(fname):
+    with open(get_path(__file__, 'visibility/ramsey_wigner_vis.json')) as f:
+        wig = json.load(f)
+
+    wig_t = numpy.array(wig['times'])
+
+    wig_N1 = numpy.array(wig['N1'])
+    wig_N2 = numpy.array(wig['N2'])
+
+    fig = mplh.figure(width=0.5)
+    s = fig.add_subplot(111,
+        xlabel='$T$ (s)',
+        ylabel='$N$')
+
+    # Pure Wigner
+    s.plot(wig_t, wig_N1, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['-'])
+    s.plot(wig_t, wig_N2, color=mplh.color.f.red.main,
+        linestyle='--', dashes=mplh.dash['--'])
+
+    s.set_xlim((0, 1.3))
+    s.set_ylim((0, 55000. / 2))
+
+    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.tight_layout(pad=0.3)
+    fig.savefig(fname)
+
+
+def spinecho_single_run_population(fname):
+    with open(get_path(__file__, 'visibility/echo_wigner_single_run.json')) as f:
+        wig = json.load(f)
+
+    wig_t = numpy.array(wig['times'])
+
+    wig_N1 = numpy.array(wig['N1'])
+    wig_N2 = numpy.array(wig['N2'])
+
+    fig = mplh.figure(width=0.5)
+    s = fig.add_subplot(111,
+        xlabel='$T$ (s)',
+        ylabel='$N$')
+
+    # Pure Wigner
+    s.plot(wig_t, wig_N1, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['-'])
+    s.plot(wig_t, wig_N2, color=mplh.color.f.red.main,
+        linestyle='--', dashes=mplh.dash['--'])
+
+    s.set_xlim((0, 1.3))
+    s.set_ylim((0, 55000. / 2))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
@@ -284,14 +350,14 @@ def spinecho_noise(fname):
         imaging_exp = json.load(f)
     with open(get_path(__file__, 'noise/echo_wigner_noise.json')) as f:
         wig = json.load(f)
-    #with open(get_path(__file__, 'noise/echo_wigner_varied_pulse_noise.json')) as f:
-    #    pulse_wig = json.load(f)
+    with open(get_path(__file__, 'noise/echo_wigner_varied_pulse_noise.json')) as f:
+        pulse_wig = json.load(f)
 
     t_wig = numpy.array(wig['times'])
     ph_wig = numpy.array(wig['phnoise'])
 
-    #t_pulse_wig = numpy.array(pulse_wig['times'])
-    #ph_pulse_wig = numpy.array(pulse_wig['phnoise'])
+    t_pulse_wig = numpy.array(pulse_wig['times'])
+    ph_pulse_wig = numpy.array(pulse_wig['phnoise'])
 
     t_exp = numpy.array(exp['xarray'])
     ph_exp = numpy.array(exp['yarray'])
@@ -310,8 +376,8 @@ def spinecho_noise(fname):
 
     s.plot(t_wig, ph_wig, color=mplh.color.f.blue.main,
         linestyle='--', dashes=mplh.dash['--'])
-    #s.plot(t_pulse_wig, ph_pulse_wig, color=mplh.color.f.blue.main,
-    #    linestyle='-', dashes=mplh.dash['-'])
+    s.plot(t_pulse_wig, ph_pulse_wig, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['-'])
 
     s.plot(t_img_exp, ph_img_exp, color=mplh.color.f.red.main,
         linestyle=':', dashes=mplh.dash[':'])
@@ -321,7 +387,7 @@ def spinecho_noise(fname):
         t_img_exp,
         combine_noises(t_img_exp,
             (t_img_exp, ph_img_exp),
-            (t_wig, ph_wig),
+            (t_pulse_wig, ph_pulse_wig),
             (t_img_exp, 0.125 * t_img_exp)), # see Egorov2011; MW freq instability of 0.125 rad/s
         color='k',
         linestyle='-', dashes=mplh.dash['-'])

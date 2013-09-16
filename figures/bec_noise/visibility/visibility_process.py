@@ -62,6 +62,7 @@ def get_visibility(fname):
         N1_errors=N1_errors, N2_errors=N2_errors)
 
 outputs = [
+    ('ramsey_gpe_no_losses.pickle', 'ramsey_gpe_no_losses_vis.json'),
     ('ramsey_gpe.pickle', 'ramsey_gpe_vis.json'),
     ('echo_gpe.pickle', 'echo_gpe_vis.json'),
     ('ramsey_wigner.pickle', 'ramsey_wigner_vis.json'),
@@ -70,6 +71,7 @@ outputs = [
     ('echo_long_gpe.pickle', 'echo_long_gpe_vis.json'),
     ('ramsey_long_wigner.pickle', 'ramsey_long_wigner_vis.json'),
     ('echo_long_wigner.pickle', 'echo_long_wigner_vis.json'),
+    ('echo_wigner_single_run.pickle', 'echo_wigner_single_run.json'),
 ]
 
 for f_pickle, f_json in outputs:

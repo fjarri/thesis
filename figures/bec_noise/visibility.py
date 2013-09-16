@@ -12,7 +12,7 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 		steps=20000, samples=100, N=55000, ensembles=1, shape=(64, 8, 8),
 		losses=True):
 
-	env = envs.cuda(device_num=1)
+	env = envs.cuda(device_num=0)
 	constants_kwds = dict(
 		fx=97.0, fy=97.0 * 1.03, fz=11.69,
 		a11=100.4, a12=98.0, a22=95.44)
@@ -36,7 +36,10 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 
 	n = WavefunctionCollector(env, constants, grid)
 
-	collectors = [n]
+	if samples > 0:
+		collectors = [n]
+	else:
+		collectors = None
 
 	psi = gs.create((N, 0), precision=1e-6)
 
@@ -51,12 +54,14 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 	if t > 0:
 		t1 = time.time()
 		if echo:
-			errors = evolution.run(psi, t / 2, steps / 2)
+			errors = evolution.run(psi, t / 2, steps / 2,
+				callbacks=collectors, samples=samples / 2)
 			if wigner:
 				pulse.apply(psi, numpy.pi, theta_noise=pulse_theta_noise)
 			else:
 				pulse.apply(psi, numpy.pi)
-			errors = evolution.run(psi, t / 2, steps / 2)
+			errors = evolution.run(psi, t / 2, steps / 2,
+				callbacks=collectors, samples=samples / 2)
 		else:
 			errors = evolution.run(psi, t, steps, callbacks=collectors, samples=samples)
 		env.synchronize()
@@ -65,7 +70,7 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 	else:
 		errors = None
 
-	if echo:
+	if samples == 0:
 		psis = psi.data.get()
 		times = t
 	else:
@@ -102,6 +107,7 @@ def calculateEcho(**kwds):
 
 		kwds['t'] = t
 		kwds['steps'] = steps
+		kwds['samples'] = 0
 		res = calculateRamsey(**kwds)
 		if ress is None:
 			ress = res
@@ -203,13 +209,19 @@ if __name__ == '__main__':
 		t=1.3, steps=80000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
 	"""
 
-	# Many ansambles, few samples: for clound rendering
+	# Many ensembles, few samples: for clound rendering
 	"""
 	run(calculateRamsey, 'ramsey_wigner_many_ensembles.pickle', 32,
 		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
 	"""
+	run(calculateRamsey, 'echo_wigner_many_ensembles.pickle', 32,
+		echo=True,
+		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
+
 
 	# A single echo run
+	"""
 	run(calculateRamsey, 'echo_wigner_single_run.pickle', 32,
 		echo=True,
 		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
+	"""
