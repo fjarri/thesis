@@ -5,4 +5,48 @@
 
 This chapter contains squeezing results from \cite{Opanchuk2012}.
 
-\input{chapters/bec-squeezing/moments-calculation}
+
+\copypaste{copypaste begins}
+
+The Wigner method is able to predict not only the average values of different observables,
+but their variances too.
+As an example, we now calculate the degree of squeezing $\xi^2$, introduced in~\cite{Wineland1994,Sorensen2001}.
+This allows the analysis of experiments beyond the usual shot noise limit~\cite{Riedel2010,Gross2010}.
+If we define spin component operators as
+$\hat{S}_{x} = [ \hat{S}_+ + \hat{S}_+^\dagger ] / 2 $,
+$\hat{S}_{y} = i [ \hat{S}_+ - \hat{S}_+^\dagger ] / 2 $ and
+\begin{equation}
+\begin{split}
+    \hat{S}_+ & = \int \upd^D\xvec \left[
+        \widehat{\Psi}^\dagger_2 (\xvec) \widehat{\Psi}_1 (\xvec)
+    \right], \\
+    \hat{S}_z & = \frac{1}{2} \int \upd^D\xvec \left[
+        \widehat{\Psi}^\dagger_1 (\xvec) \widehat{\Psi}_1 (\xvec)
+        - \widehat{\Psi}^\dagger_2 (\xvec) \widehat{\Psi}_2 (\xvec)
+    \right],
+\end{split}
+\end{equation}
+the average values of spin vector components can be calculated similarly to the average density in
+eq.~(\ref{eqn:wigner-density}).
+Now we can shift the centre of coordinates to the end of the vector
+$\langle \mathbf{S} \rangle = \{ \langle \hat{S}_x \rangle, \langle \hat{S}_y \rangle, \langle \hat{S}_z \rangle \}$
+and rotate it, making the $z^\prime$-axis parallel to $\mathbf{S}$ and choosing the remaining axes $x^\prime$ and $y^\prime$ so that
+$\Delta \hat{S}^2_{y^\prime} $ is minimized.
+
+Second-order moments of spin operators are represented using fourth-order moments of field operators
+and, therefore, can be calculated using wavefunctions in Wigner representation.
+In this new coordinate system the squeezing parameter is expressed simply as
+\begin{equation}
+\label{eqn:squeezing}
+    \xi^2 = \frac{N \Delta \hat{S}^2_{y^\prime}}{\langle S \rangle^2},
+\end{equation}
+where $N$ is the total number of atoms.
+The formula for the squeezing parameter in the original coordinate system can be found elsewhere~\cite{Li2009}.
+The squeezing parameter serves as a measure of atomic entanglement in the condensate,
+when the atoms are entangled if $\xi^2 < 1$~\cite{Sorensen2001}.
+
+\copypaste{copypaste ends}
+
+\input{chapters/bec-squeezing/moments}
+\input{chapters/bec-squeezing/separation}
+\input{chapters/bec-squeezing/feshbach}
