@@ -10,10 +10,12 @@ FORMAT = '.pdf'
 if __name__ == '__main__':
 
 	# Mean-field ground states
+    """
     plot_mean_field.one_comp_gs_small(FOLDER + 'mean_field/one_comp_gs_small' + FORMAT)
     plot_mean_field.one_comp_gs_large(FOLDER + 'mean_field/one_comp_gs_large' + FORMAT)
     plot_mean_field.two_comp_gs_immiscible(FOLDER + 'mean_field/two_comp_gs_immiscible' + FORMAT)
     plot_mean_field.two_comp_gs_miscible(FOLDER + 'mean_field/two_comp_gs_miscible' + FORMAT)
+    """
 
     # Visibility and phase noise
     plot_bec_noise.ramsey_short(FOLDER + 'bec_noise/ramsey_visibility_short' + FORMAT)
@@ -26,3 +28,5 @@ if __name__ == '__main__':
 
     plot_bec_noise.ramsey_noise(FOLDER + 'bec_noise/ramsey_noise' + FORMAT)
     plot_bec_noise.spinecho_noise(FOLDER + 'bec_noise/echo_noise' + FORMAT)
+    plot_bec_noise.illustration_noise(FOLDER + 'bec_noise/illustration_noise_20ms' + FORMAT, 20)
+    plot_bec_noise.illustration_noise(FOLDER + 'bec_noise/illustration_noise_450ms' + FORMAT, 450)

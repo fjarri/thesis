@@ -98,14 +98,7 @@ This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease wi
 The resulting mean-field prediction with the inclusion of nonlinear losses (red dotted lines) is much closer to the experimental data.
 
 The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (blue solid lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
-The Wigner results can be further adjusted to account for the noise introduced by the final measurement~\cite{Egorov2012}:
-\begin{eqn}
-\label{eqn:bec-noise:visibility:correction}
-    \mathcal{V}_{\mathrm{noisy}}(t)
-    = \mathcal{V}(t) \exp \left(
-        -\frac{\sigma_{\mathrm{img}}(t)^2 + \sigma_{\mathrm{MW}}^2}{2} \right),
-\end{eqn}
-where $\sigma_{\mathrm{img}}(t)$ and $\sigma_{\mathrm{MW}}(t)$ are time-dependent values of the imaging and oscillator noises, which are discussed in more detail in the next section.
+The Wigner results can be further adjusted to account for the noise introduced by the final measurement and non-ideal coupling (green dashed lines), which will be explained in detail in the next section.
 
 The final agreement with the experiment is still not ideal, and the explanation of this difference is an open question.
 Candidate factors include finite temperature effects and interaction with the surrounding cloud of non-condensed atoms.
@@ -125,7 +118,7 @@ With this additional pulse by the end of the experimental sequence the populatio
 
 The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:visibility:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
-Same as in the case of the regular Ramsey sequence, the predictions of the simulation can be improved by including the technical noise according to~\eqnref{bec-noise:visibility:correction}.
+Same as in the case of the regular Ramsey sequence, the predictions of the simulation can be improved by including the technical noise.
 
 \begin{figure}
     \centerline{%

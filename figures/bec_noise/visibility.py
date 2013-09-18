@@ -55,13 +55,13 @@ def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
 		t1 = time.time()
 		if echo:
 			errors = evolution.run(psi, t / 2, steps / 2,
-				callbacks=collectors, samples=samples / 2)
+				callbacks=collectors, samples=samples / 2 if samples > 1 else 1)
 			if wigner:
 				pulse.apply(psi, numpy.pi, theta_noise=pulse_theta_noise)
 			else:
 				pulse.apply(psi, numpy.pi)
 			errors = evolution.run(psi, t / 2, steps / 2,
-				callbacks=collectors, samples=samples / 2)
+				callbacks=collectors, samples=samples / 2 if samples > 1 else 1)
 		else:
 			errors = evolution.run(psi, t, steps, callbacks=collectors, samples=samples)
 		env.synchronize()
@@ -197,10 +197,10 @@ if __name__ == '__main__':
 	run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
 		pulse_theta_noise=0.02,
 		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 16,
-		pulse_theta_noise=0.02,
-		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
 	"""
+	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 32,
+		pulse_theta_noise=0.02,
+		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
 
 	# Pure GPE with no losses
 	"""
@@ -213,11 +213,10 @@ if __name__ == '__main__':
 	"""
 	run(calculateRamsey, 'ramsey_wigner_many_ensembles.pickle', 32,
 		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
-	"""
 	run(calculateRamsey, 'echo_wigner_many_ensembles.pickle', 32,
 		echo=True,
 		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
-
+	"""
 
 	# A single echo run
 	"""
