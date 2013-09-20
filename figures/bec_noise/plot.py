@@ -185,12 +185,16 @@ def ramsey_long(fname):
         gpe = json.load(f)
     with open(get_path(__file__, 'visibility/ramsey_long_wigner_vis.json')) as f:
         wig = json.load(f)
+    with open(get_path(__file__, 'visibility/ramsey_long_wigner_varied_pulse_vis.json')) as f:
+        wig_tech = json.load(f)
 
     t_gpe = numpy.array(gpe['times'])
     v_gpe = numpy.array(gpe['visibility'])
     t_wig = numpy.array(wig['times'])
     v_wig = numpy.array(wig['visibility'])
     v_wig_err = numpy.array(wig['visibility_errors'])
+    t_tech_wig = numpy.array(wig_tech['times'])
+    v_tech_wig = numpy.array(wig_tech['est_visibility'])
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -203,7 +207,7 @@ def ramsey_long(fname):
     # Pure Wigner
     s.plot(t_wig, v_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
-    s.plot(t_wig, v_wig + v_wig_err, color=mplh.color.f.blue.main,
+    s.plot(t_tech_wig, v_tech_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['--'])
 
     s.set_xlim((0, 5.))
@@ -220,12 +224,16 @@ def spinecho_long(fname):
         gpe = json.load(f)
     with open(get_path(__file__, 'visibility/echo_long_wigner_vis.json')) as f:
         wig = json.load(f)
+    with open(get_path(__file__, 'visibility/echo_long_wigner_varied_pulse_vis.json')) as f:
+        wig_tech = json.load(f)
 
     t_gpe = numpy.array(gpe['times'])
     v_gpe = numpy.array(gpe['visibility'])
     t_wig = numpy.array(wig['times'])
     v_wig = numpy.array(wig['visibility'])
     v_wig_err = numpy.array(wig['visibility_errors'])
+    t_tech_wig = numpy.array(wig_tech['times'])
+    v_tech_wig = numpy.array(wig_tech['est_visibility'])
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -239,6 +247,8 @@ def spinecho_long(fname):
     s.plot(t_wig, v_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
     s.plot(t_wig, v_wig + v_wig_err, color=mplh.color.f.blue.main,
+        linestyle='-', dashes=mplh.dash['--'])
+    s.plot(t_tech_wig, v_tech_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['--'])
 
     s.set_xlim((0, 5.))

@@ -178,18 +178,39 @@ if __name__ == '__main__':
 
 	# Long time
 	"""
-	#elif sys.argv[1] == 'ramsey-wigner':
-	run(calculateRamsey, 'ramsey_long_wigner.pickle', 16,
-		t=6, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
-	#if sys.argv[1] == 'ramsey-gpe':
 	run(calculateRamsey, 'ramsey_long_gpe.pickle', 1,
 		t=5, steps=160000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	#elif sys.argv[1] == 'echo-gpe':
 	run(calculateEcho, 'echo_long_gpe.pickle', 1,
 		t=5, steps=160000, samples=40, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	#elif sys.argv[1] == 'echo-wigner':
-	run(calculateEcho, 'echo_long_wigner.pickle', 16,
+
+	# 5s, no tech noise
+	run(calculateRamsey, 'ramsey_long_wigner_5s.pickle', 16,
+		t=5, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
+	run(calculateEcho, 'echo_long_wigner_5s.pickle', 16,
 		t=5, steps=320000, samples=40, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
+
+	# 5s, tech noise
+	run(calculateRamsey, 'ramsey_long_wigner_varied_pulse_5s.pickle', 32,
+		pulse_theta_noise=0.02,
+		t=5, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
+	run(calculateEcho, 'echo_long_wigner_varied_pulse.pickle_5s', 32,
+		pulse_theta_noise=0.02,
+		t=5, steps=320000, samples=40, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
+
+	# After 3s the population becomes too low for Wigner to work anyway,
+	# we'll run to 3s and get better resolution
+	run(calculateRamsey, 'ramsey_long_wigner.pickle', 128,
+		t=3, steps=200000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+	run(calculateEcho, 'echo_long_wigner.pickle', 128,
+		t=3, steps=200000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+
+	run(calculateRamsey, 'ramsey_long_wigner_varied_pulse.pickle', 128,
+		pulse_theta_noise=0.02,
+		t=3, steps=200000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+	run(calculateEcho, 'echo_long_wigner_varied_pulse.pickle', 128,
+		pulse_theta_noise=0.02,
+		t=3, steps=200000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+
 	"""
 
 	# Short time, varied pulse
@@ -197,10 +218,10 @@ if __name__ == '__main__':
 	run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
 		pulse_theta_noise=0.02,
 		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	"""
 	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 32,
 		pulse_theta_noise=0.02,
 		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
+	"""
 
 	# Pure GPE with no losses
 	"""

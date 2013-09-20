@@ -199,6 +199,8 @@ outputs = [
     ('echo_wigner.pickle', 'echo_wigner_vis.json'),
     ('ramsey_wigner_varied_pulse.pickle', 'ramsey_wigner_varied_pulse_vis.json', False, True),
     ('echo_wigner_varied_pulse.pickle', 'echo_wigner_varied_pulse_vis.json', True, True),
+    ('ramsey_long_wigner_varied_pulse.pickle', 'ramsey_long_wigner_varied_pulse_vis.json', False, True),
+    ('echo_long_wigner_varied_pulse.pickle', 'echo_long_wigner_varied_pulse_vis.json', True, True),
 
     ('ramsey_long_gpe.pickle', 'ramsey_long_gpe_vis.json'),
     ('echo_long_gpe.pickle', 'echo_long_gpe_vis.json'),
