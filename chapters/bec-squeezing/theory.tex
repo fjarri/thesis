@@ -1,6 +1,81 @@
 % =============================================================================
-\section{Moments of field operator in Wigner representation}
+\section{Spin squeezing in the Wigner representation}
 % =============================================================================
+
+Following~\cite{Sorensen2001,Li2009}, we define the components of the spin vector $\hat{\mathbf{S}} \equiv (\hat{S}_x, \hat{S}_y, \hat{S}_z)$ in terms of field operators as
+\begin{eqn}
+	\hat{S}_x
+	& = \frac{1}{2} \int \upd \xvec \left(
+			\Psiop_2^\dagger \Psiop_1 + \Psiop_1^\dagger \Psiop_2
+		\right), \\
+	\hat{S}_y
+	& = \frac{i}{2} \int \upd \xvec \left(
+			\Psiop_2^\dagger \Psiop_1 - \Psiop_1^\dagger \Psiop_2
+		\right), \\
+	\hat{S}_y
+	& = \frac{1}{2} \int \upd \xvec \left(
+			\Psiop_1^\dagger \Psiop_1 - \Psiop_2^\dagger \Psiop_2
+		\right).
+\end{eqn}
+The degree of squeezing is then
+\begin{eqn}
+    \xi^2
+    = \frac{N \min_{\vec{n} \perp \hat{\langle \mathbf{S} \rangle}} \Delta \hat{S}^2_{\vec{n}}}%
+    	{\langle \hat{\mathbf{S}} \rangle^2},
+\end{eqn}
+where $\Delta \hat{S}^2_{\vec{n}}$ is the variance of the total spin along the direction $\vec{n}$,
+and $N$ is the total number of atoms.
+This quantity can serve as an entanglement criterion, indicating its occurence when $\xi^2 < 1$~\cite{Sorensen2001}.
+Note that in this thesis we only consider the squeezing along the direction orthogonal to the total spin, as was originally introduced, but a more general definition is also possible \todo{reference two-directional squeezing}.
+
+The straightforward way of finding the $\xi^2$ is to shift the coordinate frame to the end of the vector $\langle \hat{\mathbf{S}} \rangle$, and rotate it so that one of the axes is aligned along it.
+The minimum variance can then be found by varying the angle of rotation of the other two axes and calculating the variance along one of them (in fact, this is how it usually done in the experiment).
+The direct approach consists of expressing the desirable minimum variance in terms of variances of the components of the spin vector in the original coordinates~\cite{Li2009}.
+We denote the polar and the azimuthal angle of $\langle \hat{\mathbf{S}} \rangle$ as $\nu$ and $\phi$ respectively, meaining that
+\begin{eqn}
+	\nu = \arccos \frac{\langle \hat{S}_z \rangle}{\langle \hat{\mathbf{S}} \rangle},\quad
+	\phi = \arg \langle \hat{S}_x + \hat{S}_z \rangle.
+\end{eqn}
+The degree of squeezing is then expressed as
+\begin{eqn}
+	\min_{\vec{n} \perp \langle \hat{\mathbf{S}} \rangle} \Delta \hat{S}^2_{\vec{n}}
+	={} & \frac{1}{2} \left(
+			\cos^2 \nu \cos^2 \phi + \sin^2 \phi
+		\right) \Delta_{xx}
+		+ \frac{1}{2} \left(
+			\cos^2 \nu \sin^2 \phi + \cos^2 \phi
+		\right) \Delta_{yy} \\
+		& + \frac{1}{2} \sin^2 \nu\, \Delta_{zz}
+			- \frac{1}{2} \sin^2 \nu \sin2\phi\, \Delta_{xy}
+			- \frac{1}{2} \sin2\nu \cos \phi\, \Delta_{xz} \\
+		& - \frac{1}{2} \sin2\nu \sin \phi\, \Delta_{yz}
+		- \frac{1}{2} \sqrt{\tilde{A}^2 + \tilde{B}^2},
+\end{eqn}
+where
+\begin{eqn}
+	\tilde{A}
+	={} & \left( \sin^2 \phi - \cos^2 \nu \cos^2 \phi \right) \Delta_{xx}
+			+ \left( \cos^2 \phi - \cos^2 \nu \sin^2 \phi \right) \Delta_{yy} \\
+		& - \sin^2 \nu\, \Delta_{zz}
+			- \left( 1 + \cos^2 \nu \right) \sin2\phi\, \Delta_{xy} \\
+		& + \sin2\nu \cos \phi\, \Delta_{xz}
+			+ \sin2\nu \sin\phi\, \Delta_{yz},
+\end{eqn}
+\begin{eqn}
+	\tilde{B}
+	={} & \cos\nu \sin2\phi \left( \Delta_{xx} - \Delta_{yy} \right)
+			- 2 \cos\nu \cos2\phi\, \Delta_{xy} \\
+		& - 2 \sin\nu \sin\phi\, \Delta_{xz}
+			+ 2 \sin\nu \cos\phi\, \Delta_{yz},
+\end{eqn}
+and the spin correlations $\Delta_{ij}$ are defined as
+\begin{eqn}
+	\Delta_{ij}
+	= \frac{1}{2} \langle \hat{S}_i \hat{S}_j + \hat{S}_j \hat{S}_i \rangle
+		- \langle \hat{S}_i \rangle \langle \hat{S}_j \rangle,\quad
+		i,j=x,y,z.
+\end{eqn}
+
 
 
 This chapter shows how to calculate different kinds of observables from wavefunctions in Wigner representation.
