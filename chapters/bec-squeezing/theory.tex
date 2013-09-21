@@ -12,7 +12,7 @@ Following~\cite{Sorensen2001,Li2009}, we define the components of the spin vecto
 	& = \frac{i}{2} \int \upd \xvec \left(
 			\Psiop_2^\dagger \Psiop_1 - \Psiop_1^\dagger \Psiop_2
 		\right), \\
-	\hat{S}_y
+	\hat{S}_z
 	& = \frac{1}{2} \int \upd \xvec \left(
 			\Psiop_1^\dagger \Psiop_1 - \Psiop_2^\dagger \Psiop_2
 		\right).
@@ -36,7 +36,7 @@ We denote the polar and the azimuthal angle of $\langle \hat{\mathbf{S}} \rangle
 	\nu = \arccos \frac{\langle \hat{S}_z \rangle}{\langle \hat{\mathbf{S}} \rangle},\quad
 	\phi = \arg \langle \hat{S}_x + \hat{S}_z \rangle.
 \end{eqn}
-The degree of squeezing is then expressed as
+The minimum uncertainty is then expressed as
 \begin{eqn}
 	\min_{\vec{n} \perp \langle \hat{\mathbf{S}} \rangle} \Delta \hat{S}^2_{\vec{n}}
 	={} & \frac{1}{2} \left(
@@ -76,431 +76,100 @@ and the spin correlations $\Delta_{ij}$ are defined as
 		i,j=x,y,z.
 \end{eqn}
 
-
-
-This chapter shows how to calculate different kinds of observables from wavefunctions in Wigner representation.
-From the definition of Wigner function~\cite{Gardiner2004}:
-\[
-	\langle \symprod{ \hat{a}^r ( \hat{a}^\dagger)^s } \rangle
-	= \int \alpha^r (\alpha^*)^s W (\alpha, \alpha^*) d^2\alpha ,
-\]
-where $\{\}_{\mathrm{sym}}$ stands for symmetrically ordered operator product.
-It can be shown that similar relation applies for the multimode field operator:
-\[
-	\langle \symprod{ \Psiop^r ( \Psiop^\dagger)^s } \rangle
-	= \int \Psi^r (\Psi^*)^s W (\Psi, \Psi^*) \delta^2\Psi.
-\]
-This equation can be further generalised for multi-component field.
-In simulations, Wigner function $W$ can be treated as the probability distribution, allowing to replace the integral by average over simulation paths:
-\[
-	\int \Psi^r (\Psi^*)^s W (\Psi, \Psi^*) \delta^2\Psi
-	= \pathavg{ \Psi^r (\Psi^*)^s }
-	= \frac{1}{N_{\mathrm{paths}}} \sum\limits_{j=1}^{N_{\mathrm{paths}}}
-		\Psi^{(j)r} (\Psi^{(j)*})^s,
-\]
-where superscript $(j)$ denotes the value taken from $j$-th simulation path.
-
-
-% =============================================================================
-\subsection{Number of atoms}
-% =============================================================================
-
-First example is the calculation of atom density:
-\begin{equation*}
-\begin{split}
-		\langle \hat{n} (\xvec) \rangle
-		& = \langle \Psiop^\dagger (\xvec) \Psiop (\xvec) \rangle \\
-		& = \langle
-				\symprod{ \Psiop^\dagger \Psiop }
-			\rangle - \frac{1}{2} \delta_P (\xvec, \xvec) \\
-		& = \pathavg{ \Psi^* (\xvec) \Psi (\xvec) }
-			- \frac{1}{2} \delta_P (\xvec, \xvec) \\
-		& = \pathavg{ n (\xvec) }
-			- \frac{1}{2} \delta_P (\xvec, \xvec).
-\end{split}
-\end{equation*}
-Defining population operator $\hat{N}$ as
-\[
-	\hat{N} = \int \hat{n} (\xvec) d\xvec,
-\]
-we can get the average of total population:
-\[
-		\langle \hat{N} \rangle
-		= \int \langle \hat{n}(\xvec) \rangle d\xvec
-		= \int \pathavg{ n(\xvec) } d\xvec - \frac{M}{2}
-		= \pathavg{ \int n(\xvec) d\xvec } d\xvec - \frac{M}{2}
-		= \pathavg{N} - \frac{M}{2},
-\]
-where $\delta_P (\xvec, \xvec)$ is a restricted delta function from \defref{func-calculus:restricted-delta}.
-Its integral over space equals to the number of modes $M$ in the restricted basis.
-
-Variance of total number $N$ is expressed in a slightly more complicated way.
-\[
-	(\Delta N)^2
-		= \langle \hat{N}^2 \rangle - \langle \hat{N} \rangle^2
-\]
-Average of $\hat{N}^2$ requires some work.
-Denoting $\Psiop(\xvec) \equiv \Psiop$ and $\Psiop(\xvec^\prime) \equiv \Psiop^\prime$ for simplicity:
-\[
-	\hat{N}^2
-		= \int \Psiop^\dagger \Psiop d\xvec
-			\int \Psiop^\dagger \Psiop d\xvec
-		= \int
-			\Psiop^\dagger \Psiop
-			\Psiop^{\prime\dagger} \Psiop^\prime
-			d\xvec d\xvec^\prime
-\]
-\begin{equation*}
-\begin{split}
-	\langle
-		\Psiop^\dagger \Psiop \Psiop^{\prime\dagger} \Psiop^\prime
-	\rangle
-	& = \langle
-		\symprod{ \Psiop^{\prime\dagger} \Psiop^\prime \Psiop^\dagger \Psiop}
-		- \frac{\delta_P(\xvec^\prime,\xvec^\prime)}{2} \symprod{\Psiop^\dagger \Psiop}
-		- \frac{\delta_P(\xvec,\xvec)}{2} \symprod{\Psiop^{\prime\dagger} \Psiop^\prime} \\
-	& - \frac{\delta_P(\xvec,\xvec^\prime)}{2} \symprod{\Psiop^{\prime\dagger} \Psiop}
-		+ \frac{\delta_P(\xvec^\prime,\xvec)}{2} \symprod{\Psiop^\dagger \Psiop^\prime}
-		+ \frac{\delta_P(\xvec,\xvec) \delta_P(\xvec^\prime,\xvec^\prime)}{2}
-	\rangle.
-\end{split}
-\end{equation*}
-Therefore the average of $\hat{N}^2$ is:
-\begin{eqn*}
-	\langle \hat{N}^2 \rangle & = \int
-		\langle
-			\Psiop^\dagger \Psiop \Psiop^{\prime\dagger} \Psiop^\prime
-		\rangle
-	d\xvec d\xvec^\prime \\
-	& = \int \pathavgleft
-		\Psi^* \Psi \Psi^{\prime *} \Psi^\prime
-		- \frac{\delta_P(\xvec^\prime,\xvec^\prime)}{2} \Psi^* \Psi
-		- \frac{\delta_P(\xvec,\xvec) }{2} \Psi^{\prime *} \Psi^\prime \right. \\
-	&	\left. - \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi
-		+ \frac{\delta_P(\xvec^\prime,\xvec)}{2} \Psi^* \Psi^\prime
-		+ \frac{\delta_P(\xvec,\xvec) \delta_P(\xvec^\prime,\xvec^\prime)}{2}
-	\pathavgright d\xvec d\xvec^\prime \\
-	& = \pathavgleft
-		\int \Psi^* \Psi d\xvec \int \Psi^* \Psi d\xvec
-		- \frac{M}{2} \int \Psi^* \Psi d\xvec
-		- \frac{M}{2} \int \Psi^* \Psi d\xvec \right. \\
-	&	\left. - \int \frac{\delta_P(\xvec,\xvec^\prime)}{2} \Psi^{\prime *} \Psi d\xvec d\xvec^\prime
-		+ \int \frac{\delta_P(\xvec^\prime,\xvec)}{2} \Psi^* \Psi^\prime d\xvec d\xvec^\prime
-		+ \frac{M^2}{2}
-	\pathavgright \\
-	& = \pathavg{N^2 - M N + \frac{M^2}{2}}.
-\end{eqn*}
-Here we used the correspondence between the average of the symmetric product of field operators and the average of wavefunctions over simulation paths.
-Then we can split variables in double integrals, allowing us to group terms and simplify the whole equation.
-Substituting this into equation for $(\Delta N)^2$:
-\begin{equation}
-\label{eqn:moments-calculation:delta-N}
-	(\Delta N)^2
-		= \langle \hat{N}^2 \rangle - \langle \hat{N} \rangle^2
-		= \pathavg{N^2 - M N + \frac{M^2}{2}} - (\pathavg{N} - \frac{M}{2})^2
-		= \pathavg{N^2} - \pathavg{N}^2 + \frac{M^2}{4}
-\end{equation}
-
-
-% =============================================================================
-\subsection{Spin vector}
-% =============================================================================
-
-Another example is the spin vector, whose averages and variances are required for squeezing calculation~\cite{Li2009}.
-Spin operators are defined as following:
-\begin{equation}
-\label{eqn:moments-calculation:spin-operators}
-\begin{split}
-	\hat{S}_x & = \frac{1}{2} \int \left(
-		\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
-	\right) d\xvec, \\
-	\hat{S}_y & = \frac{i}{2} \int \left(
-		\Psiop^\dagger_2 \Psiop_1 - \Psiop^\dagger_1 \Psiop_2
-	\right) d\xvec, \\
-	\hat{S}_z & = \frac{1}{2} \int \left(
-		\Psiop^\dagger_1 \Psiop_1 - \Psiop^\dagger_2 \Psiop_2
-	\right) d\xvec.
-\end{split}
-\end{equation}
-Averages of spin operators can be calculated straightforwardly (using the fact that interspecies commutators $[\Psiop_1, \Psiop_2] = [\Psiop^\dagger_1, \Psiop_2] = 0$):
-\begin{equation*}
-\begin{split}
+The averages of the total spin vector components and their pairwise moments can be expressed using the moments of the Wigner functional using~\eqnref{wigner-bec:fpe-bec:moments}.
+Averages of the components are calculated straightforwardly if we remember that the field operators of different components commute:
+\begin{eqn}
 	\langle \hat{S}_x \rangle
-		& = \pathavg{\Real \int \Psi^*_1 \Psi_2 d\xvec }
+		& = \pathavg{\Real \int \Psi^*_1 \Psi_2 \upd\xvec }
 		= \pathavg{\Real I}
 		= \pathavg{S_x}, \\
 	\langle \hat{S}_y \rangle
-		& = \pathavg{\Imag \int \Psi^*_1 \Psi_2 d\xvec }
+		& = \pathavg{\Imag \int \Psi^*_1 \Psi_2 \upd\xvec }
 		= \pathavg{\Imag I}
 		= \pathavg{S_y}, \\
 	\langle \hat{S}_z \rangle
-		& = \frac{1}{2} \pathavg{\int \Psi^*_1 \Psi_1 d\xvec - \int \Psi^*_2 \Psi_2 d\xvec}
-		= \frac{1}{2} (\pathavg{N_1 - N_2})
+		& = \frac{1}{2} \pathavg{\int \Psi^*_1 \Psi_1 \upd\xvec - \int \Psi^*_2 \Psi_2 \upd\xvec}
+		= \pathavg{(N_1 - N_2) / 2}
 		= \pathavg{S_z},
-\end{split}
-\end{equation*}
-where we introduced auxiliary per-path interaction values $I^{j}$ and per-path spin component values, whose definitions are an intuitive consequence of equations~\eqnref{moments-calculation:spin-operators}:
-\begin{equation*}
-\begin{split}
-	S^{(j)}_x & = \frac{1}{2} \int \left(
-		\Psi^{(j)*} \Psi^{(j)}_1 + \Psi^{(j)*}_1 \Psi^{(j)}_2
-	\right) d\xvec, \\
-	S^{(j)}_y & = \frac{i}{2} \int \left(
-		\Psi^{(j)*}_2 \Psi^{(j)}_1 - \Psi^{(j)*}_1 \Psi^{(j)}_2
-	\right) d\xvec, \\
-	S^{(j)}_z & = \frac{1}{2} \int \left(
-		\Psi^{(j)*}_1 \Psi^{(j)}_1 - \Psi^{(j)*}_2 \Psi^{(j)}_2
-	\right) d\xvec,
-\end{split}
-\end{equation*}
-where $j$ stands for the number of the simulation path.
+\end{eqn}
+where we have introduced functionals of wavefunctions in a single simulation path $I = S_x + i S_y$ and $(N_1 - N_2) / 2 = S_z$.
 
-Second-order moments of spin operators can be obtained similarly to second-order moment of population operator, by transforming normally ordered field operator products to symmetrically ordered ones, substituting them for path averages of wavefunction moments and grouping terms.
-\begin{equation*}
-\begin{split}
+Second-order moments of spin operators are obtained by transforming normally ordered field operator products to symmetrically ordered ones, substituting path averages of wavefunction moments and grouping terms.
+Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symmetrically ordered operator products as
+\begin{eqn}
 	\langle \hat{S}^2_x \rangle
-	& = \frac{1}{4} \langle \int \left(
-		\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
-	\right)
-	\left(
-		\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \langle \int \left(
-		\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		+ \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-	\right. \\
-	& \left.
-		+ \frac{\delta_P(\xvec,\xvec^\prime)}{2} \left(
-			- \symprod{ \Psiop_2 \Psiop^{\prime\dagger}_2 }
-			- \symprod{ \Psiop_1 \Psiop^{\prime\dagger}_1 }
-			+ \symprod{ \Psiop^\dagger_2 \Psiop^\prime_1 }
-			+ \symprod{ \Psiop^\dagger_1 \Psiop^\prime_2 }
+	={} & \frac{1}{4} \left\langle \int
+		\left(
+			\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
 		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
+		\left(
+			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
+		\right)
+		\upd\xvec \upd\xvec^\prime \right\rangle \\
+	={} & \frac{1}{4} \left\langle \int \left(
+			\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
+			+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
+		\right. \right. \\
+		& \left. \left.
+			+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
+			+ \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
+		\right. \right. \\
+	& \left. \left.
+		- \frac{1}{2} \Real \left(
+			\delta_{\restbasis_1} (\xvec, \xvec^\prime)
+			\delta_{\restbasis_2} (\xvec^\prime, \xvec)
+		\right)
+	\right) \upd\xvec \upd\xvec^\prime \right\rangle.
+\end{eqn}
+In general, the basis sets for the first and the second component are different, and the last term in the above equation cannot be simplified any further.
+But in the numerical simulations in this chapter we use the same set $\restbasis_1 = \restbasis_2 = \restbasis$ for both components, which allows us to transform it to a more convenient form
+\begin{eqn}
+	\int \Real \left(
+			\delta_{\restbasis} (\xvec, \xvec^\prime)
+			\delta_{\restbasis} (\xvec^\prime, \xvec)
+		\right) \upd\xvec \upd\xvec^\prime
+	& = \frac{1}{2} \int \left(
+			\sum_{\mvec \in \restbasis} \phi_{\mvec}^\prime \phi_{\mvec}^*
+			\sum_{\nvec \in \restbasis} \phi_{\nvec} \phi_{\nvec}^{\prime*}
+			+ \mathrm{c.\,c.}
+		\right) \upd\xvec \upd\xvec^\prime \\
+	& = \frac{1}{2} \sum_{\mvec \in \restbasis} \sum_{\nvec \in \restbasis}
+		\left(
+			\delta_{\mvec,\nvec} \delta_{\mvec,\nvec}
+			+ \delta_{\mvec,\nvec} \delta_{\mvec,\nvec}
+		\right) \\
+	& = | \restbasis |.
+\end{eqn}
+where we have expanded the restricted delta functions using the expression from \defref{func-calculus:restricted-delta}.
+Applying~\eqnref{wigner-bec:fpe-bec:moments} to the full expression for $\langle \hat{S}^2_x \rangle$, we rewrite it in terms of wavefunctions in Wigner representation:
+\begin{eqn}
+	\langle \hat{S}^2_x \rangle
 	& = \frac{1}{4} \pathavgleft
 		\int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
 		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \right. \\
 	&	\left. + \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec \pathavgright \\
-	& = \frac{1}{4} \pathavg{ (I^*)^2 + I I^* + I^2 + I^* I } \\
-	& = \pathavg{ (\Real I)^2 } = \pathavg{ S^2_x }
-\end{split}
-\end{equation*}
+		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
+		- \frac{|\restbasis|}{2} \pathavgright \\
+	& = \frac{1}{4} \pathavg{ (I^*)^2 + I I^* + I^2 + I^* I } - \frac{|\restbasis|}{8} \\
+	& = \pathavg{ (\Real I)^2 } - \frac{|\restbasis|}{8}
+	= \pathavg{ S^2_x } - \frac{|\restbasis|}{8}.
+\end{eqn}
 
-\begin{equation*}
-\begin{split}
+Using the same procedure we find the expectations for other pairwise moments of spin operators:
+\begin{eqn}
 	\langle \hat{S}^2_y \rangle
-	& = - \frac{1}{4} \langle \int \left(
-		\Psiop^\dagger_2 \Psiop_1 - \Psiop^\dagger_1 \Psiop_2
-	\right)
-	\left(
-		\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = - \frac{1}{4} \langle \int \left(
-		\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		- \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-	\right. \\
-	& \left.
-		+ \frac{\delta_P(\xvec,\xvec^\prime)}{2} \left(
-			\symprod{ \Psiop_2 \Psiop^{\prime\dagger}_2 }
-			+ \symprod{ \Psiop_1 \Psiop^{\prime\dagger}_1 }
-			- \symprod{ \Psiop^\dagger_2 \Psiop^\prime_2 }
-			- \symprod{ \Psiop^\dagger_1 \Psiop^\prime_1 }
-		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = - \frac{1}{4} \pathavgleft
-		\int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec \right. \\
-	&	\left. + \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		- \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec \pathavgright \\
-	& = - \frac{1}{4} \pathavg{ (I^*)^2 - I I^* + I^2 - I^* I } \\
-	& = \pathavg{ ( \Imag I )^2 } = \pathavg{ S^2_y }
-\end{split}
-\end{equation*}
-
-\begin{equation*}
-\begin{split}
+	& = \pathavg{ S^2_y } - \frac{|\restbasis|}{8}, \\
 	\langle \hat{S}^2_z \rangle
-	& = \frac{1}{4} \langle \int \left(
-		\Psiop^\dagger_1 \Psiop_1 - \Psiop^\dagger_2 \Psiop_2
-	\right)
-	\left(
-		\Psiop^{\prime\dagger}_1 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_2 \Psiop^\prime_2
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \langle \int \left(
-		\symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-	\right. \\
-	& \left.
-		+ \frac{\delta_P(\xvec,\xvec^\prime)}{2} \left(
-			\symprod{ \Psiop^\dagger_1 \Psiop^\prime_1 }
-			- \symprod{ \Psiop_2 \Psiop^{\prime\dagger}_2 }
-			+ \symprod{ \Psiop^\dagger_2 \Psiop^\prime_2 }
-			- \symprod{ \Psiop_1 \Psiop^{\prime\dagger}_1 }
-		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \pathavgleft
-		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec \right. \\
-	&	\left. - \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		+ \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec \pathavgright \\
-	& = \frac{1}{4} \pathavg{ N^2_1 - N_1 N_2 - N_2 N_1 + N^2_2 } \\
-	& = \frac{1}{4} \pathavg{ (N_1 - N_2)^2 } = \pathavg{ S^2_z }
-\end{split}
-\end{equation*}
+	& = \pathavg{ S^2_z } - \frac{|\restbasis|}{8}, \\
+	\frac{1}{2} \langle \hat{S}_x \hat{S}_y + \hat{S}_y \hat{S}_x \rangle
+	& = \pathavg{ S_x S_y }, \\
+	\frac{1}{2} \langle \hat{S}_x \hat{S}_z + \hat{S}_z \hat{S}_x \rangle
+	& = \pathavg{ S_x S_z }, \\
+	\frac{1}{2} \langle \hat{S}_y \hat{S}_z + \hat{S}_z \hat{S}_y \rangle
+	& = \pathavg{ S_y S_z }.
+\end{eqn}
 
-\begin{equation*}
-\begin{split}
-	\langle \hat{S}_x \hat{S}_y + \hat{S}_y \hat{S}_x \rangle
-	& = \frac{i}{4} \langle \int \left(
-		\left(
-			\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-		\right)
-		+ \left(
-			\Psiop^\dagger_2 \Psiop_1 - \Psiop^\dagger_1 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{i}{2} \langle \int \left(
-		\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{i}{2} \pathavg{
-		\int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec } \\
-	& = \frac{i}{2} \pathavg{ (I^*)^2 - I^2 } \\
-	& = 2 \pathavg{ \Real I \, \Imag I } = 2 \pathavg{ S_x S_y }
-\end{split}
-\end{equation*}
-
-\begin{equation*}
-\begin{split}
-	\langle \hat{S}_x \hat{S}_z + \hat{S}_z \hat{S}_x \rangle
-	& = \frac{1}{4} \langle \int \left(
-		\left(
-			\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_1 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_2 \Psiop^\prime_2
-		\right)
-		+ \left(
-			\Psiop^\dagger_1 \Psiop_1 - \Psiop^\dagger_2 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \langle \int \left(
-		\symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		+ \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-	\right. \\
-	& \left.
-		- \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{1}{4} \pathavgleft
-		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \right. \\
-	&	\left. - \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-		+ \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-	\pathavgright \\
-	& = \frac{1}{4} \pathavg{
-		N_1 I^*
-		- N_2 I
-		+ I^* N_1
-		+ I N_1
-		- I^* N_2
-		+ N_1 I
-		- N_2 I^*
-		- I N_2
-	} \\
-	& = \pathavg{ (N_1 - N_2) \Real I } = 2 \pathavg{ S_x S_z }
-\end{split}
-\end{equation*}
-
-\begin{equation*}
-\begin{split}
-	\langle \hat{S}_y \hat{S}_z + \hat{S}_z \hat{S}_y \rangle
-	& = \frac{i}{4} \langle \int \left(
-		\left(
-			\Psiop^\dagger_2 \Psiop_1 - \Psiop^\dagger_1 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_1 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_2 \Psiop^\prime_2
-		\right)
-		+ \left(
-			\Psiop^\dagger_1 \Psiop_1 - \Psiop^\dagger_2 \Psiop_2
-		\right)
-		\left(
-			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 - \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
-		\right)
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{i}{4} \langle \int \left(
-		\symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		+ \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_1 \Psiop^\prime_1 }
-	\right. \\
-	& \left.
-		- \symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-		- \symprod{ \Psiop^\dagger_1 \Psiop_1 \Psiop^{\prime\dagger}_1 \Psiop^\prime_2 }
-		- \symprod{ \Psiop^\dagger_2 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
-		+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_2 }
-	\right) d\xvec d\xvec^\prime \rangle \\
-	& = \frac{i}{4} \pathavgleft
-		\int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		+ \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		+ \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_1 \Psi_1 d\xvec
-		- \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_1 \Psi_1 d\xvec \right. \\
-	&	\left. - \int \Psi^*_2 \Psi_1 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-		- \int \Psi^*_1 \Psi_1 d\xvec \int \Psi^*_1 \Psi_2 d\xvec
-		- \int \Psi^*_2 \Psi_2 d\xvec \int \Psi^*_2 \Psi_1 d\xvec
-		+ \int \Psi^*_1 \Psi_2 d\xvec \int \Psi^*_2 \Psi_2 d\xvec
-	\pathavgright \\
-	& = \frac{i}{4} \pathavg{
-		N_1 I^*
-		+ N_2 I
-		+ I^* N_1
-		- I N_1
-		- I^* N_2
-		- N_1 I
-		- N_2 I^*
-		+ I N_2
-	} \\
-	& = \pathavg{ (N_1 - N_2) \Imag I } = 2 \pathavg{ S_y S_z }
-\end{split}
-\end{equation*}
-
-As it turns out, unlike the equation~\eqnref{moments-calculation:delta-N}, formulas for second-order moments for spin operators do not contain any additional terms depending on $M$.
-Now we can calculate all spin correlations from~\cite{Li2009}:
-\begin{equation*}
-\begin{split}
-	\Delta S^2_i
-		& = \langle \hat{S}^2_i \rangle - \langle \hat{S}_i \rangle^2
-		= \pathavg{ S^2_i } - \pathavg{ S_i }^2, \\
-	\Delta_{ij}
-		& = \langle \hat{S}_i \hat{S}_j + \hat{S}_j \hat{S}_i \rangle
-		- 2 \langle \hat{S}_i \rangle \langle \hat{S}_j \rangle
-		= 2 ( \pathavg{ S_i S_j } - \pathavg{ S_i } \pathavg { S_j } )
-\end{split}
-\end{equation*}
-In other words, we proved that in the simulator application we can first calculate spin components $S^{(j)}_i$ for each simulation path, and then use common average and variance functions on resulting arrays to obtain required correlations.
+Now we have all the required expectations to calculate the spin correlations $\Delta_{ij}$ and, consequently, the degree of squeezing $\xi^2$.
+Note that if we neglect the term $|\restbasis|/8$ in the equations for $\langle \hat{S}_i^2 \rangle$ (which we can do as long as the Wigner truncation condition~\eqnref{wigner-bec:truncation:delta-condition} applies), the spin correlations behave ``classically''.
+This means that they behave as if we had a ``cloud'' of spin vectors, where each vector corresponds to a separate simulation path, and the correlations are classical correlations of different vector components in this cloud.
+Consequently, without giving up too much accuracy we can informally illustrate the total spin uncertainty by plotting the distribution of the total spin vector $(S_x, S_y, S_z)$ over the simulation paths.
