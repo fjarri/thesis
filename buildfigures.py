@@ -35,4 +35,5 @@ if __name__ == '__main__':
     # Squeezing
     plot_squeezing.riedel_rotation(FOLDER + 'bec_squeezing/riedel_rotation' + FORMAT)
     plot_squeezing.riedel_cloud(FOLDER + 'bec_squeezing/riedel_cloud' + FORMAT)
+    plot_squeezing.feshbach_scattering(FOLDER + 'bec_squeezing/feshbach_scattering' + FORMAT)
     plot_squeezing.feshbach_squeezing(FOLDER + 'bec_squeezing/feshbach_squeezing' + FORMAT)

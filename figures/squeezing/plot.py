@@ -604,3 +604,58 @@ def feshbach_squeezing(fname):
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
 
+
+def feshbach_scattering(fname):
+
+    B0 = 9.1047
+    DB = 2e-3
+    gB = 4.7e-3
+    a_bg = 97.7
+
+    fig = mplh.figure(width=0.75)
+    subplot = fig.add_subplot(111)
+
+    B = lambda x: B0 + gB * x
+    fa = lambda x: (1 - DB / (B(x) - B0 - 1j * gB / 2))
+    x = numpy.linspace(-1, 16, 200)
+
+    #subplot.plot([0, 0], [0, 2], color='grey', linewidth=0.5,
+    #    linestyle='-.', dashes=mplh.dash['-.'])
+
+    subplot.plot(x, -fa(x).imag, color=mplh.color.f.red.main,
+        linestyle='--', dashes=mplh.dash['--'])
+    subplot.plot(x, fa(x).real, color=mplh.color.f.blue.main)
+
+    a12s = (80., 85., 90., 95.)
+    diffs = []
+    for a12 in a12s:
+        hbar = 1.054571628e-34
+        r_bohr = 5.2917720859e-11
+        m = 1.443160648e-25
+
+        a = 1 - a12 / a_bg
+        xx = (DB / a + numpy.sqrt((DB / a) ** 2 - gB ** 2)) / (2 * gB)
+        print xx * dB, a_bg * fa(xx).real, -fa(xx).imag * a_bg * r_bohr * 8 * numpy.pi * hbar / m
+        diffs.append(xx)
+
+    #for xx in (0.5, 0.75, 1.0, 1.5):
+    for xx, a12 in zip(diffs, a12s):
+
+        subplot.plot([xx, xx], [0, fa(xx).real], color='grey', linewidth=0.5,
+            linestyle='-.', dashes=mplh.dash['-.'])
+        subplot.scatter([xx], [fa(xx).real], color=mplh.color.f.blue.darkest, marker='.')
+        subplot.scatter([xx], [-fa(xx).imag], color=mplh.color.f.red.darkest, marker='.')
+        subplot.text(
+            xx - (0.9 if a12 > 80 else 1.3),
+            fa(xx).real + 0.07,
+            "$" + str(int(a12)) + "\\,r_B$")
+
+    subplot.set_xlim(xmin=-1, xmax=16)
+    subplot.set_ylim(ymin=0, ymax=1.5)
+    subplot.set_xlabel('$(B - B_0) / \\gamma_B$')
+    subplot.text(-0.1, 1.35, "$\\mathrm{Re}$")
+    subplot.text(-0.5, 0.2, "$-\\mathrm{Im}$")
+    subplot.set_ylabel('$a(B)/a_{\\mathrm{bg}}$')
+
+    fig.tight_layout(pad=0.3)
+    fig.savefig(fname)
