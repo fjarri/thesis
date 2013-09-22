@@ -384,6 +384,9 @@ def riedel_rotation(fname):
     subplot = fig.add_subplot(111)
 
     #subplot.add_patch(patch)
+    subplot.plot([amin, amax], [0, 0], color='grey', linewidth=0.5,
+        linestyle='-.', dashes=mplh.dash['-.'])
+
     subplot.plot(riedel_path_x, riedel_path_y, color=mplh.color.f.blue.main,
         linestyle='--', dashes=mplh.dash['--'])
 
@@ -393,8 +396,8 @@ def riedel_rotation(fname):
     subplot.set_ylim(ymin=-13, ymax=20)
     subplot.xaxis.set_ticks((-90, -45, 0, 45, 90))
     subplot.xaxis.set_ticklabels(('$-90$', '$-45$', '$0$', '$45$', '$90$'))
-    subplot.set_xlabel('Turning angle, $\\theta$ (degrees)')
-    subplot.set_ylabel('$\\Delta \\hat{S}_\\theta^2 / (N / 4)$ (dB)')
+    subplot.set_xlabel('$\\theta$ (degrees)')
+    subplot.set_ylabel('$N \\Delta \\hat{S}_\\theta^2 / \\langle \\hat{\\mathbf{S}} \\rangle^2$ (dB)')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
@@ -589,6 +592,8 @@ def feshbach_squeezing(fname):
     subplot.plot(t_qn_90, xi_qn_90, color=mplh.color.f.green.main,
         linestyle=':', dashes=mplh.dash[':'])
     subplot.plot(t_qn_95, xi_qn_95, color=mplh.color.f.yellow.main,
+        linestyle='-.', dashes=mplh.dash['-.'])
+    subplot.plot([0, 100], [0, 0], color='grey', linewidth=0.5,
         linestyle='-.', dashes=mplh.dash['-.'])
 
     subplot.set_xlim(xmin=0, xmax=100)
