@@ -5,7 +5,8 @@
 In the previous section we have discussed an experiment where squeezing was achieved with component-dependent potentials which helped to reduce the inter-component interaction.
 The same effect can be achieved differently --- by manipulating the external magnetic field near a Feshbach resonance for a chosen pair of hyperfine states.
 This allows one to vary the interaction in a wide range with a relative ease.
-The downside of this approach is the significant increase of the inter-component loss rate accompanying the change in the interaction strength.
+The downside of this approach is the significant increase of the inter-component nonlinear loss rate accompanying the change in the interaction strength.
+This results in the destruction of the squeezing as the two components interfere with each other.
 
 The truncated Wigner approach allows us to investigate the combined effect of reduced interaction strength and increased losses.
 In this section we will consider a hypothetical interferometry experiment with two hyperfine states of \Rb{} and demonstrate how with the help of the Wigner method we can pick the optimal value of the magnetic field that would lead to the maximum squeezing.
@@ -48,7 +49,7 @@ and the imaginary part can be connected to the loss rate by substituting it into
 
     \caption{
     Real (blue solid line) and imaginary (red dashed line, negated value is plotted for compactness) parts of the complex scattering length near the Feshbach resonance at $B_0 \approx 9.1\un{G}$.
-    Four pairs of points show the distances from the resonance chosen for the demonstration, namely $0.5 \gamma_B$, $0.75 \gamma_B$, $1.0 \gamma_B$ and $1.5 \gamma_B$.
+    Four pairs of points show the distances from the resonance chosen for the example simulation.
     }
 
     \label{fig:bec-squeezing:feshbach:scattering}
@@ -62,39 +63,25 @@ Therefore, we will pick the values of $B$ further from the resonance, as display
 The equations~\eqnref{bec-squeezing:feshbach:g} and~\eqnref{bec-squeezing:feshbach:gamma} give us the following values for the simulation:
 \begin{eqn}
     B - B_0 & = 2.24 \gamma_B, \quad
-        a_{12} = 80.0\,r_B, \quad, \gamma_{12} = 3.85\times10^{-12}\un{cm^3/s},\\
-    B - B_0 & = 2.24 \gamma_B, \quad
-        a_{12} = 80.0\,r_B, \quad, \gamma_{12} = 3.85\times10^{-12}\un{cm^3/s},\\
-    B - B_0 & = 2.24 \gamma_B, \quad
-        a_{12} = 80.0\,r_B, \quad, \gamma_{12} = 3.85\times10^{-12}\un{cm^3/s},\\
-    B - B_0 & = 2.24 \gamma_B, \quad
-        a_{12} = 80.0\,r_B, \quad, \gamma_{12} = 3.85\times10^{-12}\un{cm^3/s},\\
+        a_{12} = 80.0\,r_B, \quad \gamma_{12} = 3.85\times10^{-12}\un{cm^3/s},\\
+    B - B_0 & = 3.20 \gamma_B, \quad
+        a_{12} = 85.0\,r_B, \quad \gamma_{12} = 1.93\times10^{-12}\un{cm^3/s},\\
+    B - B_0 & = 5.35 \gamma_B, \quad
+        a_{12} = 90.0\,r_B, \quad \gamma_{12} = 7.00\times10^{-13}\un{cm^3/s},\\
+    B - B_0 & = 15.4 \gamma_B, \quad
+        a_{12} = 95.0\,r_B, \quad \gamma_{12} = 8.53\times10^{-14}\un{cm^3/s}.
 \end{eqn}
-Feshbach tuning to $a_{12} = 90.0\,a_0$ ensures the best squeezing of the four variants ($-6\un{dB}$ at $40\un{ms}$), whereas long lasting squeezing is predicted for the variant with $a_{12} = 95.0\,a_0$.
-
-\copypaste{copypaste begins}
 
 \begin{figure}
     \centerline{\includegraphics{figures_generated/bec_squeezing/feshbach_squeezing.pdf}}
 
     \caption{
-    Wigner simulations of squeezing in the vicinity of $9.1\un{G}$ Feshbach resonance in \Rb.
-    \todo{simulation parameters}.
-    except for the inter-component scattering length and corresponding loss rate~\cite{Kaufman2009}:
-    $a_{12} = 80.0\,a_0$, $\gamma^{(2)}_{12} = 3.88 \times 10^{-12}\un{cm^3/s}$ (blue solid line),
-    $a_{12} = 85.0\,a_0$, $\gamma^{(2)}_{12} = 1.95 \times 10^{-12}\un{cm^3/s}$ (red dashed line),
-    $a_{12} = 90.0\,a_0$, $\gamma^{(2)}_{12} = 7.13 \times 10^{-13}\un{cm^3/s}$ (green dash-dotted line) and
-    $a_{12} = 95.0\,a_0$, $\gamma^{(2)}_{12} = 8.54 \times 10^{-14}\un{cm^3/s}$ (black dotted line)}
+    Wigner simulations of squeezing in the vicinity of $9.1\un{G}$ Feshbach resonance in \Rb with the varying external magnetic field strength.
+    Shown are the results corresponding to the resulting scattering lengths $a_{12}=80.0\,r_B$ (blue solid line), $a_{12}=85.0\,r_B$ (red dashed line), $a_{12}=90.0\,r_B$ (green dotted line), and $a_{12}=95.0\,r_B$ (yellow dash-dotted line).}
 
     \label{fig:bec-squeezing:feshbach:squeezing}
 \end{figure}
 
-
-These simulations predict the degree of quantum noise-reduction, which is a technique that can be used to improve precision quantum interferometry.
-The quantum noise is initially reduced due to a stretching and rotation of the quantum noise ellipse, similar to that found in quantum soliton squeezing~\cite{Carter1987,Drummond1993a}.
-For lossless environments, this effect is optimized when the cross-species scattering length is maximally different to the intra-species scattering length, which is found near the Feshbach resonance.
-However, there are competing nonlinear loss effects at the Feshbach resonance, which means that some detuning of the magnetic field is essential to reduce these detrimental losses.
-Subsequently, the squeezing is destroyed in time as the two fields recombine and interfere with each other.
-Importantly, these quantum squeezing calculations indicate conditions that will allow this macroscopic quantum effect to be experimentally observed in ultra-cold atomic BEC for much larger atom numbers than calculated previously.
-
-\copypaste{copypaste ends}
+The resulting time dependence of the degree of squeezing for different interaction strengths is shown in~\figref{bec-squeezing:feshbach:squeezing}.
+Feshbach tuning to $a_{12} = 90.0\,r_B$ ensures the best squeezing of the four variants ($-6\un{dB}$ at $40\un{ms}$), whereas long lasting squeezing is predicted for the variant with $a_{12} = 95.0\,r_B$.
+In practice, it is possible to run the simulation for more different values of $B$, thus finding the ideal balance between the interaction strength and the loss rate which produces the maximum squeezing.
