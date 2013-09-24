@@ -17,7 +17,6 @@ The first $\pi/2$-pulse creates an equal superposition of two states, ${\ket{F=1
 The external magnetic field of strength $B \approx B_0$ is applied, where $B_0 = 9.1\un{G}$ corresponds to the Feshbach resonance for the two hyperfine used~\cite{Kaufman2009}.
 We then investigate the dependence of the time dependence of the maximum degree of spin squeezing.
 Intra-species interaction strengths do not depend on the external magnetic field, and are taken to be $a_{11} = 100.4\,r_B$ and $a_{22} = 95.44\,r_B$.
-We have also included a realistic two-body loss process in the second component with the rate $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$.
 
 The dependence of the inter-species interaction and loss rate can be described with a single equation for the complex scattering length~\cite{Kaufman2009}
 \begin{eqn}
@@ -73,15 +72,20 @@ The equations~\eqnref{bec-squeezing:feshbach:g} and~\eqnref{bec-squeezing:feshba
 \end{eqn}
 
 \begin{figure}
-    \centerline{\includegraphics{figures_generated/bec_squeezing/feshbach_squeezing.pdf}}
+    \centerline{%
+    \includegraphics{figures_generated/bec_squeezing/feshbach_squeezing_no_losses.pdf}%
+    \includegraphics{figures_generated/bec_squeezing/feshbach_squeezing.pdf}}
 
     \caption{
-    Wigner simulations of squeezing in the vicinity of $9.1\un{G}$ Feshbach resonance in \Rb with the varying external magnetic field strength.
+    Wigner simulations of squeezing in the vicinity of $9.1\un{G}$ Feshbach resonance in \Rb{} with the varying external magnetic field strength, with \textbf{(a)}~losses turned off, and \textbf{(b)}~$1-2$ losses turned on.
     Shown are the results corresponding to the resulting scattering lengths $a_{12}=80.0\,r_B$ (blue solid line), $a_{12}=85.0\,r_B$ (red dashed line), $a_{12}=90.0\,r_B$ (green dotted line), and $a_{12}=95.0\,r_B$ (yellow dash-dotted line).}
 
     \label{fig:bec-squeezing:feshbach:squeezing}
 \end{figure}
 
-The resulting time dependence of the degree of squeezing for different interaction strengths is shown in~\figref{bec-squeezing:feshbach:squeezing}.
-Feshbach tuning to $a_{12} = 90.0\,r_B$ ensures the best squeezing of the four variants ($-6\un{dB}$ at $40\un{ms}$), whereas long lasting squeezing is predicted for the variant with $a_{12} = 95.0\,r_B$.
+First, we perform the simulations with $\gamma_{12}$ set to zero in order to test the squeezing in ideal conditions.
+As expected, the lower $a_{12}$ is, the stronger squeezing is reachable, as shown in~\figref{bec-squeezing:feshbach:squeezing},~(a).
+
+With the inclusion of the $1-2$ losses the picture is different.
+Feshbach tuning to $a_{12} = 85.0\,r_B$ ensures the best squeezing of the four variants ($-12\un{dB}$ at $60\un{ms}$), whereas long lasting squeezing is predicted for the variant with $a_{12} = 95.0\,r_B$ (\figref{bec-squeezing:feshbach:squeezing},~(b)).
 In practice, it is possible to run the simulation for more different values of $B$, thus finding the ideal balance between the interaction strength and the loss rate which produces the maximum squeezing.

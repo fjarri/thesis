@@ -563,46 +563,45 @@ def riedel_cloud(fname):
     fig.savefig(fname)
 
 
-def feshbach_squeezing(fname):
-    with open(get_path(__file__, 'squeezing_ramsey_80.0.json')) as f:
-        qn_80 = json.load(f)
-    with open(get_path(__file__, 'squeezing_ramsey_85.0.json')) as f:
-        qn_85 = json.load(f)
-    with open(get_path(__file__, 'squeezing_ramsey_90.0.json')) as f:
-        qn_90 = json.load(f)
-    with open(get_path(__file__, 'squeezing_ramsey_95.0.json')) as f:
-        qn_95 = json.load(f)
+def _feshbach_squeezing(fname, losses):
 
-    t_qn_80 = numpy.array(qn_80['xarray'])
-    xi_qn_80 = numpy.array(qn_80['yarray'])
-    t_qn_85 = numpy.array(qn_85['xarray'])
-    xi_qn_85 = numpy.array(qn_85['yarray'])
-    t_qn_90 = numpy.array(qn_90['xarray'])
-    xi_qn_90 = numpy.array(qn_90['yarray'])
-    t_qn_95 = numpy.array(qn_95['xarray'])
-    xi_qn_95 = numpy.array(qn_95['yarray'])
+    with open(get_path(__file__, 'feshbach_squeezing' + ('' if losses else '_no_losses') + '.json')) as f:
+        sq = json.load(f)
 
-    fig = mplh.figure(width=0.75)
+    t_sq = numpy.array(sq['times'])
+    xi2_sq_80 = numpy.array(sq['xi2_80.0'])
+    xi2_sq_85 = numpy.array(sq['xi2_85.0'])
+    xi2_sq_90 = numpy.array(sq['xi2_90.0'])
+    xi2_sq_95 = numpy.array(sq['xi2_95.0'])
+
+    fig = mplh.figure(width=0.5)
     subplot = fig.add_subplot(111)
 
-    subplot.plot(t_qn_80, xi_qn_80, color=mplh.color.f.blue.main,
+    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_80), color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['-'])
-    subplot.plot(t_qn_85, xi_qn_85, color=mplh.color.f.red.main,
+    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_85), color=mplh.color.f.red.main,
         linestyle='--', dashes=mplh.dash['--'])
-    subplot.plot(t_qn_90, xi_qn_90, color=mplh.color.f.green.main,
+    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_90), color=mplh.color.f.green.main,
         linestyle=':', dashes=mplh.dash[':'])
-    subplot.plot(t_qn_95, xi_qn_95, color=mplh.color.f.yellow.main,
+    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_95), color=mplh.color.f.yellow.main,
         linestyle='-.', dashes=mplh.dash['-.'])
+
     subplot.plot([0, 100], [0, 0], color='grey', linewidth=0.5,
         linestyle='-.', dashes=mplh.dash['-.'])
 
     subplot.set_xlim(xmin=0, xmax=100)
-    subplot.set_ylim(ymin=-7, ymax=1)
+    subplot.set_ylim(ymin=-13 if losses else -20 , ymax=1)
     subplot.set_xlabel('$T$ (ms)')
     subplot.set_ylabel('$\\xi^2$ (dB)')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
+
+def feshbach_squeezing(fname):
+    _feshbach_squeezing(fname, True)
+
+def feshbach_squeezing_no_losses(fname):
+    _feshbach_squeezing(fname, False)
 
 
 def feshbach_scattering(fname):
