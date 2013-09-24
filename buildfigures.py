@@ -3,6 +3,7 @@ import figures.mplhelpers
 import figures.mean_field.plot as plot_mean_field
 import figures.bec_noise.plot as plot_bec_noise
 import figures.squeezing.plot as plot_squeezing
+import figures.exact.plot as plot_exact
 
 FOLDER = 'figures_generated/'
 FORMAT = '.pdf'
@@ -38,3 +39,8 @@ if __name__ == '__main__':
     plot_squeezing.feshbach_scattering(FOLDER + 'bec_squeezing/feshbach_scattering' + FORMAT)
     plot_squeezing.feshbach_squeezing(FOLDER + 'bec_squeezing/feshbach_squeezing' + FORMAT)
     plot_squeezing.feshbach_squeezing_no_losses(FOLDER + 'bec_squeezing/feshbach_squeezing_no_losses' + FORMAT)
+
+    # Exact comparison
+    plot_exact.squeezing_nocc(FOLDER + 'exact/squeezing_nocc' + FORMAT)
+    plot_exact.squeezing_cc(FOLDER + 'exact/squeezing_cc' + FORMAT)
+

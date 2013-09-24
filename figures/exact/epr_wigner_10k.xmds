@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation xmds-version="2">
+  <name>epr_wigner_1k</name>
+  <author>Bogdan Opanchuk</author>
+  <description>
+    EPR simulations in Wigner representation.
+  </description>
+
+  <geometry>
+    <propagation_dimension> t </propagation_dimension>
+  </geometry>
+
+  <driver name="mpi-multi-path" paths="10000" />
+
+  <features>
+      <arguments>
+        <argument name="a11" type="real" default_value="100.4" /> <!-- in Bohr radii -->
+        <argument name="a22" type="real" default_value="95.5" />
+        <argument name="B" type="real" default_value="9.105" /> <!-- in Gauss -->
+        <argument name="losses" type="int" default_value="0" />
+        <argument name="gamma1_t" type="real" default_value="0" /> <!-- linear loss -->
+        <argument name="gamma12_t" type="real" default_value="1e-4" />
+        <argument name="gamma22_t" type="real" default_value="2e-6" />
+        <argument name="gamma111_t" type="real" default_value="5e-9" />
+        <argument name="Na" type="int" default_value="200" />
+        <argument name="Nb" type="int" default_value="200" />
+        <argument name="kappa1_t" type="real" default_value="5e-3" />
+        <argument name="kappa2_t" type="real" default_value="5e-3" />
+        <argument name="tau_max" type="real" default_value="120.0" /> <!-- in g11 * Na -->
+        <![CDATA[
+
+        // Based on Kaufman et al., 2009, for |1,+1>, |2,-1> interaction
+        double a_bg = 97.7 * r_bohr; // background scattering length
+        double gamma = 4.7e-3; // decay rate, G
+        double delta = 2e-3; // width of the resonance, G
+        double B0 = 9.105; // resonance
+        double denom = (B - B0) * (B - B0) + gamma * gamma / 4;
+        double a12 = a_bg * (1 - delta * (B - B0) / denom);
+        //double gamma12_3D = 4 * M_PI * hbar * (a_bg / 2 * delta * gamma / denom) / m;
+
+        g11_t = 1.0 / Na;
+        g12_t = B == 0 ? 0 : (a12 / r_bohr) / a11 / Na;
+        g22_t = a22 / a11 / Na;
+
+        if(losses == 0) {
+            gamma12_t = 0;
+            gamma22_t = 0;
+            gamma111_t = 0;
+            gamma1_t = 0;
+        }
+
+        ]]>
+      </arguments>
+    <error_check />
+    <benchmark />
+    <openmp />
+    <auto_vectorise />
+    <validation kind="run-time"/>
+
+    <globals>
+      <![CDATA[
+        // constants
+        const double kb = 1.3806503e-23;
+        const double hbar = 1.054571628e-34;
+        const double r_bohr = 5.2917720859e-11;
+        const double m = 1.443160648e-25; // Rb-87
+
+        double g11_t, g12_t, g22_t;
+      ]]>
+    </globals>
+
+  </features>
+
+  <noise_vector name="init_noises" kind="gaussian" type="complex" method="dsfmt">
+        <components>n_1 n_2 n_3 n_4</components>
+  </noise_vector>
+
+  <noise_vector name="evo_noises" kind="wiener" type="complex" method="dsfmt">
+    <components>z_12A z_12B z_22A z_22B z_111A z_111B z_1A z_1B</components>
+  </noise_vector>
+
+  <vector name="main" type="complex">
+    <components> alpha1 alpha2 beta1 beta2 </components>
+    <initialisation noises="">
+        <dependencies>init_noises</dependencies>
+
+      <![CDATA[
+        const complex a = sqrt(Na / 2.0);
+        const complex b = sqrt(Nb / 2.0);
+        alpha1 = a + sqrt(0.5) * n_1;
+        alpha2 = a + sqrt(0.5) * n_2;
+        beta1 = b + sqrt(0.5) * n_3;
+        beta2 = b + sqrt(0.5) * n_4;
+      ]]>
+    </initialisation>
+  </vector>
+
+  <sequence>
+    <integrate algorithm="SI" interval="tau_max" steps="20000" iterations="3">
+      <samples>200</samples>
+      <operators>
+        <dependencies>evo_noises</dependencies>
+        <integration_vectors>main</integration_vectors>
+        <![CDATA[
+        dalpha1_dt = -i * (kappa1_t * beta1 + g11_t * alpha1 * norm(alpha1) + g12_t * alpha1 * norm(alpha2))
+            - gamma12_t * norm(alpha2) * alpha1 - 3 * gamma111_t * norm(alpha1) * norm(alpha1) * alpha1
+            - gamma1_t * alpha1
+            - 0.5 * gamma12_t * alpha1 // Stratonovich term
+            + sqrt(gamma12_t) * conj(alpha2) * z_12A + 3 * sqrt(gamma111_t) * conj(alpha1 * alpha1) * z_111A
+            + sqrt(gamma1_t) * z_1A;
+        dbeta1_dt = -i * (kappa1_t * alpha1 + g11_t * beta1 * norm(beta1) + g12_t * beta1 * norm(beta2))
+            - gamma12_t * norm(beta2) * beta1 - 3 * gamma111_t * norm(beta1) * norm(beta1) * beta1
+            - gamma1_t * beta1
+            - 0.5 * gamma12_t * beta1 // Stratonovich term
+            + sqrt(gamma12_t) * conj(beta2) * z_12B + 3 * sqrt(gamma111_t) * conj(beta1 * beta1) * z_111B
+            + sqrt(gamma1_t) * z_1B;
+        dalpha2_dt = -i * (kappa2_t * beta2 + g12_t * alpha2 * norm(alpha1) + g22_t * alpha2 * norm(alpha2))
+            - gamma12_t * norm(alpha1) * alpha2 - 2 * gamma22_t * norm(alpha2) * alpha2
+            - 0.5 * gamma12_t * alpha2 - 2 * gamma22_t * alpha2 // Stratonovich term
+            + sqrt(gamma12_t) * conj(alpha1) * z_12A + 2 * sqrt(gamma22_t) * conj(alpha2) * z_22A;
+        dbeta2_dt = -i * (kappa2_t * alpha2 + g12_t * beta2 * norm(beta1) + g22_t * beta2 * norm(beta2))
+            - gamma12_t * norm(beta1) * beta2 - 2 * gamma22_t * norm(beta2) * beta2
+            - 0.5 * gamma12_t * beta2 - 2 * gamma22_t * beta2 // Stratonovich term
+            + sqrt(gamma12_t) * conj(beta1) * z_12B + 2 * sqrt(gamma22_t) * conj(beta2) * z_22B;
+        ]]>
+      </operators>
+    </integrate>
+  </sequence>
+
+  <output format="ascii">
+    <group>
+      <sampling initial_sample="yes">
+          <moments>
+          re_calpha1_alpha1 im_calpha1_alpha1 re_calpha1_alpha1_calpha2_alpha2 im_calpha1_alpha1_calpha2_alpha2 re_calpha1_alpha1_calpha2_beta1 im_calpha1_alpha1_calpha2_beta1 re_calpha1_alpha1_calpha2_beta2 im_calpha1_alpha1_calpha2_beta2 re_calpha1_alpha1_alpha2_cbeta1 im_calpha1_alpha1_alpha2_cbeta1 re_calpha1_alpha1_alpha2_cbeta2 im_calpha1_alpha1_alpha2_cbeta2 re_calpha1_alpha1_cbeta1_beta1 im_calpha1_alpha1_cbeta1_beta1 re_calpha1_alpha1_cbeta1_beta2 im_calpha1_alpha1_cbeta1_beta2 re_calpha1_alpha1_beta1_cbeta2 im_calpha1_alpha1_beta1_cbeta2 re_calpha1_alpha1_cbeta2_beta2 im_calpha1_alpha1_cbeta2_beta2 re_calpha1_alpha1_2_calpha2 im_calpha1_alpha1_2_calpha2 re_calpha1_alpha1_2_cbeta1 im_calpha1_alpha1_2_cbeta1 re_calpha1_alpha1_2_cbeta2 im_calpha1_alpha1_2_cbeta2 re_calpha1_calpha2_alpha2_beta1 im_calpha1_calpha2_alpha2_beta1 re_calpha1_calpha2_alpha2_beta2 im_calpha1_calpha2_alpha2_beta2 re_calpha1_calpha2_alpha2_2 im_calpha1_calpha2_alpha2_2 re_calpha1_calpha2_beta1_beta2 im_calpha1_calpha2_beta1_beta2 re_calpha1_calpha2_beta1_2 im_calpha1_calpha2_beta1_2 re_calpha1_calpha2_beta2_2 im_calpha1_calpha2_beta2_2 re_calpha1_alpha2 im_calpha1_alpha2 re_calpha1_alpha2_cbeta1_beta1 im_calpha1_alpha2_cbeta1_beta1 re_calpha1_alpha2_cbeta1_beta2 im_calpha1_alpha2_cbeta1_beta2 re_calpha1_alpha2_beta1_cbeta2 im_calpha1_alpha2_beta1_cbeta2 re_calpha1_alpha2_cbeta2_beta2 im_calpha1_alpha2_cbeta2_beta2 re_calpha1_alpha2_2_cbeta1 im_calpha1_alpha2_2_cbeta1 re_calpha1_alpha2_2_cbeta2 im_calpha1_alpha2_2_cbeta2 re_calpha1_cbeta1_beta1_beta2 im_calpha1_cbeta1_beta1_beta2 re_calpha1_cbeta1_beta1_2 im_calpha1_cbeta1_beta1_2 re_calpha1_cbeta1_beta2_2 im_calpha1_cbeta1_beta2_2 re_calpha1_beta1 im_calpha1_beta1 re_calpha1_beta1_cbeta2_beta2 im_calpha1_beta1_cbeta2_beta2 re_calpha1_beta1_2_cbeta2 im_calpha1_beta1_2_cbeta2 re_calpha1_cbeta2_beta2_2 im_calpha1_cbeta2_beta2_2 re_calpha1_beta2 im_calpha1_beta2 re_calpha1_2_alpha1_alpha2 im_calpha1_2_alpha1_alpha2 re_calpha1_2_alpha1_beta1 im_calpha1_2_alpha1_beta1 re_calpha1_2_alpha1_beta2 im_calpha1_2_alpha1_beta2 re_calpha1_2_alpha1_2 im_calpha1_2_alpha1_2 re_calpha1_2_alpha2_beta1 im_calpha1_2_alpha2_beta1 re_calpha1_2_alpha2_beta2 im_calpha1_2_alpha2_beta2 re_calpha1_2_alpha2_2 im_calpha1_2_alpha2_2 re_calpha1_2_beta1_beta2 im_calpha1_2_beta1_beta2 re_calpha1_2_beta1_2 im_calpha1_2_beta1_2 re_calpha1_2_beta2_2 im_calpha1_2_beta2_2 re_alpha1_calpha2 im_alpha1_calpha2 re_alpha1_calpha2_alpha2_cbeta1 im_alpha1_calpha2_alpha2_cbeta1 re_alpha1_calpha2_alpha2_cbeta2 im_alpha1_calpha2_alpha2_cbeta2 re_alpha1_calpha2_cbeta1_beta1 im_alpha1_calpha2_cbeta1_beta1 re_alpha1_calpha2_cbeta1_beta2 im_alpha1_calpha2_cbeta1_beta2 re_alpha1_calpha2_beta1_cbeta2 im_alpha1_calpha2_beta1_cbeta2 re_alpha1_calpha2_cbeta2_beta2 im_alpha1_calpha2_cbeta2_beta2 re_alpha1_calpha2_2_alpha2 im_alpha1_calpha2_2_alpha2 re_alpha1_calpha2_2_beta1 im_alpha1_calpha2_2_beta1 re_alpha1_calpha2_2_beta2 im_alpha1_calpha2_2_beta2 re_alpha1_alpha2_cbeta1_cbeta2 im_alpha1_alpha2_cbeta1_cbeta2 re_alpha1_alpha2_cbeta1_2 im_alpha1_alpha2_cbeta1_2 re_alpha1_alpha2_cbeta2_2 im_alpha1_alpha2_cbeta2_2 re_alpha1_cbeta1 im_alpha1_cbeta1 re_alpha1_cbeta1_beta1_cbeta2 im_alpha1_cbeta1_beta1_cbeta2 re_alpha1_cbeta1_cbeta2_beta2 im_alpha1_cbeta1_cbeta2_beta2 re_alpha1_cbeta1_2_beta1 im_alpha1_cbeta1_2_beta1 re_alpha1_cbeta1_2_beta2 im_alpha1_cbeta1_2_beta2 re_alpha1_beta1_cbeta2_2 im_alpha1_beta1_cbeta2_2 re_alpha1_cbeta2 im_alpha1_cbeta2 re_alpha1_cbeta2_2_beta2 im_alpha1_cbeta2_2_beta2 re_alpha1_2_calpha2_cbeta1 im_alpha1_2_calpha2_cbeta1 re_alpha1_2_calpha2_cbeta2 im_alpha1_2_calpha2_cbeta2 re_alpha1_2_calpha2_2 im_alpha1_2_calpha2_2 re_alpha1_2_cbeta1_cbeta2 im_alpha1_2_cbeta1_cbeta2 re_alpha1_2_cbeta1_2 im_alpha1_2_cbeta1_2 re_alpha1_2_cbeta2_2 im_alpha1_2_cbeta2_2 re_calpha2_alpha2 im_calpha2_alpha2 re_calpha2_alpha2_cbeta1_beta1 im_calpha2_alpha2_cbeta1_beta1 re_calpha2_alpha2_cbeta1_beta2 im_calpha2_alpha2_cbeta1_beta2 re_calpha2_alpha2_beta1_cbeta2 im_calpha2_alpha2_beta1_cbeta2 re_calpha2_alpha2_cbeta2_beta2 im_calpha2_alpha2_cbeta2_beta2 re_calpha2_alpha2_2_cbeta1 im_calpha2_alpha2_2_cbeta1 re_calpha2_alpha2_2_cbeta2 im_calpha2_alpha2_2_cbeta2 re_calpha2_cbeta1_beta1_beta2 im_calpha2_cbeta1_beta1_beta2 re_calpha2_cbeta1_beta1_2 im_calpha2_cbeta1_beta1_2 re_calpha2_cbeta1_beta2_2 im_calpha2_cbeta1_beta2_2 re_calpha2_beta1 im_calpha2_beta1 re_calpha2_beta1_cbeta2_beta2 im_calpha2_beta1_cbeta2_beta2 re_calpha2_beta1_2_cbeta2 im_calpha2_beta1_2_cbeta2 re_calpha2_cbeta2_beta2_2 im_calpha2_cbeta2_beta2_2 re_calpha2_beta2 im_calpha2_beta2 re_calpha2_2_alpha2_beta1 im_calpha2_2_alpha2_beta1 re_calpha2_2_alpha2_beta2 im_calpha2_2_alpha2_beta2 re_calpha2_2_alpha2_2 im_calpha2_2_alpha2_2 re_calpha2_2_beta1_beta2 im_calpha2_2_beta1_beta2 re_calpha2_2_beta1_2 im_calpha2_2_beta1_2 re_calpha2_2_beta2_2 im_calpha2_2_beta2_2 re_alpha2_cbeta1 im_alpha2_cbeta1 re_alpha2_cbeta1_beta1_cbeta2 im_alpha2_cbeta1_beta1_cbeta2 re_alpha2_cbeta1_cbeta2_beta2 im_alpha2_cbeta1_cbeta2_beta2 re_alpha2_cbeta1_2_beta1 im_alpha2_cbeta1_2_beta1 re_alpha2_cbeta1_2_beta2 im_alpha2_cbeta1_2_beta2 re_alpha2_beta1_cbeta2_2 im_alpha2_beta1_cbeta2_2 re_alpha2_cbeta2 im_alpha2_cbeta2 re_alpha2_cbeta2_2_beta2 im_alpha2_cbeta2_2_beta2 re_alpha2_2_cbeta1_cbeta2 im_alpha2_2_cbeta1_cbeta2 re_alpha2_2_cbeta1_2 im_alpha2_2_cbeta1_2 re_alpha2_2_cbeta2_2 im_alpha2_2_cbeta2_2 re_cbeta1_beta1 im_cbeta1_beta1 re_cbeta1_beta1_cbeta2_beta2 im_cbeta1_beta1_cbeta2_beta2 re_cbeta1_beta1_2_cbeta2 im_cbeta1_beta1_2_cbeta2 re_cbeta1_cbeta2_beta2_2 im_cbeta1_cbeta2_beta2_2 re_cbeta1_beta2 im_cbeta1_beta2 re_cbeta1_2_beta1_beta2 im_cbeta1_2_beta1_beta2 re_cbeta1_2_beta1_2 im_cbeta1_2_beta1_2 re_cbeta1_2_beta2_2 im_cbeta1_2_beta2_2 re_beta1_cbeta2 im_beta1_cbeta2 re_beta1_cbeta2_2_beta2 im_beta1_cbeta2_2_beta2 re_beta1_2_cbeta2_2 im_beta1_2_cbeta2_2 re_cbeta2_beta2 im_cbeta2_beta2 re_cbeta2_2_beta2_2 im_cbeta2_2_beta2_2
+          </moments>
+          <dependencies>main</dependencies><![CDATA[
+          re_calpha1_alpha1 = (conj(alpha1) * alpha1).Re();
+          im_calpha1_alpha1 = (conj(alpha1) * alpha1).Im();
+          re_calpha1_alpha1_calpha2_alpha2 = (conj(alpha1) * alpha1 * conj(alpha2) * alpha2).Re();
+          im_calpha1_alpha1_calpha2_alpha2 = (conj(alpha1) * alpha1 * conj(alpha2) * alpha2).Im();
+          re_calpha1_alpha1_calpha2_beta1 = (conj(alpha1) * alpha1 * conj(alpha2) * beta1).Re();
+          im_calpha1_alpha1_calpha2_beta1 = (conj(alpha1) * alpha1 * conj(alpha2) * beta1).Im();
+          re_calpha1_alpha1_calpha2_beta2 = (conj(alpha1) * alpha1 * conj(alpha2) * beta2).Re();
+          im_calpha1_alpha1_calpha2_beta2 = (conj(alpha1) * alpha1 * conj(alpha2) * beta2).Im();
+          re_calpha1_alpha1_alpha2_cbeta1 = (conj(alpha1) * alpha1 * alpha2 * conj(beta1)).Re();
+          im_calpha1_alpha1_alpha2_cbeta1 = (conj(alpha1) * alpha1 * alpha2 * conj(beta1)).Im();
+          re_calpha1_alpha1_alpha2_cbeta2 = (conj(alpha1) * alpha1 * alpha2 * conj(beta2)).Re();
+          im_calpha1_alpha1_alpha2_cbeta2 = (conj(alpha1) * alpha1 * alpha2 * conj(beta2)).Im();
+          re_calpha1_alpha1_cbeta1_beta1 = (conj(alpha1) * alpha1 * conj(beta1) * beta1).Re();
+          im_calpha1_alpha1_cbeta1_beta1 = (conj(alpha1) * alpha1 * conj(beta1) * beta1).Im();
+          re_calpha1_alpha1_cbeta1_beta2 = (conj(alpha1) * alpha1 * conj(beta1) * beta2).Re();
+          im_calpha1_alpha1_cbeta1_beta2 = (conj(alpha1) * alpha1 * conj(beta1) * beta2).Im();
+          re_calpha1_alpha1_beta1_cbeta2 = (conj(alpha1) * alpha1 * beta1 * conj(beta2)).Re();
+          im_calpha1_alpha1_beta1_cbeta2 = (conj(alpha1) * alpha1 * beta1 * conj(beta2)).Im();
+          re_calpha1_alpha1_cbeta2_beta2 = (conj(alpha1) * alpha1 * conj(beta2) * beta2).Re();
+          im_calpha1_alpha1_cbeta2_beta2 = (conj(alpha1) * alpha1 * conj(beta2) * beta2).Im();
+          re_calpha1_alpha1_2_calpha2 = (conj(alpha1) * alpha1 * alpha1 * conj(alpha2)).Re();
+          im_calpha1_alpha1_2_calpha2 = (conj(alpha1) * alpha1 * alpha1 * conj(alpha2)).Im();
+          re_calpha1_alpha1_2_cbeta1 = (conj(alpha1) * alpha1 * alpha1 * conj(beta1)).Re();
+          im_calpha1_alpha1_2_cbeta1 = (conj(alpha1) * alpha1 * alpha1 * conj(beta1)).Im();
+          re_calpha1_alpha1_2_cbeta2 = (conj(alpha1) * alpha1 * alpha1 * conj(beta2)).Re();
+          im_calpha1_alpha1_2_cbeta2 = (conj(alpha1) * alpha1 * alpha1 * conj(beta2)).Im();
+          re_calpha1_calpha2_alpha2_beta1 = (conj(alpha1) * conj(alpha2) * alpha2 * beta1).Re();
+          im_calpha1_calpha2_alpha2_beta1 = (conj(alpha1) * conj(alpha2) * alpha2 * beta1).Im();
+          re_calpha1_calpha2_alpha2_beta2 = (conj(alpha1) * conj(alpha2) * alpha2 * beta2).Re();
+          im_calpha1_calpha2_alpha2_beta2 = (conj(alpha1) * conj(alpha2) * alpha2 * beta2).Im();
+          re_calpha1_calpha2_alpha2_2 = (conj(alpha1) * conj(alpha2) * alpha2 * alpha2).Re();
+          im_calpha1_calpha2_alpha2_2 = (conj(alpha1) * conj(alpha2) * alpha2 * alpha2).Im();
+          re_calpha1_calpha2_beta1_beta2 = (conj(alpha1) * conj(alpha2) * beta1 * beta2).Re();
+          im_calpha1_calpha2_beta1_beta2 = (conj(alpha1) * conj(alpha2) * beta1 * beta2).Im();
+          re_calpha1_calpha2_beta1_2 = (conj(alpha1) * conj(alpha2) * beta1 * beta1).Re();
+          im_calpha1_calpha2_beta1_2 = (conj(alpha1) * conj(alpha2) * beta1 * beta1).Im();
+          re_calpha1_calpha2_beta2_2 = (conj(alpha1) * conj(alpha2) * beta2 * beta2).Re();
+          im_calpha1_calpha2_beta2_2 = (conj(alpha1) * conj(alpha2) * beta2 * beta2).Im();
+          re_calpha1_alpha2 = (conj(alpha1) * alpha2).Re();
+          im_calpha1_alpha2 = (conj(alpha1) * alpha2).Im();
+          re_calpha1_alpha2_cbeta1_beta1 = (conj(alpha1) * alpha2 * conj(beta1) * beta1).Re();
+          im_calpha1_alpha2_cbeta1_beta1 = (conj(alpha1) * alpha2 * conj(beta1) * beta1).Im();
+          re_calpha1_alpha2_cbeta1_beta2 = (conj(alpha1) * alpha2 * conj(beta1) * beta2).Re();
+          im_calpha1_alpha2_cbeta1_beta2 = (conj(alpha1) * alpha2 * conj(beta1) * beta2).Im();
+          re_calpha1_alpha2_beta1_cbeta2 = (conj(alpha1) * alpha2 * beta1 * conj(beta2)).Re();
+          im_calpha1_alpha2_beta1_cbeta2 = (conj(alpha1) * alpha2 * beta1 * conj(beta2)).Im();
+          re_calpha1_alpha2_cbeta2_beta2 = (conj(alpha1) * alpha2 * conj(beta2) * beta2).Re();
+          im_calpha1_alpha2_cbeta2_beta2 = (conj(alpha1) * alpha2 * conj(beta2) * beta2).Im();
+          re_calpha1_alpha2_2_cbeta1 = (conj(alpha1) * alpha2 * alpha2 * conj(beta1)).Re();
+          im_calpha1_alpha2_2_cbeta1 = (conj(alpha1) * alpha2 * alpha2 * conj(beta1)).Im();
+          re_calpha1_alpha2_2_cbeta2 = (conj(alpha1) * alpha2 * alpha2 * conj(beta2)).Re();
+          im_calpha1_alpha2_2_cbeta2 = (conj(alpha1) * alpha2 * alpha2 * conj(beta2)).Im();
+          re_calpha1_cbeta1_beta1_beta2 = (conj(alpha1) * conj(beta1) * beta1 * beta2).Re();
+          im_calpha1_cbeta1_beta1_beta2 = (conj(alpha1) * conj(beta1) * beta1 * beta2).Im();
+          re_calpha1_cbeta1_beta1_2 = (conj(alpha1) * conj(beta1) * beta1 * beta1).Re();
+          im_calpha1_cbeta1_beta1_2 = (conj(alpha1) * conj(beta1) * beta1 * beta1).Im();
+          re_calpha1_cbeta1_beta2_2 = (conj(alpha1) * conj(beta1) * beta2 * beta2).Re();
+          im_calpha1_cbeta1_beta2_2 = (conj(alpha1) * conj(beta1) * beta2 * beta2).Im();
+          re_calpha1_beta1 = (conj(alpha1) * beta1).Re();
+          im_calpha1_beta1 = (conj(alpha1) * beta1).Im();
+          re_calpha1_beta1_cbeta2_beta2 = (conj(alpha1) * beta1 * conj(beta2) * beta2).Re();
+          im_calpha1_beta1_cbeta2_beta2 = (conj(alpha1) * beta1 * conj(beta2) * beta2).Im();
+          re_calpha1_beta1_2_cbeta2 = (conj(alpha1) * beta1 * beta1 * conj(beta2)).Re();
+          im_calpha1_beta1_2_cbeta2 = (conj(alpha1) * beta1 * beta1 * conj(beta2)).Im();
+          re_calpha1_cbeta2_beta2_2 = (conj(alpha1) * conj(beta2) * beta2 * beta2).Re();
+          im_calpha1_cbeta2_beta2_2 = (conj(alpha1) * conj(beta2) * beta2 * beta2).Im();
+          re_calpha1_beta2 = (conj(alpha1) * beta2).Re();
+          im_calpha1_beta2 = (conj(alpha1) * beta2).Im();
+          re_calpha1_2_alpha1_alpha2 = (conj(alpha1) * conj(alpha1) * alpha1 * alpha2).Re();
+          im_calpha1_2_alpha1_alpha2 = (conj(alpha1) * conj(alpha1) * alpha1 * alpha2).Im();
+          re_calpha1_2_alpha1_beta1 = (conj(alpha1) * conj(alpha1) * alpha1 * beta1).Re();
+          im_calpha1_2_alpha1_beta1 = (conj(alpha1) * conj(alpha1) * alpha1 * beta1).Im();
+          re_calpha1_2_alpha1_beta2 = (conj(alpha1) * conj(alpha1) * alpha1 * beta2).Re();
+          im_calpha1_2_alpha1_beta2 = (conj(alpha1) * conj(alpha1) * alpha1 * beta2).Im();
+          re_calpha1_2_alpha1_2 = (conj(alpha1) * conj(alpha1) * alpha1 * alpha1).Re();
+          im_calpha1_2_alpha1_2 = (conj(alpha1) * conj(alpha1) * alpha1 * alpha1).Im();
+          re_calpha1_2_alpha2_beta1 = (conj(alpha1) * conj(alpha1) * alpha2 * beta1).Re();
+          im_calpha1_2_alpha2_beta1 = (conj(alpha1) * conj(alpha1) * alpha2 * beta1).Im();
+          re_calpha1_2_alpha2_beta2 = (conj(alpha1) * conj(alpha1) * alpha2 * beta2).Re();
+          im_calpha1_2_alpha2_beta2 = (conj(alpha1) * conj(alpha1) * alpha2 * beta2).Im();
+          re_calpha1_2_alpha2_2 = (conj(alpha1) * conj(alpha1) * alpha2 * alpha2).Re();
+          im_calpha1_2_alpha2_2 = (conj(alpha1) * conj(alpha1) * alpha2 * alpha2).Im();
+          re_calpha1_2_beta1_beta2 = (conj(alpha1) * conj(alpha1) * beta1 * beta2).Re();
+          im_calpha1_2_beta1_beta2 = (conj(alpha1) * conj(alpha1) * beta1 * beta2).Im();
+          re_calpha1_2_beta1_2 = (conj(alpha1) * conj(alpha1) * beta1 * beta1).Re();
+          im_calpha1_2_beta1_2 = (conj(alpha1) * conj(alpha1) * beta1 * beta1).Im();
+          re_calpha1_2_beta2_2 = (conj(alpha1) * conj(alpha1) * beta2 * beta2).Re();
+          im_calpha1_2_beta2_2 = (conj(alpha1) * conj(alpha1) * beta2 * beta2).Im();
+          re_alpha1_calpha2 = (alpha1 * conj(alpha2)).Re();
+          im_alpha1_calpha2 = (alpha1 * conj(alpha2)).Im();
+          re_alpha1_calpha2_alpha2_cbeta1 = (alpha1 * conj(alpha2) * alpha2 * conj(beta1)).Re();
+          im_alpha1_calpha2_alpha2_cbeta1 = (alpha1 * conj(alpha2) * alpha2 * conj(beta1)).Im();
+          re_alpha1_calpha2_alpha2_cbeta2 = (alpha1 * conj(alpha2) * alpha2 * conj(beta2)).Re();
+          im_alpha1_calpha2_alpha2_cbeta2 = (alpha1 * conj(alpha2) * alpha2 * conj(beta2)).Im();
+          re_alpha1_calpha2_cbeta1_beta1 = (alpha1 * conj(alpha2) * conj(beta1) * beta1).Re();
+          im_alpha1_calpha2_cbeta1_beta1 = (alpha1 * conj(alpha2) * conj(beta1) * beta1).Im();
+          re_alpha1_calpha2_cbeta1_beta2 = (alpha1 * conj(alpha2) * conj(beta1) * beta2).Re();
+          im_alpha1_calpha2_cbeta1_beta2 = (alpha1 * conj(alpha2) * conj(beta1) * beta2).Im();
+          re_alpha1_calpha2_beta1_cbeta2 = (alpha1 * conj(alpha2) * beta1 * conj(beta2)).Re();
+          im_alpha1_calpha2_beta1_cbeta2 = (alpha1 * conj(alpha2) * beta1 * conj(beta2)).Im();
+          re_alpha1_calpha2_cbeta2_beta2 = (alpha1 * conj(alpha2) * conj(beta2) * beta2).Re();
+          im_alpha1_calpha2_cbeta2_beta2 = (alpha1 * conj(alpha2) * conj(beta2) * beta2).Im();
+          re_alpha1_calpha2_2_alpha2 = (alpha1 * conj(alpha2) * conj(alpha2) * alpha2).Re();
+          im_alpha1_calpha2_2_alpha2 = (alpha1 * conj(alpha2) * conj(alpha2) * alpha2).Im();
+          re_alpha1_calpha2_2_beta1 = (alpha1 * conj(alpha2) * conj(alpha2) * beta1).Re();
+          im_alpha1_calpha2_2_beta1 = (alpha1 * conj(alpha2) * conj(alpha2) * beta1).Im();
+          re_alpha1_calpha2_2_beta2 = (alpha1 * conj(alpha2) * conj(alpha2) * beta2).Re();
+          im_alpha1_calpha2_2_beta2 = (alpha1 * conj(alpha2) * conj(alpha2) * beta2).Im();
+          re_alpha1_alpha2_cbeta1_cbeta2 = (alpha1 * alpha2 * conj(beta1) * conj(beta2)).Re();
+          im_alpha1_alpha2_cbeta1_cbeta2 = (alpha1 * alpha2 * conj(beta1) * conj(beta2)).Im();
+          re_alpha1_alpha2_cbeta1_2 = (alpha1 * alpha2 * conj(beta1) * conj(beta1)).Re();
+          im_alpha1_alpha2_cbeta1_2 = (alpha1 * alpha2 * conj(beta1) * conj(beta1)).Im();
+          re_alpha1_alpha2_cbeta2_2 = (alpha1 * alpha2 * conj(beta2) * conj(beta2)).Re();
+          im_alpha1_alpha2_cbeta2_2 = (alpha1 * alpha2 * conj(beta2) * conj(beta2)).Im();
+          re_alpha1_cbeta1 = (alpha1 * conj(beta1)).Re();
+          im_alpha1_cbeta1 = (alpha1 * conj(beta1)).Im();
+          re_alpha1_cbeta1_beta1_cbeta2 = (alpha1 * conj(beta1) * beta1 * conj(beta2)).Re();
+          im_alpha1_cbeta1_beta1_cbeta2 = (alpha1 * conj(beta1) * beta1 * conj(beta2)).Im();
+          re_alpha1_cbeta1_cbeta2_beta2 = (alpha1 * conj(beta1) * conj(beta2) * beta2).Re();
+          im_alpha1_cbeta1_cbeta2_beta2 = (alpha1 * conj(beta1) * conj(beta2) * beta2).Im();
+          re_alpha1_cbeta1_2_beta1 = (alpha1 * conj(beta1) * conj(beta1) * beta1).Re();
+          im_alpha1_cbeta1_2_beta1 = (alpha1 * conj(beta1) * conj(beta1) * beta1).Im();
+          re_alpha1_cbeta1_2_beta2 = (alpha1 * conj(beta1) * conj(beta1) * beta2).Re();
+          im_alpha1_cbeta1_2_beta2 = (alpha1 * conj(beta1) * conj(beta1) * beta2).Im();
+          re_alpha1_beta1_cbeta2_2 = (alpha1 * beta1 * conj(beta2) * conj(beta2)).Re();
+          im_alpha1_beta1_cbeta2_2 = (alpha1 * beta1 * conj(beta2) * conj(beta2)).Im();
+          re_alpha1_cbeta2 = (alpha1 * conj(beta2)).Re();
+          im_alpha1_cbeta2 = (alpha1 * conj(beta2)).Im();
+          re_alpha1_cbeta2_2_beta2 = (alpha1 * conj(beta2) * conj(beta2) * beta2).Re();
+          im_alpha1_cbeta2_2_beta2 = (alpha1 * conj(beta2) * conj(beta2) * beta2).Im();
+          re_alpha1_2_calpha2_cbeta1 = (alpha1 * alpha1 * conj(alpha2) * conj(beta1)).Re();
+          im_alpha1_2_calpha2_cbeta1 = (alpha1 * alpha1 * conj(alpha2) * conj(beta1)).Im();
+          re_alpha1_2_calpha2_cbeta2 = (alpha1 * alpha1 * conj(alpha2) * conj(beta2)).Re();
+          im_alpha1_2_calpha2_cbeta2 = (alpha1 * alpha1 * conj(alpha2) * conj(beta2)).Im();
+          re_alpha1_2_calpha2_2 = (alpha1 * alpha1 * conj(alpha2) * conj(alpha2)).Re();
+          im_alpha1_2_calpha2_2 = (alpha1 * alpha1 * conj(alpha2) * conj(alpha2)).Im();
+          re_alpha1_2_cbeta1_cbeta2 = (alpha1 * alpha1 * conj(beta1) * conj(beta2)).Re();
+          im_alpha1_2_cbeta1_cbeta2 = (alpha1 * alpha1 * conj(beta1) * conj(beta2)).Im();
+          re_alpha1_2_cbeta1_2 = (alpha1 * alpha1 * conj(beta1) * conj(beta1)).Re();
+          im_alpha1_2_cbeta1_2 = (alpha1 * alpha1 * conj(beta1) * conj(beta1)).Im();
+          re_alpha1_2_cbeta2_2 = (alpha1 * alpha1 * conj(beta2) * conj(beta2)).Re();
+          im_alpha1_2_cbeta2_2 = (alpha1 * alpha1 * conj(beta2) * conj(beta2)).Im();
+          re_calpha2_alpha2 = (conj(alpha2) * alpha2).Re();
+          im_calpha2_alpha2 = (conj(alpha2) * alpha2).Im();
+          re_calpha2_alpha2_cbeta1_beta1 = (conj(alpha2) * alpha2 * conj(beta1) * beta1).Re();
+          im_calpha2_alpha2_cbeta1_beta1 = (conj(alpha2) * alpha2 * conj(beta1) * beta1).Im();
+          re_calpha2_alpha2_cbeta1_beta2 = (conj(alpha2) * alpha2 * conj(beta1) * beta2).Re();
+          im_calpha2_alpha2_cbeta1_beta2 = (conj(alpha2) * alpha2 * conj(beta1) * beta2).Im();
+          re_calpha2_alpha2_beta1_cbeta2 = (conj(alpha2) * alpha2 * beta1 * conj(beta2)).Re();
+          im_calpha2_alpha2_beta1_cbeta2 = (conj(alpha2) * alpha2 * beta1 * conj(beta2)).Im();
+          re_calpha2_alpha2_cbeta2_beta2 = (conj(alpha2) * alpha2 * conj(beta2) * beta2).Re();
+          im_calpha2_alpha2_cbeta2_beta2 = (conj(alpha2) * alpha2 * conj(beta2) * beta2).Im();
+          re_calpha2_alpha2_2_cbeta1 = (conj(alpha2) * alpha2 * alpha2 * conj(beta1)).Re();
+          im_calpha2_alpha2_2_cbeta1 = (conj(alpha2) * alpha2 * alpha2 * conj(beta1)).Im();
+          re_calpha2_alpha2_2_cbeta2 = (conj(alpha2) * alpha2 * alpha2 * conj(beta2)).Re();
+          im_calpha2_alpha2_2_cbeta2 = (conj(alpha2) * alpha2 * alpha2 * conj(beta2)).Im();
+          re_calpha2_cbeta1_beta1_beta2 = (conj(alpha2) * conj(beta1) * beta1 * beta2).Re();
+          im_calpha2_cbeta1_beta1_beta2 = (conj(alpha2) * conj(beta1) * beta1 * beta2).Im();
+          re_calpha2_cbeta1_beta1_2 = (conj(alpha2) * conj(beta1) * beta1 * beta1).Re();
+          im_calpha2_cbeta1_beta1_2 = (conj(alpha2) * conj(beta1) * beta1 * beta1).Im();
+          re_calpha2_cbeta1_beta2_2 = (conj(alpha2) * conj(beta1) * beta2 * beta2).Re();
+          im_calpha2_cbeta1_beta2_2 = (conj(alpha2) * conj(beta1) * beta2 * beta2).Im();
+          re_calpha2_beta1 = (conj(alpha2) * beta1).Re();
+          im_calpha2_beta1 = (conj(alpha2) * beta1).Im();
+          re_calpha2_beta1_cbeta2_beta2 = (conj(alpha2) * beta1 * conj(beta2) * beta2).Re();
+          im_calpha2_beta1_cbeta2_beta2 = (conj(alpha2) * beta1 * conj(beta2) * beta2).Im();
+          re_calpha2_beta1_2_cbeta2 = (conj(alpha2) * beta1 * beta1 * conj(beta2)).Re();
+          im_calpha2_beta1_2_cbeta2 = (conj(alpha2) * beta1 * beta1 * conj(beta2)).Im();
+          re_calpha2_cbeta2_beta2_2 = (conj(alpha2) * conj(beta2) * beta2 * beta2).Re();
+          im_calpha2_cbeta2_beta2_2 = (conj(alpha2) * conj(beta2) * beta2 * beta2).Im();
+          re_calpha2_beta2 = (conj(alpha2) * beta2).Re();
+          im_calpha2_beta2 = (conj(alpha2) * beta2).Im();
+          re_calpha2_2_alpha2_beta1 = (conj(alpha2) * conj(alpha2) * alpha2 * beta1).Re();
+          im_calpha2_2_alpha2_beta1 = (conj(alpha2) * conj(alpha2) * alpha2 * beta1).Im();
+          re_calpha2_2_alpha2_beta2 = (conj(alpha2) * conj(alpha2) * alpha2 * beta2).Re();
+          im_calpha2_2_alpha2_beta2 = (conj(alpha2) * conj(alpha2) * alpha2 * beta2).Im();
+          re_calpha2_2_alpha2_2 = (conj(alpha2) * conj(alpha2) * alpha2 * alpha2).Re();
+          im_calpha2_2_alpha2_2 = (conj(alpha2) * conj(alpha2) * alpha2 * alpha2).Im();
+          re_calpha2_2_beta1_beta2 = (conj(alpha2) * conj(alpha2) * beta1 * beta2).Re();
+          im_calpha2_2_beta1_beta2 = (conj(alpha2) * conj(alpha2) * beta1 * beta2).Im();
+          re_calpha2_2_beta1_2 = (conj(alpha2) * conj(alpha2) * beta1 * beta1).Re();
+          im_calpha2_2_beta1_2 = (conj(alpha2) * conj(alpha2) * beta1 * beta1).Im();
+          re_calpha2_2_beta2_2 = (conj(alpha2) * conj(alpha2) * beta2 * beta2).Re();
+          im_calpha2_2_beta2_2 = (conj(alpha2) * conj(alpha2) * beta2 * beta2).Im();
+          re_alpha2_cbeta1 = (alpha2 * conj(beta1)).Re();
+          im_alpha2_cbeta1 = (alpha2 * conj(beta1)).Im();
+          re_alpha2_cbeta1_beta1_cbeta2 = (alpha2 * conj(beta1) * beta1 * conj(beta2)).Re();
+          im_alpha2_cbeta1_beta1_cbeta2 = (alpha2 * conj(beta1) * beta1 * conj(beta2)).Im();
+          re_alpha2_cbeta1_cbeta2_beta2 = (alpha2 * conj(beta1) * conj(beta2) * beta2).Re();
+          im_alpha2_cbeta1_cbeta2_beta2 = (alpha2 * conj(beta1) * conj(beta2) * beta2).Im();
+          re_alpha2_cbeta1_2_beta1 = (alpha2 * conj(beta1) * conj(beta1) * beta1).Re();
+          im_alpha2_cbeta1_2_beta1 = (alpha2 * conj(beta1) * conj(beta1) * beta1).Im();
+          re_alpha2_cbeta1_2_beta2 = (alpha2 * conj(beta1) * conj(beta1) * beta2).Re();
+          im_alpha2_cbeta1_2_beta2 = (alpha2 * conj(beta1) * conj(beta1) * beta2).Im();
+          re_alpha2_beta1_cbeta2_2 = (alpha2 * beta1 * conj(beta2) * conj(beta2)).Re();
+          im_alpha2_beta1_cbeta2_2 = (alpha2 * beta1 * conj(beta2) * conj(beta2)).Im();
+          re_alpha2_cbeta2 = (alpha2 * conj(beta2)).Re();
+          im_alpha2_cbeta2 = (alpha2 * conj(beta2)).Im();
+          re_alpha2_cbeta2_2_beta2 = (alpha2 * conj(beta2) * conj(beta2) * beta2).Re();
+          im_alpha2_cbeta2_2_beta2 = (alpha2 * conj(beta2) * conj(beta2) * beta2).Im();
+          re_alpha2_2_cbeta1_cbeta2 = (alpha2 * alpha2 * conj(beta1) * conj(beta2)).Re();
+          im_alpha2_2_cbeta1_cbeta2 = (alpha2 * alpha2 * conj(beta1) * conj(beta2)).Im();
+          re_alpha2_2_cbeta1_2 = (alpha2 * alpha2 * conj(beta1) * conj(beta1)).Re();
+          im_alpha2_2_cbeta1_2 = (alpha2 * alpha2 * conj(beta1) * conj(beta1)).Im();
+          re_alpha2_2_cbeta2_2 = (alpha2 * alpha2 * conj(beta2) * conj(beta2)).Re();
+          im_alpha2_2_cbeta2_2 = (alpha2 * alpha2 * conj(beta2) * conj(beta2)).Im();
+          re_cbeta1_beta1 = (conj(beta1) * beta1).Re();
+          im_cbeta1_beta1 = (conj(beta1) * beta1).Im();
+          re_cbeta1_beta1_cbeta2_beta2 = (conj(beta1) * beta1 * conj(beta2) * beta2).Re();
+          im_cbeta1_beta1_cbeta2_beta2 = (conj(beta1) * beta1 * conj(beta2) * beta2).Im();
+          re_cbeta1_beta1_2_cbeta2 = (conj(beta1) * beta1 * beta1 * conj(beta2)).Re();
+          im_cbeta1_beta1_2_cbeta2 = (conj(beta1) * beta1 * beta1 * conj(beta2)).Im();
+          re_cbeta1_cbeta2_beta2_2 = (conj(beta1) * conj(beta2) * beta2 * beta2).Re();
+          im_cbeta1_cbeta2_beta2_2 = (conj(beta1) * conj(beta2) * beta2 * beta2).Im();
+          re_cbeta1_beta2 = (conj(beta1) * beta2).Re();
+          im_cbeta1_beta2 = (conj(beta1) * beta2).Im();
+          re_cbeta1_2_beta1_beta2 = (conj(beta1) * conj(beta1) * beta1 * beta2).Re();
+          im_cbeta1_2_beta1_beta2 = (conj(beta1) * conj(beta1) * beta1 * beta2).Im();
+          re_cbeta1_2_beta1_2 = (conj(beta1) * conj(beta1) * beta1 * beta1).Re();
+          im_cbeta1_2_beta1_2 = (conj(beta1) * conj(beta1) * beta1 * beta1).Im();
+          re_cbeta1_2_beta2_2 = (conj(beta1) * conj(beta1) * beta2 * beta2).Re();
+          im_cbeta1_2_beta2_2 = (conj(beta1) * conj(beta1) * beta2 * beta2).Im();
+          re_beta1_cbeta2 = (beta1 * conj(beta2)).Re();
+          im_beta1_cbeta2 = (beta1 * conj(beta2)).Im();
+          re_beta1_cbeta2_2_beta2 = (beta1 * conj(beta2) * conj(beta2) * beta2).Re();
+          im_beta1_cbeta2_2_beta2 = (beta1 * conj(beta2) * conj(beta2) * beta2).Im();
+          re_beta1_2_cbeta2_2 = (beta1 * beta1 * conj(beta2) * conj(beta2)).Re();
+          im_beta1_2_cbeta2_2 = (beta1 * beta1 * conj(beta2) * conj(beta2)).Im();
+          re_cbeta2_beta2 = (conj(beta2) * beta2).Re();
+          im_cbeta2_beta2 = (conj(beta2) * beta2).Im();
+          re_cbeta2_2_beta2_2 = (conj(beta2) * conj(beta2) * beta2 * beta2).Re();
+          im_cbeta2_2_beta2_2 = (conj(beta2) * conj(beta2) * beta2 * beta2).Im();
+          ]]>
+      </sampling>
+    </group>
+  </output>
+</simulation>
