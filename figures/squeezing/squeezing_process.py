@@ -57,9 +57,23 @@ def getXiSquared(i, n1, n2):
 
 def process_squeezing_a12(Is, N1s, N2s):
     xi2s = []
+    xi2s_err = []
     for is_, n1s, n2s in zip(Is, N1s, N2s):
         xi2s.append(getXiSquared(is_, n1s, n2s))
-    return numpy.array(xi2s)
+
+        full_size = is_.size
+        chunk_num = 16
+        chunk_size = full_size / chunk_num
+
+        sub_xi2 = []
+        for i in range(chunk_num):
+            i_start = i * chunk_size
+            i_end = (i + 1) * chunk_size
+            sub_xi2.append(getXiSquared(is_[i_start:i_end], n1s[i_start:i_end], n2s[i_start:i_end]))
+
+        xi2s_err.append(numpy.array(sub_xi2).std() / numpy.sqrt(chunk_num))
+
+    return numpy.array(xi2s), numpy.array(xi2s_err)
 
 
 def process_squeezing(losses):
@@ -70,8 +84,9 @@ def process_squeezing(losses):
             results = pickle.load(f)
         squeezing['times'] = list(results['times'])
         print "Ensembles:", results['N1s'].shape[1]
-        squeezing['xi2_' + str(a12)] = list(
-            process_squeezing_a12(results['Is'], results['N1s'], results['N2s']))
+        xi2s, xi2s_err = process_squeezing_a12(results['Is'], results['N1s'], results['N2s'])
+        squeezing['xi2_' + str(a12)] = list(xi2s)
+        squeezing['xi2_' + str(a12) + '_err'] = list(xi2s_err)
     return squeezing
 
 with open('feshbach_squeezing.json', 'wb') as f:

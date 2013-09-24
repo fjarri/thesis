@@ -568,23 +568,51 @@ def _feshbach_squeezing(fname, losses):
     with open(get_path(__file__, 'feshbach_squeezing' + ('' if losses else '_no_losses') + '.json')) as f:
         sq = json.load(f)
 
+    datasets = [
+        ('80.0', mplh.color.f.blue, '-', ),
+        ('85.0', mplh.color.f.red, '--'),
+        ('90.0', mplh.color.f.green, ':'),
+        ('95.0', mplh.color.f.yellow, '-.'),
+    ]
+
     t_sq = numpy.array(sq['times'])
-    xi2_sq_80 = numpy.array(sq['xi2_80.0'])
-    xi2_sq_85 = numpy.array(sq['xi2_85.0'])
-    xi2_sq_90 = numpy.array(sq['xi2_90.0'])
-    xi2_sq_95 = numpy.array(sq['xi2_95.0'])
 
     fig = mplh.figure(width=0.5)
     subplot = fig.add_subplot(111)
 
-    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_80), color=mplh.color.f.blue.main,
-        linestyle='-', dashes=mplh.dash['-'])
-    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_85), color=mplh.color.f.red.main,
-        linestyle='--', dashes=mplh.dash['--'])
-    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_90), color=mplh.color.f.green.main,
-        linestyle=':', dashes=mplh.dash[':'])
-    subplot.plot(t_sq * 1e3, 10 * numpy.log10(xi2_sq_95), color=mplh.color.f.yellow.main,
-        linestyle='-.', dashes=mplh.dash['-.'])
+    for a12, color, linestyle in datasets:
+        xi2_sq = numpy.array(sq['xi2_' + a12])
+        xi2_sq_err = numpy.array(sq['xi2_' + a12 + '_err'])
+
+        xi2_log = 10 * numpy.log10(xi2_sq)
+        err_down = 10 * numpy.log10(xi2_sq - xi2_sq_err)
+        err_up = 10 * numpy.log10(xi2_sq + xi2_sq_err)
+
+        drop = None
+        for i in range(err_up.size):
+            if numpy.isnan(err_up[i]):
+                err_up[i] = err_up[i-1]
+            if numpy.isnan(err_down[i]):
+                err_down[i] = err_down[i-1]
+            if numpy.isnan(xi2_log[i]):
+                xi2_log[i] = xi2_log[i-1]
+            if (err_down[i] < -20 or err_up[i] > 1) and drop is None:
+                drop = i
+
+        if drop is None:
+            drop = err_up.size - 1
+
+        positive = err_up > err_down
+        subplot.fill_between(t_sq[:drop] * 1e3,
+            err_down[:drop],
+            err_up[:drop],
+            facecolor=color.lightest,
+            where=positive[:drop],
+            #interpolate=True,
+            linewidth=0)
+
+        subplot.plot(t_sq * 1e3, xi2_log, color=color.main,
+            linestyle=linestyle, dashes=mplh.dash[linestyle])
 
     subplot.plot([0, 100], [0, 0], color='grey', linewidth=0.5,
         linestyle='-.', dashes=mplh.dash['-.'])
