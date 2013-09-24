@@ -210,7 +210,7 @@ def ramsey_long(fname):
     s.plot(t_tech_wig, v_tech_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['--'])
 
-    s.set_xlim((0, 5.))
+    s.set_xlim((0, 3.))
     s.set_ylim((0, 1.))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
@@ -251,7 +251,7 @@ def spinecho_long(fname):
     s.plot(t_tech_wig, v_tech_wig, color=mplh.color.f.blue.main,
         linestyle='-', dashes=mplh.dash['--'])
 
-    s.set_xlim((0, 5.))
+    s.set_xlim((0, 3.))
     s.set_ylim((0, 1.))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
