@@ -41,6 +41,8 @@ if __name__ == '__main__':
     plot_squeezing.feshbach_squeezing_no_losses(FOLDER + 'bec_squeezing/feshbach_squeezing_no_losses' + FORMAT)
 
     # Exact comparison
-    plot_exact.squeezing_nocc(FOLDER + 'exact/squeezing_nocc' + FORMAT)
-    plot_exact.squeezing_cc(FOLDER + 'exact/squeezing_cc' + FORMAT)
+    plot_exact.squeezing_nocc_100(FOLDER + 'exact/squeezing_nocc_100' + FORMAT)
+    plot_exact.squeezing_cc_100(FOLDER + 'exact/squeezing_cc_100' + FORMAT)
+    plot_exact.squeezing_nocc_err(FOLDER + 'exact/squeezing_nocc_err' + FORMAT)
+    plot_exact.squeezing_cc_err(FOLDER + 'exact/squeezing_cc_err' + FORMAT)
 

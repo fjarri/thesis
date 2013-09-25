@@ -123,6 +123,7 @@ It can be shown~\cite{Opanchuk2012a} that the optimal squeezing angle is
 \end{eqn}
 and the degree of squeezing can be quantified as
 \begin{eqn}
+\label{wigner-bec:mm:squeezing}
     S^{\theta,\theta+\pi/2}
     = \frac{\Delta^{2}\hat{J}_{A}^{\theta,\theta+\pi/2}}{%
         \vert\langle\hat{J}_{A}^{Y}\rangle\vert/2}.
@@ -139,18 +140,35 @@ Here we denoted the pair correlation
 
 \begin{figure}
     \centerline{%
-    \includegraphics{figures_generated/exact/squeezing_nocc.pdf}%
-    \includegraphics{figures_generated/exact/squeezing_cc.pdf}}
+    \includegraphics{figures_generated/exact/squeezing_nocc_100.pdf}%
+    \includegraphics{figures_generated/exact/squeezing_cc_100.pdf}}
 
     \caption{
     Comparison of the Wigner simulated time-dependent local squeezing (blue bands; the width corresponds to the estimated sampling error) against the exact results (black lines).
+    Trajectories used: $2000$.
     The plots correspond to \textbf{(a)} $\tilde{g}_{12} = 0$, and \textbf{(b)} $\tilde{g}_{12} \approx 1 / N_A$.}
 
     \label{fig:wigner-bec:mm:squeezing-comparison}
 \end{figure}
 
+\begin{figure}
+    \centerline{%
+    \includegraphics{figures_generated/exact/squeezing_nocc_err.pdf}%
+    \includegraphics{figures_generated/exact/squeezing_cc_err.pdf}}
+
+    \caption{
+    Difference of the Wigner simulated local squeezing and the exact results (solid lines) as compared to the sampling errors in Wigner simulations (dashed lines).
+    Plotted are the results for $2000$ trajectories (blue lines) and $20000$ trajectories (red lines).
+    The plots correspond to \textbf{(a)} $\tilde{g}_{12} = 0$, and \textbf{(b)} $\tilde{g}_{12} \approx 1 / N_A$.}
+
+    \label{fig:wigner-bec:mm:squeezing-error-comparison}
+\end{figure}
+
 The expectations above can be expressed in terms of creation and annihilation operators, and calculated either in Wigner representation using \thmref{mm-wigner:mm:moments}, or with the number state expansion using~\eqnref{wigner-bec:mm:exact-a} and~\eqnref{wigner-bec:mm:exact-f} (courtesy of Q.~Y.~He).
 The results are plotted in~\figref{wigner-bec:mm:squeezing-comparison}.
-The Wigner method shows good agreement with the exact results; the growing sampling error can be reduced to a desirable extent by using more simulation trajectories.
+The Wigner method shows good agreement with the exact results in the time range of interest; the growing sampling error can be reduced to a desirable extent by using more simulation trajectories.
+Nevertheless, the Wigner results show a systematic error (\figref{wigner-bec:mm:squeezing-error-comparison}), which is inside the sampling error range for the low number of trajectories, but preserves its magnitude as the number of trajectories is increased (and the sampling error decreased).
+This is a sign of the failing truncation approximation.
+The large oscillations of the systematic error at the start of the simulation can be explained by accumulating uncertainties in the denominator of~\eqnref{wigner-bec:mm:squeezing}.
 
 Note that while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same effectiveness~\cite{Opanchuk2012a}.
