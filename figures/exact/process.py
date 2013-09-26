@@ -10,7 +10,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-ex = 'epr_wigner_100'
 
 # Load data from Qiongyi's txt files
 def load_txt_data(fname):
@@ -41,19 +40,70 @@ with open('single_well_squeezing_exact.pickle', 'w') as f:
 		s_pi2_nc=s_pi2_nc,
 		), f, protocol=2)
 
-N = 10
 
-results_cc = getn(ex, N, Na=2000, Nb=2000, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
-results_nocc = getn(ex, N, Na=2000, Nb=2000, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
 
-results_cc = getn(ex, N, Na=200, Nb=200, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
-results_nocc = getn(ex, N, Na=200, Nb=200, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+
+N = 20
+
+results_cc = getn('epr_wigner_100', N, Na=2000, Nb=2000, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_100', N, Na=2000, Nb=2000, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
+
+results_cc = getn('epr_wigner_100', N, Na=200, Nb=200, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_100', N, Na=200, Nb=200, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
 
 S_pi2_cc_arr = numpy.array([x.sw.S_pi2 for x in results_cc])
 S_pi2_nocc_arr = numpy.array([x.sw.S_pi2 for x in results_nocc])
 
 
-with open('single_well_squeezing_wigner.pickle', 'w') as f:
+with open('single_well_squeezing_wigner_100.pickle', 'w') as f:
+	pickle.dump(dict(
+		tau_c=results_cc[0].tau,
+		s_pi2_c=S_pi2_cc_arr.mean(0),
+		s_pi2_c_err=S_pi2_cc_arr.std(0) / numpy.sqrt(N),
+		tau_nc=results_nocc[0].tau,
+		s_pi2_nc=S_pi2_nocc_arr.mean(0),
+		s_pi2_nc_err=S_pi2_nocc_arr.std(0) / numpy.sqrt(N),
+		), f, protocol=2)
+
+
+
+
+
+N = 20
+
+results_cc = getn('epr_wigner_1k', N, Na=2000, Nb=2000, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_1k', N, Na=2000, Nb=2000, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
+
+results_cc = getn('epr_wigner_1k', N, Na=200, Nb=200, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_1k', N, Na=200, Nb=200, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
+
+S_pi2_cc_arr = numpy.array([x.sw.S_pi2 for x in results_cc])
+S_pi2_nocc_arr = numpy.array([x.sw.S_pi2 for x in results_nocc])
+
+
+with open('single_well_squeezing_wigner_1k.pickle', 'w') as f:
+	pickle.dump(dict(
+		tau_c=results_cc[0].tau,
+		s_pi2_c=S_pi2_cc_arr.mean(0),
+		s_pi2_c_err=S_pi2_cc_arr.std(0) / numpy.sqrt(N),
+		tau_nc=results_nocc[0].tau,
+		s_pi2_nc=S_pi2_nocc_arr.mean(0),
+		s_pi2_nc_err=S_pi2_nocc_arr.std(0) / numpy.sqrt(N),
+		), f, protocol=2)
+
+
+
+results_cc = getn('epr_wigner_10k', N, Na=2000, Nb=2000, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_10k', N, Na=2000, Nb=2000, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
+
+results_cc = getn('epr_wigner_10k', N, Na=200, Nb=200, B=9.116, kappa1_t=0, kappa2_t=0, losses=0, tau_max=120)
+results_nocc = getn('epr_wigner_10k', N, Na=200, Nb=200, B=0, kappa1_t=0, kappa2_t=0, losses=0, tau_max=25)
+
+S_pi2_cc_arr = numpy.array([x.sw.S_pi2 for x in results_cc])
+S_pi2_nocc_arr = numpy.array([x.sw.S_pi2 for x in results_nocc])
+
+
+with open('single_well_squeezing_wigner_10k.pickle', 'w') as f:
 	pickle.dump(dict(
 		tau_c=results_cc[0].tau,
 		s_pi2_c=S_pi2_cc_arr.mean(0),

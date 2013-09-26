@@ -62,6 +62,9 @@ def _squeezing_err(fname, coupling):
         wigner_100 = pickle.load(f)
     with open(get_path(__file__, 'single_well_squeezing_wigner_1k.pickle')) as f:
         wigner_1k = pickle.load(f)
+    with open(get_path(__file__, 'single_well_squeezing_wigner_10k.pickle')) as f:
+        wigner_10k = pickle.load(f)
+
 
     suffix = '_c' if coupling else '_nc'
 
@@ -78,6 +81,10 @@ def _squeezing_err(fname, coupling):
     tau_wigner_1k = wigner_1k['tau' + suffix]
     s_wigner_1k = wigner_1k['s_pi2' + suffix]
     s_wigner_err_1k = wigner_1k['s_pi2' + suffix + '_err']
+
+    tau_wigner_10k = wigner_10k['tau' + suffix]
+    s_wigner_10k = wigner_10k['s_pi2' + suffix]
+    s_wigner_err_10k = wigner_10k['s_pi2' + suffix + '_err']
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
@@ -98,6 +105,15 @@ def _squeezing_err(fname, coupling):
     s.plot(tau_wigner_1k,
         s_wigner_err_1k / exact_interp(tau_wigner_1k),
         color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
+
+    """
+    s.plot(tau_wigner_10k,
+        numpy.abs(exact_interp(tau_wigner_10k) - s_wigner_10k) / exact_interp(tau_wigner_10k),
+        color=mplh.color.f.green.main)
+    s.plot(tau_wigner_10k,
+        s_wigner_err_10k / exact_interp(tau_wigner_10k),
+        color=mplh.color.f.green.main, linestyle='--', dashes=mplh.dash['--'])
+    """
 
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 0.15))
