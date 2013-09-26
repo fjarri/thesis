@@ -4,6 +4,7 @@ import figures.mean_field.plot as plot_mean_field
 import figures.bec_noise.plot as plot_bec_noise
 import figures.squeezing.plot as plot_squeezing
 import figures.exact.plot as plot_exact
+import figures.bell.plot as plot_bell
 
 FOLDER = 'figures_generated/'
 FORMAT = '.pdf'

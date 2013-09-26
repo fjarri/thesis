@@ -65,7 +65,7 @@ def _cooperative(fname, N):
     ax.set_ylim((-0.05, 0.45 if N == 1 else 0.55))
 
     ax.set_xlabel("$\\theta" + ("\\sqrt{2}" if N == 2 else "") + "$ (rad)")
-    ax.set_ylabel("Violation")
+    ax.set_ylabel("$\\Delta$")
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)

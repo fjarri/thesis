@@ -197,6 +197,7 @@ def journalAbbreviations(entries):
         'Proceedings of the National Academy of Sciences of the United States of America': 'P. Natl. Acad. Sci. USA',
         'Parallel Computing': 'Parallel Comput.',
         'Computing in Science \& Engineering': 'Comput. Sci. Eng.',
+        'ACM Transactions on Mathematical Software': 'ACM T. Math. Software',
     }
 
     for entry_type, entry_key, entry_fields in entries:
