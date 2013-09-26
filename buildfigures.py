@@ -51,4 +51,11 @@ if __name__ == '__main__':
     plot_bell.cooperative_N1(FOLDER + 'bell/cooperative_N1' + FORMAT)
     plot_bell.cooperative_N2(FOLDER + 'bell/cooperative_N2' + FORMAT)
 
+    plot_bell.distribution_Q1(FOLDER + 'bell/distribution_Q1' + FORMAT)
+    plot_bell.distribution_Q2(FOLDER + 'bell/distribution_Q2' + FORMAT)
+    plot_bell.distribution_P1(FOLDER + 'bell/distribution_P1' + FORMAT)
+    plot_bell.distribution_P2(FOLDER + 'bell/distribution_P2' + FORMAT)
+
+    plot_bell.ghz_violations(FOLDER + 'bell/ghz_violations' + FORMAT)
+    plot_bell.ghz_errors(FOLDER + 'bell/ghz_errors' + FORMAT)
 
