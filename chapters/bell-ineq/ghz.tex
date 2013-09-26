@@ -1,11 +1,38 @@
 % =============================================================================
-\section{GHZ states}
+\section{GHZM states}
 % =============================================================================
 
-\copypaste{We also perform mesoscopic Schr\"odinger cat state simulations, corresponding to recent ion-trap experiments with $M$ qubits.
+We also perform mesoscopic Schr\"odinger cat state simulations, corresponding to recent ion-trap experiments with $M$ qubits.
 These states violate a genuine multipartite Bell inequality, which means that it is impossible to confine the Bell violation to a microscopic part of the state.
 Such inequalities require the measurement of all possible correlation functions at the highest order available.
-We find two distinct scaling laws for the total computational difficulty, as measured by the number of samples required to obtain a given sampling error.}
+We find two distinct scaling laws for the total computational difficulty, as measured by the number of samples required to obtain a given sampling error.
+
+To understand the ultimate scaling properties of probabilistic sampling methods, we have also simulated higher order correlations that violate multipartite Bell inequalities.
+These are found in quantum states that display Bell violations with $M$ observers, not just two.
+The most well-known examples are the multimode entangled Greenberger-Horne-Zeilinger-Mermin (\abbrev{ghzm}) states~\cite{Greenberger1989,Mermin1990}, corresponding to ``Schr\"odinger Cat'' states.
+We therefore considered \abbrev{ghzm} states which describe $M$ spin-$\frac{1}{2}$ particles or qubits:
+\begin{eqn}
+    \vert\Phi\rangle
+    = \frac{1}{\sqrt{2}} \left(
+        \ket{\uparrow\ldots\uparrow}
+        + e^{i\phi} \ket{\downarrow\ldots\downarrow}
+    \right).
+\end{eqn}
+Here $\ket{\uparrow}$ and $\ket{\downarrow}$ denote spin-up or spin down particles in the $z$-direction.
+As well as being of deep significance in quantum physics, such mesoscopic states have been generated in recent ion-trap experiments~\cite{Rowe2001,Leibfried2005,Monz2011}.
+Quantum paradoxes are obtained on measuring an operator $\hat{A}$ which is defined as a linear combination of $2^{M}$ distinct $M$-th order correlation functions:
+\begin{eqn}
+    \hat{A}
+    = \prod_{j=1}^{M} \left(
+        \hat{\sigma}_{x}^{j}
+        + i s_{j} \hat{\sigma}_{y}^{j}
+        \right) e^{-i s_{j} \theta_{j}}.
+\end{eqn}
+For odd $M$ we follow Mermin~\cite{Mermin1990} and take $\phi=-\pi/2$, $s_{j}=1$ and $\theta_{j}=0$.
+For even $M$ we follow Ardehali~\cite{Ardehali1992} and take $\phi=\pi$, $s_{j}=-1$ and $\theta_{j}=0$ for $j<M$, and $s_{M}=1$, $\theta_{M}=-\pi/4$.
+Genuine multipartite Bell violations are known to exist for these states, which imply that the observed correlations cannot be explained by a nonlocality shared among $M-1$ or fewer qubits.
+To test for genuine multipartite Bell nonlocality, we adopt the hybrid local-nonlocal \abbrev{lhv} model introduced by Svetlichny~\cite{Svetlichny1987} and Collins \textit{et al}~\cite{Collins2002}.
+
 
 
 \begin{figure}
