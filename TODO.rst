@@ -19,6 +19,9 @@ Checklist:
     - positive-P projection
     - thermal initial states, Bogolyubov modes
 
+- check a11,12,22 for exact one-well squeezing results
+- fix this section - we are only talking about a single well, no need to mention two wells
+- add positive-P lines to GHZ sampling
 - remove \copypaste
 - more references?
 - chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
