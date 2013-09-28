@@ -4,7 +4,7 @@
 
 The problem of calculating the dynamics of quantum systems has been around since the dawn of quantum mechanics itself.
 In most cases the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with particle number.
-The continuing increase of the available computational power has made it possible to apply the direct diagonalisation method for relatively large systems with as many as 100 particles~\cite{Sakmann2009} \todo{actually not a good reference, it's another method?}.
+The continuing increase of the available computational power has made it possible to solve the time-dependent many-boson Schr\"odinger equation exactly for relatively large systems with as many as 100 particles~\cite{Sakmann2009}.
 But larger systems, such as Bose-Einstein condensates (\abbrev{bec}s), still remain unreachable for exact simulation approaches.
 
 This lead Feynman to postulate as early as 1982~\cite{Feynman1982} that quantum computers are the most perspective way to simulate quantum systems effectively.
@@ -35,7 +35,7 @@ Since different representation may perform better or worse depending on the syst
 Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (it will make a brief appearance in \charef{bell-ineq}).
 Positive-P representation is characterised by sampling error quickly growing in time.
 This can be in some cases handled by exploiting its non-uniqueness and tailoring the exact form of the function for the task, resulting in the gauge-P representation~\cite{Deuar2002}.
-Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error \todo{cite projection paper if there is any}.
+Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error.
 
 Wigner distribution is, in general, not positive, which presents problems when simulating systems with a small number of particles.
 Fortunately, assuming that the number of particles is large enough (our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details) which will truncate the Wigner function and make it strictly positive.
@@ -85,7 +85,7 @@ This chapter contains proofs of known properties of the transformation, and pres
 We then intriduce the functional Wigner transformation and prove several main theorems that govern the transformation of field operators and the measurement of their moments.
 Finally, \charef{wigner-spec} uses these theorems to derive general identities which can be used to transform parts of the initial master equation describing a \abbrev{bec}.
 \copypaste{We focus especially on the problem of nonlinear damping.
-This is a dominant relaxation mechanism in BEC systems, and is often ignored or (incorrectly) approximated using linear loss terms.}
+This is a dominant relaxation mechanism in \abbrev{bec} systems, and is often ignored or (incorrectly) approximated using linear loss terms.}
 
 \charef{wigner-bec} applies the formalism from the previous chapters to transform a master equation describing a \abbrev{bec} to a set of stochastic differential equations (\abbrev{sde}s).
 \copypaste{We successively reduce the problem in its initial form, the master equation for bosonic field operators, to a system of stochastic differential equations, which have significantly lower computational complexity.
@@ -94,7 +94,7 @@ used to formally calculate order-by-order behaviour in such equations.}
 
 \copypaste{We derive the correct Fokker-Planck drift and noise terms for general multicomponent damping using the $1/N$ expansion, which transforms to an expansion in the inverse particle density for quantum fields.
 Even in the single-component case, the drift term has both a leading (classical) term and a quantum noise correction to the damping. This is needed to predict the loss behaviour correctly,
-and is important in high-accuracy simulations. Such corrections --- both in the drift and noise --- are relevant to topics like EPR correlations, entanglement and quantum squeezing in the presence of nonlinear reservoirs, a topic of increasing importance in areas ranging from quantum optics and BEC physics to nanomechanical oscillators~\cite{Chaturvedi1977,Reid1986a,Rabl2004}.}
+and is important in high-accuracy simulations. Such corrections --- both in the drift and noise --- are relevant to topics like \abbrev{epr} correlations, entanglement and quantum squeezing in the presence of nonlinear reservoirs, a topic of increasing importance in areas ranging from quantum optics and \abbrev{bec} physics to nanomechanical oscillators~\cite{Chaturvedi1977,Reid1986a,Rabl2004}.}
 
 \copypaste{We derive the resulting stochastic differential equations from the functional Fokker-Planck equations, and show when the corresponding truncation approximations are applicable.
 The final equations can be treated using standard computational techniques for solving ordinary

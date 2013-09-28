@@ -1,16 +1,3 @@
-- Create phase noise histogram for losses and see if it fits Gaussian
-- Need to find criteria for fragmentation of 2-species BEC
-  See Penrose-Onsager fragmentation
-- Test fragmentation in 1D
-- Update appendix on distributions for full 3D ellipsoid on a Bloch Sphere
-  Need to find way to calculate squeezing along all directions
-- Add theory for thermal modes
-- Add description and results of noise tests (and implement them in the code)
-- Find a way to calculate energy/chemical potential for Wigner representation
-- Add a chapter on noise propagation algorithms
-- Check first approximation beyond truncated Wigner - Polkovnikov 2003
-- Add some explanation on how the loss operators are obtained
-
 Examples and tests:
 - Application to experiments: Swin's (Ramsey, spin echo), Riedel (spatial separation), Widera (1D)
 - Noise balance test: check that if we start with 0 atoms, we will still have 0 atoms even with enabled losses
@@ -21,38 +8,25 @@ Examples and tests:
 - Gradual decrease of cutoff (results should not diverge even when we get down to 2-mode)
 - Compare uniform/harmonic grid
 
-Questions:
-- Do we actually need the generalisation for |L| = \infty? This creates infinities when
-  transforming master equation to FPE (in form of \delta(x, x)) and possibly makes
-  proofs in Formalism chapter not entirely mathematically correct.
-  Moreover, the validity criterion for truncation is n(x) >> \delta(x, x).
-- (notation) Do we need explicit statement about the format of types for functions/functionals?
-- (notation) Do we need explicit notation for "restricted" functions, like tilda over restricted operators?
-- (feature) Do we need to proof that W transformation of Hermitian operator is a real-valued function?
-- fix F[\lambda] -> F[\Lambda] in zero-delta-integrals lemma
 
+Checklist:
+- write the numerical appendix
+- write the conclusion for bell-ineq
 
-Fonts to consider
------------------
+- write the global conclusion. Mention:
 
-For text:
-- Baskerville (ITC Baskerville seems to have better italics)
-- Sabon (designed by Jan Tschichold)
-- Cambria (goes with Cambria Math)
-- Lucida (goes with Lucida Math)
-- Minion (goes with Minion Math)
+    - Need to find criteria for fragmentation of 2-species BEC, See Penrose-Onsager fragmentation
+    - positive-P projection
+    - thermal initial states, Bogolyubov modes
 
-For math:
-- XITS
-- Asana
-- Cambria
-- Lucida
-- Minion Math
-- CMR
-
-
-Conventions
------------
-
-- "in the theorem", but "in theorem 1".
-
+- remove \copypaste
+- more references?
+- chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
+- chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
+- check figure captions: some colors, lines and axis labels were changed
+- chapters/wigner-bec/fpe-bec: it should be possible to proof that the formula for d<Psi+ Psi>/dt agrees with the classical one up to the $1/N$ order, same as we do for particular cases later on.
+- eqn:wigner-bec:fpe-bec:ordering-transformation : do we need proof?
+- chapters/wigner-bec/master-eqn: elaborate on why the theorem for d<Psi>/dt is important
+- proofread
+- spellcheck
+- grammar check
