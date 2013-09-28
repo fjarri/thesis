@@ -399,6 +399,9 @@ def riedel_rotation(fname):
     subplot.set_xlabel('$\\theta$ (degrees)')
     subplot.set_ylabel('$N \\Delta \\hat{S}_\\theta^2 / \\langle \\hat{\\mathbf{S}} \\rangle^2$ (dB)')
 
+    subplot.text(-80, 12, 'Wigner')
+    subplot.text(-45, 16, 'two-mode')
+
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
 
@@ -556,7 +559,7 @@ def riedel_cloud(fname):
     axYZ.add_patch(arc)
 
     # plot labels
-    axYZ.text(-30, 20, "$d_\\theta$")
+    axYZ.text(-30, 20, "$\\sigma_\\theta$")
     axYZ.text(40, 10, "$\\theta$")
 
 
@@ -622,6 +625,23 @@ def _feshbach_squeezing(fname, losses):
     subplot.set_xlabel('$T$ (ms)')
     subplot.set_ylabel('$\\xi^2$ (dB)')
 
+    subplot.text(75,
+        1 - 2.5 if losses else 1 - (2.5 / 14. * 21.),
+        '1-2 losses' if losses else 'no losses')
+
+    if losses:
+        subplot.text(42, -3, '$80.0\,r_B$')
+        subplot.text(75, -11, '$85.0\,r_B$')
+        subplot.text(20, -9, '$90.0\,r_B$')
+        subplot.text(43, -7.5, '$95.0\,r_B$')
+    else:
+        subplot.text(9, -18, '$80.0\,r_B$')
+        subplot.text(41.5, -18, '$85.0\,r_B$')
+        subplot.text(60, -15, '$90.0\,r_B$')
+        subplot.text(70, -9.5, '$95.0\,r_B$')
+
+    fig.text(0.01, 0.92, '(b)' if losses else '(a)', fontweight='bold')
+
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
 
@@ -653,7 +673,7 @@ def feshbach_scattering(fname):
         linestyle='--', dashes=mplh.dash['--'])
     subplot.plot(x, fa(x).real, color=mplh.color.f.blue.main)
 
-    a12s = (80., 85., 90., 95.)
+    a12s = (80.8, 80., 85., 90., 95.)
     diffs = []
     for a12 in a12s:
         hbar = 1.054571628e-34
@@ -662,7 +682,7 @@ def feshbach_scattering(fname):
 
         a = 1 - a12 / a_bg
         xx = (DB / a + numpy.sqrt((DB / a) ** 2 - gB ** 2)) / (2 * gB)
-        print xx * dB, a_bg * fa(xx).real, -fa(xx).imag * a_bg * r_bohr * 8 * numpy.pi * hbar / m
+        #print xx * gB, a_bg * fa(xx).real
         diffs.append(xx)
 
     #for xx in (0.5, 0.75, 1.0, 1.5):

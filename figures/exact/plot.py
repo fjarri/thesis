@@ -46,10 +46,17 @@ def _squeezing(fname, coupling, ens):
         facecolor=mplh.color.f.blue.lightest,
         linewidth=0)
 
+    s.text(
+        18 if coupling else 3,
+        0.9,
+        "local cross-coupling" if coupling else "no cross-coupling")
+
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 1.2))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.text(0.01, 0.92, '(b)' if coupling else '(a)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
@@ -115,10 +122,17 @@ def _squeezing_err(fname, coupling):
         color=mplh.color.f.green.main, linestyle='--', dashes=mplh.dash['--'])
     """
 
+    s.text(
+        18 if coupling else 3,
+        0.13,
+        "local cross-coupling" if coupling else "no cross-coupling")
+
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 0.15))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.text(0.01, 0.92, '(b)' if coupling else '(a)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)

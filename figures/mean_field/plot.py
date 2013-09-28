@@ -16,11 +16,27 @@ def _one_comp_gs(fname, N):
     fig = mplh.figure()
     s = fig.add_subplot(111,
         xlabel='$z$ ($\\mu\\mathrm{m}$)',
-        ylabel='Axial density ($\\mu\\mathrm{m}^{-1}$)')
+        ylabel='$n_z$ ($\\mu\\mathrm{m}^{-1}$)')
     s.plot(zs, n_z[0], color=mplh.color.f.blue.main, linestyle='-')
     s.plot(zs, tf_n_z[0], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
 
+    s.text(
+        6 if N == 1000 else 15,
+        2400 * 0.03 if N == 1000 else 2400,
+        '$N=' + str(N) + '$')
+
+    s.text(
+        -14 if N == 1000 else -35,
+        500 * 0.03 if N == 1000 else 500,
+        'T-F')
+    s.text(
+        -7.5 if N == 1000 else -23,
+        500 * 0.03 if N == 1000 else 500,
+        'numerical')
+
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.text(0.01, 0.92, '(b)' if N == 1000 else '(a)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
@@ -44,11 +60,31 @@ def _two_comp_gs(fname, a12):
     fig = mplh.figure()
     s = fig.add_subplot(111,
         xlabel='$z$ ($\\mu\\mathrm{m}$)',
-        ylabel='Axial density ($\\mu\\mathrm{m}^{-1}$)')
+        ylabel='$n_z$ ($\\mu\\mathrm{m}^{-1}$)')
     s.plot(zs, n_z[0], color=mplh.color.f.blue.main, linestyle='-')
     s.plot(zs, n_z[1], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
 
+    s.text(
+        11,
+        2000. / 2500 * 1600 if a12 == 97. else 2000,
+        '$a_{12}=' + str(a12) + '\\,r_B$')
+    s.text(
+        11,
+        1700. / 2500 * 1600 if a12 == 97. else 1700,
+        ('(miscible)' if a12 == 97. else '(immiscible)'))
+
+    s.text(
+        -28 if a12 == 97. else -26,
+         1000. / 2500 * 1600 if a12 == 97. else 1000,
+         '$\\vert 1 \\rangle$')
+    s.text(
+        -15 if a12 == 97. else -13,
+         2000. / 2500 * 1600 if a12 == 97. else 2000,
+         '$\\vert 2 \\rangle$')
+
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+
+    fig.text(0.01, 0.92, '(a)' if a12 == 97. else '(b)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)

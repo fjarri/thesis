@@ -114,7 +114,7 @@ The sampling is performed using the rejection method with bounding $P$ as
 \begin{eqn}
     P
     \le \frac{1}{2 \pi^{2M}} e^{-|\bmu|^2} e^{-|\blambda^2|}
-        \left(\prod_{j=1}^M |\lambda_j|^2 + 1).
+        \left( \prod_{j=1}^M |\lambda_j|^2 + 1 \right).
 \end{eqn}
 Therefore $P$ can be sampled using a combination of independent samples from Gaussian and gamma distributions, and then conditionally rejecting samples, as described in the previous section.
 
@@ -168,16 +168,12 @@ The sampling is again performed using the rejection method with bounding $Q$ as
         \right),
 \end{eqn}
 and using the inverse sampling on both terms.
-
 The expectation of $\hat{A}$ can be shown to be
 \begin{eqn}
-    \bar{A}_{\mathrm{SU(2)-Q}}
-    = \int A_{\mathrm{SU(2)-Q}}(\zvec) \upd^2 \zvec,
-\end{eqn}
-where
-\begin{eqn}
     A_{\mathrm{SU(2)-Q}}
-    = 6^M \prod_{j=1}^M \frac{z_j^*}{1 + |z_j|^2}.
+    = \int
+        6^M \prod_{j=1}^M \frac{z_j^*}{1 + |z_j|^2}
+        Q(\zvec) \upd^2 \zvec.
 \end{eqn}
 
 

@@ -66,8 +66,17 @@ def _cooperative(fname, N):
     ax.set_xlim((thetas_scaled[0], thetas_scaled[-1]))
     ax.set_ylim((-0.05, 0.45 if N == 1 else 0.55))
 
-    ax.set_xlabel("$\\theta" + ("\\sqrt{2}" if N == 2 else "") + "$ (rad)")
+    ax.set_xlabel(
+        "$\\phantom{\\sqrt{2}}$" +
+        "$\\theta" + ("\\sqrt{2}" if N == 2 else "") + "$ (rad)"
+        + "$\\phantom{\\sqrt{2}}$")
     ax.set_ylabel("$\\Delta$")
+
+    ax.text(0.3,
+        -0.05 + (0.05 if N == 1 else 0.05 * (0.6 / 0.5)),
+        '$N=1$, $J=1$' if N == 1 else '$N=2$, $J=2$')
+
+    fig.text(0.01, 0.92, '(a)' if N == 1 else '(b)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
@@ -147,6 +156,17 @@ def _distribution(fname, distr_type, order):
     #ax.w_xaxis.set_rotate_label(False)
     #ax.w_yaxis.set_rotate_label(False)
 
+    fig.text(0.4, 0.88, 'SU(2)-Q' if distr_type == 'Q' else 'positive-P')
+
+    labels = {
+        ('P', 1): '(a)',
+        ('P', 2): '(b)',
+        ('Q', 1): '(c)',
+        ('Q', 2): '(d)',
+    }
+
+    fig.text(0.01, 0.92, labels[(distr_type, order)], fontweight='bold')
+
     fig.tight_layout(pad=1.3)
     fig.savefig(fname)
 
@@ -218,19 +238,24 @@ def ghz_violations(fname):
     ax1 = fig.add_subplot(G[0,0])
     ax2 = fig.add_subplot(G[0,1])
 
-    ax1.set_xlabel('particles',
+    ax1.set_xlabel('$M$',
         color='white'
         ) # need it to make matplotlib create proper spacing
-    fig.text(0.51, 0.045, 'particles')
-    ax1.set_ylabel('$\\langle F \\rangle / \\langle F \\rangle_{\\mathrm{QM}}$')
+    fig.text(0.55, 0.04, '$M$')
+    ax1.set_ylabel('$F / F_{\\mathrm{QM}}$')
 
-    representation = 'Q'
-    violations = filter_data(data['violations'], representation=representation, size=10**9)
+    violations = filter_data(data['violations'], representation='Q', size=10**9)
+    violations_p = filter_data(data['violations'], representation='number', size=10**9)
 
     ns = violations['ns']
     qms = violations['qms']
     mean = violations['mean'] / qms
     err = violations['error'] / qms
+
+    ns_p = violations_p['ns']
+    qms_p = violations_p['qms']
+    mean_p = violations_p['mean'] / qms_p
+    err_p = violations_p['error'] / qms_p
 
     cl_ns = numpy.arange(1, 61)
     cl_qm = [getF_analytical(n, 'F_ardehali' if n % 2 == 0 else 'F_mermin') for n in cl_ns]
@@ -246,7 +271,13 @@ def ghz_violations(fname):
             linestyle='--', dashes=mplh.dash['--'])
         ax.errorbar(ns, mean, yerr=err, color=mplh.color.f.blue.main, linestyle='None',
             capsize=1.5)
-        ax.plot(cl_ns, cl_qm, color=mplh.color.f.red.main, linestyle='-.', dashes=mplh.dash['-.'])
+        ax.plot(cl_ns, cl_qm, color=mplh.color.f.yellow.main, linestyle='-.', dashes=mplh.dash['-.'])
+
+    ax1.errorbar(ns_p, mean_p, yerr=err_p, color=mplh.color.f.red.main, linestyle='None',
+        capsize=1.5)
+
+    ax1.text(5, 0.37, '\\textsc{lhv}')
+    ax2.text(51, 0.5, 'SU(2)-Q')
 
     # hide the spines between ax and ax2
     ax1.spines['right'].set_visible(False)
@@ -270,6 +301,8 @@ def ghz_violations(fname):
 
     #fig.subplots_adjust(wspace=0.001)
 
+    fig.text(0.01, 0.92, '(a)', fontweight='bold')
+
     fig.tight_layout(pad=0.3)
 
     #p1 = ax1.get_position()
@@ -289,18 +322,23 @@ def ghz_errors(fname):
     fig = mplh.figure(width=0.5)
 
     ax = fig.add_subplot(111)
-    ax.set_xlabel('particles')
-    ax.set_ylabel('$\\log_{2}($rel. error$)$')
+    ax.set_xlabel('$M$')
+    ax.set_ylabel('$\\log_{2}(\\mathrm{Err}(F) / F_{\\mathrm{QM}})$')
 
     corr1 = filter_data(data['different_order_correlations'],
         representation='Q', quantity='N_total', size=10**9)
     corrm = filter_data(data['violations'],
         representation='Q', size=10**9)
 
+    corrp = filter_data(data['violations'],
+        representation='number', size=10**9)
+
     ax.plot(corr1['ns'], numpy.log2(corr1['error'] / corr1['ns'] * 2.),
-        color=mplh.color.f.green.main, linestyle='--', dashes=mplh.dash['--'])
+        color=mplh.color.f.green.main, linestyle='-.', dashes=mplh.dash['-.'])
     ax.plot(corrm['ns'], numpy.log2(corrm['error'] / corrm['qms'])[:50],
         color=mplh.color.f.blue.main)
+    ax.plot(corrp['ns'], numpy.log2(corrp['error'] / corrp['qms']),
+        color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
 
     ref_ns = numpy.arange(1, 36)
     ax.plot(ref_ns, ref_ns / 2. - 20, linestyle=':',
@@ -309,6 +347,13 @@ def ghz_errors(fname):
     ax.set_xlim((0, 61))
     ax.set_ylim((-24, 0))
     ax.yaxis.set_ticks(range(-20, 1, 5))
+
+    ax.text(40, -21, 'first order')
+    ax.text(40, -10, 'SU(2)-Q')
+    ax.text(18, -3, 'positive-P')
+    ax.text(34, -5, 'reference')
+
+    fig.text(0.01, 0.92, '(b)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
 
