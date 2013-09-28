@@ -349,7 +349,7 @@ def ramsey_noise(fname):
     s.plot([0.02, 0.08], [0.48, 0.48], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
     s.text(0.1, 0.47, 'Wigner')
     s.plot([0.02, 0.08], [0.44, 0.44], color=mplh.color.f.blue.main, linestyle='-', dashes=mplh.dash['-'])
-    s.text(0.1, 0.43, 'Wigner + tech.noise')
+    s.text(0.1, 0.43, 'Wigner + tech. noise')
     s.errorbar([0.05], [0.4], yerr=[0.01], color='k', linestyle='none', capsize=1.5)
     s.text(0.1, 0.39, 'experiment')
 
@@ -395,7 +395,7 @@ def spinecho_noise(fname):
     s.plot([0.03, 0.15], [0.43, 0.43], color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
     s.text(0.18, 0.42, 'Wigner')
     s.plot([0.03, 0.15], [0.39, 0.39], color=mplh.color.f.blue.main, linestyle='-', dashes=mplh.dash['-'])
-    s.text(0.18, 0.38, 'Wigner + tech.noise')
+    s.text(0.18, 0.38, 'Wigner + tech. noise')
     s.errorbar([0.09], [0.35], yerr=[0.01], color='k', linestyle='none', capsize=1.5)
     s.text(0.18, 0.34, 'experiment')
 
