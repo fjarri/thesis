@@ -20,7 +20,21 @@
 {"size": 1000000000, "subsets": 1000, "particles": 57, "state": "mermin", "error": 1.041132667783327e+16, "representation": "Q", "mean": 4.361082664529759e+16, "quantity": "F_mermin"},
 {"size": 1000000000, "subsets": 1000, "particles": 58, "state": "ardehali", "error": 3.815767653841533e+16, "representation": "Q", "mean": 2.6710804158105763e+17, "quantity": "F_ardehali"},
 {"size": 1000000000, "subsets": 1000, "particles": 59, "state": "mermin", "error": 6.521050810175958e+16, "representation": "Q", "mean": 1.4815512739755578e+17, "quantity": "F_mermin"},
-{"size": 1000000000, "subsets": 1000, "particles": 60, "state": "ardehali", "error": 2.2353383704487133e+17, "representation": "Q", "mean": 5.717157178117703e+17, "quantity": "F_ardehali"}
+{"size": 1000000000, "subsets": 1000, "particles": 60, "state": "ardehali", "error": 2.2353383704487133e+17, "representation": "Q", "mean": 5.717157178117703e+17, "quantity": "F_ardehali"},
+
+{"size": 1000000000, "subsets": 1000, "particles": 1, "state": "mermin", "error": 2.0590921814748397e-06, "representation": "number", "mean": 0.9999923589967998, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 2, "state": "ardehali", "error": 9.29457295789194e-06, "representation": "number", "mean": 2.82841832598659, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 3, "state": "mermin", "error": 2.3833614509243004e-05, "representation": "number", "mean": 4.000002724301601, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 4, "state": "ardehali", "error": 0.0001017869852782627, "representation": "number", "mean": 11.31345143786556, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 5, "state": "mermin", "error": 0.00028457299447194617, "representation": "number", "mean": 16.0006702571448, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 6, "state": "ardehali", "error": 0.0012180005535923388, "representation": "number", "mean": 45.258447541291716, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 7, "state": "mermin", "error": 0.003374410961308196, "representation": "number", "mean": 63.996899135138804, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 8, "state": "ardehali", "error": 0.014733766905192737, "representation": "number", "mean": 181.00186713979085, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 9, "state": "mermin", "error": 0.034466192428602944, "representation": "number", "mean": 256.06791753770983, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 10, "state": "ardehali", "error": 0.1809170018410733, "representation": "number", "mean": 724.2092267884542, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 11, "state": "mermin", "error": 0.4720874205089379, "representation": "number", "mean": 1022.4946645996952, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 12, "state": "ardehali", "error": 2.0655801901513176, "representation": "number", "mean": 2896.644688030383, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 13, "state": "mermin", "error": 5.269281004563615, "representation": "number", "mean": 4114.101108169045, "quantity": "F_mermin"}
 ],
 "different_order_correlations": [
 {"size": 100000000, "subsets": 1000, "particles": 1, "state": "ardehali", "error": 2.2940734009939083e-06, "representation": "Q", "mean": 0.4999945854122205, "quantity": "N_total"},

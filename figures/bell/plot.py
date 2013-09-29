@@ -273,8 +273,8 @@ def ghz_violations(fname):
             capsize=1.5)
         ax.plot(cl_ns, cl_qm, color=mplh.color.f.yellow.main, linestyle='-.', dashes=mplh.dash['-.'])
 
-    ax1.errorbar(ns_p, mean_p, yerr=err_p, color=mplh.color.f.red.main, linestyle='None',
-        capsize=1.5)
+    #ax1.errorbar(ns_p, mean_p, yerr=err_p, color=mplh.color.f.red.main, linestyle='None',
+    #    capsize=1.5)
 
     ax1.text(5, 0.37, '\\textsc{lhv}')
     ax2.text(51, 0.5, 'SU(2)-Q')
