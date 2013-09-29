@@ -39,7 +39,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.668889"
-     inkscape:cx="98.394906"
+     inkscape:cx="152.90732"
      inkscape:cy="102.21078"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -47,8 +47,8 @@
      units="mm"
      inkscape:window-width="1436"
      inkscape:window-height="856"
-     inkscape:window-x="1"
-     inkscape:window-y="23"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -58,7 +58,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -125,14 +125,14 @@
        sodipodi:linespacing="125%"
        id="text4320"
        y="922.3382"
-       x="185.668"
+       x="187.26805"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Linux Libertine O;-inkscape-font-specification:Linux Libertine O Italic"
          y="922.3382"
-         x="185.668"
+         x="187.26805"
          id="tspan4322"
-         sodipodi:role="line">T</tspan></text>
+         sodipodi:role="line">t</tspan></text>
     <path
        sodipodi:nodetypes="cccccccccccccc"
        inkscape:connector-curvature="0"
@@ -191,16 +191,18 @@
        sodipodi:linespacing="125%"
        id="text3014"
        y="994.3382"
-       x="106.668"
+       x="108.268"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"><tspan
          style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Linux Libertine O;-inkscape-font-specification:Linux Libertine O Italic"
          y="994.3382"
-         x="106.668"
+         x="108.268"
          id="tspan3016"
-         sodipodi:role="line">T<tspan
-   style="font-style:normal;-inkscape-font-specification:Linux Libertine O"
-   id="tspan3018">/2</tspan></tspan></text>
+         sodipodi:role="line"><tspan
+           style="font-style:normal;-inkscape-font-specification:Linux Libertine O"
+           id="tspan3018"><tspan
+   style="font-style:italic;-inkscape-font-specification:Linux Libertine O Italic"
+   id="tspan3019">t</tspan>/2</tspan></tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart)"
        d="m 216,991.36218 49,0"
@@ -216,15 +218,15 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="266.668"
+       x="268.2681"
        y="994.3382"
        id="text3024"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3026"
-         x="266.668"
+         x="268.2681"
          y="994.3382"
-         style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Linux Libertine O;-inkscape-font-specification:Linux Libertine O Italic">T<tspan
+         style="font-size:12px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Linux Libertine O;-inkscape-font-specification:Linux Libertine O Italic">t<tspan
    id="tspan3028"
    style="font-style:normal;-inkscape-font-specification:Linux Libertine O">/2</tspan></tspan></text>
     <text
