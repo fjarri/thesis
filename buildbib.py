@@ -198,6 +198,7 @@ def journalAbbreviations(entries):
         'Parallel Computing': 'Parallel Comput.',
         'Computing in Science \& Engineering': 'Comput. Sci. Eng.',
         'ACM Transactions on Mathematical Software': 'ACM T. Math. Software',
+        'Computers \\& Fluids': 'Comput. Fluids',
     }
 
     for entry_type, entry_key, entry_fields in entries:

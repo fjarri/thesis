@@ -10,20 +10,12 @@ Examples and tests:
 
 
 Checklist:
-- write the numerical appendix
-- write the conclusion for bell-ineq
 - write acknowledgements to: Qiongyi, Margaret, Laura, Michael
-
-- write the global conclusion. Mention:
-
-    - Need to find criteria for fragmentation of 2-species BEC, See Penrose-Onsager fragmentation
-    - positive-P projection
-    - thermal initial states, Bogolyubov modes
-
 - check a11,12,22 for exact one-well squeezing results
+- add references to published papers in the beginning of the application chapters
 - fix this section - we are only talking about a single well, no need to mention two wells
-- add positive-P lines to GHZ sampling
 - remove \copypaste
+- if \cite is used as a part of speech (e.g. "... in~\cite{...}), mention actual names of the authors
 - more references?
 - chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
 - chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
