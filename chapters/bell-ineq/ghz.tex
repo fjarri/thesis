@@ -225,5 +225,28 @@ This, in addition to the reduced phase space dimensionality, allows the sampling
     \label{fig:bell-ineq:ghz:violation}
 \end{figure}
 
+\copypaste{copypaste begins}
+
 The results for test of the inequality~\eqnref{bell-ineq:ghz:general-ineq} using the SU(2)-Q representation are shown in~\figref{bell-ineq:ghz:violation}.
 We have used a \abbrev{gpu} to sample the distribution and calculate the required correlation for the values of $M$ up to $60$.
+This corresponds to measurement of $10^{18}$ distinct sixtieth order correlation functions.
+Bell violations were verified in all cases, while genuine multipartite violations of \abbrev{lhv} requiring all $M$ observers to participate, with $F/F_{QM}>1/\sqrt{2}$, were verified for $M<50$.
+
+To understand the source of sampling errors, we investigated the scaling of errors with system-size for single measurements of a low-order spin correlation (\figref{bell-ineq:ghz:violation},~(b)), in addition to the exponentially large numbers of measurements in the expectation values $F$.
+As an example of low-order correlation we have chosen the total number of ``spin-ups'' $N = \langle\sum_{j=1}^M (\hat{\sigma}_j^z + 1 )/2 \rangle$.
+Low-order correlations were easily calculated with decreasing sampling errors as $M$ increases.
+This explains why low order correlations could be efficiently sampled in previous work, for much larger Hilbert spaces than the ones studied here.
+
+In contrast to this, high-order correlations showed exponentially increasing sampling error.
+The relative error in $F$ scales as $2^{M/3}$, so that the time taken at constant error scales as $2^{2M/3}$.
+Hence, probabilistic sampling scales more favorably than experiment, which would take time proportional to $2^M$ due to the use of exponentially many measurement settings.
+Single high-order correlations might be faster, depending on experimental noise levels.
+
+These results are unexpected and interesting.
+Sampling errors in low order correlations are insensitive to scaling up to mesoscopic sizes.
+These are the most commonly measured quantities, and there is no barrier to sampling these, despite Bell violations and even mesoscopic superpositions.
+However, correlations of the same order as the system size can be exponentially hard to sample in the case of Schr\"odinger cat-like states.
+Yet even in this case, the probabilistic strategy gives advantages.
+It generates exponentially many non-commuting measurement results in parallel, which can result in scaling that is exponentially faster than with direct measurements.
+
+\copypaste{copypaste ends}
