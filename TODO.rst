@@ -12,6 +12,7 @@ Examples and tests:
 Checklist:
 - write the numerical appendix
 - write the conclusion for bell-ineq
+- write acknowledgements to: Qiongyi, Margaret, Laura, Michael
 
 - write the global conclusion. Mention:
 
@@ -26,7 +27,6 @@ Checklist:
 - more references?
 - chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
 - chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
-- check figure captions: some colors, lines and axis labels were changed
 - chapters/wigner-bec/fpe-bec: it should be possible to proof that the formula for d<Psi+ Psi>/dt agrees with the classical one up to the $1/N$ order, same as we do for particular cases later on.
 - eqn:wigner-bec:fpe-bec:ordering-transformation : do we need proof?
 - chapters/wigner-bec/master-eqn: elaborate on why the theorem for d<Psi>/dt is important

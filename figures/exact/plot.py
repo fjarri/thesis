@@ -49,7 +49,7 @@ def _squeezing(fname, coupling, ens):
     s.text(
         18 if coupling else 3,
         0.9,
-        "local cross-coupling" if coupling else "no cross-coupling")
+        "interaction on" if coupling else "interaction off")
 
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 1.2))
@@ -125,7 +125,7 @@ def _squeezing_err(fname, coupling):
     s.text(
         18 if coupling else 3,
         0.13,
-        "local cross-coupling" if coupling else "no cross-coupling")
+        "interaction on" if coupling else "interaction off")
 
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 0.15))
