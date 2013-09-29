@@ -229,15 +229,15 @@ Two parts of the figure illustrate the difference between the miscible ($a_{12}^
 As was mentioned earlier in this section, the starting state for the imaginary time propagation can be set to the Thomas-Fermi approximated state to minimize the propagation time.
 Thomas-Fermi approximation consists of neglecting the kinetic term in the stationary equations~\eqnref{bec-noise:mean-field:cgpes-stationary}.
 For a one-component state ($\Psi_2 \equiv 0$) the resulting equations can be solved analytically:
-\begin{equation}
+\begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-gs}
 	| \Psi_1(\xvec) |^2 = \frac{1}{g_{11}} \max \left( \mu_1 - V_1(\xvec), 0 \right).
-\end{equation}
+\end{eqn}
 In the $D$-dimensional harmonic trap potential
-\begin{equation}
+\begin{eqn}
 \label{eqn:bec-noise:mean-field:trap-potential}
 	V_1(\xvec) = \frac{m}{2} \sum_{d=1}^D \omega_d^2 x_d^2
-\end{equation}
+\end{eqn}
 this solution has the shape of an ellipsoid with radii $r_d = \sqrt{2\mu_1 / (m \omega_d^2)}$.
 
 The chemical potential $\mu_1$ is fixed by the normalisation condition $\int |\Psi_1|^2 \upd \xvec = N_1$.
@@ -258,7 +258,7 @@ For a \abbrev{1d} trap it has the form
 
 Now we can roughly estimate the conditions necessary to drop the kinetic term from equation.
 Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref{bec-noise:mean-field:cgpes-stationary} and comparing the kinetic term with the potential term, we get the following inequation:
-\begin{equation}
+\begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-inequation}
 	\frac{\hbar^2}{2m} \left(
 		\frac{m \sum_{d=1}^D \omega_d^2}{2}
@@ -266,12 +266,12 @@ Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref
 			{4 \left( \mu_1 - V_1(\xvec) \right)}
 	\right) \ll
 	\mu \left(\mu_1 - V_1(\xvec)\right).
-\end{equation}
+\end{eqn}
 Near the centre of the condensate this inequation simplifies to
-\begin{equation}
+\begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-condition}
 	\mu \gg \frac{\hbar}{2} |\bomega|,
-\end{equation}
+\end{eqn}
 where $\bomega \equiv (\omega_1, \ldots, \omega_D)^T$ is the vector of trap frequencies.
 
 On the other hand, near the edges of the cloud the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation} diverges, while the right-hand side tends to zero.
