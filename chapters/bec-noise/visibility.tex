@@ -63,7 +63,7 @@ where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ i
     \includegraphics{figures_generated/bec_noise/ramsey_single_run_pop.pdf}%
     \includegraphics{figures_generated/bec_noise/echo_single_run_pop.pdf}}
 
-    \caption{Numerically simulated population of components $\ket{1}$ (blue solid lines) and $\ket{2}$ (red dashed lines) in \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequence.}
+    \caption{Numerically simulated population of components $\ket{1}$ (blue solid lines) and $\ket{2}$ (red dashed lines) in \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequences.}
 
     \label{fig:bec-noise:visibility:population}
 \end{figure}
@@ -72,9 +72,9 @@ where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ i
     \centerline{\includegraphics{figures_generated/bec_noise/ramsey_visibility_short.pdf}}
 
     \caption{
-    Comparison of experimental and numerically simulated interferometric contrast in the regular Ramsey sequence.
-    Plotted are the results obtained with mean-field and no losses (yellow dash-dotted line), mean-field (red dotted line), Wigner method (blue solid line), and Wigner method with technical noises included (green dashed line), along with the experimental points (black bars).
-    Also the theoretical limit of the visibility~\eqnref{bec-noise:visibility:limit} is plotted using the populations from the mean-field model (dotted grey line).}
+    Comparison of experimental and numerically simulated interferometric contrast at the end of a regular Ramsey sequence with the evolution time $t$.
+    Experimental results (black bars) are shown in comparison with the results given by the mean-field model (green dotted line), truncated Wigner method (red dashed line), and truncated Wigner with technical noises included (blue solid line).
+    The mean-field results with losses turned off (yellow dash-dotted line) and the population-dependent visibility limit~\eqnref{bec-noise:visibility:limit} (grey dotted line) are included as a reference.}
 
     \label{fig:bec-noise:visibility:ramsey-visibility}
 \end{figure}
@@ -95,10 +95,10 @@ where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to
 But in the experiment in question the losses are present and are significantly asymmetrical, as shown in~\figref{bec-noise:visibility:population},~(a).
 With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} shows.
-The resulting mean-field prediction with the inclusion of nonlinear losses (red dotted lines) is much closer to the experimental data.
+The resulting mean-field prediction with the inclusion of nonlinear losses (green dotted lines) is much closer to the experimental data.
 
-The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (blue solid lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
-The Wigner results can be further adjusted to account for the noise introduced by the final measurement and non-ideal coupling (green dashed lines), which will be explained in detail in the next section.
+The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (red dashed lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
+The Wigner results can be further adjusted to account for the noise introduced by the final measurement and non-ideal coupling (blue solid lines), which will be explained in detail in the next section.
 
 The final agreement with the experiment is still not ideal, and the explanation of this difference is an open question.
 Candidate factors include finite temperature effects and interaction with the surrounding cloud of non-condensed atoms.
@@ -106,15 +106,15 @@ Candidate factors include finite temperature effects and interaction with the su
 \begin{figure}
     \centerline{\includegraphics{figures_generated/bec_noise/echo_visibility_short.pdf}}
 
-    \caption{Comparison of experimental and numerically simulated interferometric contrast in the spin echo sequence.
-    Plotted are the results obtained with mean-field (red dotted line), Wigner method (blue solid line), and Wigner method with technical noises included (green dashed line), along with the experimental points (black bars).}
+    \caption{Comparison of experimental and numerically simulated interferometric contrast at the end of a spin echo sequence with the evolution time $t$.
+    Experimental results (black bars) show the final visibility value for a single spin echo sequence with the full evolution time $t$ as compared with the predictions from the mean-field model (green dotted line), truncated Wigner method (red dashed line), and truncated Wigner with technical noises included (blue solid line).}
 
     \label{fig:bec-noise:visibility:echo-visibility}
 \end{figure}
 
 The asymmetricity introduced by the difference in loss rates can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
 The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as illustrated by~\figref{bec-noise:visibility:sequences},~(b).
-With this additional pulse by the end of the experimental sequence the populations of two components become equal again, as shown in~\figref{bec-noise:visibility:population},~(b), setting the theoretical limit~\eqnref{bec-noise:visibility:limit} back to $1$.
+With this additional pulse by the end of a single experimental sequence the populations of two components become equal again, as shown in~\figref{bec-noise:visibility:population},~(b), setting the theoretical visibility limit~\eqnref{bec-noise:visibility:limit} back to $1$.
 
 The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:visibility:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
@@ -125,8 +125,8 @@ Same as in the case of the regular Ramsey sequence, the predictions of the simul
     \includegraphics{figures_generated/bec_noise/ramsey_visibility_long.pdf}%
     \includegraphics{figures_generated/bec_noise/echo_visibility_long.pdf}}
 
-    \caption{Numerically simulated interferometric contrast for \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequences.
-    Shown are mean-field (red dotted lines) and truncated Wigner (blue solid lines) results.}
+    \caption{Numerically simulated interferometric contrast for \textbf{(a)} a Ramsey sequence, and \textbf{(b)} a spin echo sequence at longer times.
+    Mean-field (green dotted lines), truncated Wigner (red dashed lines) and truncated Wigner with technical noises (blue solid lines) are plotted.}
 
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
