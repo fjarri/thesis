@@ -1,14 +1,14 @@
 % =============================================================================
-\section{It\^{o} formula}
+\section{It\^o formula}
 % =============================================================================
 
-In this section we will follow the procedure similar to the one in the previous section and derive the It\^{o} formula for the differential of a functional, based on the standard definition for multi-variable real-valued case.
+In this section we will follow the procedure similar to the one in the previous section and derive the It\^o formula for the differential of a functional, based on the standard definition for multi-variable real-valued case.
 Again, we will formulate the real-valued correspondence in a way that is convenient for future proofs.
 
 \begin{lemma}
 \label{lmm:fpe-sde:ito-formula:ito-f-real}
 	Let $\zvec^T \equiv (z_1 \ldots z_M)$ be a set of real variables, and $\Zvec(t)$ be a standard $L$-dimensional Wiener process.
-	For the set of \abbrev{sde}s in It\^{o} form
+	For the set of \abbrev{sde}s in It\^o form
 	\begin{eqn*}
 		\upd\zvec = \avec(\zvec, t) \upd t + B(\zvec, t) \upd\Zvec(t),
 	\end{eqn*}
@@ -29,7 +29,7 @@ As a next step, we will extend this lemma to operate on vectors of complex varia
 \begin{theorem}
 \label{thm:fpe-sde:ito-formula:ito-f-complex}
 	Let $\balpha^T \equiv (\alpha_1 \ldots \alpha_M)$ be a set of complex variables, and $\Zvec = (\mathbf{X} + i\mathbf{Y}) / \sqrt{2}$ be an $L$-dimensional standard complex-valued Wiener process, containing two standard $L$-dimensional Wiener processes $\mathbf{X}$ and $\mathbf{Y}$.
-	For the set of \abbrev{sde}s in It\^{o} form
+	For the set of \abbrev{sde}s in It\^o form
 	\begin{eqn*}
 		\upd\balpha = \avec(\balpha, t) \upd t + B(\balpha, t) \upd\Zvec(t),
 	\end{eqn*}
@@ -159,7 +159,7 @@ The above theorem can be reformulated for the multi-component \abbrev{sde}s from
 \begin{theorem}
 \label{thm:fpe-sde:ito-formula:mc-ito-f}
 	Let $\balpha^{(j)},\, j = 1 \ldots C$ be $C$ sets of complex variables $\balpha^{(j)} \equiv (\alpha_1^{(j)} \ldots \alpha_{M_j}^{(j)})$.
-	For the \abbrev{sde} in It\^{o} form
+	For the \abbrev{sde} in It\^o form
 	\begin{eqn*}
 		\upd\balpha^{(j)} = \avec^{(j)} \upd t + B^{(j)} \upd\Zvec,
 	\end{eqn*}
@@ -176,11 +176,11 @@ The above theorem can be reformulated for the multi-component \abbrev{sde}s from
 Proved analogously to \thmref{fpe-sde:corr:mc-fpe-sde}, by combining $\balpha^{(j)}$ into a single vector and applying \thmref{fpe-sde:ito-formula:ito-f-complex}.
 \end{proof}
 
-Finally, we can use the multi-component reformulation to derive the It\^{o} formula in functional form for the set of \abbrev{sde}s from \thmref{fpe-sde:corr:fpe-sde-func}.
+Finally, we can use the multi-component reformulation to derive the It\^o formula in functional form for the set of \abbrev{sde}s from \thmref{fpe-sde:corr:fpe-sde-func}.
 
 \begin{theorem}
 \label{thm:fpe-sde:ito-formula:func-ito-f}
-	Given the set of functional \abbrev{sde}s in It\^{o} form
+	Given the set of functional \abbrev{sde}s in It\^o form
 	\begin{eqn*}
 		\upd f_j = \proj{\restbasis{j}} \left[
 			\mathcal{A}_j \upd t + \sum_{l=1}^L \mathcal{B}_{jl} \upd Q_l
@@ -275,7 +275,7 @@ Recognising definitions of functional differentials, functional Wiener process, 
 which leads to the statement of the theorem.
 \end{proof}
 
-Alternatively, the functional It\^{o} formula can be written in matrix form as
+Alternatively, the functional It\^o formula can be written in matrix form as
 \begin{eqn}
 	\upd \mathcal{F}[\fvec]
 	={} & \int \upd\xvec^\prime \left(
