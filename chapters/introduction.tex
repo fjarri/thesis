@@ -40,22 +40,21 @@ Alternatively, one may project the distribution on the required part of Hilbert 
 Wigner distribution is, in general, not positive, which presents problems when simulating systems with a small number of particles.
 Fortunately, assuming that the number of particles is large enough (our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details) which will truncate the Wigner function and make it strictly positive.
 This turns it into a probability distribution, thus providing a way to reduce the initial master equation to a set of stochastic differential equations, for which an extensive set of numerical integration methods exists.
-Of course, it is not the only method for this type of the system; a very perspective group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011},
-but it has some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.
+Of course, it is not the only method for this type of the system; a very perspective group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011}, but it has some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.
+The Wigner method allows us to treat a large number of independent field modes, thus taking into account degrees of freedom that are excited due to collisional and nonlinear losses~\cite{Norrie2005,Deuar2007}.
 
 This combination of features made the truncated Wigner representation the best choice for the task of simulating the dynamics of bosonic quantum fields, including optical fields~\cite{Drummond1993,Drummond1993a,Corney2006,Corney2008} and \abbrev{bec}s.
 For \abbrev{bec} systems, the representation has been successfully used to describe fragmentation~\cite{Isella2005,Isella2006,Gross2011}, dissipative atom transport~\cite{Ruostekoski2005}, dynamically unstable lattice dynamics~\cite{Shrestha2009}, dark solitons~\cite{Martin2010,Martin2010a}, turbulence~\cite{Norrie2005,Norrie2006}, quantum noise and decoherence~\cite{Steel1998,Norrie2006a,Egorov2011}, squeezing~\cite{Opanchuk2012} and entanglement~\cite{Opanchuk2012a}.
-\copypaste{The truncated Wigner method is particularly useful in low-dimensional and trap environments, where it has successfully predicted quantum squeezing and phase-diffusion effects, in good agreement with dynamical experiments in photonic quantum soliton propagation~\cite{Carter1987,Corney2008}.}
+The truncated Wigner method is especially effective in low-dimensional and trap environments, where it was successfully used to predict quantum squeezing and phase-diffusion effects, in good agreement with dynamical experiments in photonic quantum soliton propagation~\cite{Carter1987,Corney2008}.
 
 The comparison of the results of the truncated Wigner method with analytical predictions has generally shown an excellent agreement~\cite{Corney2006,Deuar2007}.
 Other quasiprobabilitiy representations, such as the positive-P are known to work better near the threshold of applicability of the truncation condition~\cite{Deuar2007,Hoffmann2008}.
-\copypaste{There are a number of studies of applicability that compare the truncated Wigner method with the exact positive-P method~\cite{Chaturvedi2002,Dechoum2004} or, where feasible, Bloch-basis approaches.
-The typical result found is that the truncated Wigner method gives correct results out to a
-characteristic break time.
-At this stage, the accumulated errors can lead to large discrepancies in quantum correlations.
-The method is weakest when dealing with nonlinear quantum tunneling~\cite{Drummond1989,Kinsler1991a}, which depends on both long time dynamics and quantum correlations.
-Within its domain of applicability the technique is remarkably accurate and stable.
-The overall picture of how this method is related to other techniques for quantum dynamics has been recently reviewed~\cite{He2012}.}
+There are studies that compare the truncated Wigner method with the exact positive-P method~\cite{Chaturvedi2002,Dechoum2004}.
+We perform a simple comparison of the multimode Wigner with an exact expansion in number states in \secref{wigner-bec:mm}.
+The typical results of such comparisons is that the truncated Wigner method gives correct results out to a characteristic break time.
+After this the accumulated errors are high enough to give large discrepancies in calculated correlations.
+The method thus performs badly in modeling nonlinear quantum tunneling~\cite{Drummond1989,Kinsler1991a}, which depends on both long time dynamics and quantum correlations.
+The overall picture of how this method is related to other techniques for quantum dynamics has been recently reviewed~\cite{He2012}.
 
 Although initially Wigner representation was formulated for a single-mode system, the definition and associated methods were later extended to operate on field operators and wave functions,
 which facilitates the phase-space treatment of multimode problems.
@@ -65,7 +64,7 @@ A more detailed description was given by Polkovnikov~\cite{Polkovnikov2010} in h
 Direct numerical integration of the partial differential equation resulting from the application of the Wigner transformation is, in general, very cumbersome, and one has to truncate third-order derivative terms~\cite{Drummond1993,Steel1998,Sinatra2002} and apply projection to remove modes with low population.
 This adds to the complexity of the formal description of the method.
 Moreover, nonlinear inelastic interactions, which were not approached methodically before, became important.
-\copypaste{Accordingly, much of the mathematical derivation of these techniques is not readily available.}
+Accordingly, much of the mathematical derivation of these techniques is not readily available.
 This thesis intends to provide a rigorous formal description of the functional truncated Wigner method for simulating the dynamics of multimode \abbrev{bec}s, along with the examples of its application to existing experiments.
 The core of the theory described in this thesis has been published in~\cite{Opanchuk2013}.
 
@@ -84,30 +83,22 @@ This chapter contains proofs of known properties of the transformation, and pres
 \charef{wigner} introduces the functional calculus, restricted basis formalism and their application to bosonic field operators.
 We then intriduce the functional Wigner transformation and prove several main theorems that govern the transformation of field operators and the measurement of their moments.
 Finally, \charef{wigner-spec} uses these theorems to derive general identities which can be used to transform parts of the initial master equation describing a \abbrev{bec}.
-\copypaste{We focus especially on the problem of nonlinear damping.
-This is a dominant relaxation mechanism in \abbrev{bec} systems, and is often ignored or (incorrectly) approximated using linear loss terms.}
+This chapter focuses especially on the terms related to nonlinear damping.
+This is a dominant relaxation mechanism in \abbrev{bec} systems, and it is often ignored or incorrectly approximated using linear loss terms.
 
 \charef{wigner-bec} applies the formalism from the previous chapters to transform a master equation describing a \abbrev{bec} to a set of stochastic differential equations (\abbrev{sde}s).
-\copypaste{We successively reduce the problem in its initial form, the master equation for bosonic field operators, to a system of stochastic differential equations, which have significantly lower computational complexity.
-While there is a price for making the truncation approximation, we emphasize that this is a systematic expansion in a small parameter, $1/N$, where $N$ is the particle number. Such expansions are also relevant to stochastic diagram techniques~\cite{Chaturvedi1999}, which can be
-used to formally calculate order-by-order behaviour in such equations.}
-
-\copypaste{We derive the correct Fokker-Planck drift and noise terms for general multicomponent damping using the $1/N$ expansion, which transforms to an expansion in the inverse particle density for quantum fields.
-Even in the single-component case, the drift term has both a leading (classical) term and a quantum noise correction to the damping. This is needed to predict the loss behaviour correctly,
-and is important in high-accuracy simulations. Such corrections --- both in the drift and noise --- are relevant to topics like \abbrev{epr} correlations, entanglement and quantum squeezing in the presence of nonlinear reservoirs, a topic of increasing importance in areas ranging from quantum optics and \abbrev{bec} physics to nanomechanical oscillators~\cite{Chaturvedi1977,Reid1986a,Rabl2004}.}
-
-\copypaste{We derive the resulting stochastic differential equations from the functional Fokker-Planck equations, and show when the corresponding truncation approximations are applicable.
-The final equations can be treated using standard computational techniques for solving ordinary
-and partial stochastic differential equations~\cite{Drummond1990,Werner1997,Wilkie2005}.
-There are code generator packages and public domain websites with code available for this purpose~\cite{Collecutt2001,Dennis2013}.}
+We reduce the initial master equation for bosonic field operators to a system of stochastic differential equations, which have significantly lower computational complexity.
+We discuss the truncation approximation, which is essentially a $1/N$ expansion, and the question of sampling initial states for the simulation.
+We also give an example of usage of the formalism for a single-component multi-mode \abbrev{bec}.
+In addition, we use a simple single-well two-mode system to compare the predictions of the Wigner method and the exact quantum mechanical solution.
 
 Next three chapters describe several applications of the truncated Wigner formalism.
 \charef{bec-noise} is dedicated to the theoretical description of the quantum interferometry experiments performed in Swinburne University.
 It shows how truncated Wigner can predict the visibility dynamics (including its decay) in the experiment, along with the growth of the phase noise.
 \charef{bec-squeezing} illustrates how truncated Wigner can be used to calculate squeezing in the interferometry experiments with complex dynamics.
 
-\charef{bell-ineq} stands a bit aside, since it mostly makes use of the different quasiprobability method, Husimi Q-function (in its \abbrev{su(2)} variation).
-The Q-function is used to sample the ``Shr\"{o}dinger cat'' state and to show that the probabilistical methods can indeed violate the Bell inequality.
+\charef{bell-ineq} stands a bit aside, since it mostly makes use of the different quasiprobability method, Husimi Q-function (in its SU(2) variation).
+The Q-function is used to sample the ``Shr\"odinger cat'' state and to show that the probabilistical methods can indeed violate the Bell inequality.
 
 Finally, \charef{conclusion} summarizes the thesis and discusses some possible directions of the development in the field of quasiprobability representations.
 

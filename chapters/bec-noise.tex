@@ -3,36 +3,17 @@
 \label{cha:bec-noise}
 % =============================================================================
 
-\copypaste{
-Atom interferometry is an important quantum technology at the heart of many proposed future applications of ultra-cold atomic physics.
-Bose-Einstein condensates (\abbrev{bec}s) or atom lasers are macroscopic quantum objects and have potential advantages as interferometric detectors and sensors, provided one can precisely extract atomic phase information.
-However, unlike photons, atoms can interact strongly, causing dephasing and loss of interference fringes.
-An intimate understanding of quantum many-body dynamics is the key to calculating interaction-induced dephasing in the measurement process.
-This is essential for a quantitative theory of atom interferometry.
-}
+BECs are macroscopic quantum objects and can be potentially used as high precision interferometric detectors and sensors.
+Unlike photons, atoms can interact strongly, leading to loss of coherence and decreased interferometric contrast.
+An accurate quantitative model for these quantum many-body effects is essential for explaining the results of atom interferometry experiments, and for planning the future ones.
 
-In this chapter we will apply the truncated Wigner method from \charef{wigner-bec} to the task of simulating the dynamics of an interferometry experiment with large atom number.
+In this chapter we will apply the truncated Wigner method from \charef{wigner-bec} to the task of simulating the dynamics of such experiments.
 We will start from describing the mean-field approach leading to the conventional Gross-Pitaevskii equations~\cite{Pitaevskii2003} (\abbrev{gpe}s).
 We then extend it to include quantum effects, such as the noise from linear and nonlinear losses.
-The accurate description of nonlinear losses are especially important as \copypaste{they become dominant when atom numbers are increased to improve fringe visibility.}
+The accurate description of nonlinear losses is especially important as their relative effect increases when atom numbers are increased to improve contrast.
 
-\copypaste{
-Importantly, we can clearly demonstrate where fringe visibility is driven by quantum fluctuations, and where it is driven by trap inhomogeneity and dynamical effects, in order to choose optimal conditions for quantum noise reduction and spin squeezing.
-These calculations are a first step towards understanding mesoscopic superpositions and entanglement in ultra-cold atomic gases.
-An advantage of our method compared to the variational and perturbative approaches used elsewhere~\cite{Li2009,Sakmann2009,Sinatra2011}
-is that it allows us to treat a large number of independent field modes, thus including degrees of freedom that are excited due to collisional and nonlinear loss dynamics~\cite{Norrie2005,Deuar2007}.
-Our theory can be readily extended to include finite-temperature initial conditions~\cite{Steel1998,Isella2006},
-which will be treated elsewhere.
-Nonlinear losses and finite-temperature effects can be also described within the confines of the variational approach~\cite{Li2008}.
-}
-
-\copypaste{
-Quantum phase-diffusion is defined as the phase noise induced by number fluctuations which are conjugate to phase.
-This is a fundamental feature of \abbrev{bec} interferometry, and can only be removed when there are no interactions.
-However, there are other reasons for decoherence, which are also important.
-The approach used here captures all three significant features of atom interferometry that can result in decoherence: phase-diffusion, losses, and trap inhomogeneity effects.
-The results given in this chapter are applicable to simulations where the atom number per lattice point or mode is large.
-}
+We will compare the effect of quantum fluctuations and technical noises, such as imperfect measurements or coupling phase and amplitude uncertainty, on the interferometric contrast.
+We will also consider the experimental measurement process of the contrast in detail and investigate the influence of quantum effects on such an important characteristic as phase noise.
 
 \input{chapters/bec-noise/system}
 \input{chapters/bec-noise/mean-field}
