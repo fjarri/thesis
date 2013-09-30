@@ -34,7 +34,12 @@
 {"size": 1000000000, "subsets": 1000, "particles": 10, "state": "ardehali", "error": 0.1809170018410733, "representation": "number", "mean": 724.2092267884542, "quantity": "F_ardehali"},
 {"size": 1000000000, "subsets": 1000, "particles": 11, "state": "mermin", "error": 0.4720874205089379, "representation": "number", "mean": 1022.4946645996952, "quantity": "F_mermin"},
 {"size": 1000000000, "subsets": 1000, "particles": 12, "state": "ardehali", "error": 2.0655801901513176, "representation": "number", "mean": 2896.644688030383, "quantity": "F_ardehali"},
-{"size": 1000000000, "subsets": 1000, "particles": 13, "state": "mermin", "error": 5.269281004563615, "representation": "number", "mean": 4114.101108169045, "quantity": "F_mermin"}
+{"size": 1000000000, "subsets": 1000, "particles": 13, "state": "mermin", "error": 5.269281004563615, "representation": "number", "mean": 4114.101108169045, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 14, "state": "ardehali", "error": 27.9358631686874, "representation": "number", "mean": 11661.778011465942, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 15, "state": "mermin", "error": 59.28638370762721, "representation": "number", "mean": 16523.174593210577, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 16, "state": "ardehali", "error": 268.03404583002003, "representation": "number", "mean": 47552.40814609211, "quantity": "F_ardehali"},
+{"size": 1000000000, "subsets": 1000, "particles": 17, "state": "mermin", "error": 758.4607982701983, "representation": "number", "mean": 65722.48985569476, "quantity": "F_mermin"},
+{"size": 1000000000, "subsets": 1000, "particles": 18, "state": "ardehali", "error": 3499.7714250768036, "representation": "number", "mean": 168548.65788168303, "quantity": "F_ardehali"}
 ],
 "different_order_correlations": [
 {"size": 100000000, "subsets": 1000, "particles": 1, "state": "ardehali", "error": 2.2940734009939083e-06, "representation": "Q", "mean": 0.4999945854122205, "quantity": "N_total"},
