@@ -151,6 +151,7 @@ The SU(2)-Q function is the expectation value of the density operator over the S
 \end{eqn}
 For the target \abbrev{ghzm} state~\eqnref{bell-ineq:ghz:state} the function takes form of a probability distribution
 \begin{eqn}
+\label{eqn:bell-ineq:ghz:ghz-Q}
     Q
     = \frac{1}{2} \prod_{j=1}^M
         \frac{2}{\pi (1 + |z_j|^2)^3}
@@ -221,33 +222,32 @@ This, in addition to the reduced phase space dimensionality, allows the sampling
     The red dash-dotted line is the \abbrev{lhv} prediction, which gives a Bell violation when the expectation $F$ is above this line.
     \textbf{(b)} Relative sampling errors for $F$ simulated using the positive-P (red dashed line) and SU(2)-Q (blue solid line) representations.
     Sampling errors for a first order correlation (total number of ``spin-ups'') in the SU(2)-Q representation are plotted as the green dashed line.
-    The dotted reference line $\log_2 \mathrm{error} \propto M$ shows the point at which the sampling errors would give scaling properties as slow as an experimental measurement.}%endcaption
+    The grey dotted reference line $\log_2 \mathrm{error} \propto M / 2$ shows the point at which the sampling errors would give scaling properties as slow as an experimental measurement.}%endcaption
 
     \label{fig:bell-ineq:ghz:violation}
 \end{figure}
 
-\copypaste{copypaste begins}
-
-The results for test of the inequality~\eqnref{bell-ineq:ghz:general-ineq} using the SU(2)-Q representation are shown in~\figref{bell-ineq:ghz:violation}.
-We have used a \abbrev{gpu} to sample the distribution and calculate the required correlation for the values of $M$ up to $60$.
+The results of such sampling are shown in~\figref{bell-ineq:ghz:violation}.
+We used seven nVidia Tesla M2090 \abbrev{gpu}s to generate $10^{12}$ samples of the distribution~\eqnref{bell-ineq:ghz:ghz-Q} and calculate the required correlation for the values of $M$ up to $60$, and these samples were used to test the inequality~\eqnref{bell-ineq:ghz:general-ineq}.
 This corresponds to measurement of $10^{18}$ distinct sixtieth order correlation functions.
-Bell violations were verified in all cases, while genuine multipartite violations of \abbrev{lhv} requiring all $M$ observers to participate, with $F/F_{QM}>1/\sqrt{2}$, were verified for $M<50$.
+As~\figref{bell-ineq:ghz:violation},~(a) demonstrates, Bell violations were verified in all cases, although closer to $M=60$ the sampling error grew almost enough to invalidate the results.
+Bigger values of $M$ would require more samples.
 
-To understand the source of sampling errors, we investigated the scaling of errors with system-size for single measurements of a low-order spin correlation (\figref{bell-ineq:ghz:violation},~(b)), in addition to the exponentially large numbers of measurements in the expectation values $F$.
-As an example of low-order correlation we have chosen the total number of ``spin-ups'' $N = \langle\sum_{j=1}^M (\hat{\sigma}_j^z + 1 )/2 \rangle$.
-Low-order correlations were easily calculated with decreasing sampling errors as $M$ increases.
-This explains why low order correlations could be efficiently sampled in previous work, for much larger Hilbert spaces than the ones studied here.
+We also investigated the growth of sampling errors for $F$ with the positive-P and SU(2)-Q representations, as shown in~\figref{bell-ineq:ghz:violation},~(b).
+In order to have some reference for comparisons, we also plotted the sampling error for the total number of ``spin-ups''
+\begin{eqn}
+    N = \langle\sum_{j=1}^M (\hat{\sigma}_j^z + 1 )/2 \rangle.
+\end{eqn}
+This low-order spin correlation requires a linearly growing amount of measurements in the experiment, as compared to the exponentially growing amount for $F$.
+As the plot shows, the sampling error for $N$ even slowly decreases as $M$ grows.
+This explains why low-order correlations could be efficiently sampled in previous work, for much larger Hilbert spaces than the ones studied here.
 
-In contrast to this, high-order correlations showed exponentially increasing sampling error.
-The relative error in $F$ scales as $2^{M/3}$, so that the time taken at constant error scales as $2^{2M/3}$.
-Hence, probabilistic sampling scales more favorably than experiment, which would take time proportional to $2^M$ due to the use of exponentially many measurement settings.
-Single high-order correlations might be faster, depending on experimental noise levels.
+On the other hand, high-order correlations showed exponentially growing sampling error.
+In case of positive-P the relative error scales as $2^{4M/5}$, which with the chosen number of samples, produces Bell violations only up to $M=25$.
+The SU(2)-Q representation shows much better results with the relative error scaling as $2^{M/3}$, so the time taken by the simulation at constant error scales as $2^{2M/3}$.
+An experiment measuring the same quantity would take time proportional to $2^M$, since it would have to perform measurements for exponentially many settings.
+Thus the probabilistic sampling of the SU(2)-Q function scales better than experiment for high-order correlations.
 
-These results are unexpected and interesting.
-Sampling errors in low order correlations are insensitive to scaling up to mesoscopic sizes.
-These are the most commonly measured quantities, and there is no barrier to sampling these, despite Bell violations and even mesoscopic superpositions.
-However, correlations of the same order as the system size can be exponentially hard to sample in the case of Schr\"odinger cat-like states.
-Yet even in this case, the probabilistic strategy gives advantages.
-It generates exponentially many non-commuting measurement results in parallel, which can result in scaling that is exponentially faster than with direct measurements.
-
-\copypaste{copypaste ends}
+These results show that probabilistic sampling is a perfectly viable technique both for low- and high-order correlations.
+Low-order correlations are the ones most commonly measured, and sampling errors in these are insensitive to scaling up to mesoscopic sizes.
+Correlations of the same order as the system size are still exponentially hard, but a carefully chosen quasiprobability representation can give an exponential advantage over experimental scaling.
