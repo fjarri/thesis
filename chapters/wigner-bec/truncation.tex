@@ -47,7 +47,6 @@ Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming 
 \end{eqn}
 Loss operator is transformed with \thmref{wigner-spec:w-losses} and result in a similar equation, with a finite number of differential terms up to order $2n$ for $n-$body collisional losses.
 
-\copypaste{Copypaste begins here.}
 Assuming that $K_{jk}$, $U_{jk}$, and $\kappa_{\lvec}$ are real-valued, all the transformations described above result in a partial differential equation for $W$ of the form
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:untruncated-fpe}
@@ -60,21 +59,22 @@ Assuming that $K_{jk}$, $U_{jk}$, and $\kappa_{\lvec}$ are real-valued, all the 
 		+ \mathcal{O} \left[ \frac{\fdelta^3}{\fdelta \Psi_j^3} \right]
 	\right\} W.
 \end{eqn}
-Terms of order higher than $2$ are produced both by the nonlinear term in the Hamiltonian and loss terms.
+Terms of order higher than $2$ are produced both by the nonlinear term in the Hamiltonian, and loss terms.
 Such an equation could be solved perturbatively if there were only orders up to $3$ (which means an absence of nonlinear losses)~\cite{Polkovnikov2003}, but in most cases all terms except for first- and second-order ones are truncated.
 In order to justify this truncation in a consistent way, we develop an order-by-order expansion in $1/N_j$, where $N_j$ is a characteristic particle number in a physical interaction volume, and truncate terms of formal order $1/N_j^2$.
-This is achieved~\cite{Drummond1993} by use of the formal definition of a scaled Wigner function $W^{\psi}$, satisfying a scaled equation in terms of dimensionless scaled fields $\psi$, with:
+This is achieved by use of the formal definition of a scaled Wigner function $W^{\psi}$~\cite{Drummond1993}, satisfying a scaled equation in terms of dimensionless scaled fields $\psi$, with:
 \begin{eqn}
-	\psi_{j} & = \Psi_{j}\sqrt{\ell_c^D / N_j} \\
-	\mathcal{A}_j^{\psi} & = t_j \sqrt{\ell_c^D / N_j} \mathcal{A}_j
-		+ \mathcal{O} \left( 1 / N_j^2 \right) \\
-	\mathcal{D}_{jk}^{\psi} & = t_j \left( \ell_j^D / N_j \right) \mathcal{D}_{jk}
+	\tau & = t / t_c, \\
+	\psi_{j} & = \Psi_{j}\sqrt{\ell_c / N_j}, \\
+	\mathcal{A}_j^{\psi} & = t_c \sqrt{\ell_c / N_j} \mathcal{A}_j
+		+ \mathcal{O} \left( 1 / N_j^2 \right), \\
+	\mathcal{D}_{jk}^{\psi} & = t_c \left( \ell_c / N_j \right) \mathcal{D}_{jk}
 		+ \mathcal{O} \left( 1 / N_j^2 \right).
 \end{eqn}
-Here $t_j$ is a characteristic interaction time and $\ell_j$ is a characteristic interaction length.
+Here $t_c$ is a characteristic interaction time and $\ell_c$ is a characteristic interaction length.
 These would normally be chosen as the healing time and healing length respectively in a \abbrev{bec} calculation.
 Typically the cell size is chosen as proportional to the healing length, for optimum accuracy in resolving spatial detail.
-Using this expansion, a consistent order-by-order expansion in $(1/N_c)$ can be obtained,
+Using this expansion, a consistent order-by-order expansion in $1/N_j$ can be obtained,
 of form:
 \begin{eqn}
 	\frac{\upd W^{\psi}}{\upd \tau}
@@ -87,7 +87,7 @@ of form:
 	\right\} W^{\psi}.
 \end{eqn}
 
-With the assumption of the state being coherent, the simple condition for truncation --- i.e., omitting terms of $O(1/N_j^2)$ --- can be shown to be~\cite{Sinatra2002}
+With the assumption of the state being coherent, the simple condition for truncation --- i.e., omitting terms of $\mathcal{O}(1/N_j^2)$ --- can be shown to be~\cite{Sinatra2002}
 \begin{eqn}
 	N_j \gg |\restbasis_j|,
 \end{eqn}
@@ -96,7 +96,7 @@ The inclusion of the mode factor is caused by the fact that the number of additi
 We see immediately that there are subtleties involved if one wishes to include larger numbers of high-momentum modes, since this increases the mode number while leaving the numbers unchanged.
 In other words, the truncation technique is inherently restricted in its ability to resolve fine spatial details in the high-momentum cutoff limit.
 
-The $1/N_c$ is equivalent to an expansion in the inverse density, which requires the inequality~\cite{Norrie2006}
+The $1/N_j$ is equivalent to an expansion in the inverse density, which requires the inequality~\cite{Norrie2006}
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:delta-condition}
 	\delta_{\restbasis_j}(\xvec, \xvec)
@@ -118,10 +118,6 @@ It is generally the case for unitary evolution that errors caused by truncation 
 
 The use of this Wigner truncation allows us to simplify the results of \thmref{wigner-spec:w-commutator2} and \thmref{wigner-spec:w-losses}.
 Wigner truncation is an expansion up to the order $1/N_j$, so during the simplification, along with the higher order derivatives, we drop all components with $\delta_{\restbasis_j}$ of order higher than $1$ in the drift terms, and of order higher than $0$ in the diffusion terms.
-
-While there is a price for making the truncation approximation, we emphasize that this is a systematic expansion in a small parameter, $1/N$, where $N$ is the particle number. Such expansions are also relevant to stochastic diagram techniques~\cite{Chaturvedi1999}, which can be
-used to calculate order-by-order behaviour formally in such equations.
-\copypaste{Copypaste ends here.}
 
 \begin{theorem}
 Assuming the conditions for Wigner truncation are satisfied, the result of the Wigner transformation of the nonlinear term is
