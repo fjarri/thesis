@@ -10,11 +10,10 @@ Examples and tests:
 
 
 Checklist:
-- add references to published papers in the beginning of the application chapters
 - if \cite is used as a part of speech (e.g. "... in~\cite{...}), mention actual names of the authors
 - check that each abbreviation is introduced only once (or maybe also once in an appendix): BEC, GPE, SDE, FPE, LHV, QM, GPU, GHZM
-- check that --- have ~ in front of them
 - more references?
+- add references to published papers in the beginning of the application chapters (or in the introduction?)
 - chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
 - chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
 - chapters/wigner-bec/fpe-bec: it should be possible to proof that the formula for d<Psi+ Psi>/dt agrees with the classical one up to the $1/N$ order, same as we do for particular cases later on.
