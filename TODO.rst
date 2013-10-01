@@ -21,3 +21,6 @@ Checklist:
 - proofread
 - spellcheck
 - grammar check
+- do we need a page with supervisory committee?
+- do we need a special section "publications by the author"?
+- do we need the list of figures?
