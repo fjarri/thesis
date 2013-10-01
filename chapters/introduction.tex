@@ -3,7 +3,7 @@
 % =============================================================================
 
 The problem of calculating the dynamics of quantum systems has been around since the dawn of quantum mechanics itself.
-In most cases the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with particle number.
+In most cases, the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with particle number.
 The continuing increase of the available computational power has made it possible to solve the time-dependent many-boson Schr\"odinger equation exactly for relatively large systems with as many as 100 particles~\cite{Sakmann2009}.
 But larger systems, such as Bose-Einstein condensates (\abbrev{bec}s), still remain unreachable for exact simulation approaches.
 
@@ -24,12 +24,12 @@ This thesis is dedicated to one of such approaches~--- quasiprobabilities.
 
 The essence of the quasiprobability methods is representing the system's density matrix in the form of a probability distribution, or at least a probability distribution-like function.
 This function can then be propagated in time (directly or by means of a Monte-Karlo approach) and used to obtain required observables.
-First quasiprobability representations, the Wigner function~\cite{Wigner1932,Dirac1945,Moyal1947} and Husimi Q-function~\cite{Husimi1940} were introduced as early as the first half of the 20th century.
+First quasiprobability representations, the Wigner function~\cite{Wigner1932,Dirac1945,Moyal1947} and the Husimi Q-function~\cite{Husimi1940}, were introduced as early as the first half of the 20th century.
 They were followed by the Glauber-Sudarshan P-representation~\cite{Sudarshan1963,Glauber1963b,Glauber1963} and its improved version by Drummond, Gardiner and Walls, the positive-P representation~\cite{Drummond1980,Drummond1981}.
 These representations circumvent Feynman's claim (based on the Bell's theorem~\cite{Bell1964}) about the impossibility of simulating quantum systems probabilistically~\cite{Feynman1982}.
 They use the complex phase space, have the domain larger than the values of observables predicted by quantum mechanics, and only give the correct values of those observables on average~\cite{Opanchuk2013-bell-sim}.
 
-This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments, and is focused primarily on this area.
+This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments and is focused primarily on this area.
 Since different representation may perform better or worse depending on the system in question, we had to pick one that was best suited for our problem.
 
 Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (it will make a brief appearance in \charef{bell-ineq}).
@@ -38,7 +38,7 @@ This can be in some cases handled by exploiting its non-uniqueness and tailoring
 Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error.
 
 Wigner distribution is, in general, not positive, which presents problems when simulating systems with a small number of particles.
-Fortunately, assuming that the number of particles is large enough (our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details) which will truncate the Wigner function and make it strictly positive.
+Fortunately, assuming that the number of particles is large enough (our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details), under which the Wigner function can be truncated, making it strictly positive.
 This turns it into a probability distribution, thus providing a way to reduce the initial master equation to a set of stochastic differential equations (\abbrev{sde}s), for which an extensive set of numerical integration methods exists.
 Of course, it is not the only method for this type of the system; a very perspective group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011}, but it has some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.
 The Wigner method allows us to treat a large number of independent field modes, thus taking into account degrees of freedom that are excited due to collisional and nonlinear losses~\cite{Norrie2005,Deuar2007}.
@@ -51,7 +51,7 @@ The comparison of the results of the truncated Wigner method with analytical pre
 Other quasiprobabilitiy representations, such as the positive-P are known to work better near the threshold of applicability of the truncation condition~\cite{Deuar2007,Hoffmann2008}.
 There are studies that compare the truncated Wigner method with the exact positive-P method~\cite{Chaturvedi2002,Dechoum2004}.
 We perform a simple comparison of the multimode Wigner with an exact expansion in number states in \secref{wigner-bec:mm}.
-The typical results of such comparisons is that the truncated Wigner method gives correct results out to a characteristic break time.
+The typical outcome of such comparisons is that the truncated Wigner method gives correct results out to a characteristic break time.
 After this the accumulated errors are high enough to give large discrepancies in calculated correlations.
 The method thus performs badly in modeling nonlinear quantum tunneling~\cite{Drummond1989,Kinsler1991a}, which depends on both long time dynamics and quantum correlations.
 The overall picture of how this method is related to other techniques for quantum dynamics has been recently reviewed~\cite{He2012}.
@@ -65,7 +65,7 @@ Direct numerical integration of the partial differential equation resulting from
 This adds to the complexity of the formal description of the method.
 Moreover, nonlinear inelastic interactions, which were not approached methodically before, became important.
 Accordingly, much of the mathematical derivation of these techniques is not readily available.
-This thesis intends to provide a rigorous formal description of the functional truncated Wigner method for simulating the dynamics of multimode \abbrev{bec}s, along with the examples of its application to existing experiments.
+This thesis intends to provide a rigorous formal description of the functional truncated Wigner method for simulating the dynamics of multimode \abbrev{bec}s, along with examples of its application to existing experiments.
 The core of the theory described in this thesis has been published separately~\cite{Opanchuk2013}.
 
 
@@ -99,10 +99,10 @@ It shows how truncated Wigner can predict the visibility dynamics (including its
 \charef{bell-ineq} stands a bit aside, since it mostly makes use of the different quasiprobability method, Husimi Q-function (in its SU(2) variation).
 The Q-function is used to sample the ``Shr\"odinger cat'' state and to show that the probabilistical methods can indeed violate the Bell inequality.
 
-Finally, \charef{conclusion} summarizes the thesis and discusses some possible directions of the development in the field of quasiprobability representations.
+Finally, \charef{conclusion} summarizes the thesis and discusses some possible directions of development in the field of quasiprobability representations.
 
 The thesis includes several Appendices which deal with auxiliary topics.
 \appref{c-numbers} briefly describes the relaxed complex (Wirtinger) differentiation and associated integration, which are commonly used in the field of quasiprobabilities.
 \appref{func-calculus} applies these differentiation rules to define the similar formalism for functionals.
 \appref{fpe-sde} contains several theorem which deal with the equivalence correspondence between Fokker-Planck equation (\abbrev{fpe}) and a set of \abbrev{sde}s, for complex variables and functional form.
-\appref{numerical} outlines numerical methods used in the thesis to obtain simulation results.
+\appref{numerical} outlines numerical methods used for the simulations described in the thesis.
