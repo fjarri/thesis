@@ -13,19 +13,23 @@ In the paper~\cite{Opanchuk2012a} we considered a two-well four-mode \abbrev{bec
     = \frac{1}{2} \sum_{i,j=1}^2 \tilde{g}_{ij} \left(
         \hat{a}_i^\dagger \hat{a}_j^\dagger \hat{a}_j \hat{a}_i
         + \hat{b}_i^\dagger \hat{b}_j^\dagger \hat{b}_j \hat{b}_i
-        \right)
+        \right).
 \end{eqn}
-and the initial coherent state
+In this section we are only interested in a simple local case with no interaction between wells, so we can simplify the Hamiltonian to
+\begin{eqn}
+    \hat{H}
+    = \frac{1}{2} \sum_{i,j=1}^2 \tilde{g}_{ij}
+        \hat{a}_i^\dagger \hat{a}_j^\dagger \hat{a}_j \hat{a}_i.
+\end{eqn}
+The evolutions starts from the coherent state
 \begin{eqn}
 \label{eqn:wigner-bec:mm:initial-cond}
     \Psi(0)
     =
         \ket{\sqrt{N_a / 2}}_{a_1}
-        \ket{\sqrt{N_a / 2}}_{a_2}
-        \ket{\sqrt{N_b / 2}}_{b_1}
-        \ket{\sqrt{N_b / 2}}_{b_2},
+        \ket{\sqrt{N_a / 2}}_{a_2},
 \end{eqn}
-where $N_a$ and $N_b$ stand for the initial total number of atoms in the first and the second well respectively.
+where $N_a$ stands for the initial total number of atoms in the first and the second well respectively.
 The evolution of the system is governed by the master equation
 \begin{eqn}
 \label{eqn:wigner-bec:mm:master-eqn}
@@ -35,16 +39,14 @@ The evolution of the system is governed by the master equation
 After the transformation to the \abbrev{fpe} form with \thmref{mm-wigner:mm:correspondences}, truncation, and further transformation with \thmref{fpe-sde:corr:mc-fpe-sde}, this results in the equivalent system of \abbrev{sde}s
 \begin{eqn}
     \upd \begin{pmatrix}
-        \alpha_1 \\ \beta_1 \\ \alpha_2 \\ \beta_2
+        \alpha_1 \\ \alpha_2
     \end{pmatrix}
     = -i \begin{pmatrix}
         \alpha_1 (\tilde{g}_{11} |\alpha_1|^2 + \tilde{g}_{12} |\alpha_2|^2) \\
-        \beta_1 (\tilde{g}_{11} |\beta_1|^2 + \tilde{g}_{12} |\beta_2|^2) \\
-        \alpha_2 (\tilde{g}_{22} |\alpha_2|^2 + \tilde{g}_{12} |\alpha_1|^2) \\
-        \beta_2 (\tilde{g}_{22} |\beta_2|^2 + \tilde{g}_{12} |\beta_1|^2)
+        \alpha_2 (\tilde{g}_{22} |\alpha_2|^2 + \tilde{g}_{12} |\alpha_1|^2)
     \end{pmatrix} \upd \tau.
 \end{eqn}
-These equations can be solved numerically, which in our case was done with XMDS~\cite{Collecutt2001,Dennis2013}, and the operator moments given by \thmref{mm-wigner:mm:moments} can be used to obtain required observables.
+These equations can be solved numerically, which in our case was done with XMDS (see \appref{numerical} for details), and the operator moments given by \thmref{mm-wigner:mm:moments} can be used to obtain required observables.
 
 On the other hand, the master equation~\eqnref{wigner-bec:mm:master-eqn} can be solved exactly using a number state expansion~\cite{Opanchuk2012a}.
 In the Heisenberg representation the equations of motion for the first well (with the absence of coupling of any kind, the evolution in the wells is independent) are
@@ -158,18 +160,20 @@ Here we denoted the pair correlation
     \includegraphics{figures_generated/exact/squeezing_cc_err.pdf}}
 
     \caption{
-    Difference of the Wigner simulated local squeezing and the exact results (solid lines) as compared to the sampling errors in Wigner simulations (dashed lines).
-    Plotted are the results for $2,000$ trajectories (blue lines) and $20,000$ trajectories (red lines).
+    Relative difference of the Wigner simulated local squeezing and the exact results (solid lines) as compared to the sampling errors in Wigner simulations (dashed lines).
+    Plotted are the results for $20,000$ trajectories (red lines) and $200,000$ trajectories (blue lines).
     The plots correspond to \textbf{(a)} the case of no inter-component interaction, and \textbf{(b)} strong inter-component interaction (the interaction coefficients are the same as in~\figref{wigner-bec:mm:squeezing-comparison}).}%endcaption
 
     \label{fig:wigner-bec:mm:squeezing-error-comparison}
 \end{figure}
 
 The expectations above can be expressed in terms of creation and annihilation operators, and calculated either in Wigner representation using \thmref{mm-wigner:mm:moments}, or with the number state expansion using~\eqnref{wigner-bec:mm:exact-a} and~\eqnref{wigner-bec:mm:exact-f} (courtesy of Q.~Y.~He).
-The results are plotted in~\figref{wigner-bec:mm:squeezing-comparison}.
+The results are plotted in~\figref{wigner-bec:mm:squeezing-comparison}, using a low number of trajectories ($2,000$) to make the sampling error more visible.
 The Wigner method shows good agreement with the exact results in the time range of interest; the growing sampling error can be reduced to a desirable extent by using more simulation trajectories.
-Nevertheless, the Wigner results show a systematic error (\figref{wigner-bec:mm:squeezing-error-comparison}), which is inside the sampling error range for the low number of trajectories, but preserves its magnitude as the number of trajectories is increased (and the sampling error decreased).
-This is a sign of the failing truncation approximation.
+
+The relative (normalized on the corresponding exact method results) sampling and systematic errors of the Wigner method are plotted in~\figref{wigner-bec:mm:squeezing-error-comparison}.
+The Wigner results show a systematic error in case of turned off interactions at $\tau = 5 \ldots 10$ (\figref{wigner-bec:mm:squeezing-error-comparison},~(a)), which is a sign of the failing truncation approximation.
+At other times the difference with the exact results is within the sampling error range.
 The large oscillations of the systematic error at the start of the simulation can be explained by accumulating uncertainties in the denominator of~\eqnref{wigner-bec:mm:squeezing}.
 
 Note that while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same effectiveness~\cite{Opanchuk2012a}.

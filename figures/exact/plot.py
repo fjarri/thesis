@@ -100,35 +100,36 @@ def _squeezing_err(fname, coupling):
 
     exact_interp = interp1d(tau_exact, s_exact, kind="cubic", bounds_error=False)
 
+    """
     s.plot(tau_wigner_100,
         numpy.abs(exact_interp(tau_wigner_100) - s_wigner_100) / exact_interp(tau_wigner_100),
         color=mplh.color.f.blue.main)
     s.plot(tau_wigner_100,
         s_wigner_err_100 / exact_interp(tau_wigner_100),
         color=mplh.color.f.blue.main, linestyle='--', dashes=mplh.dash['--'])
+    """
+
     s.plot(tau_wigner_1k,
         numpy.abs(exact_interp(tau_wigner_1k) - s_wigner_1k) / exact_interp(tau_wigner_1k),
-        color=mplh.color.f.red.main)
+        color=mplh.color.f.red.main, dashes=mplh.dash['-'])
     s.plot(tau_wigner_1k,
         s_wigner_err_1k / exact_interp(tau_wigner_1k),
-        color=mplh.color.f.red.main, linestyle='--', dashes=mplh.dash['--'])
+        color=mplh.color.f.red.main, dashes=mplh.dash['--'])
 
-    """
     s.plot(tau_wigner_10k,
         numpy.abs(exact_interp(tau_wigner_10k) - s_wigner_10k) / exact_interp(tau_wigner_10k),
-        color=mplh.color.f.green.main)
+        color=mplh.color.f.blue.main, dashes=mplh.dash['-'])
     s.plot(tau_wigner_10k,
         s_wigner_err_10k / exact_interp(tau_wigner_10k),
-        color=mplh.color.f.green.main, linestyle='--', dashes=mplh.dash['--'])
-    """
+        color=mplh.color.f.blue.main, dashes=mplh.dash['--'])
 
     s.text(
-        18 if coupling else 3,
-        0.13,
+        72 if coupling else 12,
+        0.0425 if coupling else 0.085,
         "interaction on" if coupling else "interaction off")
 
     s.set_xlim((0, 120 if coupling else 20))
-    s.set_ylim((0, 0.15))
+    s.set_ylim((0, 0.05 if coupling else 0.1))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 

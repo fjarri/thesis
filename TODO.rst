@@ -11,9 +11,7 @@ Examples and tests:
 
 Checklist:
 - write acknowledgements to: Qiongyi, Margaret, Laura, Michael
-- check a11,12,22 for exact one-well squeezing results
 - add references to published papers in the beginning of the application chapters
-- fix this section - we are only talking about a single well, no need to mention two wells
 - if \cite is used as a part of speech (e.g. "... in~\cite{...}), mention actual names of the authors
 - check that each abbreviation is introduced only once (or maybe also once in an appendix): BEC, GPE, SDE, FPE, LHV, QM, GPU, GHZM
 - check that --- have ~ in front of them
