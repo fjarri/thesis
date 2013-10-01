@@ -33,7 +33,7 @@ This was improved even further by combining results calculated on several videoc
 For the cases where the raw speed of calculations was less important, and the custom \abbrev{gpgpu} program was not required, we used the XMDS package~\cite{Collecutt2001,Dennis2013}.
 XMDS is a code generator written in Python, that, based on a brief XML description of the simulation problem, creates and compiles a C++ program that performs the integration.
 The strength of XMDS lies in highly optimized integration algorithms it uses (which is improved even more by on-demand compilation), and in its transparent usage of multi-processor interface (\abbrev{mpi}), which allows it to use multiple cores of a \abbrev{cpu}, or multiple nodes in a cluster.
-We used XMDS to integrate the stochastic differential equations in \secref{wigner-bec:mm}.
+We used XMDS to integrate the \abbrev{sde}s in \secref{wigner-bec:mm}.
 
 
 % =============================================================================

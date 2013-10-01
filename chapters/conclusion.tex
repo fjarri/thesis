@@ -6,13 +6,13 @@
 In this thesis we introduced the functional Wigner transformation formally.
 We proved the required theorems in from Wirtinger calculus and functional calculus, and used them to derive the basic properties of the Wigner transformation: sequential transformation of operator products, and the correspondence between operator expectations and moments of the Wigner functional.
 
-We then applied this framework to the exact operator equation governing the dynamics of a Bose-Einstein condensate (\abbrev{bec}) and showed how to transform it into the equivalent partial differential equation (\abbrev{pde}).
-An approximation (Wigner truncation) was introduced, which allowed to simplify this equation further, and turn it into a set of stochastic differential equations (\abbrev{sde}s) for trajectories in the phase space.
+We then applied this framework to the exact operator equation governing the dynamics of a \abbrev{bec} and showed how to transform it into the equivalent partial differential equation.
+An approximation (Wigner truncation) was introduced, which allowed to simplify this equation further, and turn it into a set of \abbrev{sde}s for trajectories in the phase space.
 All of this was done while keeping the functional nature of equations intact, and retaining the inherent mode cutoff of field operators and wavefunctions, which is unavoidable in numerical simulations.
 
 On the whole, it allowed us to link the coefficients and terms in the master equation directly with those of \abbrev{sde}s, resulting in a simple method of numerical simulations of \abbrev{bec} dynamics.
 This method includes the effect of nonlinear losses in a natural way, is capable of producing any high-order correlations without changes to the initial state or the propagation, and is highly parallelizable.
-The latter is a huge advantage in the modern word of multi-core and multi-node computations and the recent advent of general calculations on graphical processing units (\abbrev{gpu}s).
+The latter is a huge advantage in the modern word of multi-core and multi-node computations and the recent advent of general calculations on \abbrev{gpu}s.
 In particular, the use of modern \abbrev{gpu}s allowed us to simulate the dynamics of hundreds of thousands atoms with thousands of modes with high degree of accuracy on a desktop in the order of hours.
 
 We applied the truncated Wigner method to some recent \abbrev{bec} interferometry experiments, both local and reported by other experimental teams.
@@ -21,7 +21,7 @@ The method allows one to account for experimental imperfections (measurement and
 
 In the last chapter we considered a more broad topic of the ability of phase space methods to simulate quantum mechanical systems, and their differences from local hidden variable (\abbrev{lhv}) theories.
 We showed that, due to weaker restrictions on the codomains of the moments that correspond to physical observables, such methods are indeed capable of demonstrating such essential \abbrev{qm} properties as the violation of Bell inequalities.
-We were able to calculate the correlations involving every particle in the system in highly entangled Greenberger-Horne-Zeilinger-Mermin (\abbrev{ghzm}) states for up to 60 particles.
+We were able to calculate the correlations involving every particle in the system in highly entangled \abbrev{ghzm} states for up to $60$ particles.
 This results is far beyond the capabilities of current experimental techniques.
 
 \centerline{\vfleuron}

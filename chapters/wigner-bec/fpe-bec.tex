@@ -40,11 +40,12 @@ and the diffusion matrix
 		\frac{\upp O_{\lvec}^*}{\upp \Psi_k^*}.
 \end{eqn}
 
-It can be shown (see \appref{fpe-sde} for details) that this truncated equation has a positive-definite diffusion matrix $\mathcal{D}$ and is therefore a Fokker-Planck equation (\abbrev{fpe}), with its solution $W(t)$ being a probability distribution (provided that $W(0)$ was a probability distribution).
+It can be shown (see \appref{fpe-sde} for details) that this truncated equation has a positive-definite diffusion matrix $\mathcal{D}$ and is therefore a \abbrev{fpe}, with its solution $W(t)$ being a probability distribution (provided that $W(0)$ was a probability distribution).
 This differs from the original Wigner function(al), which can be negative, and is the result of the truncation.
 Thus the solution of this equation may not be equivalent to the solution of the orignal master equation~\eqnref{wigner-bec:master-eqn:master-eqn} (if the corresponding density matrices have non-positive Wigner functions), but, given that the truncation conditions are satisfied, the effect is negligible.
 
-Direct solution of the above \abbrev{fpe} is generally impractical, and a Monte Carlo or sampled calculation is called for. The equation can be further transformed to the equivalent set of stochastic differential equations using \thmref{fpe-sde:corr:fpe-sde-func} with
+Direct solution of the above \abbrev{fpe} is generally impractical, and a Monte Carlo or sampled calculation is called for.
+The equation can be further transformed to the equivalent set of \abbrev{sde}s using \thmref{fpe-sde:corr:fpe-sde-func} with
 \begin{eqn}
 	\mathcal{B}_{j\lvec}
 	= \sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}.

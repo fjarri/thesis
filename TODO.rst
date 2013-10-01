@@ -10,10 +10,11 @@ Examples and tests:
 
 
 Checklist:
-- check that each abbreviation is introduced only once (or maybe also once in an appendix): BEC, GPE, SDE, FPE, LHV, QM, GPU, GHZM
+- add "publications by the author" (put latest papers on arxiv)
+- add the list of figures
+- do we need to define abbrevs where they are actually used in addition to first appearance?
 - more references?
 - add references to published papers in the beginning of the application chapters (or in the introduction?)
-- chapters/bec-squeezing/separation: can we use Riedel et al squeezing plot?
 - chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
 - chapters/wigner-bec/fpe-bec: it should be possible to proof that the formula for d<Psi+ Psi>/dt agrees with the classical one up to the $1/N$ order, same as we do for particular cases later on.
 - eqn:wigner-bec:fpe-bec:ordering-transformation : do we need proof?
@@ -22,5 +23,3 @@ Checklist:
 - spellcheck
 - grammar check
 - do we need a page with supervisory committee?
-- do we need a special section "publications by the author"?
-- do we need the list of figures?
