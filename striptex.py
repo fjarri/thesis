@@ -76,7 +76,7 @@ def expand_envs(text, env):
 def replace_figures(text):
     return re.sub(r'\\begin\{figure\}(.*?)\\end\{figure\}',
         lambda m: re.sub(
-            r'^.*\\caption\{(.*)\}\%endcaption.*$',
+            r'^.*\\caption\[[^\]]+\]\{(.*)\}\%endcaption.*$',
             r'\1',
             m.group(1),
             flags=re.DOTALL),
