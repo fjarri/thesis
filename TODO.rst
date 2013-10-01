@@ -11,7 +11,6 @@ Examples and tests:
 
 Checklist:
 - add "publications by the author" (put latest papers on arxiv)
-- add the list of figures
 - do we need to define abbrevs where they are actually used in addition to first appearance?
 - more references?
 - add references to published papers in the beginning of the application chapters (or in the introduction?)
