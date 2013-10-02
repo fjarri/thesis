@@ -4,7 +4,7 @@
 % =============================================================================
 
 Formally, a function of complex variable has to be holomorphic in order to be complex differentiable.
-In many cases, however, it is enough to have less strict ``physicists'\,'' complex differentiation rules, which only requre the function's real and complex part to be differentiable, without imposing additional constraints.
+In many cases, however, it is enough to have less strict ``physicists'\,'' complex differentiation rules, which only require the function's real and complex part to be differentiable, without imposing additional constraints.
 Such rules were developed by Wirtinger~\cite{Wirtinger1927}; further extension to vectors and matrices was performed by Hj{\o}rungnes and Gesbert~\cite{Hjorungnes2007}.
 A very good review and a thorough description of their application was made by Kreutz-Delgado~\cite{Kreutz-Delgado2009}.
 This section will outline Wirtinger differentiation rules and provide some lemmas based on them, which, in turn, are going to be used in the further Appendices, and in the main body of the thesis.
@@ -50,7 +50,7 @@ It is convenient to connect symbolic rules for Wirtinger differentiation with th
 
 \begin{theorem}
 \label{thm:c-numbers:independent-vars}
-	If a function $f(z)$ can be expanded into series of $z^n (z^*)^m$, then $\cwd f/\cwd z$ and $\cwd f/\cwd z^*$ can be calculated as partial derivatives of the function $f$ expressed in terms of $z$ and $z^*$, over $z$ and $z^*$ respectively:
+	If a function $f(z)$ can be expanded into the series of $z^n (z^*)^m$, then $\cwd f/\cwd z$ and $\cwd f/\cwd z^*$ can be calculated as partial derivatives of the function $f$ expressed in terms of $z$ and $z^*$, over $z$ and $z^*$ respectively:
 	\begin{eqn*}
 		\frac{\cwd f(z)}{\cwd z} = \frac{\upd f(z, z^*)}{\upd z},
 		\quad
@@ -60,8 +60,8 @@ It is convenient to connect symbolic rules for Wirtinger differentiation with th
 \begin{proof}
 We will prove the first identity.
 Without loss of generality, we can consider $f(z) = z^r (z^*)^s$.
-First, one can easily prove (by transition to real values) that $\cwd (z z^*)/\cwd z = z^*$ and $\cwd (z z^*)/\cwd z^* = z$.
-Let us assume that the identity is true for some $r$ and $s$; then, using the product rule,
+First, one can easily prove (by the transition to real values) that $\cwd (z z^*)/\cwd z = z^*$ and $\cwd (z z^*)/\cwd z^* = z$.
+Let us assume that the identity is correct for some $r$ and $s$; then, using the product rule,
 \begin{eqn}
 	\frac{\cwd}{\cwd z} (z^{r+1} (z^*)^s)
 	& = \frac{\cwd}{\cwd z} (z z^r (z^*)^s)
@@ -69,12 +69,12 @@ Let us assume that the identity is true for some $r$ and $s$; then, using the pr
 	& = z^r (z^*)^s + r z z^{r-1} (z^*)^s
 		= (r + 1) z^r (z^*)^s.
 \end{eqn}
-By induction, the statement is true for any natural $r$ and $s$, and it is obviously true if $r = 0$ or $s = 0$, which proves the theorem.
+By induction, the statement is correct for any natural $r$ and $s$, and it is obviously true if $r = 0$ or $s = 0$, which proves the theorem.
 \end{proof}
 
 The chain differentiation rule in \thmref{c-numbers:diff-properties} and the above theorem give rise to the common notation used in conjunction with Wirtinger differentiation.
 In order to emphasize the ``independent'' behavior of $z$ and $z^*$, function arguments are sometimes written as $f(z, z^*)$, even though technically they are not independent.
-We will not use such notation in this thesis, because it will create a lot of clutter later on.
+We will not use such notation in this thesis because it will create a lot of clutter later on.
 
 
 % =============================================================================
@@ -111,8 +111,7 @@ First, by changing a variable in the integral and using known Fourier transform 
 	\int\limits_{-\infty}^{\infty} \upd v\, v^n \exp(\pm 2 i x v)
 	= \pi (\mp i / 2)^n \delta^{(n)}(x).
 \end{eqn}
-Note that we have explicitly written integration limits here;
-they are swapped when we change the variable in the first integral.
+Note that we have explicitly written integration limits here; they are swapped when we change the variable in the first integral.
 
 Denoting $\alpha = u + iv$ and $\beta = x + iy$, we can expand the initial expression as
 \begin{eqn2}
@@ -183,7 +182,7 @@ Integration by parts will be used extensively in further proofs, and we will nee
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-From the square-integrability of $f$ it follows that $\lim_{\Real \beta \rightarrow \infty} = 0$ and $\lim_{\Imag \beta \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
+It follows from the square-integrability of $f$ that $\lim_{\Real \beta \rightarrow \infty} = 0$ and $\lim_{\Imag \beta \rightarrow \infty} = 0$, so the statement of the lemma can be proved by transforming to real variables and integrating.
 \end{proof}
 
 \begin{lemma}
