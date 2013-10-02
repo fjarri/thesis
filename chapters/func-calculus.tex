@@ -14,9 +14,9 @@ Although, while these papers cover the foundations quite well, they are missing 
 \section{Functional spaces and projections}
 % =============================================================================
 
-We will assume we are provided with an arbitrary orthonormal basis $\fullbasis$, consisting of functions $\phi_{\nvec}(\xvec)$, where $\xvec \in \mathbb{R}^D$ is a $D$-dimensional coordinate vector, and $\nvec \in \fullbasis$ is a mode identifier.
+We will assume that we are provided with an arbitrary orthonormal basis $\fullbasis$, consisting of functions $\phi_{\nvec}(\xvec)$, where $\xvec \in \mathbb{R}^D$ is a $D$-dimensional coordinate vector, and $\nvec \in \fullbasis$ is a mode identifier.
 The exact nature of a mode identifier is irrelevant; we only require it to have an equivalence relation defined, and be enumerable.
-For example, for a three-dimensional harmonic potential, the mode identifier will be a tuple $(k,l,m)$ of three non-negative integers.
+For example, for a three-dimensional harmonic potential, the mode identifier is a tuple $(k,l,m)$ of three non-negative integers.
 
 Orthonormality and completeness conditions for basis functions are, respectively,
 \begin{eqns}
@@ -80,7 +80,7 @@ Being applied to the delta function, the projection operator produces a restrict
 
 \begin{definition}
 \label{def:func-calculus:restricted-delta}
-	The restricted delta function $\delta_{\restbasis} \in \mathbb{F}_{\restbasis}$ is a projected form of standard delta function:
+	The restricted delta function $\delta_{\restbasis} \in \mathbb{F}_{\restbasis}$ is a projected form of the standard delta function:
 	\begin{eqn*}
 		\delta_{\restbasis}(\xvec^\prime, \xvec)
 		= \proj{\restbasis}[\delta]
@@ -120,7 +120,7 @@ Therefore any functional operator $\mathcal{F}$ can be alternatively treated as 
 		\equiv \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{R}^D \rightarrow \mathbb{C} \\
 	& F(\balpha, \xvec) \equiv \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)](\xvec).
 \end{eqn}
-Since the operator is not linear, this correspondence in general cannot be expressed in a form of matrix.
+Since the operator is not linear, this correspondence in general cannot be expressed in a form of a matrix.
 
 Using this correspondence, we can define the differentiation in the space of functional operators:
 
@@ -145,7 +145,7 @@ Using this correspondence, we can define the differentiation in the space of fun
 \end{definition}
 
 Note that the type of the returned operator differs from the argument type: the result depends on two coordinates, not just one.
-The second coordinate ($\xvec^\prime$) comes from the function $f^\prime \equiv f(\xvec^\prime)$ we are differentiating by.
+The second coordinate ($\xvec^\prime$) comes from the function $f^\prime \equiv f(\xvec^\prime)$ by which we are differentiating.
 
 This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similar to the Wirtinger derivative from \appref{c-numbers}.
 Let us first demonstrate that the definition obeys standard differentiation rules.
@@ -164,7 +164,7 @@ Let us first demonstrate that the definition obeys standard differentiation rule
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-First tree rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into \defref{func-calculus:func-diff}.
+First three rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into \defref{func-calculus:func-diff}.
 To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
 \begin{eqn}
 \label{eqn:func-calculus:chain-expansion}
@@ -236,7 +236,7 @@ Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta 
 \end{eqn}
 \end{proof}
 
-The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- much like complex-valued functions with respect to Wirtinger differentiation.
+The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to Wirtinger differentiation.
 
 Most of the time we will deal with functional operators in a particular form, namely the algebraic expressions of their arguments.
 It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
@@ -287,7 +287,7 @@ The second identity is proved in the same way.
 \section{Functional integration}
 % =============================================================================
 
-In this section we will only postulate the expression for an integral of a functional operator; for the rationale behind this definition one can refer to~\cite{Dalton2012}.
+In this section we will only postulate the expression for the integral of a functional operator; for the rationale behind this definition one can refer to the detailed explanation by Dalton~\cite{Dalton2012}.
 Same as in the differentiation case, we will make use of the equivalence between a functional operator and a function of two vectors.
 
 \begin{definition}
@@ -404,7 +404,7 @@ Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alph
 			\left( \frac{\cwd}{\cwd \beta_{\nvec}} \right)^{v_{\nvec}}
 			\delta(\Real \beta_{\nvec}) \delta(\Imag \beta_{\nvec}).
 \end{eqn}
-Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the functional delta (\defref{func-calculus:delta-functional}):
+Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the delta functional (\defref{func-calculus:delta-functional}):
 \begin{eqn}
 	& = \pi^{2|\restbasis|}
 		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\cwd}{\cwd \beta_{\nvec}^*} \right)^r
@@ -418,7 +418,7 @@ Collapsing sums, and recognising functional derivatives (\defref{func-calculus:f
 \end{eqn}
 \end{proof}
 
-It is easy to show that functional integration has the same integration by parts property as common integration:
+It is easy to show that the functional integration has the same integration by parts property as the common integration:
 \begin{eqn}
 	\int \fdelta^2 f
 		\frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
@@ -429,7 +429,8 @@ It is easy to show that functional integration has the same integration by parts
 		\frac{\fdelta \mathcal{G}[f]}{\fdelta f^\prime}
 		\mathcal{F}[f].
 \end{eqn}
-Functional integration by parts serves as the foundation of several theorems from \charef{wigner}, and will need several theorems that will help us eliminate the first term in the right part of the expression.
+Functional integration by parts serves as the foundation of several theorems from \charef{wigner}.
+These theorems additionally need several lemmas that help us eliminate the first term in the right part of the above expression.
 Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with the addition of one more functional-specific lemma.
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:zero-integrals}]
@@ -499,7 +500,7 @@ With this notation:
 		\int \upd^2 \beta_{\nvec} \frac{\cwd}{\cwd \beta_{\nvec}}
 			D_{\nvec} \mathcal{F}[\mathcal{C}_{\restbasis}(\bbeta)].
 \end{eqn}
-For each term the internal is equal to zero because of \lmmref{c-numbers:zero-integrals}, therefore the whole sum is zero.
+For each term the internal integral is equal to zero because of \lmmref{c-numbers:zero-integrals}, and therefore the whole sum is zero.
 \end{proof}
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:zero-delta-integrals}]
@@ -525,19 +526,19 @@ For each term the internal is equal to zero because of \lmmref{c-numbers:zero-in
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Proved by expanding functional integration and differentials into modes and recognising \lmmref{c-numbers:zero-delta-integrals}.
+Proved by expanding functional integration and differentials into modes and applying \lmmref{c-numbers:zero-delta-integrals}.
 \end{proof}
 
-In order to perform transformations of master equations in the future, we will need a lemma which justifies certain operation with Laplacian (which is a part of kinetic term in a Hamiltonian).
+In order to perform transformations of a master equation in the future, we will need a lemma which justifies a certain operation with the Laplacian (which is a part of the kinetic term in a Hamiltonian).
 
 \begin{lemma}
 \label{lmm:func-calculus:move-laplacian}
-	Let mode functions in the restricted basis $\restbasis$ satisfy the condition that for any pair of modes $\mvec,\nvec \in \restbasis$ it is true that
+	Let mode functions in a restricted basis $\restbasis$ satisfy the condition that for any pair of modes $\mvec,\nvec \in \restbasis$ it is true that
 	\begin{eqn*}
 		\oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
 		= 0,
 	\end{eqn*}
-	where $A$ is the integration area associated with the basis, $\partial A$ is its boundary, and $\mathbf{v}$ is the outward pointing unit normal of surface element $\upd S$.
+	where $A$ is the integration area associated with the basis, $\partial A$ is its boundary, and $\mathbf{v}$ is the outward-pointing unit normal of a surface element $\upd S$.
 	Then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$,
 	\begin{eqn*}
 		\int\limits_A \upd\xvec \left(
@@ -590,7 +591,7 @@ In this work we use two bases: plane waves and harmonic modes (see \appref{bases
 
 For the harmonic basis the condition is obviously true, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function~\eqnref{bases:harmonic-modes} are zero there.
 
-For the plane wave basis $A$ is a box (let us suppose for definiteness that it spans from $0$ to $L_j$ in every dimension $j$), and the mode functions are separable ($\phi_{\nvec}(\xvec) \equiv \prod_{j=1}^D \phi_{n_j}^{(j)}(x_j)$) so the variables in the integral from the condition can be easily separated too:
+For the plane wave basis the area $A$ is a box (let us suppose for definiteness that it spans from $0$ to $L_j$ in every dimension $j$), and the mode functions are separable ($\phi_{\nvec}(\xvec) \equiv \prod_{j=1}^D \phi_{n_j}^{(j)}(x_j)$) so the variables in the integral from the condition can be easily separated too:
 \begin{eqn}
 	\oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
 	& = \sum_{j=1}^D
