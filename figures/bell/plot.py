@@ -350,7 +350,7 @@ def ghz_errors(fname):
 
     ax.text(40, -21, 'first order')
     ax.text(40, -10, 'SU(2)-Q')
-    ax.text(18, -3, 'positive-P')
+    ax.text(5, -3, 'positive-P')
     ax.text(34, -5, 'reference')
 
     fig.text(0.01, 0.92, '(b)', fontweight='bold')
