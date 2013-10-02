@@ -2,9 +2,9 @@
 \section{Correspondences}
 % =============================================================================
 
-We will start by formulating the known real-valued correspondence in a form which is more convenient for further proofs in this section, and also close to the results one obtains from the Wigner transformation.
+We will start by formulating the known real-valued correspondence in a form which is more convenient for further proofs in this section, and is also close to the results one obtains from the Wigner transformation.
 
-\begin{lemma}[real-valued \abbrev{fpe}--\abbrev{sde}s correspondence in convenient form.]
+\begin{lemma}[real-valued \abbrev{fpe}--\abbrev{sde}s correspondence in a convenient form.]
 \label{lmm:fpe-sde:corr:fpe-sde-real}
 	Let $\zvec^T \equiv (z_1 \ldots z_M)$ be a set of real variables.
 	Then the \abbrev{fpe}
@@ -13,11 +13,11 @@ We will start by formulating the known real-valued correspondence in a form whic
 		= -\vcwd_{\zvec}^T \cdot \avec W
 		+ \frac{1}{2} \Trace{ \vcwd_{\zvec} \vcwd_{\zvec}^T B B^T } W
 	\end{eqn*}
-	is equivalent to the set of \abbrev{sde}s in It\^o form
+	is equivalent to the set of \abbrev{sde}s in the It\^o form
 	\begin{eqn*}
 		\upd\zvec = \avec \upd t + B \upd\Zvec
 	\end{eqn*}
-	and to the set of \abbrev{sde}s in Stratonovich form
+	and to the set of \abbrev{sde}s in the Stratonovich form
 	\begin{eqn*}
 		\upd\zvec = (\avec - \svec)\upd t + B \upd\Zvec,
 	\end{eqn*}
@@ -27,15 +27,15 @@ We will start by formulating the known real-valued correspondence in a form whic
 		= \frac{1}{2} \sum_{k,i} B_{ki} \frac{\cwd}{\cwd z_k} B_{ji}
 		= \frac{1}{2} \Trace{B^T \vcwd_{\zvec} \evec_j^T B},
 	\end{eqn*}
-	$\evec_i$ being the unit vector with elements $(\evec_j)_i = \delta_{ij}$.
-	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ corresponds to the number of noise sources), $\vcwd_{\zvec}^T \equiv (\upd/\upd z_1 \ldots \upd/\upd z_M)$ is a cogradient vector, and $\Zvec$ is a standard $L$-dimensional Wiener process with $\langle \upd Z_j^2 \rangle = \upd t$.
+	with $\evec_j$ being a unit vector with elements $(\evec_j)_i = \delta_{ij}$.
+	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ is the number of noise sources), $\vcwd_{\zvec}^T \equiv (\upd/\upd z_1 \ldots \upd/\upd z_M)$ is a cogradient vector, and $\Zvec$ is a standard $L$-dimensional Wiener process with $\langle \upd Z_j^2 \rangle = \upd t$.
 \end{lemma}
 \begin{proof}
-For the detailed proof see~\cite{Risken1996}, sections 3.3 and 3.4.
+For the detailed proof see Risken~\cite{Risken1996}, sections 3.3 and 3.4.
 \end{proof}
 
 The above theorem can be extended to work with complex Wirtinger derivatives and complex-valued coefficients.
-Of couse, in order to produce the real-valued $\upd W/\upd t$ in the left part, a \abbrev{fpe} must have a particular form.
+Of couse, in order to produce a real-valued $\upd W/\upd t$ in the left part, a \abbrev{fpe} must have a particular form.
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-complex}
@@ -46,11 +46,11 @@ Of couse, in order to produce the real-valued $\upd W/\upd t$ in the left part, 
 		= -\vcwd_{\balpha}^T \avec W - \vcwd_{\balpha^*}^T \avec^* W
 		+ \Trace{ \vcwd_{\balpha^*} \vcwd_{\balpha}^T B B^H } W
 	\end{eqn*}
-	is equivalent to the set of \abbrev{sde}s in It\^o form
+	is equivalent to the set of \abbrev{sde}s in the It\^o form
 	\begin{eqn*}
 		\upd\balpha = \avec \upd t + B \upd\Zvec,
 	\end{eqn*}
-	and to the set of \abbrev{sde}s in Stratonovich form
+	and to the set of \abbrev{sde}s in the Stratonovich form
 	\begin{eqn*}
 		\upd\balpha = (\avec - \svec) \upd t + B \upd\Zvec,
 	\end{eqn*}
@@ -61,8 +61,8 @@ Of couse, in order to produce the real-valued $\upd W/\upd t$ in the left part, 
 	and $\Zvec = (\mathbf{X} + i\mathbf{Y}) / \sqrt{2}$ is an $L$-dimensional standard complex-valued Wiener process (with $\langle \upd Z_j \upd Z_k^* \rangle = \delta_{jk} \upd t$), containing two standard $L$-dimensional Wiener processes $\mathbf{X}$ and $\mathbf{Y}$.
 \end{theorem}
 \begin{proof}
-Let us expand the \abbrev{fpe} using real values $\balpha = \xvec + i \yvec$, $\avec = \mathbf{u} + i \mathbf{v}$, $B = F + iG$, $\vcwd_{\balpha} = (\vcwd_{\xvec} - i \vcwd_{\yvec}) / 2$.
-Thus
+Let us expand the \abbrev{fpe} using real variables: $\balpha = \xvec + i \yvec$, $\avec = \mathbf{u} + i \mathbf{v}$, $B = F + iG$, $\vcwd_{\balpha} = (\vcwd_{\xvec} - i \vcwd_{\yvec}) / 2$.
+This results in
 \begin{eqn}
 	\frac{\upd W}{\upd t}
 	={} & - \vcwd_{\xvec}^T \mathbf{u} W
@@ -86,7 +86,7 @@ Thus
 		(F F^T + G G^T)
 	} W.
 \end{eqn}
-Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{\yvec}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\vcwd_{\xvec} \vcwd_{\yvec}^T - \vcwd_{\yvec} \vcwd_{\xvec}^T$ are antisymmetric, corresponding traces are equal to zero, which gives us \abbrev{fpe} in real variables
+Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{\yvec}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\vcwd_{\xvec} \vcwd_{\yvec}^T - \vcwd_{\yvec} \vcwd_{\xvec}^T$ are antisymmetric ones, the corresponding traces are equal to zero, which gives us the \abbrev{fpe} in real variables
 \begin{eqn}
 	\frac{\upd W}{\upd t}
 	={} & - \vcwd_{\xvec}^T \mathbf{u} W
@@ -103,7 +103,7 @@ Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{
 
 In order to use \lmmref{fpe-sde:corr:fpe-sde-real},
 we need to join variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
-This will give us the equation in the form identical to that from the lemma, with the drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and the diffusion matrix
+This will give us an equation in the form identical to that from the lemma, with the drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and the diffusion matrix
 \begin{eqn}
 	\tilde{B} \tilde{B}^T \equiv \frac{1}{2} \begin{pmatrix}
 		F F^T + G G^T & F G^T - G F^T \\
@@ -117,7 +117,7 @@ which gives the noise matrix
 		G & F
 	\end{pmatrix}.
 \end{eqn}
-Therefore the equivalent \abbrev{sde}s in It\^o form are
+Therefore the equivalent \abbrev{sde}s in the It\^o form are
 \begin{eqn}
 	d\zvec = \tilde{\avec} dt + \tilde{B} d\tilde{\Zvec},
 \end{eqn}
@@ -137,7 +137,7 @@ which leads to the It\^o part of the theorem statement.
 \end{eqn}
 
 Noise-induced drift term in Stratonovich case can be calculated by substituting $\tilde{B}$ into the expression for $s_j$ from \lmmref{fpe-sde:corr:fpe-sde-real}.
-We will calculate $s_j$ with $j$ belonging to $\xvec$ and $\yvec$ part of coordinate space separately.
+We will calculate $s_j$ with $j$ belonging to the $\xvec$ and the $\yvec$ part of coordinate space separately.
 \begin{eqn}
 	s_j^{(x)}
 	= \frac{1}{4} \Trace{
@@ -196,7 +196,7 @@ Similarly for the $\yvec$ part,
 		+ \Trace{ F^T \vcwd_{\yvec} \evec_j^T F }
 	\right).
 \end{eqn}
-Therefore the final term in complex-valued \abbrev{sde}s is
+Therefore the final term in the complex-valued \abbrev{sde}s is
 \begin{eqn}
 	s_j
 	= s_j^{(x)} + i s_j^{(y)}
@@ -205,9 +205,9 @@ Therefore the final term in complex-valued \abbrev{sde}s is
 which finishes the proof.
 \end{proof}
 
-Note the asymmetry in the expression for Stratonovich term: if $B = B(\alpha)$, then $\mathbf{s} \equiv 0$.
+Note the asymmetry in the expression for the Stratonovich term: if $B = B(\alpha)$, then $\mathbf{s} \equiv 0$.
 It is initially caused by the asymmetry in the target \abbrev{sde}s.
-Truly general form of \abbrev{fpe} would be
+Truly general form of a \abbrev{fpe} would be
 \begin{eqn}
 	\frac{\upd W}{\upd t}
 	={} & - 2 \Real \left( \vcwd_{\balpha}^T \avec \right) W
@@ -233,11 +233,11 @@ where the Stratonovich term has elements
 \end{eqn}
 In the theorem above we limited the space of possible \abbrev{sde}s to those with $B_2 \equiv 0$, leading to the observed asymmetry.
 
-In many applications (some of which are discussed in this thesis), it is advantageous to enumerate state vector of the system with two variables instead of one: mode numbers and component numbers.
+In many applications (some of which are discussed in this thesis), it is advantageous to enumerate the state vector of a system using two variables instead of one, namely the mode identifier and the component number.
 This helps to describe particles which can occupy the same set of modes, but are otherwise distinguishable.
 We will now reformulate the previous theorem, including this component distinction.
 
-\begin{theorem}[Multi-component reformulation of \thmref{fpe-sde:corr:fpe-sde-complex}]
+\begin{theorem}[multi-component reformulation of \thmref{fpe-sde:corr:fpe-sde-complex}]
 \label{thm:fpe-sde:corr:mc-fpe-sde}
 	Let $\balpha^{(j)},\, j = 1 \ldots C$ be $C$ sets of complex variables $\balpha^{(j)} \equiv (\alpha_1^{(j)} \ldots \alpha_{M_j}^{(j)})$.
 	Then the \abbrev{fpe}
@@ -252,11 +252,11 @@ We will now reformulate the previous theorem, including this component distincti
 				B^{(k)} (B^{(j)})^H
 			} W
 	\end{eqn*}
-	is equivalent to the set of \abbrev{sde}s in It\^o form
+	is equivalent to the set of \abbrev{sde}s in the It\^o form
 	\begin{eqn*}
 		\upd\balpha^{(j)} = \avec^{(j)} \upd t + B^{(j)} \upd\Zvec,
 	\end{eqn*}
-	or to the set of \abbrev{sde}s in Stratonovich form
+	or to the set of \abbrev{sde}s in the Stratonovich form
 	\begin{eqn*}
 		\upd\balpha^{(j)} = (\avec^{(j)} - \svec^{(j)}) \upd t + B^{(j)} \upd\Zvec,
 	\end{eqn*}
@@ -286,7 +286,7 @@ and the noise matrix
 		B^{(1)} \\ \vdots \\ B^{(C)}
 	\end{pmatrix}.
 \end{eqn}
-This gives us \abbrev{sde}s in It\^o form
+This gives us \abbrev{sde}s in the It\^o form
 \begin{eqn}
 	\upd\balpha = \avec \upd t + B \upd\Zvec,
 \end{eqn}
@@ -310,7 +310,7 @@ Substituting $B$ into the expression for the Stratonovich term:
 		\end{pmatrix}
 	}.
 \end{eqn}
-Multiplying matrices successively:
+Multiplying the matrices successively, we get:
 \begin{eqn}
 	& = \frac{1}{2} \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
@@ -334,7 +334,7 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-func}
-	The \abbrev{fpe} in functional form
+	The \abbrev{fpe} in a functional form
 	\begin{eqn*}
 		\frac{\upd W}{\upd t}
 		={} & \int \upd\xvec \left(
@@ -344,14 +344,14 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 				\sum_{l=1}^L \mathcal{B}_{kl} \mathcal{B}_{jl}^* W
 		\right)
 	\end{eqn*}
-	is equivalent to the set of \abbrev{sde}s in It\^o form
+	is equivalent to the set of \abbrev{sde}s in the It\^o form
 	\begin{eqn*}
 		\upd f_j = \mathcal{P}_{\restbasis_j} \left[
 			\mathcal{A}_j \upd t
 			+ \sum_{l=1}^L \mathcal{B}_{jl} \upd Q_l
 		\right],
 	\end{eqn*}
-	or the set of \abbrev{sde}s in Stratonovich form
+	or the set of \abbrev{sde}s in the Stratonovich form
 	\begin{eqn*}
 		\upd f_j = \mathcal{P}_{\restbasis_j} \left[
 			(\mathcal{A}_j - \mathcal{S}_j) \upd t
@@ -428,7 +428,7 @@ and
 \end{eqn}
 Note that columns of $B$ are enumerated using the compound index $\pvec,l$.
 
-Therefore the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in It\^o form
+Therefore the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in the It\^o form
 \begin{eqn}
 	\upd\alpha_{\mvec}^{(j)}
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t
@@ -443,7 +443,7 @@ Multiplying by $\phi_{j,\mvec}^\prime$ and grouping by component:
 		\sum_{l=1}^L \sum_{\pvec \in \fullbasis}
 			\mathcal{B}_{jl} \phi_{\pvec} \upd Z_{\pvec,l}.
 \end{eqn}
-Recognizing \defref{func-calculus:projector} of the projection operator:
+Recognising \defref{func-calculus:projector} of the projection operator:
 \begin{eqn}
 	\upd f_j
 	= \proj{\restbasis_j} \left[
@@ -495,7 +495,7 @@ Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\
 				\phi_{j,\mvec}^* \frac{\cwd}{\cwd (\alpha_{\nvec}^{(k)})^*}
 				\mathcal{B}_{jl}.
 \end{eqn}
-Recognizing the projection transformation and the functional differential:
+Recognising the projection transformation and the functional differential:
 \begin{eqn}
 	& = \proj{\restbasis_j} \left[
 		\frac{1}{2} \sum_{k=1}^C \sum_{\nvec \in \restbasis_k} \sum_{l=1}^L
@@ -524,7 +524,7 @@ The \abbrev{fpe} in this case is
 	\right),
 \end{eqn}
 where the functional cogradient $\vfdelta_{\fvec} = \left( \fdelta/\fdelta f_1 \ldots \fdelta/\fdelta f_C \right)$, $\mathbf{\mathcal{A}}$ is a vector of $C$ functional operators, and $\mathcal{B}$ is a matrix of $C \times L$ functional operators.
-Such \abbrev{fpe} is equivalent to the matrix \abbrev{sde} in Stratonovich form:
+Such \abbrev{fpe} is equivalent to the matrix \abbrev{sde} in the Stratonovich form:
 \begin{eqn}
 	\upd \fvec = \mathbfcal{P} \left[
 		\left( \mathbfcal{A} - \mathbfcal{S} \right) \upd t

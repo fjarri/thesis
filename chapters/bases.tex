@@ -8,26 +8,28 @@ Ideally, one would want the following to be true:
 \begin{itemize}
     \item basis modes are natural to the physical problem in question (e.g., plain waves for a freely expanding \abbrev{bec});
     \item decomposition of a function defined on a discrete spatial grid in the basis is computationally effective; and
-    \item a generalised periodicity condition from \lmmref{func-calculus:move-laplacian} applies.
+    \item the generalised periodicity condition from \lmmref{func-calculus:move-laplacian} applies.
 \end{itemize}
 
 For the applications discussed in this work the first condition is the hardest to satisfy, since the equations governing the system evolution are nonlinear, which make ground and excited states of the system inexpressable algebraically (with some exceptions, when the nonlinearity is negligible).
 The advantage of this condition being true is that less modes will be required to describe the dynamics of a system, thus making it easier to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
 
-Taking this into account, we have settled on two basis sets to use in this work.
-Unless explicitly stated otherwise, the plane wave basis is the primary one, and the harmonic oscillator basis is the backup one (although it usually did not require less modes than the plane wave basis, and was more difficult to work with from the computational point of view).
+Taking this into account, we have settled on two basis sets to use in the calculations.
+The plane wave basis was used as the primary one, and the harmonic oscillator one was used as the backup.
+In practice, the latter was not very useful for the simulations considered in this thesis, since it required roughly the same number of modes as the plane wave basis, and was more difficult to work with from the computational point of view.
+Nevertheless, we are still including its description in this Appendix, as it may be still useful for different (e.g. one-dimensional) systems.
 
 
 % =============================================================================
 \section{Plane wave basis}
 % =============================================================================
 
-The plane wave basis consists of eigenfunctions of the kinetic term of the Hamiltonian:
+The plane wave basis consists of eigenfunctions of the kinetic term of a Hamiltonian:
 \begin{eqn}
     \left( -\frac{\hbar^2}{2m} \nabla^2 \right) \phi_{\nvec}
     = E_{\nvec} \phi_{\nvec}.
 \end{eqn}
-The eigenfunctions are defined in a $D$-dimensional box with the shape $(L_1, \ldots, L_D)$ with $\prod_{d=1}^D L_d \equiv V$ (which corresponds to the integration area $A$ which is referred to in \appref{func-calculus}):
+The eigenfunctions are defined in a $D$-dimensional box with the shape $(L_1, \ldots, L_D)$ with $\prod_{d=1}^D L_d \equiv V$ (which corresponds to the integration area $A$ introduced in \appref{func-calculus}):
 \begin{eqn}
 \label{eqn:bases:plane-wave-modes}
     \phi_{\nvec}(\xvec) = e^{i \kvec_{\nvec} \xvec} / \sqrt{V},
@@ -43,7 +45,7 @@ Because of the periodic boundary conditions at the edges of the box, possible va
 \end{eqn}
 
 This basis set is the most computationally effective.
-Functions defined on a discrete grid $x_d = 0, h, \ldots, L_d - h$ (the step $d = L_d / M_d$, where $M_d$ is the number of modes in the dimension $d$) can be decomposed into this basis using Fast Fourier transform (\abbrev{fft}), which is available for a wide range of platforms and programming languages, and has the asymptotical complexity $\mathcal{O}(M \log_2 M)$ (where the total number of modes $M = \prod_{d=1}^D M_d$).
+Functions defined on the discrete grid $x_d = 0, h, \ldots, L_d - h$ (the step $d = L_d / M_d$, where $M_d$ is the number of modes in the dimension $d$) can be decomposed into this basis using the Fast Fourier transform (\abbrev{fft}), which is available for a wide range of platforms and programming languages, and has the asymptotical complexity $\mathcal{O}(M \log_2 M)$ (where the total number of modes $M = \prod_{d=1}^D M_d$).
 
 While this basis is far from being natural for a harmonically confined \abbrev{bec} with nonlinear interactions, its effectiveness overweighs all the disadvantages; plane wave modes can be viewed as pixels for the mode space.
 
@@ -55,7 +57,7 @@ While this basis is far from being natural for a harmonically confined \abbrev{b
 It often happens that for a pseudo-\abbrev{1d} \abbrev{bec} the confinement in transverse dimensions is strong enough to make the nonlinear interaction negligible.
 In these cases it can be advantageous to use a harmonic oscillator basis for these dimensions despite its computational drawbacks.
 
-The harmonic basis consists of eigenfunctions of the kinetic and potential terms of the Hamiltonian:
+The harmonic basis consists of eigenfunctions of the kinetic and potential terms of a Hamiltonian:
 \begin{eqn}
     \left(
         -\frac{\hbar^2}{2m} \nabla^2
@@ -88,7 +90,7 @@ The next section describes the algorithm and these restrictions in detail.
 \section{Discrete harmonic transformation}
 % =============================================================================
 
-The numerical algorithm for the decomposition of a funtion defined on a discrete grid in a harmonic basis~\cite{Dion2003} is much less known than \abbrev{fft}, and has some unusual properties, so it is worth describing in brief.
+The numerical algorithm for the decomposition of a funtion defined on a discrete grid in the harmonic basis~\cite{Dion2003} is much less known than the \abbrev{fft}, and has some unusual properties, so it is worth describing in brief.
 
 Given some function $f(\xvec)$, one can expand it into the harmonic oscillator basis as
 \begin{eqn}
@@ -106,7 +108,7 @@ The corresponding backward transformation is
 In general, when we do not know anything about $f(\xvec)$, and only have its value sampled at some set of points, the value of the integral can be calculated only approximately.
 But we can obtain exact results for functions of a certain kind, if we are allowed to choose the sampling points.
 
-The method is based on the Gauss-Hermite quadrature~\cite{Abramowitz1972}, which states that the value of an integral can be approximated as a sum
+The method is based on the Gauss-Hermite quadrature~\cite{Abramowitz1972}, which states that the value of an integral can be approximated as the sum
 \begin{eqn}
 \label{eqn:bases:gh-quadrature}
     \int\limits_{-\infty}^{\infty} g(x) e^{-x^2} \upd x
@@ -146,7 +148,7 @@ By definition of mode functions~\eqnref{bases:harmonic-modes},
 where $P(x)$ is a polynomial of order less than or equal to $(M-1)s + m$.
 Since we want to have the same set of sample points for any $m \in [0, M^\prime-1]$,
 we will consider the worst case $m = M^\prime-1$, which makes the order of $P(x)$ limited by $(M-1)s + M^\prime - 1$.
-Changing variable in the integral to make it comply to the form~\eqnref{bases:gh-quadrature} and applying the quadrature:
+Changing variables in the integral to make it comply to the form~\eqnref{bases:gh-quadrature} and applying the quadrature:
 \begin{eqn}
     \alpha_m
     & = \int P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right) dx \\
@@ -167,11 +169,11 @@ Replacing $P$ with $\Psi$ and $\phi$ using~\eqnref{bases:polynomial-integrand}:
         \exp(r_i^2) \\
     & = \sum_{i=1}^N \tilde{w}_i \phi_m(\tilde{x}_i) f(\tilde{x}_i),
 \end{eqn}
-where modified sampling points are
+where the modified sampling points are
 \begin{eqn}
     \tilde{x}_i = l_x r_i \sqrt{\frac{2}{s+1}},
 \end{eqn}
-and modified weights are
+and the modified weights are
 \begin{eqn}
 \label{eqn:bases:gh-weights}
     \tilde{w}_i = w_i l_x \sqrt{\frac{2}{s+1}} \exp(r_i^2).
@@ -188,7 +190,7 @@ where $\Phi_{im} = \phi_m(\tilde{x}_i)$ is a $N \times M^\prime$ matrix,
 $\tilde{\mathbf{w}}$ is a $N$-vector of elements $\tilde{w}_i$,
 $\mathbf{f}$ is a $N$-vector of elements $f(\tilde{x}_i)$,
 and the symbol $\circ$ stands for Hadamard (element wise) product.
-Corresponding backward transformation is then expressed as
+The corresponding backward transformation is then expressed as
 \begin{eqn}
     \mathbf{f}
     = G^{-1}(\balpha)
@@ -196,12 +198,12 @@ Corresponding backward transformation is then expressed as
 \end{eqn}
 
 There are a few catches in the practical implementation of this algorithm.
-First, beware of significant roundoff errors during the expansion for large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
-Second, note that $G^{-1}(G(\mathbf{f})) \ne \mathbf{f}$ for $s > 1$, since during the expansion we are effectively discarding higher-order modes of $\Psi^s$ and thus losing some information.
+First, beware of significant roundoff errors during the expansion for the large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
+Second, note that $G^{-1}(G(\mathbf{f})) \ne \mathbf{f}$ for $s > 1$, since during the expansion we are effectively discarding the higher-order modes of $\Psi^s$ and are thus losing some information.
 For $s = 1$ and $M^\prime \ge M$ though the transformation is reversible.
 
 Lastly, since the known order $s$ is hardcoded into the algorithm, including the values of the sampling points, one has to transform different orders of the known function from $\mathbb{F}_{\restbasis}$ separately.
-This is a usual case when \abbrev{dht} is used to solve a nonlinear Schr\"odinger equation in momentum space.
+This is a usual case when the \abbrev{dht} is used to solve a nonlinear Schr\"odinger equation in momentum space.
 For a concrete example, consider an equation
 \begin{eqn}
     i \hbar \frac{\upd \Psi}{\upd t}
@@ -240,7 +242,7 @@ and $F^\prime$ is treated as a 2-dimensional matrix of shape $N_d \times N_2 \ld
 \item perform the backward transposition $C = T_{1 \leftrightarrow d} [C^\prime]$.
 \end{itemize}
 
-In a single expression it is a composition of two transpositions and one dot product:
+In a single expression, it is a composition of two transpositions and one dot product:
 \begin{eqn}
     G_d
     \equiv
