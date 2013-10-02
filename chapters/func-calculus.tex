@@ -27,13 +27,13 @@ Orthonormality and completeness conditions for basis functions are, respectively
 	& = \delta(\xvec^\prime - \xvec),
 \end{eqns}
 where the integration area $A$ depends on the basis set (for example, $A$ is the whole space for harmonic oscillator modes, and a box for plane waves).
-Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, for functions of coordinates the argument list will be omitted (i.e. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$) except where it is necessary for clarity.
+Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, for functions of coordinates the argument list will be often omitted (i.e. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$) except where it is necessary for clarity.
 
-Various functions can be combined from all, or the certain subset of basis modes by means of a composition:
+Various functions can be combined using all, or the certain subset, of basis modes by means of the composition:
 
 \begin{definition}
 \label{def:func-calculus:composition}
-	For some subset of the full basis $\restbasis \subseteq \fullbasis$, the composition transformation creates a function from a vector of mode populations:
+	For some subset of the full basis $\restbasis \subseteq \fullbasis$, the composition transformation creates a function out of a vector of mode populations:
 	\begin{eqn*}
 		\mathcal{C}_{\restbasis}(\balpha)
 		= \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec}.
@@ -41,25 +41,25 @@ Various functions can be combined from all, or the certain subset of basis modes
 	Decomposition transformation, correspondingly, creates a vector of populations out of a function:
 	\begin{eqn*}
 		(\mathcal{C}_{\restbasis}^{-1}[f])_{\nvec}
-		= \int \upd\xvec \phi_{\nvec}^* f,\,{\nvec} \in \restbasis.
+		= \int \upd\xvec \phi_{\nvec}^*\,f,\quad{\nvec} \in \restbasis.
 	\end{eqn*}
 \end{definition}
 
 For any subset of the full basis, there is a certain subspace of functions that can be obtained by composing modes from this subset only.
 
 \begin{definition}
-	For some subset of the full basis $\restbasis \subseteq \fullbasis$, $\mathbb{F}_{\restbasis} \equiv (\mathbb{R}^D \rightarrow \mathbb{C})_{\restbasis}$ is a space of all functions of coordinates, which can be obtained from $\mathcal{C}_{\restbasis}$.
+	For some subset of the full basis $\restbasis \subseteq \fullbasis$, $\mathbb{F}_{\restbasis} \equiv (\mathbb{R}^D \rightarrow \mathbb{C})_{\restbasis}$ is the space of all functions of coordinates, which can be obtained using $\mathcal{C}_{\restbasis}$.
 	In other words, such functions consist only of modes from $\restbasis$.
 	We denote $\mathbb{F}_{\fullbasis} \equiv \mathbb{F}$.
 \end{definition}
 
-Using this definition, the type of composition and decomposition transformations can be written as
+Using this definition, the ``type signatures'' of composition and decomposition transformations can be written as
 \begin{eqn}
 		\mathcal{C}_{\restbasis} \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}_{\restbasis},\quad
 		\mathcal{C}_{\restbasis}^{-1} \in \mathbb{F} \rightarrow \mathbb{C}^{|\restbasis|}
 \end{eqn}
-Note also that for any $f \in \mathbb{F}_{\restbasis}$ corresponding composition and decomposition are reversible, i.e. $\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f]) \equiv f$.
-We will refer such functions as restricted functions.
+Note also that for any $f \in \mathbb{F}_{\restbasis}$ corresponding composition and decomposition transformations are reversible, that is $\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f]) \equiv f$.
+We will call such functions ``restricted''.
 
 The result of any non-linear transformation of a function $f \in \mathbb{F}_{\restbasis}$ is not guaranteed to belong to $\mathbb{F}_{\restbasis}$ and requires explicit projection to be used with other restricted functions from the same subspace $\mathbb{F}_{\restbasis}$:
 
@@ -504,7 +504,7 @@ For each term the internal is equal to zero because of \lmmref{c-numbers:zero-in
 
 \begin{lemma}[Functional extension of \lmmref{c-numbers:zero-delta-integrals}]
 \label{lmm:func-calculus:zero-delta-integrals}
-	For a square-integrable functional operator $\mathcal{F}$ (i.e., a functional operator that produces only square-integrable functions), restricted function $f \in \mathbb{F}_{\restbasis}$, and non-negative integers $r$ and $s$,
+	For a square-integrable functional operator $\mathcal{F}$, restricted function $f \in \mathbb{F}_{\restbasis}$, and non-negative integers $r$ and $s$,
 	\begin{eqn*}
 		\int \fdelta^2 f
 			\frac{\fdelta}{\fdelta f} \left(
