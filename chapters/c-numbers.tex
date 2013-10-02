@@ -20,8 +20,8 @@ We will start from the definition of the differentiation:
 \label{def:c-numbers:wirtinger}
 	For a complex variable $z \equiv x + iy$, and a function $f(z) \equiv u(x, y) + iv(x, y)$
 	\begin{eqn*}
-		\left( \frac{\cwd f(z)}{\cwd z} \right)
-		= \frac{1}{2} \left(
+		\frac{\cwd f(z)}{\cwd z}
+		\equiv \frac{1}{2} \left(
 			\frac{\upd f}{\upd x} - i \frac{\upd f}{\upd y}
 		\right).
 	\end{eqn*}
@@ -44,7 +44,7 @@ Wirtinger differentiation is quite intuitive in the sense that it obeys all the 
 Some important functions we will encounter in this thesis are not holomorphic.
 Therefore, hereinafter we will use Wirtinger differentiation unless explicitly stated otherwise,
 along with the notation $\cwd f/\cwd z$.
-Consequently, by ``differentiability'' we will mean the property used in the above theorem, i.e. the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axis.
+Consequently, by ``differentiability'' we will mean the property used in the above theorem, i.e. the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axes.
 
 It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for common real-valued differentiation.
 
@@ -52,9 +52,9 @@ It is convenient to connect symbolic rules for Wirtinger differentiation with th
 \label{thm:c-numbers:independent-vars}
 	If a function $f(z)$ can be expanded into series of $z^n (z^*)^m$, then $\cwd f/\cwd z$ and $\cwd f/\cwd z^*$ can be calculated as partial derivatives of the function $f$ expressed in terms of $z$ and $z^*$, over $z$ and $z^*$ respectively:
 	\begin{eqn*}
-		\frac{\cwd f(z)}{\cwd z} \equiv \frac{\upd f(z, z^*)}{\upd z},
+		\frac{\cwd f(z)}{\cwd z} = \frac{\upd f(z, z^*)}{\upd z},
 		\quad
-		\frac{\cwd f(z)}{\cwd z^*} \equiv \frac{\upd f(z, z^*)}{\upd z^*}.
+		\frac{\cwd f(z)}{\cwd z^*} = \frac{\upd f(z, z^*)}{\upd z^*}.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
