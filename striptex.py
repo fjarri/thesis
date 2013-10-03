@@ -49,7 +49,7 @@ def replace_display_eqn(text, env):
         else:
             return ' (this equation) '
 
-    return re.sub(r'\n[ \t]*?\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}\n',
+    return re.sub(r'\n[ \t]*\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}\n',
         replace,
         text,
         flags=re.DOTALL)
