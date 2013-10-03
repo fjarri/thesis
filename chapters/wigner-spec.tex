@@ -4,8 +4,7 @@
 % =============================================================================
 
 Although the functional correspondences from \thmref{wigner:mc:correspondences} are relatively straightforward, there is a certain amount of work required to apply them to actual master equations arising in real world problems.
-This chapter contains several theorems describing transformations of specific operator sequences,
-encountered in master equations describing \abbrev{bec} evolution.
+This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing \abbrev{bec} evolution.
 
 
 % =============================================================================
@@ -72,8 +71,8 @@ we get
 which is the statement of the theorem.
 \end{proof}
 
-Commutators with the Laplacian inside require somewhat special treatment, because it acts on basis functions and, in general, cannot be dragged around like a constant.
-For our purposes we only need one specific case, and, fortunately, in this case it does act like a constant.
+Commutators with the Laplacian inside require somewhat special treatment because it acts on basis functions and, in general, cannot be dragged around like a constant.
+For our purposes, we only need one specific case, and, fortunately, in this case it does act like a constant.
 The target expression describes kinetic energy in a Hamiltonian.
 
 \begin{theorem}
@@ -137,7 +136,7 @@ and
     = \frac{\fdelta}{\fdelta \Psi} \left( \nabla^2 \Psi \right) \mathcal{F}[\Psi]
     - \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \nabla^2 \phi_{\nvec} \mathcal{F}[\Psi].
 \end{eqn}
-Therefore:
+Therefore,
 \begin{eqn}
     & \mathcal{W} \left[
         \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
@@ -168,7 +167,7 @@ Now, using \lmmref{func-calculus:move-laplacian}, we can get the final result:
 \end{proof}
 
 The last usual term in \abbrev{bec} Hamiltonians is a fourth order nonlinear interaction term.
-We will provide the transformation for its general non-local form, which can be later simplified to the local one by intergration with the delta function.
+We will provide the transformation for its general non-local form, which can be later simplified to the local one by integration with the delta function.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator2}
@@ -238,7 +237,7 @@ where $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with
 The operator of this form appears when one describes losses in a \abbrev{bec}.
 
 Before approaching the main theorem we will need two auxiliary lemmas.
-After the application of \thmref{wigner:mc:correspondences} to the operator we will have terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$, while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
+After the application of \thmref{wigner:mc:correspondences} to the operator, we will have terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$ while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
 The first lemma will provide a way to do that.
 
 \begin{lemma}
@@ -256,8 +255,7 @@ The first lemma will provide a way to do that.
 \end{lemma}
 \begin{proof}
 Proof by induction.
-Let us assume that the statement is true for $b - 1$, and prove it for $b$
-(also assuming non-trivial case of $a > 0$).
+Let us assume that the statement is correct for $b - 1$, and prove it for $b$ (also assuming the non-trivial case of $a > 0$).
 Moving a single differential to the left:
 \begin{eqn}
     \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
@@ -302,10 +300,8 @@ Shifting counter in the second sum:
             \mathcal{F}.
 \end{eqn}
 Now we can join sums, noticing that $\binom{b-1}{j} + \binom{b-1}{j-1} = \binom{b}{j}$.
-There will be at most two leftover terms: first, term for $j=0$ from the first sum,
-and, possibly, the term with $j=\min(a,b)$ from the second sum.
-The former term appears only if $\min(a,b) > \min(a, b-1)$,
-or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-1) = b-1$).
+There will be at most two leftover terms: first, term for $j=0$ from the first sum, and, possibly, the term with $j=\min(a,b)$ from the second sum.
+The former term appears only if $\min(a,b) > \min(a, b-1)$, or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-1) = b-1$):
 \begin{eqn}
     ={} & \binom{b-1}{0} \frac{(-1)^0 a!}{(a-0)!} \delta_{\restbasis}^0(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-0} \Psi^{a-0}
@@ -320,8 +316,7 @@ or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-
             \mathcal{F},
 \end{eqn}
 Where $H[n]$ is the discrete Heaviside step function.
-Now, since $\binom{b-1}{0} \equiv \binom{b}{0}$ and $\binom{b-1}{b-1} \equiv \binom{b}{b}$,
-we can attach two leftover terms to the sum as well:
+Now, since $\binom{b-1}{0} \equiv \binom{b}{0}$ and $\binom{b-1}{b-1} \equiv \binom{b}{b}$, we can attach two leftover terms to the sum as well:
 \begin{eqn}
     = \sum_{j = 0}^{\min(a, b)}
         \binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
@@ -340,8 +335,8 @@ obtaining the statement of the lemma.
     \end{eqn*}
 \end{lemma}
 \begin{proof}
-Obviously, the index $v = k - m$ of the factor $f$ can vary from $0$ (when $m=k$) to $a$ (when $k=a$ and $m=0$).
-Therefore
+Clearly, the index $v = k - m$ of the factor $f$ can vary from $0$ (when $m=k$) to $a$ (when $k=a$ and $m=0$).
+Therefore,
 \begin{eqn}
     \sum_{k=0}^a \sum_{m=0}^{\min(a-b,k)} f_{k-m} g_{k, m}
     = \sum_{v=0}^a f_v \sum_{m \in K(a, b, v)} g_{v + m, m},
@@ -365,7 +360,7 @@ where the set $K$ is defined as
 \end{eqn}
 
 It is convenient to consider the cases of $v \le b$ and $v > b$ separately.
-For the former case
+For the former case,
 \begin{eqn}
     K_{v \le b}
     = \{m |
@@ -381,7 +376,7 @@ Since $v \le b$, $m \le a - v \le a - b \le \min(a - b, m + v)$ is always true, 
         \wedge v \le b
     \}.
 \end{eqn}
-Splitting into two sets to get rid of minimum function:
+Splitting into two sets to get rid of the minimum function:
 \begin{eqn}
     ={} & \{m |
         v \le b \wedge m \ge 0
@@ -437,7 +432,7 @@ The final result is a union of these two cases:
 which gives us the statement of the lemma.
 \end{proof}
 
-With the help of these two lemmas we can perform the Wigner transformation of the nonlinear loss operator.
+With the help of these two lemmas, we can perform the Wigner transformation of the nonlinear loss operator.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-losses}
@@ -471,7 +466,7 @@ With the help of these two lemmas we can perform the Wigner transformation of th
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-Let us perform the transformation for each term of the loss operator.
+Let us perform the transformation for each term of the loss operator:
 \begin{eqn}
     W_1
     & \equiv \mathcal{W}[\hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger] \\
@@ -594,7 +589,7 @@ and
         \right)
         \mathcal{W}[\hat{A}].
 \end{eqn}
-The full expression for the Wigner transformation of $\hat{\mathcal{L}}_{\lvec}$ is therefore
+The full expression for the Wigner transformation of $\hat{\mathcal{L}}_{\lvec}$ is, therefore,
 \begin{eqn}
     \mathcal{W}[\hat{\mathcal{L}_{\lvec}}[\hat{A}]] = 2 W_1 - W_2 - W_3,
 \end{eqn}
@@ -621,7 +616,7 @@ With this in mind, the internal summation over $m$ can be rewritten as
         \delta_{\restbasis_c}^{m}(\xvec, \xvec)
         \frac{\upp \left( \Psi_c^{l_c-j} (\Psi_c^*)^{l_c-k} \right)}{\upp^{m} \Psi_c \upp^{m} \Psi_c^*}.
 \end{eqn}
-Furthermore, we can extend the summation over $m$ from $l_c$ to $\infty$, since all the new terms will be equal to zero.
+Furthermore, we can extend the summation over $m$ from $l_c$ to $\infty$ since all the new terms will be equal to zero.
 This turns the expression into the power series for the exponential:
 \begin{eqn}
     = \frac{1}{2^{j + k}}
