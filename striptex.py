@@ -40,6 +40,8 @@ def strip_comments(text):
 def replace_display_eqn(text, env):
     def replace(m):
         s = m.group(1).strip()
+        if s.endswith('\\qedhere'):
+            s = s[-8:].strip()
         if s[-1] == '.':
             return '(this equation).'
         elif s[-1] == ',':
