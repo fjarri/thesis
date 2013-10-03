@@ -3,21 +3,21 @@
 \label{cha:appendix:bases}
 % =============================================================================
 
-While it is possible to apply the main theorems from this work to many different basis set satisfying the orthonormality and completeness conditions~\eqnref{func-calculus:basis}, other factors restrict the choice in practical applications.
+While it is possible to apply the central theorems from this work to many different basis set satisfying the orthonormality and completeness conditions~\eqnref{func-calculus:basis}, other factors restrict the choice in practical applications.
 Ideally, one would want the following to be true:
 \begin{itemize}
-    \item basis modes are natural to the physical problem in question (e.g., plain waves for a freely expanding \abbrev{bec});
+    \item the basis modes are natural to the physical problem in question (e.g., plain waves for a freely expanding \abbrev{bec});
     \item decomposition of a function defined on a discrete spatial grid in the basis is computationally effective; and
     \item the generalised periodicity condition from \lmmref{func-calculus:move-laplacian} applies.
 \end{itemize}
 
-For the applications discussed in this work the first condition is the hardest to satisfy, since the equations governing the system evolution are nonlinear, which make ground and excited states of the system inexpressable algebraically (with some exceptions, when the nonlinearity is negligible).
-The advantage of this condition being true is that less modes will be required to describe the dynamics of a system, thus making it easier to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
+For the applications discussed in this work, the first condition is the hardest to satisfy since the equations governing the system evolution are nonlinear, which make ground and excited states of the system inexpressible algebraically (with some exceptions, when the nonlinearity is negligible).
+The advantage of this condition being satisfied is that fewer modes will be required to describe the dynamics of a system, thus making it easier to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
 
 Taking this into account, we have settled on two basis sets to use in the calculations.
 The plane wave basis was used as the primary one, and the harmonic oscillator one was used as the backup.
-In practice, the latter was not very useful for the simulations considered in this thesis, since it required roughly the same number of modes as the plane wave basis, and was more difficult to work with from the computational point of view.
-Nevertheless, we are still including its description in this Appendix, as it may be still useful for different (e.g. one-dimensional) systems.
+In practice, the latter was not very useful for the simulations considered in this thesis since it required roughly the same number of modes as the plane wave basis, and was more difficult to work with from the computational point of view.
+Nevertheless, we are including its description in this Appendix as it may still be useful for different (e.g. one-dimensional) systems.
 
 
 % =============================================================================
@@ -54,8 +54,8 @@ While this basis is far from being natural for a harmonically confined \abbrev{b
 \section{Harmonic oscillator basis}
 % =============================================================================
 
-It often happens that for a pseudo-\abbrev{1d} \abbrev{bec} the confinement in transverse dimensions is strong enough to make the nonlinear interaction negligible.
-In these cases it can be advantageous to use a harmonic oscillator basis for these dimensions despite its computational drawbacks.
+It often happens that, for a pseudo-\abbrev{1d} \abbrev{bec}, the confinement in transverse dimensions is strong enough to make the nonlinear interaction negligible.
+In these cases, it can be advantageous to use the harmonic oscillator basis for these dimensions despite its computational drawbacks.
 
 The harmonic basis consists of eigenfunctions of the kinetic and potential terms of a Hamiltonian:
 \begin{eqn}
@@ -65,7 +65,7 @@ The harmonic basis consists of eigenfunctions of the kinetic and potential terms
     \right) \phi_{\nvec}
     = E_{\nvec} \phi_{\nvec}.
 \end{eqn}
-The eigenfunctions are:
+The eigenfunctions are
 \begin{eqn}
 \label{eqn:bases:harmonic-modes}
     \phi_{\nvec}
@@ -90,7 +90,7 @@ The next section describes the algorithm and these restrictions in detail.
 \section{Discrete harmonic transformation}
 % =============================================================================
 
-The numerical algorithm for the decomposition of a funtion defined on a discrete grid in the harmonic basis~\cite{Dion2003} is much less known than the \abbrev{fft}, and has some unusual properties, so it is worth describing in brief.
+The numerical algorithm for the decomposition of a function defined on a discrete grid in the harmonic basis~\cite{Dion2003} is much less known than the \abbrev{fft} and has some unusual properties, so it is worth describing in brief.
 
 Given some function $f(\xvec)$, one can expand it into the harmonic oscillator basis as
 \begin{eqn}
@@ -106,7 +106,7 @@ The corresponding backward transformation is
     \equiv \sum_{\nvec \in \fullbasis} \alpha_{\nvec} \phi_{\nvec}(\xvec).
 \end{eqn}
 In general, when we do not know anything about $f(\xvec)$, and only have its value sampled at some set of points, the value of the integral can be calculated only approximately.
-But we can obtain exact results for functions of a certain kind, if we are allowed to choose the sampling points.
+However, we can obtain exact results for functions of a certain kind if we are allowed to choose the sampling points.
 
 The method is based on the Gauss-Hermite quadrature~\cite{Abramowitz1972}, which states that the value of an integral can be approximated as the sum
 \begin{eqn}
@@ -115,7 +115,7 @@ The method is based on the Gauss-Hermite quadrature~\cite{Abramowitz1972}, which
     = \sum_{i=1}^N w_i g(r_i) + E,
 \end{eqn}
 where $N$ is the number of sample points.
-Weights $w_i$ are calculated as
+The weights $w_i$ are calculated as
 \begin{eqn}
     w_i = \frac{2^{N-1} N! \sqrt{\pi}}{N^2 (H_{N-1}(r_i))^2},
 \end{eqn}
@@ -126,8 +126,9 @@ The error term is
 \end{eqn}
 Therefore if $g(x)$ is a polynomial of order $Q$, one can eliminate the error term by choosing $N$ so that $2N \ge Q + 1$, thus making the quadrature exact.
 
-In practical applications we are dealing with restricted bases.
-Without loss of generality we can consider a restricted basis to be consisting of first several low-energy modes (if the modes are actually sparse, it will only reduce the effectiveness of the method, because we can always assume that we are dealing with the sequential modes up to the maximum one, and then drop all the superfluous components from the result).
+In practical applications, we are dealing with restricted bases.
+Without loss of generality, we can consider a restricted basis to be consisting of the first several low-energy modes.
+If the modes are actually sparse, it will only reduce the effectiveness of the method because we can always assume that we are dealing with sequential modes up to the maximum one and then drop all the superfluous components from the result.
 
 
 % =============================================================================
@@ -135,7 +136,7 @@ Without loss of generality we can consider a restricted basis to be consisting o
 % =============================================================================
 
 Let us consider a one-dimensional case first, with a function $\Psi(x) \in \mathbb{F}_{\restbasis}$, where $|\restbasis| = M$.
-We want to find the population of the first $M^\prime$ modes for the decomposition of $f(x) = \Psi^s(x)$, where $s$ is a natural number (note that despite the original function $\Psi$ having non-zero population only in a finite number of modes, $\Psi^s$ may, in general, have infinite number of modes in its decomposition).
+We want to find the population of the first $M^\prime$ modes for the decomposition of $f(x) = \Psi^s(x)$, where $s$ is a natural number (note that, despite the original function $\Psi$ having non-zero population only in a finite number of modes, $\Psi^s$ may, in general, have an infinite number of modes in its decomposition).
 This means that we need to calculate
 \begin{eqn}
     \alpha_m = \int \Psi^s(x) \phi_m^*(x) \upd x.
@@ -146,9 +147,8 @@ By definition of mode functions~\eqnref{bases:harmonic-modes},
     \Psi^s(x) \phi_m^*(x) = P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right),
 \end{eqn}
 where $P(x)$ is a polynomial of order less than or equal to $(M-1)s + m$.
-Since we want to have the same set of sample points for any $m \in [0, M^\prime-1]$,
-we will consider the worst case $m = M^\prime-1$, which makes the order of $P(x)$ limited by $(M-1)s + M^\prime - 1$.
-Changing variables in the integral to make it comply to the form~\eqnref{bases:gh-quadrature} and applying the quadrature:
+Since we want to have the same set of sample points for any $m \in [0, M^\prime-1]$, we will consider the worst case $m = M^\prime-1$, which makes the order of $P(x)$ limited by $(M-1)s + M^\prime - 1$.
+Changing variables in the integral to make it comply to the form~\eqnref{bases:gh-quadrature} and applying the quadrature, we get:
 \begin{eqn}
     \alpha_m
     & = \int P(x / l_x) \exp \left( -\frac{(s+1) x^2}{2 l_x^2} \right) dx \\
@@ -186,10 +186,7 @@ Since we usually need the population of all modes at once, it is more convenient
     \equiv \Phi^T\,\mathrm{diag}(\tilde{\mathbf{w}}) \mathbf{f}
     \equiv \Phi^T (\tilde{\mathbf{w}} \circ \mathbf{f}),
 \end{eqn}
-where $\Phi_{im} = \phi_m(\tilde{x}_i)$ is a $N \times M^\prime$ matrix,
-$\tilde{\mathbf{w}}$ is a $N$-vector of elements $\tilde{w}_i$,
-$\mathbf{f}$ is a $N$-vector of elements $f(\tilde{x}_i)$,
-and the symbol $\circ$ stands for Hadamard (element wise) product.
+where $\Phi_{im} = \phi_m(\tilde{x}_i)$ is an $N \times M^\prime$ matrix, $\tilde{\mathbf{w}}$ is an $N$-vector of elements $\tilde{w}_i$, $\mathbf{f}$ is an $N$-vector of elements $f(\tilde{x}_i)$, and the symbol $\circ$ stands for Hadamard (element wise) product.
 The corresponding backward transformation is then expressed as
 \begin{eqn}
     \mathbf{f}
@@ -198,11 +195,11 @@ The corresponding backward transformation is then expressed as
 \end{eqn}
 
 There are a few catches in the practical implementation of this algorithm.
-First, beware of significant roundoff errors during the expansion for the large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
+First, beware of significant round-off errors during the expansion for the large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
 Second, note that $G^{-1}(G(\mathbf{f})) \ne \mathbf{f}$ for $s > 1$, since during the expansion we are effectively discarding the higher-order modes of $\Psi^s$ and are thus losing some information.
 For $s = 1$ and $M^\prime \ge M$ though the transformation is reversible.
 
-Lastly, since the known order $s$ is hardcoded into the algorithm, including the values of the sampling points, one has to transform different orders of the known function from $\mathbb{F}_{\restbasis}$ separately.
+Lastly, since the known order $s$ is hard-coded into the algorithm, including the values of the sampling points, one has to transform different orders of the known function from $\mathbb{F}_{\restbasis}$ separately.
 This is a usual case when the \abbrev{dht} is used to solve a nonlinear Schr\"odinger equation in momentum space.
 For a concrete example, consider an equation
 \begin{eqn}
@@ -212,7 +209,7 @@ For a concrete example, consider an equation
         + g \Psi |\Psi|^2
         - i \gamma \Psi |\Psi|^4.
 \end{eqn}
-If this equation is being propagated in the momentum space, the last two terms have to be transformed using different transformations, because the first one has the order $s=3$, and the second one has the order $s=5$:
+If this equation is being propagated in the momentum space, the last two terms have to be transformed using different transformations because the first one has the order $s=3$, and the second one has the order $s=5$:
 \begin{eqn}
     i \hbar \frac{\upd \balpha}{\upd t}
     = \mathbf{E} \cdot \balpha
@@ -233,13 +230,13 @@ If $F_{ij\ldots} = f(\tilde{x}_i^{(1)}, \tilde{x}_j^{(2)}, \ldots)$ is a $D$-dim
 \end{eqn}
 then for every dimension $d$ we want to perform the transformation, we need to:
 \begin{itemize}
-\item perform the multidimensional transposition $F^\prime = T_{1 \leftrightarrow d} [F]$, which changes the shape of $F$ to $N_d \times N_2 \times \ldots \times N_1 \times \ldots \times N_D$ (i.e., makes the $d$-th dimension major);
-\item calculate the dot product $C^\prime = (\Phi^{(d)})^T\,\mathrm{diag}(\tilde{\mathbf{w}}^{(d)}) F^\prime$, where $\Phi_{im}^{(d)} = \phi_m^{(d)}(\tilde{x}_i^{(d)})$ is a $N_d \times M_d^\prime$ matrix, $\tilde{\mathbf{w}}^{(d)}$ is a $N_d$-vector of weights
-\begin{eqn}
-    \tilde{w}_i^{(d)} = w_i^{(d)} l_x^{(d)} \sqrt{\frac{2}{s+1}} \exp((r_i^{(d)})^2),
-\end{eqn}
-and $F^\prime$ is treated as a 2-dimensional matrix of shape $N_d \times N_2 \ldots N_1 \ldots N_D$;
-\item perform the backward transposition $C = T_{1 \leftrightarrow d} [C^\prime]$.
+    \item perform the multidimensional transposition $F^\prime = T_{1 \leftrightarrow d} [F]$, which changes the shape of $F$ to $N_d \times N_2 \times \ldots \times N_1 \times \ldots \times N_D$ (i.e., makes the $d$-th dimension major);
+    \item calculate the dot product $C^\prime = (\Phi^{(d)})^T\,\mathrm{diag}(\tilde{\mathbf{w}}^{(d)}) F^\prime$, where $\Phi_{im}^{(d)} = \phi_m^{(d)}(\tilde{x}_i^{(d)})$ is an $N_d \times M_d^\prime$ matrix, $\tilde{\mathbf{w}}^{(d)}$ is an $N_d$-vector of weights
+    \begin{eqn}
+        \tilde{w}_i^{(d)} = w_i^{(d)} l_x^{(d)} \sqrt{\frac{2}{s+1}} \exp((r_i^{(d)})^2),
+    \end{eqn}
+    and $F^\prime$ is treated as a 2-dimensional matrix of shape $N_d \times N_2 \ldots N_1 \ldots N_D$;
+    \item perform the backward transposition $C = T_{1 \leftrightarrow d} [C^\prime]$.
 \end{itemize}
 
 In a single expression, it is a composition of two transpositions and one dot product:
