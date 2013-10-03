@@ -3,8 +3,7 @@
 % =============================================================================
 
 With the Wigner truncation applied, we can get rid of the third- and higher-order functional derivatives in~\eqnref{wigner-bec:truncation:untruncated-fpe}.
-Under the reasonable assumption of $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ being real-valued,
-this results in the functional equation
+Under the reasonable assumption of $K_{jk}$, $U_{jk}$ and $\kappa_{\lvec}$ being real-valued, this results in the functional equation
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:fpe}
 	\frac{\upd W}{\upd t}
@@ -40,12 +39,12 @@ and the diffusion matrix
 		\frac{\upp O_{\lvec}^*}{\upp \Psi_k^*}.
 \end{eqn}
 
-It can be shown (see \appref{fpe-sde} for details) that this truncated equation has a positive-definite diffusion matrix $\mathcal{D}$ and is therefore an \abbrev{fpe}, with its solution $W(t)$ being a probability distribution (provided that $W(0)$ was a probability distribution).
+It can be shown (see \appref{fpe-sde} for details) that this truncated equation has a positive-definite diffusion matrix $\mathcal{D}$ and is, therefore, an \abbrev{fpe}, with its solution $W(t)$ being a probability distribution (provided that $W(0)$ was a probability distribution).
 This differs from the original Wigner function(al), which can be negative, and is the result of the truncation.
-Thus the solution of this equation may not be equivalent to the solution of the orignal master equation~\eqnref{wigner-bec:master-eqn:master-eqn} (if the corresponding density matrices have non-positive Wigner functions), but, given that the truncation conditions are satisfied, the effect is negligible.
+Thus, the solution of this equation may not be equivalent to the solution of the original master equation~\eqnref{wigner-bec:master-eqn:master-eqn} (if the corresponding density matrices have non-positive Wigner functions), but, given that the truncation conditions are satisfied, the effect is negligible.
 
 Direct solution of the above \abbrev{fpe} is generally impractical, and a Monte Carlo or sampled calculation is called for.
-The equation can be further transformed to the equivalent set of \abbrev{sde}s using \thmref{fpe-sde:corr:fpe-sde-func} with
+The equation can be further transformed to an equivalent set of \abbrev{sde}s using \thmref{fpe-sde:corr:fpe-sde-func} with
 \begin{eqn}
 	\mathcal{B}_{j\lvec}
 	= \sqrt{\kappa_{\lvec}} \frac{\partial O_{\lvec}^*}{\partial \Psi_j^*}.
@@ -82,7 +81,7 @@ Note that the Stratonovich term is exactly equal to the correction in the loss-i
 This means that in the Stratonovich form the \abbrev{sde}s are actually simpler.
 
 The equations~\eqnref{wigner-bec:fpe-bec:sde} can be solved by conventional integration methods for \abbrev{sde}s (see~\appref{numerical} for details).
-The required expectations of symmetrically ordered operator products can be obtained by averaging results from multiple independent solutions according to \thmref{wigner:mc:moments}, since the truncated $W$ function is a probability distribution:
+The required expectations of symmetrically ordered operator products can be obtained by averaging results from multiple independent solutions according to \thmref{wigner:mc:moments} since the truncated $W$ function is a probability distribution:
 \begin{eqn}
 \label{eqn:wigner-bec:fpe-bec:moments}
 	\langle \symprod{ \prod_{j=1}^C \Psiop_j^{r_j} (\Psiop_j^\dagger)^{s_j} } \rangle
@@ -124,7 +123,7 @@ Namely, we are interested in population $N_i = \int \upd\xvec \langle \Psiop_i^\
 \end{theorem}
 \begin{proof}
 Let us apply \thmref{fpe-sde:ito-formula:func-ito-f} with $f_j \equiv \Psi_j$ to $\mathcal{F} \equiv \Psi_i^* \Psi_i$.
-Since in the end we are interested in the average of $\mathcal{F}$, and $\pathavg{ dQ_{\lvec} } \equiv 0$, we can discard the third term in It\^o formula.
+Since, in the end, we are interested in the average of $\mathcal{F}$, and $\pathavg{ dQ_{\lvec} } \equiv 0$, we can discard the third term in It\^o formula.
 The resulting expression for the differential is
 \begin{eqn}
 	\upd (\Psi_i^* \Psi_i)
@@ -148,7 +147,7 @@ The derivatives are evaluated as
 	& = \delta_{ij} \delta_{ik} \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec).
 \end{eqn}
 
-From~\eqnref{wigner-bec:fpe-bec:moments} it follows that
+From~\eqnref{wigner-bec:fpe-bec:moments}, it follows that
 \begin{eqn}
 	\frac{\upd N_i}{\upd t}
 	& = \int \upd \xvec \frac{\upd \langle \Psiop_i^* \Psiop_i \rangle}{\upd t} \\
@@ -210,7 +209,7 @@ The integration thus gives us
 
 Now we can substitute known expressions for drift terms~\eqnref{wigner-bec:truncation:drift-term} and diffusion terms~\eqnref{wigner-bec:truncation:diffusion-term}.
 From the form of the expression above it is clear that the unitary evolution part of the drift term does not contribute to the population change rate (which agrees with the intuition).
-Thus the drift terms can be safely simplified to
+Thus, the drift terms can be safely simplified to
 \begin{eqn}
 	\mathcal{A}_i^{\mathrm{(loss)}}
 	= - \sum_{\lvec \in L} \kappa_{\lvec} \left(
@@ -251,5 +250,5 @@ To do that, we have to rewrite the resulting path averages of the moments of $\P
 \end{eqn}
 and simplify the resulting averages of normally ordered operators using correlation factors $g^{(k)} = \langle (\Psiop^\dagger)^k \Psiop^k \rangle / \langle \Psiop^\dagger \Psiop \rangle$.
 In other words, coefficients $g^{(k)}$ define the degree of high-order correlations.
-In the ideal condensate they are equal to $1$, and increase with the temperature (the so called photon bunching, or atom bunching).
+In the ideal condensate, they are equal to $1$, and increase with the temperature (the so called photon bunching, or atom bunching).
 For example, the theoretical maximum value for $g_{111}$ is $3!=6$~\cite{Kagan1985}, which has been confirmed experimentally~\cite{Burt1997}.

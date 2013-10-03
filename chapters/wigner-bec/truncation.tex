@@ -15,7 +15,7 @@ Namely, the term with $K_{jk}$ is transformed using \thmref{wigner-spec:w-commut
 		W,
 \end{eqn}
 where Wigner function $W = \mathcal{W}[\hat{\rho}]$.
-Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming the locality of the interaction, and $U_{kj} = U_{jk}$):
+The nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming the locality of the interaction, and $U_{kj} = U_{jk}$):
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:full-nonlinear}
 	\mathcal{W} \left[
@@ -45,7 +45,7 @@ Nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assuming 
 			\frac{1}{4} \Psi_k^*
 		\right) W.
 \end{eqn}
-Loss operator is transformed with \thmref{wigner-spec:w-losses} and result in a similar equation, with a finite number of differential terms up to order $2n$ for $n-$body collisional losses.
+Loss operator terms are transformed with \thmref{wigner-spec:w-losses} and result in similar expressions, with a finite number of differential terms up to order $2n$ for $n$-body collisional losses.
 
 Assuming that $K_{jk}$, $U_{jk}$, and $\kappa_{\lvec}$ are real-valued, all the transformations described above result in a partial differential equation for $W$ of the form
 \begin{eqn}
@@ -71,11 +71,10 @@ This is achieved by use of the formal definition of a scaled Wigner function $W^
 	\mathcal{D}_{jk}^{\psi} & = t_c \left( \ell_c / N_j \right) \mathcal{D}_{jk}
 		+ \mathcal{O} \left( 1 / N_j^2 \right).
 \end{eqn}
-Here $t_c$ is a characteristic interaction time and $\ell_c$ is a characteristic interaction length.
+Here $t_c$ is a characteristic interaction time, and $\ell_c$ is a characteristic interaction length.
 These would normally be chosen as the healing time and healing length respectively in a \abbrev{bec} calculation.
 Typically the cell size is chosen as proportional to the healing length, for optimum accuracy in resolving spatial detail.
-Using this expansion, a consistent order-by-order expansion in $1/N_j$ can be obtained,
-of form:
+Using this expansion, a consistent order-by-order expansion in $1/N_j$ can be obtained, of form:
 \begin{eqn}
 	\frac{\upd W^{\psi}}{\upd \tau}
 	= \int \upd\xvec \left\{
@@ -103,18 +102,16 @@ The $1/N_j$ is equivalent to an expansion in the inverse density, which requires
 	\ll |\Psi_j|^2.
 \end{eqn}
 The coherency assumption does not, of course, encompass all possible states that can be produced during evolution, which means that the condition above is more of a guide than a restriction.
-For certain systems the truncation was shown to work even when~\eqnref{wigner-bec:truncation:delta-condition} is violated~\cite{Ruostekoski2005}.
-The validity may also depend on the simulation time~\cite{Javanainen2013}, and other physically
-relevant factors.
+For certain systems, the truncation was shown to work even when~\eqnref{wigner-bec:truncation:delta-condition} is violated~\cite{Ruostekoski2005}.
+The validity may also depend on the simulation time~\cite{Javanainen2013}, and other physically relevant factors.
 
 A common example of such relevant factors is that there can be a large difference in the size of the original parameters.
 To illustrate this issue, one may have a situation where $\kappa_1 \approx \kappa_2 N_j$ even though $N_j \gg 1$.
-Under these conditions, it is essential to include a scaling of the parameters in calculating the formal order, so that the scaled parameters have comparable sizes.
+Under these conditions, it is essential to include a scaling of the parameters in calculating the formal order so that the scaled parameters have comparable sizes.
 This allows one to identify correctly which terms are negligible in a given physical problem, and which terms must be included.
 
 In general, one can estimate the validity of truncation for the particular problem and the particular observable by calculating the quantum correction~\cite{Polkovnikov2010}.
 Other techniques for estimating validity include comparison with the exact positive-P simulation method~\cite{Drummond1993}, and examining results for unphysical behaviour such as negative occupation numbers~\cite{Deuar2007}.
-It is generally the case for unitary evolution that errors caused by truncation grow in time, leading to a finite time horizon for applicability, as explained in the introduction.
 
 The use of this Wigner truncation allows us to simplify the results of \thmref{wigner-spec:w-commutator2} and \thmref{wigner-spec:w-losses}.
 Wigner truncation is an expansion up to the order $1/N_j$, so during the simplification, along with the higher order derivatives, we drop all components with $\delta_{\restbasis_j}$ of order higher than $1$ in the drift terms, and of order higher than $0$ in the diffusion terms.
@@ -141,7 +138,7 @@ Assuming the conditions for Wigner truncation are satisfied, the result of the W
 \end{eqn*}
 \end{theorem}
 \begin{proof}
-A straigtforward result of neglecting high-order terms in~\eqnref{wigner-bec:truncation:full-nonlinear}.
+A straightforward result of neglecting high-order terms in~\eqnref{wigner-bec:truncation:full-nonlinear}.
 \end{proof}
 
 \begin{theorem}
@@ -191,7 +188,7 @@ These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$, $\frac{\
 \end{eqn}
 where $\evec_n$ is a vector consisting of zeros and a single $1$ at the $n$-th position, and $H[n]$ is the discrete Heavyside function.
 
-Evaluating the partially parametrized $Z$ function in the first term using the expression in \thmref{wigner-spec:w-losses}:
+Evaluating the partially parametrised $Z$ function in the first term using the expression in \thmref{wigner-spec:w-losses}:
 \begin{eqn}
 	Z_{\lvec, \evec_m, \mathbf{0}}
 	= l_m \prod_{c=1}^C

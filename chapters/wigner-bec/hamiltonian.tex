@@ -2,7 +2,7 @@
 \section{Hamiltonian}
 % =============================================================================
 
-The second-quantized Hamiltonian of a $C$-component \abbrev{bec} in $D$ effective dimensions is expressed using quantum field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$ defined by~\eqnref{wigner:op-calculus:field}, with the commutators~\eqnref{wigner:op-calculus:commutators}.
+The second-quantized Hamiltonian of a $C$-component \abbrev{bec} in $D$ effective dimensions is expressed using quantum field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$ defined by~\eqnref{wigner:op-calculus:field}, with the commutators~\eqnref{wigner:op-calculus:commutators}:
 \begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:H}
 	\hat{H} = \int \upd \xvec \sum_{j=1}^C \sum_{k=1}^C \left\{
@@ -13,21 +13,17 @@ The second-quantized Hamiltonian of a $C$-component \abbrev{bec} in $D$ effectiv
 			\Psiopf_j^\prime \Psiopf_k
 	\right\}.
 \end{eqn}
-Here we use the Einstein summation convention of summing over repeated indices.
-$U_{jk}$ is the two-body scattering potential, and $K_{jk}$ is the single-particle Hamiltonian:
+Here $U_{jk}$ is the two-body scattering potential, and $K_{jk}$ is the single-particle Hamiltonian:
 \begin{eqn}
 	K_{jk} = \left(
 			-\frac{\hbar^2}{2m} \nabla^2 + \hbar \omega_j + V_j(\xvec)
 		\right) \delta_{jk}
 		+ \hbar \tilde{\Omega}_{jk}(t),
 \end{eqn}
-where $V_j$ is the external trapping potential for spin $j$,
-$\omega_j$ is the internal energy of spin $j$,
-and $\tilde{\Omega}_{jk}$ represents a time-dependent coupling that is used to rotate one spin projection into another.
+where $V_j$ is the external trapping potential for the spin $j$, $\omega_j$ is the internal energy of spin $j$, and $\tilde{\Omega}_{jk}$ represents a time-dependent coupling that is used to rotate one spin projection into another.
 For details about the source and the concrete form of this term see \secref{bec-noise:mean-field}.
 
-If we impose an energy cutoff $\ecut$ and only take into account low-energy modes of the field,
-the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by the contact potential $U_{jk} \delta(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
+If we impose an energy cutoff $\ecut$ and only take into account low-energy modes of the field, the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced by the contact potential $U_{jk} \delta(\xvec - \xvec^\prime)$~\cite{Morgan2000}, giving the effective Hamiltonian
 \begin{eqn}
 \label{eqn:wigner-bec:hamiltonian:effective-H}
 	\hat{H} = \int \upd \xvec \sum_{j=1}^C \sum_{k=1}^C \left\{
@@ -37,6 +33,5 @@ the general scattering potential $U_{jk}(\xvec - \xvec^\prime)$ can be replaced 
 \end{eqn}
 where $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$ are restricted quantum field operators defined by~\eqnref{wigner:op-calculus:restricted-field}, with the commutators~\eqnref{wigner:op-calculus:restricted-commutators}.
 
-For $s$-wave scattering in three dimensions the coefficient is $U_{jk} = 4 \pi \hbar a_{jk} / m$,
-where $a_{jk}$ is the scattering length.
-Note that in general case the coefficient must be renormalised depending on the grid~\cite{Kokkelmans2002,Sinatra2002}, but the change is small if $dx_{i}\gg a_{jk}$, where $dx_{i}$ is the grid step in dimension $i$.
+For $s$-wave scattering in three dimensions the coefficient is $U_{jk} = 4 \pi \hbar a_{jk} / m$, where $a_{jk}$ is the scattering length.
+Note that, in general, the coefficient must be renormalised depending on the grid~\cite{Kokkelmans2002,Sinatra2002}, but the change is small if $dx_{i}\gg a_{jk}$, where $dx_{i}$ is the grid step in dimension $i$.

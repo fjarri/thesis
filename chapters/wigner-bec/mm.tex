@@ -3,7 +3,7 @@
 \label{sec:wigner-bec:mm}
 % =============================================================================
 
-It is usually problematic to perform a comparison with an exact method for the functional truncated Wigner, since it is applied to the systems with many modes and many particles, for which no exact methods exist.
+It is usually problematic to perform a comparison with an exact method for the functional truncated Wigner since it is applied to systems with many modes and many particles, for which no exact methods exist.
 It is possible though to do this for the multimode truncated Wigner with only a few modes.
 Such systems are well within the area of applicability for first-principle exact methods such as number state expansions.
 
@@ -21,7 +21,7 @@ In this section we are only interested in a simple local case with no interactio
     = \frac{1}{2} \sum_{i,j=1}^2 \tilde{g}_{ij}
         \hat{a}_i^\dagger \hat{a}_j^\dagger \hat{a}_j \hat{a}_i.
 \end{eqn}
-The evolutions starts from the coherent state
+The evolution starts from the coherent state
 \begin{eqn}
 \label{eqn:wigner-bec:mm:initial-cond}
     \Psi(0)
@@ -70,7 +70,7 @@ The initial conditions~\eqnref{wigner-bec:mm:initial-cond} can be, in turn, expa
         \sum_{m=0}^{\infty} C_m^{(1)} \ket{m}_{a_1}
         \sum_{n=0}^{\infty} C_n^{(2)} \ket{n}_{a_2},
 \end{eqn}
-and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2)$ at time $\tau$ as
+and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2)$ at the time $\tau$ as
 \begin{eqn}
 \label{eqn:wigner-bec:mm:exact-f}
     \langle f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2) \rangle
@@ -81,8 +81,8 @@ and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat
         \ket{m}_{a_1} \ket{n}_{a_2}.
 \end{eqn}
 
-For the comparison we will take several quantities that were calculated for the system in question~\cite{Opanchuk2012a}.
-We will not go into detail about their physical meaning here, as they is not the primary focus of this thesis.
+For the purposes of comparison, we will take several quantities that were calculated for the system in question~\cite{Opanchuk2012a}.
+We will not go into detail about their physical meaning here as they are not the primary focus of this section.
 First we introduce phase-rotated Schwinger spin operator measurements for each well as
 \begin{eqn}
     \hat{J}_A^X
@@ -163,7 +163,7 @@ Here we denoted the pair correlation
 
     \caption[Sampling and systematic errors in Wigner simulated local squeezing]{
     Relative difference of the Wigner simulated local squeezing and the exact results (solid lines) as compared to the sampling errors in Wigner simulations (dashed lines).
-    Plotted are the results for $20,000$ trajectories (red lines) and $200,000$ trajectories (blue lines).
+    The results for $20,000$ trajectories (red lines) and $200,000$ trajectories (blue lines) are plotted.
     The plots correspond to \textbf{(a)} the case of no inter-component interaction, and \textbf{(b)} strong inter-component interaction (the interaction coefficients are the same as in~\figref{wigner-bec:mm:squeezing-comparison}).}%endcaption
 
     \label{fig:wigner-bec:mm:squeezing-error-comparison}
@@ -175,7 +175,7 @@ The Wigner method shows good agreement with the exact results in the time range 
 
 The relative (normalized on the corresponding exact method results) sampling and systematic errors of the Wigner method are plotted in~\figref{wigner-bec:mm:squeezing-error-comparison}.
 The Wigner results show a systematic error in case of turned off interactions at $\tau = 5 \ldots 10$ (\figref{wigner-bec:mm:squeezing-error-comparison},~(a)), which is a sign of the failing truncation approximation.
-At other times the difference with the exact results is within the sampling error range.
+At other times, the difference with the exact results is within the sampling error range.
 The large oscillations of the systematic error at the start of the simulation can be explained by accumulating uncertainties in the denominator of~\eqnref{wigner-bec:mm:squeezing}.
 
 Note that while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same effectiveness~\cite{Opanchuk2012a}.

@@ -27,8 +27,8 @@ describing local $n=(\sum l_c)$-body collision losses.
 This definition assumes that $l_1, \ldots, l_C$ particles of internal states with quantum number $j=1,\ldots C$ respectively all collide simultaneously within the volume corresponding to the inverse momentum cutoff, and are removed from the Bose gas.
 
 This minimal model of particle loss assumes that the reservoir of ``lost'' particles does not interact with the original Bose gas.
-Its accuracy thus depends on the trapping mechanism, since the ``lost'' particles are simply in a different quantum state (or are combined into molecules).
-The model is valid if the trap is state-selective, or the collision is highly exotermic, such that the resulting particles are able to move rapidly away.
+Its accuracy thus depends on the trapping mechanism since the ``lost'' particles are simply in a different quantum state (or are combined into molecules).
+The model is valid if the trap is state-selective, or the collision is highly exothermic, such that the resulting particles are able to move away rapidly.
 It is also possible to treat non-Markovian reservoirs within this formalism, by extending the Hamiltonian to include the detailed loss dynamics, but this is not treated in detail in this thesis.
 
 The master equation allows us to derive an important property.
@@ -150,7 +150,7 @@ Swapping $m \leftrightarrow k$ in the term corresponding to the second Kronecker
 	\rangle.
 \end{eqn}
 
-Finally, for the third term we notice that $\hat{O}_{\lvec}^\prime$ commutes with $\Psiop_j$, since it is just a product of annihilation operators itself:
+Finally, for the third term we notice that $\hat{O}_{\lvec}^\prime$ commutes with $\Psiop_j$ since it is just a product of annihilation operators itself:
 \begin{eqn}
 	\Trace{
 		\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
@@ -184,7 +184,7 @@ Representing the commutator as a formal derivative of the coupling operator acco
 	\rangle.
 \end{eqn}
 
-Thus the full relation is
+Thus, the full relation is
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j \rangle
 	& = \int \upd \xvec^\prime \delta_{\restbasis_j}(\xvec^\prime, \xvec) \left(
@@ -253,7 +253,7 @@ Expanding the loss operator:
 				\right]
 			\rangle.
 \end{eqn}
-Applyting \lmmref{wigner:op-calculus:functional-commutators} to transform the commutator and using~\eqnref{func-calculus:projector-via-delta} to integrate over $\xvec^\prime$:
+Applying \lmmref{wigner:op-calculus:functional-commutators} to transform the commutator and using~\eqnref{func-calculus:projector-via-delta} to integrate over $\xvec^\prime$:
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & -2\sum_{\lvec \in L} \kappa_{\lvec}

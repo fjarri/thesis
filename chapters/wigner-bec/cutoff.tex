@@ -3,11 +3,11 @@
 % =============================================================================
 
 As was noted earlier, in order to use contact interactions, an energy cutoff has to be imposed.
-In numerical simulations we use two different bases, plane waves and harmonic oscillator modes (see \appref{bases} for details).
+We use two different bases in numerical simulations, plane waves and harmonic oscillator modes (see \appref{bases} for details).
 Both have analytical expressions for modes and corresponding energies, which makes the selection of the modes straightforward.
 
 Besides being a requirement for using the contact interaction in the Hamiltonian, the energy cutoff has other important functions.
-First, it allows one to check for the convergence of the integration with respect to decreasing step of the spatial grid.
+First, it allows one to check for the convergence of integration with respect to decreasing step of the spatial grid.
 It effectively separates the propagation in momentum space (which remains constant) from the propagating of the nonlinear parts of the equation in coordinate space (which, hopefully, becomes more precise when the grid step is decreased).
-Alternatively, the energy cutoff can work in a different direction, lowering the amount of modes under consideration, while keeping the spatial grid constant.
+Alternatively, the energy cutoff can work in a different direction, lowering the amount of modes under consideration while keeping the spatial grid constant.
 This helps to satisfy the Wigner truncation condition (see \secref{wigner-bec:truncation} for details).
