@@ -3,7 +3,7 @@
 \label{sec:bec-squeezing:theory}
 % =============================================================================
 
-Following~\cite{Sorensen2001,Li2009}, we define the components of the spin vector $\hat{\mathbf{S}} \equiv (\hat{S}_x, \hat{S}_y, \hat{S}_z)$ in terms of field operators as
+Following S{\o}rensen \textit{et~al}~\cite{Sorensen2001} and Li \textit{et~al}~\cite{Li2009}, we define the components of the spin vector $\hat{\mathbf{S}} \equiv (\hat{S}_x, \hat{S}_y, \hat{S}_z)$ in terms of field operators as
 \begin{eqn}
 	\hat{S}_x
 	& = \frac{1}{2} \int \upd \xvec \left(
@@ -25,15 +25,14 @@ The degree of squeezing is then
     = \frac{N \min_{\vec{n} \perp \hat{\langle \mathbf{S} \rangle}} \Delta \hat{S}^2_{\vec{n}}}%
     	{\langle \hat{\mathbf{S}} \rangle^2},
 \end{eqn}
-where $\Delta \hat{S}^2_{\vec{n}}$ is the variance of the total spin along the direction $\vec{n}$,
-and $N$ is the total number of atoms.
-This quantity can serve as an entanglement criterion, indicating its occurence when $\xi^2 < 1$~\cite{Sorensen2001}.
+where $\Delta \hat{S}^2_{\vec{n}}$ is the variance of the total spin along the direction $\vec{n}$, and $N$ is the total number of atoms.
+This quantity can serve as an entanglement criterion, indicating its occurrence when $\xi^2 < 1$~\cite{Sorensen2001}.
 Note that in this thesis we only consider the squeezing along the direction orthogonal to the total spin, as was originally introduced, but other definitions are also possible~\cite{He2011}.
 
 The straightforward way of finding the $\xi^2$ is to shift the coordinate frame to the end of the vector $\langle \hat{\mathbf{S}} \rangle$, and rotate it so that one of the axes is aligned along it.
 The minimum variance can then be found by varying the angle of rotation of the other two axes and calculating the variance along one of them (in fact, this is how it usually done in the experiment).
 The direct approach consists of expressing the desirable minimum variance in terms of variances of the components of the spin vector in the original coordinates~\cite{Li2009}.
-We denote the polar and the azimuthal angle of $\langle \hat{\mathbf{S}} \rangle$ as $\nu$ and $\phi$ respectively, meaining that
+We denote the polar and the azimuthal angle of $\langle \hat{\mathbf{S}} \rangle$ as $\nu$ and $\phi$ respectively, meaning that
 \begin{eqn}
 	\nu = \arccos \frac{\langle \hat{S}_z \rangle}{\langle \hat{\mathbf{S}} \rangle},\quad
 	\phi = \arg \langle \hat{S}_x + \hat{S}_z \rangle.
@@ -125,7 +124,7 @@ Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symme
 	\right) \upd\xvec \upd\xvec^\prime \right\rangle.
 \end{eqn}
 In general, the basis sets for the first and the second component are different, and the last term in the above equation cannot be simplified any further.
-But in the numerical simulations in this chapter we use the same set $\restbasis_1 = \restbasis_2 = \restbasis$ for both components, which allows us to transform it to a more convenient form
+However, in the numerical simulations in this chapter we use the same set $\restbasis_1 = \restbasis_2 = \restbasis$ for both components, which allows us to transform it to a more convenient form
 \begin{eqn}
 	\int \Real \left(
 			\delta_{\restbasis} (\xvec, \xvec^\prime)
@@ -141,7 +140,7 @@ But in the numerical simulations in this chapter we use the same set $\restbasis
 			\delta_{\mvec,\nvec} \delta_{\mvec,\nvec}
 			+ \delta_{\mvec,\nvec} \delta_{\mvec,\nvec}
 		\right) \\
-	& = | \restbasis |.
+	& = | \restbasis |,
 \end{eqn}
 where we have expanded the restricted delta functions using the expression from \defref{func-calculus:restricted-delta}.
 Applying~\eqnref{wigner-bec:fpe-bec:moments} to the full expression for $\langle \hat{S}^2_x \rangle$, we rewrite it in terms of wavefunctions in Wigner representation:
