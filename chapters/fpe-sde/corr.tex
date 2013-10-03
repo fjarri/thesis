@@ -28,14 +28,14 @@ We will start by formulating the known real-valued correspondence in a form whic
 		= \frac{1}{2} \Trace{B^T \vcwd_{\zvec} \evec_j^T B},
 	\end{eqn*}
 	with $\evec_j$ being a unit vector with elements $(\evec_j)_i = \delta_{ij}$.
-	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having size $M \times L$, where $L$ is the number of noise sources), $\vcwd_{\zvec}^T \equiv (\upd/\upd z_1 \ldots \upd/\upd z_M)$ is a cogradient vector, and $\Zvec$ is a standard $L$-dimensional Wiener process with $\langle \upd Z_j^2 \rangle = \upd t$.
+	Here $W \equiv W(\zvec)$ is a probability distribution, $\avec \equiv \avec(\zvec)$ is a vector function, $B \equiv B(\zvec)$ is a matrix function ($B$ having the size $M \times L$, where $L$ is the number of noise sources), $\vcwd_{\zvec}^T \equiv (\upd/\upd z_1 \ldots \upd/\upd z_M)$ is a cogradient vector, and $\Zvec$ is a standard $L$-dimensional Wiener process with $\langle \upd Z_j^2 \rangle = \upd t$.
 \end{lemma}
 \begin{proof}
 For the detailed proof see Risken~\cite{Risken1996}, sections 3.3 and 3.4.
 \end{proof}
 
 The above theorem can be extended to work with complex Wirtinger derivatives and complex-valued coefficients.
-Of couse, in order to produce a real-valued $\upd W/\upd t$ in the left part, a \abbrev{fpe} must have a particular form.
+Of course, in order to produce a real-valued $\upd W/\upd t$ in the left part, a \abbrev{fpe} must have a particular form.
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-complex}
@@ -101,8 +101,7 @@ Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{
 	} W.
 \end{eqn}
 
-In order to use \lmmref{fpe-sde:corr:fpe-sde-real},
-we need to join variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
+In order to use \lmmref{fpe-sde:corr:fpe-sde-real}, we need to join variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
 This will give us an equation in the form identical to that from the lemma, with the drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and the diffusion matrix
 \begin{eqn}
 	\tilde{B} \tilde{B}^T \equiv \frac{1}{2} \begin{pmatrix}
@@ -117,12 +116,12 @@ which gives the noise matrix
 		G & F
 	\end{pmatrix}.
 \end{eqn}
-Therefore the equivalent \abbrev{sde}s in the It\^o form are
+Therefore, the equivalent \abbrev{sde}s in the It\^o form are
 \begin{eqn}
 	d\zvec = \tilde{\avec} dt + \tilde{B} d\tilde{\Zvec},
 \end{eqn}
 where $d\tilde{\Zvec} \equiv d\mathbf{X} \oplus d\mathbf{Y}$.
-Returning to our previous variables:
+Returning to the previous variables:
 \begin{eqn}
 	d\xvec & = \mathbf{u} dt + \frac{1}{\sqrt{2}} F d\mathbf{X} - \frac{1}{\sqrt{2}} G d\mathbf{Y}, \\
 	d\yvec & = \mathbf{v} dt + \frac{1}{\sqrt{2}} G d\mathbf{X} + \frac{1}{\sqrt{2}} F d\mathbf{Y}.
@@ -131,13 +130,14 @@ Multiplying the second equation by $i$ and adding it to the first one:
 \begin{eqn}
 	d\balpha = \avec dt + \frac{1}{\sqrt{2}} (F + iG) (d\mathbf{X} + id\mathbf{Y}),
 \end{eqn}
-which leads to the It\^o part of the theorem statement.
+which leads to the It\^o part of the theorem statement
 \begin{eqn}
 	d\balpha = \avec dt + B d\Zvec.
 \end{eqn}
 
 Noise-induced drift term in Stratonovich case can be calculated by substituting $\tilde{B}$ into the expression for $s_j$ from \lmmref{fpe-sde:corr:fpe-sde-real}.
-We will calculate $s_j$ with $j$ belonging to the $\xvec$ and the $\yvec$ part of coordinate space separately.
+We will calculate $s_j$ with $j$ belonging to the $\xvec$ and the $\yvec$ part of the coordinate space separately.
+Starting from the $\xvec$ part:
 \begin{eqn}
 	s_j^{(x)}
 	= \frac{1}{4} \Trace{
@@ -154,9 +154,9 @@ We will calculate $s_j$ with $j$ belonging to the $\xvec$ and the $\yvec$ part o
 		\begin{pmatrix}
 			F & -G \\ G & F
 		\end{pmatrix}
-	}
+	}.
 \end{eqn}
-Multiplying matrices:
+Multiplying the matrices, we get:
 \begin{eqn}
 	={} & \frac{1}{4} \Trace{
 		\begin{pmatrix}
@@ -196,7 +196,7 @@ Similarly for the $\yvec$ part,
 		+ \Trace{ F^T \vcwd_{\yvec} \evec_j^T F }
 	\right).
 \end{eqn}
-Therefore the final term in the complex-valued \abbrev{sde}s is
+Therefore, the final term in the complex-valued \abbrev{sde}s is
 \begin{eqn}
 	s_j
 	= s_j^{(x)} + i s_j^{(y)}
@@ -265,7 +265,7 @@ We will now reformulate the previous theorem, including this component distincti
 		s_i^{(j)} = \frac{1}{2} \sum_{k=1}^C
 			\Trace{ (B^{(k)})^H \vcwd_{(\balpha^{(k)})^*} \evec_i^T B^{(j)} }.
 	\end{eqn*}
-	Here $\Zvec$ is an $L$-dimensional standard complex-valued Wiener process, and noise matrices $B^{(j)}$ have sizes $M_j \times L$.
+	Here $\Zvec$ is an $L$-dimensional standard complex-valued Wiener process, and the noise matrices $B^{(j)}$ have sizes $M_j \times L$.
 \end{theorem}
 \begin{proof}
 Let us join all variable sets $\balpha^{(j)}$ into a single set
@@ -310,7 +310,7 @@ Substituting $B$ into the expression for the Stratonovich term:
 		\end{pmatrix}
 	}.
 \end{eqn}
-Multiplying the matrices successively, we get:
+Multiplying the matrices successively, we get
 \begin{eqn}
 	& = \frac{1}{2} \Trace{
 		\begin{pmatrix} (B^{(1)})^H & \cdots & (B^{(C)})^H \end{pmatrix}
@@ -413,7 +413,7 @@ The diffusion term has to be transformed in order to conform to \thmref{fpe-sde:
 Note that we did not specify the index of the full basis used to expand the delta function.
 It can be any orthonormal and complete basis, in particular one of $\fullbasis_j$~--- this will not change the result.
 
-Now we have the \abbrev{fpe} in the from required by \thmref{fpe-sde:corr:mc-fpe-sde} with
+Now we have the \abbrev{fpe} in the form required by \thmref{fpe-sde:corr:mc-fpe-sde} with
 \begin{eqn}
 	a_{\mvec}^{(j)}
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j,\,
@@ -428,7 +428,7 @@ and
 \end{eqn}
 Note that columns of $B$ are enumerated using the compound index $\pvec,l$.
 
-Therefore the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in the It\^o form
+Therefore, the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in the It\^o form
 \begin{eqn}
 	\upd\alpha_{\mvec}^{(j)}
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{A}_j \upd t
