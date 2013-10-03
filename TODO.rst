@@ -21,3 +21,4 @@ Checklist:
 - grammar check
 - do we need a page with supervisory committee?
 - "non-" or "non"? Currently I have "nonlinear", but everything else is with "non-" (non-zero, non-trivial, non-negative etc).
+- commas after introductory phrases? E.g.: "In this chapter,", "Here,", "Therefore,", "At the beginning of the simulation"

@@ -48,13 +48,13 @@ For example, the dominant three-body and two-body losses in a two-component \Rb{
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
 	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
 \end{eqn}
-These equations were obtained empyrically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
+These equations were obtained empirically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
 
 The difference between the internal energies of components $\ket{1}$ and $\ket{2}$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
 
 The fact that $\hbar \omega_j \gg V_j$ can cause problems when performing calculations with low precision.
-Therefore it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
+Therefore, it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
 \begin{eqn}
 	\Psi_1 & \rightarrow \Psi_1 e^{i \omega_1^{(i)} t}, \\
 	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2^{(i)} t}.
@@ -101,7 +101,7 @@ This allows us to neglect the quickly oscillating terms:
 	\right) \Psi_2 +
 	\frac{\hbar \Omega}{2} e^{i (\delta t + \alpha)} \Psi_1.
 \end{eqn}
-When the pulse is applied twice using the same coupling field (which is the case for the Ramsey interferometry), it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse; therefore $\alpha$ stays the same too.
+When the pulse is applied twice using the same coupling field (which is the case for the Ramsey interferometry), it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse; therefore, $\alpha$ stays the same too.
 If one wants to apply pulse with the different detuning, the phase information is lost, and the value of $\alpha$ has to become random before this pulse.
 
 The application of the coupling field can be simplified, if certain additional conditions are valid, namely:
@@ -132,7 +132,7 @@ In particular, for the two-pulse Ramsey scheme with the time $t_R$ between pulse
 \subsection{Ground state calculation}
 % =============================================================================
 
-At the beginning of the simulation the \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
+At the beginning of the simulation, the \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
 The ground state is a solution of the stationary \abbrev{cgpe}s
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-stationary}
@@ -150,7 +150,7 @@ The ground state is a solution of the stationary \abbrev{cgpe}s
 where $\mu_1$ and $\mu_2$ are chemical potentials of the components.
 
 The most common method to find the ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
-The essense of the method is that propagating an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
+The essence of the method is that propagating an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore, after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
 The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-simplified} without the loss or coupling terms:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:imaginary-time}
@@ -183,7 +183,7 @@ After the substitution $t \rightarrow \tau = it$ the solution will become fading
 \end{eqn}
 
 Therefore, if we take some random initial solution and propagate it long enough in imaginary time using~\eqnref{bec-noise:mean-field:imaginary-time}, the higher-energy components will eventually die out (in comparison with the lowest-energy state) and leave us with the desired ground state.
-The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one, since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
+The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
 
 Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, renormalisation after each step will be required.
 Known total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
@@ -228,7 +228,7 @@ Two parts of the figure illustrate the difference between the miscible ($a_{12}^
 
 As was mentioned earlier in this section, the starting state for the imaginary time propagation can be set to the Thomas-Fermi approximated state to minimize the propagation time.
 Thomas-Fermi approximation consists of neglecting the kinetic term in the stationary equations~\eqnref{bec-noise:mean-field:cgpes-stationary}.
-For a one-component state ($\Psi_2 \equiv 0$) the resulting equations can be solved analytically:
+For a one-component state ($\Psi_2 \equiv 0$), the resulting equations can be solved analytically:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-gs}
 	| \Psi_1(\xvec) |^2 = \frac{1}{g_{11}} \max \left( \mu_1 - V_1(\xvec), 0 \right).
@@ -236,7 +236,7 @@ For a one-component state ($\Psi_2 \equiv 0$) the resulting equations can be sol
 In the $D$-dimensional harmonic trap potential
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:trap-potential}
-	V_1(\xvec) = \frac{m}{2} \sum_{d=1}^D \omega_d^2 x_d^2
+	V_1(\xvec) = \frac{m}{2} \sum_{d=1}^D \omega_d^2 x_d^2,
 \end{eqn}
 this solution has the shape of an ellipsoid with radii $r_d = \sqrt{2\mu_1 / (m \omega_d^2)}$.
 
@@ -267,7 +267,7 @@ Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref
 	\right) \ll
 	\mu \left(\mu_1 - V_1(\xvec)\right).
 \end{eqn}
-Near the centre of the condensate this inequation simplifies to
+Near the centre of the condensate, this inequation simplifies to
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-condition}
 	\mu \gg \frac{\hbar}{2} |\bomega|,
@@ -275,12 +275,11 @@ Near the centre of the condensate this inequation simplifies to
 where $\bomega \equiv (\omega_1, \ldots, \omega_D)^T$ is the vector of trap frequencies.
 
 On the other hand, near the edges of the cloud the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation} diverges, while the right-hand side tends to zero.
-This means that near the edges Thomas-Fermi approximation fails regardless of the conditions.
-Fortunately, the density of the particles there is low, so we can estimate the width $h$ of the ``belt'' where our first approximation of the state function is significantly incorrect.
+This means that near the edges the Thomas-Fermi approximation fails regardless of the conditions.
+Fortunately, the particle density there is low, so we can estimate the width $h$ of the ``belt'' where our first approximation of the state function is significantly incorrect.
 If it happens to be small as compared to the size of the condensate, the approximation can be considered valid.
 
-The first term at the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation}
-is constant and can be dropped in the limit of $V_1(\xvec) \rightarrow \mu_1$.
+The first term at the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation} is constant and can be dropped in the limit of $V_1(\xvec) \rightarrow \mu_1$.
 Then, for the sake of simplicity, we consider all but one of coordinates to be zero and the remaining one to be equal to $r_d - h_d$, where $r_d$ is the corresponding radius of the condensate.
 After replacing ``$\ll$'' by ``$\approx$'' and assuming $h_d$ to be small as compared to $r_d$, we obtain the conditions for each coordinate:
 \begin{eqn}
@@ -290,7 +289,7 @@ They have to be much smaller than corresponding radii, which gives us
 \begin{eqn}
 	\mu_1 \gg \frac{1}{2} \hbar \max_{d \in [1, \ldots, D]} \omega_d.
 \end{eqn}
-This condition is less strict than the condition for the center of the condensate.
+This condition is less strict than the condition for the centre of the condensate.
 Therefore, we have only one condition justifying the application of the Thomas-Fermi approximation is~\eqnref{bec-noise:mean-field:tf-condition}.
 
 \begin{figure}
@@ -304,8 +303,8 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
 For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
 This means that the Thomas-Fermi approximation produces solution which is close to the real one.
-But for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
-\figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state, and for $1,000$ atoms it differs significantly, as expected.
+However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
+\figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state and for $1,000$ atoms it differs significantly as expected.
 
 More extended discussion of the Thomas-Fermi approximation was done by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.
-It is possible to work out the Thomas-Fermi approximation for the two-component condensate, but it requires some non-trivial handling of various misibility/immiscibility cases~\cite{Anderson2010}.
+It is possible to work out the Thomas-Fermi approximation for the two-component condensate, but it requires some non-trivial handling of various miscibility/immiscibility cases~\cite{Anderson2010}.

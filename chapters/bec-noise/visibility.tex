@@ -3,9 +3,9 @@
 % =============================================================================
 
 In this section we will apply the model from the previous sections to the recent interferometry experiments involving a two-component \Rb{} \abbrev{bec} with two hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$~\cite{Egorov2011} (the components are denoted $\ket{1}$ and $\ket{2}$ further in this section).
-In the following simulations the intra- and interspecies scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
+In the following simulations, the intra- and interspecies scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
 
-The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$, so that the magnetic field dephasing is largely eliminated~\cite{Hall1998}.
+The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$ so that the magnetic field dephasing is mostly eliminated~\cite{Hall1998}.
 The experiment is then carried out using two protocols.
 
 \begin{figure}
@@ -21,8 +21,8 @@ Since this pulse is short as compare to the total evolution time, it was simulat
 
 During the further evolution of the system the components experience complex dynamics, separating and merging periodically~\cite{Mertes2007}.
 This, in turn, leads to periodic dephasing and self-rephasing of the \abbrev{bec} components.
-After some period of the free evolution the second $\pi/2$-pulse is applied, transforming the phase difference between the two components in the superposition into the population difference which can be imaged.
-Many such experiments are performed with different free evolution times, contributing one time-point each, because the imaging effectively destroys the \abbrev{bec}.
+After some period of the free evolution, the second $\pi/2$-pulse is applied, transforming the phase difference between the two components in the superposition into the population difference which can be imaged.
+Many such experiments are performed with different free evolution times, contributing one time-point each because the imaging effectively destroys the \abbrev{bec}.
 A more detailed description of the experiment can be found in the paper by Egorov \textit{et~al}~\cite{Egorov2011}, and in his PhD thesis~\cite{Egorov2012}.
 %acknowledgement
 The experimental points used in this and the next section are also courtesy of M.~Egorov.
@@ -39,14 +39,14 @@ The rephasing cycles can be represented by a common interferometric quantity~---
 \end{eqn}
 where the denominator is just the total number of atoms in the system.
 This quantity can be shown to be the envelope curve of the population fringes produced by the second $\pi/2$-pulse in the experiment.
-In the mean-field model the required correlations are calculated simply as
+In the mean-field model, the required correlations are calculated simply as
 \begin{eqn}
     \tilde{n}
     & = \langle \Psiop_1^\dagger \Psiop_2 \rangle \approx \Psi_1^* \Psi_2, \\
     n_j
     & = \langle \Psiop_j^\dagger \Psiop_j \rangle \approx \Psi_j^* \Psi_j.
 \end{eqn}
-In the Wigner representation we have to make the correlations symmetrically-ordered first, and then~\eqnref{wigner-bec:fpe-bec:moments} gives us
+In the Wigner representation, we have to make the correlations symmetrically-ordered first, and then~\eqnref{wigner-bec:fpe-bec:moments} gives us
 \begin{eqn}
     \tilde{n}
     & = \langle \Psiop_1^\dagger \Psiop_2 \rangle
@@ -87,7 +87,7 @@ The inclusion of these factors in the simulation of the Ramsey sequence is demon
 The experimental results and their uncertainties are shown as the black bars in the figure.
 
 The simplest model~--- the mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} with losses turned off~--- gives results that are completely off base: the visibility is completely restored during rephasings (yellow dash-dotted lines in the figure).
-This is to be expected, as the theoretical limit of visibility
+This is to be expected as the theoretical limit of visibility
 \begin{eqn}
 \label{eqn:bec-noise:visibility:limit}
     \mathcal{V}_{\mathrm{max}}
@@ -95,12 +95,12 @@ This is to be expected, as the theoretical limit of visibility
 \end{eqn}
 where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to $1$ in this case, and there are no other limiting factors.
 
-But in the experiment in question the losses are present and are significantly asymmetrical, as shown in~\figref{bec-noise:visibility:population},~(a).
-With the populations typical for the experiment (tens of thousands of atoms or less) the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
+But in the experiment in question the losses are present and are significantly asymmetrical as shown in~\figref{bec-noise:visibility:population},~(a).
+With the populations typical for the experiment (tens of thousands of atoms or less), the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} shows.
 The resulting mean-field prediction with the inclusion of nonlinear losses (green dotted lines) is much closer to the experimental data.
 
-The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (red dashed lines) has little effect on the short-time visibility (although it becomes more important at longer times, as we will see later in~\figref{bec-noise:visibility:visibility-long}).
+The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with the Wigner method (red dashed lines) has little effect on the short-time visibility (although it becomes more important at longer times as we will see later in~\figref{bec-noise:visibility:visibility-long}).
 The Wigner results can be further adjusted to account for the noise introduced by the final measurement and non-ideal coupling (blue solid lines), which will be explained in detail in the next section.
 
 The final agreement with the experiment is still not ideal, and the explanation of this difference is an open question.
@@ -117,10 +117,10 @@ Candidate factors include finite temperature effects and interaction with the su
 \end{figure}
 
 The asymmetricity introduced by the difference in loss rates can be compensated by periodically swapping the populations of the two components by a ``spin echo'' coupler pulse of the length $\pi$.
-The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution, as illustrated by~\figref{bec-noise:visibility:sequences},~(b).
-With this additional pulse by the end of a single experimental sequence the populations of two components become equal again, as shown in~\figref{bec-noise:visibility:population},~(b), setting the theoretical visibility limit~\eqnref{bec-noise:visibility:limit} back to $1$.
+The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution as illustrated by~\figref{bec-noise:visibility:sequences},~(b).
+With this additional pulse by the end of a single experimental sequence the populations of two components become equal again as shown in~\figref{bec-noise:visibility:population},~(b), setting the theoretical visibility limit~\eqnref{bec-noise:visibility:limit} back to $1$.
 
-The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment, as seen in~\figref{bec-noise:visibility:echo-visibility}.
+The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment as seen in~\figref{bec-noise:visibility:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
 Same as in the case of the regular Ramsey sequence, the predictions of the simulation can be improved by including the technical noise.
 
@@ -136,6 +136,6 @@ Same as in the case of the regular Ramsey sequence, the predictions of the simul
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
 
-The simulations can be performed for longer times, as shown in~\figref{bec-noise:visibility:visibility-long}.
+The simulations can be performed for longer times as shown in~\figref{bec-noise:visibility:visibility-long}.
 The difference between the mean-field and the truncated Wigner approach becomes clearer in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts the significant decrease in the amplitude of the rephasing oscillations, caused by the quantum noise.
 One must remember though that at such times the simulated atom densities become too low due to losses and violate the truncation validity criterion~\eqnref{wigner-bec:truncation:delta-condition}, thus making the predictions less reliable.

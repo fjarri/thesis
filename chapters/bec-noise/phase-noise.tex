@@ -19,7 +19,7 @@ Using the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix} it can b
         e^{-i\phi} \int \langle \Psiop_1^\dagger \Psi_2 \rangle \upd\xvec
         \right).
 \end{eqn}
-One can notice that the integral of the second order moment in this expression is the same as in~\eqnref{bec-noise:visibility:visibility}, and is also normalized on the total population.
+One can notice that the integral of the second order moment in this expression is the same as in~\eqnref{bec-noise:visibility:visibility} and is also normalized on the total population.
 Therefore if we vary $\phi$ in the experiment, the resulting $P_z(\phi)$ can be fit with a sine function, and its amplitude will give us the visibility $\mathcal{V}$.
 
 \begin{figure}
@@ -36,13 +36,13 @@ Therefore if we vary $\phi$ in the experiment, the resulting $P_z(\phi)$ can be 
 
 In practice, naturally, the measurement of $P_z$ is affected by various sources of technical noise.
 As a result, the measured points are displaced from the ideal curve.
-In the experiment in question three such noise sources were identified.
-First, the length of $\pi/2$-pulses varied throughout the exeprimental runs with an estimated standard deviation of $\Delta \theta = 0.02\un{rad}$ (caused by the drift of the Rabi frequency $\Omega$).
+In the experiment in question, three such noise sources were identified.
+First, the length of $\pi/2$-pulses varied throughout the experimental runs with an estimated standard deviation of $\Delta \theta = 0.02\un{rad}$ (caused by the drift of the Rabi frequency $\Omega$).
 The phase of the coupler also had an uncertainty caused by the MW frequency instability that grew with time as $\Delta \phi / t = 0.5\un{rad/s}$.
 Finally, the imaging technique used to measure populations $N_1^\prime$ and $N_2^\prime$ resulted in an uncertainty of $\Delta N / N = 0.023$.
 These factors can be trivially added to the simulations: first two at the moment of the application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}, by adding a random factor to the length $\theta$ and the phase $\phi$, and the third one by adding a random factor to the populations $N_1$ and $N_2$ produced by integrating the corresponding moments of wavefunctions.
 
-The result is illustrated in~\figref{bec-noise:phase-noise:illustration}, with the ``experimental'' points emulated this way plotted agains a sine fit, for two different evolution times.
+The result is illustrated in~\figref{bec-noise:phase-noise:illustration}, with the ``experimental'' points emulated this way plotted against a sine fit, for two different evolution times.
 The base simulation is the truncated Wigner one for the regular Ramsey sequence from the previous section.
 The standard deviation of the horizontal distance $\sigma$ of the experimental results from the fitting curve is called the phase noise.
 The amplitude of the curve, in turn, is taken to be the predicted visibility accounting for the technical noises (see~\figref{bec-noise:visibility:ramsey-visibility} and~\figref{bec-noise:visibility:echo-visibility} in the previous section).
@@ -78,4 +78,4 @@ As~\figref{bec-noise:phase-noise:echo-phnoise} shows, even after the inclusion o
 This may be caused by the systematic error introduced by the truncation, or possibly by some additional source of technical noise.
 
 One may notice that the total noise shown in~\figref{bec-noise:phase-noise:ramsey-phnoise} and~\figref{bec-noise:phase-noise:echo-phnoise} is lower than the one reported by Egorov \textit{et~al}~\cite{Egorov2011,Egorov2012}.
-This is the result of the honest calculation of the total noise (in essence, we simulate the actual experimental measurement procedure), as opposed to the post-factum combination of noise from the technical sources with the Wigner results.
+This is the result of the honest calculation of the total noise (in essence, we simulate the actual experimental measurement procedure) as opposed to the post-factum combination of noise from the technical sources with the Wigner results.
