@@ -5,7 +5,7 @@
 Field operators can simplify both the analysis of a master equation, and its transformation to an \abbrev{fpe} using phase-space methods, which is the main topic of this thesis.
 In this section we are going to outline the functional operator calculus.
 It is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
-The similartiy and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
+The similarity and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
 
 Multimode field of a $C$-component \abbrev{bec} in $D$ effective dimensions is described by field operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\Psiop_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at a location defined by a $D$-component coordinate vector $\xvec$, and $\Psiop_j$ destroys one.
 We will use the same scheme as with functions of coordinates in \appref{func-calculus}, abbreviating $\Psiop_j \equiv \Psiop_j(\xvec)$ and $\Psiop_j^\prime \equiv \Psiop_j(\xvec^\prime)$.
@@ -19,7 +19,7 @@ The commutators are
     [ \Psiopf_j, \Psiopf_k^{\prime\dagger} ]
     & = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
-Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ consitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
+Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ constitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
 Field operators can be decomposed using a single-particle orthonormal basis (see~\eqnref{func-calculus:basis}):
 \begin{eqn}
 \label{eqn:wigner:op-calculus:field}
@@ -29,14 +29,14 @@ Note that each component can have its own basis.
 Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{mm-wigner:mm:commutators}, with the pair $j,\nvec$ serving as a mode identifier.
 
 In practice, one cannot use an infinitely sized basis in numerical calculations; some subset of modes is always chosen.
-To take this into account we will restrict ourselves to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$.
+In order to take this into account, we will restrict ourselves to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$.
 New restricted field operators are
 \begin{eqn}
 \label{eqn:wigner:op-calculus:restricted-field}
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
 They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
-Because of the restricted nature of these operators, commutation relations~\eqnref{wigner:op-calculus:commutators} no longer apply.
+Because of the restricted nature of these operators, the commutation relations~\eqnref{wigner:op-calculus:commutators} no longer apply.
 The following ones should be used instead:
 \begin{eqn}
 \label{eqn:wigner:op-calculus:restricted-commutators}
@@ -46,11 +46,11 @@ The following ones should be used instead:
     & = \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec).
 \end{eqn}
 
-Let us now find the expression for high-order commutators of restricted field operators, analogous to the one for single-mode operators which can be found in the book by Louisell~\cite{Louisell1990}.
+Let us now find the expression for high-order commutators of restricted field operators, analogous to the one for single-mode operators, which can be found in the book by Louisell~\cite{Louisell1990}.
 
 \begin{lemma}
 \label{lmm:wigner:op-calculus:moment-commutators}
-    For $\Psiop \in \mathbb{FH}_{\restbasis}$
+    For $\Psiop \in \mathbb{FH}_{\restbasis}$,
     \begin{eqn*}
         \left[ \Psiop, ( \Psiop^{\prime\dagger} )^l \right]
         & = l \delta_{\restbasis} (\xvec^\prime, \xvec) ( \Psiop^{\prime\dagger} )^{l-1}, \\
@@ -85,7 +85,7 @@ Now we can get the commutator of any order starting from the known relation~\eqn
 A further generalisation of these relations is
 \begin{lemma}
 \label{lmm:wigner:op-calculus:functional-commutators}
-    For $\Psiop \in \mathbb{FH}_{\restbasis}$
+    For $\Psiop \in \mathbb{FH}_{\restbasis}$,
     \begin{eqn*}
         \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
         & = \delta_{\restbasis} (\xvec^\prime, \xvec) \frac{\partial f}{\partial \Psiop^{\prime\dagger}}, \\
@@ -97,7 +97,7 @@ A further generalisation of these relations is
 \begin{proof}
 Let us prove the first relation; the procedure for the second one is the same.
 Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in power series of normally ordered operators (otherwise we can just use commutation relations).
-Thus
+Thus,
 \begin{eqn}
     \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
     & = \sum_{r,s} f_{rs} [ \Psiop, (\Psiop^{\prime\dagger})^r (\Psiop^\prime)^s ] \\

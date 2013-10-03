@@ -1,5 +1,5 @@
 % =============================================================================
-\section{Functional Wigner representation}
+\section{Functional transformation}
 % =============================================================================
 
 Now we have all the tools we need to work with the functional Wigner representation.
@@ -71,7 +71,7 @@ Thus, differentiation of the displacement operator gives
 The remaining equations from the statement are proved analogously.
 \end{proof}
 
-The functional Wigner transformation is the same Fourier transform of the trace as in \defref{mm-wigner:sm:w-transformation}, but expressed in functional terms.
+Similar to the single-mode Wigner transformation from \defref{mm-wigner:sm:w-transformation}, the functional Wigner transformation is the Fourier transform of a trace, but expressed in functional terms.
 
 \begin{definition}
 \label{def:wigner:func:w-transformation}
@@ -109,7 +109,7 @@ Correspondence relations and moment extraction theorems have the same form as in
 
 \begin{theorem}[functional extension of \thmref{mm-wigner:sm:correspondences}]
 \label{thm:wigner:func:correspondences}
-	For any Hilbert-Schmidt operator $\hat{A}$
+	For any Hilbert-Schmidt operator $\hat{A}$,
 	\begin{eqn*}
 		\mathcal{W} [ \Psiop \hat{A} ]
 			& = \left( \Psi + \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \right) \mathcal{W}[\hat{A}],
@@ -184,7 +184,7 @@ Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over 
 \end{lemma}
 \begin{proof}
 The proof follows the same general scheme as in the single-mode case.
-The exponent in the $\chi_W$ can be expanded as
+The exponent in the expression for $\chi_W$ can be expanded as
 \begin{eqn}
 	\exp (\int \upd\xvec \Lambda \Psiop^\dagger - \int \upd\xvec \Lambda^* \Psiop)
 	= \sum_{r,s}
@@ -211,7 +211,7 @@ and multiple application of the differential gives us
 	\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^r
 	= r! ( \Psiop^{\prime\dagger} )^r.
 \end{eqn}
-Similarly for the other differential:
+Similarly, for the other differential:
 \begin{eqn}
 	\left( -\frac{\fdelta}{\fdelta \Lambda^{\prime*}} \right)^s
 	\left( -\int \upd\xvec\, \Lambda \Psiop^\dagger \right)^s
@@ -250,7 +250,7 @@ By definition of the Wigner functional:
 		\hat{D}[\Lambda]
 	}
 \end{eqn}
-Evaluating integral over $\Psi$ using \lmmref{func-calculus:fourier-of-moments}:
+Evaluating the integral over $\Psi$ using \lmmref{func-calculus:fourier-of-moments}:
 \begin{eqn}
 	= \int \fdelta^2\Lambda
 		\left(
@@ -279,6 +279,5 @@ Integrating by parts and eliminating terms which fit \lmmref{func-calculus:zero-
 		\chi_W [\Lambda]
 	\right|_{\Lambda \equiv 0}.
 \end{eqn}
-Now, recognising the final expression as a part of \lmmref{wigner:func:moments-from-chi},
-we immideately get the statement of the theorem.
+Now, recognising the final expression as a part of \lmmref{wigner:func:moments-from-chi}, we immediately get the statement of the theorem.
 \end{proof}
