@@ -20,3 +20,4 @@ Checklist:
 - spellcheck
 - grammar check
 - do we need a page with supervisory committee?
+- "non-" or "non"? Currently I have "nonlinear", but everything else is with "non-" (non-zero, non-trivial, non-negative etc).
