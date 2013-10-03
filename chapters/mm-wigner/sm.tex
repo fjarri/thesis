@@ -1,5 +1,5 @@
 % =============================================================================
-\section{Single-mode Wigner transformation}
+\section{Single-mode transformation}
 % =============================================================================
 
 In this section we will work with a single-mode bosonic system with standard creation and annihilation operators
@@ -32,13 +32,13 @@ Using the displacement operator we can define the Wigner transformation:
 
 \begin{definition}
 \label{def:mm-wigner:sm:w-transformation}
-	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space.
+	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space:
 	\begin{eqn*}
 		\mathcal{W}\left[\hat{A}\right]
 		= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
 			\Trace{ \hat{A} \hat{D}(\lambda) }.
 	\end{eqn*}
-	The backward transformation (called the Weyl transformation) gives back the operator:
+	The backward transformation (called the Weyl transformation) restores the operator:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[f]
 		= \frac{1}{\pi} \int \upd^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
@@ -70,7 +70,7 @@ Applying \lmmref{c-numbers:fourier-of-moments} to integrate over $\lambda$:
 \end{eqn}
 The proof for the other direction looks the same.
 
-Although in general the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it is can be proved to be always real-valued.
+Although, in general, the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it is can be proved to be always real-valued.
 
 \begin{theorem}
 \label{thm:mm-wigner:sm:w-real}
@@ -89,7 +89,7 @@ Changing variables as $\lambda \rightarrow -\lambda$ and using the fact that $(\
 		\Trace{ \hat{A}^\dagger \exp(-\lambda^* \hat{a} + \lambda \hat{a}^\dagger) } \\
 	& = W[\hat{A}^\dagger].
 \end{eqn}
-Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equal to itself and therefore is real.
+Therefore, if $\hat{A} = \hat{A}^\dagger$, the conjugate of $W[\hat{A}]$ is equal to itself and, therefore, is real.
 \end{proof}
 
 Earlier in this section we have defined the Wigner transformation for arbitrary operators, but the most often occurring and the most important case is the transformation of a density matrix.
@@ -105,7 +105,7 @@ Earlier in this section we have defined the Wigner transformation for arbitrary 
 The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
 Note also that since any density matrix is Hermitian, according to \thmref{mm-wigner:sm:w-real} $W(\alpha)$ is a real-valued function.
 
-In some cases it will be convenient to use Wigner function in form
+In some cases, it will be convenient to use Wigner function in the form
 \begin{eqn}
 	W (\alpha)
 	= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -146,7 +146,7 @@ First, let us transform the trace using~\eqnref{mm-wigner:sm:displacement-deriva
 		-\frac{1}{2} \lambda
 	\right) \Trace{ \hat{A} \hat{D}}.
 \end{eqn}
-Subsituting this into the definition of the Wigner transformation:
+Substituting this into the definition of the Wigner transformation:
 \begin{eqn}
 	\mathcal{W} [ \hat{a} \hat{A} ]
 	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -210,8 +210,7 @@ Thus
 		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
 		\langle \symprod{ \hat{a}^j (\hat{a}^\dagger)^k } \rangle.
 \end{eqn}
-Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $j < r$ and $k < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $j > r$ and $k > s$,
-leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
+Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $j < r$ and $k < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $j > r$ and $k > s$, leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 \begin{eqn}
 	\left.
 		\left( \frac{\cwd}{\cwd \lambda} \right)^s
@@ -267,7 +266,7 @@ Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delt
 		\chi_W (\lambda)
 	\right|_{\lambda=0}.
 \end{eqn}
-Now, recognising the final expression as a part of \lmmref{mm-wigner:sm:moments-from-chi}, we immideately get the statement of the theorem.
+Now, recognising the final expression as a part of \lmmref{mm-wigner:sm:moments-from-chi}, we immediately get the statement of the theorem.
 \end{proof}
 
 With the help of \thmref{mm-wigner:sm:correspondences} and \thmref{mm-wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$, transform it to an ordinary differential equation, and use its solution to get expectations of any observables.
