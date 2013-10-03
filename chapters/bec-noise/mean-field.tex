@@ -42,7 +42,7 @@ The coupling terms were first included in~\cite{Ballagh1997}, and the loss terms
 A detailed description of the mean-field approximation can be found in the book by Pitaevskii and Stringari~\cite{Pitaevskii2003}.
 
 The exact expression of the loss parameters $\Gamma_j$ depends on the loss processes in the particular experiment.
-For example, the dominant three-body and two-body losses in the two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in~\cite{Burt1997,Mertes2007}
+For example, the dominant three-body and two-body losses in a two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in~\cite{Burt1997,Mertes2007}
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:losses}
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
@@ -50,7 +50,7 @@ For example, the dominant three-body and two-body losses in the two-component \R
 \end{eqn}
 These equations were obtained empyrically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
 
-The difference between the internal energies of spins $1$ and $2$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
+The difference between the internal energies of components $\ket{1}$ and $\ket{2}$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
 
 The fact that $\hbar \omega_j \gg V_j$ can cause problems when performing calculations with low precision.
@@ -110,7 +110,7 @@ The application of the coupling field can be simplified, if certain additional c
 	\item $\delta \ll \Omega$;
 	\item the characteristic time of the other terms in~\eqnref{bec-noise:mean-field:cgpes} is much greater than $t_{\mathrm{pulse}}$.
 \end{enumerate}
-This allows us to use the ``instantaneous'' pulse, multiplying the state vector by a rotation matrix:
+This allows us to use an ``instantaneous'' pulse, multiplying the state vector by a rotation matrix:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:rotation-matrix}
 	\begin{pmatrix}
@@ -186,7 +186,7 @@ Therefore, if we take some random initial solution and propagate it long enough 
 The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one, since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
 
 Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, renormalisation after each step will be required.
-Known total number of atoms in ground state serves best in this case (because we will have to renormalise the final ground state anyway):
+Known total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
 \begin{eqn}
 	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 \upd V = N.
 \end{eqn}
@@ -256,7 +256,7 @@ For a \abbrev{1d} trap it has the form
 		\left( \frac{m \omega_1^2}{2} \right)^{\frac{1}{3}}.
 \end{eqn}
 
-Now we can roughly estimate the conditions necessary to drop the kinetic term from equation.
+Now we can roughly estimate the conditions necessary to drop the kinetic term from the equation.
 Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref{bec-noise:mean-field:cgpes-stationary} and comparing the kinetic term with the potential term, we get the following inequation:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-inequation}
@@ -290,7 +290,7 @@ They have to be much smaller than corresponding radii, which gives us
 \begin{eqn}
 	\mu_1 \gg \frac{1}{2} \hbar \max_{d \in [1, \ldots, D]} \omega_d.
 \end{eqn}
-This conditions is less strict than the condition for the center of the condensate.
+This condition is less strict than the condition for the center of the condensate.
 Therefore, we have only one condition justifying the application of the Thomas-Fermi approximation is~\eqnref{bec-noise:mean-field:tf-condition}.
 
 \begin{figure}
@@ -304,7 +304,7 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
 For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
 This means that the Thomas-Fermi approximation produces solution which is close to the real one.
-But for lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
+But for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
 \figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state, and for $1,000$ atoms it differs significantly, as expected.
 
 More extended discussion of the Thomas-Fermi approximation was done by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.

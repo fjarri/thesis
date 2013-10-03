@@ -3,9 +3,9 @@
 % =============================================================================
 
 In this section we will apply the model from the previous sections to the recent interferometry experiments involving a two-component \Rb{} \abbrev{bec} with two hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$~\cite{Egorov2011} (the components are denoted $\ket{1}$ and $\ket{2}$ further in this section).
-In the following simulations the intra- and interspecies scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
+In the following simulations the intra- and interspecies scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
 
-The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$, so that magnetic field dephasing is largely eliminated~\cite{Hall1998}.
+The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$, so that the magnetic field dephasing is largely eliminated~\cite{Hall1998}.
 The experiment is then carried out using two protocols.
 
 \begin{figure}
@@ -76,7 +76,7 @@ where we used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M / V$ i
 
     \caption[Experimental and numerically simulated interferometric constrast in Ramsey sequence]{
     Comparison of experimental and numerically simulated interferometric contrast at the end of a regular Ramsey sequence with the evolution time $t$.
-    Experimental results (black bars) are shown in comparison with the results given by the mean-field model (green dotted line), truncated Wigner method (red dashed line), and truncated Wigner with technical noises included (blue solid line).
+    Experimental results (black bars) are shown in comparison with the results given by the mean-field model (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).
     The mean-field results with losses turned off (yellow dash-dotted line) and the population-dependent visibility limit~\eqnref{bec-noise:visibility:limit} (grey dotted line) are included as a reference.}%endcaption
 
     \label{fig:bec-noise:visibility:ramsey-visibility}
@@ -111,7 +111,7 @@ Candidate factors include finite temperature effects and interaction with the su
 
     \caption[Experimental and numerically simulated interferometric constrast in spin echo sequence]{
     Comparison of experimental and numerically simulated interferometric contrast at the end of a spin echo sequence with the evolution time $t$.
-    Experimental results (black bars) show the final visibility value for a single spin echo sequence with the full evolution time $t$ as compared with the predictions from the mean-field model (green dotted line), truncated Wigner method (red dashed line), and truncated Wigner with technical noises included (blue solid line).}%endcaption
+    Experimental results (black bars) show the final visibility value for a single spin echo sequence with the full evolution time $t$ as compared with the predictions from the mean-field model (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).}%endcaption
 
     \label{fig:bec-noise:visibility:echo-visibility}
 \end{figure}
@@ -129,12 +129,13 @@ Same as in the case of the regular Ramsey sequence, the predictions of the simul
     \includegraphics{figures_generated/bec_noise/ramsey_visibility_long.pdf}%
     \includegraphics{figures_generated/bec_noise/echo_visibility_long.pdf}}
 
-    \caption[Experimental and numerically simulated interferometric constrast in Ramsey and spin echo sequences for longer times]{Numerically simulated interferometric contrast for \textbf{(a)} a Ramsey sequence, and \textbf{(b)} a spin echo sequence at longer times.
-    Mean-field (green dotted lines), truncated Wigner (red dashed lines) and truncated Wigner with technical noises (blue solid lines) are plotted.}%endcaption
+    \caption[Experimental and numerically simulated interferometric constrast in Ramsey and spin echo sequences for longer times]{
+    Numerically simulated interferometric contrast for \textbf{(a)} a Ramsey sequence, and \textbf{(b)} a spin echo sequence at longer times.
+    The results for the mean-field model (green dotted lines), the truncated Wigner method (red dashed lines) and the truncated Wigner with technical noises (blue solid lines) are plotted.}%endcaption
 
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
 
 The simulations can be performed for longer times, as shown in~\figref{bec-noise:visibility:visibility-long}.
-The difference between the mean-field and the truncated Wigner approach becomes more clear in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts the significant decrease in the amplitude of the rephasing oscillations, caused by the quantum noise.
+The difference between the mean-field and the truncated Wigner approach becomes clearer in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts the significant decrease in the amplitude of the rephasing oscillations, caused by the quantum noise.
 One must remember though that at such times the simulated atom densities become too low due to losses and violate the truncation validity criterion~\eqnref{wigner-bec:truncation:delta-condition}, thus making the predictions less reliable.
