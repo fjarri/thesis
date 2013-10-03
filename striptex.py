@@ -43,13 +43,13 @@ def replace_display_eqn(text, env):
         if s.endswith('\\qedhere'):
             s = s[-8:].strip()
         if s[-1] == '.':
-            return '(this equation).'
+            return ' (this equation). '
         elif s[-1] == ',':
-            return '(this equation),'
+            return ' (this equation), '
         else:
-            return '(this equation)'
+            return ' (this equation) '
 
-    return re.sub(r'\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}',
+    return re.sub(r'\n[ \t]*?\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}\n',
         replace,
         text,
         flags=re.DOTALL)
