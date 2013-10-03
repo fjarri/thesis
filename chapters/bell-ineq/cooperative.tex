@@ -4,7 +4,7 @@
 
 A Bell inequality sets a limit on observable correlations in a physical system that obeys a local hidden variable theory (\abbrev{lhv})~\cite{Bell1964,Clauser1969}.
 This is a classical theory where the results of the measurements are functions of local detector settings and the hidden parameter $\lambda$.
-Thus the values measured by two spatially separated observers, $A$ and $B$ (for Alice and Bob, as they are usually denoted), can be expressed as $A(a, \lambda)$ and $B(b, \lambda)$, where $a$ and $b$ are Alice's and Bob's detector settings.
+Thus, the values measured by two spatially separated observers, $A$ and $B$ (for Alice and Bob, as they are usually denoted), can be expressed as $A(a, \lambda)$ and $B(b, \lambda)$, where $a$ and $b$ are Alice's and Bob's detector settings.
 Possible correlations are defined probabilistically as
 \begin{eqn}
 \label{eqn:bell-ineq:cooperative:lhv}
@@ -34,7 +34,7 @@ The quantum state in question is
 \end{eqn}
 where $N$ is the number of photon pairs, indices $1$ and $2$ denote the propagation direction, and $+$ and $-$ stand for the polarization direction.
 These states are generated in certain types of optical parametric down-conversion experiments, and it has proved difficult to obtain a direct, loophole free violation of a Bell inequality, owing to detector inefficiencies~\cite{Cabello2007,Larsson1998,Larsson2001}.
-But these issues are not significant for the simulations in this thesis, since we are considering an ideal experiment.
+However, these issues are not significant for the simulations in this thesis since we are considering an ideal experiment.
 
 We define the intensity correlations to be~\cite{Drummond1983}
 \begin{eqn}
@@ -81,7 +81,7 @@ This gives the violation of
     = 3\cos^{2}\theta - \cos^{2}3\theta - 2
 \end{eqn}
 for the two-particle case, which corresponds to the usual two-particle experiment originally proposed by Bell.
-For the four-particle case the violation can be found to be
+For the four-particle case, the violation can be found to be
 \begin{eqn}
 \label{eqn:bell-ineq:cooperative:violation-2}
     \Delta_{\mathrm{2\, pairs}}(\theta)
@@ -104,14 +104,14 @@ In essence, it is an exact expansion of an arbitrary density matrix of bosons wi
         \langle \bbeta^* \vert \balpha \rangle,
 \end{eqn}
 where $\vert\balpha\rangle$ is a multimode coherent state.
-The positive P-representation therefore corresponds exactly to the definition of a physical weak measurement~\cite{Aharonov1988}, with initial state $\vert\balpha\rangle$ and final postselected state $\vert\bbeta\rangle$ occuring with probability $P(\balpha,\bbeta)$.
+The positive P-representation, therefore, corresponds exactly to the definition of a physical weak measurement~\cite{Aharonov1988}, with initial state $\vert\balpha\rangle$ and final postselected state $\vert\bbeta\rangle$ occurring with probability $P(\balpha,\bbeta)$.
 The standard form we use is also known to be measurable using multiple beam-splitter operations~\cite{Agarwal1994}.
 
 The expression above looks very similar to~\eqnref{bell-ineq:cooperative:lhv}, given by \abbrev{lhv}.
 The fundamental difference, which allows the correlations obtained from the positive-P distribution to violate Bell inequalities, is that the quantities being sampled can be complex numbers of any magnitude.
 Only after the weighted averaging with the probability distribution $P$ they give the value of the observable.
 
-For an arbitrary moment of creation and annihilation operators $\hat{O}(\avec^\dagger, \avec)$ the expectation is calculated as
+For an arbitrary moment of creation and annihilation operators $\hat{O}(\avec^\dagger, \avec)$, the expectation is calculated as
 \begin{eqn}
 \label{eqn:bell-ineq:cooperative:moment-expectation}
     \langle \hat{O} \rangle
@@ -201,7 +201,7 @@ where $k$ is the number of components in $\Avec$ (in our case $\Avec$ contains t
 \begin{eqn}
     S_{k-1}(r) = \frac{2\pi^{k/2} r^{k-1}}{\Gamma(k/2)}.
 \end{eqn}
-Thus the normalization coefficient is
+Thus, the normalization coefficient is
 \begin{eqn}
     M
     = \int F(\Avec) \upd^2 \Avec
@@ -232,7 +232,7 @@ In order to sample the distribution $R$, we have to do another variable change: 
         \frac{x^{N}}{\pi^2 (N+1)!} e^{-x} \\
     & = \frac{x^{N+1}}{(N+1)!} e^{-x}.
 \end{eqn}
-The result is exactly the gamma-distribution with the scale $\alpha = N + 2$, for which an effective sampling method exists~\cite{Marsaglia2000}.
+The result is exactly the gamma-distribution with the scale $\alpha = N + 2$, for which an efficient sampling method exists~\cite{Marsaglia2000}.
 
 Combining it all together, the rejection algorithm for sampling the probability distribution~\eqnref{bell-ineq:cooperative:pos-P} consists of the following steps:
 \begin{enumerate}

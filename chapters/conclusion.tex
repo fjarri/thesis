@@ -4,7 +4,7 @@
 % =============================================================================
 
 In this thesis we introduced the functional Wigner transformation formally.
-We proved the required theorems in from Wirtinger calculus and functional calculus, and used them to derive the basic properties of the Wigner transformation: sequential transformation of operator products, and the correspondence between operator expectations and moments of the Wigner functional.
+We proved the required theorems in from Wirtinger calculus and functional calculus, and used them to derive the essential properties of the Wigner transformation: sequential transformation of operator products, and the correspondence between operator expectations and moments of the Wigner functional.
 
 We then applied this framework to the exact operator equation governing the dynamics of a \abbrev{bec} and showed how to transform it into the equivalent partial differential equation.
 An approximation (Wigner truncation) was introduced, which allowed to simplify this equation further, and turn it into a set of \abbrev{sde}s for trajectories in the phase space.
@@ -13,7 +13,7 @@ All of this was done while keeping the functional nature of equations intact, an
 On the whole, it allowed us to link the coefficients and terms in the master equation directly with those of \abbrev{sde}s, resulting in a simple method of numerical simulations of \abbrev{bec} dynamics.
 This method includes the effect of nonlinear losses in a natural way, is capable of producing any high-order correlations without changes to the initial state or the propagation, and is highly parallelizable.
 The latter is a huge advantage in the modern word of multi-core and multi-node computations and the recent advent of general calculations on \abbrev{gpu}s.
-In particular, the use of modern \abbrev{gpu}s allowed us to simulate the dynamics of hundreds of thousands atoms with thousands of modes with high degree of accuracy on a desktop in the order of hours.
+In particular, the use of modern \abbrev{gpu}s allowed us to simulate the dynamics of hundreds of thousands of atoms with thousands of modes with a high degree of accuracy on a desktop in the order of hours.
 
 We applied the truncated Wigner method to some recent \abbrev{bec} interferometry experiments, both local and reported by other experimental teams.
 The method showed good agreement with the experimental results for such important observables as interferometric contrast (a second-order correlation), phase noise and degree of spin squeezing (fourth-order correlations).
@@ -22,7 +22,7 @@ The method allows one to account for experimental imperfections (measurement and
 In the last chapter we considered a more broad topic of the ability of phase space methods to simulate quantum mechanical systems, and their differences from \abbrev{lhv} theories.
 We showed that, due to weaker restrictions on the codomains of the moments that correspond to physical observables, such methods are indeed capable of demonstrating such essential quantum mechanical properties as the violation of Bell inequalities.
 We were able to calculate the correlations involving every particle in the system in highly entangled \abbrev{ghzm} states for up to $60$ particles.
-This results is far beyond the capabilities of current experimental techniques.
+This result is far beyond the capabilities of current experimental techniques.
 
 \centerline{\vfleuron}
 
@@ -33,9 +33,9 @@ First, we only used coherent initial states and zero temperature for our simulat
 While it is a reasonable first approximation, for some experiments this may not be acceptable.
 The obvious next step here is to include finite-temperature initial conditions using Bogoliubov modes~\cite{Steel1998,Sinatra2002,Ruostekoski2005,Isella2006,Blakie2008}.
 During the simulation, the validity of the truncation needs to be estimated more accurately than by using the condition~\eqnref{wigner-bec:truncation:delta-condition}.
-This condition turns out to be, in fact, more of a guideline, as there are examples of good agreement with the exact methods even when it is not satisfied.
+This condition turns out to be, in fact, more of a guideline as there are examples of good agreement with the exact methods even when it is not satisfied.
 More accurate test can be performed by calculating the quantum correction~\cite{Polkovnikov2010}.
 
 Speaking about phase space methods generally, despite demonstrating excellent results in sampling static quantum states, they often struggle in simulating the dynamics of these systems.
 Positive-P is known to display exponentially growing sampling error because of the redundant dimensions it uses.
-In some cases this can be neutralized by using a gauge-P representation~\cite{Deuar2002,Deuar2005a}, or adding a projection.
+In some cases, this can be neutralized by using a gauge-P representation~\cite{Deuar2002,Deuar2005a}, or adding a projection.
