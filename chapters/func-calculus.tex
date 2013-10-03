@@ -4,10 +4,10 @@
 % =============================================================================
 
 The definitions of differentiation and integration from \appref{c-numbers} can be extended to operate on functions and functionals.
-This proved to be a useful tool in the derivation of the functional Wigner transformation and expressing accompanied results, as it helps encapsulate bases and mode populations inside wave functions and field operators.
+This proved to be a useful tool in the derivation of the functional Wigner transformation and expressing accompanying results as it helps encapsulate bases and mode populations inside wave functions and field operators.
 It has been introduced (among other places) in most of the papers treating functional extensions of quasiprobability with varying level of detail.
 The most extensive description was made by Dalton~\cite{Dalton2012}.
-Although, while these papers cover the foundations quite well, they are missing several important results which are essential for this thesis, and which will be therefore proved in this Appendix.
+Nevertheless, while these papers cover the foundations quite well, they are missing several important results which are essential for this thesis, and which will be, therefore, proved in this Appendix.
 
 
 % =============================================================================
@@ -26,8 +26,8 @@ Orthonormality and completeness conditions for basis functions are, respectively
 	\sum_{\nvec \in \fullbasis} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime)
 	& = \delta(\xvec^\prime - \xvec),
 \end{eqns}
-where the integration area $A$ depends on the basis set (for example, $A$ is the whole space for harmonic oscillator modes, and a box for plane waves).
-Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, for functions of coordinates the argument list will be often omitted (i.e. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$) except where it is necessary for clarity.
+where the integration area $A$ depends on the basis set (for example, $A$ is the whole space for harmonic oscillator modes and a box for plane waves).
+Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, the argument list will be often omitted for functions of coordinates (e.g. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$), except where it is necessary for clarity.
 
 Various functions can be combined using all, or the certain subset, of basis modes by means of the composition:
 
@@ -45,7 +45,7 @@ Various functions can be combined using all, or the certain subset, of basis mod
 	\end{eqn*}
 \end{definition}
 
-For any subset of the full basis, there is a certain subspace of functions that can be obtained by composing modes from this subset only.
+For any subset of the full basis, there is a subspace of functions that can be obtained by composing modes from this subset only.
 
 \begin{definition}
 	For some subset of the full basis $\restbasis \subseteq \fullbasis$, $\mathbb{F}_{\restbasis} \equiv (\mathbb{R}^D \rightarrow \mathbb{C})_{\restbasis}$ is the space of all functions of coordinates, which can be obtained using $\mathcal{C}_{\restbasis}$.
@@ -53,12 +53,12 @@ For any subset of the full basis, there is a certain subspace of functions that 
 	We denote $\mathbb{F}_{\fullbasis} \equiv \mathbb{F}$.
 \end{definition}
 
-Using this definition, the ``type signatures'' of composition and decomposition transformations can be written as
+With the help of this definition, the ``type signatures'' of composition and decomposition transformations can be written as
 \begin{eqn}
 		\mathcal{C}_{\restbasis} \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}_{\restbasis},\quad
-		\mathcal{C}_{\restbasis}^{-1} \in \mathbb{F} \rightarrow \mathbb{C}^{|\restbasis|}
+		\mathcal{C}_{\restbasis}^{-1} \in \mathbb{F} \rightarrow \mathbb{C}^{|\restbasis|}.
 \end{eqn}
-Note also that for any $f \in \mathbb{F}_{\restbasis}$ corresponding composition and decomposition transformations are reversible, that is $\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f]) \equiv f$.
+Note also that, for any $f \in \mathbb{F}_{\restbasis}$, the corresponding composition and decomposition transformations are reversible, that is $\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f]) \equiv f$.
 We will call such functions ``restricted''.
 
 The result of any non-linear transformation of a function $f \in \mathbb{F}_{\restbasis}$ is not guaranteed to belong to $\mathbb{F}_{\restbasis}$ and requires explicit projection to be used with other restricted functions from the same subspace $\mathbb{F}_{\restbasis}$:
@@ -95,7 +95,7 @@ Projection transformation can be, in turn, expressed using the restricted delta 
 \label{eqn:func-calculus:projector-via-delta}
 	\proj{\restbasis}[f](\xvec) = \int \upd\xvec^\prime \delta_{\restbasis}(\xvec^\prime, \xvec) f^\prime.
 \end{eqn}
-The conjugate of $\proj{\restbasis}$ is therefore
+The conjugate of $\proj{\restbasis}$ is, therefore,
 \begin{eqn}
 	(\proj{\restbasis}[f](\xvec))^*
 	= \int \upd\xvec^\prime \delta_{\restbasis}^*(\xvec^\prime, \xvec) f^{\prime*}
@@ -109,8 +109,8 @@ The conjugate of $\proj{\restbasis}$ is therefore
 
 Let $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some arbitrary functional operator (not to be confused with quantum mechanical operators) acting on functions from a restricted basis.
 Such operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
-Note that in general this operator is nor linear, therefore its result is not guaranteed to belong to the same restricted basis as its argument.
-Also, since $\mathbb{C}$ is a specific case of $\mathbb{F}$ (a constant function of coordinates), a specific case of a functional operator is a functional $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$).
+Note that in general this operator is nor linear; therefore, its result is not guaranteed to belong to the same restricted basis as its argument.
+Also, since $\mathbb{C}$ is a specific case of $\mathbb{F}$ (a constant function of coordinates), a specific case of a functional operator is a functional $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$.
 This means that the calculus described in this section applies to functionals as well.
 
 Composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
@@ -152,7 +152,7 @@ Let us first demonstrate that the definition obeys standard differentiation rule
 
 \begin{theorem}
 	Functional differentiation from \defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
-	The latter one is applied as if $\mathcal{F}[f]$ was a function of two independent variables $f$ and $f^*$:
+	The latter one is applied as if $\mathcal{F}[f]$ were a function of two independent variables $f$ and $f^*$:
 	\begin{eqn*}
 		\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
 			= \int \upd\xvec^{\prime\prime} \left(
@@ -188,15 +188,17 @@ Applying the chain rule for Wirtinger derivatives, and recalling the definition 
 		\frac{\cwd \beta_{\mvec}^*}{\cwd \alpha_{\nvec}}
 	\right),
 \end{eqn}
+where the nested differentials are calculated as
 \begin{eqn}
 	\frac{\cwd \beta_{\mvec}}{\cwd \alpha_{\nvec}}
 	= \frac{\cwd (\mathcal{C}^{-1}[G(\balpha, \xvec)])_{\mvec}}{\cwd \alpha_{\nvec}}
-	= \int \cwd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime*}
+	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime*}
 		\frac{\cwd G(\balpha, \xvec)}{\cwd \alpha_{\nvec}},
 \end{eqn}
+and
 \begin{eqn}
 	\frac{\cwd \beta_{\mvec}^*}{\cwd \alpha_{\nvec}}
-	= \int \cwd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime}
+	= \int \upd\xvec^{\prime\prime} \phi_{\mvec}^{\prime\prime}
 		\frac{\cwd G^*(\balpha, \xvec)}{\cwd \alpha_{\nvec}}.
 \end{eqn}
 Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
@@ -224,21 +226,12 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 					\frac{\cwd \mathcal{G}^*[\mathcal{C}(\balpha)]}{\cwd \alpha_{\nvec}}
 				\right|_{\balpha = \mathcal{C}_{\restbasis}^{-1}[f]}.
 \end{eqn}
-Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we get the final expression
-\begin{eqn}
-	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
-		= \int \upd\xvec^{\prime\prime} \left(
-			\frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime}}
-			\frac{\fdelta \mathcal{G}}{\fdelta \mathcal{f}^{\prime}}
-			+ \frac{\fdelta \mathcal{F}}{\fdelta \mathcal{G}^{\prime\prime*}}
-			\frac{\fdelta \mathcal{G}^*}{\fdelta \mathcal{f}^{\prime}}
-		\right).
-\end{eqn}
+Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we obtain the statement of the theorem.
 \end{proof}
 
 The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to Wirtinger differentiation.
 
-Most of the time we will deal with functional operators in a particular form, namely the algebraic expressions of their arguments.
+Most of the time we will deal with functional operators in a particular form, namely algebraic expressions of their arguments.
 It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
@@ -258,7 +251,7 @@ It turns out that for this subset functional differentiation behaves almost exac
 \begin{proof}
 We will prove the first identity.
 Without loss of generality, we can consider $\mathcal{F} = f^r (f^*)^s$.
-Substituting this into \defref{func-calculus:func-diff}, differentiating the composition according to \defref{func-calculus:composition} and recognising the restricted delta function:
+Substituting this into \defref{func-calculus:func-diff}, differentiating the composition according to \defref{func-calculus:composition} and recognising the restricted delta function, we get:
 \begin{eqn}
 	\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime*}
@@ -418,7 +411,7 @@ Collapsing sums, and recognising functional derivatives (\defref{func-calculus:f
 \end{eqn}
 \end{proof}
 
-It is easy to show that the functional integration has the same integration by parts property as the common integration:
+It is easy to show that the functional integration has the same integration by parts property as the regular integration:
 \begin{eqn}
 	\int \fdelta^2 f
 		\frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
@@ -481,13 +474,11 @@ With this notation, for fixed $\nvec$:
 \end{eqn}
 and, similarly,
 \begin{eqn}
-	g & = g_{\lnot \nvec} + g_{\nvec},
-\end{eqn}
-\begin{eqn}
+	g & = g_{\lnot \nvec} + g_{\nvec}, \\
 	\int \upd^2 \bbeta & = \int \upd^2 \bbeta_{\lnot \nvec} \int \upd^2 \beta_{\nvec}.
 \end{eqn}
 
-With this notation:
+Separating variables in the integral using the introduced notation:
 \begin{eqn}
 	\int \fdelta^2g
 		\frac{\fdelta}{\fdelta g^\prime} \left(D[g, f] \mathcal{F}[g] \right)
@@ -533,7 +524,7 @@ In order to perform transformations of a master equation in the future, we will 
 
 \begin{lemma}
 \label{lmm:func-calculus:move-laplacian}
-	Let mode functions in a restricted basis $\restbasis$ satisfy the condition that for any pair of modes $\mvec,\nvec \in \restbasis$ it is true that
+	Let mode functions in a restricted basis $\restbasis$ satisfy the condition that for any pair of modes $\mvec,\nvec \in \restbasis$
 	\begin{eqn*}
 		\oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
 		= 0,
@@ -550,17 +541,17 @@ In order to perform transformations of a master equation in the future, we will 
 \end{lemma}
 \begin{proof}
 Integration limits play an important role in this proof, so we will write them explicitly.
+The components of the integral are expanded using the basis functions as
 \begin{eqn}
 \label{eqn:func-calculus:move-laplasian-expansion}
 	\int\limits_A \upd\xvec \left(
 		\nabla^2 \frac{\fdelta}{\fdelta f}
-	\right) f
+	\right) f \mathcal{F}[f]
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
 			\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 		\right)
 		\frac{\cwd}{\cwd \alpha_{\nvec}} \alpha_{\mvec}
-			\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)]
-	= (*),
+			\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)],
 \end{eqn}
 where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$.
 Using Green's first identity and the condition for the integrals over the boundary of $A$:
@@ -575,7 +566,9 @@ Using Green's first identity and the condition for the integrals over the bounda
 \end{eqn}
 Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 \begin{eqn}
-	(*)
+	\int\limits_A \upd\xvec \left(
+		\nabla^2 \frac{\fdelta}{\fdelta f}
+	\right) f \mathcal{F}[f]
 	& = \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
 			\int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
 		\right)
@@ -589,7 +582,7 @@ Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 Note that this lemma imposes an additional requirement on basis functions, which is, essentially, a generalised form of periodicity in the zeroth and first derivative over $A$.
 In this work we use two bases: plane waves and harmonic modes (see \appref{bases} for details).
 
-For the harmonic basis the condition is obviously true, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function~\eqnref{bases:harmonic-modes} are zero there.
+For the harmonic basis the condition is obviously satisfied, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function~\eqnref{bases:harmonic-modes} are equal to zero there.
 
 For the plane wave basis the area $A$ is a box (let us suppose for definiteness that it spans from $0$ to $L_j$ in every dimension $j$), and the mode functions are separable ($\phi_{\nvec}(\xvec) \equiv \prod_{j=1}^D \phi_{n_j}^{(j)}(x_j)$) so the variables in the integral from the condition can be easily separated too:
 \begin{eqn}
@@ -606,4 +599,4 @@ It is obvious from~\eqnref{bases:plane-wave-modes} that for any mode $\nvec$
 \end{eqn}
 which makes the integral above zero.
 
-Hereinafter we will assume that this condition is true for any basis we work with.
+In this thesis we will assume that this condition is satisfied for any basis we work with.
