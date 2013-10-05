@@ -4,14 +4,14 @@
 % =============================================================================
 
 Although the functional correspondences from \thmref{wigner:mc:correspondences} are relatively straightforward, there is a certain amount of work required to apply them to actual master equations arising in real world problems.
-This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing \abbrev{bec} evolution.
+This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing the \abbrev{bec} evolution.
 
 
 % =============================================================================
 \section{Unitary evolution}
 % =============================================================================
 
-The simplest non-trivial element of the Hamiltonian one is the density operator $\Psiop_j^\dagger \Psiop_k$, which describes, for instance, a potential or a coupling field.
+The simplest non-trivial element of a Hamiltonian one is the second-order operator $\Psiop_j^\dagger \Psiop_k$, which may describe, for instance, a potential or a coupling field.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator1}
@@ -71,9 +71,9 @@ we get
 which is the statement of the theorem.
 \end{proof}
 
-Commutators with the Laplacian inside require somewhat special treatment because it acts on basis functions and, in general, cannot be dragged around like a constant.
-For our purposes, we only need one specific case, and, fortunately, in this case it does act like a constant.
-The target expression describes kinetic energy in a Hamiltonian.
+Commutators with the Laplacian inside require somewhat special treatment, because it acts on basis functions and, in general, cannot be dragged around like a constant.
+For our purposes, we only need one specific case, namely the kinetic term in a Hamiltonian.
+Fortunately, in this case the Laplacian does act like a constant.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-laplacian-commutator1}
@@ -96,7 +96,7 @@ First, it is obvious from the definition of the Wigner transformation that an in
     \mathcal{W} [ \nabla^2 \hat{B}(\xvec) \hat{A} ]
     & = \nabla^2 \mathcal{W} [\hat{B}(\xvec) \hat{A}].
 \end{eqn}
-Let us now expand the commutator and apply correspondences from \thmref{wigner:func:correspondences}:
+Let us now expand the commutator and apply the correspondences from \thmref{wigner:func:correspondences}:
 \begin{eqn2}
     & \mathcal{W} && \left[
         \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
@@ -166,8 +166,8 @@ Now, using \lmmref{func-calculus:move-laplacian}, we can get the final result:
 \end{eqn}
 \end{proof}
 
-The last usual term in \abbrev{bec} Hamiltonians is a fourth order nonlinear interaction term.
-We will provide the transformation for its general non-local form, which can be later simplified to the local one by integration with the delta function.
+The last of the usual terms in \abbrev{bec} Hamiltonians is the fourth order nonlinear interaction term.
+We will provide a transformation for its general non-local form, which can be later simplified to a local one by integration with the delta function.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator2}
@@ -212,7 +212,7 @@ We will provide the transformation for its general non-local form, which can be 
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved by straightforward application of \thmref{wigner:mc:correspondences} and simplification of the resulting expression, similarly to \thmref{wigner-spec:w-commutator1}.
+Proved by a straightforward application of \thmref{wigner:mc:correspondences} and a simplification of the resulting expression, similarly to \thmref{wigner-spec:w-commutator1}.
 \end{proof}
 
 
@@ -220,7 +220,7 @@ Proved by straightforward application of \thmref{wigner:mc:correspondences} and 
 \section{Losses}
 % =============================================================================
 
-In this section we will state and proof the theorem which describes the transformation of the nonlinear operator
+In this section we will formulate and prove a theorem that describes the Wigner transformation of the nonlinear operator
 \begin{eqn}
 \label{eqn:wigner-spec:loss-operator}
     \hat{\mathcal{L}}_{\lvec} [\hat{A}]
@@ -228,17 +228,17 @@ In this section we will state and proof the theorem which describes the transfor
         - \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
         - \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
 \end{eqn}
-where $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with $l_j$ specifying the number of particles of component $j$ lost in the event, and
+where $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with $l_j$ denoting the number of particles of the component $j$ lost in the event, and
 \begin{eqn}
     \hat{O}_{\lvec}
     \equiv \hat{O}_{\lvec} (\Psiopvec)
     = \prod_{j=1}^C \Psiop_j^{l_j} (\xvec).
 \end{eqn}
-The operator of this form appears when one describes losses in a \abbrev{bec}.
+The operator of this form appears when one describes Markovian loss processes in a \abbrev{bec}~\cite{Jack2002}.
 
 Before approaching the main theorem we will need two auxiliary lemmas.
-After the application of \thmref{wigner:mc:correspondences} to the operator, we will have terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$ while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
-The first lemma will provide a way to do that.
+The result of an application of \thmref{wigner:mc:correspondences} to the operator $\hat{\mathcal{L}}$ will contain terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$, while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
+The first lemma will provide a way to perform this rearrangement.
 
 \begin{lemma}
 \label{lmm:wigner-spec:swap-differential}
@@ -254,7 +254,7 @@ The first lemma will provide a way to do that.
     \end{eqn*}
 \end{lemma}
 \begin{proof}
-Proof by induction.
+Proved by induction.
 Let us assume that the statement is correct for $b - 1$, and prove it for $b$ (also assuming the non-trivial case of $a > 0$).
 Moving a single differential to the left:
 \begin{eqn}
@@ -268,28 +268,33 @@ Moving a single differential to the left:
 \end{eqn}
 Using the known relation for $b-1$:
 \begin{eqn}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     ={} & \frac{\fdelta}{\fdelta \Psi} \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-j}
             \mathcal{F} \\
     & - a \delta_{\restbasis}(\xvec, \xvec) \sum_{j = 0}^{\min(a-1, b-1)}
-            \binom{b-1}{j} \frac{(-1)^j (a-1)!}{(a-1-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
+            \binom{b-1}{j} \frac{(-1)^j (a-1)!}{(a-1-j)!} \\
+    & \quad \times \delta_{\restbasis}^j(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
             \mathcal{F}.
 \end{eqn}
-Merging coefficients in front of the sums into internal expressions:
+Merging the coefficients in front of the sums into the internal expressions:
 \begin{eqn}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     ={} & \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F} \\
     & + \sum_{j = 0}^{\min(a-1, b-1)}
-            \binom{b-1}{j} \frac{(-1)^{j+1} a!}{(a-1-j)!} \delta_{\restbasis}^{j+1}(\xvec, \xvec)
+            \binom{b-1}{j} \frac{(-1)^{j+1} a!}{(a-1-j)!}
+            \delta_{\restbasis}^{j+1}(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-1-j} \Psi^{a-1-j}
             \mathcal{F}.
 \end{eqn}
-Shifting counter in the second sum:
+Shifting the counter in the second sum:
 \begin{eqn}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     ={} & \sum_{j = 0}^{\min(a, b-1)}
             \binom{b-1}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
@@ -299,10 +304,11 @@ Shifting counter in the second sum:
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
             \mathcal{F}.
 \end{eqn}
-Now we can join sums, noticing that $\binom{b-1}{j} + \binom{b-1}{j-1} = \binom{b}{j}$.
-There will be at most two leftover terms: first, term for $j=0$ from the first sum, and, possibly, the term with $j=\min(a,b)$ from the second sum.
+Now we can merge the sums, noticing that $\binom{b-1}{j} + \binom{b-1}{j-1} = \binom{b}{j}$.
+There will be at most two leftover terms: first, the term for $j=0$ from the first sum, and, possibly, the term with $j=\min(a,b)$ from the second sum.
 The former term appears only if $\min(a,b) > \min(a, b-1)$, or, in other words, $a \ge b$ (which means that $\min(a, b) = b$ and $\min(a, b-1) = b-1$):
 \begin{eqn}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     ={} & \binom{b-1}{0} \frac{(-1)^0 a!}{(a-0)!} \delta_{\restbasis}^0(\xvec, \xvec)
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-0} \Psi^{a-0}
             \mathcal{F} \\
@@ -315,9 +321,10 @@ The former term appears only if $\min(a,b) > \min(a, b-1)$, or, in other words, 
             \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-b} \Psi^{a-b}
             \mathcal{F},
 \end{eqn}
-Where $H[n]$ is the discrete Heaviside step function.
-Now, since $\binom{b-1}{0} \equiv \binom{b}{0}$ and $\binom{b-1}{b-1} \equiv \binom{b}{b}$, we can attach two leftover terms to the sum as well:
+where $H[n]$ is the discrete Heaviside step function.
+Now, since $\binom{b-1}{0} \equiv \binom{b}{0}$ and $\binom{b-1}{b-1} \equiv \binom{b}{b}$, we can attach the two leftover terms to the sum as well:
 \begin{eqn}
+    \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}
     = \sum_{j = 0}^{\min(a, b)}
         \binom{b}{j} \frac{(-1)^j a!}{(a-j)!} \delta_{\restbasis}^j(\xvec, \xvec)
         \left( \frac{\fdelta}{\fdelta \Psi} \right)^{b-j} \Psi^{a-j}
@@ -371,13 +378,15 @@ For the former case,
 \end{eqn}
 Since $v \le b$, $m \le a - v \le a - b \le \min(a - b, m + v)$ is always true, and the first inequation is redundant:
 \begin{eqn}
+    K_{v \le b}
     = \{m |
         0 \le m \le \min(a - b, v + m)
         \wedge v \le b
     \}.
 \end{eqn}
-Splitting into two sets to get rid of the minimum function:
+Splitting it into two sets to get rid of the minimum function:
 \begin{eqn}
+    K_{v \le b}
     ={} & \{m |
         v \le b \wedge m \ge 0
         \\
@@ -403,7 +412,7 @@ Splitting into two sets to get rid of the minimum function:
     \} \\
     ={} & \{m | v \le b \wedge 0 \le m \le a - b \}.
 \end{eqn}
-For the latter case $v < U$ we have
+For the latter case of $v < U$ we have
 \begin{eqn}
     K_{v > b}
     ={} & \{m |
@@ -466,7 +475,8 @@ With the help of these two lemmas, we can perform the Wigner transformation of t
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-Let us perform the transformation for each term of the loss operator:
+Let us perform the transformation for each term of the loss operator.
+For the first term we have
 \begin{eqn}
     W_1
     & \equiv \mathcal{W}[\hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger] \\
@@ -501,6 +511,7 @@ Let us perform the transformation for each term of the loss operator:
 \end{eqn}
 Using \lmmref{wigner-spec:swap-differential} to swap $\Psi_c$ and $\fdelta / \fdelta \Psi_c$:
 \begin{eqn}
+    W_1
     ={} & \prod_{c=1}^C \left(
             \sum_{j=0}^{l_c}
             \sum_{k=0}^{l_c}
@@ -553,7 +564,7 @@ where
     & = \frac{(-1)^m m!}{2^{j + k + m}}
         \binom{l}{j} \binom{l}{k} \binom{l-k}{m} \binom{l-j}{m}.
 \end{eqn}
-Similarly,
+Similarly, for the second term:
 \begin{eqn}
     W_2
     \equiv {} & \mathcal{W}[\hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}] \\
@@ -571,7 +582,7 @@ Similarly,
         \right)
         \mathcal{W}[\hat{A}],
 \end{eqn}
-and
+and for the third term:
 \begin{eqn}
     W_3
     \equiv {} & \mathcal{W}[\hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}] \\
