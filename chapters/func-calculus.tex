@@ -15,10 +15,10 @@ Nevertheless, while these papers cover the foundations quite well, they are miss
 % =============================================================================
 
 We will assume that we are provided with an arbitrary orthonormal basis $\fullbasis$, consisting of functions $\phi_{\nvec}(\xvec)$, where $\xvec \in \mathbb{R}^D$ is a $D$-dimensional coordinate vector, and $\nvec \in \fullbasis$ is a mode identifier.
-The exact nature of a mode identifier is irrelevant; we only require it to have an equivalence relation defined, and be enumerable.
+The exact nature of the mode identifier is irrelevant; we only require it to have an equivalence relation defined, and be enumerable.
 For example, for a three-dimensional harmonic potential, the mode identifier is a tuple $(k,l,m)$ of three non-negative integers.
 
-Orthonormality and completeness conditions for basis functions are, respectively,
+The orthonormality and completeness conditions for basis functions are, respectively,
 \begin{eqns}
 \label{eqn:func-calculus:basis}
 	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) \upd\xvec
@@ -38,7 +38,7 @@ Various functions can be combined using all, or the certain subset, of basis mod
 		\mathcal{C}_{\restbasis}(\balpha)
 		= \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec}.
 	\end{eqn*}
-	Decomposition transformation, correspondingly, creates a vector of populations out of a function:
+	The decomposition transformation, correspondingly, creates a vector of populations out of a function:
 	\begin{eqn*}
 		(\mathcal{C}_{\restbasis}^{-1}[f])_{\nvec}
 		= \int \upd\xvec \phi_{\nvec}^*\,f,\quad{\nvec} \in \restbasis.
@@ -48,12 +48,12 @@ Various functions can be combined using all, or the certain subset, of basis mod
 For any subset of the full basis, there is a subspace of functions that can be obtained by composing modes from this subset only.
 
 \begin{definition}
-	For some subset of the full basis $\restbasis \subseteq \fullbasis$, $\mathbb{F}_{\restbasis} \equiv (\mathbb{R}^D \rightarrow \mathbb{C})_{\restbasis}$ is the space of all functions of coordinates, which can be obtained using $\mathcal{C}_{\restbasis}$.
-	In other words, such functions consist only of modes from $\restbasis$.
+	For some subset of the full basis $\restbasis \subseteq \fullbasis$, $\mathbb{F}_{\restbasis} \equiv (\mathbb{R}^D \rightarrow \mathbb{C})_{\restbasis}$ is the space of all functions of coordinates that can be obtained using $\mathcal{C}_{\restbasis}$.
+	In other words, such functions consist only of the modes from $\restbasis$.
 	We denote $\mathbb{F}_{\fullbasis} \equiv \mathbb{F}$.
 \end{definition}
 
-With the help of this definition, the ``type signatures'' of composition and decomposition transformations can be written as
+With the help of this definition, the ``type signatures'' of the composition and decomposition transformations can be written as
 \begin{eqn}
 		\mathcal{C}_{\restbasis} \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}_{\restbasis},\quad
 		\mathcal{C}_{\restbasis}^{-1} \in \mathbb{F} \rightarrow \mathbb{C}^{|\restbasis|}.
@@ -61,7 +61,7 @@ With the help of this definition, the ``type signatures'' of composition and dec
 Note also that, for any $f \in \mathbb{F}_{\restbasis}$, the corresponding composition and decomposition transformations are reversible, that is $\mathcal{C}_{\restbasis}(\mathcal{C}_{\restbasis}^{-1}[f]) \equiv f$.
 We will call such functions ``restricted''.
 
-The result of any nonlinear transformation of a function $f \in \mathbb{F}_{\restbasis}$ is not guaranteed to belong to $\mathbb{F}_{\restbasis}$ and requires explicit projection to be used with other restricted functions from the same subspace $\mathbb{F}_{\restbasis}$:
+The result of any nonlinear transformation of a function $f \in \mathbb{F}_{\restbasis}$ is not guaranteed to belong to $\mathbb{F}_{\restbasis}$ and requires an explicit projection to be used with other restricted functions from the same subspace $\mathbb{F}_{\restbasis}$:
 
 \begin{definition}
 \label{def:func-calculus:projector}
@@ -90,7 +90,7 @@ Being applied to the delta function, the projection operator produces a restrict
 	For a full basis, this definition coincides with the standard delta function: $\delta_{\fullbasis}(\xvec^\prime, \xvec) \equiv \delta(\xvec^\prime - \xvec)$.
 \end{definition}
 
-Projection transformation can be, in turn, expressed using the restricted delta function:
+The projection transformation can be, in turn, expressed using the restricted delta function:
 \begin{eqn}
 \label{eqn:func-calculus:projector-via-delta}
 	\proj{\restbasis}[f](\xvec) = \int \upd\xvec^\prime \delta_{\restbasis}(\xvec^\prime, \xvec) f^\prime.
@@ -113,14 +113,14 @@ Note that in general this operator is nor linear; therefore, its result is not g
 Also, since $\mathbb{C}$ is a specific case of $\mathbb{F}$ (a constant function of coordinates), a specific case of a functional operator is a functional $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$.
 This means that the calculus described in this section applies to functionals as well.
 
-Composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
+The composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
 Therefore any functional operator $\mathcal{F}$ can be alternatively treated as a function of a vector of mode populations and a coordinate vector:
 \begin{eqn}
 	& F \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}
 		\equiv \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{R}^D \rightarrow \mathbb{C} \\
 	& F(\balpha, \xvec) \equiv \mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)](\xvec).
 \end{eqn}
-Since the operator is not linear, this correspondence in general cannot be expressed in a form of a matrix.
+Since the operator is not linear, this correspondence in general cannot be expressed in the form of a matrix.
 
 Using this correspondence, we can define the differentiation in the space of functional operators:
 
@@ -151,7 +151,7 @@ This definition may look too elaborate at first, but later in this section we wi
 Let us first demonstrate that the definition obeys standard differentiation rules.
 
 \begin{theorem}
-	Functional differentiation from \defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
+	The functional differentiation from \defref{func-calculus:func-diff} obeys sum, product, quotient, and chain differentiation rules.
 	The latter one is applied as if $\mathcal{F}[f]$ were a function of two independent variables $f$ and $f^*$:
 	\begin{eqn*}
 		\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
@@ -164,8 +164,8 @@ Let us first demonstrate that the definition obeys standard differentiation rule
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-First three rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into \defref{func-calculus:func-diff}.
-To prove the latter, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
+The first three rules are proved straightforwardly by substituting $\mathcal{F} + \mathcal{G}$, $\mathcal{F} \mathcal{G}$ and $\mathcal{F} / \mathcal{G}$ into \defref{func-calculus:func-diff}.
+To prove the chain differentiation rule, let us substitute $\mathcal{F}[\mathcal{G}]$ into the definition:
 \begin{eqn}
 \label{eqn:func-calculus:chain-expansion}
 	\frac{\fdelta \mathcal{F}[\mathcal{G}[f]]}{\fdelta f^\prime}
@@ -229,13 +229,13 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we obtain the statement of the theorem.
 \end{proof}
 
-The above lemma demonstrates that, with respect to differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to Wirtinger differentiation.
+The above theorem demonstrates that, with respect to the functional differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to the Wirtinger differentiation.
 
-Most of the time we will deal with functional operators in a particular form, namely algebraic expressions of their arguments.
-It turns out that for this subset functional differentiation behaves almost exactly like Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
+Most of the time we will deal with functional operators in a particular form, namely an algebraic expression of their arguments.
+It turns out that for this subset the functional differentiation behaves almost exactly like the Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
-	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f] \equiv g(f)$, where $g(z)$ is a function that can be expanded into power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f)$ over $f$ and $f^*$, respectively, times the restricted delta function:
+	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f] \equiv g(f)$, where $g(z)$ is a function that can be expanded into the power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f)$ over $f$ and $f^*$, respectively, times the restricted delta function:
 	\begin{eqn*}
 		\frac{\fdelta \mathcal{F}}{\fdelta f^\prime}
 		= \delta_{\restbasis}(\xvec^\prime, \xvec) \left.
@@ -298,7 +298,7 @@ Same as in the differentiation case, we will make use of the equivalence between
     If the restricted basis contains an infinite number of modes, the integral is treated as a limit $|\restbasis| \rightarrow \infty$.
 \end{definition}
 
-Functional integration has a Fourier-like property analogous to \lmmref{c-numbers:fourier-of-moments}, but its statement requires the definition of the delta functional:
+The functional integration has a Fourier-like property analogous to \lmmref{c-numbers:fourier-of-moments}, but its statement requires the definition of the delta functional:
 
 \begin{definition}
 \label{def:func-calculus:delta-functional}
@@ -326,7 +326,7 @@ The delta functional has the sifting property in functional integrals:
 By analogy with the field displacement operator from \defref{wigner:func:displacement-op}, we can define a displacement functional, which will often appear in the formulation of functional Wigner transformation (\defref{wigner:func:w-transformation}) and accompanying proofs:
 
 \begin{definition}
-	Displacement functional takes two functions as arguments and returns a complex result:
+	The displacement functional takes two functions as arguments and returns a complex result:
 	\begin{eqn*}
 		& D \in \mathbb{F} \rightarrow \mathbb{F} \rightarrow \mathbb{C} \\
 		& D[g, f] = \exp \int \upd\xvec \left(
@@ -356,11 +356,13 @@ We will start by representing the functional integral and the integrand in mode 
 	& = \int \upd^2\balpha
 		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec} \alpha_{\nvec} \right)^r
 		\left( \sum_{\nvec \in \restbasis} \phi^*_{\nvec} \alpha_{\nvec}^* \right)^s
-		\prod_{\nvec \in \restbasis} \exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}),
+		\prod_{\nvec \in \restbasis} \exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}) \\
+	& = (*),
 \end{eqn}
 where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$ and $\bbeta = \mathcal{C}_{\restbasis}^{-1}[g]$.
-Expanding powers of $f$ and $f^*$ using multinomial theorem:
+Expanding powers of $f$ and $f^*$ using the multinomial theorem:
 \begin{eqn2}
+	(*)
 	& ={} && \int \upd^2\balpha
 		\left(
 			\sum_{\sum u_{\mvec} = r} \binom{r}{ \left\{ u_{\mvec} \right\} }
@@ -375,6 +377,7 @@ Expanding powers of $f$ and $f^*$ using multinomial theorem:
 where $\binom{r}{ \left\{ u_{\mvec} \right\} } \equiv r! / (\prod u_{\mvec}!)$ are multinomial coefficients.
 Splitting variables:
 \begin{eqn2}
+	(*)
 	& ={} && \sum_{ \sum u_{\mvec} = r,\, \sum v_{\mvec} = s }
 		\binom{r}{ \left\{ u_{\mvec} \right\} }
 		\binom{s}{ \left\{ v_{\mvec} \right\} } \\
@@ -385,8 +388,9 @@ Splitting variables:
 				(\alpha_{\nvec}^*)^{v_{\nvec}}
 				\exp(-\beta_{\nvec} \alpha_{\nvec}^* + \beta_{\nvec}^* \alpha_{\nvec}).
 \end{eqn2}
-Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alpha_{\nvec}$:
+Applying \lmmref{c-numbers:fourier-of-moments} to evaluate the integrals over $\alpha_{\nvec}$:
 \begin{eqn}
+	(*)
 	={} & \sum_{\sum u_{\mvec} = r,\, \sum v_{\mvec} = s}
 		\binom{r}{ \left\{ u_{\mvec} \right\} }
 		\binom{s}{ \left\{ v_{\mvec} \right\} }
@@ -399,6 +403,7 @@ Applying \lmmref{c-numbers:fourier-of-moments} to evaluate integrals over $\alph
 \end{eqn}
 Collapsing sums, and recognising functional derivatives (\defref{func-calculus:func-diff}) and the delta functional (\defref{func-calculus:delta-functional}):
 \begin{eqn}
+	(*)
 	& = \pi^{2|\restbasis|}
 		\left( -\sum_{\nvec \in \restbasis} \phi_{\nvec} \frac{\cwd}{\cwd \beta_{\nvec}^*} \right)^r
 		\left( \sum_{\nvec \in \restbasis} \phi_{\nvec}^* \frac{\cwd}{\cwd \beta_{\nvec}} \right)^s
@@ -422,9 +427,9 @@ It is easy to show that the functional integration has the same integration by p
 		\frac{\fdelta \mathcal{G}[f]}{\fdelta f^\prime}
 		\mathcal{F}[f].
 \end{eqn}
-Functional integration by parts serves as the foundation of several theorems from \charef{wigner}.
+The functional integration by parts serves as the foundation of several theorems from \charef{wigner}.
 These theorems additionally need several lemmas that help us eliminate the first term in the right part of the above expression.
-Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with the addition of one more functional-specific lemma.
+Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with an addition of one more functional-specific lemma.
 
 \begin{lemma}[functional extension of \lmmref{c-numbers:zero-integrals}]
 \label{lmm:func-calculus:zero-integrals}
@@ -441,7 +446,7 @@ Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-
 \begin{proof}
 We will prove the first equation.
 Let $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$ and $\bbeta = \mathcal{C}_{\restbasis}^{-1}[g]$.
-Displacement functional can be represented as a function of mode vectors:
+The displacement functional can be represented as a function of mode vectors:
 \begin{eqn}
 	D[g, f]
 	& = \exp \int \upd x \sum_{\nvec \in \restbasis,\mvec \in \restbasis} \left(
@@ -517,7 +522,7 @@ For each term the internal integral is equal to zero because of \lmmref{c-number
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-Proved by expanding functional integration and differentials into modes and applying \lmmref{c-numbers:zero-delta-integrals}.
+Proved by expanding the functional integral and differentials into modes and applying \lmmref{c-numbers:zero-delta-integrals}.
 \end{proof}
 
 In order to perform transformations of a master equation in the future, we will need a lemma which justifies a certain operation with the Laplacian (which is a part of the kinetic term in a Hamiltonian).
@@ -579,7 +584,7 @@ Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 \end{eqn}
 \end{proof}
 
-Note that this lemma imposes an additional requirement on basis functions, which is, essentially, a generalised form of periodicity in the zeroth and first derivative over $A$.
+Note that this lemma imposes an additional requirement on basis functions, which is, essentially, a generalised form of periodicity in the zeroth and the first derivative over $A$.
 In this work we use two bases: plane waves and harmonic modes (see \appref{bases} for details).
 
 For the harmonic basis the condition is obviously satisfied, since the boundary of $A$ is on the infinity, and both zeroth and first derivatives (or any other order, for that matter) of any mode function~\eqnref{bases:harmonic-modes} are equal to zero there.
