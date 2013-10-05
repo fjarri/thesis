@@ -3,10 +3,10 @@
 % =============================================================================
 
 Now we have all the tools we need to work with the functional Wigner representation.
-First, we will define functional analogue of the displacement operator~\eqnref{mm-wigner:sm:displacement-op}:
+First, we will define a functional analogue of the displacement operator~\eqnref{mm-wigner:sm:displacement-op}:
 \begin{definition}
 \label{def:wigner:func:displacement-op}
-Functional displacement operator $\hat{D} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis}$ is
+The functional displacement operator $\hat{D} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis}$ is defined as
 \begin{eqn}
 	\hat{D}[\Lambda] = \exp \int \upd\xvec \left(
 		\Lambda \Psiop^\dagger - \Lambda^* \Psiop
@@ -18,6 +18,7 @@ It can be shown that the displacement operator has properties similar to~\eqnref
 
 \begin{lemma}
 \label{lmm:wigner:func:displacement-derivatives}
+	Derivatives of the functional displacement operator are
 	\begin{eqn*}
 		\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
 		& = \hat{D}[\Lambda] (\Psiop^{\prime\dagger} + \frac{1}{2} \Lambda^{\prime*})
@@ -75,7 +76,7 @@ Similar to the single-mode Wigner transformation from \defref{mm-wigner:sm:w-tra
 
 \begin{definition}
 \label{def:wigner:func:w-transformation}
-	Functional Wigner transformation $\mathcal{W} \in \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}$ is defined as
+	The functional Wigner transformation $\mathcal{W} \in \mathbb{FH}_{\restbasis} \rightarrow \mathbb{F}_{\restbasis}$ is defined as
 	\begin{eqn*}
 		\mathcal{W}[\hat{A}]
 		= \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda\,
@@ -92,7 +93,7 @@ Similar to the single-mode Wigner transformation from \defref{mm-wigner:sm:w-tra
 \end{definition}
 
 It can be proved, same as in \thmref{mm-wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian, and $\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F$ (by mode expansion).
-Following the single-mode and multimode cases we define the characteristic functional $\chi_W [\Lambda] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$
+Following the single-mode and the multimode cases we define the characteristic functional $\chi_W [\Lambda] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$
 \begin{eqn}
 	\chi_W [\Lambda] = \Trace{ \hat{\rho} \hat{D}[\Lambda] },
 \end{eqn}
@@ -105,7 +106,7 @@ and the Wigner functional $W \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{R}$
 		\chi_W [\Lambda].
 \end{eqn}
 
-Correspondence relations and moment extraction theorems have the same form as in the single-mode case.
+Correspondence relations and the moment extraction theorem have the same form as in the single-mode case.
 
 \begin{theorem}[functional extension of \thmref{mm-wigner:sm:correspondences}]
 \label{thm:wigner:func:correspondences}
@@ -138,7 +139,7 @@ First, let us transform the trace using \lmmref{wigner:func:displacement-derivat
 		-\frac{1}{2} \Lambda
 	\right) \Trace{ \hat{A} \hat{D}}.
 \end{eqn}
-Moving additional multiplier outside the integral:
+Moving the additional multiplier to the outside of the integral:
 \begin{eqn}
 	\mathcal{W} [ \hat{\Psi} \hat{A} ]
 	& = \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda
@@ -159,6 +160,7 @@ Moving additional multiplier outside the integral:
 \end{eqn}
 Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ ($\hat{D}[\Lambda]$ equals to a product of single-mode displacement operators, which makes the operator in the trace Hilbert-Schmidt, and the trace itself bounded):
 \begin{eqn}
+	\mathcal{W} [ \hat{\Psi} \hat{A} ]
 	& = \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \mathcal{W} [\hat{A}]
 	+ \frac{1}{\pi^{2|\restbasis|}} \int \fdelta^2 \Lambda \left(
 		\frac{\fdelta}{\fdelta \Lambda^*}
@@ -172,7 +174,7 @@ Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over 
 
 \begin{lemma}[functional extension of \lmmref{mm-wigner:sm:moments-from-chi}]
 \label{lmm:wigner:func:moments-from-chi}
-	For a system with the density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
+	For a system with a density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ (\Psiop^\prime)^r (\Psiop^{\prime\dagger})^s } \rangle
 		= \left.
@@ -205,7 +207,7 @@ We can swap a functional derivative with both integration and multiplication by 
 		\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1} \\
 	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1},
 \end{eqn}
-and multiple application of the differential gives us
+and a multiple application of the differential gives us
 \begin{eqn}
 	\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^r
 	\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^r
@@ -234,7 +236,7 @@ Thus, same as in the single-mode case, the differentiation will eliminate all lo
 
 \begin{theorem}[functional extension of \thmref{mm-wigner:sm:moments}]
 \label{thm:wigner:func:moments}
-	For a system with the density matrix $\hat{\rho}$ and the corresponding Wigner functional $W[\Psi]$, and any non-negative integer $r$, $s$:
+	For a system with a density matrix $\hat{\rho}$ and the corresponding Wigner functional $W[\Psi]$, and any non-negative integer $r$, $s$:
 	\begin{eqn*}
 		\langle \symprod{ \Psiop^r (\Psiop^\dagger)^s } \rangle
 		= \int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi].
@@ -243,8 +245,8 @@ Thus, same as in the single-mode case, the differentiation will eliminate all lo
 \begin{proof}
 By definition of the Wigner functional:
 \begin{eqn}
-	\int & \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi] \\
-	={} & \frac{1}{\pi^{2|\restbasis|}} \Trace{ \hat{\rho}
+	\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi]
+	= \frac{1}{\pi^{2|\restbasis|}} \Trace{ \hat{\rho}
 		\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s
 		\int \fdelta^2\Lambda \exp(-\Lambda \Psi^* + \Lambda^* \Psi)
 		\hat{D}[\Lambda]
@@ -252,6 +254,7 @@ By definition of the Wigner functional:
 \end{eqn}
 Evaluating the integral over $\Psi$ using \lmmref{func-calculus:fourier-of-moments}:
 \begin{eqn}
+	\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi]
 	= \int \fdelta^2\Lambda
 		\left(
 			\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s
@@ -263,8 +266,9 @@ Evaluating the integral over $\Psi$ using \lmmref{func-calculus:fourier-of-momen
 			\hat{D}[\Lambda]
 		}.
 \end{eqn}
-Integrating by parts and eliminating terms which fit \lmmref{func-calculus:zero-delta-integrals}:
+Integrating by parts and eliminating the terms that fit \lmmref{func-calculus:zero-delta-integrals}:
 \begin{eqn}
+	\int \fdelta^2\Psi\, \Psi^r (\Psi^*)^s W[\Psi]
 	& = \int \fdelta^2\Lambda\,
 		\Delta_{\restbasis}[\Lambda]
 		\left( \frac{\fdelta}{\fdelta \Lambda} \right)^s

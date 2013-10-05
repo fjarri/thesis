@@ -2,7 +2,7 @@
 \section{Multi-component functional transformation}
 % =============================================================================
 
-Many experiments with \abbrev{bec} involve several interacting components, so the definition of the functional Wigner transformation from the previous section, along with \thmref{wigner:func:correspondences} and \thmref{wigner:func:moments} can be further extended to the case of several components.
+Many experiments with \abbrev{bec}s involve several interacting components, so it is useful to extend the definition of the functional Wigner transformation from the previous section, along with \thmref{wigner:func:correspondences} and \thmref{wigner:func:moments}, to the case of several components.
 
 Definitions of the displacement operator and the Wigner functional are extended to the case multiple components.
 
@@ -13,12 +13,12 @@ Definitions of the displacement operator and the Wigner functional are extended 
 			\Lambda \Psiop_j^\dagger - \Lambda^* \Psiop_j
 		\right),
 	\end{eqn*}
-	where $\Psiop_j^\dagger$ and $\Psiop_j$ are creation and annihilation operators for this component.
+	where $\Psiop_j^\dagger$ and $\Psiop_j$ are creation and annihilation field operators for this component.
 \end{definition}
 
 \begin{definition}
 \label{def:wigner:mc:w-transformation}
-	Multi-component functional Wigner transformation $\mathcal{W}$ is defined as
+	The multi-component functional Wigner transformation $\mathcal{W}$ is defined as
 	\begin{eqn*}
 		& \mathcal{W} \in \left( \mathbb{R}^D \rightarrow \prod_{j=1}^C \mathbb{H}_{\restbasis_j} \right)
 			\rightarrow \prod_{j=1}^C \mathbb{F}_{\restbasis_j}
@@ -30,7 +30,7 @@ Definitions of the displacement operator and the Wigner functional are extended 
 	\end{eqn*}
 	where $\Lambda_j \in \mathbb{F}_{\restbasis_j}$, and $\int \fdelta^2 \bLambda \equiv \int \fdelta^2 \Lambda_1 \ldots \int \fdelta^2 \Lambda_C$.
 	It transforms an operator $\hat{A}$ on a restricted subset of the Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi]$.
-	Corresponding Weyl transformation is
+	The corresponding Weyl transformation is
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
 		= \frac{1}{\pi^{\sum |\restbasis_j|}} \int \fdelta^2 \bXi
@@ -43,7 +43,7 @@ Definitions of the displacement operator and the Wigner functional are extended 
 
 \begin{definition}
 \label{def:wigner:mc:w-functional}
-	The Wigner functional $W \in \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R}$ is
+	The Wigner functional $W \in \prod_{j=1}^C \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{R}$ is defined as
 	\begin{eqn*}
 		W [\bPsi]
 		\equiv \mathcal{W}[\hat{\rho}]
@@ -58,7 +58,7 @@ Definitions of the displacement operator and the Wigner functional are extended 
 	\end{eqn*}
 \end{definition}
 
-Two main theorems for the transformation can be straightforwardly reformulated for multiple components.
+The two central theorems for the single-component functional Wigner transformation can be straightforwardly reformulated for multiple components.
 
 \begin{theorem}[multi-component extension of \thmref{wigner:func:correspondences}]
 \label{thm:wigner:mc:correspondences}
@@ -82,7 +82,7 @@ Proved in exactly the same way as \thmref{wigner:func:correspondences}.
 
 \begin{theorem}[multi-component extension of \thmref{wigner:func:moments}]
 \label{thm:wigner:mc:moments}
-	For a system with the density matrix $\hat{\rho}$ and the corresponding Wigner functional $W[\bPsi]$, and any non-negative integer $r$, $s$:
+	For a system with a density matrix $\hat{\rho}$ and the corresponding Wigner functional $W[\bPsi]$, and any non-negative integer $r$, $s$:
 	\begin{eqn*}
 		\langle \symprod{ \prod_{j=1}^C \Psiop_j^{r_j} (\Psiop_j^\dagger)^{s_j} } \rangle
 		= \int \fdelta^2 \bPsi\,

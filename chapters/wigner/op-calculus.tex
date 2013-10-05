@@ -2,15 +2,15 @@
 \section{Field operator calculus}
 % =============================================================================
 
-Field operators can simplify both the analysis of a master equation, and its transformation to an \abbrev{fpe} using phase-space methods, which is the main topic of this thesis.
-In this section we are going to outline the functional operator calculus.
+Field operators can simplify both the analysis of a master equation and its transformation to an \abbrev{fpe} using phase-space methods, which is the main topic of this thesis.
+In this section we are going to outline the field operator calculus.
 It is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
 The similarity and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
 
-Multimode field of a $C$-component \abbrev{bec} in $D$ effective dimensions is described by field operators $\Psiop_j^{\dagger}(\xvec)$ and $\Psiop_j(\xvec)$, where $\Psiop_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at a location defined by a $D$-component coordinate vector $\xvec$, and $\Psiop_j$ destroys one.
-We will use the same scheme as with functions of coordinates in \appref{func-calculus}, abbreviating $\Psiop_j \equiv \Psiop_j(\xvec)$ and $\Psiop_j^\prime \equiv \Psiop_j(\xvec^\prime)$.
+Multimode field of a $C$-component \abbrev{bec} in $D$ effective dimensions is described by field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$, where $\Psiopf_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at a location defined by a $D$-component coordinate vector $\xvec$, and $\Psiopf_j$ destroys one.
+We will use the same scheme as with functions of coordinates in \appref{func-calculus}, abbreviating $\Psiopf_j \equiv \Psiopf_j(\xvec)$ and $\Psiopf_j^\prime \equiv \Psiopf_j(\xvec^\prime)$.
 
-The commutators are
+The field operators obey standard bosonic commutation relations
 \begin{eqn}
 \label{eqn:wigner:op-calculus:commutators}
     [ \Psiopf_j, \Psiopf_k^{\prime} ]
@@ -19,8 +19,8 @@ The commutators are
     [ \Psiopf_j, \Psiopf_k^{\prime\dagger} ]
     & = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
-Field operators have type $\Psiop_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ constitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
-Field operators can be decomposed using a single-particle orthonormal basis (see~\eqnref{func-calculus:basis}):
+Field operators have type $\Psiopf_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ constitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
+Field operators can be decomposed using a single-particle orthonormal basis (see~\eqnref{func-calculus:basis} for details):
 \begin{eqn}
 \label{eqn:wigner:op-calculus:field}
     \Psiopf_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
@@ -35,9 +35,9 @@ New restricted field operators are
 \label{eqn:wigner:op-calculus:restricted-field}
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
-They map coordinates to a restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
+They map coordinates to restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
 Because of the restricted nature of these operators, the commutation relations~\eqnref{wigner:op-calculus:commutators} no longer apply.
-The following ones should be used instead:
+The following ones must be used instead:
 \begin{eqn}
 \label{eqn:wigner:op-calculus:restricted-commutators}
     \left[ \Psiop_j, \Psiop_k^\prime \right]
@@ -96,7 +96,7 @@ A further generalisation of these relations is
 \end{lemma}
 \begin{proof}
 Let us prove the first relation; the procedure for the second one is the same.
-Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in power series of normally ordered operators (otherwise we can just use commutation relations).
+Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in the power series of normally ordered operators (otherwise we can just use the commutation relations).
 Thus,
 \begin{eqn}
     \left[ \Psiop, f( \Psiop^\prime, \Psiop^{\prime\dagger} ) \right]
