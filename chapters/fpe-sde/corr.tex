@@ -2,7 +2,7 @@
 \section{Correspondences}
 % =============================================================================
 
-We will start by formulating the known real-valued correspondence in a form which is more convenient for further proofs in this section, and is also close to the results one obtains from the Wigner transformation.
+We will start by formulating the known real-valued correspondence in a form which is more convenient for further proofs in this section, and is also closer to the results one obtains from the Wigner transformation.
 
 \begin{lemma}[real-valued \abbrev{fpe}--\abbrev{sde}s correspondence in a convenient form.]
 \label{lmm:fpe-sde:corr:fpe-sde-real}
@@ -101,7 +101,7 @@ Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{
 	} W.
 \end{eqn}
 
-In order to use \lmmref{fpe-sde:corr:fpe-sde-real}, we need to join variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
+In order to use \lmmref{fpe-sde:corr:fpe-sde-real}, we need to merge variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
 This will give us an equation in the form identical to that from the lemma, with the drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and the diffusion matrix
 \begin{eqn}
 	\tilde{B} \tilde{B}^T \equiv \frac{1}{2} \begin{pmatrix}
@@ -135,7 +135,7 @@ which leads to the It\^o part of the theorem statement
 	d\balpha = \avec dt + B d\Zvec.
 \end{eqn}
 
-Noise-induced drift term in Stratonovich case can be calculated by substituting $\tilde{B}$ into the expression for $s_j$ from \lmmref{fpe-sde:corr:fpe-sde-real}.
+The noise-induced drift term in the Stratonovich case can be calculated by substituting $\tilde{B}$ into the expression for $s_j$ from \lmmref{fpe-sde:corr:fpe-sde-real}.
 We will calculate $s_j$ with $j$ belonging to the $\xvec$ and the $\yvec$ part of the coordinate space separately.
 Starting from the $\xvec$ part:
 \begin{eqn}
@@ -207,7 +207,7 @@ which finishes the proof.
 
 Note the asymmetry in the expression for the Stratonovich term: if $B = B(\alpha)$, then $\mathbf{s} \equiv 0$.
 It is initially caused by the asymmetry in the target \abbrev{sde}s.
-Truly general form of an \abbrev{fpe} would be
+A truly general form of an \abbrev{fpe} would be
 \begin{eqn}
 	\frac{\upd W}{\upd t}
 	={} & - 2 \Real \left( \vcwd_{\balpha}^T \avec \right) W
@@ -330,7 +330,7 @@ Multiplying the matrices successively, we get
 which is the expression from the theorem statement.
 \end{proof}
 
-Most of the time we will deal with \abbrev{fpe}s in functional form, so we will reformulate the correspondence once again, now using functional derivatives.
+Most of the time we will deal with \abbrev{fpe}s in a functional form, so we will reformulate the correspondence once again, now using functional derivatives.
 
 \begin{theorem}
 \label{thm:fpe-sde:corr:fpe-sde-func}
@@ -366,13 +366,13 @@ Most of the time we will deal with \abbrev{fpe}s in functional form, so we will 
 			\mathcal{B}_{jl}.
 	\end{eqn*}
 	Here $f_j \in \mathbb{F}_{\mathbb{M}_j}$, $\mathcal{A}_j \equiv \mathcal{A}_j[\fvec]$ and $\mathcal{B}_{jl} \equiv \mathcal{B}_{jl}[\fvec]$ are functional operators, $W \equiv W[\fvec]$ is a probability functional, and $L$ is the number of noise sources.
-	Standard functional Wiener processes $Q_l$ are compositions of standard complex-valued Wiener processes:
+	The standard functional Wiener processes $Q_l$ are the compositions of standard complex-valued Wiener processes:
 	\begin{eqn*}
 		Q_l = \sum_{\nvec \in \fullbasis} \phi_{\nvec} Z_{l,\nvec}.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Expanding functional derivatives according to \defref{func-calculus:func-diff} with $f_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$:
+Expanding the functional derivatives according to \defref{func-calculus:func-diff} with $f_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \alpha_{j,\nvec}$:
 \begin{eqn}
 	\frac{\upd W}{\upd t}
 	={} & \left(
@@ -426,7 +426,7 @@ and
 	= \int \upd\xvec\, \phi_{j,\mvec}^* \mathcal{B}_{jl} \phi_{\pvec},\,
 	\mvec \in \restbasis_j, \pvec \in \fullbasis, l \in [1 \ldots L].
 \end{eqn}
-Note that columns of $B$ are enumerated using the compound index $\pvec,l$.
+Note that the columns of $B$ are enumerated using the compound index $\pvec,l$.
 
 Therefore, the initial \abbrev{fpe} is equivalent to the set of \abbrev{sde}s in the It\^o form
 \begin{eqn}

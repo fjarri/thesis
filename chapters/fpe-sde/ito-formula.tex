@@ -70,7 +70,7 @@ Applying \lmmref{fpe-sde:ito-formula:ito-f-real} for real-valued functions $g(\m
 \end{eqn}
 Now let us match this equation and the lemma statement term by term.
 
-First term:
+The first term:
 \begin{eqn}
 	2 \Real ( \avec \cdot \vcwd_{\balpha} )
 	& = \Real \left(
@@ -81,7 +81,7 @@ First term:
 		\begin{pmatrix} \vcwd_{\mathbf{x}} \\ \vcwd_{\mathbf{y}} \end{pmatrix}.
 \end{eqn}
 
-Second term:
+The second term:
 \begin{eqn}
 	\Trace{ B B^H \vcwd_{\balpha^*} \vcwd_{\balpha}^T }
 	={} & \frac{1}{4} \Trace{
@@ -105,7 +105,7 @@ Second term:
 			- \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T)
 	}.
 \end{eqn}
-Same as in \thmref{fpe-sde:corr:fpe-sde-complex} we notice that $F F^T + G G^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T + \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T - \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T$ are antisymmetric ones.
+Same as in \thmref{fpe-sde:corr:fpe-sde-complex}, we notice that $F F^T + G G^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{x}}^T + \vcwd_{\mathbf{y}} \vcwd_{\mathbf{y}}^T$ are symmetric matrices, and $F G^T - G F^T$ and $\vcwd_{\mathbf{x}} \vcwd_{\mathbf{y}}^T - \vcwd_{\mathbf{y}} \vcwd_{\mathbf{x}}^T$ are antisymmetric ones.
 Therefore, the last two terms contain traces of antisymmetric matrices and are, consequently, equal to zero:
 \begin{eqn}
 	={} & \frac{1}{4} \Trace{
@@ -134,7 +134,7 @@ Therefore, the last two terms contain traces of antisymmetric matrices and are, 
 	}.
 \end{eqn}
 
-Third term:
+The third term:
 \begin{eqn}
 	2 \Real \Trace{ B \upd\Zvec \vcwd_{\balpha}^T }
 	& = \frac{1}{\sqrt{2}} \Real \Trace{
@@ -176,7 +176,7 @@ The above theorem can be reformulated for the multi-component \abbrev{sde}s from
 Proved analogously to \thmref{fpe-sde:corr:mc-fpe-sde}, by combining $\balpha^{(j)}$ into a single vector and applying \thmref{fpe-sde:ito-formula:ito-f-complex}.
 \end{proof}
 
-Finally, we can use the multi-component reformulation to derive the It\^o formula in functional form for the set of \abbrev{sde}s from \thmref{fpe-sde:corr:fpe-sde-func}.
+Finally, we can use the multi-component reformulation to derive the It\^o formula in a functional form for the set of \abbrev{sde}s from \thmref{fpe-sde:corr:fpe-sde-func}.
 
 \begin{theorem}
 \label{thm:fpe-sde:ito-formula:func-ito-f}
@@ -275,7 +275,7 @@ Recognising definitions of the functional differentials, the functional Wiener p
 which leads to the statement of the theorem.
 \end{proof}
 
-Alternatively, the functional It\^o formula can be written in the matrix form as
+Alternatively, the functional It\^o formula can be written in a matrix form as
 \begin{eqn}
 	\upd \mathcal{F}[\fvec]
 	={} & \int \upd\xvec^\prime \left(
