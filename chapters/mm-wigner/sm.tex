@@ -2,7 +2,7 @@
 \section{Single-mode transformation}
 % =============================================================================
 
-In this section we will work with a single-mode bosonic system with standard creation and annihilation operators
+In this section we will work with a single-mode bosonic system with the standard creation and annihilation operators
 \begin{eqn}
 	[ \hat{a}, \hat{a} ] & = [ \hat{a}^\dagger, \hat{a}^\dagger ] = 0, \\
 	[ \hat{a}, \hat{a}^\dagger ] & = 1.
@@ -10,14 +10,14 @@ In this section we will work with a single-mode bosonic system with standard cre
 The essential part of the definition is the displacement operator which was first introduced by Weyl~\cite{Weyl1950} and thoroughly described by Cahill and Glauber~\cite{Cahill1969}:
 
 \begin{definition}
-	Displacement operator is an operator-valued function of complex variable
+	The displacement operator is the operator-valued function of a complex variable
 	\begin{eqn*}
 	\label{eqn:mm-wigner:sm:displacement-op}
 		\hat{D}(\lambda) = \exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a}).
 	\end{eqn*}
 \end{definition}
 
-Using the Baker-Hausdorff theorem to split the non-commuting creation and annihilation operators in the exponent, one can find that
+Using the Baker-Hausdorff theorem to split non-commuting creation and annihilation operators in the exponent, one can find that
 \begin{eqn}
 \label{eqn:mm-wigner:sm:displacement-derivatives}
 	\frac{\cwd}{\cwd \lambda} \hat{D}(\lambda)
@@ -32,7 +32,7 @@ Using the displacement operator we can define the Wigner transformation:
 
 \begin{definition}
 \label{def:mm-wigner:sm:w-transformation}
-	Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space:
+	The Wigner transformation converts an operator $\hat{A}$ on a Hilbert space to a complex-valued function $\mathcal{W}[\hat{A}](\alpha)$ on phase space:
 	\begin{eqn*}
 		\mathcal{W}\left[\hat{A}\right]
 		= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -63,6 +63,7 @@ Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi) \hat{D}(\lambda)} = \pi
 \end{eqn}
 Applying \lmmref{c-numbers:fourier-of-moments} to integrate over $\lambda$:
 \begin{eqn}
+	\mathcal{W}[\hat{A}]
 	& = \frac{1}{\pi^2} \int \upd^2 \eta \int \upd^2 \lambda
 	 	\exp(-\lambda (\alpha^* - \eta^*) + \lambda^* (\alpha - \eta)) f(\eta, \eta^*) \\
 	& = \int \upd^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta, \eta^*) \\
@@ -70,14 +71,14 @@ Applying \lmmref{c-numbers:fourier-of-moments} to integrate over $\lambda$:
 \end{eqn}
 The proof for the other direction looks the same.
 
-Although, in general, the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it is can be proved to be always real-valued.
+Although, in general, the result of the Wigner transformation is a complex-valued function, for Hermitian operators, which are of the main interest for us, it can be proved to always be real-valued.
 
 \begin{theorem}
 \label{thm:mm-wigner:sm:w-real}
 	If an operator $\hat{A}$ is Hermitian, its Wigner transformation $W[\hat{A}]$ is a real-valued function.
 \end{theorem}
 \begin{proof}
-Let us calculate the conjugation of $W[\hat{A}]$:
+Let us calculate the conjugate of $W[\hat{A}]$:
 \begin{eqn}
 	(W[\hat{A}])^*
 	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda^* \alpha + \lambda \alpha^*)
@@ -85,6 +86,7 @@ Let us calculate the conjugation of $W[\hat{A}]$:
 \end{eqn}
 Changing variables as $\lambda \rightarrow -\lambda$ and using the fact that $(\Tr{\hat{B}})^* = \Tr{\hat{B}^\dagger}$:
 \begin{eqn}
+	(W[\hat{A}])^*
 	& = \frac{1}{\pi^2} \int \upd^2 \lambda \exp(\lambda^* \alpha - \lambda \alpha^*)
 		\Trace{ \hat{A}^\dagger \exp(-\lambda^* \hat{a} + \lambda \hat{a}^\dagger) } \\
 	& = W[\hat{A}^\dagger].
@@ -96,7 +98,7 @@ Earlier in this section we have defined the Wigner transformation for arbitrary 
 
 \begin{definition}
 \label{def:mm-wigner:sm:w-function}
-	Wigner function is the Wigner transformation of a density matrix:
+	The Wigner function is the Wigner transformation of a density matrix:
 	\begin{eqn*}
 		W(\alpha) \equiv \mathcal{W}[\hat{\rho}].
 	\end{eqn*}
@@ -105,7 +107,7 @@ Earlier in this section we have defined the Wigner transformation for arbitrary 
 The Wigner function always exists for any density matrix~\cite{Gardiner2004}.
 Note also that since any density matrix is Hermitian, according to \thmref{mm-wigner:sm:w-real} $W(\alpha)$ is a real-valued function.
 
-In some cases, it will be convenient to use Wigner function in the form
+In some cases, it will be convenient to use the Wigner function in the form
 \begin{eqn}
 	W (\alpha)
 	= \frac{1}{\pi^2} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha)
@@ -116,7 +118,7 @@ where $\chi_W (\lambda)$ is the characteristic function
 	\chi_W (\lambda) = \Trace{ \hat{\rho} \hat{D}(\lambda) }.
 \end{eqn}
 
-We will finish this section with the proofs of two main theorems which are required for any practical application of the Wigner function.
+We will finish this section with the proofs of two central theorems which are required for any practical application of the Wigner function.
 The first theorem provides a way to transform any master equation written in terms of creation and annihilation operators to a partial differential equation for the Wigner function.
 
 \begin{theorem}[operator correspondences]
@@ -165,22 +167,23 @@ Substituting this into the definition of the Wigner transformation:
 The second term is almost the definition of the Wigner function, except for the derivative over $\lambda^*$.
 Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\hat{A}$ is Hilbert-Schmidt, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}):
 \begin{eqn}
-	= \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
+	\mathcal{W} [ \hat{a} \hat{A} ]
+	& = \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
 	+ \frac{1}{\pi^2} \int \upd^2 \lambda \left(
 		\frac{\cwd}{\cwd \lambda^*} \exp(-\lambda \alpha^* + \lambda^* \alpha)
 	\right)
 	\Trace{ \hat{A} \hat{D}(\lambda) } \\
-	= \left( \alpha + \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \right) \mathcal{W} [\hat{A}].
+	& = \left( \alpha + \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \right) \mathcal{W} [\hat{A}].
 	\qedhere
 \end{eqn}
 \end{proof}
 
-This theorem is paired with the second theorem, which helps extract observables (again, expressed in terms of creation and annihilation operators) from the known Wigner function.
-We will start by proving the auxiliary lemma which connects the expectation of an operator product and the characteristic function.
+This theorem is paired with the second theorem, which helps to extract observables (again, expressed in terms of creation and annihilation operators) from a known Wigner function.
+We will start by proving an auxiliary lemma which connects the expectation of an operator product with a derivative of the characteristic function.
 
 \begin{lemma}
 \label{lmm:mm-wigner:sm:moments-from-chi}
-	For a system with the density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
+	For a system with a density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.
@@ -198,7 +201,7 @@ The exponent in the expression for $\chi_W$ can be expanded as
 		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
 		\symprod{ \hat{a}^j (\hat{a}^\dagger)^k }.
 \end{eqn}
-Thus
+Thus,
 \begin{eqn}
 	\chi_W(\lambda)
 	& = \sum_{j,k}
@@ -210,7 +213,7 @@ Thus
 		\frac{(-\lambda^*)^j \lambda^k}{j!k!}
 		\langle \symprod{ \hat{a}^j (\hat{a}^\dagger)^k } \rangle.
 \end{eqn}
-Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $j < r$ and $k < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $j > r$ and $k > s$, leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
+Clearly, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lambda^*)^r$ will eliminate all moments with $j < r$ and $k < s$, and setting $\lambda = 0$ afterwards will eliminate all moments with $j > r$ and $k > s$, leaving only the term with $\symprod{ \hat{a}^r (\hat{a}^\dagger)^s }$:
 \begin{eqn}
 	\left.
 		\left( \frac{\cwd}{\cwd \lambda} \right)^s
@@ -224,11 +227,11 @@ Apparently, the application of $(\cwd / \cwd \lambda)^s$ and $(-\cwd / \cwd \lam
 \end{eqn}
 \end{proof}
 
-Using this lemma we can now prove the main theorem which connects operator expectations and moments of the Wigner function.
+Using this lemma we can now prove the main theorem which connects expectations of observables with moments of the Wigner function.
 
 \begin{theorem}
 \label{thm:mm-wigner:sm:moments}
-	For a system with the density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$, and any non-negative integer $r$, $s$:
+	For a system with a density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$, and any non-negative integer $r$, $s$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha).
@@ -245,6 +248,7 @@ By definition of the Wigner function:
 \end{eqn}
 Integrating over $\alpha$ using \lmmref{c-numbers:fourier-of-moments}:
 \begin{eqn}
+	\int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha)
 	= \int \upd^2\lambda
 		\left(
 			\left( \frac{\cwd}{\cwd \lambda} \right)^s
@@ -255,6 +259,7 @@ Integrating over $\alpha$ using \lmmref{c-numbers:fourier-of-moments}:
 \end{eqn}
 Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delta-integrals}:
 \begin{eqn}
+	\int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha)
 	& = \int \upd^2\lambda
 		\delta(\Real \lambda) \delta(\Imag \lambda)
 		\left( \frac{\cwd}{\cwd \lambda} \right)^s
@@ -269,4 +274,4 @@ Integrating by parts and eliminating terms which fit \lmmref{c-numbers:zero-delt
 Now, recognising the final expression as a part of \lmmref{mm-wigner:sm:moments-from-chi}, we immediately get the statement of the theorem.
 \end{proof}
 
-With the help of \thmref{mm-wigner:sm:correspondences} and \thmref{mm-wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$, transform it to an ordinary differential equation, and use its solution to get expectations of any observables.
+With the help of \thmref{mm-wigner:sm:correspondences} and \thmref{mm-wigner:sm:moments} one can straightforwardly transform any master equation written in terms of creation and annihilation operators $\hat{a}^\dagger$ and $\hat{a}$ to an ordinary differential equation, and use its solution to get expectations of any observables.
