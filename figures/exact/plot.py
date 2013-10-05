@@ -67,6 +67,9 @@ def _squeezing_err(fname, coupling):
         '10k': mplh.color.f.blue,
         '1k': mplh.color.f.red,
         '100': mplh.color.f.green}
+    dashes = {
+        '10k': '-',
+        '1k': '--'}
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
@@ -90,14 +93,13 @@ def _squeezing_err(fname, coupling):
         diff = numpy.abs(s_wigner - s_exact) / s_exact
         err = s_wigner_err / s_exact
 
-        tau_wigner, min_diff, max_diff = mplh.crop_bounds(
+        tau_diff, min_diff, max_diff = mplh.crop_bounds(
             tau_wigner, diff-err, diff+err, (0, (120 if coupling else 20), 0, 0.1))
 
-        s.fill_between(tau_wigner, min_diff, max_diff, facecolor=colors[tr].lightest,
-            #where=positive[:drop],
-            color=colors[tr].darkest,
-            linewidth=0.3,
+        s.fill_between(tau_diff, min_diff, max_diff, facecolor=colors[tr].lightest,
+            linewidth=0,
             alpha=0.5)
+        s.plot(tau_wigner, diff, color=colors[tr].main, dashes=mplh.dash[dashes[tr]])
 
     s.text(
         72 if coupling else 12,
@@ -128,6 +130,10 @@ def _squeezing_N_err(fname, coupling):
         20: mplh.color.f.blue,
         200: mplh.color.f.red,
         2000: mplh.color.f.green}
+    dashes = {
+        20: '-',
+        200: '--',
+        2000: ':'}
 
     for Na in (20, 200, 2000):
 
@@ -147,13 +153,13 @@ def _squeezing_N_err(fname, coupling):
         diff = numpy.abs(s_wigner - s_exact) / s_exact
         err = s_wigner_err / s_exact
 
-        tau, min_diff, max_diff = mplh.crop_bounds(tau, diff-err, diff+err, (0, 1., 0, 0.2))
+        tau_diff, min_diff, max_diff = mplh.crop_bounds(tau, diff-err, diff+err, (0, 1., 0, 0.2))
 
-        s.fill_between(tau, min_diff, max_diff,
+        s.fill_between(tau_diff, min_diff, max_diff,
             facecolor=colors[Na].lightest,
-            color=colors[Na].darkest,
-            linewidth=0.3,
+            linewidth=0,
             alpha=0.5)
+        s.plot(tau, diff, color=colors[Na].main, dashes=mplh.dash[dashes[Na]])
 
     s.text(
         0.6,
