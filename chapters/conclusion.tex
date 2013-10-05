@@ -4,18 +4,21 @@
 % =============================================================================
 
 In this thesis we introduced the functional Wigner transformation formally.
-We proved the required theorems in from Wirtinger calculus and functional calculus, and used them to derive the essential properties of the Wigner transformation: sequential transformation of operator products, and the correspondence between operator expectations and moments of the Wigner functional.
+We proved the required theorems from Wirtinger and functional calculi, and used them to derive the essential properties of the Wigner transformation: sequential transformation of operator products, and the correspondence between operator expectations and moments of the Wigner functional.
 
 We then applied this framework to the exact operator equation governing the dynamics of a \abbrev{bec} and showed how to transform it into the equivalent partial differential equation.
-An approximation (Wigner truncation) was introduced, which allowed to simplify this equation further, and turn it into a set of \abbrev{sde}s for trajectories in the phase space.
-All of this was done while keeping the functional nature of equations intact, and retaining the inherent mode cutoff of field operators and wavefunctions, which is unavoidable in numerical simulations.
+An approximation (Wigner truncation) was introduced, which allowed us to simplify this equation further, and turn it into a set of \abbrev{sde}s for trajectories in the phase space.
+All of this was done while keeping the functional nature of equations intact and retaining the inherent mode cutoff of field operators and wavefunctions, which is unavoidable in numerical simulations.
 
-On the whole, it allowed us to link the coefficients and terms in the master equation directly with those of \abbrev{sde}s, resulting in a simple method of numerical simulations of \abbrev{bec} dynamics.
-This method includes the effect of nonlinear losses in a natural way, is capable of producing any high-order correlations without changes to the initial state or the propagation, and is highly parallelizable.
-The latter is a huge advantage in the modern word of multi-core and multi-node computations and the recent advent of general calculations on \abbrev{gpu}s.
+On the whole, it allowed us to link the coefficients and terms in the master equation directly with those of \abbrev{sde}s, resulting in a simple method of numerical simulation of \abbrev{bec} dynamics.
+This method includes the effect of nonlinear losses in a natural way, is capable of producing any high-order correlations without changes to the initial state or the propagation, and is highly parallelisable.
+The latter is a huge advantage in the modern world of multi-core and multi-node computations and the recent advent of general calculations on \abbrev{gpu}s.
 In particular, the use of modern \abbrev{gpu}s allowed us to simulate the dynamics of hundreds of thousands of atoms with thousands of modes with a high degree of accuracy on a desktop in the order of hours.
 
-We applied the truncated Wigner method to some recent \abbrev{bec} interferometry experiments, both local and reported by other experimental teams.
+As a simple test of the truncation accuracy, we applied the multimode form of the Wigner representation to a two-mode system, for which an exact quantum mechanical description is possible.
+We have shown that the Wigner method gives correct results in the characteristic time frame, with systematic errors much lower than what is testable in an experiment.
+
+We then used the truncated Wigner method to model some recent \abbrev{bec} interferometry experiments, both local and reported by other experimental teams.
 The method showed good agreement with the experimental results for such important observables as interferometric contrast (a second-order correlation), phase noise and degree of spin squeezing (fourth-order correlations).
 The method allows one to account for experimental imperfections (measurement and apparatus noises) naturally, which greatly increases the accuracy of predictions.
 
