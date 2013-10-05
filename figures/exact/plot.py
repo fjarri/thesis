@@ -23,33 +23,31 @@ def _squeezing(fname, coupling, ens):
     s_wigner = wigner['s_pi2' + suffix]
     s_wigner_err = wigner['s_pi2' + suffix + '_err']
 
-
+    s_exact = numpy.log10(s_exact) * 10
     tau_wigner, s_wigner_bot, s_wigner_top = mplh.crop_bounds(
-        tau_wigner, s_wigner - s_wigner_err, s_wigner + s_wigner_err,
-        (0, (120 if coupling else 20), 0, 1.2))
+        tau_wigner,
+        numpy.log10(s_wigner - s_wigner_err) * 10,
+        numpy.log10(s_wigner + s_wigner_err) * 10,
+        (0, (120 if coupling else 20), -15, 1))
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
         xlabel='$\\tau$',
-        ylabel='$S_{\\theta + \\pi/2}$')
+        ylabel='$S_{\\theta + \\pi/2}$ (dB)')
 
     s.plot(tau_exact, s_exact, color="black")
-    s.fill_between(tau_wigner,
-        s_wigner_bot,
-        s_wigner_top,
+    s.fill_between(
+        tau_wigner, s_wigner_bot, s_wigner_top,
         facecolor=mplh.color.f.blue.lightest,
-        linewidth=0,
-        #linewidth=0.3,
-        #color=mplh.color.f.blue.darkest
-        )
+        linewidth=0)
 
     s.text(
         18 if coupling else 3,
-        0.9,
+        -1,
         "interaction on" if coupling else "interaction off")
 
     s.set_xlim((0, 120 if coupling else 20))
-    s.set_ylim((0, 1.2))
+    s.set_ylim((-15, 1))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
@@ -74,7 +72,7 @@ def _squeezing_err(fname, coupling):
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
         xlabel='$\\tau$',
-        ylabel='Errors for $S_{\\theta + \\pi/2}$')
+        ylabel='Relative errors')
 
     for tr in ('1k', '10k'):
 
@@ -96,10 +94,11 @@ def _squeezing_err(fname, coupling):
         tau_diff, min_diff, max_diff = mplh.crop_bounds(
             tau_wigner, diff-err, diff+err, (0, (120 if coupling else 20), 0, 0.1))
 
-        s.fill_between(tau_diff, min_diff, max_diff, facecolor=colors[tr].lightest,
+        s.fill_between(tau_diff, min_diff, max_diff,
+            facecolor=colors[tr].light,
             linewidth=0,
             alpha=0.5)
-        s.plot(tau_wigner, diff, color=colors[tr].main, dashes=mplh.dash[dashes[tr]])
+        s.plot(tau_wigner, diff, color=colors[tr].dark, dashes=mplh.dash[dashes[tr]])
 
     s.text(
         72 if coupling else 12,
@@ -123,8 +122,8 @@ def _squeezing_N_err(fname, coupling):
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
-        xlabel='$\\tau$',
-        ylabel='Errors for $S_{\\theta + \\pi/2}$')
+        xlabel='$\\tau / \\tau_c(N)$',
+        ylabel='Relative errors')
 
     colors = {
         20: mplh.color.f.blue,
@@ -156,10 +155,10 @@ def _squeezing_N_err(fname, coupling):
         tau_diff, min_diff, max_diff = mplh.crop_bounds(tau, diff-err, diff+err, (0, 1., 0, 0.2))
 
         s.fill_between(tau_diff, min_diff, max_diff,
-            facecolor=colors[Na].lightest,
+            facecolor=colors[Na].light,
             linewidth=0,
             alpha=0.5)
-        s.plot(tau, diff, color=colors[Na].main, dashes=mplh.dash[dashes[Na]])
+        s.plot(tau, diff, color=colors[Na].dark, dashes=mplh.dash[dashes[Na]])
 
     s.text(
         0.6,

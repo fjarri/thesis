@@ -46,6 +46,8 @@ if __name__ == '__main__':
     plot_exact.squeezing_cc_100(FOLDER + 'exact/squeezing_cc_100' + FORMAT)
     plot_exact.squeezing_nocc_err(FOLDER + 'exact/squeezing_nocc_err' + FORMAT)
     plot_exact.squeezing_cc_err(FOLDER + 'exact/squeezing_cc_err' + FORMAT)
+    plot_exact.squeezing_nocc_N_err(FOLDER + 'exact/squeezing_nocc_N_err' + FORMAT)
+    plot_exact.squeezing_cc_N_err(FOLDER + 'exact/squeezing_cc_N_err' + FORMAT)
 
     # Bell inequalities
     plot_bell.cooperative_N1(FOLDER + 'bell/cooperative_N1' + FORMAT)
