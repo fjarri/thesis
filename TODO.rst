@@ -15,7 +15,7 @@ Checklist:
 - chapters/bec-squeezing/theory: any other planar squeezing papers to reference besides He2011?
 - chapters/wigner-bec/fpe-bec: it should be possible to proof that the formula for d<Psi+ Psi>/dt agrees with the classical one up to the $1/N$ order, same as we do for particular cases later on.
 - eqn:wigner-bec:fpe-bec:ordering-transformation : do we need proof?
-- chapters/wigner-bec/master-eqn: elaborate on why the theorem for d<Psi>/dt is important
+- chapters/wigner-bec/master-eqn: elaborate on why the theorem for d<Psi>/dt is important. It's basically the Ehrenfest theorem anyway.
 - proofread
 - spellcheck
 - grammar check
