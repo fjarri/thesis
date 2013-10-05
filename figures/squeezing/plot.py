@@ -591,26 +591,13 @@ def _feshbach_squeezing(fname, losses):
         err_down = 10 * numpy.log10(xi2_sq - xi2_sq_err)
         err_up = 10 * numpy.log10(xi2_sq + xi2_sq_err)
 
-        drop = None
-        for i in range(err_up.size):
-            if numpy.isnan(err_up[i]):
-                err_up[i] = err_up[i-1]
-            if numpy.isnan(err_down[i]):
-                err_down[i] = err_down[i-1]
-            if numpy.isnan(xi2_log[i]):
-                xi2_log[i] = xi2_log[i-1]
-            if (err_down[i] < -20 or err_up[i] > 1) and drop is None:
-                drop = i
-
-        if drop is None:
-            drop = err_up.size - 1
+        t_err, err_down, err_up = mplh.crop_bounds(
+            t_sq, err_down, err_up, (0, 0.1, (-13 if losses else -20), 1))
 
         positive = err_up > err_down
-        subplot.fill_between(t_sq[:drop] * 1e3,
-            err_down[:drop],
-            err_up[:drop],
+        subplot.fill_between(
+            t_err * 1e3, err_down, err_up,
             facecolor=color.lightest,
-            where=positive[:drop],
             #interpolate=True,
             linewidth=0)
 
