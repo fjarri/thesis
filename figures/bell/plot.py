@@ -56,7 +56,7 @@ def _cooperative(fname, N):
     ax.fill_between(thetas_scaled, deltas-err, deltas+err,
         facecolor=mplh.color.f.blue.lightest, interpolate=True,
         color=mplh.color.f.blue.darkest,
-        linewidth=0.3)
+        linewidth=0)
 
     ax.plot(
         thetas_scaled,
