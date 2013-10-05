@@ -164,3 +164,20 @@ def aspect_modifier(s):
     xs = s.get_xlim()
     return (xs[1] - xs[0]) / (ys[1] - ys[0])
 
+
+def crop_bounds(x, y_low, y_high, extent):
+
+    xmin, xmax, ymin, ymax = extent
+
+    for imin in range(x.size):
+        if x[imin] > xmin:
+            break
+    for imax in range(imin, x.size):
+        if x[imax] > xmax or y_high[imax] < ymin or y_low[imax] > ymax:
+            break
+
+    x = x[imin:imax]
+    y_low = y_low[imin:imax]
+    y_high = y_high[imin:imax]
+
+    return x, numpy.array([max(ymin, y) for y in y_low]), numpy.array([min(ymax, y) for y in y_high])
