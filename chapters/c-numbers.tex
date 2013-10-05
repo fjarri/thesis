@@ -46,7 +46,7 @@ Therefore, hereinafter we will use Wirtinger differentiation unless explicitly s
 along with the notation $\cwd f/\cwd z$.
 Consequently, by ``differentiability'' we will mean the property used in the above theorem, namely the existence of partial derivatives of $\Real f$ and $\Imag f$ over real and complex axes.
 
-It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for common real-valued differentiation.
+It is convenient to connect symbolic rules for Wirtinger differentiation with the rules for the common real-valued differentiation.
 
 \begin{theorem}
 \label{thm:c-numbers:independent-vars}
@@ -60,7 +60,7 @@ It is convenient to connect symbolic rules for Wirtinger differentiation with th
 \begin{proof}
 We will prove the first identity.
 Without loss of generality, we can consider $f(z) = z^r (z^*)^s$.
-First, one can easily prove (by the transition to real values) that $\cwd (z z^*)/\cwd z = z^*$ and $\cwd (z z^*)/\cwd z^* = z$.
+First, one can easily prove (by transition to real variables) that $\cwd (z z^*)/\cwd z = z^*$ and $\cwd (z z^*)/\cwd z^* = z$.
 Let us assume that the identity is correct for some $r$ and $s$; then, using the product rule,
 \begin{eqn}
 	\frac{\cwd}{\cwd z} (z^{r+1} (z^*)^s)
@@ -105,13 +105,13 @@ This definition allows us to prove an analogue of one of the properties of the F
 	\end{eqn*}
 \end{lemma}
 \begin{proof}
-First, by changing a variable in the integral and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
+First, by changing variables in the integral and using known Fourier transform relations, we can prove that for real $x$ and $v$, and non-negative integer $n$
 \begin{eqn}
 \label{eqn:c-numbers:fourier-real}
 	\int\limits_{-\infty}^{\infty} \upd v\, v^n \exp(\pm 2 i x v)
 	= \pi (\mp i / 2)^n \delta^{(n)}(x).
 \end{eqn}
-Note that we have explicitly written integration limits here; they are swapped when we change the variable in the first integral.
+Note that we have explicitly written the integration limits here; they are swapped when we change variables in the first integral.
 
 Denoting $\alpha = u + iv$ and $\beta = x + iy$, we can expand the initial expression as
 \begin{eqn2}
@@ -164,7 +164,7 @@ Integration by parts will be used extensively in further proofs, and we will nee
 
 \begin{lemma}
 \label{lmm:c-numbers:zero-integrals}
-	For a square-integrable $f(\beta)$, and a complex $\alpha$
+	For a square-integrable $f(\beta)$ and a complex $\alpha$
 	\begin{eqn*}
 		\int \upd^2\beta
 			\frac{\cwd}{\cwd \beta} \left(
