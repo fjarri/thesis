@@ -29,7 +29,7 @@ This result is far beyond the capabilities of current experimental techniques.
 In conclusion, we have shown that the truncated Wigner method is a convenient and fast tool that can be used to plan the future experiments, and to get better insight into the existing ones.
 There is, of course, still a lot of room for further improvement.
 
-First, we only used coherent initial states and zero temperature for our simulations.
+First, we have only used coherent initial states and zero temperature for our simulations.
 While it is a reasonable first approximation, for some experiments this may not be acceptable.
 The obvious next step here is to include finite-temperature initial conditions using Bogoliubov modes~\cite{Steel1998,Sinatra2002,Ruostekoski2005,Isella2006,Blakie2008}.
 During the simulation, the validity of the truncation needs to be estimated more accurately than by using the condition~\eqnref{wigner-bec:truncation:delta-condition}.
@@ -39,3 +39,6 @@ More accurate test can be performed by calculating the quantum correction~\cite{
 Speaking about phase space methods generally, despite demonstrating excellent results in sampling static quantum states, they often struggle in simulating the dynamics of these systems.
 Positive-P is known to display exponentially growing sampling error because of the redundant dimensions it uses.
 In some cases, this can be neutralized by using a gauge-P representation~\cite{Deuar2002,Deuar2005a}, or adding a projection.
+
+Finally, it is possible to make the Wigner representation positive in the same way it was done for the P representation~\cite{Plimak2001}.
+The applicability of this ``positive-Wigner'' representation to various simulation problem is yet to be investigated.
