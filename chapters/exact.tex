@@ -18,13 +18,14 @@ We consider a two-well four-mode \abbrev{bec} system with the Hamiltonian
         \right),
 \end{eqn}
 which was described in detail elsewhere~\cite{Opanchuk2012a}.
-For the purposes of this chapter, we only need a simple case with no post-evolution beam splitter application and can, therefore, discard the second well terms and simplify the Hamiltonian to
+For the purposes of this chapter, we only need a simple case with no post-evolution beam splitter application.
+Therefore, we can discard the second well terms and reduce the Hamiltonian to
 \begin{eqn}
     \hat{H} / \hbar
     = \frac{1}{2} \sum_{i,j=1}^2 g_{jk}
         \hat{a}_j^\dagger \hat{a}_k^\dagger \hat{a}_k \hat{a}_j.
 \end{eqn}
-To simplify the equations, we use the dimensionless variables $\tilde{g}_{jk} = g_{jk} / (g_{11} N) \equiv a_{jk} / (a_{11} N)$, $\tau = g_{11} N t$, where $a_{jk}$ are $s$-wave scattering length for the interaction between modes $j$ and $k$:
+To simplify the equations, we use the dimensionless variables $\tilde{g}_{jk} = g_{jk} / (g_{11} N) \equiv a_{jk} / (a_{11} N)$, $\tau = g_{11} N t$, where $a_{jk}$ is the $s$-wave scattering length for the interaction between modes $j$ and $k$:
 \begin{eqn}
     \tilde{H}
     = \frac{1}{2} \sum_{i,j=1}^2 \tilde{g}_{jk}
@@ -35,8 +36,8 @@ The evolution starts from the coherent state
 \label{eqn:exact:initial-cond}
     \Psi(0)
     =
-        \ket{\sqrt{N / 2}}_{a_1}
-        \ket{\sqrt{N / 2}}_{a_2},
+        \ket{\sqrt{N / 2}}_1
+        \ket{\sqrt{N / 2}}_2,
 \end{eqn}
 where $N$ stands for the initial total number of atoms in the well.
 
@@ -46,7 +47,7 @@ In the Schr\"odinger picture, the evolution of the system is governed by the mas
     \frac{\upd \hat{\rho}}{\upd \tau}
     = -i \left[ \tilde{H}, \hat{\rho} \right].
 \end{eqn}
-After the transformation to the \abbrev{fpe} form with \thmref{mm-wigner:mm:correspondences}, truncation, and the further transformation with \thmref{fpe-sde:corr:mc-fpe-sde}, this equation turns into the equivalent system of \abbrev{sde}s
+After the transformation to an \abbrev{fpe} form with \thmref{mm-wigner:mm:correspondences}, truncation, and further transformation with \thmref{fpe-sde:corr:mc-fpe-sde}, this equation turns into the equivalent system of \abbrev{sde}s
 \begin{eqn}
     \upd \begin{pmatrix}
         \alpha_1 \\ \alpha_2
@@ -62,16 +63,18 @@ After the transformation to the \abbrev{fpe} form with \thmref{mm-wigner:mm:corr
             \right)
     \end{pmatrix} \upd \tau.
 \end{eqn}
-These equations can be solved numerically using conventional integration methods, which in our case was done with XMDS (see \appref{numerical} for details), and the operator moments given by \thmref{mm-wigner:mm:moments} can be used to obtain required observables.
+These equations can be solved numerically using conventional integration methods, which in our case was done with XMDS (see \appref{numerical} for details).
+Observables are obtained from the moments of $\alpha_1$ and $\alpha_2$ with the help of \thmref{mm-wigner:mm:moments}.
 
-On the other hand, the time-dependent values of any observables for this system can be obtained exactly using an expansion in number states~\cite{Opanchuk2012a}.
+On the other hand, time-dependent values of any observables for this system can be obtained exactly using an expansion in number states~\cite{Opanchuk2012a}.
 % acknowledgement
-The theoretical derivations for this method were provided by Q.-Y.~He and R.~Y.~Teh.
+Theoretical derivations for this method were provided by Q.-Y.~He and R.~Y.~Teh.
+
 In the Heisenberg picture, the equations of motion for the annihilation operators are
 \begin{eqn}
-    \frac{\upd \hat{a}_i}{\upd \tau}
-    = i \left[ \hat{H}, \hat{a}_i \right]
-    = -i \sum_{j=1}^2 \tilde{g}_{ij} \hat{N}_j \hat{a}_i,
+    \frac{\upd \hat{a}_i(\tau)}{\upd \tau}
+    = i \left[ \hat{H}, \hat{a}_i(\tau) \right]
+    = -i \sum_{j=1}^2 \tilde{g}_{ij} \hat{N}_j \hat{a}_i(\tau),
 \end{eqn}
 and their solution is (since the population of each mode is conserved):
 \begin{eqn}
@@ -89,7 +92,7 @@ The initial conditions~\eqnref{exact:initial-cond} can be, in turn, expanded as
         \sum_{m=0}^{\infty} C_m^{(1)} \ket{m}_1
         \sum_{n=0}^{\infty} C_n^{(2)} \ket{n}_2,
 \end{eqn}
-and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2)$ at the time $\tau$ as
+and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2)$ at a time $\tau$ as
 \begin{eqn}
 \label{eqn:exact:exact-f}
     \langle f(\hat{a}_1^\dagger, \hat{a}_1, \hat{a}_2^\dagger, \hat{a}_2) \rangle
@@ -100,7 +103,7 @@ and used to calculate any required moments $f(\hat{a}_1^\dagger, \hat{a}_1, \hat
         \ket{m}_1 \ket{n}_2.
 \end{eqn}
 
-For the purposes of comparison, we will take several quantities that were calculated for the system in question~\cite{Opanchuk2012a}, namely the local degree of spin squeezing.
+For the purposes of comparison, we will take a basic quantity that has been calculated for the system in question~\cite{Opanchuk2012a}, namely the degree of local spin squeezing.
 First we introduce phase-rotated Schwinger spin operator measurements in the well as
 \begin{eqn}
     \hat{J}_X
@@ -116,7 +119,7 @@ First we introduce phase-rotated Schwinger spin operator measurements in the wel
         \hat{a}_{2}^{\dagger} \hat{a}_{2}
         - \hat{a}_{1}^{\dagger} \hat{a}_{1}\right),
 \end{eqn}
-where $\Delta\theta = \pi / 2 - \arg \langle \hat{a}_2^\dagger \hat{a}_1 \rangle$ is the phase difference between the two modes in a well.
+where $\Delta\theta = \pi / 2 - \arg \langle \hat{a}_2^\dagger \hat{a}_1 \rangle$ is the phase difference between the two modes.
 
 We consider all possible orthogonal pairs of spin operators $\hat{J}_\theta$, $\hat{J}_{\theta+\pi/2}$ in the plane orthogonal to $\hat{J}_Y$, where $\hat{J}_\theta$ is defined as
 \begin{eqn}
@@ -203,7 +206,7 @@ The large oscillations of the systematic error at the start of the simulation ca
 
     \caption[Dependence of systematic errors in Wigner simulated spin squeezing on the particle number]{
     Difference of the Wigner simulated spin squeezing $S_{\theta+\pi/2}$ and the exact results (lines) as compared to the sampling errors in Wigner simulations (bands), normalized on the exact results.
-    The errors for $N=20$ (blue solid lines), $N=200$ (red dashed lines) and $N=2,000$ (green dotted lines) with $20,000$ trajectories are plotted.
+    The errors for $N=20$ (blue solid lines), $N=200$ (red dashed lines) and $N=2,000$ (green dotted lines) with $200,000$ trajectories are plotted.
     The plots correspond to \textbf{(a)} the case of no inter-component interaction, and \textbf{(b)} strong inter-component interaction (the interaction coefficients are the same as in~\figref{exact:squeezing-comparison}).}%endcaption
 
     \label{fig:exact:squeezing-N-error-comparison}
@@ -219,7 +222,7 @@ Therefore, the absolute error is also quite low (of the order of tenths of decib
 On the other hand, the technical noise in spin squeezing experiments can reach $10\un{dB}$~\cite{Riedel2010}.
 This means that the systematic errors in the truncated Wigner method are far from being detectable by current technology.
 
-Note that, while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same effectiveness~\cite{Opanchuk2012a}.
+Note that, while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same efficiency~\cite{Opanchuk2012a}.
 
 In conclusion, we have decisively shown that the truncated Wigner method gives accurate predictions for the sophisticated compound observables (the squeezing~\eqnref{exact:squeezing} is calculated as a fourth order moment divided by a second order moment).
 The system used in this chapter was a very simple one; for more complex systems it is possible to perform comparisons with the exact (in the limit of infinite simulation trajectories) positive-P phase-space method~\cite{Drummond1993,Chaturvedi2002,Dechoum2004}.
