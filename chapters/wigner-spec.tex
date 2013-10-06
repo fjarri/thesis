@@ -223,7 +223,7 @@ Proved by a straightforward application of \thmref{wigner:mc:correspondences} an
 In this section we will formulate and prove a theorem that describes the Wigner transformation of the nonlinear operator
 \begin{eqn}
 \label{eqn:wigner-spec:loss-operator}
-    \hat{\mathcal{L}}_{\lvec} [\hat{A}]
+    \mathcal{L}_{\lvec} [\hat{A}]
     = 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
         - \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
         - \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
@@ -237,7 +237,7 @@ where $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with
 The operator of this form appears when one describes Markovian loss processes in a \abbrev{bec}~\cite{Jack2002}.
 
 Before approaching the main theorem we will need two auxiliary lemmas.
-The result of an application of \thmref{wigner:mc:correspondences} to the operator $\hat{\mathcal{L}}$ will contain terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$, while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
+The result of an application of \thmref{wigner:mc:correspondences} to the operator $\mathcal{L}$ will contain terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$, while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
 The first lemma will provide a way to perform this rearrangement.
 
 \begin{lemma}
@@ -445,9 +445,9 @@ With the help of these two lemmas, we can perform the Wigner transformation of t
 
 \begin{theorem}
 \label{thm:wigner-spec:w-losses}
-    The Wigner transformation of the loss operator $\hat{\mathcal{L}}_{\lvec}$ of form~\eqnref{wigner-spec:loss-operator} is
+    The Wigner transformation of the loss operator $\mathcal{L}_{\lvec}$ of form~\eqnref{wigner-spec:loss-operator} is
     \begin{eqn*}
-        \mathcal{W} \left[ \hat{\mathcal{L}}_{\lvec} [\hat{A}] \right]
+        \mathcal{W} \left[ \mathcal{L}_{\lvec} [\hat{A}] \right]
         =
             \sum_{j_1=0}^{l_1} \sum_{k_1=0}^{l_1} \ldots
             \sum_{j_C=0}^{l_C} \sum_{k_C=0}^{l_C}
@@ -600,7 +600,7 @@ and for the third term:
         \right)
         \mathcal{W}[\hat{A}].
 \end{eqn}
-The full expression for the Wigner transformation of $\hat{\mathcal{L}}_{\lvec}$ is, therefore,
+The full expression for the Wigner transformation of $\mathcal{L}_{\lvec}$ is, therefore,
 \begin{eqn}
     \mathcal{W}[\hat{\mathcal{L}_{\lvec}}[\hat{A}]] = 2 W_1 - W_2 - W_3,
 \end{eqn}
