@@ -19,12 +19,12 @@ Here we have introduced local Liouville loss terms that describe $n$-body collis
 		- \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{\rho}
 		- \hat{\rho} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}.
 \end{eqn}
-The reservoir coupling operators $\hat{O}_{\lvec}$ are products of local field annihilation operators
+The reservoir coupling operators $\hat{O}_{\lvec}$ are products of restricted field annihilation operators
 \begin{eqn}
 	\hat{O}_{\lvec} \equiv \hat{O}_{\lvec} (\Psiopvec) = \prod_{j=1}^C \Psiop_j^{l_j},
 \end{eqn}
 describing local $n=(\sum l_c)$-body collision losses.
-This definition assumes that $l_1, \ldots, l_C$ particles of internal states with quantum number $j=1,\ldots C$ respectively all collide simultaneously within the volume corresponding to the inverse momentum cutoff, and are removed from the Bose gas.
+This definition assumes that $l_1, \ldots, l_C$ particles of internal states with quantum numbers $j=1,\ldots C$ respectively all collide simultaneously within the volume corresponding to the inverse momentum cutoff, and are removed from the Bose gas.
 
 This minimal model of particle loss assumes that the reservoir of ``lost'' particles does not interact with the original Bose gas.
 Its accuracy thus depends on the trapping mechanism since the ``lost'' particles are simply in a different quantum state (or are combined into molecules).
@@ -76,7 +76,7 @@ Rewriting the expectation as a trace, and substituting the right part of~\eqnref
 			}
 	\right),
 \end{eqn}
-where $K_{mk}^\prime \equiv K_{mk}(\xvec^\prime)$, $\mathcal{L}_{\lvec}^\prime \equiv \mathcal{L} [ O_{\lvec}^\prime ] \equiv \mathcal{L} [ O_{\lvec} ( \Psiopvec^\prime ) ]$.
+where $K_{mk}^\prime \equiv K_{mk}(\xvec^\prime)$, $\mathcal{L}_{\lvec}^\prime \equiv \mathcal{L} ( \Psiopvec^\prime )$.
 
 Let us transform each term separately.
 Noticing that $K_{mk}^\prime$ commutes with $\Psiop_j$, and using \lmmref{wigner:op-calculus:moment-commutators}, we can transform the first term as:
@@ -201,13 +201,14 @@ Thus, the full relation is
 which is equivalent to the statement of the theorem after replacing the integration with the restricted delta by a projector according to~\eqnref{func-calculus:projector-via-delta}.
 \end{proof}
 
-The same method can be applied to calculating the time derivative of component population.
+The same method can be applied to calculating the time derivative of the per-component population.
 
 \begin{theorem}
-	The time derivative of the expectation of the population operator for a field operator whose evolution is described by the master equation~\eqnref{wigner-bec:master-eqn:master-eqn} with the Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H} is
+	For a system whose evolution is described by the master equation~\eqnref{wigner-bec:master-eqn:master-eqn} with the Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H}, the time derivative of the population of the component $j$ is
 	\begin{eqn*}
-		\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+		\frac{d}{dt} \int \upd\xvec \langle \Psiop_j^\dagger \Psiop_j \rangle
 		= -2 \sum_{\lvec} \kappa_{\lvec}
+			\int \upd\xvec
 			\langle
 				\Psiop_j^\dagger
 				\mathcal{P}_{\restbasis_j} \left[
@@ -217,11 +218,11 @@ The same method can be applied to calculating the time derivative of component p
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Starting from the master equation, and ignoring the unitary evolution (which, obviously, will not contribute to the population change):
+Starting from the master equation, and ignoring the unitary evolution (which, obviously, will not contribute to the total population change):
 \begin{eqn}
-	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+	\frac{d}{dt} \int \upd\xvec \langle \Psiop_j^\dagger \Psiop_j \rangle
 	= \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd \xvec^\prime \Trace{
+			\int \upd\xvec\, \upd \xvec^\prime \Trace{
 				\mathcal{L}_{\lvec}^\prime \left[ \hat{\rho} \right]
 				\Psiop_j^\dagger \Psiop_j
 			}.
@@ -230,7 +231,7 @@ Expanding the loss operator:
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd \xvec^\prime \Trace{
+			\int \upd\xvec\, \upd\xvec^\prime \Trace{
 				\hat{\rho} \left(
 					2 \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^\prime
 					- \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
@@ -238,7 +239,7 @@ Expanding the loss operator:
 				\right)
 			} \\
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd \xvec^\prime \langle
+			\int \upd\xvec\, \upd\xvec^\prime \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
@@ -247,7 +248,7 @@ Expanding the loss operator:
 				\right] \Psiop_j
 			\rangle \\
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd \xvec^\prime 2 \Real \langle
+			\int \upd\xvec\, \upd\xvec^\prime 2 \Real \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
@@ -255,9 +256,9 @@ Expanding the loss operator:
 \end{eqn}
 Applying \lmmref{wigner:op-calculus:functional-commutators} to transform the commutator and using~\eqnref{func-calculus:projector-via-delta} to integrate over $\xvec^\prime$:
 \begin{eqn}
-	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
+	\frac{d}{dt} \int \upd\xvec \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & -2\sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd \xvec^\prime \Real \langle
+			\int \upd\xvec\, \upd\xvec^\prime \Real \langle
 				\Psiop_j^\dagger
 				\delta_{\restbasis_j}(\xvec^\prime, \xvec)
 				\frac{\upp \left(
@@ -265,7 +266,7 @@ Applying \lmmref{wigner:op-calculus:functional-commutators} to transform the com
 					\right)}{\upp \Psiop_j^{\prime\dagger}}
 			\rangle \\
 	={} & -2\sum_{\lvec \in L} \kappa_{\lvec}
-			\langle
+			\int \upd\xvec \langle
 				\Psiop_j^\dagger
 				\mathcal{P}_{\restbasis_j} \left[
 					\frac{\upp \hat{O}_{\lvec}^\dagger}{\upp \Psiop_j^\dagger}

@@ -2,7 +2,7 @@
 \section{Initial states}
 % =============================================================================
 
-Before integrating the evolution equations~\eqnref{wigner-bec:fpe-bec:sde} or~\eqnref{wigner-bec:fpe-bec:sde-stratonovich}, the initial value of $\Psi_j$ at $t=0$ has to be sampled.
+Before integrating the evolution equations~\eqnref{wigner-bec:fpe-bec:sde} or~\eqnref{wigner-bec:fpe-bec:sde-stratonovich}, the initial value of $\Psi_j$ at $t=0$ has to be sampled for each integration trajectory.
 The general procedure is to take the density matrix of the desired initial state and find its Wigner transformation using \defref{wigner:mc:w-transformation}.
 The resulting Wigner function is then sampled.
 
@@ -12,6 +12,7 @@ The resulting Wigner function is then sampled.
 % =============================================================================
 
 The simplest case of an initial state is a coherent state.
+It also serves as a good first approximation for most \abbrev{bec} interferometry experiments.
 
 \begin{theorem}
 \label{thm:wigner-bec:initial-state:coherent-state}
@@ -115,5 +116,6 @@ where $\Psi_j^{(0)}(\xvec, 0)$ is the ``classical'' ground state of the system.
 \subsection{Other cases}
 % =============================================================================
 
-In particular, a numerically efficient way to sample a Wigner distribution for Bogoliubov states was developed by Sinatra~\textit{et~al}~\cite{Sinatra2002}.
+While sampling the coherent state is computationally easy, it is not the best choice for multimode systems.
 More involved examples, including thermalized states and Bogoliubov states, are reviewed by Blakie~\textit{et~al}~\cite{Blakie2008}, Olsen and Bradley~\cite{Olsen2009}, and Ruostekoski and Martin~\cite{Ruostekoski2010}.
+In particular, a numerically efficient way to sample a Wigner distribution for Bogoliubov states has been developed by Sinatra~\textit{et~al}~\cite{Sinatra2002}.

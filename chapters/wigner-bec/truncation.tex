@@ -3,9 +3,9 @@
 \label{sec:wigner-bec:truncation}
 % =============================================================================
 
-In order to solve operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} with the Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H} numerically, we will transform it to an ordinary differential equation using the Wigner transformation from \defref{wigner:mc:w-transformation}.
+In order to solve the operator equation~\eqnref{wigner-bec:master-eqn:master-eqn} with the Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H} numerically, we will transform it to an ordinary differential equation using the Wigner transformation from \defref{wigner:mc:w-transformation}.
 
-Namely, the term with $K_{jk}$ is transformed using \thmref{wigner-spec:w-commutator1} and \thmref{wigner-spec:w-laplacian-commutator1} (since $K_{jk}$ is basically a sum of the Laplacian operator and functions of $\xvec$):
+Namely, the term with $K_{jk}$ is transformed using \thmref{wigner-spec:w-commutator1} and \thmref{wigner-spec:w-laplacian-commutator1} (since $K_{jk}$ is basically a sum of the Laplacian operator and functions of coordinates):
 \begin{eqn}
 	\mathcal{W} \left[ [ \int \upd\xvec \Psiop_j^\dagger K_{jk} \Psiop_k, \hat{\rho} ] \right]
 	= \int \upd\xvec \left(
@@ -25,7 +25,7 @@ The nonlinear term is transformed with \thmref{wigner-spec:w-commutator2} (assum
 			\hat{\rho}
 		]
 	\right]
-	& = \int \upd\xvec U_{jk} \left(
+	={} & \int \upd\xvec U_{jk} \left(
 		\frac{\delta}{\delta \Psi_j} \left(
 			- \Psi_j \Psi_k \Psi_k^*
 			+ \frac{\delta_{\restbasis_k}(\xvec, \xvec)}{2} ( \delta_{jk} \Psi_k + \Psi_j )
@@ -59,7 +59,7 @@ Assuming that $K_{jk}$, $U_{jk}$, and $\kappa_{\lvec}$ are real-valued, all the 
 		+ \mathcal{O} \left[ \frac{\fdelta^3}{\fdelta \Psi_j^3} \right]
 	\right\} W.
 \end{eqn}
-Terms of order higher than $2$ are produced both by the nonlinear term in the Hamiltonian, and loss terms.
+The terms of order higher than $2$ are produced both by the nonlinear term in the Hamiltonian, and loss terms.
 Such an equation could be solved perturbatively if there were only orders up to $3$ (which means an absence of nonlinear losses)~\cite{Polkovnikov2003}, but in most cases all terms except for first- and second-order ones are truncated.
 In order to justify this truncation in a consistent way, we develop an order-by-order expansion in $1/N_j$, where $N_j$ is a characteristic particle number in a physical interaction volume, and truncate terms of formal order $1/N_j^2$.
 This is achieved by use of the formal definition of a scaled Wigner function $W^{\psi}$~\cite{Drummond1993}, satisfying a scaled equation in terms of dimensionless scaled fields $\psi$, with:
@@ -73,7 +73,7 @@ This is achieved by use of the formal definition of a scaled Wigner function $W^
 \end{eqn}
 Here $t_c$ is a characteristic interaction time, and $\ell_c$ is a characteristic interaction length.
 These would normally be chosen as the healing time and healing length respectively in a \abbrev{bec} calculation.
-Typically the cell size is chosen as proportional to the healing length, for optimum accuracy in resolving spatial detail.
+Typically the cell size is chosen to be proportional to the healing length, for optimum accuracy in resolving spatial detail.
 Using this expansion, a consistent order-by-order expansion in $1/N_j$ can be obtained, of form:
 \begin{eqn}
 	\frac{\upd W^{\psi}}{\upd \tau}
@@ -82,11 +82,11 @@ Using this expansion, a consistent order-by-order expansion in $1/N_j$ can be ob
 		- \sum_{j=1}^C \frac{\fdelta}{\fdelta \psi_j^*} \mathcal{A}_j^{\psi*}
 		+ \sum_{j=1}^C \sum_{k=1}^C \frac{\fdelta^2}{\fdelta \psi_j^* \fdelta \psi_k}
 			\mathcal{D}_{jk}^{\psi}
-		+ \mathcal{O} \left[ \frac{1}{N_j^2} \right]
+		+ \mathcal{O} \left[ \frac{1}{N_j^{3/2}} \right]
 	\right\} W^{\psi}.
 \end{eqn}
 
-With the assumption of the state being coherent, the simple condition for truncation~--- that is, omitting terms of the order $\mathcal{O}(1/N_j^2)$~--- can be shown to be~\cite{Sinatra2002}
+With the assumption of the state being coherent, the simple condition for truncation~--- that is, omitting terms of the order $\mathcal{O}(1/N_j^{3/2})$~--- can be shown to be~\cite{Sinatra2002}
 \begin{eqn}
 	N_j \gg |\restbasis_j|,
 \end{eqn}
@@ -117,7 +117,7 @@ The use of this Wigner truncation allows us to simplify the results of \thmref{w
 Wigner truncation is an expansion up to the order $1/N_j$, so during the simplification, along with the higher order derivatives, we drop all components with $\delta_{\restbasis_j}$ of order higher than $1$ in the drift terms, and of order higher than $0$ in the diffusion terms.
 
 \begin{theorem}
-Assuming the conditions for Wigner truncation are satisfied, the result of the Wigner transformation of the nonlinear term is
+Assuming the conditions for the Wigner truncation are satisfied, the result of the Wigner transformation of the nonlinear term of a Hamiltonian is
 \begin{eqn*}
 	\mathcal{W} \left[
 		[
@@ -138,11 +138,11 @@ Assuming the conditions for Wigner truncation are satisfied, the result of the W
 \end{eqn*}
 \end{theorem}
 \begin{proof}
-A straightforward result of neglecting high-order terms in~\eqnref{wigner-bec:truncation:full-nonlinear}.
+A straightforward result of neglecting the high-order terms in~\eqnref{wigner-bec:truncation:full-nonlinear}.
 \end{proof}
 
 \begin{theorem}
-Assuming the conditions for Wigner truncation are satisfied, the result of the Wigner transformation of the loss term is
+Assuming the conditions for the Wigner truncation are satisfied, the result of the Wigner transformation of the loss term is
 \begin{eqn*}
 	\mathcal{W}[\mathcal{L}_{\lvec}[\hat{\rho}]]
 	\approx{} & \left(
@@ -166,12 +166,12 @@ Assuming the conditions for Wigner truncation are satisfied, the result of the W
 		\frac{\upp O_{\lvec}}{\upp\Psi_m} \frac{\upp O_{\lvec}^*}{\upp\Psi_n^*}
 	\right) W,
 	\end{eqn*}
-where coupling functionals $O_{\lvec} \equiv O_{\lvec}[\Psivec] = \prod_{c=1}^C \Psi_c^{l_c}$.
+where the coupling functionals $O_{\lvec} \equiv O_{\lvec}[\Psivec] = \prod_{c=1}^C \Psi_c^{l_c}$.
 \end{theorem}
 \begin{proof}
 The proof is basically a simplification of the result of \thmref{wigner-spec:w-losses} under two conditions following from neglecting the terms smaller than $1 / N$.
 First, we are dropping all terms with high order differentials, which can be expressed as limiting $\sum j_c + \sum k_c \le 2$.
-Second, we are only considering the terms with the restricted delta function of up to first order in the drift part (containing the functional differentials of order $1$), and terms with no restricted delta functions in the diffusion part (containing the functional differentials of order $2$).
+Second, we are only considering the terms with the restricted delta function of up to the first order in the drift part (containing the functional differentials of order $1$), and terms with no restricted delta functions in the diffusion part (containing the functional differentials of order $2$).
 
 The only combinations of $j_c$ and $k_c$ for which $Z_{\lvec,\jvec,\kvec}$ is not zero are thus $\{ j_c = \delta_{cm}, k_c = 0, m \in [1, C] \}$, $\{ j_c = 0, k_c = \delta_{cm}, m \in [1, C] \}$ and $\{ j_c = \delta_{cm}, k_c = \delta_{cn}, m \in [1, C], n \in [1, C] \}$.
 These combinations produce terms with $\frac{\delta}{\delta \Psi_n^*}$, $\frac{\delta}{\delta \Psi_n}$ and $\frac{\delta^2}{\delta \Psi_p \delta \Psi_n^*}$ respectively:
