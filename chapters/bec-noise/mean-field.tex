@@ -3,7 +3,7 @@
 \label{sec:bec-noise:mean-field}
 % =============================================================================
 
-We will start from the classical model of a trapped \abbrev{bec}~--- the mean-field approximation.
+We will start from a classical model of a trapped \abbrev{bec}~--- the mean-field approximation.
 While it cannot predict quantum effects, it provides the basis for comparison with the truncated Wigner method, and can be also applied to calculate the ground state of a trapped \abbrev{bec} numerically.
 
 We will use the combined model which includes linear coupling and losses, and later in \secref{bec-noise:wigner}, dedicated to the application of the truncated Wigner method we will show how we can get almost identical equations from the first principles.
@@ -13,7 +13,7 @@ We will use the combined model which includes linear coupling and losses, and la
 \subsection{Two-component condensate}
 % =============================================================================
 
-The classical \abbrev{bec} is described by the wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
+The state of a classical \abbrev{bec} is described by wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
 The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations (\abbrev{cgpe}s)
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes}
@@ -38,17 +38,17 @@ The evolution of the condensate is described by the system of coupled Gross-Pita
 \end{eqn}
 Here $V_j(\xvec)$ are external potentials~\eqnref{bec-noise:system:V}, $\omega_j^{(i)}$ is the internal energy of the component $j$, $g_{jk}$ are nonlinear interaction coefficients~\eqnref{bec-noise:system:g}, $\Gamma_j$ terms represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the phase of the coupling).
 The \abbrev{cgpe}s without loss or coupling terms were introduced by Zeng \textit{et~al}~\cite{Zeng1995}, and Ho and Shenoy~\cite{Ho1996}.
-The coupling terms were first included in~\cite{Ballagh1997}, and the loss terms by Yurovsky \textit{et~al}~\cite{Yurovsky1999}.
+The coupling terms were first included by Ballagh \textit{et~al}~\cite{Ballagh1997}, and the loss terms by Yurovsky \textit{et~al}~\cite{Yurovsky1999}.
 A detailed description of the mean-field approximation can be found in the book by Pitaevskii and Stringari~\cite{Pitaevskii2003}.
 
-The exact expression of the loss parameters $\Gamma_j$ depends on the loss processes in the particular experiment.
+The exact expressions for the loss parameters $\Gamma_j$ depend on the loss processes in a particular experiment.
 For example, the dominant three-body and two-body losses in a two-component \Rb{} \abbrev{bec} with the components ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$ result in~\cite{Burt1997,Mertes2007}
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:losses}
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
 	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
 \end{eqn}
-These equations were obtained empirically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to the exact operator equation.
+These equations were obtained empirically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to an exact operator equation.
 
 The difference between the internal energies of components $\ket{1}$ and $\ket{2}$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
@@ -82,7 +82,7 @@ The transformed equations look like:
 	\right) \Psi_1.
 \end{eqn}
 
-Furthermore, in the experiment the coupling field is applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
+Furthermore, in experiments the coupling field is typically applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
 This allows us to neglect the quickly oscillating terms:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-simplified}
@@ -104,12 +104,12 @@ This allows us to neglect the quickly oscillating terms:
 When the pulse is applied twice using the same coupling field (which is the case for the Ramsey interferometry), it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse; therefore, $\alpha$ stays the same too.
 If one wants to apply pulse with the different detuning, the phase information is lost, and the value of $\alpha$ has to become random before this pulse.
 
-The application of the coupling field can be simplified, if certain additional conditions are valid, namely:
-\begin{enumerate}
+The application of the coupling field can be simplified when certain additional conditions are valid, namely:
+\begin{itemize}
 	\item $\mu / \hbar \ll \Omega$, where $\mu$ is the chemical potential of the first component;
 	\item $\delta \ll \Omega$;
 	\item the characteristic time of the other terms in~\eqnref{bec-noise:mean-field:cgpes} is much greater than $t_{\mathrm{pulse}}$.
-\end{enumerate}
+\end{itemize}
 This allows us to use an ``instantaneous'' pulse, multiplying the state vector by a rotation matrix:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:rotation-matrix}
@@ -125,15 +125,15 @@ This allows us to use an ``instantaneous'' pulse, multiplying the state vector b
 	\end{pmatrix},
 \end{eqn}
 where $\theta = \Omega t_{\mathrm{pulse}}$, and $\phi$ is the phase of the coupling field at the beginning of the pulse.
-In particular, for the two-pulse Ramsey scheme with the time $t_R$ between pulses, $\phi_2 = \phi_1 + \delta t_R$.
+In particular, for the two-pulse Ramsey scheme (\figref{bec-noise:visibility:sequences},~(a)) with the time $t_R$ between pulses, $\phi_2 = \phi_1 + \delta t_R$.
 
 
 % =============================================================================
 \subsection{Ground state calculation}
 % =============================================================================
 
-At the beginning of the simulation, the \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
-The ground state is a solution of the stationary \abbrev{cgpe}s
+At the beginning of the simulation, a \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
+The ground state is the solution of the stationary \abbrev{cgpe}s
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-stationary}
 	\mu_1 \Psi_1 & = \left(
@@ -149,8 +149,8 @@ The ground state is a solution of the stationary \abbrev{cgpe}s
 \end{eqn}
 where $\mu_1$ and $\mu_2$ are chemical potentials of the components.
 
-The most common method to find the ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
-The essence of the method is that propagating an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore, after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
+The most common method of finding the ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
+The essence of the method is that the propagation of an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore, after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
 The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-simplified} without the loss or coupling terms:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:imaginary-time}
@@ -167,7 +167,7 @@ The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-sim
 \end{eqn}
 
 The rigorous proof of this method was derived by Bao and Du~\cite{Bao2004}.
-The idea can be roughly illustrated by considering a one-component system with the linear Hamiltonian $\hat{H}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$, where the lowest eigenvalue corresponds to ground state we want to find.
+The idea can be roughly illustrated by considering a one-component system with a linear Hamiltonian $\hat{H}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$, where the lowest eigenvalue corresponds to ground state we want to find.
 The steady solution of the time-dependent \abbrev{gpe}
 \begin{eqn}
 	i \hbar \frac{\upd \Psi}{\upd t} = \hat{H} \Psi
@@ -177,7 +177,7 @@ then looks like
 	\Psi(\xvec, t) = \sum_k e^{-\frac{i}{\hbar}\mu_k t} f_k(\xvec),
 \end{eqn}
 where $f_k$ are eigenfunctions of $\hat{H}$ corresponding to the eigenvalues $\mu_k$.
-After the substitution $t \rightarrow \tau = it$ the solution will become fading, with higher-energy components fading faster:
+After the substitution $t \rightarrow \tau = it$ the solution becomes fading, with higher-energy components fading faster:
 \begin{eqn}
 	\Psi(\xvec, \tau) = \sum_k e^{-\frac{1}{\hbar}\mu_k \tau} f_k(\xvec).
 \end{eqn}
@@ -185,8 +185,8 @@ After the substitution $t \rightarrow \tau = it$ the solution will become fading
 Therefore, if we take some random initial solution and propagate it long enough in imaginary time using~\eqnref{bec-noise:mean-field:imaginary-time}, the higher-energy components will eventually die out (in comparison with the lowest-energy state) and leave us with the desired ground state.
 The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
 
-Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, renormalisation after each step will be required.
-Known total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
+Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, a renormalisation after each step will be required.
+The total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
 \begin{eqn}
 	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 \upd V = N.
 \end{eqn}
@@ -212,14 +212,14 @@ thus has to be calculated after each step and compared to the previous value, wa
 \includegraphics{figures_generated/mean_field/two_comp_gs_immiscible.pdf}}
 
 \caption[Two-component ground state for miscible and immiscible regimes]{
-Two-component ground state for \textbf{(a)}~miscible and \textbf{(b)}~immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in a \abbrev{3d} harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$.
+Two-component ground state for \textbf{(a)}~miscible and \textbf{(b)}~immiscible regimes of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in a three-dimensional harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$.
 Blue solid lines and red dashed lines show the axial density of the first and the second component respectively.
 Intra-component scattering lengths are $a_{11} = 100.40\,r_B$, $a_{22} = 95.68\,r_B$, inter-component scattering length is \textbf{(a)}~$a_{12} = 97.0\,r_B$ and \textbf{(b)}~$a_{11} = 99.0\,r_B$, where $r_B$ is the Bohr radius.}%endcaption
 \label{fig:bec-noise:mean-field:two-comp-gs}
 \end{figure}
 
-As an example, \figref{bec-noise:mean-field:two-comp-gs} shows the axial density $n_z = \int n(\xvec) \upd x \upd y$ of the two-component ground state for an equal mix of two states of \Rb{} \abbrev{bec}.
-Two parts of the figure illustrate the difference between the miscible ($a_{12}^2 < a_{11} a_{22}$) and immiscible ($a_{12}^2 > a_{11} a_{22}$) regimes.
+As an example, \figref{bec-noise:mean-field:two-comp-gs} shows the axial density $n_z = \int n(\xvec) \upd x \upd y$ of the two-component ground state for an equal mix of two hyperfine states of \Rb{} \abbrev{bec}.
+Two panes of the figure illustrate the difference between the miscible ($a_{12}^2 < a_{11} a_{22}$) and immiscible ($a_{12}^2 > a_{11} a_{22}$) regimes.
 
 
 % =============================================================================
@@ -228,7 +228,7 @@ Two parts of the figure illustrate the difference between the miscible ($a_{12}^
 
 As was mentioned earlier in this section, the starting state for the imaginary time propagation can be set to the Thomas-Fermi approximated state to minimize the propagation time.
 Thomas-Fermi approximation consists of neglecting the kinetic term in the stationary equations~\eqnref{bec-noise:mean-field:cgpes-stationary}.
-For a one-component state ($\Psi_2 \equiv 0$), the resulting equations can be solved analytically:
+For a one-component state ($\Psi_2 \equiv 0$), the resulting equations can be easily solved analytically:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-gs}
 	| \Psi_1(\xvec) |^2 = \frac{1}{g_{11}} \max \left( \mu_1 - V_1(\xvec), 0 \right).
@@ -241,7 +241,7 @@ In the $D$-dimensional harmonic trap potential
 this solution has the shape of an ellipsoid with radii $r_d = \sqrt{2\mu_1 / (m \omega_d^2)}$.
 
 The chemical potential $\mu_1$ is fixed by the normalisation condition $\int |\Psi_1|^2 \upd \xvec = N_1$.
-For a \abbrev{3d} trap it can be shown to be
+For a three-dimensional trap it can be shown to be
 \begin{eqn}
 	\mu_1^{\mathrm{(3D)}} =
 		\left( \frac{15 N_1}{8 \pi} \right)^{\frac{2}{5}}
@@ -249,7 +249,7 @@ For a \abbrev{3d} trap it can be shown to be
 		{g_{11}}^{\frac{2}{5}},
 \end{eqn}
 where $\bar{\omega} = \sqrt[3]{\omega_x \omega_y \omega_z}$.
-For a \abbrev{1d} trap it has the form
+For a one-dimensional trap it has the form
 \begin{eqn}
 	\mu_1^{\mathrm{(1D)}} =
 		\left( \frac{3 g_{11} N_1}{4} \right)^{\frac{2}{3}}
@@ -280,12 +280,12 @@ Fortunately, the particle density there is low, so we can estimate the width $h$
 If it happens to be small as compared to the size of the condensate, the approximation can be considered valid.
 
 The first term at the left-hand side of the inequation~\eqnref{bec-noise:mean-field:tf-inequation} is constant and can be dropped in the limit of $V_1(\xvec) \rightarrow \mu_1$.
-Then, for the sake of simplicity, we consider all but one of coordinates to be zero and the remaining one to be equal to $r_d - h_d$, where $r_d$ is the corresponding radius of the condensate.
+Then, for the sake of simplicity, we assume all but one of coordinates to be zero and the remaining one to be equal to $r_d - h_d$, where $r_d$ is the corresponding radius of the condensate.
 After replacing ``$\ll$'' by ``$\approx$'' and assuming $h_d$ to be small as compared to $r_d$, we obtain the conditions for each coordinate:
 \begin{eqn}
 	h_d \approx \sqrt{\frac{\hbar^2}{2 \mu_1 m}},\,d \in [1, \ldots, D].
 \end{eqn}
-They have to be much smaller than corresponding radii, which gives us
+They have to be much smaller than the corresponding radii, which gives us
 \begin{eqn}
 	\mu_1 \gg \frac{1}{2} \hbar \max_{d \in [1, \ldots, D]} \omega_d.
 \end{eqn}
@@ -302,9 +302,9 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
 For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
-This means that the Thomas-Fermi approximation produces solution which is close to the real one.
-However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that the we are reaching the limit of the approximation's applicability.
+This means that the Thomas-Fermi approximation produces a solution which is close to the real one.
+However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that we are reaching the limit of the approximation's applicability.
 \figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state and for $1,000$ atoms it differs significantly as expected.
 
 More extended discussion of the Thomas-Fermi approximation was done by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.
-It is possible to work out the Thomas-Fermi approximation for the two-component condensate, but it requires some non-trivial handling of various miscibility/immiscibility cases~\cite{Anderson2010}.
+It is possible to work out the Thomas-Fermi approximation for a two-component condensate, but it requires some non-trivial handling of various miscibility/immiscibility cases~\cite{Anderson2010}.
