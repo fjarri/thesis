@@ -44,7 +44,7 @@ We used XMDS to integrate the \abbrev{sde}s in \charef{exact}.
 The problem of integrating \abbrev{sde}s is well-studied; for some general information, one can refer to an extensive reviews by Drummond and Mortimer~\cite{Drummond1990}, and by Werner and Drummond~\cite{Werner1997}.
 The common approach is to use a method from the Runge-Kutta family, which can be applied without changes to a set of \abbrev{sde}s in the Stratonovich form~\cite{Wilkie2004,Wilkie2005}.
 
-It is possible to employ variable-stepsize methods, which are strongly convergent providing that stochastic differentials on the subintervals are sampled correctly~\cite{Wilkie2005}.
+It is possible to employ variable-stepsize methods, which are strongly convergent, provided that stochastic differentials on the subintervals are sampled correctly~\cite{Wilkie2005}.
 Another widely-used specialized Runge-Kutta subtype is the \abbrev{rk4} interaction picture method~\cite{CaradocDavies2000}, which can improve convergence properties considerably when applied to stiff equations.
 One must note though that the reduction in the number of steps required for a given level of convergence is often neutralized by the increased number of \abbrev{fft}s that have to be performed on each step.
 
