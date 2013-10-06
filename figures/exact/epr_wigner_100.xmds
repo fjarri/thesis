@@ -10,7 +10,7 @@
     <propagation_dimension> t </propagation_dimension>
   </geometry>
 
-  <driver name="multi-path" paths="100" />
+  <driver name="mpi-multi-path" paths="100" />
 
   <features>
       <arguments>
@@ -96,29 +96,41 @@
   </vector>
 
   <sequence>
-    <integrate algorithm="SI" interval="tau_max" steps="40000" iterations="3">
+    <integrate algorithm="ARK89" interval="tau_max" tolerance="1e-7">
       <samples>200</samples>
       <operators>
         <dependencies>evo_noises</dependencies>
         <integration_vectors>main</integration_vectors>
         <![CDATA[
-        dalpha1_dt = -i * (kappa1_t * beta1 + g11_t * alpha1 * norm(alpha1) + g12_t * alpha1 * norm(alpha2))
+        dalpha1_dt = -i * (
+            kappa1_t * beta1
+            + g11_t * alpha1 * (norm(alpha1) - 1)
+            + g12_t * alpha1 * (norm(alpha2) - 0.5))
             - gamma12_t * norm(alpha2) * alpha1 - 3 * gamma111_t * norm(alpha1) * norm(alpha1) * alpha1
             - gamma1_t * alpha1
             - 0.5 * gamma12_t * alpha1 // Stratonovich term
             + sqrt(gamma12_t) * conj(alpha2) * z_12A + 3 * sqrt(gamma111_t) * conj(alpha1 * alpha1) * z_111A
             + sqrt(gamma1_t) * z_1A;
-        dbeta1_dt = -i * (kappa1_t * alpha1 + g11_t * beta1 * norm(beta1) + g12_t * beta1 * norm(beta2))
+        dbeta1_dt = -i * (
+            kappa1_t * alpha1
+            + g11_t * beta1 * (norm(beta1) - 1)
+            + g12_t * beta1 * (norm(beta2) - 0.5))
             - gamma12_t * norm(beta2) * beta1 - 3 * gamma111_t * norm(beta1) * norm(beta1) * beta1
             - gamma1_t * beta1
             - 0.5 * gamma12_t * beta1 // Stratonovich term
             + sqrt(gamma12_t) * conj(beta2) * z_12B + 3 * sqrt(gamma111_t) * conj(beta1 * beta1) * z_111B
             + sqrt(gamma1_t) * z_1B;
-        dalpha2_dt = -i * (kappa2_t * beta2 + g12_t * alpha2 * norm(alpha1) + g22_t * alpha2 * norm(alpha2))
+        dalpha2_dt = -i * (
+            kappa2_t * beta2
+            + g12_t * alpha2 * (norm(alpha1) - 0.5)
+            + g22_t * alpha2 * (norm(alpha2) - 1))
             - gamma12_t * norm(alpha1) * alpha2 - 2 * gamma22_t * norm(alpha2) * alpha2
             - 0.5 * gamma12_t * alpha2 - 2 * gamma22_t * alpha2 // Stratonovich term
             + sqrt(gamma12_t) * conj(alpha1) * z_12A + 2 * sqrt(gamma22_t) * conj(alpha2) * z_22A;
-        dbeta2_dt = -i * (kappa2_t * alpha2 + g12_t * beta2 * norm(beta1) + g22_t * beta2 * norm(beta2))
+        dbeta2_dt = -i * (
+            kappa2_t * alpha2
+            + g12_t * beta2 * (norm(beta1) - 0.5)
+            + g22_t * beta2 * (norm(beta2) - 1))
             - gamma12_t * norm(beta1) * beta2 - 2 * gamma22_t * norm(beta2) * beta2
             - 0.5 * gamma12_t * beta2 - 2 * gamma22_t * beta2 // Stratonovich term
             + sqrt(gamma12_t) * conj(beta1) * z_12B + 2 * sqrt(gamma22_t) * conj(beta2) * z_22B;

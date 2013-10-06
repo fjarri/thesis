@@ -31,6 +31,13 @@ def get(executable, **params):
 	return processData(res_file)
 
 
+def deln(executable, n, **params):
+	for i in range(n):
+		res_file = resultn(executable, i, **params)
+		if os.path.exists(res_file):
+			os.remove(res_file)
+
+
 def getn(executable, n, **params):
 	datasets = []
 	for i in range(n):

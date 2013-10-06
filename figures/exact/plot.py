@@ -105,6 +105,17 @@ def _squeezing_err(fname, coupling):
         0.085,
         "interaction on" if coupling else "interaction off")
 
+    if coupling:
+        s.text(55, 0.06, '$20,000$')
+        s.text(55, 0.052, 'trajectories')
+        s.text(19, 0.02, '$200,000$')
+        s.text(19, 0.012, 'trajectories')
+    else:
+        s.text(13, 0.06, '$20,000$')
+        s.text(13, 0.052, 'trajectories')
+        s.text(4, 0.02, '$200,000$')
+        s.text(4, 0.012, 'trajectories')
+
     s.set_xlim((0, 120 if coupling else 20))
     s.set_ylim((0, 0.1))
 
@@ -136,7 +147,7 @@ def _squeezing_N_err(fname, coupling):
 
     for Na in (20, 200, 2000):
 
-        with open(get_path(__file__, 'single_well_squeezing_wigner_1k_Na' + str(Na) + '.pickle')) as f:
+        with open(get_path(__file__, 'single_well_squeezing_wigner_10k_Na' + str(Na) + '.pickle')) as f:
             wigner = pickle.load(f)
 
         tau_wigner = wigner['tau' + suffix]
@@ -152,7 +163,7 @@ def _squeezing_N_err(fname, coupling):
         diff = numpy.abs(s_wigner - s_exact) / s_exact
         err = s_wigner_err / s_exact
 
-        tau_diff, min_diff, max_diff = mplh.crop_bounds(tau, diff-err, diff+err, (0, 1., 0, 0.2))
+        tau_diff, min_diff, max_diff = mplh.crop_bounds(tau, diff-err, diff+err, (0, 1., 0, 0.16))
 
         s.fill_between(tau_diff, min_diff, max_diff,
             facecolor=colors[Na].light,
@@ -162,11 +173,20 @@ def _squeezing_N_err(fname, coupling):
 
     s.text(
         0.6,
-        0.17,
+        0.135,
         "interaction on" if coupling else "interaction off")
 
+    if coupling:
+        s.text(0.12, 0.12, '$N=20$')
+        s.text(0.25, 0.062, '$N=200$')
+        s.text(0.17, 0.03, '$N=2000$')
+    else:
+        s.text(0.1, 0.12, '$N=20$')
+        s.text(0.27, 0.082, '$N=200$')
+        s.text(0.16, 0.01, '$N=2000$')
+
     s.set_xlim((0, 1.))
-    s.set_ylim((0, 0.2))
+    s.set_ylim((0, 0.16))
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
