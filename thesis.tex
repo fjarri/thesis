@@ -26,7 +26,7 @@
 \usepackage[nottoc]{tocbibind} % include ToC and Bibliography in ToC
 \usepackage{environ} % gives \NewEnviron macro
 \usepackage{chngcntr} % provides \counterwithin to add appendix letter to theorems, lemmas etc
-\usepackage{xcolor}
+\usepackage[rgb]{xcolor}
 \usepackage{fancyhdr}
 \usepackage{setspace}
 \usepackage{cite} % cite successive references as lists, i.e. [1-5] instead of [1,2,3,4,5]
@@ -107,6 +107,18 @@
 \else
 [pp~#2]%
 \fi }
+
+
+\immediate\pdfobj stream attr{/N 3}  file{sRGBIEC1966-2.1.icm}
+\pdfcatalog{%
+/OutputIntents [ <<
+/Type /OutputIntent
+/S/GTS_PDFA1
+/DestOutputProfile \the\pdflastobj\space 0 R
+/OutputConditionIdentifier (sRGB IEC61966-2.1)
+/Info(sRGB IEC61966-2.1)
+>> ]
+}
 
 
 \begin{document}
