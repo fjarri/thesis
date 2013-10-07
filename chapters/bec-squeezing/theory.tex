@@ -29,8 +29,8 @@ where $\Delta \hat{S}^2_{\vec{n}}$ is the variance of the total spin along the d
 This quantity can serve as an entanglement criterion, indicating its occurrence when $\xi^2 < 1$~\cite{Sorensen2001}.
 Note that in this thesis we only consider the squeezing along the direction orthogonal to the total spin, as was originally introduced, but other definitions are also possible~\cite{He2011}.
 
-The straightforward way of finding the $\xi^2$ is to shift the coordinate frame to the end of the vector $\langle \hat{\mathbf{S}} \rangle$, and rotate it so that one of the axes is aligned along it.
-The minimum variance can then be found by varying the angle of rotation of the other two axes and calculating the variance along one of them (in fact, this is how it usually done in the experiment).
+A straightforward way of finding the $\xi^2$ is to shift the coordinate frame to the end of the vector $\langle \hat{\mathbf{S}} \rangle$, and rotate it so that one of the axes is aligned along it.
+The minimum variance can then be found by varying the angle of rotation of the other two axes and calculating the variance along one of them (in fact, this is how it is usually done in the experiment).
 The direct approach consists of expressing the desirable minimum variance in terms of variances of the components of the spin vector in the original coordinates~\cite{Li2009}.
 We denote the polar and the azimuthal angle of $\langle \hat{\mathbf{S}} \rangle$ as $\nu$ and $\phi$ respectively, meaning that
 \begin{eqn}
@@ -78,25 +78,25 @@ The spin correlations $\Delta_{ij}$ are defined as
 		i,j=x,y,z.
 \end{eqn}
 
-The averages of the total spin vector components and their pairwise moments can be expressed using the moments of the Wigner functional using~\eqnref{wigner-bec:fpe-bec:moments}.
-Averages of the components are calculated straightforwardly if we remember that the field operators of different components commute:
+Averages of the total spin vector components and their pairwise moments can be expressed calculated using moments of the Wigner functional according to~\eqnref{wigner-bec:fpe-bec:moments}.
+The averages are calculated straightforwardly if we remember that the field operators of different components commute:
 \begin{eqn}
 	\langle \hat{S}_x \rangle
 		& = \pathavg{\Real \int \Psi^*_1 \Psi_2 \upd\xvec }
-		= \pathavg{\Real I}
-		= \pathavg{S_x}, \\
+		\equiv \pathavg{\Real I}
+		\equiv \pathavg{S_x}, \\
 	\langle \hat{S}_y \rangle
 		& = \pathavg{\Imag \int \Psi^*_1 \Psi_2 \upd\xvec }
-		= \pathavg{\Imag I}
-		= \pathavg{S_y}, \\
+		\equiv \pathavg{\Imag I}
+		\equiv \pathavg{S_y}, \\
 	\langle \hat{S}_z \rangle
 		& = \frac{1}{2} \pathavg{\int \Psi^*_1 \Psi_1 \upd\xvec - \int \Psi^*_2 \Psi_2 \upd\xvec}
-		= \pathavg{(N_1 - N_2) / 2}
-		= \pathavg{S_z},
+		\equiv \pathavg{(N_1 - N_2) / 2}
+		\equiv \pathavg{S_z},
 \end{eqn}
-where we have introduced functionals of wavefunctions in a single simulation path $I = S_x + i S_y$ and $(N_1 - N_2) / 2 = S_z$.
+where we have introduced the functionals of wavefunctions in a single simulation path $I \equiv S_x + i S_y$ and $(N_1 - N_2) / 2 \equiv S_z$.
 
-Second-order moments of spin operators are obtained by transforming normally ordered field operator products to symmetrically ordered ones, substituting path averages of wavefunction moments and grouping terms.
+The second-order moments of the spin operators are obtained by transforming normally ordered field operator products to symmetrically ordered ones, substituting path averages of wavefunction moments and grouping terms.
 Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symmetrically ordered operator products as
 \begin{eqn}
 	\langle \hat{S}^2_x \rangle
@@ -107,7 +107,7 @@ Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symme
 		\left(
 			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
 		\right)
-		\upd\xvec \upd\xvec^\prime \right\rangle \\
+		\upd\xvec\, \upd\xvec^\prime \right\rangle \\
 	={} & \frac{1}{4} \left\langle \int \left(
 			\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
 			+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
@@ -121,15 +121,15 @@ Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symme
 			\delta_{\restbasis_1} (\xvec, \xvec^\prime)
 			\delta_{\restbasis_2} (\xvec^\prime, \xvec)
 		\right)
-	\right) \upd\xvec \upd\xvec^\prime \right\rangle.
+	\right) \upd\xvec\, \upd\xvec^\prime \right\rangle.
 \end{eqn}
-In general, the basis sets for the first and the second component are different, and the last term in the above equation cannot be simplified any further.
+In general, basis sets of the first and the second component are different, and the last term in the above equation cannot be simplified any further.
 However, in the numerical simulations in this chapter we use the same set $\restbasis_1 = \restbasis_2 = \restbasis$ for both components, which allows us to transform it to a more convenient form
 \begin{eqn}
 	\int \Real \left(
 			\delta_{\restbasis} (\xvec, \xvec^\prime)
 			\delta_{\restbasis} (\xvec^\prime, \xvec)
-		\right) \upd\xvec \upd\xvec^\prime
+		\right) \upd\xvec\, \upd\xvec^\prime
 	& = \frac{1}{2} \int \left(
 			\sum_{\mvec \in \restbasis} \phi_{\mvec}^\prime \phi_{\mvec}^*
 			\sum_{\nvec \in \restbasis} \phi_{\nvec} \phi_{\nvec}^{\prime*}
@@ -143,7 +143,7 @@ However, in the numerical simulations in this chapter we use the same set $\rest
 	& = | \restbasis |,
 \end{eqn}
 where we have expanded the restricted delta functions using the expression from \defref{func-calculus:restricted-delta}.
-Applying~\eqnref{wigner-bec:fpe-bec:moments} to the full expression for $\langle \hat{S}^2_x \rangle$, we rewrite it in terms of wavefunctions in Wigner representation:
+Applying~\eqnref{wigner-bec:fpe-bec:moments} to the full expression for $\langle \hat{S}^2_x \rangle$, we rewrite it in terms of wavefunctions in the Wigner representation:
 \begin{eqn}
 	\langle \hat{S}^2_x \rangle
 	& = \frac{1}{4} \pathavgleft
@@ -157,7 +157,7 @@ Applying~\eqnref{wigner-bec:fpe-bec:moments} to the full expression for $\langle
 	= \pathavg{ S^2_x } - \frac{|\restbasis|}{8}.
 \end{eqn}
 
-Using the same procedure we find the expectations for other pairwise moments of spin operators:
+Using the same procedure, we find the expectations for other pairwise moments of the spin operators:
 \begin{eqn}
 	\langle \hat{S}^2_y \rangle
 	& = \pathavg{ S^2_y } - \frac{|\restbasis|}{8}, \\
@@ -172,6 +172,6 @@ Using the same procedure we find the expectations for other pairwise moments of 
 \end{eqn}
 
 Now we have all the required expectations to calculate the spin correlations $\Delta_{ij}$ and, consequently, the degree of squeezing $\xi^2$.
-Note that if we neglect the term $|\restbasis|/8$ in the equations for $\langle \hat{S}_i^2 \rangle$ (which we can do as long as the Wigner truncation condition~\eqnref{wigner-bec:truncation:delta-condition} applies), the spin correlations behave ``classically''.
+Note that if we neglect the term $|\restbasis|/8$ in the equations for $\langle \hat{S}_i^2 \rangle$ (which is small as compared to $S_i^2$ when the Wigner truncation condition~\eqnref{wigner-bec:truncation:delta-condition} applies), the spin correlations behave ``classically''.
 This means that they behave as if we had a ``cloud'' of spin vectors, where each vector corresponds to a separate simulation path, and the correlations are classical correlations of different vector components in this cloud.
 Consequently, without giving up too much accuracy we can informally illustrate the total spin uncertainty by plotting the distribution of the total spin vector $(S_x, S_y, S_z)$ over the integration trajectories.
