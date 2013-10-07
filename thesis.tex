@@ -1,5 +1,7 @@
 % !TEX program = lualatex
 
+\RequirePackage{pdf14}
+
 % replace oneside by twoside for final print
 \documentclass[headings=optiontohead,chapterprefix=true,oneside,a4paper,12pt,
     %DIV=9,BCOR=0mm,
@@ -93,7 +95,40 @@
 \definecolor{darkred}{HTML}{8F4B3F}
 \definecolor{mainblue}{HTML}{1F409A}
 \definecolor{lightblue}{HTML}{7392E6}
-\usepackage[pdfa, bookmarks, bookmarkstype=toc, unicode, pdfencoding=auto, backref=page, breaklinks, pdftitle={PhD thesis: \plainthesisname}, pdfauthor={Bogdan Opanchuk}, colorlinks, urlcolor=mainblue, citecolor=darkred, linkcolor=mainblue]{hyperref}
+
+\usepackage{hyperxmp}
+\usepackage[pdfa,bookmarks=true,backref=page]{hyperref}
+
+\hypersetup{%
+  bookmarkstype=toc,
+  unicode,
+  pdfencoding=auto,
+  breaklinks,
+  pdftitle={PhD thesis: \plainthesisname},
+  pdfauthor={Bogdan Opanchuk},
+  pdfauthortitle={},
+  pdfcopyright={Copyright (C) 2013, Bogdan Opanchuk},
+  pdfsubject={PhD thesis},
+  pdfkeywords={physics, quantum mechanics, BEC, GPU, numerical simulations, quasiprobabilities},
+  pdflicenseurl={http://creativecommons.org/licenses/by-nc-nd/3.0/},
+  pdfcaptionwriter={Bogdan Opanchuk},
+  pdfcontactaddress={},
+  pdfcontactcity={},
+  pdfcontactpostcode={},
+  pdfcontactcountry={},
+  pdfcontactemail={bogdan@opanchuk.net},
+  pdfcontacturl={},
+  pdflang={en},
+  hypertexnames=false,
+  colorlinks,
+  urlcolor=mainblue,
+  citecolor=darkred,
+  linkcolor=mainblue
+  %bookmarksopen=true,
+  %bookmarksopenlevel=3,
+  %linktocpage=true,
+  %plainpages=false,
+  }
 
 \newcommand{\citationneeded}{\textcolor{mainred}{[citation needed]}}
 
