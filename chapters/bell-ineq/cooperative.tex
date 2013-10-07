@@ -3,8 +3,8 @@
 % =============================================================================
 
 A Bell inequality sets a limit on observable correlations in a physical system that obeys a local hidden variable theory (\abbrev{lhv})~\cite{Bell1964,Clauser1969}.
-This is a classical theory where the results of the measurements are functions of local detector settings and the hidden parameter $\lambda$.
-Thus, the values measured by two spatially separated observers, $A$ and $B$ (for Alice and Bob, as they are usually denoted), can be expressed as $A(a, \lambda)$ and $B(b, \lambda)$, where $a$ and $b$ are Alice's and Bob's detector settings.
+This is a classical theory where the results of the measurements are functions of local detector settings and a hidden parameter $\lambda$.
+Thus, values measured by two spatially separated observers, $A$ and $B$ (for Alice and Bob, as they are usually denoted), can be expressed as $A(a, \lambda)$ and $B(b, \lambda)$, where $a$ and $b$ are Alice's and Bob's detector settings.
 Possible correlations are defined probabilistically as
 \begin{eqn}
 \label{eqn:bell-ineq:cooperative:lhv}
@@ -43,9 +43,9 @@ We define the intensity correlations to be~\cite{Drummond1983}
     = \langle N \vert
         \hat{A}^{I}(1,\hat{\avec}_{1})
         \hat{A}^{J}(\gamma,\hat{\avec}_{2})
-        \vert N \rangle
-\end{eqn},
-where $\gamma$ is a linear combination parameter related to a polarizer angle, and auxiliary functions are introduced so that:
+        \vert N \rangle,
+\end{eqn}
+where $\gamma$ is a linear combination parameter related to the polarizer angle, and auxiliary functions are introduced so that:
 \begin{eqn}
     \hat{A}^{J}(\gamma,\hat{\avec}_{k})
     ={} & \left(
@@ -104,7 +104,7 @@ In essence, it is an exact expansion of an arbitrary density matrix of bosons wi
         \langle \bbeta^* \vert \balpha \rangle,
 \end{eqn}
 where $\vert\balpha\rangle$ is a multimode coherent state.
-The positive P-representation, therefore, corresponds exactly to the definition of a physical weak measurement~\cite{Aharonov1988}, with initial state $\vert\balpha\rangle$ and final postselected state $\vert\bbeta\rangle$ occurring with probability $P(\balpha,\bbeta)$.
+The positive P-representation, therefore, corresponds exactly to the definition of a physical weak measurement~\cite{Aharonov1988}, with the initial state $\vert\balpha\rangle$ and the final postselected state $\vert\bbeta\rangle$ occurring with probability $P(\balpha,\bbeta)$.
 The standard form we use is also known to be measurable using multiple beam-splitter operations~\cite{Agarwal1994}.
 
 The expression above looks very similar to~\eqnref{bell-ineq:cooperative:lhv}, given by \abbrev{lhv}.
@@ -146,7 +146,7 @@ Note that it is not unique, and it may be possible to find other expressions tha
 
 In order to illustrate our point better, we simulate the measurement of the operator~\eqnref{bell-ineq:cooperative:G} using the Monte-Carlo method: we sample the distribution~\eqnref{bell-ineq:cooperative:pos-P} and calculate the weighted average~\eqnref{bell-ineq:cooperative:pos-P-expectation}.
 
-We sample this distribution by transforming it to a form where we could use the well-known von Neumann rejection algorithm.
+We sample this distribution by transforming it to a form where we can use the well-known von Neumann rejection algorithm.
 Performing the variable change
 \begin{eqn}
 \label{eqn:bell-ineq:cooperative:mu-lambda}
@@ -166,12 +166,12 @@ we can separate the positive-P function into independent parts as
     P(\Avec, \Bvec, \delta\Avec, \delta\Bvec)
     = P^\prime(\Avec, \Bvec) G(\delta\Avec) G(\delta\Bvec).
 \end{eqn}
-Here $G$ is the $4$-component Gaussian distribution with the variance $\sigma^2 = 1/2$ in each real component
+Here $G$ is a $4$-component Gaussian distribution with the variance $\sigma^2 = 1/2$ in each real component
 \begin{eqn}
     G(\delta\Avec)
     = \frac{1}{\pi^2} e^{-|\delta\Avec|^2},
 \end{eqn}
-and $P^\prime$ is the distribution core with the reduced number of variables
+and $P^\prime$ is the distribution core with a reduced number of variables
 \begin{eqn}
     P^\prime(\Avec, \Bvec)
     = \left(
@@ -180,7 +180,7 @@ and $P^\prime$ is the distribution core with the reduced number of variables
         e^{-|\Avec|^2 - |\Bvec|^2},
 \end{eqn}
 
-The Gaussian parts can be sampled exactly using conventional methods, while the distribution core requires requires the application of rejection sampling.
+The Gaussian parts can be sampled exactly using conventional methods, while the distribution core requires requires an application of rejection sampling.
 Since $|\Avec\cdot\Bvec| \le |\Avec| |\Bvec|$, $P^\prime$ can be bounded as
 \begin{eqn}
     P^\prime(\Avec, \Bvec) \le F(\Avec) F(\Bvec),
@@ -190,7 +190,7 @@ where
     F(\Avec)
     = \frac{|\Avec|^2N}{\pi^2 \sqrt{N+1} N!} e^{-|\Avec|^2}.
 \end{eqn}
-The bounding function $F$ will be used as a probability distribution in the rejection sampling, so it must be normalized to $1$.
+The bounding function $F$ will be used as a probability distribution in the rejection sampling, so it must be normalised on $1$.
 In order to do that, we notice that
 \begin{eqn}
     \int |\Avec|^{2N} e^{-|\Avec|^{2}} \upd^2 \Avec
@@ -201,7 +201,7 @@ where $k$ is the number of components in $\Avec$ (in our case $\Avec$ contains t
 \begin{eqn}
     S_{k-1}(r) = \frac{2\pi^{k/2} r^{k-1}}{\Gamma(k/2)}.
 \end{eqn}
-Thus, the normalization coefficient is
+Thus, the normalisation coefficient is
 \begin{eqn}
     M
     = \int F(\Avec) \upd^2 \Avec
@@ -222,8 +222,8 @@ The distribution $F^\prime$, in turn, can be represented as a product of two ind
     = R(r) U(\nvec),
 \end{eqn}
 where $r = |\Avec|$, $\nvec$ is a unit vector on a $k$-dimensional sphere, and $U=1/S_{k-1}(1)$ is a uniform distribution of vector directions (or, in other words, a uniform distribution on the surface of a $k$-dimensional ball).
-The latter can be sampled using the Marsaglia algorithm~\cite{Marsaglia1972} (sampling a vector of $k$ normally distributed random numbers and normalising it to $1$).
-In order to sample the distribution $R$, we have to do another variable change: $r^{2}\rightarrow x$:
+The latter can be sampled using the Marsaglia algorithm~\cite{Marsaglia1972} (sampling a vector of $k$ normally distributed random numbers and normalising it on $1$).
+In order to sample the distribution $R$, we have to do another variable change, $r^{2}\rightarrow x$:
 \begin{eqn}
     R(x)
     & = \frac{1}{2\sqrt{x}} S_{k-1}(\sqrt{x}) g(x) \\
@@ -265,4 +265,4 @@ The resulting phase-space coordinates $\balpha$ and $\bbeta$ can be now used to 
 Using the sampling method described in the previous subsection, we can now sample the positive-P distribution~\eqnref{bell-ineq:cooperative:pos-P} and calculate the violation~\eqnref{bell-ineq:cooperative:violation}.
 We do that for the two-particle case $N=J=1$, and also for the four-particle case $N=J=2$, which has been observed experimentally~\cite{Howell2002}.
 The results are plotted in~\figref{bell-ineq:cooperative:violation}, together with the analytical predictions~\eqnref{bell-ineq:cooperative:violation-1} and~\eqnref{bell-ineq:cooperative:violation-2}.
-The second case requires significantly more samples to achieve a small enough sampling error, but it is clear that in both cases we were able to demonstrate the violation which is well beyond the sampling error range.
+The second case requires significantly more samples to achieve a small enough sampling error, but it is clear that in both cases we were able to demonstrate the violation which is beyond the sampling error range.
