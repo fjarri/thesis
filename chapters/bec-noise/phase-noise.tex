@@ -2,8 +2,8 @@
 \section{Phase noise}
 % =============================================================================
 
-Another important characteristic of a \abbrev{bec} interferometry experiment is the phase noise, which is connected with the visibility.
-We will discuss it based on the same experiment~\cite{Egorov2011,Egorov2012} as in the previous section.
+Another important characteristic of a \abbrev{bec} interferometry experiment is a phase noise, which is connected to the visibility.
+We will explain it by the example of the same experiment~\cite{Egorov2011,Egorov2012} as in the previous section.
 
 While in the simulation we can measure the visibility~\eqnref{bec-noise:visibility:visibility} simply by calculating a second-order moment, experimentalists do not have the luxury of knowing the wavefunctions of the components.
 Instead, multiple runs of the Ramsey sequence with the same evolution time are performed, with the second $\pi/2$-pulse having a different phase lag $\phi$ each time.
@@ -40,11 +40,11 @@ In the experiment in question, three such noise sources were identified.
 First, the length of $\pi/2$-pulses varied throughout the experimental runs with an estimated standard deviation of $\Delta \theta = 0.02\un{rad}$ (caused by the drift of the Rabi frequency $\Omega$).
 The phase of the coupler also had an uncertainty caused by the MW frequency instability that grew with time as $\Delta \phi / t = 0.5\un{rad/s}$.
 Finally, the imaging technique used to measure populations $N_1^\prime$ and $N_2^\prime$ resulted in an uncertainty of $\Delta N / N = 0.023$.
-These factors can be trivially added to the simulations: first two at the moment of the application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}, by adding a random factor to the length $\theta$ and the phase $\phi$, and the third one by adding a random factor to the populations $N_1$ and $N_2$ produced by integrating the corresponding moments of wavefunctions.
+These factors can be trivially added to the simulations: the first two at the moment of the application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}, by adding a random factor to the length $\theta$ and the phase $\phi$, and the third one by adding a random factor to the populations $N_1$ and $N_2$ produced by integrating the corresponding moments of wavefunctions.
 
 The result is illustrated in~\figref{bec-noise:phase-noise:illustration}, with the ``experimental'' points emulated this way plotted against a sine fit, for two different evolution times.
 The base simulation is the truncated Wigner one for the regular Ramsey sequence from the previous section.
-The standard deviation of the horizontal distance $\sigma$ of the experimental results from the fitting curve is called the phase noise.
+The standard deviation $\sigma$ of the horizontal distance from the fitting curve for the experimental results is called the phase noise.
 The amplitude of the curve, in turn, is taken to be the predicted visibility accounting for the technical noises (see~\figref{bec-noise:visibility:ramsey-visibility} and~\figref{bec-noise:visibility:echo-visibility} in the previous section).
 
 \begin{figure}
@@ -75,7 +75,7 @@ There seems to be a lot of room for the improvement of the apparatus until the m
 Phase noise in a spin echo sequence can be estimated in the same way.
 The reported MW frequency instability for this experiment was $\Delta \phi / t = 0.125\un{rad/s}$.
 As~\figref{bec-noise:phase-noise:echo-phnoise} shows, even after the inclusion of the technical noise, there is some disagreement with the experimental data.
-This may be caused by the systematic error introduced by the truncation, or possibly by some additional source of technical noise.
+This may be caused by a systematic error introduced by the Wigner truncation, or possibly by some additional source of technical noise.
 
 One may notice that the total noise shown in~\figref{bec-noise:phase-noise:ramsey-phnoise} and~\figref{bec-noise:phase-noise:echo-phnoise} is lower than the one reported by Egorov \textit{et~al}~\cite{Egorov2011,Egorov2012}.
 This is the result of the honest calculation of the total noise (in essence, we simulate the actual experimental measurement procedure) as opposed to the post-factum combination of noise from the technical sources with the Wigner results.
