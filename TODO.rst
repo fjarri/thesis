@@ -9,6 +9,7 @@ Examples and tests:
 - Compare uniform/harmonic grid
 
 
+- Chapter 5, p.45, bottom - "broad-band"?
 Checklist:
 - do we need to define abbrevs where they are actually used in addition to first appearance?
 - more references?
@@ -33,6 +34,8 @@ Peter's changes:
 - Chapter 2, p.8: add the derivation for eqn (2.2)?
 - Chapter 2, p.11, top - is it "surface term"?
 - Chapter 3, "non-commuting field operators" - in what sense?
-
 - is it "with a corresponding ...", or "with corresponding ..."?
+- Chapter 5, "stet"?
+- Chapter 5, p.41 - discuss
+- Chapter 5, p.45, bottom - "broad-band"?
 

@@ -1,0 +1,157 @@
+% =============================================================================
+\section{Integral averages}
+% =============================================================================
+
+It is interesting to derive an expression for the time dependence of some simple observables using \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde} and It\^o's formula (\thmref{fpe-sde:ito-formula:func-ito-f}).
+Namely, we are interested in the population $N_i = \int \upd\xvec \langle \Psiop_i^\dagger \Psiop_i \rangle$.
+
+\begin{theorem}
+\label{thm:wigner-bec:fpe-bec:population-change}
+    In a \abbrev{bec} with the evolution governed by the set of \abbrev{sde}s~\eqnref{wigner-bec:fpe-bec:sde}, the population changes in time as
+    \begin{eqn*}
+        \frac{\upd N_i}{\upd t}
+        ={} & - \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
+            2 \frac{\upp O_{\lvec}^*}{\upp \Psi_i^*} O_{\lvec} \Psi_i^*
+                - \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
+                    \frac{\upp^2 O_{\lvec}^*}{\upp \Psi_i^* \upp \Psi_k^*}
+                    \frac{\upp O_{\lvec}}{\upp \Psi_k}
+                    \Psi_i^*
+            \right. \\
+        & \quad \left.
+            - \frac{\partial O_{\lvec}}{\partial \Psi_i}
+                \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
+                \delta_{\restbasis_i}(\xvec, \xvec)
+        \pathavgright.
+    \end{eqn*}
+\end{theorem}
+\begin{proof}
+Let us apply \thmref{fpe-sde:ito-formula:func-ito-f} with $f_j \equiv \Psi_j$ to $\mathcal{F} \equiv \Psi_i^* \Psi_i$.
+Since, in the end, we are interested in the average of $\mathcal{F}$, and $\pathavg{ dQ_{\lvec} } \equiv 0$, we can discard the third term in the It\^o formula.
+The resulting expression for the differential is
+\begin{eqn}
+    \upd (\Psi_i^* \Psi_i)
+    ={} & \int \upd \xvec^\prime \left(
+        \sum_{j=1}^C \mathcal{A}_j^\prime
+            \frac{\fdelta (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^\prime}
+        + \sum_{j=1}^C \mathcal{A}_j^{\prime *}
+            \frac{\fdelta (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^{\prime *}} \right. \\
+    & \quad \left. + \sum_{j=1}^C \sum_{k=1}^C \sum_{\lvec \in L}
+            \mathcal{B}_{j\lvec}^\prime \mathcal{B}_{k\lvec}^{\prime *}
+            \frac{\fdelta^2 (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^\prime \fdelta \Psi_k^{\prime *}}
+        \right) \upd t.
+\end{eqn}
+The derivatives are evaluated as
+\begin{eqn}
+    \frac{\fdelta (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^\prime}
+    & = \delta_{ij} \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec), \\
+    \frac{\fdelta (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^{\prime *}}
+    & = \delta_{ij} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec), \\
+    \frac{\fdelta^2 (\Psi_i^* \Psi_i)}{\fdelta \Psi_j^\prime \fdelta \Psi_k^{\prime *}}
+    & = \delta_{ij} \delta_{ik} \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec).
+\end{eqn}
+
+From~\eqnref{wigner-bec:fpe-bec:moments}, it follows that
+\begin{eqn}
+    \frac{\upd N_i}{\upd t}
+    & = \int \upd \xvec \frac{\upd \langle \Psiop_i^* \Psiop_i \rangle}{\upd t} \\
+    & \approx \int \upd \xvec \frac{\upd (
+        \pathavg{ \Psi_i^* \Psi_i } - \frac{1}{2} \delta_{\restbasis_i}(\xvec, \xvec)
+        )}{\upd t}
+    = \int \upd \xvec
+        \pathavg{ \frac{\upd (\Psi_i^* \Psi_i)}{\upd t} }.
+\end{eqn}
+Substituting the expression for the differential of $\Psi_i^* \Psi_i$, we get
+\begin{eqn}
+    \frac{\upd N_i}{\upd t}
+    ={} & \iint \upd \xvec\, \upd \xvec^\prime \pathavgleft
+        \mathcal{A}_i^\prime
+            \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)
+        + \mathcal{A}_i^{\prime *}
+            \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec) \right. \\
+    & \quad + \sum_{\lvec \in L} \left.
+            \mathcal{B}_{i\lvec}^\prime \mathcal{B}_{i\lvec}^{\prime *}
+            \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+        \pathavgright,
+\end{eqn}
+where we were able to move the integral over $\xvec$ since the drift and diffusion terms depend on $\xvec^\prime$.
+Integrating by $\xvec$, and expanding $\Psi_i$ and restricted delta functions:
+\begin{eqn}
+    \iint \upd\xvec\, \upd\xvec^\prime
+        \mathcal{A}_i^\prime \Psi_i^* \delta_{\restbasis_i}(\xvec^\prime, \xvec)
+    & = \iint d\xvec d\xvec^\prime \mathcal{A}_i^\prime
+        \sum_{\nvec \in \restbasis_i} \phi_{i,\nvec}^* \alpha_{i,\nvec}^*
+        \sum_{\mvec \in \restbasis_i} \phi_{i,\mvec} \phi_{i,\mvec}^{\prime *} \\
+    & = \int \upd\xvec^\prime \mathcal{A}_i^\prime
+        \sum_{\mvec \in \restbasis_i} \alpha_{i,\nvec}^* \phi_{i,\nvec}^{\prime *} \\
+    & = \int \upd\xvec \mathcal{A}_i \Psi_i^*.
+\end{eqn}
+Similarly,
+\begin{eqn}
+    \iint \upd\xvec\, \upd\xvec^\prime
+        \mathcal{A}_i^{\prime *} \Psi_i \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+    = \int \upd\xvec \mathcal{A}_i^* \Psi_i,
+\end{eqn}
+and
+\begin{eqn}
+    \iint \upd\xvec\, \upd\xvec^\prime
+        \mathcal{B}_{i\lvec}^\prime \mathcal{B}_{i\lvec}^{\prime *}
+        \delta_{\restbasis_i}(\xvec^\prime, \xvec) \delta_{\restbasis_i}^*(\xvec^\prime, \xvec)
+    = \int \upd\xvec \mathcal{B}_{i\lvec} \mathcal{B}_{i\lvec}^*
+        \delta_{\restbasis_i}(\xvec, \xvec).
+\end{eqn}
+The integration thus gives us
+\begin{eqn}
+    \frac{\upd N_i}{\upd t}
+    = \int \upd\xvec \pathavgleft
+        \mathcal{A}_i \Psi_i^*
+        + \mathcal{A}_i^* \Psi_i
+        + \sum_{\lvec \in L} \mathcal{B}_{i\lvec} \mathcal{B}_{i\lvec}^*
+            \delta_{\restbasis_i}(\xvec, \xvec)
+    \pathavgright.
+\end{eqn}
+
+Now we can substitute the known expressions for drift terms~\eqnref{wigner-bec:truncation:drift-term} and diffusion terms~\eqnref{wigner-bec:truncation:diffusion-term}.
+From the form of the expression above it is clear that the unitary evolution part of the drift term does not contribute to the population change rate (which agrees with the intuition).
+Thus, the drift terms can be safely simplified to
+\begin{eqn}
+    \mathcal{A}_i^{\mathrm{(loss)}}
+    = - \sum_{\lvec \in L} \kappa_{\lvec} \left(
+        \frac{\upp O_{\lvec}^*}{\upp \Psi_i^*} O_{\lvec}
+        - \frac{1}{2} \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
+            \frac{\upp^2 O_{\lvec}^*}{\upp \Psi_i^* \upp \Psi_k^*}
+            \frac{\upp O_{\lvec}}{\upp \Psi_k}
+        \right),
+\end{eqn}
+which gives the population change rate
+\begin{eqn}
+    \frac{\upd N_i}{\upd t}
+    ={} & - \sum_{\lvec \in L} \kappa_{\lvec} \int \upd\xvec \pathavgleft
+        2 \frac{\upp O_{\lvec}^*}{\upp \Psi_i^*} O_{\lvec} \Psi_i^*
+            - \sum_{k=1}^C \delta_{\restbasis_k}(\xvec, \xvec)
+                \frac{\upp^2 O_{\lvec}^*}{\upp \Psi_i^* \upp \Psi_k^*}
+                \frac{\upp O_{\lvec}}{\upp \Psi_k}
+                \Psi_i^*
+        \right. \\
+    & \quad \left.
+        - \frac{\partial O_{\lvec}}{\partial \Psi_i}
+            \frac{\partial O_{\lvec}^*}{\partial \Psi_i^*}
+            \delta_{\restbasis_i}(\xvec, \xvec)
+    \pathavgright,
+\end{eqn}
+where we have used the fact that the coupling functional $O_{\lvec}$ are products of integer powers of $\Psi_j$, which makes $\mathcal{A}_i^{\mathrm{(loss)}} \Psi_j^* \equiv (\mathcal{A}_i^{\mathrm{(loss)}})^* \Psi_j$.
+\end{proof}
+
+In practice, it is more convenient to express the above equation using more intuitive quantities, namely real component densities $n_i = \langle \Psiop_i^\dagger \Psiop_i \rangle$.
+To do that, we have to rewrite the resulting path averages of the moments of $\Psi_j$ as averages of symmetric products of $\Psiop_j$, transform them to the normal order using the analogue of the ordering transformation formula~\cite{Cahill1969} for field operators
+\begin{eqn}
+\label{eqn:wigner-bec:fpe-bec:ordering-transformation}
+    \symprod{
+        (\Psiop_j^\dagger)^r \Psiop_j^s
+    }
+    = \sum_{k=0}^{\min(r,s)} \frac{k!}{2^{k}} \binom{r}{k} \binom{s}{k}
+        (\Psiop^\dagger)^{r-k} \Psiop^{s-k} \delta_{\restbasis_j}^k,
+\end{eqn}
+and simplify the resulting averages of normally ordered operators using correlation factors $g^{(k)} = \langle (\Psiop^\dagger)^k \Psiop^k \rangle / \langle \Psiop^\dagger \Psiop \rangle$.
+In other words, the coefficients $g^{(k)}$ define the degree of high-order correlations.
+In the ideal condensate, these are equal to $1$, and increase with the temperature (the so called photon bunching, or atom bunching).
+For example, the theoretical maximum value for $g_{111}$ is $3!=6$~\cite{Kagan1985}, which has been confirmed experimentally~\cite{Burt1997}.

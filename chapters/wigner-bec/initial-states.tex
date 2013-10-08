@@ -16,7 +16,7 @@ It also serves as a good first approximation for most \abbrev{bec} interferometr
 
 \begin{theorem}
 \label{thm:wigner-bec:initial-state:coherent-state}
-	The Wigner distribution for a multimode coherent state with the expectation value $\Psi^{(0)} \equiv \sum_{\nvec \in restbasis} \alpha_{\nvec}^{(0)} \phi_{\nvec}$ is
+	The Wigner distribution for a multimode coherent state with the expectation value $\Psi^{(0)} \equiv \sum_{\nvec \in \restbasis} \alpha_{\nvec}^{(0)} \phi_{\nvec}$ is
 	\begin{eqn*}
 		W_{\mathrm{coh}} [\Psi]
 		= \left( \frac{2}{\pi} \right)^{|\restbasis|} \prod_{\nvec \in \restbasis}
@@ -102,8 +102,8 @@ Therefore, the initial state can be sampled as
 	\alpha_{\nvec} = \alpha_{\nvec}^{(0)} + \frac{1}{\sqrt{2}} \eta_{\nvec},
 \end{eqn}
 where $\eta_{\nvec}$ are normally distributed complex random numbers with zero mean, $\langle \eta_{\mvec} \eta_{\nvec} \rangle = 0$ and $\langle \eta_{\mvec} \eta_{\nvec}^* \rangle = \delta_{\mvec,\nvec}$, or, in other words, with components distributed independently with variance $\frac{1}{2}$.
-This looks like adding half a ``vacuum particle'' to each mode.
-In the functional form, this can be written as
+Physically, this looks like adding half a ``vacuum particle'' to each mode.
+In the functional form, the coherent initial condition can be written as
 \begin{eqn}
 	\Psi_j(\xvec, 0)
 	= \Psi_j^{(0)}(\xvec, 0)

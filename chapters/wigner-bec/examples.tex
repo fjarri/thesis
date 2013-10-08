@@ -3,10 +3,21 @@
 \label{sec:wigner-bec:examples}
 % =============================================================================
 
-General theorems from the previous sectionsmay seem complicated, so in this section we will look into a simple example of how they can be applied to real systems.
+General theorems from the previous sections may seem complicated, so in this section we will look into a simple example of how they can be applied to real systems.
 
-We will first consider a simple case of a single-component \abbrev{bec} with a 3-body loss process and no unitary evolution (the same as described by Norrie \textit{et~al}~\cite{Norrie2006a}).
-For this system, we have $K \equiv 0$, $U \equiv 0$ and $\hat{O} = \Psiop^3$ (and, consequently, $O = \Psi^3$), and we also denote $\gamma = 6\kappa$ ($\gamma$ and $\kappa$ represent ``theoretical'' and ``experimental'' loss rates, respectively; see~\eqnref{bec-noise:wigner:loss-rates} and the surrounding paragraph).
+We will consider a simple case of a single-component \abbrev{bec} with a 3-body loss process and no unitary evolution (the same as described by Norrie \textit{et~al}~\cite{Norrie2006a}).
+The master equation for this system is
+\begin{eqn}
+    \frac{\upd \hat{\rho}}{\upd t}
+    & = \frac{\gamma}{6} \int \upd\xvec \mathcal{L}_{111}[\hat{\rho}] \\
+    & \equiv \frac{\gamma}{6} \int \upd\xvec \left(
+            2 \Psiop^3 \hat{\rho} (\Psiop^\dagger)^3
+            - (\Psiop^\dagger)^3 \Psiop^3 \hat{\rho}
+            - \hat{\rho} (\Psiop^\dagger)^3 \Psiop^3
+        \right),
+\end{eqn}
+so we have $K \equiv 0$, $U \equiv 0$ and a single source of losses with $\lvec=(1,1,1)$ and $\hat{O}_{111} = \Psiop^3$ (and, consequently, $O_{111} = \Psi^3$).
+The coefficient $\gamma = 6 \kappa_{111}$ corresponds to the ``experimental'' normalization of loss rates; see~\eqnref{bec-noise:wigner:loss-rates} and the surrounding paragraph for details.
 The \abbrev{fpe} for this system is, therefore,
 \begin{eqn}
     \frac{\upd W}{\upd t}
@@ -41,7 +52,7 @@ The \abbrev{fpe} for this system is, therefore,
         \right)
         + \mathcal{O}\left[ \frac{1}{N^4} \right].
 \end{eqn}
-After the truncation, the resulting stochastic equation describing the system is
+After truncation, the resulting stochastic equation describing the system is
 \begin{eqn}
     \upd\Psi
     & = \mathcal{P}_{\restbasis} \left[
@@ -60,7 +71,7 @@ After the truncation, the resulting stochastic equation describing the system is
             + \sqrt{\frac{3\gamma}{2}}(\Psi^*)^2 \upd Q(\xvec,t)
         \right].
 \end{eqn}
-The equation coincides with the one given by Norrie \textit{et~al}, except for the additional correction to the drift term, which is of order $1/N$ and, therefore, cannot be omitted.
+The equation above coincides with the one given by Norrie \textit{et~al}, except for the additional correction to the drift term, which is of order $1/N$ and, therefore, cannot be omitted.
 
 If we calculate the rate population change over time using \thmref{wigner-bec:fpe-bec:population-change}, we obtain
 \begin{eqn}
@@ -95,3 +106,5 @@ Substituting above expressions into the equation for the population change rate:
 \end{eqn}
 We see that the second highest term in the expression is canceled, which agrees with the expansion being correct up to the order $1/N$.
 If the quantum correction term to the drift is omitted, one finds that a physically incorrect quadratic nonlinear term proportional to $n^2$ is obtained, which is inconsistent with the exact short-time solution to the master equation~\cite{Norrie2006a}.
+The last two terms in this result are artefacts of the truncated Wigner method.
+They give rise to loss processes that occur even when $N=0$, which, of course, is physically impossible.
