@@ -200,6 +200,7 @@ def journalAbbreviations(entries):
         'ACM Transactions on Mathematical Software': 'ACM T. Math. Software',
         'Computers \\& Fluids': 'Comput. Fluids',
         'Optics Communications': 'Opt. Commun.',
+        'Sitzungsberichte der Preussischen Akademie der Wissenschaften': 'Sitzber. Preuss. Akad.'
     }
 
     for entry_type, entry_key, entry_fields in entries:

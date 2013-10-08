@@ -5,9 +5,22 @@
 The problem of calculating the dynamics of quantum systems has been around since the dawn of quantum mechanics itself.
 In most cases, the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with particle number.
 The continuing increase of the available computational power has made it possible to solve the time-dependent many-boson Schr\"odinger equation exactly for relatively large systems with as many as 100 particles~\cite{Sakmann2009}.
-However, larger systems, such as Bose-Einstein condensates (\abbrev{bec}s), still remain unreachable for exact simulation approaches.
 
-This lead Feynman to postulate as early as 1982~\cite{Feynman1982} that quantum computers are the most perspective way to simulate quantum systems efficiently.
+Meanwhile, mesoscopic quantum systems gain in popularity.
+The most prominent of such systems, a Bose-Einstein condensate (\abbrev{bec}), has been first observed by Corenell, Wieman \textit{et~al}~\cite{Anderson1995}, and Ketterle \textit{et~al}~\cite{Davis1995} 70 years after its theoretical description by Bose~\cite{Bose1924} and Einstein~\cite{Einstein1924,Einstein1925}.
+A \abbrev{bec} can be easily observed with macroscopic detectors and is, in fact, almost large enough to be seen with a naked eye.
+Its properties can be varied in a wide range (even during an experiment) with an application of external electromagnetic fields.
+On the other hand, it is able to exhibit inherent non-classical properties such as entanglement, formation of quantised vortices or destructive interference.
+This unique combination makes \abbrev{bec}s a convenient model for various physical phenomena.
+
+Because of their sensitivity to external conditions, \abbrev{bec}s are used as detectors for precise measurements of time or gravity.
+The precision of these measurements can be significantly improved by manipulating the quantum state of a \abbrev{bec}, in particular by reducing the uncertainty of total spin in the direction of measurement (``spin squeezing'').
+But planning such changes and explaining the results of corresponding experiments requires an accurate model of \abbrev{bec} dynamics.
+Such model must properly account for the effect of strong nonlinear elastic and inelastic interactions on the quantum state, all of which can affect the evolution of a condensate significantly.
+
+However, developing a quantitative model of a \abbrev{bec} proved out to be difficult.
+At the time of the writing, mesoscopic systems remain unreachable for exact simulation approaches.
+In theory, quantum computers can solve this problem, and Feynman postulated as early as 1982~\cite{Feynman1982} that they are the most perspective way to simulate quantum systems efficiently.
 Unfortunately, even today quantum computers of any useable size are not readily available, and prognoses about the speed of their development seem rather grim.
 At the moment of writing, the largest universal quantum computer operates with 6 qubits~\cite{Lanyon2011}.
 If one restricts himself to a particular algorithm, somewhat larger numbers are available (8 qubits for quantum factorisation, for instance~\cite{Xu2012}).
