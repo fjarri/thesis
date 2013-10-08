@@ -4,14 +4,16 @@
 % =============================================================================
 
 Although the functional correspondences from \thmref{wigner:mc:correspondences} are relatively straightforward, there is a certain amount of work required to apply them to actual master equations arising in real world problems.
-This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing the \abbrev{bec} evolution.
+This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing \abbrev{bec} evolution.
+
+We will use these theorems to obtain a correspondence between operator evolution equations and functional derivatives of a classical field $\Psi$, which act on the Wigner functional instead of the quantum density matrix.
 
 
 % =============================================================================
 \section{Unitary evolution}
 % =============================================================================
 
-The simplest non-trivial element of a Hamiltonian one is the second-order operator $\Psiop_j^\dagger \Psiop_k$, which may describe, for instance, a potential or a coupling field.
+The simplest non-trivial element of a Hamiltonian is the second-order operator $\Psiop_j^\dagger \Psiop_k$, which may describe, for instance, a potential or a coupling field.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator1}
@@ -71,7 +73,7 @@ we get
 which is the statement of the theorem.
 \end{proof}
 
-Commutators with the Laplacian inside require somewhat special treatment, because it acts on basis functions and, in general, cannot be dragged around like a constant.
+Commutators with a Laplacian inside require special treatment, because the Laplacian acts on basis functions and, in general, cannot be treated like a constant.
 For our purposes, we only need one specific case, namely the kinetic term in a Hamiltonian.
 Fortunately, in this case the Laplacian does act like a constant.
 
@@ -89,7 +91,7 @@ Fortunately, in this case the Laplacian does act like a constant.
     \end{eqn*}
 \end{theorem}
 \begin{proof}
-First, it is obvious from the definition of the Wigner transformation that an integral or a derivative acting on coordinates can be moved in and out of the transformation:
+First, it is obvious from the linearity of the Wigner transformation that an integral or a derivative acting on coordinates can be moved in and out of the transformation:
 \begin{eqn}
     \mathcal{W} \left[ \int \upd\xvec \hat{B}(\xvec) \hat{A} \right]
     & = \int \upd\xvec \mathcal{W} [\hat{B}(\xvec) \hat{A}], \\
@@ -203,7 +205,7 @@ We will provide a transformation for its general non-local form, which can be la
             \right)
         \right) \mathcal{W}[\hat{A}],
     \end{eqn*}
-    where we denoted
+    where we introduced
     \begin{eqn*}
         \mathcal{Q}_{jk}[\bPsi](\xvec, \xvec^\prime)
         = \Psi_j | \Psi_k^\prime |^2
@@ -640,3 +642,7 @@ This turns the expression into the power series for the exponential:
 \end{eqn}
 Substituting this into $W_1$, $W_2$ and $W_3$, and swapping the product and summations over $j_c$ and $k_c$, we get the statement of the lemma.
 \end{proof}
+
+This theorem is the most complex result needed in this thesis.
+It is essential for the treatment of nonlinear loss processes in a \abbrev{bec} using a master equation.
+In the next chapters we will use these results to analyse realistic experiments, that often do involve nonlinear loss processes.

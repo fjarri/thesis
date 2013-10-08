@@ -34,4 +34,5 @@ Peter's changes:
 - Chapter 2, p.11, top - is it "surface term"?
 - Chapter 3, "non-commuting field operators" - in what sense?
 
+- is it "with a corresponding ...", or "with corresponding ..."?
 
