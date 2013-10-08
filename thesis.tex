@@ -96,6 +96,7 @@
 \definecolor{mainblue}{HTML}{1F409A}
 \definecolor{lightblue}{HTML}{7392E6}
 
+% XMP metadata is required to conform to PDF/A standard.
 \usepackage{hyperxmp}
 \usepackage[pdfa,bookmarks=true,backref=page]{hyperref}
 
@@ -144,6 +145,8 @@
 \fi }
 
 
+% Magic metadata to include a color profile.
+% This is required to conform to PDF/A standard.
 \immediate\pdfobj stream attr{/N 3}  file{sRGBIEC1966-2.1.icm}
 \pdfcatalog{%
 /OutputIntents [ <<
