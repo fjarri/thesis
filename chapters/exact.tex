@@ -3,28 +3,24 @@
 \label{cha:exact}
 % =============================================================================
 
-The first test for a new approximated model is usually a comparison with exact analytical predictions, when it is possible.
+The first test for an approximate theory is usually a comparison with exact analytical predictions, when it is possible.
 For systems where the functional truncated Wigner method really shines~--- the ones with hundreds of thousands of particles and thousands of modes~--- no exact methods exist.
 However, one can perform such a comparison for the multimode truncated Wigner with only a few modes.
 While it does not demonstrate the full extent of the truncated Wigner's functionality, it can still give a general idea about the accuracy of the method.
 In this chapter we will investigate a simple two-level system, the dynamics of which can be described exactly using an expansion in number states, and simulate its evolution using the Wigner representation.
 
-We consider a two-well four-mode \abbrev{bec} system with the Hamiltonian
-\begin{eqn}
-    \hat{H} / \hbar
-    = \frac{1}{2} \sum_{i,j=1}^2 g_{jk} \left(
-        \hat{a}_j^\dagger \hat{a}_k^\dagger \hat{a}_k \hat{a}_j
-        + \hat{b}_j^\dagger \hat{b}_k^\dagger \hat{b}_k \hat{b}_j
-        \right),
-\end{eqn}
-which was described in detail elsewhere~\cite{Opanchuk2012a}.
-For the purposes of this chapter, we only need a simple case with no post-evolution beam splitter application.
-Therefore, we can discard the second well terms and reduce the Hamiltonian to
+
+% =============================================================================
+\section{Two-mode BEC example}
+% =============================================================================
+
+We consider a single-well two-mode \abbrev{bec} system with the Hamiltonian
 \begin{eqn}
     \hat{H} / \hbar
     = \frac{1}{2} \sum_{i,j=1}^2 g_{jk}
-        \hat{a}_j^\dagger \hat{a}_k^\dagger \hat{a}_k \hat{a}_j.
+        \hat{a}_j^\dagger \hat{a}_k^\dagger \hat{a}_k \hat{a}_j,
 \end{eqn}
+which is a special case of the two-well four-mode system described elsewhere~\cite{Opanchuk2012a}.
 To simplify the equations, we use the dimensionless variables $\tilde{g}_{jk} = g_{jk} / (g_{11} N) \equiv a_{jk} / (a_{11} N)$, $\tau = g_{11} N t$, where $a_{jk}$ is the $s$-wave scattering length for the interaction between modes $j$ and $k$:
 \begin{eqn}
     \tilde{H}
@@ -47,7 +43,7 @@ In the Schr\"odinger picture, the evolution of the system is governed by the mas
     \frac{\upd \hat{\rho}}{\upd \tau}
     = -i \left[ \tilde{H}, \hat{\rho} \right].
 \end{eqn}
-After the transformation to an \abbrev{fpe} form with \thmref{mm-wigner:mm:correspondences}, truncation, and further transformation with \thmref{fpe-sde:corr:mc-fpe-sde}, this equation turns into the equivalent system of \abbrev{sde}s
+After the transformation to an \abbrev{fpe} form with \thmref{mm-wigner:mm:correspondences}, truncation, and further transformation with \thmref{fpe-sde:corr:mc-fpe-sde}, this equation turns into the equivalent system of \abbrev{ode}s
 \begin{eqn}
     \upd \begin{pmatrix}
         \alpha_1 \\ \alpha_2
@@ -63,8 +59,14 @@ After the transformation to an \abbrev{fpe} form with \thmref{mm-wigner:mm:corre
             \right)
     \end{pmatrix} \upd \tau.
 \end{eqn}
+We note that in this exactly solvable example, there is only initial Wigner noise, as the damping is zero.
 These equations can be solved numerically using conventional integration methods, which in our case was done with XMDS (see \appref{numerical} for details).
 Observables are obtained from the moments of $\alpha_1$ and $\alpha_2$ with the help of \thmref{mm-wigner:mm:moments}.
+
+
+% =============================================================================
+\section{Exact solution}
+% =============================================================================
 
 On the other hand, time-dependent values of any observables for this system can be obtained exactly using an expansion in number states~\cite{Opanchuk2012a}.
 % acknowledgement
@@ -164,6 +166,11 @@ Here we denoted the pair correlation
         \right).
 \end{eqn}
 
+
+% =============================================================================
+\section{Comparisons of exact results and Wigner simulations}
+% =============================================================================
+
 \begin{figure}
     \centerline{%
     \includegraphics{figures_generated/exact/squeezing_nocc_100.pdf}%
@@ -187,7 +194,7 @@ The Wigner method shows good agreement with the exact results in the time range 
     \includegraphics{figures_generated/exact/squeezing_cc_err.pdf}}
 
     \caption[Sampling and systematic errors in Wigner simulated spin squeezing]{
-    Difference of the Wigner simulated spin squeezing $S_{\theta+\pi/2}$ and the exact results (lines) as compared to the sampling errors in Wigner simulations (bands), normalized on the exact results.
+    Difference of the Wigner simulated spin squeezing $S_{\theta+\pi/2}$ and the exact results (lines) as compared to the sampling errors in Wigner simulations (bands), normalized by the exact results.
     The errors for $20,000$ trajectories (red dashed lines) and $200,000$ trajectories (blue solid lines) are plotted.
     The plots correspond to \textbf{(a)} the case of no inter-component interaction, and \textbf{(b)} strong inter-component interaction (the interaction coefficients are the same as in~\figref{exact:squeezing-comparison}).}%endcaption
 
@@ -218,12 +225,12 @@ As expected, the larger is the population $N$, the smaller is the systematic err
 This indirectly confirms the truncation condition~\eqnref{wigner-bec:truncation:delta-condition}.
 
 It must be emphasized that, while relative systematic errors are noticeable (about $5\%$ at the maximum), they correspond to the periods with low values of $S$ (see~\figref{exact:squeezing-comparison}).
-Therefore, the absolute error is also quite low (of the order of tenths of decibel).
+Therefore, the absolute error is extremely low (of the order of tenths of decibel).
 On the other hand, the technical noise in spin squeezing experiments can reach $10\un{dB}$~\cite{Riedel2010}.
 This means that the systematic errors in the truncated Wigner method are far from being detectable by current technology.
 
 Note that, while in this particular example the exact method gives more accurate results at comparable or lower computational cost, it becomes unapplicable as soon as one wants to include tunneling and nonlinear losses into the model, while the Wigner method continues to perform with the same efficiency~\cite{Opanchuk2012a}.
 
-In conclusion, we have decisively shown that the truncated Wigner method gives accurate predictions for the sophisticated compound observables (the squeezing~\eqnref{exact:squeezing} is calculated as a fourth order moment divided by a second order moment).
+In conclusion, we have decisively shown that the truncated Wigner method gives accurate predictions for sophisticated compound observables (the squeezing~\eqnref{exact:squeezing} is calculated as a fourth order moment divided by a second order moment).
 The system used in this chapter was a very simple one; for more complex systems it is possible to perform comparisons with the exact (in the limit of infinite simulation trajectories) positive-P phase-space method~\cite{Drummond1993,Chaturvedi2002,Dechoum2004}.
-A detailed study of the validity of the truncated Wigner method was done by Sinatra \textit{et~al}~\cite{Sinatra2002}.
+A detailed study of the validity of the truncated Wigner method was carried out by Sinatra \textit{et~al}~\cite{Sinatra2002}.

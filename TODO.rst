@@ -38,4 +38,4 @@ Peter's changes:
 - Chapter 5, "stet"?
 - Chapter 5, p.41 - discuss
 - Chapter 5, p.45, bottom - "broad-band"?
-
+- Chapter 6, p.57 - discuss
