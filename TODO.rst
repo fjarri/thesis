@@ -22,3 +22,15 @@ Checklist:
 - do we need a page with supervisory committee?
 - "non-" or "non"? Currently I have "nonlinear", but everything else is with "non-" (non-zero, non-trivial, non-negative etc).
 - commas after introductory phrases? E.g.: "In this chapter,", "Here,", "Therefore,", "At the beginning of the simulation"
+
+
+Peter's changes:
+- PDF/A compatibility: need to find a way to solve current problems with metadata and zero witdh of some symbols.
+  (Check Adobe Acrobat, it may be able to perform the conversion)
+- Introduction, p.2 ("under which the Wigner function can be truncated") - what's the word there?
+- Introduction, p.5 - do we still need "correctly" after "It shows how the truncated Wigner method can predict"?
+- Introduction, the end - describe the code.
+
+
+
+

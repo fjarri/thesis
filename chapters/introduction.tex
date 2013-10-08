@@ -4,7 +4,7 @@
 
 The problem of calculating the dynamics of quantum systems has been around since the dawn of quantum mechanics itself.
 In most cases, the exact simulation of such systems is intractable or at least extremely slow due to the exponential growth of the system's Hilbert space with particle number.
-The continuing increase of the available computational power has made it possible to solve the time-dependent many-boson Schr\"odinger equation exactly for relatively large systems with as many as 100 particles~\cite{Sakmann2009}.
+The continuing increase of the available computational power has made it possible to solve the time-dependent many-boson Schr\"odinger equation almost exactly for one-dimensional systems with as many as 100 particles~\cite{Sakmann2009}.
 
 Meanwhile, mesoscopic quantum systems gain in popularity.
 The most prominent of such systems, a Bose-Einstein condensate (\abbrev{bec}), has been first observed by Corenell, Wieman \textit{et~al}~\cite{Anderson1995}, and Ketterle \textit{et~al}~\cite{Davis1995} 70 years after its theoretical description by Bose~\cite{Bose1924} and Einstein~\cite{Einstein1924,Einstein1925}.
@@ -19,12 +19,13 @@ But planning such changes and explaining the results of corresponding experiment
 Such model must properly account for the effect of strong nonlinear elastic and inelastic interactions on the quantum state, all of which can affect the evolution of a condensate significantly.
 
 However, developing a quantitative model of a \abbrev{bec} proved out to be difficult.
-At the time of the writing, mesoscopic systems remain unreachable for exact simulation approaches.
-In theory, quantum computers can solve this problem, and Feynman postulated as early as 1982~\cite{Feynman1982} that they are the most perspective way to simulate quantum systems efficiently.
-Unfortunately, even today quantum computers of any useable size are not readily available, and prognoses about the speed of their development seem rather grim.
+At the time of the writing, mesoscopic systems in two or three dimensions remain unreachable for exact simulation approaches.
+In theory, quantum computers can solve this problem, and Feynman speculated as early as 1982~\cite{Feynman1982} that they are the most perspective way to simulate quantum systems efficiently.
+Unfortunately, even today quantum computers of any useable size are not readily available, and estimates about the speed of their development seem rather slow.
 At the moment of writing, the largest universal quantum computer operates with 6 qubits~\cite{Lanyon2011}.
 If one restricts himself to a particular algorithm, somewhat larger numbers are available (8 qubits for quantum factorisation, for instance~\cite{Xu2012}).
-Among the problems current quantum computers are facing today are decoherence, circuit errors, and an exponentially growing number of measurements (and, consequently, experiments) one has to perform in order to get the result of a computation.
+Among the problems current quantum computers are facing today are decoherence, circuit errors, and speed.
+A more subtle problem is that an exponentially growing number of measurements (and, consequently, experiments) are needed to perform in order to get the complete result of a computation.
 Therefore, even despite a number of recent developments in the field, it will require a major breakthrough for quantum computers to overcome classical ones in the near future.
 
 That is why, in order to handle existing quantum dynamics problems, approximations of varying accuracy have been developed in parallel with the quantum computing research.
@@ -36,24 +37,25 @@ This thesis is dedicated to one of such approaches~--- quasiprobabilities.
 % =============================================================================
 
 The essence of the quasiprobability methods is representing the system's density matrix in the form of a probability distribution, or at least a probability distribution-like function.
-This function can then be propagated in time (directly or by means of a Monte-Karlo approach) and used to obtain required observables.
-First quasiprobability representations, the Wigner function~\cite{Wigner1932,Dirac1945,Moyal1947} and the Husimi Q-function~\cite{Husimi1940}, were introduced as early as the first half of the 20th century.
+This function can then be propagated in time (directly or by means of a Monte-Carlo approach) and used to obtain required observables.
+The first quasiprobability representations, the Wigner function~\cite{Wigner1932,Dirac1945,Moyal1947} and the Husimi Q-function~\cite{Husimi1940}, were introduced as early as the first half of the 20th century.
 They were followed by the Glauber-Sudarshan P-representation~\cite{Sudarshan1963,Glauber1963b,Glauber1963} and its improved version by Drummond, Gardiner and Walls, the positive-P representation~\cite{Drummond1980,Drummond1981}.
 These representations circumvent Feynman's claim (based on the Bell's theorem~\cite{Bell1964}) about the impossibility of simulating quantum systems probabilistically~\cite{Feynman1982}.
-They use the complex phase space, have the domain larger than the values of observables predicted by quantum mechanics, and only give the correct values of those observables on average~\cite{Opanchuk2013-bell-sim}.
+They use a complex phase space, have a domain larger than the values of observables predicted by quantum mechanics, and only give correct values of those observables on average~\cite{Opanchuk2013-bell-sim}.
 
 This thesis has arisen from the task of simulating non-classical effects in \abbrev{bec} experiments and is focused primarily on this area.
-Since different representation may perform better or worse depending on the system in question, we had to pick one that was best suited for our problem.
+Since different representations may perform better or worse depending on the system in question, we picked one that was best suited for our problem.
 
-Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (it will make a brief appearance in \charef{bell-ineq}).
-Positive-P representation is characterised by sampling error quickly growing in time.
+The Q-function is usually difficult to propagate in time, although it can be extremely efficient for the sampling of static states (it will make a brief appearance in \charef{bell-ineq}).
+The positive-P representation is exact, but is often characterised by sampling errors that grow in time.
 This can be in some cases handled by exploiting its non-uniqueness and tailoring the exact form of the function for the task, resulting in the gauge-P representation~\cite{Deuar2002}.
 Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error.
 
 The Wigner distribution is, in general, not positive, which presents problems when simulating systems with a small number of particles.
-Fortunately, assuming that the number of particles is large enough (our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details), under which the Wigner function can be truncated, making it strictly positive.
+Fortunately, assuming that the number of particles is large enough (as in our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details), under which the Wigner function can be truncated.
 This turns it into a probability distribution, thus providing a way to reduce the initial master equation to a set of stochastic differential equations (\abbrev{sde}s), for which an extensive set of numerical integration methods exists.
-Of course, it is not the only method for this type of the system; a very perspective group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011}, but it has some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.
+Of course, it is not the only method for this type of the system.
+A very useful group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011}, but these have some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.
 The Wigner method allows us to treat a large number of independent field modes, thus taking into account degrees of freedom that are excited due to collisional and nonlinear losses~\cite{Norrie2005,Deuar2007}.
 
 This combination of features made the truncated Wigner representation the best choice for the task of simulating the dynamics of bosonic quantum fields, including optical fields~\cite{Drummond1993,Drummond1993a,Corney2006,Corney2008} and \abbrev{bec}s.
@@ -69,13 +71,14 @@ After this, the accumulated errors are high enough to give large discrepancies i
 The method thus performs badly in modeling nonlinear quantum tunneling~\cite{Drummond1989,Kinsler1991a}, which depends on both long time dynamics and quantum correlations.
 The overall picture of how this method is related to other techniques for quantum dynamics has been recently reviewed~\cite{He2012}.
 
-Although initially Wigner representation was formulated for a single-mode system, the definition and associated methods were later extended to operate on field operators and wave functions, which facilitates the phase-space treatment of multimode problems.
-First such description was produced by Graham~\cite{Graham1970,Graham1970a}, followed by its usage in various other works~\cite{Steel1998,Gardiner2003,Isella2006,Norrie2006,Norrie2006a,Blakie2008,Martin2010} without a formal introduction of corresponding definitions and accompanying theorems.
+Although the Wigner representation was initially formulated for a single-mode system, the definition and associated methods were later extended to operate on field operators and wave functions, which facilitates the phase-space treatment of multimode problems.
+The first such description was produced by Graham~\cite{Graham1970,Graham1970a}, followed by its usage in various other works~\cite{Steel1998,Gardiner2003,Isella2006,Norrie2006,Norrie2006a,Blakie2008,Martin2010} without a formal introduction of corresponding definitions and accompanying theorems.
 A more detailed description was given by Polkovnikov~\cite{Polkovnikov2010} in his review paper of phase-space methods.
 
-Direct numerical integration of the partial differential equation resulting from the application of the Wigner transformation is, in general, very cumbersome, and one has to truncate third-order derivative terms~\cite{Drummond1993,Steel1998,Sinatra2002} and apply projection to remove modes with low population.
+Direct numerical integration of the partial differential equation resulting from the application of the Wigner transformation is, in general, very cumbersome.
+One has to truncate third-order derivative terms~\cite{Drummond1993,Steel1998,Sinatra2002} and apply projection to remove modes with low population.
 This adds to the complexity of the formal description of the method.
-Moreover, nonlinear inelastic interactions, which were not approached methodically before, became important.
+Moreover, nonlinear inelastic interactions, which were not approached methodically before, are important in \abbrev{bec} experiments.
 Accordingly, much of the mathematical derivation of these techniques is not readily available.
 This thesis intends to provide a rigorous formal description of the functional truncated Wigner method for simulating the dynamics of multimode \abbrev{bec}s, along with examples of its application to existing experiments.
 The core of the theory described in this thesis has been published separately~\cite{Opanchuk2013}.
@@ -88,7 +91,7 @@ The core of the theory described in this thesis has been published separately~\c
 This thesis is laid out in the mathematical tradition, with the formalism preceding its application.
 Supplementary information, methods, and parts of the formalism that are not directly connected to quantum mechanics can be found in the Appendices.
 
-First three chapters contain the foundation for the functional Wigner transformation.
+The first three chapters contain the foundation for the functional Wigner transformation.
 \charef{mm-wigner} introduces the Wigner transformation.
 In this chapter we also extend it to work with sets of single-mode operators.
 This chapter contains proofs of known properties of the transformation and presents the single-mode transformation in a way facilitating further extension into the functional domain.
@@ -102,16 +105,17 @@ This is a dominant relaxation mechanism in \abbrev{bec} systems, and it is often
 We discuss the truncation approximation, which is essentially a $1/N$ expansion, and the question of sampling initial states for the simulation.
 We also give an example of usage of the formalism for a single-component multimode \abbrev{bec}.
 
-Next three chapters describe several applications of the truncated Wigner formalism.
+The next three chapters describe several applications of the truncated Wigner formalism.
 In \charef{exact}, we use a simple single-well two-mode system to compare the predictions for the degree of spin squeezing obtained from the multimode truncated Wigner method and an exact quantum mechanical solution.
-We also investigate the behavior of sampling and systematic errors of the truncated Wigner for varying mode populations and numbers of trajectories.
+We also investigate the behavior of sampling and systematic errors of the truncated Wigner method for varying mode populations and numbers of trajectories.
 \charef{bec-noise} is dedicated to the theoretical description of the quantum interferometry experiments performed in Swinburne University.
-It shows how the truncated Wigner can predict the visibility dynamics (including its decay) in the experiment, along with the growth of the phase noise.
-\charef{bec-squeezing} illustrates how the truncated Wigner can be used to calculate the degree of spin squeezing in interferometry experiments with complex dynamics.
+It shows how the truncated Wigner method can predict the visibility dynamics (including its decay) in the experiment, along with the growth of phase noise.
+\charef{bec-squeezing} illustrates how the truncated Wigner method can be used to calculate the degree of spin squeezing in interferometry experiments with complex dynamics.
 
-\charef{bell-ineq} stands a bit aside, as it investigates some basic properties of positive quasiprobability representations, namely their ability to simulate the violation of Bell inequalities.
-As opposed to the previous chapters, it mostly makes use of the positive-P and the SU(2)-Q representations.
-These are used to sample coperative photon states and the ``Shr\"odinger cat'' state, and demonstrate the violation of the corresponding inequalities.
+\charef{bell-ineq} treats a topic of future significance.
+It investigates some basic properties of positive quasiprobability representations, namely their ability to simulate the violation of Bell inequalities.
+In contrast to the previous chapters, it mostly makes use of the probabilistic positive-P and the SU(2)-Q representations.
+These are used to sample cooperative photon states and the ``Schr\"odinger cat'' state, and demonstrate the violation of the corresponding inequalities.
 We also investigate the growth of the sampling error in these simulations.
 
 Finally, \charef{conclusion} summarizes the thesis and discusses some possible directions of development in the field of quasiprobability representations.
