@@ -7,7 +7,8 @@ In this section we will work with a single-mode bosonic system with the standard
 	[ \hat{a}, \hat{a} ] & = [ \hat{a}^\dagger, \hat{a}^\dagger ] = 0, \\
 	[ \hat{a}, \hat{a}^\dagger ] & = 1.
 \end{eqn}
-The essential part of the definition is the displacement operator which was first introduced by Weyl~\cite{Weyl1950} and thoroughly described by Cahill and Glauber~\cite{Cahill1969}:
+An essential part of the Wigner function definition is the displacement operator.
+This was first introduced by Weyl~\cite{Weyl1950} and thoroughly described by Cahill and Glauber~\cite{Cahill1969}:
 
 \begin{definition}
 	The displacement operator is the operator-valued function of a complex variable
@@ -41,8 +42,8 @@ Using the displacement operator we can define the Wigner transformation:
 	The backward transformation (called the Weyl transformation) restores the operator:
 	\begin{eqn*}
 		\mathcal{W}^{-1}[f]
-		= \frac{1}{\pi} \int \upd^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
-			\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*).
+		= \frac{1}{\pi} \int \upd^2 \xi \hat{D}^{\dagger}(\xi)
+			\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta).
 	\end{eqn*}
 \end{definition}
 
@@ -53,20 +54,20 @@ Then, using the fact that $\Trace{\hat{D}^{\dagger}(\xi) \hat{D}(\lambda)} = \pi
 	\mathcal{W}[\hat{A}]
 	={} & \frac{1}{\pi^3} \int \upd^2 \lambda \exp(-\lambda \alpha^* + \lambda^* \alpha) \\
 	&	\times \Trace{
-			\int \upd^2 \xi \hat{D}^{\dagger}(\xi, \xi^*)
-				\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta, \eta^*)
+			\int \upd^2 \xi \hat{D}^{\dagger}(\xi)
+				\int \upd^2 \eta \exp(-\eta \xi^* + \eta^* \xi) f(\eta)
 			\hat{D}(\lambda)
 		} \\
 	={} & \frac{1}{\pi^2} \int \upd^2 \lambda \int \upd^2 \eta
 	 	\exp(-\lambda \alpha^* + \lambda^* \alpha)
-		\exp(-\eta \lambda^* + \eta^* \lambda) f(\eta, \eta^*).
+		\exp(-\eta \lambda^* + \eta^* \lambda) f(\eta).
 \end{eqn}
 Applying \lmmref{c-numbers:fourier-of-moments} to integrate over $\lambda$:
 \begin{eqn}
 	\mathcal{W}[\hat{A}]
 	& = \frac{1}{\pi^2} \int \upd^2 \eta \int \upd^2 \lambda
-	 	\exp(-\lambda (\alpha^* - \eta^*) + \lambda^* (\alpha - \eta)) f(\eta, \eta^*) \\
-	& = \int \upd^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta, \eta^*) \\
+	 	\exp(-\lambda (\alpha^* - \eta^*) + \lambda^* (\alpha - \eta)) f(\eta) \\
+	& = \int \upd^2 \eta \delta(\Real \alpha - \Real \eta) \delta(\Imag \alpha - \Imag \eta) f(\eta) \\
 	& = f(\alpha).
 \end{eqn}
 The proof for the other direction looks the same.
@@ -165,7 +166,8 @@ Substituting this into the definition of the Wigner transformation:
 		\Trace{ \hat{A} \hat{D}(\lambda) }.
 \end{eqn}
 The second term is almost the definition of the Wigner function, except for the derivative over $\lambda^*$.
-Moving it using integration by parts and \lmmref{c-numbers:zero-integrals} ($\hat{A}$ is Hilbert-Schmidt, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}):
+Here we can use \lmmref{c-numbers:zero-integrals} since $\hat{A}$ is a Hilbert-Schmidt operator, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}.
+This implies that we can use integration by parts with vanishing surface term, so
 \begin{eqn}
 	\mathcal{W} [ \hat{a} \hat{A} ]
 	& = \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
@@ -183,7 +185,7 @@ We will start by proving an auxiliary lemma which connects the expectation of an
 
 \begin{lemma}
 \label{lmm:mm-wigner:sm:moments-from-chi}
-	For a system with a density matrix $\hat{\rho}$ and the corresponding characteristic function $\chi_W$:
+	For a system with a density matrix $\hat{\rho}$ and corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.
@@ -231,7 +233,7 @@ Using this lemma we can now prove the main theorem which connects expectations o
 
 \begin{theorem}
 \label{thm:mm-wigner:sm:moments}
-	For a system with a density matrix $\rho$ and the corresponding Wigner function $W(\alpha)$, and any non-negative integer $r$, $s$:
+	For a system with a density matrix $\rho$ and a corresponding Wigner function $W(\alpha)$, given any non-negative integers $r$, $s$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \int \upd^2\alpha\, \alpha^r (\alpha^*)^s W(\alpha).

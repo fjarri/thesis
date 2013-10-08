@@ -15,7 +15,7 @@ The simplest non-trivial element of a Hamiltonian one is the second-order operat
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator1}
-    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$, 
+    For a Hilbert-Schmidt operator $\hat{A}$ with a corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$, 
     \begin{eqn*}
         \mathcal{W} \left[ [\int \upd\xvec \Psiop_j^\dagger \Psiop_k, \hat{A}] \right]
         = \int \upd\xvec \left(
@@ -77,7 +77,7 @@ Fortunately, in this case the Laplacian does act like a constant.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-laplacian-commutator1}
-    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
+    For a Hilbert-Schmidt operator $\hat{A}$ with a corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
     \begin{eqn*}
         \mathcal{W} \left[
             \int \upd\xvec [\Psiop^\dagger(\xvec) \nabla^2 \Psiop(\xvec), \hat{A}]
@@ -171,7 +171,7 @@ We will provide a transformation for its general non-local form, which can be la
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator2}
-    For a Hilbert-Schmidt operator $\hat{A}$ with the corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
+    For a Hilbert-Schmidt operator $\hat{A}$ with a corresponding Wigner functional $\mathcal{W}[\hat{A}] \equiv (\mathcal{W}[\hat{A}])[\bPsi]$,
     \begin{eqn*}
         & \mathcal{W} \left[
             [
@@ -242,7 +242,7 @@ The first lemma will provide a way to perform this rearrangement.
 
 \begin{lemma}
 \label{lmm:wigner-spec:swap-differential}
-    For a function $\Psi \in \mathbb{F}_{\restbasis}$ and a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, and non-negative integer $a$, $b$
+    For a function $\Psi \in \mathbb{F}_{\restbasis}$ and a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$, and non-negative integers $a$, $b$
     \begin{eqn*}
         \Psi^a \left( \frac{\fdelta}{\fdelta \Psi} \right)^b \mathcal{F}[\Psi]
         = \sum_{j=0}^{\min(a, b)}
@@ -335,7 +335,7 @@ obtaining the statement of the lemma.
 
 \begin{lemma}[sum rearrangement]
 \label{lmm:wigner-spec:sum-rearrangement}
-    For non-negative integer $a$, $b$:
+    For any non-negative integers $a$, $b$:
     \begin{eqn*}
         \sum_{k=0}^a \sum_{m=0}^{\min(a-b,k)} f_{k-m} g_{k, m}
         = \sum_{v=0}^a f_v \sum_{m=0}^{a-\max(b,v)} g_{v + m, m}.

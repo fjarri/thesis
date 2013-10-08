@@ -30,7 +30,7 @@ Peter's changes:
 - Introduction, p.2 ("under which the Wigner function can be truncated") - what's the word there?
 - Introduction, p.5 - do we still need "correctly" after "It shows how the truncated Wigner method can predict"?
 - Introduction, the end - describe the code.
-
-
+- Chapter 2, p.8: add the derivation for eqn (2.2)?
+- Chapter 2, p.11, top - is it "surface term"?
 
 
