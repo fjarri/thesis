@@ -3,17 +3,19 @@
 % =============================================================================
 
 Now we have all the tools we need to work with the functional Wigner representation.
+The notation for multidimensional integral follows that given in \appref{func-calculus}.
 First, we will define a functional analogue of the displacement operator~\eqnref{mm-wigner:sm:displacement-op}:
 \begin{definition}
 \label{def:wigner:func:displacement-op}
 The functional displacement operator $\hat{D} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{H}_{\restbasis}$ is defined as
 \begin{eqn}
 	\hat{D}[\Lambda] = \exp \int \upd\xvec \left(
-		\Lambda \Psiop^\dagger - \Lambda^* \Psiop
+		\Lambda(\xvec) \Psiop^\dagger(\xvec) - \Lambda^*(\xvec) \Psiop(\xvec)
 	\right).
 \end{eqn}
 \end{definition}
 
+From now on we drop the coordinate argument of functions and field operators for brevity.
 It can be shown that the displacement operator has properties similar to~\eqnref{mm-wigner:sm:displacement-derivatives}.
 
 \begin{lemma}
@@ -59,14 +61,31 @@ resulting in the expression for the displacement operator
 			-\frac{1}{2} \int \upd\xvec \Lambda \Lambda^*
 		\right).
 \end{eqn}
-Note that, since $\Lambda \in \mathbb{F}_{\restbasis}$, it projects to itself, and so does $\Psiop^\dagger$.
 Thus, differentiation of the displacement operator gives
 \begin{eqn}
 	\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
 	& = \left(
 		\int \upd\xvec \Psiop^\dagger \delta_{\restbasis}(\xvec^\prime, \xvec)
 		- \frac{1}{2} \int \upd\xvec \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
-	\right) \hat{D}[\Lambda] \\
+	\right) \hat{D}[\Lambda].
+\end{eqn}
+Expanding $\Lambda^*$ into modes and using the \defref{func-calculus:restricted-delta} of the restricted delta function, it is easy to show that
+\begin{eqn}
+	\int \upd\xvec \Lambda^* \delta_{\restbasis}(\xvec^\prime, \xvec)
+	& = \sum_{\mvec,\nvec \in \restbasis} \int \upd\xvec
+			\phi_{\mvec}^* \lambda_{\mvec}^*
+			\phi_{\nvec}^{\prime*} \phi_{\nvec} \\
+	& = \sum_{\nvec \in \restbasis} \phi_{\nvec}^{\prime *} \lambda_{\mvec}^*
+	\equiv \Lambda^{\prime *},
+\end{eqn}
+and similarly that
+\begin{eqn}
+	\int \upd\xvec \Psiop^\dagger \delta_{\restbasis}(\xvec^\prime, \xvec)
+	= \Psiop^{\prime\dagger}.
+\end{eqn}
+This results in the final expression for the differential
+\begin{eqn}
+	\frac{\fdelta}{\fdelta \Lambda^\prime} \hat{D}[\Lambda]
 	& = (\Psiop^{\prime\dagger} - \frac{1}{2} \Lambda^{\prime *}) \hat{D}[\Lambda].
 \end{eqn}
 The remaining equations from the statement are proved analogously.
@@ -90,9 +109,10 @@ Similar to the single-mode Wigner transformation from \defref{mm-wigner:sm:w-tra
 		= \frac{1}{\pi^{|\restbasis|}} \int \fdelta^2 \Xi\, \hat{D}^{\dagger}[\Xi]
 			\int \fdelta^2 \Phi\, D[\Phi, \Xi] F[\Phi].
 	\end{eqn*}
+	Here $\Psi \equiv \Psi(\xvec)$ is a complex-valued classical field, unlike the operator-valued field $\Psiop$ introduced earlier in this chapter.
 \end{definition}
 
-It can be proved, same as in \thmref{mm-wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian, and $\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F$ (by mode expansion).
+It can be proved, as in \thmref{mm-wigner:sm:w-real} for the single-mode case, that $\mathcal{W}[\hat{A}]$ is real if $\hat{A}$ is Hermitian, and $\mathcal{W}[\mathcal{W}^{-1}[F]] \equiv F$ (by mode expansion).
 Following the single-mode and the multimode cases we define the characteristic functional $\chi_W [\Lambda] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$
 \begin{eqn}
 	\chi_W [\Lambda] = \Trace{ \hat{\rho} \hat{D}[\Lambda] },
@@ -158,7 +178,7 @@ Moving the additional multiplier to the outside of the integral:
 		\frac{\fdelta}{\fdelta \Lambda^*}
 		\Trace{ \hat{A} \hat{D}[\Lambda] }.
 \end{eqn}
-Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ ($\hat{D}[\Lambda]$ equals to a product of single-mode displacement operators, which makes the operator in the trace Hilbert-Schmidt, and the trace itself bounded):
+Using \lmmref{func-calculus:zero-integrals} to move the partial derivative over $\Lambda^*$ ($\hat{D}[\Lambda]$ equals a product of single-mode displacement operators, which makes the operator in the trace Hilbert-Schmidt, and the trace itself bounded):
 \begin{eqn}
 	\mathcal{W} [ \hat{\Psi} \hat{A} ]
 	& = \frac{1}{2} \frac{\fdelta}{\fdelta \Psi^*} \mathcal{W} [\hat{A}]
@@ -205,9 +225,9 @@ We can swap a functional derivative with both integration and multiplication by 
 		\left( \int \upd\xvec \Lambda \Psiop^\dagger \right)^{r-1} \\
 	& = r \int \upd\xvec\, \delta_{\restbasis}(\xvec^\prime, \xvec) \Psiop^\dagger
 		\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1} \\
-	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1},
+	& = r \Psiop^{\prime\dagger} \left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^{r-1}.
 \end{eqn}
-and a multiple application of the differential gives us
+A multiple application of the differential then gives us
 \begin{eqn}
 	\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^r
 	\left( \int \upd\xvec\, \Lambda \Psiop^\dagger \right)^r
@@ -220,7 +240,7 @@ Similarly, for the other differential:
 	= s! ( \Psiop^{\prime\dagger} )^s.
 \end{eqn}
 
-Thus, same as in the single-mode case, the differentiation will eliminate all lower order terms in the expansion, and all higher order terms will be eliminated by setting $\Lambda \equiv 0$, leaving only one operator product with the required order:
+Thus, as in the single-mode case, the differentiation will eliminate all lower order terms in the expansion, and all higher order terms will be eliminated by setting $\Lambda \equiv 0$, leaving only one operator product with the required order:
 \begin{eqn}
 	\left.
 		\left( \frac{\fdelta}{\fdelta \Lambda^\prime} \right)^s

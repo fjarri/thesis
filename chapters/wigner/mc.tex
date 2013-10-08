@@ -4,7 +4,7 @@
 
 Many experiments with \abbrev{bec}s involve several interacting components, so it is useful to extend the definition of the functional Wigner transformation from the previous section, along with \thmref{wigner:func:correspondences} and \thmref{wigner:func:moments}, to the case of several components.
 
-Definitions of the displacement operator and the Wigner functional are extended to the case multiple components.
+First, definitions of the displacement operator and the Wigner functional are extended to the case multiple components.
 
 \begin{definition}
 	The functional displacement operator $\hat{D}_j \in \mathbb{F}_{\restbasis_j} \rightarrow \mathbb{H}_{\restbasis_j}$ for the component $j$ is defined as
@@ -29,7 +29,7 @@ Definitions of the displacement operator and the Wigner functional are extended 
 			\Trace{ \hat{A} \prod_{j=1}^C \hat{D}_j[\Lambda_j] },
 	\end{eqn*}
 	where $\Lambda_j \in \mathbb{F}_{\restbasis_j}$, and $\int \fdelta^2 \bLambda \equiv \int \fdelta^2 \Lambda_1 \ldots \int \fdelta^2 \Lambda_C$.
-	It transforms an operator $\hat{A}$ on a restricted subset of the Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi]$.
+	This transforms an operator $\hat{A}$ on a restricted subset of the Hilbert space to a functional $(\mathcal{W}[\hat{A}])[\bPsi]$.
 	The corresponding Weyl transformation is
 	\begin{eqn*}
 		\mathcal{W}^{-1}[F]
@@ -77,7 +77,7 @@ The two central theorems for the single-component functional Wigner transformati
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved in exactly the same way as \thmref{wigner:func:correspondences}.
+Proved in the same way as \thmref{wigner:func:correspondences}.
 \end{proof}
 
 \begin{theorem}[multi-component extension of \thmref{wigner:func:moments}]
@@ -92,5 +92,5 @@ Proved in exactly the same way as \thmref{wigner:func:correspondences}.
 	\end{eqn*}
 \end{theorem}
 \begin{proof}
-Proved in exactly the same way as \thmref{wigner:func:moments}, processing each component successively.
+Proved in the same way as \thmref{wigner:func:moments}, processing each component successively.
 \end{proof}

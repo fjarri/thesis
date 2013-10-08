@@ -4,10 +4,10 @@
 
 Field operators can simplify both the analysis of a master equation and its transformation to an \abbrev{fpe} using phase-space methods, which is the main topic of this thesis.
 In this section we are going to outline the field operator calculus.
-It is quite similar to the calculus of functional operators, described in \appref{func-calculus}).
+It is quite similar to the calculus of functional operators, described in \appref{func-calculus}.
 The similarity and interconnection of field operators and functional operators will become even more evident during the description of the functional Wigner transformation in \charef{wigner}.
 
-Multimode field of a $C$-component \abbrev{bec} in $D$ effective dimensions is described by field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$, where $\Psiopf_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at a location defined by a $D$-component coordinate vector $\xvec$, and $\Psiopf_j$ destroys one.
+A multimode field of a $C$-component \abbrev{bec} in $D$ effective dimensions is described by field operators $\Psiopf_j^{\dagger}(\xvec)$ and $\Psiopf_j(\xvec)$, where $\Psiopf_j^{\dagger}$ creates a bosonic atom of spin $j$, $j = 1 \ldots C$ at a location defined by a $D$-component coordinate vector $\xvec$, and $\Psiopf_j$ destroys one.
 We will use the same scheme as with functions of coordinates in \appref{func-calculus}, abbreviating $\Psiopf_j \equiv \Psiopf_j(\xvec)$ and $\Psiopf_j^\prime \equiv \Psiopf_j(\xvec^\prime)$.
 
 The field operators obey standard bosonic commutation relations
@@ -19,23 +19,24 @@ The field operators obey standard bosonic commutation relations
     [ \Psiopf_j, \Psiopf_k^{\prime\dagger} ]
     & = \delta_{jk} \delta(\xvec^\prime-\xvec).
 \end{eqn}
-Field operators have type $\Psiopf_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where per-component Hilbert spaces $\mathbb{H}_j$ constitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
+Field operators have type $\Psiopf_j \in (\mathbb{R}^D \rightarrow \mathbb{H}_j) \equiv \mathbb{FH}_j$, where the component Hilbert spaces $\mathbb{H}_j$ constitute the system Hilbert space $\mathbb{H} = \bigotimes_{j=1}^C \mathbb{H}_j$.
 Field operators can be decomposed using a single-particle orthonormal basis (see~\eqnref{func-calculus:basis} for details):
 \begin{eqn}
 \label{eqn:wigner:op-calculus:field}
-    \Psiopf_j = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
+    \Psiopf_j(\xvec) = \sum_{\nvec \in \fullbasis_j} \phi_{j,\nvec}(\xvec) \hat{a}_{j,\nvec}.
 \end{eqn}
 Note that each component can have its own basis.
 Single mode operators $\hat{a}_{j,\nvec}$ obey commutation relations~\eqnref{mm-wigner:mm:commutators}, with the pair $j,\nvec$ serving as a mode identifier.
+From now on, we drop the coordinate argument of mode functions $\phi(\xvec)$.
 
 In practice, one cannot use an infinitely sized basis in numerical calculations; some subset of modes is always chosen.
-In order to take this into account, we will restrict ourselves to a subset of modes from full basis for each component: $\restbasis_j \subset \fullbasis_j$.
-New restricted field operators are
+In order to take this into account, we will restrict ourselves to a subset of modes from the full basis for each component: $\restbasis_j \subset \fullbasis_j$.
+The new restricted field operators are
 \begin{eqn}
 \label{eqn:wigner:op-calculus:restricted-field}
     \Psiop_j = \sum_{\nvec \in \restbasis_j} \phi_{j,\nvec} \hat{a}_{j,\nvec}.
 \end{eqn}
-They map coordinates to restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
+These map coordinates to restricted Hilbert subspaces: $\Psiop_j \in (\mathbb{R} \rightarrow \mathbb{H}_{\restbasis_j}) = \mathbb{FH}_{\restbasis_j}$.
 Because of the restricted nature of these operators, the commutation relations~\eqnref{wigner:op-calculus:commutators} no longer apply.
 The following ones must be used instead:
 \begin{eqn}
@@ -43,8 +44,9 @@ The following ones must be used instead:
     \left[ \Psiop_j, \Psiop_k^\prime \right]
     & = \left[ \Psiop_j^\dagger, \Psiop_k^{\prime\dagger} \right] = 0, \\
     \left[ \Psiop_j, \Psiop_k^{\prime\dagger} \right]
-    & = \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec).
+    & = \delta_{jk} \delta_{\restbasis_j}(\xvec^\prime, \xvec),
 \end{eqn}
+where $\delta_{\restbasis_j}$ is the restricted delta function introduced in \appref{func-calculus}, \defref{func-calculus:restricted-delta}.
 
 Let us now find the expression for high-order commutators of restricted field operators, analogous to the one for single-mode operators, which can be found in the book by Louisell~\cite{Louisell1990}.
 
@@ -79,6 +81,7 @@ the commutator of higher order can be expanded as
         \Psiop, ( \Psiop^{\prime\dagger} )^{l-1}
     ].
 \end{eqn}
+A similar result holds for the second relation, on conjugating the first one.
 Now we can get the commutator of any order starting from the known relation~\eqnref{wigner:op-calculus:restricted-commutators}.
 \end{proof}
 
@@ -95,7 +98,8 @@ A further generalisation of these relations is
     where $f(x, y)$ is a function that can be expanded in the power series of $x$ and $y$.
 \end{lemma}
 \begin{proof}
-Let us prove the first relation; the procedure for the second one is the same.
+Let us prove the first relation.
+The procedure for the second one is the same.
 Without loss of generality, we can assume that $f(\Psiop^\prime, \Psiop^{\prime\dagger})$ can be expanded in the power series of normally ordered operators (otherwise we can just use the commutation relations).
 Thus,
 \begin{eqn}
