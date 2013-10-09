@@ -660,7 +660,7 @@ def feshbach_scattering(fname):
         linestyle='--', dashes=mplh.dash['--'])
     subplot.plot(x, fa(x).real, color=mplh.color.f.blue.main)
 
-    a12s = (80.8, 80., 85., 90., 95.)
+    a12s = (80., 85., 90., 95.)
     diffs = []
     for a12 in a12s:
         hbar = 1.054571628e-34
@@ -689,7 +689,7 @@ def feshbach_scattering(fname):
     subplot.set_xlabel('$(B - B_0) / \\gamma_B$')
     subplot.text(-0.1, 1.35, "$\\mathrm{Re}$")
     subplot.text(-0.5, 0.2, "$-\\mathrm{Im}$")
-    subplot.set_ylabel('$a(B)/a_{\\mathrm{bg}}$')
+    subplot.set_ylabel('$(\\mathrm{Re},\\mathrm{Im})a(B)/a_{\\mathrm{bg}}$')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
