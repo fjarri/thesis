@@ -77,5 +77,9 @@ The reported MW frequency instability for this experiment was $\Delta \phi / t =
 As~\figref{bec-noise:phase-noise:echo-phnoise} shows, even after the inclusion of the technical noise, there is some disagreement with the experimental data.
 This may be caused by systematic error introduced by the Wigner truncation, or possibly by some additional source of technical noise.
 
-One may notice that the total noise shown in~\figref{bec-noise:phase-noise:ramsey-phnoise} and~\figref{bec-noise:phase-noise:echo-phnoise} is lower than the one reported by Egorov \textit{et~al}~\cite{Egorov2011,Egorov2012}.
-This is the result of the calculation of the total noise (in essence, we simulate the actual experimental measurement procedure) as opposed to the post-factum combination of noise from the technical sources with the Wigner results.
+The total noise shown in~\figref{bec-noise:phase-noise:ramsey-phnoise} and~\figref{bec-noise:phase-noise:echo-phnoise} is lower than the one reported by Egorov \textit{et~al}~\cite{Egorov2011,Egorov2012}.
+The reason for this is that in this thesis we have not taken into account the uncertainty in the prepared atom number, which can be quite significant.
+If each of the experiments starts from a different atom number, each of the measured $P_z$ points in~\figref{bec-noise:phase-noise:illustration} belongs to a different family of results (since the frequency of Ramsey fringes has a non-trivial dependence on the atom number), so they cannot be fitted with a single curve.
+The initial atom number in each of the experiments can be inferred based on the measured final $N_1$ and $N_2$, and the adjustment to phase noise can be made.
+This adjustment grows in time as the inference becomes less accurate.
+Additional phase noise caused by this factor is comparable to that from the other sources~\cite{Egorov2012} and accounts for the difference in presented results.
