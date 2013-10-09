@@ -4,23 +4,23 @@
 % =============================================================================
 
 The system we are interested in is an ultracold harmonically trapped \Rb{} \abbrev{bec} in $3$ effective dimensions such as the one used in the experiments by Riedel \textit{et~al}~\cite{Riedel2010} and Egorov \textit{et~al}~\cite{Egorov2011,Egorov2013}.
-The \abbrev{bec} in question has two components with a significant nonlinear repulsive interaction (both inter- and intra-component), nonlinear losses and perhaps some additional linear unitary effects, such as an electromagnetic coupling between components.
-The number of components is only set to two in order to simplify the resulting equations for the experiments described in this chapter; it can be easily increased if necessary.
+The \abbrev{bec} in question has two components with a significant nonlinear repulsive interaction (both inter- and intra-component), nonlinear losses and additional linear unitary effects, such as an electromagnetic coupling between components.
+The number of components is set to two in order to simplify the resulting equations for the experiments described in this chapter; it can be easily increased if necessary.
 
-We assume that the \abbrev{bec} has $s$-wave interactions, which makes the nonlinear interaction coefficients have the form
+We assume that the \abbrev{bec} has $s$-wave interactions, which means the nonlinear interaction coefficients have the form
 \begin{eqn}
 \label{eqn:bec-noise:system:g}
     g_{jk} = \frac{4\pi\hbar^2 a_{jk}}{m},
 \end{eqn}
-where $j$ and $k$ are the indices of the interacting components, $a_{jk}$ is the corresponding $s$-wave scattering length, and $m$ hereinafter in this chapter stands for the mass of a \Rb{} atom.
+where $j$ and $k$ are the indices of the interacting components, $a_{jk}$ is the corresponding $s$-wave scattering length, and $m$ in this chapter stands for the mass of a \Rb{} atom.
 Here we assume a momentum cutoff $k_d \ll 1 / a_{jk}$ in the numerical simulations, otherwise the couplings must be renormalized~\cite{Sinatra2002}.
 
 The external harmonic trapping potential $V_j$ for the component $j$ (which can include a component-dependent shift along some of the axes) has the form
 \begin{eqn}
 \label{eqn:bec-noise:system:V}
     V_j
-    = \frac{m}{2} \sum_{d=1}^3 \omega_d^2 (x_d - l_d)^2,
+    = \frac{m}{2} \sum_{d=1}^3 \omega_d^2 (x_d - l_d^{(j)})^2,
 \end{eqn}
 where $\omega_d$ are trapping frequencies, which will be specified later when the concrete experiments are described.
 
-Again, in principle, the methods described in this chapter can be easily generalized to include an arbitrary potential shape, and possibly some different form of nonlinear interaction coefficients, but for the experiments to be described the equations above will apply.
+In principle, the methods described in this chapter can be easily generalized to include an arbitrary potential shape, and possibly some different form of nonlinear interaction coefficients, but for the experiments to be described the equations above will apply.

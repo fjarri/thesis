@@ -48,7 +48,7 @@ For example, the dominant three-body and two-body losses in a two-component \Rb{
 	\Gamma_1 &= \left( \gamma_{111} n_1^2 + \gamma_{12} n_2 \right) / 2, \\
 	\Gamma_2 &= \left( \gamma_{12} n_1 + \gamma_{22} n_2 \right) / 2.
 \end{eqn}
-These equations were obtained empirically, but we will see later in this chapter how the same (in the first-order term) expressions appear as a result of the application of the truncated Wigner method to an exact operator equation.
+These equations were obtained empirically, but we will see later in this chapter how the same expressions (to leading order) appear as a result of the application of the truncated Wigner method.
 
 The difference between the internal energies of components $\ket{1}$ and $\ket{2}$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
@@ -83,7 +83,7 @@ The transformed equations look like:
 \end{eqn}
 
 Furthermore, in experiments the coupling field is typically applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
-This allows us to neglect the quickly oscillating terms:
+This allows us to neglect the rapidly oscillating terms proportional to $e^{i(\omega + \omega_{hf})t}$, giving:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-simplified}
 	i \hbar \frac{\upd \Psi_1}{\upd t} & = \left(
@@ -102,7 +102,7 @@ This allows us to neglect the quickly oscillating terms:
 	\frac{\hbar \Omega}{2} e^{i (\delta t + \alpha)} \Psi_1.
 \end{eqn}
 When the pulse is applied twice using the same coupling field (which is the case for the Ramsey interferometry), it is the same as just setting $\Omega$ to zero after the first pulse and then restoring its value for the time of the second pulse; therefore, $\alpha$ stays the same too.
-If one wants to apply pulse with the different detuning, the phase information is lost, and the value of $\alpha$ has to become random before this pulse.
+If one wants to apply pulse with the different detuning, the phase information is lost, and the value of $\alpha$ has to be regarded as random.
 
 The application of the coupling field can be simplified when certain additional conditions are valid, namely:
 \begin{itemize}
@@ -132,7 +132,7 @@ In particular, for the two-pulse Ramsey scheme (\figref{bec-noise:visibility:seq
 \subsection{Ground state calculation}
 % =============================================================================
 
-At the beginning of the simulation, a \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
+At the beginning of the simulation, the \abbrev{bec} is assumed to be in the ground state which has the lowest possible energy.
 The ground state is the solution of the stationary \abbrev{cgpe}s
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-stationary}
@@ -149,7 +149,7 @@ The ground state is the solution of the stationary \abbrev{cgpe}s
 \end{eqn}
 where $\mu_1$ and $\mu_2$ are chemical potentials of the components.
 
-The most common method of finding the ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
+The most common method of finding the mean-field ground state is the imaginary time propagation~\cite{Chiofalo2000,Bao2004}.
 The essence of the method is that the propagation of an arbitrary wavefunction using the time-dependent \abbrev{cgpe}s, but with the substitution $t \rightarrow \tau = it$, lowers its energy; therefore, after the sufficient amount of time this propagation will lead us arbitrarily close to the ground state.
 The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-simplified} without the loss or coupling terms:
 \begin{eqn}
@@ -221,12 +221,14 @@ Intra-component scattering lengths are $a_{11} = 100.40\,r_B$, $a_{22} = 95.68\,
 As an example, \figref{bec-noise:mean-field:two-comp-gs} shows the axial density $n_z = \int n(\xvec) \upd x \upd y$ of the two-component ground state for an equal mix of two hyperfine states of \Rb{} \abbrev{bec}.
 Two panes of the figure illustrate the difference between the miscible ($a_{12}^2 < a_{11} a_{22}$) and immiscible ($a_{12}^2 > a_{11} a_{22}$) regimes.
 
+It should be emphasized that this ground state is not a true many-body ground state, but rather a type of mean-field (single-particle) approximation, since it omits quantum correlations.
+
 
 % =============================================================================
 \subsection{Thomas-Fermi approximation}
 % =============================================================================
 
-As was mentioned earlier in this section, the starting state for the imaginary time propagation can be set to the Thomas-Fermi approximated state to minimize the propagation time.
+As was mentioned earlier in this section, the starting state for the imaginary time calculation can be set to the Thomas-Fermi approximate state to minimize the propagation time.
 Thomas-Fermi approximation consists of neglecting the kinetic term in the stationary equations~\eqnref{bec-noise:mean-field:cgpes-stationary}.
 For a one-component state ($\Psi_2 \equiv 0$), the resulting equations can be easily solved analytically:
 \begin{eqn}
@@ -285,7 +287,7 @@ After replacing ``$\ll$'' by ``$\approx$'' and assuming $h_d$ to be small as com
 \begin{eqn}
 	h_d \approx \sqrt{\frac{\hbar^2}{2 \mu_1 m}},\,d \in [1, \ldots, D].
 \end{eqn}
-They have to be much smaller than the corresponding radii, which gives us
+These have to be much smaller than the corresponding radii, which gives us
 \begin{eqn}
 	\mu_1 \gg \frac{1}{2} \hbar \max_{d \in [1, \ldots, D]} \omega_d.
 \end{eqn}
@@ -301,10 +303,11 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 \end{figure}
 
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
-For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have the scattering length $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
+For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have a scattering length of $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
 This means that the Thomas-Fermi approximation produces a solution which is close to the real one.
-However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is the sign that we are reaching the limit of the approximation's applicability.
+However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is a sign that we are reaching the limit of the approximation's applicability.
 \figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state and for $1,000$ atoms it differs significantly as expected.
 
-More extended discussion of the Thomas-Fermi approximation was done by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.
+An extended discussion of the Thomas-Fermi approximation was given by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.
 It is possible to work out the Thomas-Fermi approximation for a two-component condensate, but it requires some non-trivial handling of various miscibility/immiscibility cases~\cite{Anderson2010}.
+In this thesis we only single-component ground states, as these are the only ones used in the experiments we are considering.

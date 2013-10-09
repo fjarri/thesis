@@ -4,8 +4,8 @@
 % =============================================================================
 
 Having discussed the classical mean-field approach in the previous section, we will now apply the functional truncated Wigner method described in \charef{wigner-bec}.
-While the mean-field approximation gives a fast way to get a qualitative picture of the \abbrev{bec} dynamics, it ignores many important effects that originate from the inherent quantum nature of the system, in particular, nonlinear quantum noise effects of quantum dynamics: phase diffusion, entanglement and spin squeezing.
-An initial satate uncertainty and noise terms do not occur in semi-classical \abbrev{cgpe}s, which are, therefore, unable to predict these effects.
+While the mean-field approximation gives a fast way to obtain a qualitative picture of the \abbrev{bec} dynamics, it ignores many important effects that originate from the inherent quantum nature of the system, in particular, nonlinear quantum noise effects of quantum dynamics: phase diffusion, entanglement and spin squeezing.
+An initial satate uncertainty and noise terms do not occur in semi-classical \abbrev{cgpe}s, which are unable to predict these effects.
 
 We will see how an initial master equation produces a system of equations very similar to \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} with loss terms resembling~\eqnref{bec-noise:mean-field:losses}.
 
@@ -64,7 +64,7 @@ Applying the general formulas from \charef{wigner-bec}, we can transform the mas
         + \sum_{\lvec \in L} \mathcal{B}_{2,\lvec} \upd Q_{\lvec}
     \right]
 \end{eqn}
-with the drift terms
+with drift terms
 \begin{eqn}
 \label{eqn:bec-noise:wigner:drift}
     \mathcal{A}_1^{(s)}
@@ -86,7 +86,7 @@ with the drift terms
     & - \kappa_{12} |\Psi_1|^2 \Psi_2
     - 2\kappa_{22} |\Psi_2|^2 \Psi_2,
 \end{eqn}
-and the noise terms
+and noise terms
 \begin{eqn}
     \mathcal{B}_{1,111} = 3 \sqrt{\kappa_{111}} \left( \Psi_1^* \right)^2,\quad
     \mathcal{B}_{1,12} = \sqrt{\kappa_{12}} \Psi_2^*,\quad
@@ -95,19 +95,23 @@ and the noise terms
     \mathcal{B}_{2,12} = \sqrt{\kappa_{12}} \Psi_1^*,\quad
     \mathcal{B}_{2,22} = 2\sqrt{\kappa_{22}} \Psi_2^*.
 \end{eqn}
-Note that the main order of the loss components in the drift terms coincides with the phenomenological loss components of the \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes}.
+Note that the leading order of the loss components in the drift terms coincides with the phenomenological loss components of the \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes}.
 
-The drift coefficients~\eqnref{bec-noise:wigner:drift} and the \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes} use different loss coefficients.
-This is caused by the fact that the coefficients $\kappa$ originate from the ``natural theoretical'' definition (a coefficient in front of the loss operator $\mathcal{L}$), and the coefficients $\gamma$ correspond to the ``natural experimental'' definition based on observed atom number losses:
+The drift coefficients~\eqnref{bec-noise:wigner:drift} and the \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes} use sligtly different loss parameters.
+This is caused by the fact that the parameters $\kappa$ originate from the ``natural theoretical'' definition (a coefficient in front of the loss operator $\mathcal{L}$), and the parameters $\gamma$ correspond to the ``natural experimental'' definition based on observed atom number losses:
 \begin{eqn}
 \label{eqn:bec-noise:wigner:loss-rates}
     \frac{\upd n_j}{\upd t} = - \gamma_{j,\lvec} n^{l_1}_1 n^{l_2}_2 \ldots,
 \end{eqn}
 where $n_j$ is the density of component $j$.
-The conversion between these two representations can be carried out easily as $\gamma_{j,\lvec} \equiv 2 l_j \kappa_{\lvec}$.
+The conversion between these two parameters can be carried out easily as
+\begin{eqn}
+    \gamma_{j,\lvec} \equiv 2 l_j \kappa_{\lvec}.
+\end{eqn}
 
-The pick of an initial state for the integration largely depends on the system in question.
-While the expectation of the initial Wigner functional is usually the classical ground state minimising the energy functional~\eqnref{bec-noise:mean-field:two-comp-energy}, an actual distribution can be different.
-For the interferometry experiments described in this thesis, it is usually sufficient to assume an initial coherent state which can be sampled as a set of Gaussian random numbers according to \thmref{wigner-bec:initial-state:coherent-state} since the temperature of the condensate is low.
-In more complicated cases when the temperature cannot be neglected, one can use Bogoliubov states~\cite{Blakie2008,Ruostekoski2010}, for which there exists a numerically efficient sampling method~\cite{Sinatra2002}.
+The choice of an initial state for the integration largely depends on the system in question.
+While the mean value of the initial Wigner functional is usually chosen as the classical ground state minimising the energy functional~\eqnref{bec-noise:mean-field:two-comp-energy}, the full distribution is a more subtle problem.
+For the interferometry experiments described in this thesis, it is sufficient to assume an initial coherent state which can be sampled as a set of Gaussian random numbers according to \thmref{wigner-bec:initial-state:coherent-state} since the temperature of the condensate is low.
+The main source of quantum noise is due to the beam-splitter rather than the initial state, so this approximation is not a crucial one.
+In more complicated cases when the temperature cannot be neglected, one can use thermal Bogoliubov states~\cite{Blakie2008,Ruostekoski2010}, for which there exists a numerically efficient sampling method~\cite{Sinatra2002}.
 The initial Wigner distribution may also include uncertainties of the ground state caused by ``technical'' reasons, for example, by a variation in the trap frequencies.

@@ -1,5 +1,5 @@
 % =============================================================================
-\section{Visibility}
+\section{Fringe visibility}
 % =============================================================================
 
 In this section we will apply the models from the previous sections to recent interferometry experiments involving a two-component \Rb{} \abbrev{bec} with two components corresponding to the hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$~\cite{Egorov2011} (the components are denoted $\ket{1}$ and $\ket{2}$ further in this section).
@@ -17,7 +17,7 @@ The experiment is then carried out using two protocols.
 
 The first protocol is a regular Ramsey sequence, depicted schematically in \figref{bec-noise:visibility:sequences},~(a): a $\pi/2$-pulse is applied by an electromagnetic coupler, creating a non-equilibrium superposition of components $\ket{1}$ and $\ket{2}$.
 Mathematically, it means that coupling terms in~\eqnref{bec-noise:mean-field:cgpes-simplified} or in~\eqnref{bec-noise:wigner:single-particle-H} are enabled for a period of time equal to $t_{\mathrm{pulse}} = \theta / \Omega$, where $\theta = \pi/2$, with the Rabi frequency of the oscillator in this experiment being $\Omega = 350\un{Hz}$.
-Since this pulse is short as compared to the total evolution time, it was simulated via an application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}.
+Since this pulse is short compared to the total evolution time, it was simulated via an application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}.
 
 During the further evolution of the system the components experience complex dynamics, separating and merging periodically~\cite{Mertes2007}.
 This, in turn, leads to periodic dephasing and self-rephasing of the \abbrev{bec} components.
@@ -29,6 +29,7 @@ The experimental points used in this and the next section are also courtesy of M
 
 The simulations in this and the following sections used the plane wave basis (see \appref{bases} for details) and a $64\times8\times8$ spatial grid.
 The integration was performed using a low-dissipation 4th-order Runge-Kutta algorithm (see \appref{numerical} for details).
+This grid choice was made to ensure that mode populations were high, in view of the truncation approximation inherent in our method.
 
 The rephasing cycles can be represented by a common interferometric quantity~--- the fringe contrast, or visibility:
 \begin{eqn}
@@ -95,8 +96,8 @@ where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to
     \label{fig:bec-noise:visibility:population}
 \end{figure}
 
-But in the experiment in question the losses are present and are significantly asymmetrical as shown in~\figref{bec-noise:visibility:population},~(a).
-With the populations typical for the experiment (tens of thousands of atoms or less), the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
+However, in the experiment in question, losses are present and are significantly asymmetrical as shown in~\figref{bec-noise:visibility:population},~(a).
+With populations typical for the experiment (tens of thousands of atoms or less), the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} illustrates.
 The resulting mean-field prediction with the inclusion of nonlinear losses (green dotted lines) is much closer to the experimental data.
 
@@ -122,7 +123,7 @@ With this additional pulse, by the end of a single experimental sequence the pop
 
 The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment as seen in~\figref{bec-noise:visibility:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
-Same as in the case of the regular Ramsey sequence, the predictions of the simulation are improved by the inclusion of the technical noise.
+Just as in the case of the regular Ramsey sequence, the predictions of the simulation are improved by the inclusion of technical noise.
 
 \begin{figure}
     \centerline{%
@@ -137,5 +138,5 @@ Same as in the case of the regular Ramsey sequence, the predictions of the simul
 \end{figure}
 
 The simulations can be performed for longer times as shown in~\figref{bec-noise:visibility:visibility-long}.
-The difference between the mean-field and the truncated Wigner approach becomes clearer in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts the significant decrease in the amplitude of the rephasing oscillations, caused by the quantum noise.
+The difference between the mean-field and the truncated Wigner approach becomes clearer in~\figref{bec-noise:visibility:visibility-long},~(a), where the truncated Wigner predicts a significant decrease in the amplitude of the rephasing oscillations, caused by quantum noise.
 One must remember though that at such times the simulated atom densities become too low due to losses and violate the truncation validity criterion~\eqnref{wigner-bec:truncation:delta-condition}, thus making the predictions less reliable.
