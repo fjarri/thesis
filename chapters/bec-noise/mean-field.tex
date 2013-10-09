@@ -14,11 +14,11 @@ We will use the combined model which includes linear coupling and losses, and la
 % =============================================================================
 
 In the mean-field approximation the two-component \abbrev{bec} is described by wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
-The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations (\abbrev{cgpe}s)
+The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations (\abbrev{cgpe}s)~\cite{Pitaevskii2003}
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes}
 	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_1 + \hbar \omega_1^{(i)}
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
 		+ g_{11} \lvert \Psi_1 \rvert^2
 		+ g_{12} \lvert \Psi_2 \rvert^2
 		- i \hbar \Gamma_1
@@ -27,7 +27,7 @@ The evolution of the condensate is described by the system of coupled Gross-Pita
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
 	\right) \Psi_2, \\
 	i \hbar \frac{\upd \Psi_2}{\upd t} ={} & \left(
-		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_2^{(i)}
+		-\frac{\hbar^2 \nabla^2}{2 m} + V_2 + \hbar \omega_{hf}
 		+ g_{22} \lvert \Psi_2 \rvert^2
 		+ g_{12} \lvert \Psi_1 \rvert^2
 		- i \hbar \Gamma_2
@@ -36,7 +36,7 @@ The evolution of the condensate is described by the system of coupled Gross-Pita
 		e^{i (\omega t + \alpha)} + e^{-i (\omega t + \alpha)}
 	\right) \Psi_1.
 \end{eqn}
-Here $V_j(\xvec)$ are external potentials~\eqnref{bec-noise:system:V}, $\omega_j^{(i)}$ is the internal energy of the component $j$, $g_{jk}$ are nonlinear interaction coefficients~\eqnref{bec-noise:system:g}, $\Gamma_j$ terms represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the phase of the coupling).
+Here $V_j(\xvec)$ are external potentials~\eqnref{bec-noise:system:V}, $\omega_{hf}$ is the hyperfine splitting between components, $g_{jk}$ are nonlinear interaction coefficients~\eqnref{bec-noise:system:g}, $\Gamma_j$ terms represent nonlinear losses for the component $j$, and $\Omega$ is the electromagnetic coupling strength (with $\omega$ being the frequency, and $\alpha$ the initial phase shift of the coupling).
 The \abbrev{cgpe}s without loss or coupling terms were introduced by Zeng \textit{et~al}~\cite{Zeng1995}, and Ho and Shenoy~\cite{Ho1996}.
 The coupling terms were first included by Ballagh \textit{et~al}~\cite{Ballagh1997}, and the loss terms by Yurovsky \textit{et~al}~\cite{Yurovsky1999}.
 A detailed description of the mean-field approximation can be found in the book by Pitaevskii and Stringari~\cite{Pitaevskii2003}.
@@ -50,17 +50,14 @@ For example, the dominant three-body and two-body losses in a two-component \Rb{
 \end{eqn}
 These equations were obtained empirically, but we will see later in this chapter how the same expressions (to leading order) appear as a result of the application of the truncated Wigner method.
 
-The difference between the internal energies of components $\ket{1}$ and $\ket{2}$ is the hyperfine frequency $\omega_{hf} = \omega_1^{(i)} - \omega_2^{(i)}$.
 The coupling frequency $\omega$ is usually slightly detuned from the hyperfine frequency in the experiment: $\omega = \omega_{hf} + \delta$, where $\delta \ll \omega_{hf}$.
-
-The fact that $\hbar \omega_j \gg V_j$ can cause problems when performing calculations with low precision.
-Therefore, it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
+It is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes} in a rotating frame:
 \begin{eqn}
-	\Psi_1 & \rightarrow \Psi_1 e^{i \omega_1^{(i)} t}, \\
-	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2^{(i)} t}.
+	\Psi_1 & = \Psi_1^{(r)}, \\
+	\Psi_2 & = \Psi_2^{(r)} e^{i \omega_{hf} t}.
 \end{eqn}
-This transformation eliminates $\omega_1^{(i)}$ and $\omega_2^{(i)}$ from the equations and does not change single-time observable values.
-The transformed equations are:
+This transformation eliminates $\omega_{hf}$ from the equations and does not change single-time observable values.
+Dropping the rotating frame superscript for simplicity, we obtain the transformed equations
 \begin{eqn}
 	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
@@ -83,7 +80,7 @@ The transformed equations are:
 \end{eqn}
 
 Furthermore, in experiments the coupling field is typically applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
-This allows us to neglect the rapidly oscillating terms proportional to $e^{i(\omega + \omega_{hf})t}$ and come to \abbrev{cgpe}s in the rotating wave approximation:
+This allows us to neglect the rapidly oscillating terms proportional to $e^{i(\omega + \omega_{hf})t}$ and come to \abbrev{cgpe}s in the rotating frame:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-simplified}
 	i \hbar \frac{\upd \Psi_1}{\upd t} & = \left(
@@ -124,7 +121,7 @@ This allows us to use an ``instantaneous'' pulse, multiplying the state vector b
 		\Psi_1 \\ \Psi_2
 	\end{pmatrix},
 \end{eqn}
-where $\theta = \Omega t_{\mathrm{pulse}}$, and $\phi$ is the phase of the coupling field at the beginning of the pulse.
+where $\theta = \Omega t_{\mathrm{pulse}}$, and $\phi = \delta t + \alpha$ is the total phase of the coupling field at the beginning of the pulse.
 In particular, for the two-pulse Ramsey scheme (\figref{bec-noise:visibility:sequences},~(a)) with the time $t_R$ between pulses, $\phi_2 = \phi_1 + \delta t_R$.
 
 
