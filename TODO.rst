@@ -45,3 +45,7 @@ Peter's changes:
 - Chapter 7, p.64: discuss. I can use K, probably.
 - Chapter 7, p.74: underlined phrase?
 - Chapter 7, p.79: can't post factum be used as an adjective? Or if it's "o", then "ex post facto".
+
+Andrei's changes:
+- Chapter 7, p.60: preparation does not matter at this point, it is described in "Visibility" section.
+  Also, BEC is prepared in only one state.

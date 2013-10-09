@@ -16,12 +16,12 @@ The experiment is then carried out using two protocols.
 \end{figure}
 
 The first protocol is a regular Ramsey sequence, depicted schematically in \figref{bec-noise:visibility:sequences},~(a): a $\pi/2$-pulse is applied by an electromagnetic coupler, creating a non-equilibrium superposition of components $\ket{1}$ and $\ket{2}$.
-Mathematically, it means that coupling terms in~\eqnref{bec-noise:mean-field:cgpes-simplified} or in~\eqnref{bec-noise:wigner:single-particle-H} are enabled for a period of time equal to $t_{\mathrm{pulse}} = \theta / \Omega$, where $\theta = \pi/2$, with the Rabi frequency of the oscillator in this experiment being $\Omega = 350\un{Hz}$.
+Mathematically, it means that coupling terms in~\eqnref{bec-noise:mean-field:cgpes-simplified} or in~\eqnref{bec-noise:wigner:single-particle-H} are enabled for a period of time equal to $t_{\mathrm{pulse}} = \theta / \Omega$, where $\theta = \pi/2$, with the Rabi frequency of the oscillator in this experiment being $\Omega = 2\pi \times 350\un{rad/s}$.
 Since this pulse is short compared to the total evolution time, it was simulated via an application of the rotation matrix~\eqnref{bec-noise:mean-field:rotation-matrix}.
 
 During the further evolution of the system the components experience complex dynamics, separating and merging periodically~\cite{Mertes2007}.
 This, in turn, leads to periodic dephasing and self-rephasing of the \abbrev{bec} components.
-After some period of the free evolution, a second $\pi/2$-pulse is applied, transforming the phase difference between the two components in the superposition into a population difference which can be imaged.
+After some period of the free evolution, a second $\pi/2$-pulse is applied, transforming the phase difference between the two components in the superposition into a population difference which can be measured through imaging of both \abbrev{bec} components.
 Many such experiments are performed with different free evolution times, contributing one time-point each because the imaging effectively destroys the \abbrev{bec}.
 A more detailed description of the experiment can be found in the paper by Egorov \textit{et~al}~\cite{Egorov2011}, and in his PhD thesis~\cite{Egorov2012}.
 %acknowledgement
@@ -31,7 +31,7 @@ The simulations in this and the following sections used the plane wave basis (se
 The integration was performed using a low-dissipation 4th-order Runge-Kutta algorithm (see \appref{numerical} for details).
 This grid choice was made to ensure that mode populations were high, in view of the truncation approximation inherent in our method.
 
-The rephasing cycles can be represented by a common interferometric quantity~--- the fringe contrast, or visibility:
+Coherence of the interference signal can be characterised by a common quantity~--- the fringe contrast, or visibility:
 \begin{eqn}
 \label{eqn:bec-noise:visibility:visibility}
     \mathcal{V}
@@ -72,11 +72,11 @@ where we have used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M /
     \label{fig:bec-noise:visibility:ramsey-visibility}
 \end{figure}
 
-The visibility can serve as a good example of the differences introduced by taking into account losses, quantum effects, and technical noises in the simulation of the experiment.
+The visibility can serve as a good parameter of different effects (losses, quantum effects and technical noises) in the modelling of the experiment.
 The inclusion of these factors in the simulation of the Ramsey sequence is demonstrated in~\figref{bec-noise:visibility:ramsey-visibility}.
 The experimental results and their uncertainties are shown as the black bars in the figure.
 
-The simplest model~--- the mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} with losses turned off~--- gives results that are completely off base: the visibility is completely restored during rephasings (yellow dash-dotted lines in the figure).
+The simplest model~--- the mean-field \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} with losses turned off~--- shows behavior that differs significantly from the experimental points: the visibility is completely restored during rephasings (yellow dash-dotted lines in the figure).
 This is to be expected as the theoretical limit of visibility
 \begin{eqn}
 \label{eqn:bec-noise:visibility:limit}
@@ -91,12 +91,12 @@ where $N_1$ and $N_2$ are populations before the second $\pi/2$-pulse, equals to
     \includegraphics{figures_generated/bec_noise/echo_single_run_pop.pdf}}
 
     \caption[Component population in Ramsey and spin echo sequences]{
-    Numerically simulated population of components $\ket{1}$ (blue solid lines) and $\ket{2}$ (red dashed lines) in \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequences.}%endcaption
+    Numerically simulated decay of the population of components $\ket{1}$ (blue solid lines) and $\ket{2}$ (red dashed lines) in \textbf{(a)} Ramsey and \textbf{(b)} spin echo sequences.}%endcaption
 
     \label{fig:bec-noise:visibility:population}
 \end{figure}
 
-However, in the experiment in question, losses are present and are significantly asymmetrical as shown in~\figref{bec-noise:visibility:population},~(a).
+However, in the experiment losses are present and are significantly asymmetrical as shown in~\figref{bec-noise:visibility:population},~(a).
 With populations typical for the experiment (tens of thousands of atoms or less), the two-body loss process in $\ket{2}$ is significantly stronger than the three-body one in $\ket{1}$.
 This makes the theoretical limit~\eqnref{bec-noise:visibility:limit} decrease with time, as the dotted grey line in~\figref{bec-noise:visibility:ramsey-visibility} illustrates.
 The resulting mean-field prediction with the inclusion of nonlinear losses (green dotted lines) is much closer to the experimental data.
@@ -105,7 +105,7 @@ The application of the \abbrev{sde}s~\eqnref{bec-noise:wigner:sde} obtained with
 The Wigner results can be further adjusted to account for the noise introduced by the final measurement and non-ideal coupling (blue solid lines), which will be explained in detail in the next section.
 
 The final agreement with the experiment is still not ideal, and the explanation of this difference is an open question.
-Candidate factors include finite temperature effects and interaction with the surrounding cloud of non-condensed atoms.
+Potential unaccounted factors include finite temperature effects and interaction with the surrounding cloud of non-condensed atoms.
 
 \begin{figure}
     \centerline{\includegraphics{figures_generated/bec_noise/echo_visibility_short.pdf}}

@@ -13,7 +13,7 @@ We will use the combined model which includes linear coupling and losses, and la
 \subsection{Two-component condensate}
 % =============================================================================
 
-The state of a classical \abbrev{bec} is described by wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
+In the mean-field approximation the two-component \abbrev{bec} is described by wavefunctions $\Psi_j$, which are normalized such that $\int |\Psi_j|^2 \upd\xvec \equiv N_j$, where $N_j$ is the total population of the component $j$ (consequently, $|\Psi_j|^2 \equiv n_j$ is the component density).
 The evolution of the condensate is described by the system of coupled Gross-Pitaevskii equations (\abbrev{cgpe}s)
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes}
@@ -60,7 +60,7 @@ Therefore, it is convenient to use equations~\eqnref{bec-noise:mean-field:cgpes}
 	\Psi_2 & \rightarrow \Psi_2 e^{i \omega_2^{(i)} t}.
 \end{eqn}
 This transformation eliminates $\omega_1^{(i)}$ and $\omega_2^{(i)}$ from the equations and does not change single-time observable values.
-The transformed equations look like:
+The transformed equations are:
 \begin{eqn}
 	i \hbar \frac{\upd \Psi_1}{\upd t} ={} & \left(
 		-\frac{\hbar^2 \nabla^2}{2 m} + V_1
@@ -83,7 +83,7 @@ The transformed equations look like:
 \end{eqn}
 
 Furthermore, in experiments the coupling field is typically applied for short periods of time $t_{\mathrm{pulse}}$, where $1 / \omega \ll t_{\mathrm{pulse}} \ll 1 / \delta$.
-This allows us to neglect the rapidly oscillating terms proportional to $e^{i(\omega + \omega_{hf})t}$, giving:
+This allows us to neglect the rapidly oscillating terms proportional to $e^{i(\omega + \omega_{hf})t}$ and come to \abbrev{cgpe}s in the rotating wave approximation:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:cgpes-simplified}
 	i \hbar \frac{\upd \Psi_1}{\upd t} & = \left(
@@ -177,13 +177,13 @@ then looks like
 	\Psi(\xvec, t) = \sum_k e^{-\frac{i}{\hbar}\mu_k t} f_k(\xvec),
 \end{eqn}
 where $f_k$ are eigenfunctions of $\hat{H}$ corresponding to the eigenvalues $\mu_k$.
-After the substitution $t \rightarrow \tau = it$ the solution becomes fading, with higher-energy components fading faster:
+After the substitution $t \rightarrow \tau = it$ the solution becomes fading, with higher-energy terms fading faster:
 \begin{eqn}
 	\Psi(\xvec, \tau) = \sum_k e^{-\frac{1}{\hbar}\mu_k \tau} f_k(\xvec).
 \end{eqn}
 
-Therefore, if we take some random initial solution and propagate it long enough in imaginary time using~\eqnref{bec-noise:mean-field:imaginary-time}, the higher-energy components will eventually die out (in comparison with the lowest-energy state) and leave us with the desired ground state.
-The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one since it is rather close to the desired one (and, therefore, higher-energy components are already quite small).
+Therefore, if we take some random initial solution and propagate it long enough in imaginary time using~\eqnref{bec-noise:mean-field:imaginary-time}, the higher-energy terms will eventually die out (in comparison with the lowest-energy state) and leave us with the desired ground state.
+The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken as the initial one since it is rather close to the desired one (and, therefore, higher-energy terms are already quite small).
 
 Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, a renormalisation after each step will be required.
 The total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
@@ -191,7 +191,7 @@ The total number of atoms in the ground state serves best in this case (because 
 	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 \upd V = N.
 \end{eqn}
 
-Propagation is terminated when the Gross-Pitaevskii energy of the state converges to the required precision (that is, only one component with the lowest energy is left out).
+Propagation is terminated when the Gross-Pitaevskii energy of the state converges to the required precision (that is, only one eigenstate with the lowest energy is left out).
 The energy of the two-component condensate~\cite{Pitaevskii2003}
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:two-comp-energy}
@@ -212,7 +212,7 @@ thus has to be calculated after each step and compared to the previous value, wa
 \includegraphics{figures_generated/mean_field/two_comp_gs_immiscible.pdf}}
 
 \caption[Two-component ground state for miscible and immiscible regimes]{
-Two-component ground state for \textbf{(a)}~a miscible and \textbf{(b)}~an immiscible regime of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in a three-dimensional harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$.
+Axial densities of two-component ground state for \textbf{(a)}~a miscible and \textbf{(b)}~an immiscible regime of \Rb{} \abbrev{bec} with $N_1 = N_2 = 40,000$ atoms in a three-dimensional harmonic trap with the frequencies $f_x = f_y = 97.6\un{Hz},\,f_z = 11.96\un{Hz}$.
 Blue solid lines and red dashed lines show the axial density of the first and the second component respectively.
 Intra-component scattering lengths are $a_{11} = 100.40\,r_B$, $a_{22} = 95.68\,r_B$, inter-component scattering length is \textbf{(a)}~$a_{12} = 97.0\,r_B$ and \textbf{(b)}~$a_{11} = 99.0\,r_B$, where $r_B$ is the Bohr radius.}%endcaption
 \label{fig:bec-noise:mean-field:two-comp-gs}
@@ -258,7 +258,7 @@ For a one-dimensional trap it has the form
 		\left( \frac{m \omega_1^2}{2} \right)^{\frac{1}{3}}.
 \end{eqn}
 
-Now we can roughly estimate the conditions necessary to drop the kinetic term from the equation.
+Now we can roughly estimate the conditions necessary to neglect the kinetic term from the equation.
 Substituting approximate solution~\eqnref{bec-noise:mean-field:tf-gs} to~\eqnref{bec-noise:mean-field:cgpes-stationary} and comparing the kinetic term with the potential term, we get the following inequation:
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:tf-inequation}
@@ -298,14 +298,15 @@ Therefore, we have only one condition justifying the application of the Thomas-F
 \centerline{%
 	\includegraphics{figures_generated/mean_field/one_comp_gs_large.pdf}%
 	\includegraphics{figures_generated/mean_field/one_comp_gs_small.pdf}}
-\caption[Numerically calculated and Thomas-Fermi approximated ground states]{Numerically calculated (blue solid lines) and Thomas-Fermi approximated (red dashed lines) ground states for a one-component \Rb{} \abbrev{bec} of \textbf{(a)}~$100,000$ atoms, and \textbf{(b)}~$1,000$ atoms.}%endcaption
+\caption[Numerically calculated and Thomas-Fermi approximated ground states]{
+Axial densities of numerically calculated (blue solid lines) and Thomas-Fermi approximated (red dashed lines) ground states for a one-component \Rb{} \abbrev{bec} of \textbf{(a)}~$100,000$ atoms, and \textbf{(b)}~$1,000$ atoms.}%endcaption
 \label{fig:bec-noise:mean-field:tf-vs-accurate}
 \end{figure}
 
 Let us use some real-life experimental parameters and check how well the Thomas-Fermi approximation works.
 For a three-dimensional trap with the frequencies $f_x = f_y = 97.6\un{Hz}$ and $f_z = 11.96\un{Hz}$ and $N_1=10^5$ \Rb{} atoms (which have a scattering length of $a_{11} = 100.4 r_B$), we have $2 \mu_1 / (\hbar |\bomega|) \approx 10.68$.
 This means that the Thomas-Fermi approximation produces a solution which is close to the real one.
-However, for a lower amount of atoms, say $N_1=10^3$, we get $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is a sign that we are reaching the limit of the approximation's applicability.
+However, for a lower amount of atoms, say $N_1=10^3$, we obtain $2 \mu / (\hbar |\bomega|) \approx 1.69$, which is a sign that we are reaching the limit of the approximation's applicability.
 \figref{bec-noise:mean-field:tf-vs-accurate} shows the axial density for both cases: for $100,000$ atoms the Thomas-Fermi approximation is very close to the numerically calculated ground state and for $1,000$ atoms it differs significantly as expected.
 
 An extended discussion of the Thomas-Fermi approximation was given by Dalfovo \textit{et~al}~\cite{Dalfovo1999}.
