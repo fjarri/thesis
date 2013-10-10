@@ -164,16 +164,16 @@ The actual equations to be propagated are~\eqnref{bec-noise:mean-field:cgpes-sim
 \end{eqn}
 
 The rigorous proof of this method was derived by Bao and Du~\cite{Bao2004}.
-The idea can be roughly illustrated by considering a one-component system with a linear Hamiltonian $\hat{H}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$, where the lowest eigenvalue corresponds to ground state we want to find.
+The idea can be roughly illustrated by considering a one-component system with a linear Hamiltonian $\hat{K}$, whose eigenvalues are $\mu_1 < \mu_2 < ...$, where the lowest eigenvalue corresponds to ground state we want to find.
 The steady solution of the time-dependent \abbrev{gpe}
 \begin{eqn}
-	i \hbar \frac{\upd \Psi}{\upd t} = \hat{H} \Psi
+	i \hbar \frac{\upd \Psi}{\upd t} = \hat{K} \Psi
 \end{eqn}
 then looks like
 \begin{eqn}
 	\Psi(\xvec, t) = \sum_k e^{-\frac{i}{\hbar}\mu_k t} f_k(\xvec),
 \end{eqn}
-where $f_k$ are eigenfunctions of $\hat{H}$ corresponding to the eigenvalues $\mu_k$.
+where $f_k$ are eigenfunctions of $\hat{K}$ corresponding to the eigenvalues $\mu_k$.
 After the substitution $t \rightarrow \tau = it$ the solution becomes fading, with higher-energy terms fading faster:
 \begin{eqn}
 	\Psi(\xvec, \tau) = \sum_k e^{-\frac{1}{\hbar}\mu_k \tau} f_k(\xvec).

@@ -17,13 +17,3 @@ Peter's changes:
 - PDF/A compatibility: need to find a way to solve current problems with metadata and zero witdh of some symbols.
   (Check Adobe Acrobat, it may be able to perform the conversion)
 - Introduction, the end - describe the code.
-- Chapter 2, p.8: add the derivation for eqn (2.2)?
-- Chapter 5, p.45, bottom - "broad-band"?
-- Chapter 6, p.57 - discuss
-- Chapter 7, add more explanations to the discrepancies with the experiment
-- Chapter 7, p.60, do I need to add component-dependent \omega's too?
-- Chapter 7, p.62: merge with Andrei's comments. I'll be dropping this part anyway.
-- Chapter 7, p.64: discuss. I can use K, probably.
-- Chapter 7, p.74: underlined phrase?
-- Chapter 7, p.79: can't post factum be used as an adjective? Or if it's "o", then "ex post facto".
-- Chapter 8, is it enough to just reference the paper, or some explanation needed too?
