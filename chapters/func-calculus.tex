@@ -27,7 +27,7 @@ The orthonormality and completeness conditions for basis functions are, respecti
 	& = \delta(\xvec^\prime - \xvec),
 \end{eqns}
 where the integration area $A$ depends on the basis set (for example, $A$ is the whole space for harmonic oscillator modes and a box for plane waves).
-Hereinafter we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, the argument list will be often omitted for functions of coordinates (e.g. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$), except where it is necessary for clarity.
+From now on we assume that the integration $\int \upd\xvec$ is always performed over $A$, unless explicitly stated otherwise. In addition, to avoid clutter, the argument list will be often omitted for functions of coordinates (e.g. $f(\xvec) \equiv f$ and $f(\xvec^\prime) \equiv f^\prime$), except where it is necessary for clarity.
 
 Various functions can be combined using all, or the certain subset, of basis modes by means of the composition:
 
@@ -76,7 +76,7 @@ The result of any nonlinear transformation of a function $f \in \mathbb{F}_{\res
 	Obviously, $\proj{\fullbasis} \equiv \mathds{1}$.
 \end{definition}
 
-Being applied to the delta function, the projection operator produces a restricted delta function:
+When applied to the delta function, the projection operator produces a restricted delta function:
 
 \begin{definition}
 \label{def:func-calculus:restricted-delta}
@@ -108,12 +108,12 @@ The conjugate of $\proj{\restbasis}$ is, therefore,
 % =============================================================================
 
 Let $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ be some arbitrary functional operator (not to be confused with quantum mechanical operators) acting on functions from a restricted basis.
-Such operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
-Note that in general this operator is nor linear; therefore, its result is not guaranteed to belong to the same restricted basis as its argument.
+Such an operator can be as simple as an algebraic function of $f$, for example, $\mathcal{F}[f] = f^2$, but it can also be more complicated.
+Note that in general this operator is not linear; therefore, its result is not guaranteed to belong to the same restricted basis as its argument.
 Also, since $\mathbb{C}$ is a specific case of $\mathbb{F}$ (a constant function of coordinates), a specific case of a functional operator is a functional $\mathcal{F}[f] \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{C}$.
 This means that the calculus described in this section applies to functionals as well.
 
-The composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of the corresponding dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
+The composition and decomposition transformations from \defref{func-calculus:composition} define a bijection between a restricted function space $\mathbb{F}_{\restbasis}$ and a vector space of dimensionality $\mathbb{C}^{|\restbasis|}$ (where $|\restbasis|$ denotes the cardinality of $\restbasis$).
 Therefore any functional operator $\mathcal{F}$ can be alternatively treated as a function of a vector of mode populations and a coordinate vector:
 \begin{eqn}
 	& F \in \mathbb{C}^{|\restbasis|} \rightarrow \mathbb{F}
@@ -126,7 +126,7 @@ Using this correspondence, we can define the differentiation in the space of fun
 
 \begin{definition}
 \label{def:func-calculus:func-diff}
-	Derivative of a functional operator is
+	The derivative of a functional operator is
 	\begin{eqn*}
 		& \frac{\fdelta}{\fdelta f^\prime} \in
 		\left(
@@ -144,10 +144,10 @@ Using this correspondence, we can define the differentiation in the space of fun
 	\end{eqn*}
 \end{definition}
 
-Note that the type of the returned operator differs from the argument type: the result depends on two coordinates, not just one.
+Note that the type of the returned operator differs from its argument type: the result depends on two coordinates, not just one.
 The second coordinate ($\xvec^\prime$) comes from the function $f^\prime \equiv f(\xvec^\prime)$ by which we are differentiating.
 
-This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similar to the Wirtinger derivative from \appref{c-numbers}.
+This definition may look too elaborate at first, but later in this section we will see that it leads to intuitive consequences, making the functional derivative behave very similarly to the Wirtinger derivative from \appref{c-numbers}.
 Let us first demonstrate that the definition obeys standard differentiation rules.
 
 \begin{theorem}
@@ -229,10 +229,10 @@ Substituting this into~\eqnref{func-calculus:chain-expansion}, we get
 Recognising \defref{func-calculus:func-diff} for $\fdelta \mathcal{F} / \fdelta \mathcal{G}$ and $\fdelta \mathcal{G} / \fdelta \mathcal{f}$, we obtain the statement of the theorem.
 \end{proof}
 
-The above theorem demonstrates that, with respect to the functional differentiation, functional operators behave as if they were depending on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to the Wirtinger differentiation.
+The above theorem demonstrates that, with respect to the functional differentiation, functional operators behave as if they depend on two independent functions, $f$ and $f^*$~--- just like complex-valued functions with respect to the Wirtinger differentiation.
 
 Most of the time we will deal with functional operators in a particular form, namely an algebraic expression of their arguments.
-It turns out that for this subset the functional differentiation behaves almost exactly like the Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
+It turns out that for this subset, functional differentiation behaves almost exactly like the Wirtinger differentiation and allows one to circumvent \defref{func-calculus:func-diff}, calculating derivatives based on well-known symbolic rules.
 
 \begin{theorem}
 	If a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ has the form $\mathcal{F}[f] \equiv g(f)$, where $g(z)$ is a function that can be expanded into the power series of $z^r (z^*)^s$, then $\fdelta \mathcal{F} / \fdelta f^\prime$ and $\fdelta \mathcal{F} / \fdelta f^{\prime*}$ can be calculated as derivatives of $g(f)$ over $f$ and $f^*$, respectively, times the restricted delta function:
@@ -280,8 +280,8 @@ The second identity is proved in the same way.
 \section{Functional integration}
 % =============================================================================
 
-In this section we will only postulate the expression for the integral of a functional operator; for the rationale behind this definition one can refer to the detailed explanation by Dalton~\cite{Dalton2012}.
-Same as in the differentiation case, we will make use of the equivalence between a functional operator and a function of two vectors.
+In this section we will only postulate the expression for the integral of a functional operator. For the rationale behind this definition one can refer to the detailed explanation by Dalton~\cite{Dalton2012}.
+Just as in the differentiation case, we will make use of the equivalence between a functional operator and a function of two vectors.
 
 \begin{definition}
 	An integral of a functional operator $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$ is an integral of the corresponding function over mode variables:
@@ -416,7 +416,7 @@ Collapsing sums, and recognising functional derivatives (\defref{func-calculus:f
 \end{eqn}
 \end{proof}
 
-It is easy to show that the functional integration has the same integration by parts property as the regular integration:
+It is easy to show that functional integration has the same integration by parts property as regular integration:
 \begin{eqn}
 	\int \fdelta^2 f
 		\frac{\fdelta \mathcal{F}[f]}{\fdelta f^\prime}
@@ -427,9 +427,9 @@ It is easy to show that the functional integration has the same integration by p
 		\frac{\fdelta \mathcal{G}[f]}{\fdelta f^\prime}
 		\mathcal{F}[f].
 \end{eqn}
-The functional integration by parts serves as the foundation of several theorems from \charef{wigner}.
+Functional integration by parts serves as the foundation of several theorems from \charef{wigner}.
 These theorems additionally need several lemmas that help us eliminate the first term in the right-hand part of the above expression.
-Namely, these are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with an addition of one more functional-specific lemma.
+These are extensions of \lmmref{c-numbers:zero-integrals} and \lmmref{c-numbers:zero-delta-integrals} in terms of functional operators, with an addition of one more functional-specific lemma.
 
 \begin{lemma}[functional extension of \lmmref{c-numbers:zero-integrals}]
 \label{lmm:func-calculus:zero-integrals}

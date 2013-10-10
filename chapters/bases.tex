@@ -195,7 +195,7 @@ The corresponding backward transformation is then expressed as
 \end{eqn}
 
 There are a few catches in the practical implementation of this algorithm.
-First, beware of significant round-off errors during the expansion for the large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
+First, there can be significant round-off errors during the expansion for the large $N$ due to the exponential term in the expression for weights~\eqnref{bases:gh-weights}.
 Second, note that $G^{-1}(G(\mathbf{f})) \ne \mathbf{f}$ for $s > 1$, since during the expansion we are effectively discarding the higher-order modes of $\Psi^s$ and are thus losing some information.
 For $s = 1$ and $M^\prime \ge M$ though the transformation is reversible.
 
@@ -209,7 +209,7 @@ For a concrete example, consider an equation
         + g \Psi |\Psi|^2
         - i \gamma \Psi |\Psi|^4.
 \end{eqn}
-If this equation is being propagated in the momentum space, the last two terms have to be transformed using different transformations because the first one has the order $s=3$, and the second one has the order $s=5$:
+If this equation is propagated in momentum space, the last two terms have to be transformed using different transformations because the first one has the order $s=3$, and the second one has the order $s=5$:
 \begin{eqn}
     i \hbar \frac{\upd \balpha}{\upd t}
     = \mathbf{E} \cdot \balpha
@@ -247,7 +247,7 @@ In a single expression, it is a composition of two transpositions and one dot pr
         ((\Phi^{(d)})^T\,\mathrm{diag}(\tilde{\mathbf{w}}^{(d)}) \cdot)
         T_{1 \leftrightarrow d},
 \end{eqn}
-with the backward transformation
+with backward transformation
 \begin{eqn}
     G_d^{-1}
     \equiv

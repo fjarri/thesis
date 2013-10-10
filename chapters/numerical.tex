@@ -8,12 +8,12 @@ While full texts of the programs used are too long to include verbatim in the te
 
 
 % =============================================================================
-\section{Calculations on GPU}
+\section{Parallel calculations}
 % =============================================================================
 
 The phase space methods described in this thesis are inherently parallel.
-Such algorithms are very suitable to run on modern \abbrev{gpu}s, as long as the data being processed fits the video memory (which was our case).
-We chose nVidia's CUDA as the \abbrev{gpgpu} platform because of its maturity and the included set of libraries with effective implementations of the \abbrev{fft}, random number generators, and other useful algorithms.
+Such algorithms are suitable to run on modern graphical processing units (\abbrev{gpu}s), as long as the data being processed fits the video memory (which was our case).
+We chose nVidia's CUDA as the general purpose \abbrev{gpu} (\abbrev{gpgpu}) platform because of its maturity and the included set of libraries with effective implementations of the \abbrev{fft}, random number generators, and other useful algorithms.
 In practice, OpenCL could be used as well: at the moment it is just as fast as CUDA on nVidia video cards, and has an additional benefit of supporting AMD cards.
 
 Furthermore, in order to speed up prototyping we did not use the CUDA language itself (which is, essentially, a superset of C++), but Python bindings to it.
@@ -22,7 +22,7 @@ It is quite popular in the academic community owing to the excellent NumPy and S
 PyCUDA~\cite{Klockner2012} augments it with a convenient access to CUDA and its libraries, significantly reducing the amount of boilerplate code and making metaprogramming possible.
 Of course, the dynamical facilities of Python make it slower than C++, but this was negligible in our simulations since the majority of calculations was done on \abbrev{gpu}, and the Python language overhead was masked by their asynchronous execution.
 
-The use of \abbrev{gpgpu} allowed us to reach a hundredfold speedup of calculations on a single nVidia Tesla C2050 as compared to MatLab implementations.
+The use of \abbrev{gpu} hardware allowed us to reach a hundredfold speedup of calculations on a single nVidia Tesla C2050 as compared to MatLab implementations.
 This was improved even further by combining the results calculated on several video cards, such as we did for the calculations in \secref{bell-ineq:ghz}, where we used seven nVidia Tesla M2090.
 
 
@@ -30,7 +30,7 @@ This was improved even further by combining the results calculated on several vi
 \section{XMDS}
 % =============================================================================
 
-For the cases where the raw speed of calculations was less important, and the custom \abbrev{gpgpu} program was not required, we used the XMDS package~\cite{Collecutt2001,Dennis2013}.
+For the cases where the raw speed of calculations was less important, and a custom \abbrev{gpgpu} program was not required, we used the XMDS package~\cite{Collecutt2001,Dennis2013}.
 XMDS is a code generator for numerical simulation problems, written in Python.
 It creates and compiles a C++ program that performs the integration, based on a brief \abbrev{xml} description of the simulation problem.
 The strength of XMDS lies in highly optimized integration algorithms it uses (which is improved even more by on-demand compilation), and in its transparent usage of multi-processor interface (\abbrev{mpi}), which allows it to take advantage of multiple cores of a \abbrev{cpu}, or multiple nodes in a cluster.
@@ -48,6 +48,7 @@ It is possible to employ variable-stepsize methods, which are strongly convergen
 Another widely-used specialized Runge-Kutta subtype is the \abbrev{rk4} interaction picture method~\cite{CaradocDavies2000}, which can improve convergence properties considerably when applied to stiff equations.
 One must note though that the reduction in the number of steps required for a given level of convergence is often neutralized by the increased number of \abbrev{fft}s that have to be performed on each step.
 
-In our case, neither adaptive stepsize nor the transition to interaction picture did not appear necessary, and we settled on a fixed-stepsize fourth order \abbrev{rk} method optimized for low dissipation, low dispersion and low storage~\cite{Berland2006}.
+In our case, neither adaptive stepsize, nor a transition to the interaction picture was not necessary, and we settled on a fixed-stepsize fourth order \abbrev{rk} method optimized for low dissipation, low dispersion and low storage~\cite{Berland2006}.
 In particular, the latter means that in each substep of the \abbrev{rk} propagation the result depends only on the output of the previous step.
-This results in an algorithm requiring 6 steps in order to reach the 4th order, but the low-storage property is very important in the \abbrev{gpgpu} world, where one has to keep the whole arrays of intermediate results in video memory.
+This results in an algorithm requiring 6 steps in order to reach 4th order.
+The low-storage property is very important in the \abbrev{gpgpu} world, where one has to keep whole arrays of intermediate results in video memory.

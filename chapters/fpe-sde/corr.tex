@@ -102,7 +102,7 @@ Since $F F^T + G G^T$ and $\vcwd_{\xvec} \vcwd_{\xvec}^T + \vcwd_{\yvec} \vcwd_{
 \end{eqn}
 
 In order to use \lmmref{fpe-sde:corr:fpe-sde-real}, we need to merge variables $\xvec$ and $\yvec$ into one variable vector $\zvec \equiv \xvec \oplus \yvec$.
-This will give us an equation in the form identical to that from the lemma, with the drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and the diffusion matrix
+This will give us an equation in the form identical to that from the lemma, with drift vector $\tilde{\avec} \equiv \mathbf{u} \oplus \mathbf{v}$ and diffusion matrix
 \begin{eqn}
 	\tilde{B} \tilde{B}^T \equiv \frac{1}{2} \begin{pmatrix}
 		F F^T + G G^T & F G^T - G F^T \\
@@ -206,7 +206,7 @@ which finishes the proof.
 \end{proof}
 
 Note the asymmetry in the expression for the Stratonovich term: if $B = B(\alpha)$, then $\mathbf{s} \equiv 0$.
-It is initially caused by the asymmetry in the target \abbrev{sde}s.
+This is initially caused by the asymmetry in the target \abbrev{sde}s.
 A truly general form of an \abbrev{fpe} would be
 \begin{eqn}
 	\frac{\upd W}{\upd t}
@@ -471,6 +471,7 @@ Performing the same multiplication and summation on the Stratonovich term from \
 \end{eqn}
 Transforming the trace to a summation:
 \begin{eqn}
+	\mathcal{S}_j
 	= \frac{1}{2} \sum_{\mvec \in \restbasis_c} \phi_{j,\mvec}^\prime \sum_{k=1}^C
 		\sum_{\nvec \in \restbasis_k} \sum_{l=1}^L \sum_{\pvec \in \fullbasis}
 			(B_{\nvec (\pvec,l)}^{(k)})^*
@@ -479,6 +480,7 @@ Transforming the trace to a summation:
 \end{eqn}
 Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise matrix:
 \begin{eqn}
+	\mathcal{S}_j
 	= \frac{1}{2} \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime \sum_{k=1}^C
 		\sum_{\nvec \in \restbasis_k} \sum_{l=1}^L \sum_{\pvec \in \fullbasis}
 			\int \upd\xvec\, \phi_{k,\nvec} \mathcal{B}_{kl}^* \phi_{\pvec}^*
@@ -488,6 +490,7 @@ Using the multimode form~\eqnref{fpe-sde:corr:func-noise-matrix} of the noise ma
 \end{eqn}
 Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\xvec - \xvec^\prime)$:
 \begin{eqn}
+	\mathcal{S}_j
 	= \frac{1}{2} \sum_{\mvec \in \restbasis_j} \phi_{j,\mvec}^\prime
 		\sum_{k=1}^C \sum_{\nvec \in \restbasis_k} \sum_{l=1}^L
 			\int \upd\xvec\,
@@ -497,6 +500,7 @@ Substituting $\sum_{\pvec \in \fullbasis} \phi_{\pvec}^* \phi_{\pvec} = \delta(\
 \end{eqn}
 Recognising the projection transformation and the functional differential:
 \begin{eqn}
+	\mathcal{S}_j
 	& = \proj{\restbasis_j} \left[
 		\frac{1}{2} \sum_{k=1}^C \sum_{\nvec \in \restbasis_k} \sum_{l=1}^L
 			\phi_{k,\nvec} \mathcal{B}_{kl}^*
