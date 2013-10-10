@@ -53,7 +53,7 @@ This can be in some cases handled by exploiting its non-uniqueness and tailoring
 Alternatively, one may project the distribution on the required part of Hilbert space, thus preventing it from venturing into ``useless'' states, which will cancel out during measurement, yet still affect the total error.
 
 The Wigner distribution is, in general, not positive, which presents problems when simulating systems with a small number of particles.
-Fortunately, assuming that the number of particles is large enough (as in our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details), under which the Wigner function can be truncated.
+Fortunately, assuming that the number of particles is large enough (as in our case), one can make certain approximations (see \secref{wigner-bec:truncation} for details), under which the Wigner function can be truncated, making it strictly positive.
 This turns it into a probability distribution, thus providing a way to reduce the initial master equation to a set of stochastic differential equations (\abbrev{sde}s), for which an extensive set of numerical integration methods exists.
 Of course, it is not the only method for this type of the system.
 A very useful group of two-mode variational methods has been used by different research groups~\cite{Li2008,Li2009,Sinatra2011}, but these have some difficulties handling nonlinear losses in \abbrev{bec}s, and the approximation starts to break down in the presence of many populated modes.

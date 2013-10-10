@@ -18,7 +18,22 @@ This was first introduced by Weyl~\cite{Weyl1950} and thoroughly described by Ca
 	\end{eqn*}
 \end{definition}
 
-Using the Baker-Hausdorff theorem to split non-commuting creation and annihilation operators in the exponent, one can find that
+We will need the differentials of this operator with respect to $\lambda$ and $\lambda^*$.
+In order to calculate these, we separate commuting terms in the exponent using the Baker-Hausdorff theorem for operators $\hat{A} \equiv \lambda \hat{a}^\dagger$ and $\hat{B} \equiv  - \lambda^* \hat{a}$.
+In our case $[\hat{A}, [\hat{A}, \hat{B}]] = [\hat{B}, [\hat{A}, \hat{B}]] = 0$, so the theorem gives
+\begin{eqn}
+	\exp(\lambda \hat{a}^\dagger - \lambda^* \hat{a})
+	=
+		\exp(-|\lambda|^2/2)
+		\exp(\lambda \hat{a}^\dagger)
+		\exp(- \lambda^* \hat{a}).
+\end{eqn}
+This can be easily differentiated (minding the ordering of factors with $\hat{a}^\dagger$ and $\hat{a}$) as
+\begin{eqn}
+	\frac{\cwd}{\cwd \lambda} \hat{D}(\lambda)
+	= (\hat{a}^\dagger - \frac{1}{2} \lambda^*) \hat{D}(\lambda).
+\end{eqn}
+Similarly, for $\cwd/\cwd \lambda^*$ and for two different orderings of operator factors we find that
 \begin{eqn}
 \label{eqn:mm-wigner:sm:displacement-derivatives}
 	\frac{\cwd}{\cwd \lambda} \hat{D}(\lambda)
@@ -167,7 +182,7 @@ Substituting this into the definition of the Wigner transformation:
 \end{eqn}
 The second term is almost the definition of the Wigner function, except for the derivative over $\lambda^*$.
 Here we can use \lmmref{c-numbers:zero-integrals} since $\hat{A}$ is a Hilbert-Schmidt operator, which means that $\Trace{\hat{A} \hat{D}}$ is square-integrable~\cite{Cahill1969}.
-This implies that we can use integration by parts with vanishing surface term, so
+This implies that we can use integration by parts with vanishing boundary terms, so
 \begin{eqn}
 	\mathcal{W} [ \hat{a} \hat{A} ]
 	& = \frac{1}{2} \frac{\cwd}{\cwd \alpha^*} \mathcal{W} [\hat{A}]
@@ -185,7 +200,7 @@ We will start by proving an auxiliary lemma which connects the expectation of an
 
 \begin{lemma}
 \label{lmm:mm-wigner:sm:moments-from-chi}
-	For a system with a density matrix $\hat{\rho}$ and corresponding characteristic function $\chi_W$:
+	For a system with a density matrix $\hat{\rho}$ and a corresponding characteristic function $\chi_W$:
 	\begin{eqn*}
 		\langle \symprod{ \hat{a}^r (\hat{a}^\dagger)^s } \rangle
 		= \left.

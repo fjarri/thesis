@@ -28,15 +28,8 @@ Checklist:
 Peter's changes:
 - PDF/A compatibility: need to find a way to solve current problems with metadata and zero witdh of some symbols.
   (Check Adobe Acrobat, it may be able to perform the conversion)
-- Introduction, p.2 ("under which the Wigner function can be truncated") - what's the word there?
-- Introduction, p.5 - do we still need "correctly" after "It shows how the truncated Wigner method can predict"?
 - Introduction, the end - describe the code.
 - Chapter 2, p.8: add the derivation for eqn (2.2)?
-- Chapter 2, p.11, top - is it "surface term"?
-- Chapter 3, "non-commuting field operators" - in what sense?
-- is it "with a corresponding ...", or "with corresponding ..."?
-- Chapter 5, "stet"?
-- Chapter 5, p.41 - discuss
 - Chapter 5, p.45, bottom - "broad-band"?
 - Chapter 6, p.57 - discuss
 - Chapter 7, add more explanations to the discrepancies with the experiment

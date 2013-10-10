@@ -76,6 +76,7 @@ These would normally be chosen as the healing time and healing length respective
 Typically the cell size is chosen to be proportional to the healing length, for optimum accuracy in resolving spatial detail.
 Using this expansion, a consistent order-by-order expansion in $1/\sqrt{N_j}$ can be obtained, of form:
 \begin{eqn}
+\label{eqn:wigner-bec:truncation:population-condition}
 	\frac{\upd W^{\psi}}{\upd \tau}
 	= \int \upd\xvec \left\{
 		- \sum_{j=1}^C \frac{\fdelta}{\fdelta \psi_j} \mathcal{A}_j^{\psi}
@@ -94,7 +95,7 @@ where $N_j$ is the total number of atoms of the component $j$.
 The inclusion of the mode factor is caused by the fact that the number of additional terms increases as the number of modes increases, which may be needed to treat convergence of the method for large momentum cutoff.
 We see immediately that there are subtleties involved if one wishes to include larger numbers of high-momentum modes, since this increases the mode number while leaving the numbers unchanged.
 In other words, the truncation technique is inherently restricted in its ability to resolve fine spatial details in the high-momentum cutoff limit.
-The truncation condition can be written in an alternative form for component density~\cite{Norrie2006}
+The truncation condition~\eqnref{wigner-bec:truncation:population-condition} has a stronger form expressed in terms of component density~\cite{Norrie2006}
 \begin{eqn}
 \label{eqn:wigner-bec:truncation:delta-condition}
 	\delta_{\restbasis_j}(\xvec, \xvec)
