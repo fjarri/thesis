@@ -11,7 +11,16 @@
 \DeclareMicrotypeSet{maintext}{family={LinLibertine}}
 \UseMicrotypeSet[protrusion,expansion,tracking]{maintext}
 
+% three asterisks, used to separate sub-parts of text
+\newcommand{\asterism}{{\upshape\normalfont\symbol{\string"2042}}}
+% a symbol used to separate two words
+\newcommand{\separator}{{\upshape\normalfont\symbol{\string"25C6}}}
+% a fancy bullet (Warning: this code is specific to LinLibertine, other fonts may not have it)
+\newcommand{\hbullet}{{\upshape\normalfont\symbol{\string"E001}}}
+
 % Fleurons (which most fonts do not have)
-\newfontface{\fleurons}{JUnicode}
-\newcommand{\vfleuron}{{\upshape\fleurons\symbol{\string"2766}}} % vertical
-\newcommand{\hfleuron}{{\upshape\fleurons\symbol{\string"2767}}} % horizontal
+% These symbols interact stangely with some printers, and add a dependency on another font.
+% Commenting for now and using what LinLibertine has.
+%\newfontface{\fleurons}{JUnicode}
+%\newcommand{\vfleuron}{{\upshape\fleurons\symbol{\string"2766}}} % vertical
+%\newcommand{\hfleuron}{{\upshape\fleurons\symbol{\string"2767}}} % horizontal
