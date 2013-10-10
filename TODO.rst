@@ -38,6 +38,7 @@ Peter's changes:
 - Chapter 7, p.64: discuss. I can use K, probably.
 - Chapter 7, p.74: underlined phrase?
 - Chapter 7, p.79: can't post factum be used as an adjective? Or if it's "o", then "ex post facto".
+- Chapter 8, is it enough to just reference the paper, or some explanation needed too?
 
 Andrei's changes:
 - Chapter 7, p.60: preparation does not matter at this point, it is described in "Visibility" section.

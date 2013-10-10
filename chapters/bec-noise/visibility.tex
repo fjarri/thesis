@@ -40,7 +40,7 @@ Coherence of the interference signal can be characterised by a common quantity~-
 \end{eqn}
 where the denominator is just the total number of atoms in the system.
 This quantity can be shown to be the envelope curve of the population fringes produced by the second $\pi/2$-pulse in the experiment.
-In the mean-field model, the required correlations are calculated simply as
+In the mean-field approximation, the required correlations are calculated simply as
 \begin{eqn}
     \tilde{n}
     & = \langle \Psiop_1^\dagger \Psiop_2 \rangle \approx \Psi_1^* \Psi_2, \\
@@ -66,7 +66,7 @@ where we have used the fact that $\delta_{\restbasis_j}(\xvec, \xvec) \equiv M /
 
     \caption[Experimental and numerically simulated interferometric constrast in Ramsey sequence]{
     Comparison of experimental and numerically simulated interferometric contrast at the end of a regular Ramsey sequence with the evolution time $t$.
-    Experimental results (black bars) are shown in comparison with the results given by the mean-field model (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).
+    Experimental results (black bars) are shown in comparison with the results given by the mean-field approximation (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).
     The mean-field results with losses turned off (yellow dash-dotted line) and the population-dependent visibility limit~\eqnref{bec-noise:visibility:limit} (grey dotted line) are included as a reference.}%endcaption
 
     \label{fig:bec-noise:visibility:ramsey-visibility}
@@ -112,7 +112,7 @@ Potential unaccounted factors include finite temperature effects and interaction
 
     \caption[Experimental and numerically simulated interferometric constrast in spin echo sequence]{
     Comparison of experimental and numerically simulated interferometric contrast at the end of a spin echo sequence with the evolution time $t$.
-    Experimental results (black bars) show the final visibility value for a single spin echo sequence with the full evolution time $t$ as compared with the predictions from the mean-field model (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).}%endcaption
+    Experimental results (black bars) show the final visibility value for a single spin echo sequence with the full evolution time $t$ as compared with the predictions from the mean-field approximation (green dotted line), the truncated Wigner method (red dashed line), and the truncated Wigner with technical noises included (blue solid line).}%endcaption
 
     \label{fig:bec-noise:visibility:echo-visibility}
 \end{figure}
@@ -121,7 +121,7 @@ The asymmetricity introduced by the difference in loss rates can be compensated 
 The simplest, yet already very effective, variant is to apply the $\pi$-pulse in the middle of the evolution as illustrated by~\figref{bec-noise:visibility:sequences},~(b).
 With this additional pulse, by the end of a single experimental sequence the populations of two components become equal again as shown in~\figref{bec-noise:visibility:population},~(b), restoring the theoretical visibility limit~\eqnref{bec-noise:visibility:limit} back to $1$.
 
-The mean-field model predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment as seen in~\figref{bec-noise:visibility:echo-visibility}.
+The mean-field approximation predicts the full recovery of the visibility even at long evolution times, which is inconsistent with the experiment as seen in~\figref{bec-noise:visibility:echo-visibility}.
 On the other hand, the quasiprobability model qualitatively predicts the decay of visibility with time.
 Just as in the case of the regular Ramsey sequence, the predictions of the simulation are improved by the inclusion of technical noise.
 Nevertheless, even after that the difference is still significant and points to unaccounted factors, which will be discussed in the conclusion.
@@ -134,7 +134,7 @@ In the paper by Egorov \textit{et~al}~\cite{Egorov2011} presenting the results o
 
     \caption[Experimental and numerically simulated interferometric constrast in Ramsey and spin echo sequences for longer times]{
     Numerically simulated interferometric contrast for \textbf{(a)} a Ramsey sequence, and \textbf{(b)} a spin echo sequence at longer times.
-    The results for the mean-field model (green dotted lines), the truncated Wigner method (red dashed lines) and the truncated Wigner with technical noises (blue solid lines) are plotted.}%endcaption
+    The results for the mean-field approximation (green dotted lines), the truncated Wigner method (red dashed lines) and the truncated Wigner with technical noises (blue solid lines) are plotted.}%endcaption
 
     \label{fig:bec-noise:visibility:visibility-long}
 \end{figure}
