@@ -63,14 +63,14 @@ Consequently, for \abbrev{qm} and \abbrev{lhv} predictions we get the uniform \a
 \label{eqn:bell-ineq:ghz:general-ineq}
     F_{\lambda} \le 2^{(M-1)/2}.
 \end{eqn}
-The relative violation can thus be made arbitrarily big to compensate for any imperfections in the measurements.
+The relative violation can thus be made arbitrarily large to compensate for any imperfections in the measurements.
 
 
 % =============================================================================
 \subsection{Positive-P representation}
 % =============================================================================
 
-The na\"ive approach to the sampling of the state~\eqnref{bell-ineq:ghz:state} is to use the the P-representation, as we did in the previous section.
+One approach to the sampling of the state~\eqnref{bell-ineq:ghz:state} is to use the the P-representation, the same as in the previous section.
 In general, spin-up and spin-down states are represented as $\ket{\uparrow}\equiv\ket{10}$ and $\ket{\downarrow}\equiv\ket{01}$, where $\ket{0}$ and $\ket{1}$ are number states, which allows for straightforward application of Pauli spin operators.
 
 But for our particular choice of the target operator~\eqnref{bell-ineq:ghz:operator}, we can choose a simplified representation, which will halve the dimensionality of the resulting phase space: $\ket{\uparrow}\equiv\ket{0}$ and $\ket{\downarrow}\equiv\ket{1}$.
@@ -203,7 +203,7 @@ The real parts of the correlations in this expression for both representations u
 The main feature of quasiprobability representations is apparent: neither of them limits the value of $\Real \sigma_1^x$ or $\Real \sigma_2^x$ to the range $[-1, 1]$ as would happen in a \abbrev{lhv} theory.
 This means that the Bell theorem does not apply to these results because the sampled values differ from their physical equivalents.
 Moreover, the plots for the SU(2)-Q show that in this representation the correlations are more peaked, and also do not have exponential tails as the ones in the positive-P representation.
-This, in addition to the reduced phase space dimensionality, allows the sampling with SU(2)-Q representation for high values of $M$.
+This, in addition to the reduced phase space dimensionality, allows for more efficient sampling with SU(2)-Q representation for high values of $M$.
 
 \begin{figure}
     \centerline{%
@@ -234,16 +234,16 @@ In order to have some reference for comparisons, we also plotted the sampling er
 \begin{eqn}
     N = \langle\sum_{j=1}^M (\hat{\sigma}_j^z + 1 )/2 \rangle.
 \end{eqn}
-This low-order spin correlation requires a linearly growing amount of measurements in the experiment as compared to the exponentially growing amount for $F$.
-As the plot shows, the sampling error for $N$ even slowly decreases as $M$ grows.
+This low-order spin correlation physically requires only a linearly growing amount of measurements in the experiment as compared to the exponentially growing amount for $F$.
+As the plot shows, the sampling error for $N$ slowly decreases as $M$ grows.
 This explains why low-order correlations could be efficiently sampled in previous work, for much larger Hilbert spaces than the ones studied here.
 
 On the other hand, high-order correlations showed exponentially growing sampling error.
-In case of positive-P the relative error scales as $2^{4M/5}$, which with the chosen number of samples, produces Bell violations only up to $M=25$.
-The SU(2)-Q representation shows much better results with the relative error scaling as $2^{M/3}$, so the time taken by the simulation at constant error scales as $2^{2M/3}$.
+In the positive-P case the relative error scales as $2^{4M/5}$, which with the chosen number of samples, produces Bell violations only up to $M=25$.
+The SU(2)-Q representation shows much better results with a relative error scaling of $2^{M/3}$, so the time taken by the simulation at constant error scales as $2^{2M/3}$.
 An experiment measuring the same quantity would take time proportional to $2^M$ since it would have to perform measurements for exponentially many settings.
 Thus, the probabilistic sampling of the SU(2)-Q function scales better than an analogous experiment for high-order correlations.
 
-These results show that the probabilistic sampling is a perfectly viable technique both for low- and high-order correlations.
+These results show that the probabilistic sampling is a viable technique both for low- and high-order correlations.
 Low-order correlations are the ones most commonly measured, and sampling errors in these are insensitive to scaling up to mesoscopic sizes.
 Correlations of the same order as the system size are still exponentially hard, but a carefully chosen quasiprobability representation can give an exponential advantage over the experimental scaling.

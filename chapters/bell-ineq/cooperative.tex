@@ -33,7 +33,7 @@ The quantum state in question is
         }{N! \left( N+1 \right)^{1/2}},
 \end{eqn}
 where $N$ is the number of photon pairs, indices $1$ and $2$ denote the propagation direction, and $+$ and $-$ stand for the polarization direction.
-These states are generated in certain types of optical parametric down-conversion experiments, and it has proved difficult to obtain a direct, loophole free violation of a Bell inequality, owing to detector inefficiencies~\cite{Cabello2007,Larsson1998,Larsson2001}.
+These states are generated in certain types of optical parametric down-conversion experiments, and it has proved difficult to obtain a direct, loophole free violation of a Bell inequality, owing to detector inefficiencies~\cite{Cabello2007,Larsson1998,Larsson2001} (although this problem has been solved recently~\cite{Giustina2013}).
 However, these issues are not significant for the simulations in this thesis since we are considering an ideal experiment.
 
 We define the intensity correlations to be~\cite{Drummond1983}
@@ -107,9 +107,9 @@ where $\vert\balpha\rangle$ is a multimode coherent state.
 The positive P-representation, therefore, corresponds exactly to the definition of a physical weak measurement~\cite{Aharonov1988}, with the initial state $\vert\balpha\rangle$ and the final postselected state $\vert\bbeta\rangle$ occurring with probability $P(\balpha,\bbeta)$.
 The standard form we use is also known to be measurable using multiple beam-splitter operations~\cite{Agarwal1994}.
 
-The expression above looks very similar to~\eqnref{bell-ineq:cooperative:lhv}, given by \abbrev{lhv}.
+The expression above looks very similar to~\eqnref{bell-ineq:cooperative:lhv}, given by an \abbrev{lhv} theory.
 The fundamental difference, which allows the correlations obtained from the positive-P distribution to violate Bell inequalities, is that the quantities being sampled can be complex numbers of any magnitude.
-Only after the weighted averaging with the probability distribution $P$ they give the value of the observable.
+Only after the weighted averaging with the probability distribution $P$ do they give the value of the observable.
 
 For an arbitrary moment of creation and annihilation operators $\hat{O}(\avec^\dagger, \avec)$, the expectation is calculated as
 \begin{eqn}
@@ -191,7 +191,7 @@ where
     = \frac{|\Avec|^2N}{\pi^2 \sqrt{N+1} N!} e^{-|\Avec|^2}.
 \end{eqn}
 The bounding function $F$ will be used as a probability distribution in the rejection sampling, so it must be normalised on $1$.
-In order to do that, we notice that
+In order to do this, we notice that
 \begin{eqn}
     \int |\Avec|^{2N} e^{-|\Avec|^{2}} \upd^2 \Avec
     & = S_{k-1}(1) \int_0^{\infty} r^{2N+k-1} \exp(-r^{2}) \upd r \\
@@ -223,7 +223,7 @@ The distribution $F^\prime$, in turn, can be represented as a product of two ind
 \end{eqn}
 where $r = |\Avec|$, $\nvec$ is a unit vector on a $k$-dimensional sphere, and $U=1/S_{k-1}(1)$ is a uniform distribution of vector directions (or, in other words, a uniform distribution on the surface of a $k$-dimensional ball).
 The latter can be sampled using the Marsaglia algorithm~\cite{Marsaglia1972} (sampling a vector of $k$ normally distributed random numbers and normalising it on $1$).
-In order to sample the distribution $R$, we have to do another variable change, $r^{2}\rightarrow x$:
+In order to sample the distribution $R$, we have to make another variable change, $r^{2}\rightarrow x$:
 \begin{eqn}
     R(x)
     & = \frac{1}{2\sqrt{x}} S_{k-1}(\sqrt{x}) g(x) \\
@@ -234,7 +234,7 @@ In order to sample the distribution $R$, we have to do another variable change, 
 \end{eqn}
 The result is exactly the gamma-distribution with the scale $\alpha = N + 2$, for which an efficient sampling method exists~\cite{Marsaglia2000}.
 
-Combining it all together, the rejection algorithm for sampling the probability distribution~\eqnref{bell-ineq:cooperative:pos-P} consists of the following steps:
+In summary, the rejection algorithm for sampling the probability distribution~\eqnref{bell-ineq:cooperative:pos-P} consists of the following steps:
 \begin{enumerate}
 \item Sample two squared lengths $|\Avec|^2$ and $|\Bvec|^2$ using the gamma distribution with the scale $N+2$.
 \item Sample two directions $\nvec_A$ and $\nvec_B$ using the Marsaglia algorithm.
@@ -243,7 +243,7 @@ Combining it all together, the rejection algorithm for sampling the probability 
 \item If $u > P^\prime(\Avec,\Bvec) / (M^2 F^\prime(\Avec) F^\prime(\Bvec))$, reject the sample and start over.
 \item Sample the real components of $\delta\Avec$ and $\delta\Bvec$ independently using Gaussian distributions with the variance $1/2$ and combine them with $\Avec$ and $\Bvec$ to get $\balpha$ and $\bbeta$ using~\eqnref{bell-ineq:cooperative:ab-delta-ab} and~\eqnref{bell-ineq:cooperative:mu-lambda}.
 \end{enumerate}
-The resulting phase-space coordinates $\balpha$ and $\bbeta$ can be now used to get a sample of any moment of creation and annihilation operators using the formula~\eqnref{bell-ineq:cooperative:moment-expectation}.
+The resulting phase-space coordinates $\balpha$ and $\bbeta$ can be now used to obtain a sample of any moment of creation and annihilation operators using the formula~\eqnref{bell-ineq:cooperative:moment-expectation}.
 
 
 % =============================================================================
@@ -263,6 +263,7 @@ The resulting phase-space coordinates $\balpha$ and $\bbeta$ can be now used to 
 \end{figure}
 
 Using the sampling method described in the previous subsection, we can now sample the positive-P distribution~\eqnref{bell-ineq:cooperative:pos-P} and calculate the violation~\eqnref{bell-ineq:cooperative:violation}.
-We do that for the two-particle case $N=J=1$, and also for the four-particle case $N=J=2$, which has been observed experimentally~\cite{Howell2002}.
+We do this for the two-particle case $N=J=1$, and also for the four-particle case $N=J=2$, which has also been observed experimentally~\cite{Howell2002}.
 The results are plotted in~\figref{bell-ineq:cooperative:violation}, together with the analytical predictions~\eqnref{bell-ineq:cooperative:violation-1} and~\eqnref{bell-ineq:cooperative:violation-2}.
-The second case requires significantly more samples to achieve a small enough sampling error, but it is clear that in both cases we were able to demonstrate the violation which is beyond the sampling error range.
+The second case requires significantly more samples to achieve a small enough sampling error, but it is clear that in both cases we were able to demonstrate a violation which is beyond the sampling error range.
+This is a direct counterexample to Feynman's claim.
