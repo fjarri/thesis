@@ -185,14 +185,14 @@ The state obtained from the Thomas-Fermi approximated \abbrev{gpe} can be taken 
 Since the population will decrease exponentially after each step, and the precision of numerical calculations is limited, a renormalisation after each step will be required.
 The total number of atoms in the ground state serves best in this case (because we will have to renormalise the final ground state anyway):
 \begin{eqn}
-	\int\limits_V \lvert \Psi(\tau, \xvec) \rvert^2 \upd V = N.
+	\int \lvert \Psi(\tau, \xvec) \rvert^2 \upd\xvec = N.
 \end{eqn}
 
 Propagation is terminated when the Gross-Pitaevskii energy of the state converges to the required precision (that is, only one eigenstate with the lowest energy is left out).
 The energy of the two-component condensate~\cite{Pitaevskii2003}
 \begin{eqn}
 \label{eqn:bec-noise:mean-field:two-comp-energy}
-	E[\Psivec] ={} & \int\limits_A \left(
+	E[\Psivec] ={} & \int \left(
 		- \frac{\hbar^2 \Psi_1^* \nabla^2 \Psi_1}{2m}
 		- \frac{\hbar^2 \Psi_2^* \nabla^2 \Psi_2}{2m}
 	\right. \\
