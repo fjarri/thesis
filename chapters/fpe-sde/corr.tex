@@ -396,11 +396,11 @@ The diffusion term has to be transformed in order to conform to \thmref{fpe-sde:
 \begin{eqn}
 	\int \upd\xvec \phi_{j,\mvec} \phi_{k,\nvec}^* \sum_{l=1}^L
 		\mathcal{B}_{kl} \mathcal{B}_{jl}^*
-	& = \int \upd\xvec \int \upd\xvec^\prime
+	& = \iint \upd\xvec\, \upd\xvec^\prime
 			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
 			\sum_{l=1}^L \mathcal{B}_{jl}^{\prime *} \mathcal{B}_{kl}
 			\delta(\xvec - \xvec^\prime) \\
-	& = \int \upd\xvec \int \upd\xvec^\prime
+	& = \iint \upd\xvec\, \upd\xvec^\prime
 			\phi_{j,\mvec}^\prime \phi_{k,\nvec}^*
 			\sum_{l=1}^L \mathcal{B}_{jl}^{\prime *} \mathcal{B}_{kl}
 			\sum_{\pvec \in \fullbasis} \phi_{\pvec}^{\prime*} \phi_{\pvec} \\

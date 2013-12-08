@@ -234,7 +234,7 @@ Expanding the loss operator:
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd\xvec\, \upd\xvec^\prime \Trace{
+			\iint \upd\xvec\, \upd\xvec^\prime \Trace{
 				\hat{\rho} \left(
 					2 \hat{O}_{\lvec}^{\prime\dagger} \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^\prime
 					- \Psiop_j^\dagger \Psiop_j \hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime
@@ -242,7 +242,7 @@ Expanding the loss operator:
 				\right)
 			} \\
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd\xvec\, \upd\xvec^\prime \langle
+			\iint \upd\xvec\, \upd\xvec^\prime \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
@@ -251,7 +251,7 @@ Expanding the loss operator:
 				\right] \Psiop_j
 			\rangle \\
 	={} & \sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd\xvec\, \upd\xvec^\prime 2 \Real \langle
+			\iint \upd\xvec\, \upd\xvec^\prime 2 \Real \langle
 				\Psiop_j^\dagger \left[
 					\hat{O}_{\lvec}^{\prime\dagger} \hat{O}_{\lvec}^\prime, \Psiop_j
 				\right]
@@ -261,7 +261,7 @@ Applying \lmmref{wigner:op-calculus:functional-commutators} to transform the com
 \begin{eqn}
 	\frac{d}{dt} \int \upd\xvec \langle \Psiop_j^\dagger \Psiop_j \rangle
 	={} & -2\sum_{\lvec \in L} \kappa_{\lvec}
-			\int \upd\xvec\, \upd\xvec^\prime \Real \left\langle
+			\iint \upd\xvec\, \upd\xvec^\prime \Real \left\langle
 				\Psiop_j^\dagger
 				\delta_{\restbasis_j}(\xvec^\prime, \xvec)
 				\frac{\upp \left(
