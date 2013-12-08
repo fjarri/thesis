@@ -21,7 +21,7 @@ For example, for a three-dimensional harmonic potential, the mode identifier is 
 The orthonormality and completeness conditions for basis functions are, respectively,
 \begin{eqns}
 \label{eqn:func-calculus:basis}
-	\int\limits_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) \upd\xvec
+	\int_A \phi_{\nvec}^*(\xvec) \phi_{\mvec}(\xvec) \upd\xvec
 	& = \delta_{\nvec\mvec}, \\
 	\sum_{\nvec \in \fullbasis} \phi_{\nvec}^*(\xvec) \phi_{\nvec}(\xvec^\prime)
 	& = \delta(\xvec^\prime - \xvec),
@@ -537,10 +537,10 @@ In order to perform transformations of a master equation in the future, we will 
 	where $A$ is the integration area associated with the basis, $\partial A$ is its boundary, and $\mathbf{v}$ is the outward-pointing unit normal of a surface element $\upd S$.
 	Then for any $\mathcal{F} \in \mathbb{F}_{\restbasis} \rightarrow \mathbb{F}$,
 	\begin{eqn*}
-		\int\limits_A \upd\xvec \left(
+		\int_A \upd\xvec \left(
 			\nabla^2 \frac{\fdelta}{\fdelta f}
 		\right) f \mathcal{F}[f]
-		= \int\limits_A \upd\xvec \frac{\fdelta}{\fdelta f}
+		= \int_A \upd\xvec \frac{\fdelta}{\fdelta f}
 		( \nabla^2 f ) \mathcal{F}[f]
 	\end{eqn*}
 \end{lemma}
@@ -549,11 +549,11 @@ Integration limits play an important role in this proof, so we will write them e
 The components of the integral are expanded using the basis functions as
 \begin{eqn}
 \label{eqn:func-calculus:move-laplasian-expansion}
-	\int\limits_A \upd\xvec \left(
+	\int_A \upd\xvec \left(
 		\nabla^2 \frac{\fdelta}{\fdelta f}
 	\right) f \mathcal{F}[f]
 	= \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
-			\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+			\int_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 		\right)
 		\frac{\cwd}{\cwd \alpha_{\nvec}} \alpha_{\mvec}
 			\mathcal{F}[\mathcal{C}_{\restbasis}(\balpha)],
@@ -561,24 +561,24 @@ The components of the integral are expanded using the basis functions as
 where $\balpha = \mathcal{C}_{\restbasis}^{-1}[f]$.
 Using Green's first identity and the condition for the integrals over the boundary of $A$:
 \begin{eqn}
-	\int\limits_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
+	\int_A \upd\xvec ( \nabla^2 \phi_{\nvec}^* ) \phi_{\mvec}
 	& = \oint\limits_{\partial A} \phi_{\mvec} (\nabla \phi_{\nvec}^* \cdot \mathbf{v}) \upd S
-	- \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
-	& = 0 - \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	- \int_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = 0 - \int_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
 	& = \oint\limits_{\partial A} \phi_{\nvec}^* (\nabla \phi_{\mvec} \cdot \mathbf{v}) \upd S
-	- \int\limits_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
-	& = \int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
+	- \int_A \upd\xvec ( \nabla \phi_{\nvec}^* ) ( \nabla \phi_{\mvec} ) \\
+	& = \int_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} ),
 \end{eqn}
 Substituting this back into~\eqnref{func-calculus:move-laplasian-expansion}:
 \begin{eqn}
-	\int\limits_A \upd\xvec \left(
+	\int_A \upd\xvec \left(
 		\nabla^2 \frac{\fdelta}{\fdelta f}
 	\right) f \mathcal{F}[f]
 	& = \sum_{\nvec \in \restbasis, \mvec \in \restbasis} \left(
-			\int\limits_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
+			\int_A \upd\xvec \phi_{\nvec}^* ( \nabla^2 \phi_{\mvec} )
 		\right)
 		\frac{\cwd}{\cwd \alpha_{\nvec}} \alpha_{\mvec} \mathcal{F}(\mathbf{\alpha}) \\
-	& = \int\limits_A \upd\xvec \frac{\fdelta}{\fdelta f}
+	& = \int_A \upd\xvec \frac{\fdelta}{\fdelta f}
 		( \nabla^2 f ) \mathcal{F}[f].
 	\qedhere
 \end{eqn}
