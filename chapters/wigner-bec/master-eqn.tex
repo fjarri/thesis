@@ -36,16 +36,16 @@ The master equation allows us to derive an important property.
 \begin{theorem}
 	The time derivative of the expectation of the field operator whose evolution is described by the master equation~\eqnref{wigner-bec:master-eqn:master-eqn} with the Hamiltonian~\eqnref{wigner-bec:hamiltonian:effective-H} is
 	\begin{eqn*}
-		\frac{\upd}{\upd t} \langle \Psiop_m \rangle
-		= \mathcal{P}_{\restbasis_m} \left[
-			\langle
-				-\frac{i}{\hbar} \left(
-					K_{mj} \Psiop_j
-					+ U_{mk} \Psiop_k^\dagger \Psiop_k \Psiop_m
+		\frac{\upd}{\upd t} \langle \Psiop_j \rangle
+		= \mathcal{P}_{\restbasis_j} \left[
+			\left\langle
+				-\frac{i}{\hbar} \sum_{k=1}^C \left(
+					K_{jk} \Psiop_k
+					+ U_{jk} \Psiop_k^\dagger \Psiop_k \Psiop_j
 				\right)
 				- \sum_{\lvec \in L} \kappa_{\lvec}
-					\frac{\upp \hat{O}_{\lvec}^\dagger}{\upp \Psiop_m^\dagger} \hat{O}_{\lvec}
-			\rangle
+					\frac{\upp \hat{O}_{\lvec}^\dagger}{\upp \Psiop_j^\dagger} \hat{O}_{\lvec}
+			\right\rangle
 		\right].
 	\end{eqn*}
 \end{theorem}
@@ -56,13 +56,13 @@ Rewriting the expectation as a trace, and substituting the right-hand part of~\e
 	={} & \frac{\upd}{\upd t} \Trace{ \hat{\rho} \Psiop_j }
 	= \Trace{ \frac{\upd\hat{\rho}}{\upd t} \Psiop_j } \\
 	={} & \int \upd \xvec^\prime \left(
-		- \frac{i}{\hbar} \Trace{
+		- \frac{i}{\hbar} \sum_{m=1}^C \sum_{k=1}^C \Trace{
 			\left[
 				\Psiop_m^{\prime\dagger} K_{mk}^\prime \Psiop_k^\prime,
 				\hat{\rho}
 			\right] \Psiop_j
 		} \right. \\
-	& \quad - \frac{i}{2\hbar} U_{mk} \Trace{
+	& \quad - \frac{i}{2\hbar} \sum_{m=1}^C \sum_{k=1}^C U_{mk} \Trace{
 			\left[
 				\Psiop_m^{\prime\dagger} \Psiop_k^{\prime\dagger}
 				\Psiop_m^\prime \Psiop_k^\prime,
@@ -101,7 +101,8 @@ Noticing that $K_{mk}^\prime$ commutes with $\Psiop_j$, and using \lmmref{wigner
 	& = \Trace{
 		\hat{\rho} \delta_{jm} \delta_{\restbasis_j}(\xvec^\prime, \xvec) K_{mk}^\prime \Psiop_k^\prime
 	}
-	= \delta_{\restbasis_j}(\xvec^\prime, \xvec) \langle K_{jk}^\prime \Psiop_k^\prime \rangle.
+	= \delta_{jm} \delta_{\restbasis_j}(\xvec^\prime, \xvec)
+		\langle K_{mk}^\prime \Psiop_k^\prime \rangle.
 \end{eqn}
 
 The second (nonlinear) term is transformed similarly:
@@ -135,7 +136,7 @@ The second (nonlinear) term is transformed similarly:
 \end{eqn}
 Swapping $m \leftrightarrow k$ in the term corresponding to the second Kronecker delta, and summing over $m$:
 \begin{eqn}
-	U_{mk} \Trace{
+	\sum_{m=1}^C U_{mk} \Trace{
 		\left[
 			\Psiop_m^{\prime\dagger} \Psiop_k^{\prime\dagger}
 			\Psiop_m^\prime \Psiop_k^\prime,
@@ -188,14 +189,16 @@ Thus, the full relation is
 \begin{eqn}
 	\frac{d}{dt} \langle \Psiop_j \rangle
 	& = \int \upd \xvec^\prime \delta_{\restbasis_j}(\xvec^\prime, \xvec) \left(
-		- \frac{i}{\hbar} \langle K_{jk}^\prime \Psiop_k^\prime \rangle
-		- \frac{i U_{jk}}{\hbar} \langle
-			\Psiop_k^{\prime\dagger} \Psiop_k^\prime \Psiop_j^\prime
-		\rangle
-		- \sum_{\lvec} \kappa_{\lvec} \langle
+		- \frac{i}{\hbar} \sum_{k=1}^C \left(
+			\langle K_{jk}^\prime \Psiop_k^\prime \rangle
+			+ U_{jk} \langle
+				\Psiop_k^{\prime\dagger} \Psiop_k^\prime \Psiop_j^\prime
+			\rangle
+		\right)
+		- \sum_{\lvec} \kappa_{\lvec} \left\langle
 			\frac{\upp \hat{O}_{\lvec}^{\prime\dagger}}{\upp \Psiop_j^{\prime\dagger}}
 			\hat{O}_{\lvec}^\prime
-		\rangle
+		\right\rangle
 	\right),
 \end{eqn}
 which is equivalent to the statement of the theorem after replacing the integration with the restricted delta by a projector according to~\eqnref{func-calculus:projector-via-delta}.
