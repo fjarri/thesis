@@ -1,5 +1,6 @@
 % =============================================================================
 \section{Master equation}
+\label{sec:wigner-bec:master-eqn}
 % =============================================================================
 
 The time evolution of the density matrix $\hat{\rho}$ of a multi-component \abbrev{bec} with particle losses can be written as a Markovian master equation~\cite{Jack2002}
@@ -12,7 +13,7 @@ The time evolution of the density matrix $\hat{\rho}$ of a multi-component \abbr
 \end{eqn}
 where $L$ is the set of all loss processes taken into account, and $\lvec = (l_1, l_2, \ldots, l_C)$ is a vector containing the number of particles of each component involved in the inelastic interaction causing the specific loss process (with $C$ being the number of components).
 The coefficients $\kappa_{\lvec}$ are strengths of the corresponding loss processes, whose connection to experimentally measurable population losses will be discussed later in \secref{bec-noise:wigner} and is expressed by Eqn.~\eqnref{bec-noise:wigner:loss-rates-relation}.
-Here we have introduced local Liouville loss terms that describe $n$-body collisional losses in the Markovian approximation,
+Here the local Liouville loss terms (introduced in \charef{wigner-spec}) that describe $n$-body collisional losses in the Markovian approximation are
 \begin{eqn}
 \label{eqn:wigner-bec:master-eqn:loss-op}
 	\mathcal{L}_{\lvec} \left[ \hat{\rho} \right] =

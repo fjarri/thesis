@@ -5,15 +5,50 @@
 
 Although the functional correspondences from \thmref{wigner:mc:correspondences} are relatively straightforward, there is a certain amount of work required to apply them to actual master equations arising in real world problems.
 This chapter contains several theorems describing transformations of specific operator sequences, encountered in master equations describing \abbrev{bec} evolution.
+We will use these theorems in \charef{wigner-bec} to obtain a correspondence between operator evolution equations and functional derivatives of a classical field $\Psi$, which act on the Wigner functional instead of the quantum density matrix.
 
-We will use these theorems to obtain a correspondence between operator evolution equations and functional derivatives of a classical field $\Psi$, which act on the Wigner functional instead of the quantum density matrix.
+In order to give an idea about the form of expressions we are targeting, we will outline the master equation of interest.
+It will be described in more detail in \secref{wigner-bec:hamiltonian} and \secref{wigner-bec:master-eqn}.
+We are interested in transforming a master equation of the form
+\begin{eqn}
+    \frac{\upd\hat{\rho}}{\upd t} =
+        - \frac{i}{\hbar} \left[ \hat{H}, \hat{\rho} \right]
+        + \sum_{\lvec \in L} \kappa_{\lvec} \int \upd \xvec
+            \mathcal{L}_{\lvec} \left[ \hat{\rho} \right],
+\end{eqn}
+where $\hat{H}$ is the Hamiltonian of the system, and the $\mathcal{L}$ are nonlinear Liouville loss terms
+\begin{eqn}
+\label{eqn:wigner-spec:loss-op}
+    \mathcal{L}_{\lvec} [\hat{A}]
+    = 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
+        - \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
+        - \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec}.
+\end{eqn}
+Here $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with $l_j$ denoting the number of particles of the component $j$ lost in the event, and
+\begin{eqn}
+    \hat{O}_{\lvec}
+    \equiv \hat{O}_{\lvec} (\Psiopvec)
+    = \prod_{j=1}^C \Psiop_j^{l_j} (\xvec).
+\end{eqn}
+The Hamiltonian, in turn, has the general form
+\begin{eqn}
+\label{eqn:wigner-spec:H}
+    \hat{H} = \int \upd \xvec \sum_{j=1}^C \sum_{k=1}^C \left\{
+        \Psiop_j^{\dagger} K_{jk} \Psiop_k
+        + \frac{1}{2} \int \upd \xvec^\prime
+            \Psiop_j^\dagger \Psiop_k^{\prime\dagger}
+            U_{jk}(\xvec - \xvec^\prime)
+            \Psiop_j \Psiop_k^\prime
+    \right\},
+\end{eqn}
+where $K_{jk} = \alpha \nabla^2 + \beta(\xvec, t)$ is a linear operator that does not depend on $\Psiop_j$, possibly containing a linear occurrence of a Laplacian.
 
 
 % =============================================================================
 \section{Unitary evolution}
 % =============================================================================
 
-The simplest non-trivial element of a Hamiltonian is the second-order operator $\Psiop_j^\dagger \Psiop_k$, which may describe, for instance, a potential or a coupling field.
+The simplest non-trivial element of the Hamiltonian~\eqnref{wigner-spec:H} is the second-order operator $\Psiop_j^\dagger \Psiop_k$, which may describe, for instance, a potential or a coupling field.
 
 \begin{theorem}
 \label{thm:wigner-spec:w-commutator1}
@@ -74,7 +109,7 @@ which is the statement of the theorem.
 \end{proof}
 
 Commutators with a Laplacian inside require special treatment, because the Laplacian acts on basis functions and, in general, cannot be treated like a constant.
-For our purposes, we only need one specific case, namely the kinetic term in a Hamiltonian.
+For our purposes, we only need the case where it occurs linearly in a Hamiltonian (referred to as the kinetic term).
 Fortunately, in this case the Laplacian does act like a constant.
 
 \begin{theorem}
@@ -168,7 +203,7 @@ Now, using \lmmref{func-calculus:move-laplacian}, we can get the final result:
 \end{eqn}
 \end{proof}
 
-The last of the usual terms in \abbrev{bec} Hamiltonians is the fourth order nonlinear interaction term.
+The last of the terms in the Hamiltonian~\eqnref{wigner-spec:H} is the fourth order nonlinear interaction term.
 We will provide a transformation for its general non-local form, which can be later simplified to a local one by integration with the delta function.
 
 \begin{theorem}
@@ -222,22 +257,7 @@ Proved by a straightforward application of \thmref{wigner:mc:correspondences} an
 \section{Losses}
 % =============================================================================
 
-In this section we will formulate and prove a theorem that describes the Wigner transformation of the nonlinear operator
-\begin{eqn}
-\label{eqn:wigner-spec:loss-operator}
-    \mathcal{L}_{\lvec} [\hat{A}]
-    = 2 \hat{O}_{\lvec} \hat{A} \hat{O}_{\lvec}^\dagger
-        - \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec} \hat{A}
-        - \hat{A} \hat{O}_{\lvec}^\dagger \hat{O}_{\lvec},
-\end{eqn}
-where $\lvec = (l_1,\,\ldots,\,l_C)^T$ is the identifier of a loss process, with $l_j$ denoting the number of particles of the component $j$ lost in the event, and
-\begin{eqn}
-    \hat{O}_{\lvec}
-    \equiv \hat{O}_{\lvec} (\Psiopvec)
-    = \prod_{j=1}^C \Psiop_j^{l_j} (\xvec).
-\end{eqn}
-The operator of this form appears when one describes Markovian loss processes in a \abbrev{bec}~\cite{Jack2002}.
-
+In this section we will derive the theorem for transformation of the loss terms~\eqnref{wigner-spec:loss-op}.
 Before approaching the main theorem we will need two auxiliary lemmas.
 The result of an application of \thmref{wigner:mc:correspondences} to the operator $\mathcal{L}$ will contain terms with mixed order of $\Psi_j$ and $\fdelta / \fdelta \Psi_j$, while we need all derivatives to be grouped in the beginning in order to apply \thmref{fpe-sde:corr:fpe-sde-func} to the resulting differential equation.
 The first lemma will provide a way to perform this rearrangement.
@@ -447,7 +467,7 @@ With the help of these two lemmas, we can perform the Wigner transformation of t
 
 \begin{theorem}
 \label{thm:wigner-spec:w-losses}
-    The Wigner transformation of the loss operator $\mathcal{L}_{\lvec}$ of form~\eqnref{wigner-spec:loss-operator} is
+    The Wigner transformation of the loss operator $\mathcal{L}_{\lvec}$ of form~\eqnref{wigner-spec:loss-op} is
     \begin{eqn*}
         \mathcal{W} \left[ \mathcal{L}_{\lvec} [\hat{A}] \right]
         =
