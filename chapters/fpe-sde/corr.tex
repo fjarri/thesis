@@ -123,8 +123,8 @@ Therefore, the equivalent \abbrev{sde}s in the It\^o form are
 where $d\tilde{\Zvec} \equiv d\mathbf{X} \oplus d\mathbf{Y}$.
 Returning to the previous variables:
 \begin{eqn}
-	d\xvec & = \mathbf{u} dt + \frac{1}{\sqrt{2}} F d\mathbf{X} - \frac{1}{\sqrt{2}} G d\mathbf{Y}, \\
-	d\yvec & = \mathbf{v} dt + \frac{1}{\sqrt{2}} G d\mathbf{X} + \frac{1}{\sqrt{2}} F d\mathbf{Y}.
+	\upd\xvec & = \mathbf{u} dt + \frac{1}{\sqrt{2}} F d\mathbf{X} - \frac{1}{\sqrt{2}} G d\mathbf{Y}, \\
+	\upd\yvec & = \mathbf{v} dt + \frac{1}{\sqrt{2}} G d\mathbf{X} + \frac{1}{\sqrt{2}} F d\mathbf{Y}.
 \end{eqn}
 Multiplying the second equation by $i$ and adding it to the first one:
 \begin{eqn}
@@ -521,7 +521,7 @@ Alternatively, the \abbrev{fpe} from the above theorem can be expressed in a sho
 The \abbrev{fpe} in this case is
 \begin{eqn}
 	\frac{dW}{dt}
-	= \int d\xvec \left(
+	= \int \upd\xvec \left(
 		- \vfdelta_{\fvec} \cdot \mathbfcal{A} W
 		- \vfdelta_{\fvec^*} \cdot \mathbfcal{A}^* W
 		+ \Trace{ \vfdelta_{\fvec^*} \vfdelta_{\fvec}^T \mathcal{B} \mathcal{B}^H } W
