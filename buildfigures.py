@@ -1,5 +1,6 @@
 import figures.mplhelpers
 
+import figures.test.plot as plot_test
 import figures.mean_field.plot as plot_mean_field
 import figures.bec_noise.plot as plot_bec_noise
 import figures.squeezing.plot as plot_squeezing
@@ -11,6 +12,17 @@ FORMAT = '.pdf'
 
 
 if __name__ == '__main__':
+
+    # Testing plots
+    for wigner in (False, True):
+        for abbrev in (
+            "CDIP", "RK4IP", "RK46NL", "CD"
+            ):
+            plot_test.convergence(wigner, abbrev,
+                FOLDER + 'test/convergence_' +
+                ('wigner_' if wigner else 'gpe_') +
+                abbrev + FORMAT)
+    plot_test.convergence_by_time(FOLDER + 'test/convergence_by_time' + FORMAT)
 
 	# Mean-field ground states
     plot_mean_field.one_comp_gs_small(FOLDER + 'mean_field/one_comp_gs_small' + FORMAT)
