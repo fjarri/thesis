@@ -41,17 +41,92 @@ We used XMDS to integrate the \abbrev{sde}s in \charef{exact}.
 \section{Stochastic integration}
 % =============================================================================
 
-The problem of integrating \abbrev{sde}s is well-studied; for some general information, one can refer to an extensive reviews by Drummond and Mortimer~\cite{Drummond1991}, and by Werner and Drummond~\cite{Werner1997}.
-The common approach is to use a method from the Runge-Kutta family, which can be applied without changes to a set of \abbrev{sde}s in the Stratonovich form~\cite{Wilkie2004,Wilkie2005}.
+The problem of integrating \abbrev{sde}s is well-studied; for some general information, one can refer to extensive reviews by Drummond and Mortimer~\cite{Drummond1991}, and by Werner and Drummond~\cite{Werner1997}.
 
+Convergence properties of stochastic integration algorithms may depend on the equation being integrated, so we tested several widely used algorithms with our target system.
+The first one is the semi-implicit central difference method (\abbrev{cd})~\cite{Werner1997}, which is robust and simple to implement.
+We tried it both in its general form, and in the interaction picture (denoted CCIP in the figures below), which is commonly referred to as ``split-step''.
+Unfortunately, \abbrev{cd} has only second order convergence in time.
+
+The methods from the Runge-Kutta family can be applied without changes to a set of \abbrev{sde}s in the Stratonovich form~\cite{Wilkie2004,Wilkie2005} and are able to achieve higher orders of convergence for the drift part of the equations.
 It is possible to employ variable-stepsize methods, which are strongly convergent, provided that stochastic differentials on the subintervals are sampled correctly~\cite{Wilkie2005}.
-Another widely-used specialized Runge-Kutta subtype is the \abbrev{rk4} interaction picture method~\cite{CaradocDavies2000}, which can improve convergence properties considerably when applied to stiff equations.
-One must note though that the reduction in the number of steps required for a given level of convergence is often neutralized by the increased number of \abbrev{fft}s that have to be performed on each step.
+Since our target problems have relatively uniform characteristic time over the whole range of interest, there was no particular need in variable stepsize methods.
+We have implemented two fixed stepsize \abbrev{rk} methods: the \abbrev{rk4} interaction picture method (\abbrev{rk4ip})~\cite{CaradocDavies2000}, and a low dissipation, low dispersion and low storage \abbrev{rk46nl} method~\cite{Berland2006}, which both have the fourth order convergence in the drift part.
 
-In our case, neither adaptive stepsize, nor a transition to the interaction picture was not necessary, and we settled on a fixed-stepsize fourth order \abbrev{rk} method optimized for low dissipation, low dispersion and low storage~\cite{Berland2006}.
-In particular, the latter means that in each substep of the \abbrev{rk} propagation the result depends only on the output of the previous step.
-This results in an algorithm requiring 6 steps in order to reach 4th order.
-The low-storage property is very important in the \abbrev{gpgpu} world, where one has to keep whole arrays of intermediate results in video memory.
+As Burrage~\textit{et~al} correctly point out in their comment~\cite{Burrage2006}, the major drawback of \abbrev{rk} methods when applied to \abbrev{sde}s is that the convergence for the diffusion part for these methods is, in general, only of the first order.
+Nevertheless, when the evolution is dominated by the drift part, as in our case, the high order methods can still show overall convergence corresponding to their order for a certain range of time steps.
+This means that while asymptotically \abbrev{cd} and \abbrev{cdip} methods may be better, for practically useful time steps \abbrev{rk4ip} and \abbrev{rk46nl} will give more accurate results.
+
+To test that we have applied the four methods described above to a typical simulation problem from \charef{bec-noise}, the Ramsey interferometry sequence, with the parameters described in \secref{bec-noise:visibility}.
+This includes nonlinear elastic interaction and three sources of nonlinear losses (and corresponding noises in the diffusion part).
+The test is essentially the same integration that was used to plot \figref{bec-noise:visibility:ramsey-visibility}, only executed for a shorter time ($t=0.1\un{s}$) for convenience.
+We used $64$ trajectories for the Wigner part of the test.
+
+The convergence was estimated as a relative difference in a quantity of interest for an integration with a normal and a doubled time step.
+We sampled noises so that the total noise for two normal steps is was exactly the same as for the corresponding double step (this was achieved by initializing the random number generator to the same state for both runs, and sampling the noise for the double step as two sequential noises).
+This allowed us to test the strong convergence in addition to weak one (convergence of a quantity averaged over simulation trajectories).
+In addition, we have always started from the same noises in the initial state for all tests, and all the tests which have the same number of steps, used the same noises.
+
+The quantities used to estimate the convergence are:
+\begin{itemize}
+\item the strong convergence, quantified as the $2$-norm of the difference between the full result vectors (consisting of results for all simulation trajectories) for the normal and the double step, normalized by the $2$-norm of the result vector for the normal step;
+\item the weak convergence in the total population $N = \langle \Psiop_1^\dagger \Psiop_1^\dagger + \Psiop_2^\dagger \Psiop_2^\dagger \rangle$ (second order correlation);
+\item the weak convergence in the total spin $\langle \hat{S}^2_z \rangle$~\eqnref{bec-squeezing:thoery:spin-squares} (fourth order correlation).
+\end{itemize}
+
+\begin{figure}
+    \includegraphics{figures_generated/test/convergence_gpe_RK46NL.pdf}%
+    \includegraphics{figures_generated/test/convergence_gpe_RK4IP.pdf}\\%
+    \includegraphics{figures_generated/test/convergence_gpe_CD.pdf}%
+    \includegraphics{figures_generated/test/convergence_gpe_SS-CD.pdf}%
+
+    \caption[Convergence tests, cGPEs]{
+    Convergence tests for classical cGPEs.}%endcaption
+
+    \label{fig:numerical:convergence-gpe}
+\end{figure}
+
+As a start, we executed our tests for classical \abbrev{cgpe}s to check the order of convergence in deterministic part of the equation.
+The results are plotted in~\figref{numerical:convergence-gpe}, with $\upd t$, $\upd t^2$ and $\upd t^4$ lines given for reference.
+It is evident that \abbrev{rk4ip} and \abbrev{rk46nl} demonstrate fourth order convergence, while \abbrev{cd} and \abbrev{cdip} are only of second order, as expected.
+
+\begin{figure}
+    \includegraphics{figures_generated/test/convergence_wigner_RK46NL.pdf}%
+    \includegraphics{figures_generated/test/convergence_wigner_RK4IP.pdf}\\%
+    \includegraphics{figures_generated/test/convergence_wigner_CD.pdf}%
+    \includegraphics{figures_generated/test/convergence_wigner_SS-CD.pdf}%
+
+    \caption[Convergence tests, Wigner representation]{
+    Convergence tests for the Wigner representation.}%endcaption
+
+    \label{fig:numerical:convergence-wigner}
+\end{figure}
+
+The tests for the Wigner representation, plotted in \figref{numerical:convergence-wigner}, which now include the stochastic terms, show a different picture.
+The \abbrev{rk} algorithms behave as fourth order ones for larger time steps, and then deteriorate to the first order.
+On the other hand, the \abbrev{cd} algorithms show steady second order behavior for all time steps.
+This is in agreement with the Burrage~\textit{et al} predictions.
+
+\begin{figure}
+    \centerline{%
+    \includegraphics{figures_generated/test/convergence_by_time.pdf}}%
+
+    \caption[Convergence tests, comparison]{
+    Convergence comparison.}%endcaption
+
+    \label{fig:numerical:convergence-by-time}
+\end{figure}
+
+While the \abbrev{cd} algorithms clearly outperform the \abbrev{rk} ones on the infinity, we do not need much accuracy in the simulations from \charef{bec-noise} and \charef{bec-squeezing}, as the errors in the experimental results are quite large.
+It is enough to have $10^{-3}-10^{-4}$ relative weak convergence in the quantities of interest for integration times of the order of $t=1\un{s}$, which approximately corresponds to the range $10^{-4}-10^{-5}$ in our tests (which were only executed for $t=0.1\un{s}$).
+
+In order to compare the methods, we have plotted the convergence in the total population $N$ as a function of time spent for integration in \figref{numerical:convergence-by-time}, with the target convergence area marked.
+It is apparent that \abbrev{rk} methods achieve the practical accuracy about one order of magnitude faster.
+That is why for our simulations we decided to pick one of \abbrev{rk} algorithms.
+
+Since the problem is not stiff (notice that \abbrev{cd} and \abbrev{cdip} show almost identical results), the \abbrev{rk4ip} does not have much advantage over \abbrev{rk46nl}, while the latter has an important low-storage property, which means that in each substep of the \abbrev{rk} propagation the result depends only on the output of the previous step.
+It is quite important in the \abbrev{gpgpu} world, where one has to keep whole arrays of intermediate results in video memory.
+Finally, the \abbrev{rk46nl} algorithm was picked and used for simulations in this thesis.
 
 
 % =============================================================================
