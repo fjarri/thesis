@@ -59,7 +59,7 @@ This means that while asymptotically \abbrev{cd} and \abbrev{cdip} methods may b
 
 To test that we have applied the four methods described above to a typical simulation problem from \charef{bec-noise}, the Ramsey interferometry sequence, with the parameters described in \secref{bec-noise:visibility}.
 This includes nonlinear elastic interaction and three sources of nonlinear losses (and corresponding noises in the diffusion part).
-The test is essentially the same integration that was used to plot \figref{bec-noise:visibility:ramsey-visibility}, only executed for a shorter time ($t=0.1\un{s}$) for convenience.
+The test is essentially the same integration that was used to plot \figref{bec-noise:visibility:ramsey-visibility}, only executed for a shorter time ($t_e=0.1\un{s}$) for convenience.
 We used $64$ trajectories for the Wigner part of the test.
 
 The convergence was estimated as a relative difference in a quantity of interest for an integration with a normal and a doubled time step.
@@ -69,24 +69,28 @@ In addition, we have always started from the same noises in the initial state fo
 
 The quantities used to estimate the convergence are:
 \begin{itemize}
-\item the strong convergence, quantified as the $2$-norm of the difference between the full result vectors (consisting of results for all simulation trajectories) for the normal and the double step, normalized by the $2$-norm of the result vector for the normal step;
-\item the weak convergence in the total population $N = \langle \Psiop_1^\dagger \Psiop_1^\dagger + \Psiop_2^\dagger \Psiop_2^\dagger \rangle$ (second order correlation);
-\item the weak convergence in the total spin $\langle \hat{S}^2_z \rangle$~\eqnref{bec-squeezing:thoery:spin-squares} (fourth order correlation).
+\item The ``full'' error $E_{\bPsi} = \| \bPsi^{S}(t_e) - \bPsi^{S / 2}(t_e) \|_2 / \| \bPsi^{S}(t_e) \|_2$, where $\|\ldots\|_2$ is the $2$-norm, and $\bPsi^{S}(t)$ is the full solution vector at time $t$ for the total number of steps $S$, consisting of solution vectors for all trajectories.
+    This quantity is used to estimate the strong convergence.
+\item The error in the total population $E_2 = |N^{S}(t_e) - N^{S / 2}(t_e)| / |N^{S}(t_e)|$, where $N = \langle \Psiop_1^\dagger \Psiop_1^\dagger + \Psiop_2^\dagger \Psiop_2^\dagger \rangle$ is a second order correlation.
+    The total population $N$ is averaged over trajectories and therefore the behavior of its error corresponds to the weak convergence.
+\item The error in the square of the $z$-component of the spin operator $E_4 = |Z^{S}(t_e) - Z^{S / 2}(t_e)| / |Z^{S}(t_e)|$, where $Z = \langle \hat{S}^2_z \rangle$ is a fourth order correlation~\eqnref{bec-squeezing:thoery:spin-squares}.
 \end{itemize}
 
 \begin{figure}
     \includegraphics{figures_generated/test/convergence_gpe_RK46NL.pdf}%
     \includegraphics{figures_generated/test/convergence_gpe_RK4IP.pdf}\\%
     \includegraphics{figures_generated/test/convergence_gpe_CD.pdf}%
-    \includegraphics{figures_generated/test/convergence_gpe_SS-CD.pdf}%
+    \includegraphics{figures_generated/test/convergence_gpe_CDIP.pdf}%
 
-    \caption[Convergence tests, cGPEs]{
-    Convergence tests for classical cGPEs.}%endcaption
+    \caption[Convergence tests, \abbrev{CGPE}s]{
+    Convergence tests for classical \abbrev{CGPE}s with \textbf{(a)} \abbrev{RK46NL}, \textbf{(b)} \abbrev{RK4IP}, \textbf{(c)} \abbrev{CD} and \textbf{(d)} \abbrev{CDIP} integration algorithms.
+    The plots show full errors $E_{\bPsi}$ (solid lines), errors for a second order correlation $E_2$ (dashed lines), and errors for a fourth order correlation $E_4$ (dotted lines).
+    }%endcaption
 
     \label{fig:numerical:convergence-gpe}
 \end{figure}
 
-As a start, we executed our tests for classical \abbrev{cgpe}s to check the order of convergence in deterministic part of the equation.
+As a start, we executed our tests for classical \abbrev{cgpe}s~\eqnref{bec-noise:mean-field:cgpes-simplified} to check the order of convergence in deterministic part of the equation.
 The results are plotted in~\figref{numerical:convergence-gpe}, with $\upd t$, $\upd t^2$ and $\upd t^4$ lines given for reference.
 It is evident that \abbrev{rk4ip} and \abbrev{rk46nl} demonstrate fourth order convergence, while \abbrev{cd} and \abbrev{cdip} are only of second order, as expected.
 
@@ -94,15 +98,17 @@ It is evident that \abbrev{rk4ip} and \abbrev{rk46nl} demonstrate fourth order c
     \includegraphics{figures_generated/test/convergence_wigner_RK46NL.pdf}%
     \includegraphics{figures_generated/test/convergence_wigner_RK4IP.pdf}\\%
     \includegraphics{figures_generated/test/convergence_wigner_CD.pdf}%
-    \includegraphics{figures_generated/test/convergence_wigner_SS-CD.pdf}%
+    \includegraphics{figures_generated/test/convergence_wigner_CDIP.pdf}%
 
-    \caption[Convergence tests, Wigner representation]{
-    Convergence tests for the Wigner representation.}%endcaption
+    \caption[Convergence tests, \abbrev{sde}s]{
+    Convergence tests for the Wigner representation \abbrev{sde}s.
+    The meaning of the lines is the same as in \figref{numerical:convergence-gpe}.
+    }%endcaption
 
     \label{fig:numerical:convergence-wigner}
 \end{figure}
 
-The tests for the Wigner representation, plotted in \figref{numerical:convergence-wigner}, which now include the stochastic terms, show a different picture.
+The tests for the Wigner representation \abbrev{sde}s~\eqnref{bec-noise:wigner:sde}, plotted in \figref{numerical:convergence-wigner}, which now include the stochastic terms, show a different picture.
 The \abbrev{rk} algorithms behave as fourth order ones for larger time steps, and then deteriorate to the first order.
 On the other hand, the \abbrev{cd} algorithms show steady second order behavior for all time steps.
 This is in agreement with the Burrage~\textit{et al} predictions.
@@ -111,8 +117,11 @@ This is in agreement with the Burrage~\textit{et al} predictions.
     \centerline{%
     \includegraphics{figures_generated/test/convergence_by_time.pdf}}%
 
-    \caption[Convergence tests, comparison]{
-    Convergence comparison.}%endcaption
+    \caption[Comparison of integration algorithms]{
+    Comparison of the weak convergence in $N$ for \abbrev{RK46NL} (blue solid line), \abbrev{RK4IP} (red dashed line), \abbrev{CD} (yellow dash-dotted line) and \abbrev{CDIP} (green dotted line).
+    The errors $E_N$ are plotted versus time taken by the corresponding integration algorithm to achieve them.
+    The approximate target range of errors is illustrated with the grey band.
+    }%endcaption
 
     \label{fig:numerical:convergence-by-time}
 \end{figure}
