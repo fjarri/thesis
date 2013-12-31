@@ -29,6 +29,8 @@ def setup_backend(draft=False):
                 r"\usepackage{unicode-math}",  # unicode math setup
                 r"\setmathfont{Tex Gyre Pagella Math}", # Tex Gyre as main math font
                 r"\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{Latin Modern Math}"
+                r"\newfontfamily\abbrevfont[Numbers=Uppercase]{Linux Libertine O}"
+                r"\newcommand{\abbrev}[1]{{\abbrevfont\expandafter\MakeUppercase\expandafter{#1}}}"
                 ]
         }
 

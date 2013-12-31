@@ -214,8 +214,8 @@ def convergence(wigner, label, fname):
         result = results[label][str(steps)]
         step_nums.append(int(steps))
         strong_errors.append(result['errors']['psi'])
-        N_errors.append(result['errors']['N_mean'])
-        SZ2_errors.append(result['errors']['SZ2_mean'])
+        N_errors.append(result['errors']['N'])
+        SZ2_errors.append(result['errors']['SZ2'])
         N_diffs.append(result['N_diff'])
 
     s.plot(step_nums, strong_errors, label=label + ", strong errors",
@@ -234,7 +234,7 @@ def convergence(wigner, label, fname):
         dashes=mplh.dash['-.'], linewidth=0.5)
 
 
-    s.text(1.3*10**5, 2*10**(-1), label)
+    s.text(1.3*10**5, 2*10**(-1), "\\abbrev{" + label + "}")
     s.plot([1.2*10**3, 2.4*10**3], [3*10**(-7), 3*10**(-7)],
         dashes=mplh.dash['-'], color=colors[label].main)
     s.text(3*10**3, 10**(-7), '$E_{\\mathbf{\\Psi}}$')
@@ -272,7 +272,7 @@ def convergence_by_time(fname):
     s.set_yscale('log', basey=10)
 
     tmin = 10
-    tmax = 10 ** 5
+    tmax = 10 ** 4
 
     s.set_xlim(tmin, tmax)
     s.set_ylim(10**(-7), 1)
@@ -291,18 +291,18 @@ def convergence_by_time(fname):
         for steps in sorted(int_steps):
             result = results[label][str(steps)]
             times.append(result['t_integration'])
-            N_errors.append(result['errors']['N_mean'])
+            N_errors.append(result['errors']['N'])
 
         s.plot(times, N_errors, label=label + ", N errors",
             color=colors[label].main, dashes=mplh.dash[linestyles[label]])
 
 
-    s.text(5*10**2, 10**(-2), 'CD')
-    s.text(2*10**2, 10**(-3), 'CDIP')
-    s.text(8*10**1, 10**(-2), 'RK4IP')
-    s.text(2*10**1, 10**(-3), 'RK46NL')
+    s.text(5*10**2, 10**(-2), '\\abbrev{CD}')
+    s.text(2.5*10**2, 10**(-3), '\\abbrev{CDIP}')
+    s.text(7.5*10**1, 10**(-2), '\\abbrev{RK4IP}')
+    s.text(3*10**1, 10**(-3), '\\abbrev{RK46NL}')
 
-    s.text(5*10**3, 2*10**(-4), 'target error')
+    s.text(1.5*10**1, 3*10**(-6), 'target error')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
