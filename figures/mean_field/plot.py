@@ -1,17 +1,17 @@
 import numpy
-import pickle
+import json
 
 from figures import get_path
 import figures.mplhelpers as mplh
 
 
 def _one_comp_gs(fname, N):
-    with open(get_path(__file__, 'one_comp_gs.pickle'), 'rb') as f:
-        data = pickle.load(f)
+    with open(get_path(__file__, 'one_comp_gs.json'), 'rb') as f:
+        data = json.load(f)
 
-    zs = data[N]['zs'] / 1e-6 # to um
-    n_z = data[N]['n_z'] * 1e-6 # to um^-1
-    tf_n_z = data[N]['tf_n_z'] * 1e-6 # to um^-1
+    zs = numpy.array(data[str(N)]['xs']) / 1e-6 # to um
+    n_z = numpy.array(data[str(N)]['n_x']) * 1e-6 # to um^-1
+    tf_n_z = numpy.array(data[str(N)]['tf_n_x']) * 1e-6 # to um^-1
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -34,6 +34,13 @@ def _one_comp_gs(fname, N):
         500 * 0.03 if N == 1000 else 500,
         'numerical')
 
+    if N == 1000:
+        s.set_xlim(-20, 20)
+        s.set_ylim(0, 90)
+    else:
+        s.set_xlim(-50, 50)
+        s.set_ylim(0, 3000)
+
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
     fig.text(0.01, 0.92, '(b)' if N == 1000 else '(a)', fontweight='bold')
@@ -51,11 +58,11 @@ def one_comp_gs_large(fname):
 
 
 def _two_comp_gs(fname, a12):
-    with open(get_path(__file__, 'two_comp_gs.pickle'), 'rb') as f:
-        data = pickle.load(f)
+    with open(get_path(__file__, 'two_comp_gs.json'), 'rb') as f:
+        data = json.load(f)
 
-    zs = data[a12]['zs'] / 1e-6 # to um
-    n_z = data[a12]['n_z'] * 1e-6 # to um^-1
+    zs = numpy.array(data[str(a12)]['xs']) / 1e-6 # to um
+    n_z = numpy.array(data[str(a12)]['n_x']) * 1e-6 # to um^-1
 
     fig = mplh.figure()
     s = fig.add_subplot(111,
@@ -81,6 +88,12 @@ def _two_comp_gs(fname, a12):
         -15 if a12 == 97. else -13,
          2000. / 2500 * 1600 if a12 == 97. else 2000,
          '$\\vert 2 \\rangle$')
+
+    s.set_xlim(-40, 40)
+    if a12 == 97.:
+        s.set_ylim(0, 1600)
+    else:
+        s.set_ylim(0, 2500)
 
     s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
 
