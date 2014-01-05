@@ -23,6 +23,8 @@ if __name__ == '__main__':
                 ('wigner_' if wigner else 'gpe_') +
                 abbrev + FORMAT)
     plot_test.convergence_by_time(FOLDER + 'test/convergence_by_time' + FORMAT)
+    plot_test.grid_check_gpe(FOLDER + 'test/grid_check_gpe' + FORMAT)
+    plot_test.grid_check_wigner(FOLDER + 'test/grid_check_wigner' + FORMAT)
 
 	# Mean-field ground states
     plot_mean_field.one_comp_gs_small(FOLDER + 'mean_field/one_comp_gs_small' + FORMAT)

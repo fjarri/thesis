@@ -7,47 +7,7 @@ from figures import get_path
 import figures.mplhelpers as mplh
 
 
-def grid_check(fname):
-
-    fig = mplh.figure(width=0.75)
-    s = fig.add_subplot(111,
-        xlabel='$t$ (s)',
-        ylabel='$\\mathcal{V}$')
-
-    for data, ls, color in [
-            ('ramsey_wigner_vis.json', '-', mplh.color.f.blue.main),
-            ('ramsey_wigner_test_axial2_box1_vis.json', '--', mplh.color.f.red.main),
-            ('ramsey_wigner_test_axial2_box2_vis.json', ':', mplh.color.f.red.main),
-            ('ramsey_wigner_test_radial2_box1_vis.json', '--', mplh.color.f.green.main),
-            ('ramsey_wigner_test_radial2_box2_vis.json', ':', mplh.color.f.green.main),
-
-            #('ramsey_gpe_vis.json', '-', mplh.color.f.yellow.main),
-            #('ramsey_gpe_test_axial2_box1_vis.json', '--', mplh.color.f.red.main),
-            #('ramsey_wigner_test_axial2_box2_vis.json', ':', mplh.color.f.red.main),
-            #('ramsey_wigner_test_radial2_box1_vis.json', '--', mplh.color.f.green.main),
-            #('ramsey_wigner_test_radial2_box2_vis.json', ':', mplh.color.f.green.main),
-            ]:
-
-        with open(get_path(__file__, data)) as f:
-            wig = json.load(f)
-
-            wig_t = numpy.array(wig['times'])
-            wig_v = numpy.array(wig['visibility'])
-            #wig_v_err = numpy.array(wig['visibility_errors'])
-
-            s.plot(wig_t, wig_v, color=color, dashes=mplh.dash[ls])
-            #s.plot(wig_t, wig_v + wig_v_err, color='grey', dashes=mplh.dash[ls])
-
-    s.set_xlim((0, 1.3))
-    s.set_ylim((0, 1.))
-
-    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
-
-    fig.tight_layout(pad=0.3)
-    fig.savefig(fname)
-
-
-def grid_check2(fname):
+def _grid_check(prefix, fname):
 
     tests = [
 
@@ -73,17 +33,19 @@ def grid_check2(fname):
     ]
 
     results = {}
-    with open(get_path(__file__, 'ramsey_wigner_test_vis.json')) as f:
+    wigner = (prefix == 'wigner')
+    prefix = 'grid-' + prefix + '/ramsey_' + prefix + '_test'
+
+    with open(get_path(__file__, prefix + '_vis.json')) as f:
         data = json.load(f)
     ref_axial_spacing = data['box'][2] / data['shape'][2]
     ref_radial_spacing = data['box'][0] / data['shape'][0]
     ref_V = numpy.array(data['visibility'])
     ref_V_norm = numpy.linalg.norm(ref_V)
     ref_V_error = data['convergence']['V']
-    print(ref_V_error)
 
     for suffix in tests:
-        fn = 'ramsey_wigner_test' + suffix + '_vis.json'
+        fn = prefix + suffix + '_vis.json'
         with open(get_path(__file__, fn)) as f:
             data = json.load(f)
         axial_spacing = data['box'][2] / data['shape'][2]
@@ -92,29 +54,15 @@ def grid_check2(fname):
 
         idx = (axial_spacing / ref_axial_spacing, radial_spacing / ref_radial_spacing)
         results[idx] = (
-            #numpy.linalg.norm(V - ref_V) / ref_V_norm,
-            (V[-1] - ref_V[-1]) / ref_V[-1],
+            numpy.linalg.norm(V - ref_V) / ref_V_norm,
+            #(V[-1] - ref_V[-1]) / ref_V[-1],
             data['convergence']['V'])
-        print(idx, data['shape'], data['box'], results[idx])
 
 
-    fig = mplh.figure(width=0.75)
+    fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
         xlabel='relative spacing',
         ylabel='visibility difference')
-
-    spacings = [1.0]
-    diffs = [0.0]
-    errors = [ref_V_error]
-    for spacing, res in results.items():
-        axial, radial = spacing
-        diff, error = res
-        if axial == 1.:
-            spacings.append(radial)
-            diffs.append(diff)
-            errors.append(error)
-    s.errorbar(spacings, diffs, yerr=errors, linestyle='none', color='blue', label='radial')
-    s.scatter(spacings, diffs, color='blue', s=10)
 
     spacings = [1.0]
     diffs = [0.0]
@@ -126,56 +74,46 @@ def grid_check2(fname):
             spacings.append(axial)
             diffs.append(diff)
             errors.append(error)
-    s.errorbar(spacings, diffs, yerr=errors, linestyle='none', color='red', label='axial')
-    s.scatter(spacings, diffs, color='red', s=10)
+    s.scatter(spacings, diffs, marker='^', color=mplh.color.f.red.main, s=10)
+
+    spacings = [1.0]
+    diffs = [0.0]
+    errors = [ref_V_error]
+    for spacing, res in results.items():
+        axial, radial = spacing
+        diff, error = res
+        if axial == 1.:
+            spacings.append(radial)
+            diffs.append(diff)
+            errors.append(error)
+    s.scatter(spacings, diffs, marker='.', color=mplh.color.f.blue.main, s=10)
+
+    s.plot([0.4, 1.6], [0, 0], color='grey', linewidth=0.5, dashes=mplh.dash['-.'])
 
     s.set_xlim((0.4, 1.6))
-    s.set_ylim((-0.12, 0.12))
-    s.legend(loc='upper center')
+    s.set_ylim((-0.01, 0.07))
 
-    #s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+    s.scatter(
+        [0.7, 0.74, 0.78], [0.055, 0.055, 0.055],
+        marker='.', color=mplh.color.f.blue.dark, s=10)
+    s.text(0.82, 0.053, 'axial spacing')
+    s.scatter(
+        [0.7, 0.74, 0.78], [0.045, 0.045, 0.045],
+        marker='^', color=mplh.color.f.red.dark, s=10)
+    s.text(0.82, 0.043, 'radial spacing')
 
-    fig.tight_layout(pad=0.3)
-    fig.savefig(fname)
-
-
-def noise_check(fname):
-
-    fig = mplh.figure(width=0.75)
-    s = fig.add_subplot(111,
-        xlabel='$t$ (s)',
-        ylabel='$\\mathcal{V}$')
-
-    for data, ls, color in [
-            #('ramsey_wigner_test_linear_loss_vis.json', '-', mplh.color.f.blue.main),
-            #('ramsey_wigner_test_linear_loss_no_K_vis.json', '--', mplh.color.f.blue.main),
-            #('ramsey_wigner_test_linear_loss_no_g_vis.json', '-.', mplh.color.f.blue.main),
-            #('ramsey_wigner_test_linear_loss_no_g_no_K_vis.json', ':', mplh.color.f.blue.main),
-            ('ramsey_wigner_test_linear_loss_no_g_no_K_no_V_vis.json', ':', mplh.color.f.red.main),
-            #('ramsey_gpe_test_linear_loss_vis.json', '-.', mplh.color.f.green.main),
-            #('ramsey_wigner_test_linear_loss_zero_N_vis.json', ':', mplh.color.f.red.main),
-            ]:
-
-        with open(get_path(__file__, data)) as f:
-            wig = json.load(f)
-
-            wig_t = numpy.array(wig['times'])
-            wig_N1 = numpy.array(wig['N1'])
-            wig_N2 = numpy.array(wig['N2'])
-
-            print wig_N1 + wig_N2
-
-            s.plot(wig_t, wig_N1 + wig_N2, color=color, dashes=mplh.dash[ls])
-
-    s.plot(wig_t, (55000 + 4096) * numpy.exp(-wig_t) - 4096, color='grey', dashes=mplh.dash[':'])
-
-    s.set_xlim((0, 1.3))
-    s.set_ylim((-1000, 55000))
-
-    s.set_aspect((5 ** 0.5 - 1) / 2 * mplh.aspect_modifier(s))
+    fig.text(0.01, 0.92, '(b)' if wigner else '(a)', fontweight='bold')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
+
+
+def grid_check_gpe(fname):
+    _grid_check('gpe', fname)
+
+
+def grid_check_wigner(fname):
+    _grid_check('wigner', fname)
 
 
 def convergence(wigner, label, fname):
