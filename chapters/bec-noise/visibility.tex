@@ -6,7 +6,7 @@
 In this section we will apply the models from the previous sections to recent interferometry experiments involving a two-component \Rb{} \abbrev{bec} with two components corresponding to the hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$~\cite{Egorov2011} (the components are denoted $\ket{1}$ and $\ket{2}$ further in this section).
 In the following simulations, the intra- and inter-component scattering lengths for these states were taken to be $a_{11} = 100.4\,r_B$~\cite{Widera2006,Mertes2007}, $a_{12} = 98.0\,r_B$, $a_{22} = 95.44\,r_B$~\cite{Egorov2013}, and the coefficients for the dominant loss processes are $\gamma_{111} = 5.4 \times 10^{-30} \un{cm^6/s}$~\cite{Mertes2007}, $\gamma_{12} = 1.51 \times 10^{-14}\un{cm^3/s}$, and $\gamma_{22} = 8.1 \times 10^{-14} \un{cm^3/s}$~\cite{Egorov2013}.
 
-The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = f_y = 97.0\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$ so that the magnetic field dephasing is mostly eliminated~\cite{Hall1998}.
+The experiment starts with $N = 55000$ atoms of the component $\ket{1}$ in the ground state in a cigar-shaped magnetic trap with the frequencies $f_x = 97.0\un{Hz}$, $f_y = 99.91\un{Hz}$ and $f_z = 11.69\un{Hz}$ in a bias magnetic field of $3.23\un{G}$ so that the magnetic field dephasing is mostly eliminated~\cite{Hall1998}.
 The experiment is then carried out using two protocols.
 
 \begin{figure}
@@ -29,8 +29,9 @@ A more detailed description of the experiment can be found in the paper by Egoro
 The experimental points used in this and the next section are also courtesy of M.~Egorov.
 
 The simulations in this and the following sections used the plane wave basis (see \appref{bases} for details) and a $64\times8\times8$ spatial grid.
-The integration was performed using a low-dissipation 4th-order Runge-Kutta algorithm (see \appref{numerical} for details).
-This grid choice was made to ensure that mode populations were high, in view of the truncation approximation inherent in our method.
+The integration was performed using a low-dissipation 4th-order Runge-Kutta algorithm (see \appref{numerical} for details about the algorithm and convergence tests).
+This grid choice was made to ensure that mode populations were high (in view of the truncation approximation inherent in our method) while making sure that the spatial resolution is sufficient to describe the required dynamics.
+More information about the spatial convergence tests performed can be found in \secref{bec-noise:grid}.
 
 Coherence of the interference signal can be characterised by a common quantity~--- the fringe contrast, or visibility:
 \begin{eqn}
