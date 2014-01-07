@@ -28,8 +28,13 @@ A more detailed description of the experiment can be found in the paper by Egoro
 %acknowledgement
 The experimental points used in this and the next section are also courtesy of M.~Egorov.
 
-The simulations in this and the following sections used the plane wave basis (see \appref{bases} for details) and a $64\times8\times8$ spatial grid.
 The integration was performed using a low-dissipation 4th-order Runge-Kutta algorithm (see \appref{numerical} for details about the algorithm and convergence tests).
+The \abbrev{gpe} simulations in this section and \secref{bec-noise:phase-noise} used $40,000$ time steps ($160,000$ for \figref{bec-noise:visibility:visibility-long}), and the truncated Wigner ones used $80,000$ time steps ($200,000$ for \figref{bec-noise:visibility:visibility-long}).
+The resulting relative convergence error was lower than $10^{-3}$ in all cases.
+The truncated Wigner simulations used $128$ trajectories, which lead to relative sampling errors lower than $10^{-3}$.
+Both of these sources of errors therefore would not be noticeable in the figures and have not been plotted.
+
+The simulations in this chapter and \charef{bec-squeezing} used the plane wave basis (see \appref{bases} for details) and a $8\times8\times64$ spatial grid.
 This grid choice was made to ensure that mode populations were high (in view of the truncation approximation inherent in our method) while making sure that the spatial resolution is sufficient to describe the required dynamics.
 More information about the spatial convergence tests performed can be found in \secref{bec-noise:grid}.
 

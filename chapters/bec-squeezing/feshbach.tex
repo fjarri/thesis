@@ -17,6 +17,7 @@ The first $\pi/2$-pulse creates an equal superposition of two states, ${\ket{F=1
 The external magnetic field of strength $B \approx B_0$ is applied, where $B_0 = 9.1047\un{G}$ corresponds to the Feshbach resonance for the two hyperfine states used~\cite{Kaufman2009}.
 We then investigate the time dependence of the maximum degree of spin squeezing.
 Intra-component interaction strengths do not depend on the external magnetic field, and are taken to be $a_{11} = 100.4\,r_B$ and $a_{22} = 95.44\,r_B$.
+The numerical simulations used a $8\times8\times64$ spatial grid, $100,000$ time steps and $2560$ stochastic trajectories.
 
 The dependence of the inter-component interaction and loss rate can be described with a single equation for the complex scattering length~\cite{Kaufman2009}
 \begin{eqn}
@@ -84,7 +85,7 @@ Equations~\eqnref{bec-squeezing:feshbach:g} and~\eqnref{bec-squeezing:feshbach:g
     \label{fig:bec-squeezing:feshbach:squeezing}
 \end{figure}
 
-First, we perform the simulations with $\gamma_{12}$ set to zero in order to test the squeezing in ideal conditions.
+First, we run the simulations with $\gamma_{12}$ set to zero in order to test the squeezing in ideal conditions.
 As expected, the lower cross-term $a_{12}$ is, the stronger is the squeezing, as shown in~\figref{bec-squeezing:feshbach:squeezing},~(a).
 
 With the inclusion of inter-component losses, the picture is different.

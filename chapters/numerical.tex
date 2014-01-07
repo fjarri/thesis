@@ -60,7 +60,6 @@ This means that while asymptotically \abbrev{cd} and \abbrev{cdip} methods may p
 To test that we have applied the four methods described above to a typical simulation problem from \charef{bec-noise}, the Ramsey interferometry sequence, with the parameters described in \secref{bec-noise:visibility}.
 This includes nonlinear elastic interactions and three sources of nonlinear losses (and corresponding noises in the stochastic part of \abbrev{sde}s).
 The test consisted of integrating the equations used to plot \figref{bec-noise:visibility:ramsey-visibility} for a shorter time $t_e=0.1\un{s}$.
-We used $64$ trajectories for the Wigner part of the test.
 
 The convergence was estimated as the relative difference in a quantity of interest between the reference results obtained with $S$ time steps, and auxiliary results obtained with $S / 2$ time steps.
 We initialized the random number generator with the same seed for all tests and sampled the noise for the auxiliary integration as two sequential noises, so the total noise for two steps of the reference integration was exactly the same as the noise for a single step of the auxiliary integration.
@@ -102,7 +101,7 @@ It is evident that \abbrev{rk4ip} and \abbrev{rk46nl} have fourth order converge
     \includegraphics{figures_generated/test/convergence_wigner_CDIP.pdf}%
 
     \caption[Convergence tests, \abbrev{sde}s]{
-    Convergence tests for the Wigner representation \abbrev{sde}s.
+    Convergence tests for the Wigner representation \abbrev{sde}s, $64$ trajectories.
     The meaning of the lines is the same as in \figref{numerical:convergence-gpe}.
     }%endcaption
 
