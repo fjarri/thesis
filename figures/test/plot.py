@@ -32,17 +32,21 @@ def _grid_check(prefix, fname):
         '_radial2_box1.8',
     ]
 
-    results = {}
     wigner = (prefix == 'wigner')
     prefix = 'grid-' + prefix + '/ramsey_' + prefix + '_test'
 
     with open(get_path(__file__, prefix + '_vis.json')) as f:
-        data = json.load(f)
-    ref_axial_spacing = data['box'][2] / data['shape'][2]
-    ref_radial_spacing = data['box'][0] / data['shape'][0]
-    ref_V = numpy.array(data['visibility'])
+        ref_data = json.load(f)
+    ref_axial_spacing = ref_data['box'][2] / ref_data['shape'][2]
+    ref_radial_spacing = ref_data['box'][0] / ref_data['shape'][0]
+    ref_V = numpy.array(ref_data['visibility'])
     ref_V_norm = numpy.linalg.norm(ref_V)
-    ref_V_error = data['convergence']['V']
+    ref_V_error = ref_data['convergence']['V']
+
+    axial_spacings = [1.0]
+    axial_diffs = [0.0]
+    radial_spacings = [1.0]
+    radial_diffs = [0.0]
 
     for suffix in tests:
         fn = prefix + suffix + '_vis.json'
@@ -52,55 +56,42 @@ def _grid_check(prefix, fname):
         radial_spacing = data['box'][0] / data['shape'][0]
         V = numpy.array(data['visibility'])
 
-        idx = (axial_spacing / ref_axial_spacing, radial_spacing / ref_radial_spacing)
-        results[idx] = (
-            numpy.linalg.norm(V - ref_V) / ref_V_norm,
-            #(V[-1] - ref_V[-1]) / ref_V[-1],
-            data['convergence']['V'])
+        rel_axial_spacing = axial_spacing / ref_axial_spacing
+        rel_radial_spacing = radial_spacing / ref_radial_spacing
+        delta_V = numpy.linalg.norm(V - ref_V) / ref_V_norm
 
+        if rel_axial_spacing != 1.0 or data['box'][2] != ref_data['box'][2]:
+            axial_spacings.append(rel_axial_spacing)
+            axial_diffs.append(delta_V)
+        if rel_radial_spacing != 1.0 or data['box'][0] != ref_data['box'][0]:
+            radial_spacings.append(rel_radial_spacing)
+            radial_diffs.append(delta_V)
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
         xlabel='relative spacing',
-        ylabel='visibility difference')
+        ylabel='$\\Delta \\mathcal{V}$')
 
-    spacings = [1.0]
-    diffs = [0.0]
-    errors = [ref_V_error]
-    for spacing, res in results.items():
-        axial, radial = spacing
-        diff, error = res
-        if radial == 1.:
-            spacings.append(axial)
-            diffs.append(diff)
-            errors.append(error)
-    s.scatter(spacings, diffs, marker='^', color=mplh.color.f.red.main, s=10)
-
-    spacings = [1.0]
-    diffs = [0.0]
-    errors = [ref_V_error]
-    for spacing, res in results.items():
-        axial, radial = spacing
-        diff, error = res
-        if axial == 1.:
-            spacings.append(radial)
-            diffs.append(diff)
-            errors.append(error)
-    s.scatter(spacings, diffs, marker='.', color=mplh.color.f.blue.main, s=10)
+    s.scatter(radial_spacings, radial_diffs, marker='^', color=mplh.color.f.red.main, s=10)
+    s.scatter(axial_spacings, axial_diffs, marker='.', color=mplh.color.f.blue.main, s=10)
 
     s.plot([0.4, 1.6], [0, 0], color='grey', linewidth=0.5, dashes=mplh.dash['-.'])
 
     s.set_xlim((0.4, 1.6))
     s.set_ylim((-0.01, 0.07))
 
+    legend_x = 0.7
+    legend_y = 0.06
     s.scatter(
-        [0.7, 0.74, 0.78], [0.055, 0.055, 0.055],
+        [legend_x, legend_x + 0.04, legend_x + 0.08], [legend_y] * 3,
         marker='.', color=mplh.color.f.blue.dark, s=10)
-    s.text(0.82, 0.053, 'axial spacing')
+    s.text(legend_x + 0.12, legend_y - 0.002, 'axial spacing')
     s.scatter(
-        [0.7, 0.74, 0.78], [0.045, 0.045, 0.045],
+        [legend_x, legend_x + 0.04, legend_x + 0.08], [legend_y - 0.008] * 3,
         marker='^', color=mplh.color.f.red.dark, s=10)
-    s.text(0.82, 0.043, 'radial spacing')
+    s.text(legend_x + 0.12, legend_y - 0.01, 'radial spacing')
+
+    s.text(1.32, 0.06, 'Wigner' if wigner else 'GPE')
 
     fig.text(0.01, 0.92, '(b)' if wigner else '(a)', fontweight='bold')
 
