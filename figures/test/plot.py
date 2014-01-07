@@ -156,14 +156,8 @@ def convergence(wigner, label, fname):
         SZ2_errors.append(result['errors']['SZ2'])
         N_diffs.append(result['N_diff'])
 
-    s.plot(step_nums, strong_errors, label=label + ", strong errors",
-        color=colors[label].main, dashes=mplh.dash['-'])
-    s.plot(step_nums, N_errors, label=label + ", N errors",
-        color=colors[label].main, dashes=mplh.dash['--'])
-    s.plot(step_nums, SZ2_errors, label=label + ", Sz^2 errors",
-        color=colors[label].main, dashes=mplh.dash[':'])
-
     step_nums = numpy.array(step_nums)
+
     s.plot(step_nums, 1e3 * (1. / step_nums) ** 1, color='grey',
         dashes=mplh.dash['-.'], linewidth=0.5)
     s.plot(step_nums, 1e6 * (1. / step_nums) ** 2, color='grey',
@@ -171,6 +165,16 @@ def convergence(wigner, label, fname):
     s.plot(step_nums, 1e12 * (1. / step_nums) ** 4, color='grey',
         dashes=mplh.dash['-.'], linewidth=0.5)
 
+    s.plot(step_nums, strong_errors, label=label + ", strong errors",
+        color=colors[label].main, dashes=mplh.dash['-'])
+    s.plot(step_nums, N_errors, label=label + ", N errors",
+        color=colors[label].main, dashes=mplh.dash['--'])
+    s.plot(step_nums, SZ2_errors, label=label + ", Sz^2 errors",
+        color=colors[label].main, dashes=mplh.dash[':'])
+
+    s.text(5.7*10**5, (1e3 * (1. / step_nums) ** 1)[-1] / 2, '$\\mathup{d}t$', color='grey', fontsize=7)
+    s.text(5.7*10**5, (1e6 * (1. / step_nums) ** 2)[-1] / 2, '$\\mathup{d}t^2$', color='grey', fontsize=7)
+    s.text(5.7*10**5, (1e12 * (1. / step_nums) ** 4)[-1] / 2, '$\\mathup{d}t^4$', color='grey', fontsize=7)
 
     s.text(1.3*10**5, 2*10**(-1), "\\abbrev{" + label + "}")
     s.plot([1.2*10**3, 2.4*10**3], [3*10**(-7), 3*10**(-7)],
@@ -215,8 +219,6 @@ def convergence_by_time(fname):
     s.set_xlim(tmin, tmax)
     s.set_ylim(10**(-7), 1)
 
-    #s.plot([tmin, tmax], [10**(-4), 10**(-4)], linewidth=0.5, color='grey')
-    #s.plot([tmin, tmax], [10**(-5), 10**(-5)], linewidth=0.5, color='grey')
     s.fill_between([tmin, tmax], [10**(-5), 10**(-5)], [10**(-4), 10**(-4)],
         facecolor=(0.9, 0.9, 0.9), color=(0.7,0.7,0.7), linewidth=0.5)
 
@@ -240,7 +242,7 @@ def convergence_by_time(fname):
     s.text(7.5*10**1, 10**(-2), '\\abbrev{RK4IP}')
     s.text(3*10**1, 10**(-3), '\\abbrev{RK46NL}')
 
-    s.text(1.5*10**1, 3*10**(-6), 'target error')
+    s.text(1.5*10**1, 3*10**(-6), 'target accuracy')
 
     fig.tight_layout(pad=0.3)
     fig.savefig(fname)
