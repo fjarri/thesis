@@ -9,71 +9,25 @@ import figures.mplhelpers as mplh
 
 def _grid_check(prefix, fname):
 
-    tests = [
-
-        '_axial2_box1',
-        '_axial2_box2',
-
-        '_axial1_box1.5',
-        '_axial2_box1.5',
-        '_axial1_box1.1',
-        '_axial2_box1.9',
-        '_axial1_box1.2',
-        '_axial2_box1.8',
-
-        '_radial2_box1',
-        '_radial2_box2',
-
-        '_radial1_box1.5',
-        '_radial2_box1.5',
-        '_radial1_box1.1',
-        '_radial2_box1.9',
-        '_radial1_box1.2',
-        '_radial2_box1.8',
-    ]
-
     wigner = (prefix == 'wigner')
-    prefix = 'grid-' + prefix + '/ramsey_' + prefix + '_test'
 
-    with open(get_path(__file__, prefix + '_vis.json')) as f:
-        ref_data = json.load(f)
-    ref_axial_spacing = ref_data['box'][2] / ref_data['shape'][2]
-    ref_radial_spacing = ref_data['box'][0] / ref_data['shape'][0]
-    ref_V = numpy.array(ref_data['visibility'])
-    ref_V_norm = numpy.linalg.norm(ref_V)
-    ref_V_error = ref_data['convergence']['V']
+    with open(get_path(__file__, 'grid_test.json')) as f:
+        data = json.load(f)
 
-    axial_spacings = [1.0]
-    axial_diffs = [0.0]
-    radial_spacings = [1.0]
-    radial_diffs = [0.0]
-
-    for suffix in tests:
-        fn = prefix + suffix + '_vis.json'
-        with open(get_path(__file__, fn)) as f:
-            data = json.load(f)
-        axial_spacing = data['box'][2] / data['shape'][2]
-        radial_spacing = data['box'][0] / data['shape'][0]
-        V = numpy.array(data['visibility'])
-
-        rel_axial_spacing = axial_spacing / ref_axial_spacing
-        rel_radial_spacing = radial_spacing / ref_radial_spacing
-        delta_V = numpy.linalg.norm(V - ref_V) / ref_V_norm
-
-        if rel_axial_spacing != 1.0 or data['box'][2] != ref_data['box'][2]:
-            axial_spacings.append(rel_axial_spacing)
-            axial_diffs.append(delta_V)
-        if rel_radial_spacing != 1.0 or data['box'][0] != ref_data['box'][0]:
-            radial_spacings.append(rel_radial_spacing)
-            radial_diffs.append(delta_V)
+    data = data['wigner' if wigner else 'gpe']
 
     fig = mplh.figure(width=0.5)
     s = fig.add_subplot(111,
         xlabel='relative spacing',
         ylabel='$\\Delta \\mathcal{V}$')
 
-    s.scatter(radial_spacings, radial_diffs, marker='^', color=mplh.color.f.red.main, s=10)
-    s.scatter(axial_spacings, axial_diffs, marker='.', color=mplh.color.f.blue.main, s=10)
+    radial_spacings = list(sorted(data['radial_points']))
+    radial_diffs = [data['radial_points'][spacing] for spacing in radial_spacings]
+    s.scatter([1.] + radial_spacings, [0.] + radial_diffs, marker='^', color=mplh.color.f.red.main, s=10)
+
+    axial_spacings = list(sorted(data['axial_points']))
+    axial_diffs = [data['axial_points'][spacing] for spacing in axial_spacings]
+    s.scatter([1.] + axial_spacings, [0.] + axial_diffs, marker='.', color=mplh.color.f.blue.main, s=10)
 
     s.plot([0.4, 1.6], [0, 0], color='grey', linewidth=0.5, dashes=mplh.dash['-.'])
 
