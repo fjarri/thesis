@@ -134,7 +134,6 @@ def convergence(wigner, label, fname):
     step_nums = []
     strong_errors = []
     N_errors = []
-    N_diffs = []
     SZ2_errors = []
 
     int_steps = [int(steps) for steps in results[label]]
@@ -142,10 +141,9 @@ def convergence(wigner, label, fname):
     for steps in sorted(int_steps):
         result = results[label][str(steps)]
         step_nums.append(int(steps))
-        strong_errors.append(result['errors']['psi'])
-        N_errors.append(result['errors']['N'])
-        SZ2_errors.append(result['errors']['SZ2'])
-        N_diffs.append(result['N_diff'])
+        strong_errors.append(result['strong_errors']['psi'])
+        N_errors.append(result['weak_errors']['N'])
+        SZ2_errors.append(result['weak_errors']['SZ2'])
 
     step_nums = numpy.array(step_nums)
 
@@ -222,16 +220,16 @@ def convergence_by_time(fname):
         for steps in sorted(int_steps):
             result = results[label][str(steps)]
             times.append(result['t_integration'])
-            N_errors.append(result['errors']['N'])
+            N_errors.append(result['weak_errors']['N'])
 
         s.plot(times, N_errors, label=label + ", N errors",
             color=colors[label].main, dashes=mplh.dash[linestyles[label]])
 
 
-    s.text(5*10**2, 10**(-2), '\\abbrev{CD}')
-    s.text(2.5*10**2, 10**(-3), '\\abbrev{CDIP}')
-    s.text(7.5*10**1, 10**(-2), '\\abbrev{RK4IP}')
-    s.text(3*10**1, 10**(-3), '\\abbrev{RK46NL}')
+    s.text(4.5*10**2, 10**(-2), '\\abbrev{CD}')
+    s.text(2.5*10**2, 1.5*10**(-3), '\\abbrev{CDIP}')
+    s.text(6.5*10**1, 10**(-2), '\\abbrev{RK4IP}')
+    s.text(2*10**1, 1.5*10**(-3), '\\abbrev{RK46NL}')
 
     s.text(1.5*10**1, 3*10**(-6), 'target accuracy')
 
