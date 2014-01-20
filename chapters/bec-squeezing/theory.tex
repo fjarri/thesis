@@ -100,7 +100,7 @@ The second-order moments of the spin operators are obtained by transforming norm
 Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symmetrically ordered operator products as
 \begin{eqn}
 	\langle \hat{S}^2_x \rangle
-	={} & \frac{1}{4} \left\langle \int
+	={} & \frac{1}{4} \left\langle \iint
 		\left(
 			\Psiop^\dagger_2 \Psiop_1 + \Psiop^\dagger_1 \Psiop_2
 		\right)
@@ -108,7 +108,7 @@ Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symme
 			\Psiop^{\prime\dagger}_2 \Psiop^\prime_1 + \Psiop^{\prime\dagger}_1 \Psiop^\prime_2
 		\right)
 		\upd\xvec\, \upd\xvec^\prime \right\rangle \\
-	={} & \frac{1}{4} \left\langle \int \left(
+	={} & \frac{1}{4} \left\langle \iint \left(
 			\symprod{ \Psiop^\dagger_2 \Psiop_1 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
 			+ \symprod{ \Psiop^\dagger_1 \Psiop_2 \Psiop^{\prime\dagger}_2 \Psiop^\prime_1 }
 		\right. \right. \\
@@ -126,11 +126,11 @@ Starting with $\langle \hat{S}^2_x \rangle$, we can express it in terms of symme
 In general, basis sets of the first and the second component are different, and the last term in the above equation cannot be simplified any further.
 However, in the numerical simulations in this chapter we use the same set $\restbasis_1 = \restbasis_2 = \restbasis$ for both components, which allows us to transform it to a more convenient form
 \begin{eqn}
-	\int \Real \left(
+	\iint \Real \left(
 			\delta_{\restbasis} (\xvec, \xvec^\prime)
 			\delta_{\restbasis} (\xvec^\prime, \xvec)
 		\right) \upd\xvec\, \upd\xvec^\prime
-	& = \frac{1}{2} \int \left(
+	& = \frac{1}{2} \iint \left(
 			\sum_{\mvec \in \restbasis} \phi_{\mvec}^\prime \phi_{\mvec}^*
 			\sum_{\nvec \in \restbasis} \phi_{\nvec} \phi_{\nvec}^{\prime*}
 			+ \mathrm{c.\,c.}
