@@ -9,7 +9,7 @@ The experiment essentially consisted of the same regular Ramsey sequence as depi
 The experiment started with an application of a $\pi/2$-pulse using an oscillator with the Rabi frequency $\Omega=2\pi \times 2.1\times 10^{3}\un{rad/s}$, creating an equal superposition of two hyperfine states ${\ket{F=1,\, m_F=-1}}$ and ${\ket{F=2,\, m_F=+1}}$.
 The second pulse had a varied length allowing a measurement of the spin along the angle $\theta$: $\hat{S}_\theta = \hat{S}_z \cos \theta - \hat{S}_y \sin \theta$ (spin tomography).
 
-The important difference was an addition of the component-dependent longitudinal shift to the potential $l_x^{(1,2)} = \pm 0.26\un{\mu m}$ right after the first pulse (as described by~\eqnref{bec-noise:system:V}), persisting the whole time of the evolution until the second oscillator pulse.
+The important difference was an addition of the component-dependent longitudinal shift to the potential $l_z^{(1,2)} = \pm 0.26\un{\mu m}$ right after the first pulse (as described by~\eqnref{bec-noise:system:V}), persisting the whole time of the evolution until the second oscillator pulse.
 This effectively reduced the component overlap and provided a way of enabling the nonlinearity only at a chosen ``best squeezing'' time according to the one-axis twisting Hamiltonian model~\cite{Kitagawa1993}.
 
 \begin{figure}
@@ -24,7 +24,8 @@ This effectively reduced the component overlap and provided a way of enabling th
 The truncated Wigner approach is applied straightforwardly to this system and allows us to measure the degree of squeezing $\xi^2$ according to the formula~\eqnref{bec-squeezing:theory:xi2}, calculating the required spin correlations using the expressions derived in \secref{bec-squeezing:theory}.
 Furthermore, we can simulate the observations closer to those used in the experiment, and collect the spin tomography results, as shown in~\figref{bec-squeezing:separation:tomography}.
 The maximum degree of squeezing and the corresponding rotation angle corresponds to the minimum of the graph.
-The simulation used a $8\times8\times64$ spatial grid, $12,000$ time steps and $2560$ stochastic trajectories.
+The simulation used a $16\times16\times128$ spatial grid, $20,000$ time steps and $2560$ stochastic trajectories.
+We used the energy cutoff $\epsilon_{\mathrm{cut}} = 5000\hbar$ (chosen to produce the safe padded momentum space~\cite{Norrie2006}) which reduced the number of effective modes to $70$.
 
 The Wigner method shows good agreement with the two-mode variational method~\cite{Li2009}, which was used by the experimental team, and also includes the effect of particle losses.
 The two-mode method predictions were taken from~\cite{Riedel2010} and plotted in~\figref{bec-squeezing:separation:tomography} for the sake of comparison.

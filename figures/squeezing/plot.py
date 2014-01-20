@@ -328,48 +328,13 @@ def buildRiedelTomographyPath():
     return vertices, codes
 
 
-def getAngles(amin, amax, n=300):
-    # angles for tomography
-    angles = numpy.arange(n + 1) / float(n) * (amax - amin) + amin
-    angles_radian = angles * 2 * numpy.pi / 360
-    return angles, angles_radian
-
-
-def calculateSqueezing(angles_radian, sy, sz):
-    # Calculate \Delta^2 \hat{S}_\theta.
-    # sy, sz and the result have shape (subsets, points)
-    N = 1200.0
-    ss = sy.shape[0]
-    tp = angles_radian.size
-    ca = numpy.tile(numpy.cos(angles_radian), (ss, 1))
-    sa = numpy.tile(numpy.sin(angles_radian), (ss, 1))
-
-    # calculate mean inside subset and tile it to match cosine and sine data
-    mean = lambda x: numpy.tile(x.mean(1).reshape(ss, 1), (1, tp))
-
-    d2S = mean(sz ** 2) * ca ** 2 + mean(sy ** 2) * sa ** 2 - \
-        2 * mean(sz * sy) * sa * ca - mean(sy) ** 2 * sa ** 2 - mean(sz) ** 2 * ca ** 2 + \
-        2 * mean(sz) * mean(sy) * sa * ca
-    return d2S / N * 4
-
-
 def riedel_rotation(fname):
 
-    with open(get_path(__file__, 'split_potentials_spins_last.pickle'), 'rb') as f:
-        spins = pickle.load(f)
+    with open(get_path(__file__, 'riedel_rotation.json')) as f:
+        rotation = json.load(f)
 
-    Sx = spins['Sx']
-    # for some reason Y direction in Riedel is swapped (is it the sign of detuning?)
-    Sy = -spins['Sy']
-    Sz = spins['Sz']
-
-    amin = -90
-    amax = 90
-    angles, angles_radian = getAngles(amin, amax)
-
-    ens = Sy.size # total number of ensembles
-    # average result using all data
-    res_full = calculateSqueezing(angles_radian, Sy.reshape(1, ens), Sz.reshape(1, ens))
+    angles = numpy.array(rotation['angles'])
+    squeezing = numpy.array(rotation['squeezing'])
 
     vertices, codes = buildRiedelTomographyPath()
     riedel_path = path.Path(vertices, codes)
@@ -384,15 +349,15 @@ def riedel_rotation(fname):
     subplot = fig.add_subplot(111)
 
     #subplot.add_patch(patch)
-    subplot.plot([amin, amax], [0, 0], color='grey', linewidth=0.5,
+    subplot.plot([angles[0], angles[-1]], [0, 0], color='grey', linewidth=0.5,
         linestyle='-.', dashes=mplh.dash['-.'])
 
     subplot.plot(riedel_path_x, riedel_path_y, color=mplh.color.f.blue.main,
         linestyle='--', dashes=mplh.dash['--'])
 
-    subplot.plot(angles, numpy.log10(res_full[0]) * 10, color=mplh.color.f.red.main)
+    subplot.plot(angles, numpy.log10(squeezing) * 10, color=mplh.color.f.red.main)
 
-    subplot.set_xlim(xmin=amin, xmax=amax)
+    subplot.set_xlim(xmin=angles[0], xmax=angles[-1])
     subplot.set_ylim(ymin=-13, ymax=20)
     subplot.xaxis.set_ticks((-90, -45, 0, 45, 90))
     subplot.xaxis.set_ticklabels(('$-90$', '$-45$', '$0$', '$45$', '$90$'))
@@ -430,13 +395,12 @@ def riedel_cloud(fname):
     cloud_xbins = int(cloud_zbins * cloud_xsize / cloud_zsize + 0.5)
     cloud_ybins = int(cloud_zbins * cloud_ysize / cloud_zsize + 0.5)
 
-    with open(get_path(__file__, 'split_potentials_spins_last.pickle'), 'rb') as f:
-        spins = pickle.load(f)
+    with open(get_path(__file__, 'riedel_spins.json')) as f:
+        spins = json.load(f)
 
-    Sx = spins['Sx']
-    # for some reason Y direction in Riedel is swapped (is it the sign of detuning?)
-    Sy = -spins['Sy']
-    Sz = spins['Sz']
+    Sx = numpy.array(spins['Sx'])
+    Sy = numpy.array(spins['Sy'])
+    Sz = numpy.array(spins['Sz'])
 
     Sx -= Sx.mean()
     Sy -= Sy.mean()

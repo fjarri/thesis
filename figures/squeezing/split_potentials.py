@@ -2,127 +2,127 @@
 This example demonstrates usage of static per-component potentials
 """
 
+import pickle
 import numpy
+import sys
+
+from reikna import cluda
 from beclab import *
-from beclab.constants import buildProjectorMask
+
 
 # parameters from Riedel at al. (2010)
 N = 1250
-f_rad = 109
-f_ax = 500
+freqs = (500, 500, 109)
 f_rabi = 2100
 f_detuning = -40
 potentials_separation = 0.52e-6
 splitting_time = 12.7e-3
-e_cut = 5000
-shape = (128, 16, 16)
-parameters = repr(dict(e_cut=e_cut, shape=shape))
+shape = (16, 16, 128)
+state_dtype = numpy.complex128
+steps = 20000
+samples = 100
 
 
-def split_potentials(constants, grid):
+components = [const.rb87_1_minus1, const.rb87_2_1]
+scattering = const.scattering_3d(
+    numpy.array([[100.4, 97.7], [97.7, 95.0]]), components[0].m)
 
-	x = grid.x_full
-	y = grid.y_full
-	z = grid.z_full
+losses = [
+    (5.4e-42 / 6, (3, 0)),
+    (8.1e-20 / 4, (0, 2)),
+    (1.51e-20 / 2, (1, 1)),
+    ]
 
-	potentials = lambda dz: constants.m * (
-		(constants.wx * x) ** 2 +
-		(constants.wy * y) ** 2 +
-		(constants.wz * (z + dz)) ** 2) / (2.0 * constants.hbar)
+potential_init = HarmonicPotential(freqs)
+potential_split = HarmonicPotential(
+    freqs,
+    displacements=[
+        (0, 2, -potentials_separation / 2),
+        (1, 2, potentials_separation / 2)])
+system_init = System(components, scattering, potential=potential_init, losses=losses)
+system_split = System(components, scattering, potential=potential_split, losses=losses)
 
-	return numpy.concatenate([
-		potentials(potentials_separation / 2),
-		potentials(-potentials_separation / 2)
-	]).reshape((2,) + x.shape).astype(constants.scalar.dtype)
+box = box_for_tf(system_init, 0, N)
+box = (box[0], box[1], box[2] + potentials_separation * 2)
+grid = UniformGrid(shape, box)
 
-
-def runPass():
-	env = envs.cuda(device_num=1)
-	constants = Constants(double=env.supportsDouble(),
-		a11=100.4, a12=97.7, a22=95.0, fx=f_ax, fy=f_ax, fz=f_rad, e_cut=e_cut)
-
-	# axial size of the N / 2 cloud ~ 8e-6 >> potentials_separation
-	# therefore we can safely use normal grid, provided that it has big enough border
-	box = constants.boxSizeForN(N, 3, border=1.2)
-	grid = UniformGrid(env, constants, shape,
-		(box[0] + potentials_separation * 2, box[1], box[2]))
-	#print constants.planeWaveModesForCutoff(constants.boxSizeForN(N, 3, border=2))
-
-	gs = SplitStepGroundState(env, constants, grid, dt=1e-6)
-	pulse = Pulse(env, constants, grid, f_rabi=f_rabi, f_detuning=f_detuning)
-	evolution = SplitStepEvolution(env, constants, grid,
-		potentials=split_potentials(constants, grid),
-		dt=1e-6)
-
-	n = ParticleNumberCollector(env, constants, grid, verbose=False)
-	v = VisibilityCollector(env, constants, grid)
-#	a = AxialProjectionCollector(env, constants, grid, pulse=pulse)
-	u = UncertaintyCollector(env, constants, grid)
-	s = SpinCloudCollector(env, constants, grid)
-
-	psi = gs.create((N, 0))
-
-	psi.toMSpace()
-	mode_data = numpy.abs(env.fromDevice(psi.data))[0, 0] # remember mode data
-	mask = buildProjectorMask(constants, grid)
-	psi.toXSpace()
-
-	psi.toWigner(128)
-	pulse.apply(psi, numpy.pi / 2)
-	evolution.run(psi, splitting_time, callbacks=[v, n, u, s],
-		callback_dt=splitting_time / 100)
-	env.synchronize()
-	env.release()
-
-	"""
-	times, heightmap = a.getData()
-	HeightmapPlot(
-		HeightmapData("test", heightmap,
-			xmin=0, xmax=splitting_time * 1e3,
-			ymin=grid.z[0] * 1e6,
-			ymax=grid.z[-1] * 1e6,
-			zmin=-1, zmax=1,
-			xname="T (ms)", yname="z ($\\mu$m)", zname="Spin projection")
-	).save('split_potentials_axial.pdf')
-	"""
-
-	times, n_stddev, xi_squared = u.getData()
-	XYData("Squeezing", times * 1000, numpy.log10(xi_squared),
-		xname="T (ms)", yname="log$_{10}$($\\xi^2$)",
-		description=parameters).save('split_potentials_xi.json')
+if sys.argv[1] == 'padded':
+    cutoff = WavelengthCutoff.padded(grid, pad=4)
+    fname_suffix = 'padded'
+elif sys.argv[1] == '5000':
+    cutoff = WavelengthCutoff.for_energy(5000 * const.HBAR, components[0])
+    fname_suffix = '5000'
+print("Using", cutoff.get_modes_number(grid), "modes out of", grid.size)
 
 
-	times, vis = v.getData()
-	XYData('test', times * 1e3, vis,
-		xname="T (ms)", yname="$\\mathcal{V}$",
-		ymin=0, ymax=1,
-		description=parameters).save('split_potentials_vis.json')
+def run_pass(trajectories=128):
+
+    api = cluda.ocl_api()
+    thr = api.Thread.create()
+
+    rng = numpy.random.RandomState(1234)
+
+    gs_gen = ImaginaryTimeGroundState(thr, state_dtype, grid, system_init,
+        stepper_cls=RK46NLStepper, cutoff=cutoff)
+
+    # Ground state
+    psi = gs_gen([N, 0], E_diff=1e-7, E_conv=1e-9, sample_time=1e-6)
+
+    # Initial noise
+    psi = psi.to_wigner_coherent(trajectories, seed=rng.randint(0, 2**32-1))
+
+    integrator = Integrator(
+        psi, system_split,
+        trajectories=trajectories,
+        stepper_cls=RK46NLStepper, cutoff=cutoff,
+        wigner=True, seed=rng.randint(0, 2**32-1))
+
+    # Prepare samplers
+    bs = BeamSplitter(psi, f_detuning=f_detuning, f_rabi=f_rabi)
+    n_bs_sampler = PopulationSampler(psi, beam_splitter=bs, theta=numpy.pi / 2)
+    n_sampler = PopulationSampler(psi)
+    i_sampler = InteractionSampler(psi)
+    v_sampler = VisibilitySampler(psi)
+    v_sampler.no_values = True
+    ax_sampler = Density1DSampler(psi, axis=2)
+    ax_sampler.no_values = True
+
+    samplers = dict(
+        N=n_sampler, I=i_sampler, V=v_sampler,
+        N_bs=n_bs_sampler, axial_density=ax_sampler)
+
+    # Integrate
+    bs(psi.data, 0, numpy.pi / 2)
+
+    result, info = integrator.fixed_step(
+        psi, 0, splitting_time, steps, samples=samples,
+        samplers=samplers, weak_convergence=['N', 'I', 'V'])
+
+    return result, info
 
 
-	times, phi, yps, Sx, Sy, Sz = s.getData()
-	return times, Sx, Sy, Sz
+def combined_test(fname, total_trajectories):
+
+    chunk = 64
+
+    full_results = None
+
+    for i in range(total_trajectories // chunk):
+
+        print("Chunk", i)
+
+        result, info = run_pass(trajectories=chunk)
+
+        if full_results is None:
+            full_results = result
+        else:
+            full_results = join_results(full_results, result)
+
+        with open(fname, 'wb') as f:
+            pickle.dump(dict(
+                errors=info.weak_errors,
+                results=full_results), f, protocol=2)
 
 
 if __name__ == '__main__':
-
-	Sxs = []
-	Sys = []
-	Szs = []
-	times = None
-
-	for i in xrange(100):
-		print "*** Running ", i + 1, "-th pass"
-		times, Sx, Sy, Sz = runPass()
-		XYPlot([XYData.load('split_potentials_xi.json')]).save('split_potentials_xi_squared.pdf')
-		XYPlot([XYData.load('split_potentials_vis.json')]).save('split_potentials_vis.pdf')
-		Sxs.append(Sx)
-		Sys.append(Sy)
-		Szs.append(Sz)
-
-		Sx = numpy.concatenate(Sxs, 1)
-		Sy = numpy.concatenate(Sys, 1)
-		Sz = numpy.concatenate(Szs, 1)
-
-		Data('spins', ['times', 'name', 'Sx', 'Sy', 'Sz', 'description'],
-			times=times, Sx=Sx, Sy=Sy, Sz=Sz,
-			name="Spins", description="parameters").save('split_potentials_spins.pickle')
+    combined_test('split_potentials_' + fname_suffix + '.pickle', 1024 * 10)
