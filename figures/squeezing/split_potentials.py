@@ -46,12 +46,7 @@ box = box_for_tf(system_init, 0, N)
 box = (box[0], box[1], box[2] + potentials_separation * 2)
 grid = UniformGrid(shape, box)
 
-if sys.argv[1] == 'padded':
-    cutoff = WavelengthCutoff.padded(grid, pad=4)
-    fname_suffix = 'padded'
-elif sys.argv[1] == '5000':
-    cutoff = WavelengthCutoff.for_energy(5000 * const.HBAR, components[0])
-    fname_suffix = '5000'
+cutoff = WavelengthCutoff.for_energy(5000 * const.HBAR, components[0])
 print("Using", cutoff.get_modes_number(grid), "modes out of", grid.size)
 
 
@@ -103,7 +98,7 @@ def run_pass(trajectories=128):
 
 def combined_test(fname, total_trajectories):
 
-    chunk = 64
+    chunk = 128
 
     full_results = None
 
@@ -125,4 +120,4 @@ def combined_test(fname, total_trajectories):
 
 
 if __name__ == '__main__':
-    combined_test('split_potentials_' + fname_suffix + '.pickle', 1024 * 10)
+    combined_test('split_potentials.pickle', 128 * 100)

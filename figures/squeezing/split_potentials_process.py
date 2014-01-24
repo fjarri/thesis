@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from split_potentials import grid
+from split_potentials import grid, cutoff
 
 
 def plot_density(results):
@@ -79,11 +79,13 @@ def calculate_squeezing(angles_radian, n, sy, sz):
 
     tile = lambda arr: numpy.tile(arr.reshape(1, subsets), (tp, 1))
 
+    modes = cutoff.get_modes_number(grid)
+
     exp_n = tile(n.mean(-1))
     exp_sy = tile(sy.mean(-1))
-    exp_sy2 = tile((sy ** 2).mean(-1))
+    exp_sy2 = tile((sy ** 2 - modes / 8.).mean(-1))
     exp_sz = tile(sz.mean(-1))
-    exp_sz2 = tile((sz ** 2).mean(-1))
+    exp_sz2 = tile((sz ** 2 - modes / 8.).mean(-1))
     exp_sysz = tile((sy * sz).mean(-1))
 
     ca = numpy.tile(numpy.cos(angles_radian).reshape(tp, 1), (1, subsets))
@@ -174,7 +176,7 @@ if __name__ == '__main__':
     #plot_position(results)
     #plot_visibility(results)
     #plot_population(results)
-    #plot_tomography(results)
+    plot_tomography(results)
     save_tomography(results, 'riedel_rotation.json')
     save_spins(results, 'riedel_spins.json')
 
