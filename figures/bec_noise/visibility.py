@@ -1,247 +1,212 @@
+from __future__ import print_function, division
+
+import sys
 import numpy
-import time
 import pickle
 
+import reikna.cluda as cluda
+
 from beclab import *
-from beclab.evolution_strong import StrongRKEvolution
-import gc
-import sys
+from beclab.integrator.results import sample
 
 
-def calculateRamsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
-		steps=20000, samples=100, N=55000, ensembles=1, shape=(64, 8, 8),
-		losses=True):
+def calculate_ramsey(pulse_theta_noise=0, wigner=False, echo=False, t=1.0,
+        steps=20000, samples=100, N=55000, trajectories=1, shape=(8, 8, 64),
+        losses_enabled=True):
 
-	env = envs.cuda(device_num=0)
-	constants_kwds = dict(
-		fx=97.0, fy=97.0 * 1.03, fz=11.69,
-		a11=100.4, a12=98.0, a22=95.44)
+    api = cluda.ocl_api()
+    thr = api.Thread.create()
 
-	if losses:
-		constants_kwds.update(
-			dict(gamma111=5.4e-42, gamma12=1.51e-20, gamma22=8.1e-20))
-	else:
-		constants_kwds.update(
-			dict(gamma111=0, gamma12=0, gamma22=0))
+    f_detuning = 37
+    f_rabi = 350
+    state_dtype = numpy.complex128
 
-	constants = Constants(
-		double=env.supportsDouble(),
-		**constants_kwds)
+    rng = numpy.random.RandomState(1234)
 
-	grid = UniformGrid.forN(env, constants, N, shape)
+    freqs = (97.0, 97.0 * 1.03, 11.69)
+    components = [const.rb87_1_minus1, const.rb87_2_1]
 
-	gs = SplitStepGroundState(env, constants, grid, dt=1e-6)
-	evolution = StrongRKEvolution(env, constants, grid)
-	pulse = Pulse(env, constants, grid, f_rabi=350)
+    scattering = const.scattering_3d(numpy.array([[100.4, 98.0], [98.0, 95.44]]), components[0].m)
 
-	n = WavefunctionCollector(env, constants, grid)
+    if losses_enabled:
+        losses = [
+            (5.4e-42 / 6, (3, 0)),
+            (8.1e-20 / 4, (0, 2)),
+            (1.51e-20 / 2, (1, 1)),
+            ]
+    else:
+        losses = None
 
-	if samples > 0:
-		collectors = [n]
-	else:
-		collectors = None
+    potential = HarmonicPotential(freqs)
+    system = System(components, scattering, potential=potential, losses=losses)
 
-	psi = gs.create((N, 0), precision=1e-6)
+    # Initial state
+    with open('ground_states/ground_state_8-8-64_1-1-1.pickle') as f:
+        data = pickle.load(f)
 
-	if wigner:
-		psi.toWigner(ensembles)
+    psi_gs = data['data']
+    box = data['box']
+    grid = UniformGrid(shape, box)
+    print(grid.shape, grid.box)
 
-	if wigner:
-		pulse.apply(psi, numpy.pi / 2, theta_noise=pulse_theta_noise)
-	else:
-		pulse.apply(psi, numpy.pi / 2)
+    psi = WavefunctionSet(thr, numpy.complex128, grid, components=2)
 
-	if t > 0:
-		t1 = time.time()
-		if echo:
-			errors = evolution.run(psi, t / 2, steps / 2,
-				callbacks=collectors, samples=samples / 2 if samples > 1 else 1)
-			if wigner:
-				pulse.apply(psi, numpy.pi, theta_noise=pulse_theta_noise)
-			else:
-				pulse.apply(psi, numpy.pi)
-			errors = evolution.run(psi, t / 2, steps / 2,
-				callbacks=collectors, samples=samples / 2 if samples > 1 else 1)
-		else:
-			errors = evolution.run(psi, t, steps, callbacks=collectors, samples=samples)
-		env.synchronize()
-		t2 = time.time()
-		print "Time spent: " + str(t2 - t1) + " s"
-	else:
-		errors = None
+    # Two-component state
+    psi.fill_with(psi_gs)
 
-	if samples == 0:
-		psis = psi.data.get()
-		times = t
-	else:
-		times, psis = n.getData()
+    # Initial noise
+    if wigner:
+        psi = psi.to_wigner_coherent(trajectories, seed=rng.randint(0, 2**32-1))
 
-	psi_type = psi.type
+    bs = BeamSplitter(psi, f_detuning=f_detuning, f_rabi=f_rabi, seed=rng.randint(0, 2**32-1))
 
-	del psi
-	del evolution
-	del gs
-	del pulse
-	del constants
-	del grid
-	env.release()
-	del env
-	gc.collect()
+    integrator = Integrator(
+        psi, system,
+        trajectories=trajectories, stepper_cls=RK46NLStepper,
+        wigner=wigner, seed=rng.randint(0, 2**32-1))
 
-	return dict(times=times, psis=psis, errors=errors, psi_type=psi_type,
-		constants_kwds=constants_kwds, N=N, steps=steps, shape=shape)
+    # Integrate
+    n_bs_sampler = PopulationSampler(psi, beam_splitter=bs, theta=numpy.pi/2)
+    n_sampler = PopulationSampler(psi)
+    i_sampler = InteractionSampler(psi)
+    v_sampler = VisibilitySampler(psi)
 
+    samplers = dict(N_bs=n_bs_sampler, N=n_sampler, V=v_sampler, I=i_sampler)
+    weak_convergence = ['N', 'V', 'N_bs', 'I']
 
-def calculateEcho(**kwds):
-	kwds['echo'] = True
-	total_steps = kwds['steps']
-	total_samples = kwds['samples']
-	total_t = float(kwds['t'])
-	assert total_steps % total_samples == 0
+    bs(psi.data, 0, numpy.pi / 2, theta_noise=pulse_theta_noise)
 
-	ress = None
-	for j in xrange(total_samples + 1):
-		steps = total_steps / total_samples * j
-		t = total_t / total_samples * j
-		print "--- Running Ramsey for t =", t, " steps =", steps
+    if t > 0:
+        if echo:
+            result1, info1 = integrator.fixed_step(
+                psi, 0, t / 2, steps // 2, samples=samples // 2 if samples > 1 else 1,
+                samplers=samplers, weak_convergence=weak_convergence)
+            bs(psi.data, t / 2, numpy.pi, theta_noise=pulse_theta_noise)
+            result2, info2 = integrator.fixed_step(
+                psi, t / 2, t, steps // 2, samples=samples // 2 if samples > 1 else 1,
+                samplers=samplers, weak_convergence=weak_convergence)
 
-		kwds['t'] = t
-		kwds['steps'] = steps
-		kwds['samples'] = 0
-		res = calculateRamsey(**kwds)
-		if ress is None:
-			ress = res
-			ress['times'] = [t]
-			ress['psis'] = [res['psis']]
-		else:
-			ress['times'].append(t)
-			ress['psis'].append(res['psis'])
+            result = concatenate_results(result1, result2)
+            info = info2
+        else:
+            result, info = integrator.fixed_step(
+                psi, 0, t, steps, samples=samples, samplers=samplers,
+                weak_convergence=weak_convergence)
+        weak_errors = info.weak_errors
+    else:
+        samples, _ = sample(psi.data, 0, samplers)
+        result = {}
+        for key in samples:
+            result[key] = dict(
+                trajectories=trajectories,
+                time=numpy.array([0]))
+            for subkey in ('mean', 'values', 'stderr'):
+                if subkey in samples[key]:
+                    result[key][subkey] = samples[key][subkey].reshape(1, *samples[key][subkey].shape)
+        weak_errors = {key:0 for key in weak_convergence}
 
-	ress['errors'] = res['errors']
-	return ress
+    psi_type = 'wigner' if wigner else 'wavefunction'
+
+    return dict(result=result, weak_errors=weak_errors, psi_type=psi_type,
+        N=N, steps=steps,
+        shape=grid.shape, box=grid.box,
+        wigner=wigner)
 
 
-def run(func, fname, ens_step, **kwds):
+def concatenate_results(result1, result2):
+    results = {}
+    for key in result1:
+        r = {}
+        r1 = result1[key]
+        r2 = result2[key]
+        r['trajectories'] = r1['trajectories']
+        for subkey in ('time', 'mean', 'values', 'stderr'):
+            if subkey in r1:
+                r[subkey] = numpy.concatenate([r1[subkey], r2[subkey]])
+        results[key] = r
+    return results
 
-	total_ensembles = kwds['ensembles']
-	kwds['ensembles'] = ens_step
 
-	for j in xrange(0, total_ensembles, ens_step):
-		print "*** Ensembles:", j, "to", j + ens_step - 1
-		res = func(**kwds)
+def calculate_echo(**kwds):
+    kwds['echo'] = True
+    total_steps = kwds['steps']
+    total_samples = kwds['samples']
+    total_t = float(kwds['t'])
+    assert total_steps % total_samples == 0
 
-		if j > 0:
-			with open(fname, 'rb') as f:
-				ress = pickle.load(f)
+    ress = None
+    for j in xrange(total_samples + 1):
+        steps = total_steps // total_samples * j
+        t = total_t / total_samples * j
+        print("--- Running Ramsey for t =", t, " steps =", steps)
 
-			res['errors']['error_strong_max'] = max(
-				ress['errors']['error_strong_max'],
-				res['errors']['error_strong_max'])
-			res['errors']['error_weak_max'] = max(
-				ress['errors']['error_weak_max'],
-				res['errors']['error_weak_max'])
+        kwds['t'] = t
+        kwds['steps'] = steps
+        kwds['samples'] = 0
+        res = calculate_ramsey(**kwds)
+        if ress is None:
+            ress = res
+        else:
+            for key in res['result']:
+                ress['result'][key]['time'] = numpy.concatenate(
+                    [ress['result'][key]['time'], numpy.array([res['result'][key]['time'][-1]])])
+                for subkey in ('mean', 'values', 'stderr'):
+                    if subkey in res['result'][key]:
+                        ress['result'][key][subkey] = numpy.concatenate([
+                            ress['result'][key][subkey],
+                            res['result'][key][subkey][-1:]])
+            ress['weak_errors'] = res['weak_errors']
 
-			psis = ress['psis']
-			psis_part = res['psis']
+    return ress
 
-			psis_new = []
-			for psi, psi_part in zip(psis, psis_part):
-				psi = psi.transpose(*((1, 0) + tuple(range(2, len(psi.shape)))))
-				psi_part = psi_part.transpose(*((1, 0) + tuple(range(2, len(psi_part.shape)))))
-				psi_new = numpy.vstack([psi, psi_part])
-				psi_new = psi_new.transpose(*((1, 0) + tuple(range(2, len(psi_new.shape)))))
-				psis_new.append(psi_new)
 
-			res['psis'] = psis_new
+def run(func, fname, **kwds):
+    data = func(**kwds)
+    with open(fname, 'wb') as f:
+        pickle.dump(data, f, protocol=2)
 
-		with open(fname, 'wb') as f:
-			pickle.dump(res, f, protocol=2)
+
+def test(short_time, test_name):
+
+    ramsey_max_t = 1.3 if short_time else 3.0
+    echo_max_t = 1.8 if short_time else 3.0
+    steps = 80000 if short_time else 200000
+    suffix = '' if short_time else '_long'
+    fname = test_name + suffix + '.pickle'
+
+    if test_name == 'ramsey_gpe_no_losses':
+        run(calculate_ramsey, fname,
+            losses_enabled=False,
+            t=ramsey_max_t, steps=steps, samples=100, N=55000, wigner=False, trajectories=1, shape=(8,8,64))
+
+    elif test_name == 'ramsey_gpe':
+        run(calculate_ramsey, fname,
+            t=ramsey_max_t, steps=steps, samples=100, N=55000, wigner=False, trajectories=1, shape=(8,8,64))
+    elif test_name == 'echo_gpe':
+        run(calculate_echo, fname,
+            t=echo_max_t, steps=steps, samples=50, N=55000, wigner=False, trajectories=1, shape=(8,8,64))
+
+    elif test_name == 'ramsey_wigner':
+        run(calculate_ramsey, fname,
+            t=ramsey_max_t, steps=steps, samples=100, N=55000, wigner=True, trajectories=128, shape=(8,8,64))
+    elif test_name == 'echo_wigner':
+        run(calculate_echo, fname,
+            t=echo_max_t, steps=steps, samples=50, N=55000, wigner=True, trajectories=128, shape=(8,8,64))
+
+    elif test_name == 'ramsey_wigner_varied_pulse':
+        run(calculate_ramsey, fname,
+            pulse_theta_noise=0.02,
+            t=ramsey_max_t, steps=steps, samples=100, N=55000, wigner=True, trajectories=128, shape=(8,8,64))
+    elif test_name == 'echo_wigner_varied_pulse':
+        run(calculate_echo, fname,
+            pulse_theta_noise=0.02,
+            t=echo_max_t, steps=steps, samples=50, N=55000, wigner=True, trajectories=128, shape=(8,8,64))
+
+    elif test_name == 'echo_wigner_single_run':
+        run(calculate_ramsey, fname,
+            echo=True,
+            t=ramsey_max_t, steps=steps, samples=100, N=55000, wigner=True, trajectories=128, shape=(8,8,64))
 
 
 if __name__ == '__main__':
-
-	# Short time
-	"""
-	#if sys.argv[1] == 'ramsey-gpe':
-	run(calculateRamsey, 'ramsey_gpe.pickle', 1,
-		t=1.3, steps=40000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	#elif sys.argv[1] == 'echo-gpe':
-	run(calculateEcho, 'echo_gpe.pickle', 1,
-		t=1.8, steps=40000, samples=50, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	#elif sys.argv[1] == 'ramsey-wigner':
-	run(calculateRamsey, 'ramsey_wigner.pickle', 8,
-		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
-	#elif sys.argv[1] == 'echo-wigner':
-	run(calculateEcho, 'echo_wigner.pickle', 8,
-		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
-	"""
-
-	# Long time
-	"""
-	run(calculateRamsey, 'ramsey_long_gpe.pickle', 1,
-		t=5, steps=160000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	run(calculateEcho, 'echo_long_gpe.pickle', 1,
-		t=5, steps=160000, samples=40, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-
-	# 5s, no tech noise
-	run(calculateRamsey, 'ramsey_long_wigner_5s.pickle', 16,
-		t=5, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
-	run(calculateEcho, 'echo_long_wigner_5s.pickle', 16,
-		t=5, steps=320000, samples=40, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
-
-	# 5s, tech noise
-	run(calculateRamsey, 'ramsey_long_wigner_varied_pulse_5s.pickle', 32,
-		pulse_theta_noise=0.02,
-		t=5, steps=320000, samples=100, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
-	run(calculateEcho, 'echo_long_wigner_varied_pulse.pickle_5s', 32,
-		pulse_theta_noise=0.02,
-		t=5, steps=320000, samples=40, N=55000, wigner=True, ensembles=32, shape=(64,8,8))
-
-	# After 3s the population becomes too low for Wigner to work anyway,
-	# we'll run to 3s and get better resolution
-	run(calculateRamsey, 'ramsey_long_wigner.pickle', 128,
-		t=3, steps=200000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	run(calculateEcho, 'echo_long_wigner.pickle', 128,
-		t=3, steps=200000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-
-	run(calculateRamsey, 'ramsey_long_wigner_varied_pulse.pickle', 128,
-		pulse_theta_noise=0.02,
-		t=3, steps=200000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	run(calculateEcho, 'echo_long_wigner_varied_pulse.pickle', 128,
-		pulse_theta_noise=0.02,
-		t=3, steps=200000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-
-	"""
-
-	# Short time, varied pulse
-	"""
-	run(calculateRamsey, 'ramsey_wigner_varied_pulse.pickle', 16,
-		pulse_theta_noise=0.02,
-		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	run(calculateEcho, 'echo_wigner_varied_pulse.pickle', 32,
-		pulse_theta_noise=0.02,
-		t=1.8, steps=80000, samples=50, N=55000, wigner=True, ensembles=128, shape=(64,8,8))
-	"""
-
-	# Pure GPE with no losses
-	"""
-	run(calculateRamsey, 'ramsey_gpe_no_losses.pickle', 1,
-		losses=False,
-		t=1.3, steps=80000, samples=100, N=55000, wigner=False, ensembles=1, shape=(64,8,8))
-	"""
-
-	# Many ensembles, few samples: for clound rendering
-	"""
-	run(calculateRamsey, 'ramsey_wigner_many_ensembles.pickle', 32,
-		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
-	run(calculateRamsey, 'echo_wigner_many_ensembles.pickle', 32,
-		echo=True,
-		t=0.72, steps=36000, samples=6, N=55000, wigner=True, ensembles=1024, shape=(64,8,8))
-	"""
-
-	# A single echo run
-	"""
-	run(calculateRamsey, 'echo_wigner_single_run.pickle', 32,
-		echo=True,
-		t=1.3, steps=80000, samples=100, N=55000, wigner=True, ensembles=64, shape=(64,8,8))
-	"""
+    test(bool(int(sys.argv[1])), sys.argv[2])

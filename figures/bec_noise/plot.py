@@ -8,15 +8,15 @@ import figures.mplhelpers as mplh
 
 
 def ramsey_short(fname):
-    with open(get_path(__file__, 'visibility/ramsey_experimental.json')) as f:
+    with open(get_path(__file__, 'experimental/ramsey_experimental.json')) as f:
         vis_exp = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_gpe_no_losses_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_gpe_no_losses.json')) as f:
         gpe_nl = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_gpe_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_gpe.json')) as f:
         gpe = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_wigner_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner_varied_pulse.json')) as f:
         wig_tech = json.load(f)
 
     t_exp = numpy.array(vis_exp['xarray'])
@@ -31,7 +31,6 @@ def ramsey_short(fname):
 
     wig_t = numpy.array(wig['times'])
     wig_v = numpy.array(wig['visibility'])
-    wig_v_err = numpy.array(wig['visibility_errors'])
 
     wig_tech_t = numpy.array(wig_tech['times'])
     wig_tech_v = numpy.array(wig_tech['est_visibility'])
@@ -86,13 +85,13 @@ def ramsey_short(fname):
 
 
 def spinecho_short(fname):
-    with open(get_path(__file__, 'visibility/echo_experimental.json')) as f:
+    with open(get_path(__file__, 'experimental/echo_experimental.json')) as f:
         vis_exp = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_gpe_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_gpe.json')) as f:
         gpe = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_wigner_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner_varied_pulse.json')) as f:
         wig_tech = json.load(f)
 
     t_exp = numpy.array(vis_exp['xarray'])
@@ -103,7 +102,6 @@ def spinecho_short(fname):
     gpe_v = numpy.array(gpe['visibility'])
     wig_t = numpy.array(wig['times'])
     wig_v = numpy.array(wig['visibility'])
-    wig_v_err = numpy.array(wig['visibility_errors'])
 
     wig_tech_t = numpy.array(wig_tech['times'])
     wig_tech_v = numpy.array(wig_tech['est_visibility'])
@@ -145,7 +143,7 @@ def spinecho_short(fname):
 
 
 def ramsey_single_run_population(fname):
-    with open(get_path(__file__, 'visibility/ramsey_wigner_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner.json')) as f:
         wig = json.load(f)
 
     wig_t = numpy.array(wig['times'])
@@ -180,7 +178,7 @@ def ramsey_single_run_population(fname):
 
 
 def spinecho_single_run_population(fname):
-    with open(get_path(__file__, 'visibility/echo_wigner_single_run.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner_single_run.json')) as f:
         wig = json.load(f)
 
     wig_t = numpy.array(wig['times'])
@@ -215,18 +213,17 @@ def spinecho_single_run_population(fname):
 
 
 def ramsey_long(fname):
-    with open(get_path(__file__, 'visibility/ramsey_long_gpe_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_gpe_long.json')) as f:
         gpe = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_long_wigner_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner_long.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_long_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner_varied_pulse_long.json')) as f:
         wig_tech = json.load(f)
 
     t_gpe = numpy.array(gpe['times'])
     v_gpe = numpy.array(gpe['visibility'])
     t_wig = numpy.array(wig['times'])
     v_wig = numpy.array(wig['visibility'])
-    v_wig_err = numpy.array(wig['visibility_errors'])
     t_tech_wig = numpy.array(wig_tech['times'])
     v_tech_wig = numpy.array(wig_tech['est_visibility'])
 
@@ -258,18 +255,17 @@ def ramsey_long(fname):
 
 
 def spinecho_long(fname):
-    with open(get_path(__file__, 'visibility/echo_long_gpe_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_gpe_long.json')) as f:
         gpe = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_long_wigner_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner_long.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_long_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner_varied_pulse_long.json')) as f:
         wig_tech = json.load(f)
 
     t_gpe = numpy.array(gpe['times'])
     v_gpe = numpy.array(gpe['visibility'])
     t_wig = numpy.array(wig['times'])
     v_wig = numpy.array(wig['visibility'])
-    v_wig_err = numpy.array(wig['visibility_errors'])
     t_tech_wig = numpy.array(wig_tech['times'])
     v_tech_wig = numpy.array(wig_tech['est_visibility'])
 
@@ -300,23 +296,12 @@ def spinecho_long(fname):
     fig.savefig(fname)
 
 
-def combine_noises(x_final, *pairs):
-    interps = [
-        interp1d(x, y, kind="cubic", bounds_error=False)(x_final) for x, y in pairs]
-
-    res = interps[0] ** 2
-    for i in interps[1:]:
-        res += i ** 2
-
-    return numpy.sqrt(res)
-
-
 def ramsey_noise(fname):
-    with open(get_path(__file__, 'noise/ramsey_phnoise_exp.json')) as f:
+    with open(get_path(__file__, 'experimental/ramsey_phnoise_exp.json')) as f:
         exp = json.load(f)
-    with open(get_path(__file__, 'noise/ramsey_wigner_noise.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/ramsey_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/ramsey_wigner_varied_pulse.json')) as f:
         tech_wig = json.load(f)
 
     t_exp = numpy.array(exp['xarray'])
@@ -324,7 +309,7 @@ def ramsey_noise(fname):
     ph_exp_errors = numpy.array(exp['yerrors'])
 
     t_wig = numpy.array(wig['times'])
-    ph_wig = numpy.array(wig['phnoise'])
+    ph_wig = numpy.array(wig['est_phnoises'])
 
     t_tech_wig = numpy.array(tech_wig['times'])
     ph_tech_wig = numpy.array(tech_wig['est_phnoises'])
@@ -358,15 +343,15 @@ def ramsey_noise(fname):
 
 
 def spinecho_noise(fname):
-    with open(get_path(__file__, 'noise/echo_phnoise_exp.json')) as f:
+    with open(get_path(__file__, 'experimental/echo_phnoise_exp.json')) as f:
         exp = json.load(f)
-    with open(get_path(__file__, 'noise/echo_wigner_noise.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner.json')) as f:
         wig = json.load(f)
-    with open(get_path(__file__, 'visibility/echo_wigner_varied_pulse_vis.json')) as f:
+    with open(get_path(__file__, 'simulations/echo_wigner_varied_pulse.json')) as f:
         tech_wig = json.load(f)
 
     t_wig = numpy.array(wig['times'])
-    ph_wig = numpy.array(wig['phnoise'])
+    ph_wig = numpy.array(wig['est_phnoises'])
 
     t_tech_wig = numpy.array(tech_wig['times'])
     ph_tech_wig = numpy.array(tech_wig['est_phnoises'])
@@ -404,7 +389,7 @@ def spinecho_noise(fname):
 
 
 def illustration_noise(fname, t_ms):
-    with open(get_path(__file__, 'noise/ramsey_sim_phnoise_' + str(t_ms) + 'ms.json')) as f:
+    with open(get_path(__file__, 'ramsey_sim_phnoise_' + str(t_ms) + 'ms.json')) as f:
         meas = json.load(f)
 
     Pz = numpy.array(meas['Pz'])
