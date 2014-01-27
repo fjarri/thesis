@@ -559,14 +559,13 @@ def _feshbach_squeezing(fname, losses):
             t_sq, err_down, err_up, (0, 0.1, (-13 if losses else -20), 1))
 
         positive = err_up > err_down
-        subplot.fill_between(
-            t_err * 1e3, err_down, err_up,
-            facecolor=color.lightest,
+        #subplot.fill_between(
+        #    t_err * 1e3, err_down, err_up,
+        #    facecolor=color.lightest,
             #interpolate=True,
-            linewidth=0)
+        #    linewidth=0)
 
-        subplot.plot(t_sq * 1e3, xi2_log, color=color.main,
-            linestyle=linestyle, dashes=mplh.dash[linestyle])
+        subplot.plot(t_sq * 1e3, xi2_log, color=color.main, dashes=mplh.dash[linestyle])
 
     subplot.plot([0, 100], [0, 0], color='grey', linewidth=0.5,
         linestyle='-.', dashes=mplh.dash['-.'])
@@ -581,15 +580,15 @@ def _feshbach_squeezing(fname, losses):
         '1-2 losses' if losses else 'no losses')
 
     if losses:
-        subplot.text(42, -3, '$80.0\,r_B$')
-        subplot.text(75, -11, '$85.0\,r_B$')
-        subplot.text(20, -9, '$90.0\,r_B$')
-        subplot.text(43, -7.5, '$95.0\,r_B$')
+        subplot.text(40, -2, '$80.0\,r_B$')
+        subplot.text(70, -8.5, '$85.0\,r_B$')
+        subplot.text(40, -11.0, '$90.0\,r_B$')
+        subplot.text(43, -6.75, '$95.0\,r_B$')
     else:
-        subplot.text(9, -18, '$80.0\,r_B$')
-        subplot.text(41.5, -18, '$85.0\,r_B$')
-        subplot.text(60, -15, '$90.0\,r_B$')
-        subplot.text(70, -9.5, '$95.0\,r_B$')
+        subplot.text(35, -16.5, '$80.0\,r_B$')
+        subplot.text(70, -15., '$85.0\,r_B$')
+        subplot.text(75, -12., '$90.0\,r_B$')
+        subplot.text(75, -8., '$95.0\,r_B$')
 
     fig.text(0.01, 0.92, '(b)' if losses else '(a)', fontweight='bold')
 

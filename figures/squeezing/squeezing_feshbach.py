@@ -4,118 +4,120 @@ Data is accumulated over several iterations which helps if many trajectories
 are necessary and there is not enough GPU memory to process them at once.
 """
 
+import sys
 import numpy
+import json, pickle
+
+import reikna.cluda.dtypes as dtypes
+import reikna.cluda as cluda
 from beclab import *
-from beclab.meters import UncertaintyMeter, getXiSquared
-import pickle
 
 
-class AveragesCollector:
+lattice_size = (16, 16, 128) # spatial lattice points
+interval = 0.1 # time interval
+samples = 200 # how many samples to take during simulation
+steps = samples * 100 # number of time steps (should be multiple of samples)
+f_detuning = 37
+f_rabi = 350
+N = 55000
+state_dtype = numpy.complex128
+freqs = (97.0, 97.0 * 1.03, 11.69)
+components = [const.rb87_1_1, const.rb87_2_minus1]
 
-	def __init__(self, env, constants, grid):
-		self._unc = UncertaintyMeter(env, constants, grid)
-		self.times = []
-		self.n1 = []
-		self.n2 = []
-		self.i = []
+params = [
+    (80.0, 38.5e-19),
+    (85.0, 19.3e-19),
+    (90.0, 7.00e-19),
+    (95.0, 0.853e-19)
+]
 
-	def prepare(self, **kwds):
-		self._unc.prepare(components=kwds['components'],
-			ensembles=kwds['ensembles'], psi_type=kwds['psi_type'])
+losses_enabled = bool(int(sys.argv[1]))
+param_idx = int(sys.argv[2])
 
-	def __call__(self, t, dt, psi):
-		self.times.append(t)
+if sys.argv[3] == 'cd':
+    stepper_cls = CDStepper
+elif sys.argv[3] == 'rk46nl':
+    stepper_cls = RK46NLStepper
 
-		i, n = self._unc.getEnsembleSums(psi)
+a12, gamma12 = params[param_idx]
+fname = 'feshbach_a12_' + str(a12) + ("" if losses_enabled else "_no_losses") + '.pickle'
 
-		self.i.append(i)
-		self.n1.append(n[0])
-		self.n2.append(n[1])
+scattering = const.scattering_3d(
+    numpy.array([[100.4, a12], [a12, 95.44]]), components[0].m)
 
-	def getData(self):
-		return numpy.array(self.times), self.i, self.n1, self.n2
+if losses_enabled:
+    losses = [
+        (gamma12 / 2, (1, 1)),
+        ]
+else:
+    losses = None
+
+potential = HarmonicPotential(freqs)
+system = System(components, scattering, potential=potential, losses=losses)
+grid = UniformGrid(lattice_size, box_for_tf(system, 0, N))
+#cutoff = WavelengthCutoff.padded(grid, pad=4)
+cutoff = None
 
 
-def testUncertainties(a12, gamma12, losses):
+def test_uncertainties(trajectories=128):
 
-	t = 0.1
-	callback_dt = 0.001
-	N = 55000
-	ensembles = 128
+    api = cluda.ocl_api()
+    thr = api.Thread.create()
 
-	parameters = dict(
-		fx=97.0, fy=97.0 * 1.03, fz=11.69,
-		a12=a12, a22=95.44,
-		gamma111=0,
-		gamma12=gamma12, gamma22=0)
+    rng = numpy.random.RandomState(1234)
 
-	if not losses:
-		parameters.update(dict(gamma111=0, gamma12=0, gamma22=0))
+    gs_gen = ImaginaryTimeGroundState(thr, state_dtype, grid, system, cutoff=cutoff)
 
-	env = envs.cuda()
-	constants = Constants(double=env.supportsDouble(), **parameters)
-	grid = UniformGrid.forN(env, constants, N, (64, 8, 8))
+    # Ground state
+    psi = gs_gen([N, 0], E_diff=1e-7, E_conv=1e-9, sample_time=1e-6)
 
-	gs = SplitStepGroundState(env, constants, grid, dt=1e-6)
-	evolution = SplitStepEvolution(env, constants, grid, dt=1e-6)
-	pulse = Pulse(env, constants, grid, f_rabi=350, f_detuning=-37)
+    # Initial noise
+    psi = psi.to_wigner_coherent(trajectories, seed=rng.randint(0, 2**32-1))
 
-	avc = AveragesCollector(env, constants, grid)
+    integrator = Integrator(
+        psi, system,
+        trajectories=trajectories, stepper_cls=stepper_cls,
+        wigner=True, seed=rng.randint(0, 2**32-1),
+        cutoff=cutoff)
 
-	psi = gs.create((N, 0))
-	psi.toWigner(ensembles)
+    # Prepare samplers
+    bs = BeamSplitter(psi, f_detuning=f_detuning, f_rabi=f_rabi)
+    n_sampler = PopulationSampler(psi)
+    i_sampler = InteractionSampler(psi)
+    samplers = dict(N=n_sampler, I=i_sampler)
 
-	pulse.apply(psi, math.pi / 2)
+    # Integrate
+    bs(psi.data, 0, numpy.pi / 2)
+    result, info = integrator.fixed_step(
+        psi, 0, interval, steps, samples=samples,
+        samplers=samplers, weak_convergence=['N', 'I'])
 
-	evolution.run(psi, t, callbacks=[avc], callback_dt=callback_dt)
-	env.release()
+    return result, info
 
-	times, i, n1, n2 = avc.getData()
 
-	return times, i, n1, n2
+def combined_test(fname, total_trajectories):
 
-def combinedTest(fname, N, a12, gamma12, losses):
-	t = None
-	ii = None
-	nn1 = None
-	nn2 = None
+    chunk = 256
 
-	for i in xrange(N):
-		times, i, n1, n2 = testUncertainties(a12, gamma12, losses)
+    full_results = None
 
-		if ii is None:
-			ii = i
-			nn1 = n1
-			nn2 = n2
-			t = times
-		else:
-			for j in xrange(len(ii)):
-				ii[j] = numpy.concatenate([ii[j], i[j]])
-				nn1[j] = numpy.concatenate([nn1[j], n1[j]])
-				nn2[j] = numpy.concatenate([nn2[j], n2[j]])
+    for i in range(total_trajectories // chunk):
 
-		with open(fname, 'wb') as f:
-			pickle.dump(
-				dict(times=numpy.array(t),
-					a12=a12, gamma12=gamma12, losses=losses, Is=numpy.array(ii),
-					N1s=numpy.array(nn1), N2s=numpy.array(nn2)), f, protocol=2)
+        print("Chunk", i)
+
+        result, info = test_uncertainties(trajectories=chunk)
+
+        if full_results is None:
+            full_results = result
+        else:
+            full_results = join_results(full_results, result)
+
+        with open(fname, 'wb') as f:
+            pickle.dump(dict(
+                a12=a12, gamma12=gamma12, losses_enabled=losses_enabled,
+                errors=info.weak_errors,
+                results=full_results), f, protocol=2)
 
 
 if __name__ == '__main__':
-
-	iterations = 20
-
-	params = [
-		(80.0, 38.5e-19),
-		(85.0, 19.3e-19),
-		(90.0, 7.00e-19),
-		(95.0, 0.853e-19)
-	]
-
-	import sys
-	param_idx = int(sys.argv[1])
-	losses = bool(int(sys.argv[2]))
-
-	a12, gamma12 = params[param_idx]
-	fname = 'feshbach_a12_' + str(a12) + ("" if losses else "_no_losses") + '.pickle'
-	combinedTest(fname, iterations, a12, gamma12, losses)
+    combined_test(fname, 2560)
